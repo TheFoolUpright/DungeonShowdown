@@ -1,12 +1,10 @@
-const mysql = require("mysql2");
+const mysql = require("mysql2")
 
-var connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "root",
-    database: "games"
+const connectionOptions = mysql.createConnection({
+    host: "localhost", 
+    user: "root", 
+    password: "master1234", 
+    database: "dungeonshowdown"
 });
 
-
-module.exports = connection;
-
+module.exports = connectionOptions;
