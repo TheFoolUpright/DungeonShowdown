@@ -11,16 +11,6 @@ connection.connect((err) => {
     console.log("Connected to DB.")
 })
 
-connection.query("SELECT * FROM players",
-    function (err, rows, fields) {
-        if(err) {
-            console.log(err)
-        } else {
-            console.log(rows)
-        }
-    }
-);
-
 const app = express();
 
 // MiddleWare
@@ -72,7 +62,7 @@ app.post("/login", (req, res) => {
 
             // res.redirect("/game.html")
             res.status(200).json({
-                "message": "welcome"
+                "message": "welcome" + username
             })
 
         }
