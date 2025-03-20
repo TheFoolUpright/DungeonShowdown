@@ -7,3 +7,10 @@ function UpdateGame(){
 }
 
 setInterval(UpdateGame, 2000)
+
+function SelectShowdownCard() {
+    var totalChecked = 0
+
+    //for all the checkboxs in Showdown Cards class 
+    
+}

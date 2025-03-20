@@ -27,7 +27,7 @@ function RegisterRequest() {
 
             if (this.status = 200) {
                 // If status is 200, redirect to the login page
-                window.location.href = "/login"
+                window.location.href = "/login.html"
             }else{
                 //report problem to the message areas
             }

@@ -134,8 +134,11 @@ app.post("/register", (req, res) => {
                     res.send("Error: " + err);
                     return;
                 }
-
-                res.send("Registered Successfully! <br/> <a href='login.html'>Go to login page</a>")
+                
+                //Registered got to login page
+                res.status(200).json({
+                    "message": "Registered Successfully!"
+                })
             }
         )
 
