@@ -1,5 +1,4 @@
-function login() {
-    
+function LoginRequest() {
     var username = document.getElementById("username").value
     var password = document.getElementById("password").value
     console.log("try to login with " + username + " and " + password)
