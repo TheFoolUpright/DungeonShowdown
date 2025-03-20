@@ -43,14 +43,15 @@ app.post("/login", (req, res) => {
     password = req.body.password;
     console.log("username: " + username + " |password: " + password)
 
-    connection.query("SELECT * FROM players WHERE username = ? AND password = ?", [username, password], 
+    connection.query("SELECT * FROM player WHERE PlayerUsername = ? AND PlayerPassword = ?", [username, password], 
         function(err, rows, fields) {
+            console.log(rows.length)
             if (err) {
                 console.log("error " + err)
                 return
             }
             
-            if (rows.length = 0) {
+            if (rows.length == 0) {
                 res.send("No one has made an account yet, please register ;-;")
                 return
             }
@@ -140,6 +141,10 @@ app.post("/register", (req, res) => {
         )
 
 });
+
+app.get("/game", (req, res) => {
+    connection.query("")
+})
 
 // listen for requests on port 
 app.listen(4000, () => {
