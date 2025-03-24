@@ -56,6 +56,9 @@ app.post("/login", (req, res) => {
                 return
             }
 
+            //Save login to session
+            
+
             // res.redirect("/game.html")
             res.status(200).json({
                 "message": "welcome" + username

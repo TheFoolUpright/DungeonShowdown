@@ -24,6 +24,7 @@
         </tr>
     </table>
     <br/><br/><br/>
+    
     <div id="ShowdownCards">
         <table>
             <tr>
@@ -45,12 +46,14 @@
                 <td id="SkillCardStats">[Skill Stats]</td>
             </tr>
             <tr>
-                <td><input type="checkbox" name="ShowdownCheck" onclick="SelectShowdownCard()"></td>
-                <td><input type="checkbox" name="ShowdownCheck" onclick="SelectShowdownCard()"></td>
-                <td><input type="checkbox" name="ShowdownCheck" onclick="SelectShowdownCard()"></td>
-                <td><input type="checkbox" name="ShowdownCheck" onclick="SelectShowdownCard()"></td>
+                <td><input type="checkbox" name="ShowdownCheck" onclick="SelectShowdownCard(1)"></td>
+                <td><input type="checkbox" name="ShowdownCheck" onclick="SelectShowdownCard(2)"></td>
+                <td><input type="checkbox" name="ShowdownCheck" onclick="SelectShowdownCard(3)"></td>
+                <td><input type="checkbox" name="ShowdownCheck" onclick="SelectShowdownCard(4)"></td>
             </tr>
         </table>
+
+        <button id="ShowdownConfirm" onclick="ShowdownEndTurn()">End Turn</button>
     </div>
 
     <div id="SelectedShowdownCard">Selected Card</div>
