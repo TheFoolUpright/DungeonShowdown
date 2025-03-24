@@ -15,7 +15,10 @@
     <div id="card1">Card 1</div>
     <div id="card2">Card 2</div>
     <div id="card3">Card 3</div>
+    <div id="selectedCard">Selected Card</div>
+    <button id="confirm">Confirm</button>
     <br/><br/><br/>
+    
     <div id="ShowdownCards">
         <table>
             <tr>
@@ -37,15 +40,15 @@
                 <td id="SkillCardStats">[Skill Stats]</td>
             </tr>
             <tr>
-                <td><input type="checkbox" name="ShowdownCheck" onclick="SelectShowdownCard()"></td>
-                <td><input type="checkbox" name="ShowdownCheck" onclick="SelectShowdownCard()"></td>
-                <td><input type="checkbox" name="ShowdownCheck" onclick="SelectShowdownCard()"></td>
-                <td><input type="checkbox" name="ShowdownCheck" onclick="SelectShowdownCard()"></td>
+                <td><input type="checkbox" name="ShowdownCheck" onclick="SelectShowdownCard(1)"></td>
+                <td><input type="checkbox" name="ShowdownCheck" onclick="SelectShowdownCard(2)"></td>
+                <td><input type="checkbox" name="ShowdownCheck" onclick="SelectShowdownCard(3)"></td>
+                <td><input type="checkbox" name="ShowdownCheck" onclick="SelectShowdownCard(4)"></td>
             </tr>
         </table>
+
+        <button id="ShowdownConfirm" onclick="ShowdownEndTurn()">End Turn</button>
     </div>
 
-    <div id="selectedCard">Selected Card</div>
-    <button id="confirm">Confirm</button>
 </body>
 </html>

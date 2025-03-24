@@ -21,5 +21,13 @@ function SelectShowdownCard() {
     var totalChecked = 0
 
     //for all the checkboxs in Showdown Cards class 
+
+}
+
+function FetchShowdownHand() {
+
+}
+
+function ConfirmShowdownCards() {
     
 }
