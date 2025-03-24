@@ -8,13 +8,21 @@
 </head>
 <body>
     <h1>This is the Game Page</h1>
-    <div id="health">20</div>
-    <div id="energy">10</div>
-    <div id="insight">10</div>
-    <div id="damage">1</div><br>
-    <div id="card1">Card 1</div>
-    <div id="card2">Card 2</div>
-    <div id="card3">Card 3</div>
+    <div id="Health">20</div>
+    <div id="Energy">10</div>
+    <div id="Insight">10</div>
+    <div id="Damage">1</div><br>
+    <table>
+        <tr>
+            <input type="radio" id="DungeonCard1" name="DungeonCard1" value="DungeonCard1"/><label for="DungeonCard1">Card1</label>
+            <input type="radio" id="DungeonCard2" name="DungeonCard2" value="DungeonCard2"/><label for="DungeonCard2">Card2</label>
+            <input type="radio" id="DungeonCard3" name="DungeonCard3" value="DungeonCard3" /><label for="DungeonCard3">Card3</label>
+            <div id="SelectedDungeonCard"></div>
+        </tr>
+        <tr>
+            <td><input type="button" value="Confirm" name="DungeonCheck"></td>
+        </tr>
+    </table>
     <br/><br/><br/>
     <div id="ShowdownCards">
         <table>
@@ -45,7 +53,7 @@
         </table>
     </div>
 
-    <div id="selectedCard">Selected Card</div>
+    <div id="SelectedShowdownCard">Selected Card</div>
     <button id="confirm">Confirm</button>
 </body>
 </html>
