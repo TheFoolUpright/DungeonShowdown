@@ -52,7 +52,9 @@ app.post("/login", (req, res) => {
             }
             
             if (rows.length == 0) {
-                res.send("No one has made an account yet, please register ;-;")
+                res.status(400).json({
+                    "message": "No one has made an account yet, please register ;-;"
+                })
                 return
             }
 
