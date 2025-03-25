@@ -43,7 +43,7 @@ app.post("/login", (req, res) => {
     password = req.body.password;
     console.log("username: " + username + " |password: " + password)
 
-    connection.query("SELECT * FROM player WHERE PlayerUsername = ? AND PlayerPassword = ?", [username, password], 
+    connection.query("SELECT player_id FROM player WHERE player_username = ? AND player_username = ?", [username, password], 
         function(err, rows, fields) {
             console.log(rows.length)
             if (err) {
@@ -57,8 +57,7 @@ app.post("/login", (req, res) => {
             }
 
             //Save login to session
-            req.session.PlayerID = rows[0].PlayerID
-            
+            req.session.PlayerId = rows[0].player_id
 
             // res.redirect("/game.html")
             res.status(200).json({
@@ -115,7 +114,7 @@ app.post("/register", (req, res) => {
     }
 
     //Select 
-    connection.query("SELECT PlayerUsername, PlayerEmail FROM player WHERE PlayerUsername = ?", [receivedUsername],
+    connection.query("SELECT player_username, player_email FROM player WHERE player_username = ?", [receivedUsername],
         function (err, rows, fields) {
             if (err){
                 res.send("Error: " + err);
@@ -133,7 +132,7 @@ app.post("/register", (req, res) => {
 
 
     //Insert into the Database
-    connection.query("INSERT INTO player (PlayerUsername, PlayerEmail, PlayerPassword) VALUES (?,?,?)", [receivedUsername, receivedemail, receivedPassword1],
+    connection.query("INSERT INTO player (player_username, player_email, player_username) VALUES (?,?,?)", [receivedUsername, receivedemail, receivedPassword1],
             function (err, rows, fields) {
                 if (err){
                     res.send("Error: " + err);
