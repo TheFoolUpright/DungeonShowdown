@@ -47,6 +47,10 @@ app.post("/login", (req, res) => {
         function(err, rows, fields) {
             console.log(rows.length)
             if (err) {
+                console.log("Database Error: " + err)
+                res.status(500).json({
+                    "message": err
+                })
                 console.log("error " + err)
                 return
             }
@@ -154,7 +158,7 @@ app.get("/game", (req, res) => {
     connection.query("")
 })
 
-app.post("/mainMenu", (req, res) => {
+app.post("/joinMatch", (req, res) => {
     if (req.session.PlayerId) {
         connection.query("UPDATE player SET is_waiting_for_match = 1 WHERE player_id = ?", [req.session.PlayerId],
         function (err, rows, fields) {

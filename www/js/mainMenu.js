@@ -14,7 +14,7 @@ function JoinMatch() {
         }
     }
 
-    xhttp.open("POST", "/mainMenu", true);
+    xhttp.open("POST", "/joinMatch", true);
 
     xhttp.setRequestHeader("Content-Type", "application/json");
 
