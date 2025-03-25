@@ -43,7 +43,7 @@ app.post("/login", (req, res) => {
     password = req.body.password;
     console.log("username: " + username + " |password: " + password)
 
-    connection.query("SELECT player_id FROM player WHERE player_username = ? AND player_username = ?", [username, password], 
+    connection.query("SELECT player_id FROM player WHERE player_username = ? AND player_password = ?", [username, password], 
         function(err, rows, fields) {
             console.log(rows.length)
             if (err) {
@@ -52,7 +52,9 @@ app.post("/login", (req, res) => {
             }
             
             if (rows.length == 0) {
-                res.send("No one has made an account yet, please register ;-;")
+                res.status(400).json({
+                    "message": "No one has made an account yet, please register ;-;"
+                })
                 return
             }
 
@@ -132,7 +134,7 @@ app.post("/register", (req, res) => {
 
 
     //Insert into the Database
-    connection.query("INSERT INTO player (player_username, player_email, player_username) VALUES (?,?,?)", [receivedUsername, receivedemail, receivedPassword1],
+    connection.query("INSERT INTO player (player_username, player_email, player_password) VALUES (?,?,?)", [receivedUsername, receivedemail, receivedPassword1],
             function (err, rows, fields) {
                 if (err){
                     res.send("Error: " + err);
@@ -150,6 +152,61 @@ app.post("/register", (req, res) => {
 
 app.get("/game", (req, res) => {
     connection.query("")
+})
+
+app.post("/mainMenu", (req, res) => {
+    if (req.session.PlayerId) {
+        connection.query("UPDATE player SET is_waiting_for_match = 1 WHERE player_id = ?", [req.session.PlayerId],
+        function (err, rows, fields) {
+            if (err) {
+                console.log(err)
+                res.send("Error: " + err);
+                return;
+            }
+            //Check for opponent
+            connection.query("SELECT player_id FROM player WHERE is_waiting_for_match = 1 AND player_id != ?", [req.session.PlayerId], 
+                function (err, rows, fields) {
+                    if (err) {
+                        console.log(err)
+                        res.send("Error: " + err);
+                        return;
+                    }
+                    if (rows.length == 0) {
+                        res.status(200).json({
+                            "message": "Waiting for Match!"
+                        })
+                    }
+                    else {
+                        connection.query("INSERT INTO game_match (player_1_id, player_2_id) VALUES (?, ?)"), [rows[0].player_id, req.session.PlayerId],
+                        function (err, rows, fields) {
+                            if (err) {
+                                console.log(err)
+                                res.send("Error: " + err);
+                                return;
+                            }
+                            if (rows.length == 0) {
+                                res.status(200).json({
+                                    "message": "Joined Match!"
+                                })
+                            }
+
+                        }
+                        //If match found send to game
+
+                    }
+                }
+            )
+
+        }
+    )
+
+    
+
+    }
+    // send to login
+
+
+
 })
 
 // listen for requests on port 

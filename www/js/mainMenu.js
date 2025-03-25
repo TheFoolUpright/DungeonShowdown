@@ -18,5 +18,5 @@ function JoinMatch() {
 
     xhttp.setRequestHeader("Content-Type", "application/json");
 
-    xhttp.send(JSON.stringify(player));
+    xhttp.send();
 }
