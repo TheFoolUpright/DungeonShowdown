@@ -7,7 +7,7 @@ function JoinMatch() {
         if (this.readyState == 4) {
 
             if (this.status==200){
-                window.location.href = "/mainMenu.html";
+                //window.location.href = "/mainMenu.html";
             }
             console.log(this.response)
             document.getElementById("success").innerHTML = this.responseText;
