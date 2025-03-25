@@ -17,7 +17,7 @@ function RegisterRequest() {
 
     var request = new XMLHttpRequest();
     request.onreadystatechange = () => {
-        if (this.readyState = 4) {
+        if (this.readyState == 4) {
             console.log(this.request)
             // When the request is done, parse the response to JSON.
             //var data = JSON.parse(this.request);
@@ -25,7 +25,7 @@ function RegisterRequest() {
             // Log the response to the console of the browser.
             console.log(data);
 
-            if (this.status = 200) {
+            if (this.status == 200) {
                 // If status is 200, redirect to the login page
                 window.location.href = "/login.html"
             }else{

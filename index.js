@@ -45,9 +45,11 @@ app.post("/login", (req, res) => {
 
     connection.query("SELECT player_id FROM player WHERE player_username = ? AND player_password = ?", [username, password], 
         function(err, rows, fields) {
-            console.log(rows.length)
             if (err) {
-                console.log("error " + err)
+                console.log("Database Error: " + err)
+                res.status(500).json({
+                    "message": err
+                })
                 return
             }
             
@@ -158,7 +160,23 @@ app.get("/game", (req, res) => {
     connection.query("")
 })
 
-app.post("/mainMenu", (req, res) => {
+app.post("/joinMatch", (req, res) => {
+     if (!req.session.PlayerId) {
+        
+     }
+
+
+    function fun1() {
+        fun2()
+    }
+
+    
+    function fun2() {
+
+    }
+
+    fun1()
+
     if (req.session.PlayerId) {
         
         //Update the database
@@ -179,7 +197,7 @@ app.post("/mainMenu", (req, res) => {
                             return;
                         }
 
-                        if(rows.length = 0){
+                        if(rows.length == 0){
                             //Send waiting for matches
                             res.status(200).json({
                                 "message": "Waiting for Match!"
