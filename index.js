@@ -57,6 +57,7 @@ app.post("/login", (req, res) => {
             }
 
             //Save login to session
+            req.session.PlayerID = rows[0].PlayerID
             
 
             // res.redirect("/game.html")

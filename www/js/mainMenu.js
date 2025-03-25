@@ -1,12 +1,5 @@
-function LoginRequest() {
-    var username = document.getElementById("username").value
-    var password = document.getElementById("password").value
-    console.log("try to login with " + username + " and " + password)
+function JoinMatch() {
 
-    var player = {
-        "username": username,
-        "password": password
-    }
 
     var xhttp = new XMLHttpRequest();
     
@@ -21,7 +14,7 @@ function LoginRequest() {
         }
     }
 
-    xhttp.open("POST", "/login", true);
+    xhttp.open("POST", "/mainMenu", true);
 
     xhttp.setRequestHeader("Content-Type", "application/json");
 
