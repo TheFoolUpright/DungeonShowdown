@@ -35,7 +35,7 @@ function RegisterRequest() {
     }
     
     // Open the request with POST method and URL /login
-    request.open("POST", "/register", true)
+    request.open("PUT", "/register", true)
 
     // Set the request header to JSON
     request.setRequestHeader("Content-Type", "application/json");
