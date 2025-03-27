@@ -243,6 +243,10 @@ app.post("/joinMatch", (req, res) => {
 
 })
 
+app.post("/createGame", (req, res) => {
+    
+})
+
 // listen for requests on port 
 app.listen(4000, () => {
     console.log("🙌 Server is running on port 4000. Check http://localhost:4000/")
