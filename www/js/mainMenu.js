@@ -6,13 +6,15 @@ function JoinMatch() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
 
+            var data = JSON.parse(this.responseText)
+            console.log(data)
+
             if (this.status == 200){
-                if(this.status.response.state == "MATCH_FOUND") {
+                if (data.state == "MATCH_FOUND") {
                     window.location.href = "/game.html";
                 }
             }
-            console.log(this.response)
-            document.getElementById("success").innerHTML = this.responseText;
+            
         }
     }
 
@@ -35,13 +37,10 @@ function SearchMatch() {
             console.log(data)
 
             if (this.status == 200){
-
-                if(data.state == "MATCH_FOUND") {
+                if (data.state == "MATCH_FOUND") { // ask cesar
                     window.location.href = "/game.html";
                 }
             }
-            console.log(this.response)
-            document.getElementById("success").innerHTML = this.responseText;
         }
     }
 
@@ -52,4 +51,4 @@ function SearchMatch() {
     xhttp.send();
 }
 
-setInterval(SearchMatch, 30000)
+setInterval(SearchMatch, 3000)
