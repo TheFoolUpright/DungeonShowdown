@@ -298,6 +298,7 @@ app.put("/joinMatch", (req, res) => {
                     return;
                 }
                 req.session.MatchId = rows[0].match_id
+                CreatePlayerStatus(player1, player2)
                 UpdateWaitingForMatchFound()
                 
             }
@@ -323,12 +324,33 @@ app.put("/joinMatch", (req, res) => {
             }
         );
     }
+    
+    
 
     UpdateWaitingForMatchSearch()
 })
 
-app.post("/createGame", (req, res) => {
+app.post("/dungeon", (req, res) => {
+
+    function CreatePlayerStatus() {
+        connection.query("INSERT INTO player_status (match_id, player_id, max_health, current_health, energy, insight, damage) VALUES (?, ?, 20, 20, 10, 10, 1)", [req.session.MatchId, req.session.PlayerId],
+            function (err, rows, fields) {
+                if (err){
+                    console.log("Database Error: " + err);
+                    res.status(500).json({
+                        "message": err
+                    });
+                    return;
+                }
+                
+
+            }
     
+        )
+    }
+
+    // insert the default values for the player stats
+
 })
 
 // listen for requests on port 
