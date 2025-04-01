@@ -1,7 +1,7 @@
 //import modules
 const express = require("express");
 const bodyParser = require("body-parser")
-const connection = require("./database")
+const connection = require("./Server js/database")
 const session = require("express-session")
 
 //initialize express
