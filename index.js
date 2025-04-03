@@ -162,11 +162,7 @@ app.post("/register", (req, res) => {
 
 });
 
-app.get("/game", (req, res) => {
-    connection.query("")
-})
-
-app.get("/searchMatch", (req, res) => {
+app.get("/getMatchState", (req, res) => {
     if (req.session.MatchId) {
        res.status(400).json({
            "message": "Player already in a match",
@@ -298,7 +294,6 @@ app.put("/joinMatch", (req, res) => {
                     return;
                 }
                 req.session.MatchId = rows[0].match_id
-                CreatePlayerStatus(player1, player2)
                 UpdateWaitingForMatchFound()
                 
             }
@@ -330,10 +325,27 @@ app.put("/joinMatch", (req, res) => {
     UpdateWaitingForMatchSearch()
 })
 
-app.post("/dungeon", (req, res) => {
+app.post("/setGameState", (req, res) => {
+    connection.query("INSERT INTO player_status (match_id, player_id) VALUES (?, ?)", [req.session.MatchId, req.session.PlayerId],
+        function (err, rows, fields) {
+            if (err){
+                console.log("Database Error: " + err);
+                res.status(500).json({
+                    "message": err
+                });
+                return;
+            }
+            res.status(200).json({
+                "message": "Status Updated"
+            })
+        }
+    )
+})
 
-    function CreatePlayerStatus() {
-        connection.query("INSERT INTO player_status (match_id, player_id, max_health, current_health, energy, insight, damage) VALUES (?, ?, 20, 20, 10, 10, 1)", [req.session.MatchId, req.session.PlayerId],
+app.get("/getGameState", (req, res) => {
+    
+    function GetGameState() {
+        connection.query("SELECT max_health, current_health, energy, insight, damage FROM player_status WHERE match_id = ? and player_id = ?", [req.session.MatchId, req.session.PlayerId],
             function (err, rows, fields) {
                 if (err){
                     console.log("Database Error: " + err);
@@ -342,15 +354,20 @@ app.post("/dungeon", (req, res) => {
                     });
                     return;
                 }
-                
-
+                res.status(200).json({
+                    "message": "Player stats Updated",
+                    "max_health": rows[0].max_health,
+                    "current_health": rows[0].current_health,
+                    "energy": rows[0].energy,
+                    "insight": rows[0].insight,
+                    "damage": rows[0].damage
+                })
             }
-    
         )
     }
 
-    // insert the default values for the player stats
-
+    GetGameState()
+    
 })
 
 // listen for requests on port 
