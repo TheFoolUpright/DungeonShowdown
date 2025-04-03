@@ -405,14 +405,17 @@ app.get("/getGameState", (req, res) => {
                     });
                     return;
                 }
-                res.status(200).json({
-                    "message": "Player stats Updated",
-                    "max_health": rows[0].max_health,
-                    "current_health": rows[0].current_health,
-                    "energy": rows[0].energy,
-                    "insight": rows[0].insight,
-                    "damage": rows[0].damage
-                })
+                if (rows.length != 0){
+                    console.log("Sending Stats")
+                    res.status(200).json({
+                        "message": "Player stats Updated",
+                        "max_health": rows[0].max_health,
+                        "current_health": rows[0].current_health,
+                        "energy": rows[0].energy,
+                        "insight": rows[0].insight,
+                        "damage": rows[0].damage
+                    })
+                }
             }
         )
         console.log("GetGameState: End")
