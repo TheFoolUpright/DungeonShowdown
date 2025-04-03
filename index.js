@@ -223,6 +223,8 @@ app.put("/joinMatch", (req, res) => {
         return;
      }
 
+     UpdateWaitingForMatchSearch()
+
     function UpdateWaitingForMatchSearch() {
         connection.query("UPDATE player SET is_waiting_for_match = 1 WHERE player_id = ?;", [req.session.PlayerId], 
             function (err, rows, fields) {
@@ -300,9 +302,6 @@ app.put("/joinMatch", (req, res) => {
             }
         )
     }
-})
-
-    
     function UpdateWaitingForMatchFound() {
         connection.query("UPDATE player p INNER JOIN game_match m ON m.player_1_id = p.player_id or m.player_2_id = p.player_id SET p.is_waiting_for_match = 0 WHERE m.match_id = ?", [req.session.MatchId], 
             function (err, rows, fields) {
@@ -321,6 +320,10 @@ app.put("/joinMatch", (req, res) => {
             }
         );
     }
+})
+
+    
+    
 
 
 
@@ -336,9 +339,6 @@ app.post("/setGameState", (req, res) => {
                 });
                 return;
             }
-            res.status(200).json({
-                "message": "Status Updated"
-            })
         }
     )
 }
@@ -346,24 +346,24 @@ app.post("/setGameState", (req, res) => {
 
     function GameSetup() {
         //initalized varibles
-        const deck = [];
+        //var deck = [];
 
         //create player status
         CreatePlayerStatus();
 
         //Create deck for player cards
-        deck = GetRoomDeck();
+        //deck = GetRoomDeck();
 
         //Create type selection
-        for (let i = 0; i < deck.length; i++) {
-            //if current health <  max health
-                //add card type 1
-            //if energy < 10 or insight < 10
-                //add card type rest
+        // for (let i = 0; i < deck.length; i++) {
+        //     //if current health <  max health
+        //         //add card type 1
+        //     //if energy < 10 or insight < 10
+        //         //add card type rest
             
-            const element = array[index];
+        //     //const element = array[index];
             
-        }
+        // }
 
     }
 
@@ -385,12 +385,17 @@ app.post("/setGameState", (req, res) => {
         )
         console.log("Get Room Deck: End")
     }
+
+    GameSetup() 
     
 })
 
 app.get("/getGameState", (req, res) => {
     
+    GetGameState()
+
     function GetGameState() {
+        console.log("GetGameState: Start")
         connection.query("SELECT max_health, current_health, energy, insight, damage FROM player_status WHERE match_id = ? and player_id = ?", [req.session.MatchId, req.session.PlayerId],
             function (err, rows, fields) {
                 if (err){
@@ -410,6 +415,7 @@ app.get("/getGameState", (req, res) => {
                 })
             }
         )
+        console.log("GetGameState: End")
     }
 })
 
