@@ -366,7 +366,6 @@ app.post("/setGameState", (req, res) => {
         }
 
     }
-    
 
     function GetRoomDeck() {
         console.log("Get Room Deck: Start")
@@ -386,8 +385,6 @@ app.post("/setGameState", (req, res) => {
         )
         console.log("Get Room Deck: End")
     }
-    
-    GameSetup()
     
 })
 
@@ -414,8 +411,6 @@ app.get("/getGameState", (req, res) => {
             }
         )
     }
-
-    GetGameState()
 })
 
 //Emma and Monica's code
