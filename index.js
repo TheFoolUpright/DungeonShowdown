@@ -155,7 +155,8 @@ app.post("/register", (req, res) => {
                 
                 //Registered got to login page
                 res.status(200).json({
-                    "message": "Registered Successfully!"
+                    "message": "Registered Successfully!",
+                    "state": "LOGGED_IN"
                 })
             }
         );
@@ -166,9 +167,9 @@ app.get("/game", (req, res) => {
     connection.query("")
 })
 
-app.get("/searchMatch", (req, res) => {
+app.get("/getMatchState", (req, res) => {
     if (req.session.MatchId) {
-       res.status(400).json({
+       res.status(200).json({
            "message": "Player already in a match",
            "state": "MATCH_FOUND"
        })
@@ -189,7 +190,7 @@ app.get("/searchMatch", (req, res) => {
                     //Send waiting for matches
                     res.status(200).json({
                         "message": "Waiting for Match!",
-                        "state": "WAITNING_FOR_MATCH"
+                        "state": "WAITING_FOR_MATCH"
                     })
                 }
             }
@@ -219,7 +220,7 @@ app.put("/joinMatch", (req, res) => {
      }
 
      if (req.session.MatchId) {
-        res.status(400).json({
+        res.status(200).json({
             "message": "Player already in a match",
             "state": "MATCH_FOUND"
         })
@@ -259,7 +260,7 @@ app.put("/joinMatch", (req, res) => {
                     //Send waiting for matches
                     res.status(200).json({
                         "message": "Waiting for Match!",
-                        "state": "WAITNING_FOR_MATCH"
+                        "state": "WAITING_FOR_MATCH"
                     })
                 }
                 else {
@@ -298,7 +299,7 @@ app.put("/joinMatch", (req, res) => {
                     return;
                 }
                 req.session.MatchId = rows[0].match_id
-                CreatePlayerStatus(player1, player2)
+                //CreatePlayerStatus(player1, player2)
                 UpdateWaitingForMatchFound()
                 
             }
@@ -325,14 +326,11 @@ app.put("/joinMatch", (req, res) => {
         );
     }
     
-    
 
-    UpdateWaitingForMatchSearch()
-})
 
-app.post("/dungeon", (req, res) => {
 
     function CreatePlayerStatus() {
+        console.log("Create Player Status: Start")
         connection.query("INSERT INTO player_status (match_id, player_id, max_health, current_health, energy, insight, damage) VALUES (?, ?, 20, 20, 10, 10, 1)", [req.session.MatchId, req.session.PlayerId],
             function (err, rows, fields) {
                 if (err){
@@ -343,13 +341,88 @@ app.post("/dungeon", (req, res) => {
                     return;
                 }
                 
-
             }
-    
         )
+        console.log("Create Player Status: End")
     }
 
-    // insert the default values for the player stats
+    function GameSetup() {
+        //initalized varibles
+        const deck = [];
+
+        //create player status
+        CreatePlayerStatus();
+
+        //Create deck for player cards
+        deck = GetRoomDeck();
+
+        //Create type selection
+        for (let i = 0; i < deck.length; i++) {
+            //if current health <  max health
+                //add card type 1
+            //if energy < 10 or insight < 10
+                //add card type rest
+            
+            const element = array[index];
+            
+        }
+
+    }
+
+    function GetRoomDeck() {
+        console.log("Get Room Deck: Start")
+        connection.query("SELECT c.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_image_path FROM card_room cr INNER JOIN card c ON c.card_id = cr.card_id INNER JOIN room r ON cr.room_id = r.room_id WHERE r.room_id = ?", [req.session.RoomId], 
+            function (err, rows, fields) {
+                if (err){
+                    console.log("Database Error: " + err);
+                    res.status(500).json({
+                        "message": err
+                    });
+                    return;
+                }
+                
+                return rows;
+
+            }
+        )
+        console.log("Get Room Deck: End")
+    }
+
+
+
+    UpdateWaitingForMatchSearch()
+})
+
+//Emma and Monica's code
+app.post("/cardchoices", (req, res) => {
+    // console.log("hello")
+    // update to abandoned
+    connection.query("SELECT * FROM flower UNION ALL SELECT * FROM spell",
+        function (err, rows, fields) {
+            // If there is an error, return the error message.
+            if (err){
+                res.status(500).json({
+                    "message": err
+                })
+                return
+            }
+
+            var card1 = rows[Math.floor(Math.random() * rows.length)]
+            var card2 = rows[Math.floor(Math.random() * rows.length)]
+            var card3 = rows[Math.floor(Math.random() * rows.length)]
+
+
+            res.status(200).json({ //
+                "message": "Here are the card choices",
+                "card" : [
+                    card1, card2, card3
+                ]
+            }) 
+        }
+    )
+})
+
+app.get("/getGameState", (req, res) => {
 
 })
 
