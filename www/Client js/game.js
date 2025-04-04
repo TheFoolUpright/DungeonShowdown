@@ -128,8 +128,9 @@ function UnwrapCardStats(card)
     return stringBuilder;
 }
 
-
-SetGameState()
+function SetupDungeon(){
+    SetGameState()
+}
 
 setInterval(GetGameState, 3000)
 
