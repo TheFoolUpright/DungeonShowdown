@@ -37,6 +37,10 @@ app.use(session({
 }));
 
 
+//Varible
+var MatchID = 30;
+var PlayerID = 1;
+
 app.post("/login", (req, res) => {
 
     username = req.body.username;
@@ -61,7 +65,7 @@ app.post("/login", (req, res) => {
             }
 
             //Save login to session
-            req.session.PlayerId = rows[0].player_id
+            PlayerID = rows[0].player_id
 
             // res.redirect("/game.html")
             res.status(200).json({
@@ -164,7 +168,7 @@ app.post("/register", (req, res) => {
 });
 
 app.get("/getMatchState", (req, res) => {
-    if (req.session.MatchId) {
+    if (MatchID) {
        res.status(200).json({
            "message": "Player already in a match",
            "state": "MATCH_FOUND"
@@ -172,7 +176,7 @@ app.get("/getMatchState", (req, res) => {
        return;
     }
 
-    connection.query("SELECT match_id FROM game_match WHERE (player_1_id = ? OR player_2_id = ?) AND is_match_finished = 0;", [req.session.PlayerId, req.session.PlayerId],
+    connection.query("SELECT match_id FROM game_match WHERE (player_1_id = ? OR player_2_id = ?) AND is_match_finished = 0;", [PlayerID, PlayerID],
         function (err, rows, fields) {
             if (err){
                 console.log("Database Error: " + err);
@@ -191,8 +195,8 @@ app.get("/getMatchState", (req, res) => {
                 }
             }
             else {
-                req.session.MatchId = rows[0].match_id
-                if (req.session.MatchId) {
+                MatchID = rows[0].match_id
+                if (MatchID) {
                    res.status(200).json({
                        "message": "Player already in a match",
                        "state": "MATCH_FOUND"
@@ -206,7 +210,7 @@ app.get("/getMatchState", (req, res) => {
 })
 
 app.put("/joinMatch", (req, res) => {
-     if (!req.session.PlayerId) {
+     if (!PlayerID) {
         //not logged in
         res.status(401).json({
             "message": "Player not logged in"
@@ -215,7 +219,7 @@ app.put("/joinMatch", (req, res) => {
         
      }
 
-     if (req.session.MatchId) {
+     if (MatchID) {
         res.status(200).json({
             "message": "Player already in a match",
             "state": "MATCH_FOUND"
@@ -226,7 +230,7 @@ app.put("/joinMatch", (req, res) => {
      UpdateWaitingForMatchSearch()
 
     function UpdateWaitingForMatchSearch() {
-        connection.query("UPDATE player SET is_waiting_for_match = 1 WHERE player_id = ?;", [req.session.PlayerId], 
+        connection.query("UPDATE player SET is_waiting_for_match = 1 WHERE player_id = ?;", [PlayerID], 
             function (err, rows, fields) {
                 if (err){
                     console.log("Database Error: " + err);
@@ -244,7 +248,7 @@ app.put("/joinMatch", (req, res) => {
     }
 
     function FindAnOpponent() {
-        connection.query("SELECT player_id FROM player WHERE is_waiting_for_match = 1 AND player_id != ? ", [req.session.PlayerId], 
+        connection.query("SELECT player_id FROM player WHERE is_waiting_for_match = 1 AND player_id != ? ", [PlayerID], 
             function (err, rows, fields) {
                 if (err){
                     console.log("Database Error: " + err);
@@ -269,7 +273,7 @@ app.put("/joinMatch", (req, res) => {
     }
 
     function CreateAMatch(player1) {
-        connection.query("INSERT INTO game_match (player_1_id, player_2_id) VALUES (?, ?)", [player1, req.session.PlayerId],
+        connection.query("INSERT INTO game_match (player_1_id, player_2_id) VALUES (?, ?)", [player1, PlayerID],
             function (err, rows, fields) {
                 if (err){
                     console.log("Database Error: " + err);
@@ -279,7 +283,7 @@ app.put("/joinMatch", (req, res) => {
                     return;
                 }
 
-                FindMatch(player1, req.session.PlayerId)
+                FindMatch(player1, PlayerID)
 
             }
         );
@@ -296,14 +300,14 @@ app.put("/joinMatch", (req, res) => {
                     });
                     return;
                 }
-                req.session.MatchId = rows[0].match_id
+                MatchID = rows[0].match_id
                 UpdateWaitingForMatchFound()
                 
             }
         )
     }
     function UpdateWaitingForMatchFound() {
-        connection.query("UPDATE player p INNER JOIN game_match m ON m.player_1_id = p.player_id or m.player_2_id = p.player_id SET p.is_waiting_for_match = 0 WHERE m.match_id = ?", [req.session.MatchId], 
+        connection.query("UPDATE player p INNER JOIN game_match m ON m.player_1_id = p.player_id or m.player_2_id = p.player_id SET p.is_waiting_for_match = 0 WHERE m.match_id = ?", [MatchID], 
             function (err, rows, fields) {
                 if (err){
                     console.log("Database Error: " + err);
@@ -330,7 +334,7 @@ app.put("/joinMatch", (req, res) => {
 
 app.post("/setGameState", (req, res) => {
     function CreatePlayerStatus() {
-    connection.query("INSERT INTO player_status (match_id, player_id) VALUES (?, ?)", [req.session.MatchId, req.session.PlayerId],
+    connection.query("INSERT INTO player_status (match_id, player_id) VALUES (?, ?)", [MatchID, PlayerID],
         function (err, rows, fields) {
             if (err){
                 console.log("Database Error: " + err);
@@ -341,29 +345,72 @@ app.post("/setGameState", (req, res) => {
             }
         }
     )
-}
+    }
+    CreatePlayerStatus() 
+})
 
+app.get("/getGameState", (req, res) => {
+    GetGameState()
+    
+
+    function GetGameState() {
+        //console.log("GetGameState: Start")
+        connection.query("SELECT max_health, current_health, energy, insight, damage FROM player_status WHERE match_id = ? and player_id = ?", [MatchID, PlayerID],
+            function (err, rows, fields) {
+                if (err){
+                    console.log("Database Error: " + err);
+                    res.status(500).json({
+                        "message": err
+                    });
+                    return;
+                }
+                if (rows.length != 0){
+                    //console.log("Sending Stats")
+                    res.status(200).json({
+                        "message": "Player stats and cards updated",
+                        "max_health": rows[0].max_health,
+                        "current_health": rows[0].current_health,
+                        "energy": rows[0].energy,
+                        "insight": rows[0].insight,
+                        "damage": rows[0].damage
+                        // "card" : [
+                        //     card1, card2, card3
+                        // ]
+                    })
+                }
+            }
+        )
+        //console.log("GetGameState: End")
+    }
 
     function GameSetup() {
         //initalized varibles
-        //var deck = [];
+        var deck = [];
+        var playerStats = [];
+        req.session.RoomId = 1
 
         //create player status
-        CreatePlayerStatus();
+        playerStats = GetGameState();
 
-        //Create deck for player cards
-        //deck = GetRoomDeck();
+        // //Create deck for player cards
+        // deck = GetRoomDeck();
 
-        //Create type selection
-        // for (let i = 0; i < deck.length; i++) {
-        //     //if current health <  max health
-        //         //add card type 1
-        //     //if energy < 10 or insight < 10
-        //         //add card type rest
-            
-        //     //const element = array[index];
-            
-        // }
+        // //Get three dungeon cards
+        // var card1 = deck[Math.floor(Math.random() * deck.length)]
+        // var card2 = deck[Math.floor(Math.random() * deck.length)]
+        // var card3 = deck[Math.floor(Math.random() * deck.length)]
+
+        res.status(200).json({
+            "message": "Player stats and cards updated",
+            "max_health": playerStats[0].max_health,
+            "current_health": playerStats[0].current_health,
+            "energy": playerStats[0].energy,
+            "insight": playerStats[0].insight,
+            "damage": playerStats[0].damage
+            // "card" : [
+            //     card1, card2, card3
+            // ]
+        })
 
     }
 
@@ -386,44 +433,11 @@ app.post("/setGameState", (req, res) => {
         console.log("Get Room Deck: End")
     }
 
-    GameSetup() 
-    
-})
 
-app.get("/getGameState", (req, res) => {
-    
-    GetGameState()
-
-    function GetGameState() {
-        console.log("GetGameState: Start")
-        connection.query("SELECT max_health, current_health, energy, insight, damage FROM player_status WHERE match_id = ? and player_id = ?", [req.session.MatchId, req.session.PlayerId],
-            function (err, rows, fields) {
-                if (err){
-                    console.log("Database Error: " + err);
-                    res.status(500).json({
-                        "message": err
-                    });
-                    return;
-                }
-                if (rows.length != 0){
-                    console.log("Sending Stats")
-                    res.status(200).json({
-                        "message": "Player stats Updated",
-                        "max_health": rows[0].max_health,
-                        "current_health": rows[0].current_health,
-                        "energy": rows[0].energy,
-                        "insight": rows[0].insight,
-                        "damage": rows[0].damage
-                    })
-                }
-            }
-        )
-        console.log("GetGameState: End")
-    }
 })
 
 //Emma and Monica's code
-app.post("/cardchoices", (req, res) => {
+app.post("/cardChoices", (req, res) => {
     // console.log("hello")
     // update to abandoned
     connection.query("SELECT * FROM flower UNION ALL SELECT * FROM spell",

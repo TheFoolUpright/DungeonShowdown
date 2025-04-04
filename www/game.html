@@ -13,17 +13,43 @@
     <div id="Energy"></div>
     <div id="Insight"></div>
     <div id="Damage"></div><br>
+    <div id="SelectedDungeonCard">
+        <table>
+            <tr>
+                <td id="SelectCardName">Selected Card Name</td>
+            </tr>
+            <tr>
+                <td id="SelectCardImage">[Selected Card Image]</td>
+            </tr>
+            <tr>
+                <td id="SelectCardStats">Selected Card Stats</td>
+            </tr>
+        </table>
+    </div>
+
     <table>
         <tr>
-            <input type="radio" id="DungeonCard1" name="DungeonCard1" value="DungeonCard1"/><label for="DungeonCard1">Card1</label>
-            <input type="radio" id="DungeonCard2" name="DungeonCard2" value="DungeonCard2"/><label for="DungeonCard2">Card2</label>
-            <input type="radio" id="DungeonCard3" name="DungeonCard3" value="DungeonCard3" /><label for="DungeonCard3">Card3</label>
-            <div id="SelectedDungeonCard"></div>
+            <td id="Card1Name">Card 1 Name</td>
+            <td id="Card2Name">Card 2 Name</td>
+            <td id="Card3Name">Card 3 Name</td>
         </tr>
         <tr>
-            <td><input type="button" value="Confirm" name="DungeonCheck"></td>
+            <td id="Card1Image">[Card 1 Image]</td>
+            <td id="Card2Image">[Card 2 Image]</td>
+            <td id="Card3Image">[Card 3 Image]</td>
+        </tr>
+        <tr>
+            <td id="Card1Stats">Card 1 Stats</td>
+            <td id="Card2Stats">Card 2 Stats</td>
+            <td id="Card3Stats">Card 3 Stats</td>
+        </tr>
+        <tr>
+            <td> <input type="radio" id="DungeonCard1Selection" name="DungeonCard" value="Card1"/></td>
+            <td><input type="radio" id="DungeonCard2Selection" name="DungeonCard" value="Card2"/></td>
+            <td><input type="radio" id="DungeonCard3Selection" name="DungeonCard" value="Card3"/></td>
         </tr>
     </table>
+    <input type="button" value="Confirm" name="DungeonCheck" onclick="DungeonEndTurn()">
     <br/><br/><br/>
     
     <div id="ShowdownCards">
