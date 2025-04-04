@@ -40,7 +40,9 @@ app.use(session({
 //Varible
 var MatchID = 30;
 var PlayerID = 1;
+var PlayerStatusID = 10;
 var RoomID = 1;
+
 
 app.post("/login", (req, res) => {
 
@@ -365,7 +367,7 @@ app.post("/setGameState", (req, res) => {
                     });
                     return;
                 }
-                
+                PlayerStatusID = rows[0].player_status_id
                 //Call function to get Deck
                 GetRoomDeck(rows);
             }
@@ -439,7 +441,7 @@ app.get("/getGameState", (req, res) => {
                     return;
                 }
                 if (rows.length != 0){
-                    console.log("Sending Stats and Cards")
+                    //console.log("Sending Stats and Cards")
 
                     var card1 = rows[0];
                     var card2 = rows[1];
@@ -463,8 +465,11 @@ app.get("/getGameState", (req, res) => {
 })
 
 app.post("/resolveDungeonTurn", (req, res) => {
-
-    connection.query("", [], 
+    console.log("resolveDungeonTurn start")
+    // req.body.cardId
+    console.log(req.body.cardId)
+    console.log(PlayerStatusID)
+    connection.query("UPDATE player_card_slot SET slot_id = 4 WHERE card_id = ? AND player_status_id = ?;", [req.body.cardId, PlayerStatusID], 
         function(err, rows, fields) {
             if (err) {
                 console.log("Database Error: " + err)
@@ -473,6 +478,8 @@ app.post("/resolveDungeonTurn", (req, res) => {
                 })
                 return
             }
+            console.log("resolveDungeonTurn start")
+
         }
     )
 });
