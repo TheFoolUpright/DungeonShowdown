@@ -425,12 +425,11 @@ app.post("/setGameState", (req, res) => {
     })
 
 app.get("/getGameState", (req, res) => {
+    
     GetGameState()
     
-
     function GetGameState() {
-        //console.log("GetGameState: Start")
-        connection.query("SELECT max_health, current_health, energy, insight, damage FROM player_status WHERE match_id = ? and player_id = ?", [MatchID, PlayerID],
+        connection.query("SELECT player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, match_id, player_id, max_health, current_health, energy, insight, damage, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = ? AND match_id = ?; ", [PlayerID, MatchID],
             function (err, rows, fields) {
                 if (err){
                     console.log("Database Error: " + err);
@@ -440,96 +439,43 @@ app.get("/getGameState", (req, res) => {
                     return;
                 }
                 if (rows.length != 0){
-                    //console.log("Sending Stats")
+                    console.log("Sending Stats and Cards")
+
+                    var card1 = rows[0];
+                    var card2 = rows[1];
+                    var card3 = rows[2];
+
                     res.status(200).json({
                         "message": "Player stats and cards updated",
                         "max_health": rows[0].max_health,
                         "current_health": rows[0].current_health,
                         "energy": rows[0].energy,
                         "insight": rows[0].insight,
-                        "damage": rows[0].damage
-                        // "card" : [
-                        //     card1, card2, card3
-                        // ]
+                        "damage": rows[0].damage,
+                        "card" : [
+                            card1, card2, card3
+                        ]
                     })
                 }
             }
         )
-        //console.log("GetGameState: End")
     }
-
-
-
-    function GameSetup() {
-        //initalized varibles
-        var deck = [];
-        var playerStats = [];
-        req.session.RoomId = 1
-
-        //create player status
-        playerStats = GetGameState();
-
-        // //Create deck for player cards
-        // deck = GetRoomDeck();
-
-        // //Get three dungeon cards
-        // var card1 = deck[Math.floor(Math.random() * deck.length)]
-        // var card2 = deck[Math.floor(Math.random() * deck.length)]
-        // var card3 = deck[Math.floor(Math.random() * deck.length)]
-
-        res.status(200).json({
-            "message": "Player stats and cards updated",
-            "max_health": playerStats[0].max_health,
-            "current_health": playerStats[0].current_health,
-            "energy": playerStats[0].energy,
-            "insight": playerStats[0].insight,
-            "damage": playerStats[0].damage
-            // "card" : [
-            //     card1, card2, card3
-            // ]
-        })
-
-    }
-
-    
-
-
 })
 
-//Emma and Monica's code
-app.post("/cardChoices", (req, res) => {
-    // console.log("hello")
-    // update to abandoned
-    connection.query("SELECT * FROM flower UNION ALL SELECT * FROM spell",
-        function (err, rows, fields) {
-            // If there is an error, return the error message.
-            if (err){
+app.post("/resolveDungeonTurn", (req, res) => {
+
+    connection.query("", [], 
+        function(err, rows, fields) {
+            if (err) {
+                console.log("Database Error: " + err)
                 res.status(500).json({
                     "message": err
                 })
                 return
             }
-
-            var card1 = rows[Math.floor(Math.random() * rows.length)]
-            var card2 = rows[Math.floor(Math.random() * rows.length)]
-            var card3 = rows[Math.floor(Math.random() * rows.length)]
-
-
-            res.status(200).json({ //
-                "message": "Here are the card choices",
-                "card" : [
-                    card1, card2, card3
-                ]
-            }) 
         }
     )
-})
-
-app.get("/getGameState", (req, res) => {
-
-    GetGameState()
-    
-})
+});
 
 // listen for requests on port 
 app.listen(4000, () => {
