@@ -8,32 +8,33 @@
 </head>
 <body>
     <h1>Dungeon Showdown</h1> <input type="button" value="SetupDungeonRoom1" name="SetupDungeonRoom1" onclick="SetupDungeon()">
-    <p id="RoomId">Room 1</p>
-    <div id="Max Health"></div>
-    <div id="Current Health"></div>
-    <div id="Energy"></div>
-    <div id="Insight"></div>
-    <div id="Damage"></div><br>
+    <p id="roomId">Room 1</p>
+    <p id="showdownTurn">Turn 0</p>
+    <div id="maxHealth"></div>
+    <div id="currentHealth"></div>
+    <div id="energy"></div>
+    <div id="insight"></div>
+    <div id="damage"></div><br>
     <br /> 
-    <div id="OpponentChoiceSection" style="display: none;">
-        <p id="OpponentChoice">Opponent Selected Card Name</p>
-        <input type="button" value="Confirm" name="OpponentChoiceConfirm" onclick="SetupNextRoom()">
+    <div id="opponentChoiceSection" style="display: none;">
+        <p id="opponentChoice">Opponent Selected Card Name</p>
+        <input type="button" value="Confirm" name="opponentChoiceConfirm" onclick="SetupNextRoom()">
     </div>
 
     <br /> 
     
-<div id="DungeonCards">
+<div id="dungeonCards">
     
-    <div id="SelectedDungeonCard">
+    <div id="selectedDungeonCard">
         <table>
             <tr>
-                <td id="SelectedCardName">Selected Card Name</td>
+                <td id="selectedCardName">Selected Card Name</td>
             </tr>
             <tr>
-                <td id="SelectedCardImage">[Selected Card Image]</td>
+                <td id="selectedCardImage">[Selected Card Image]</td>
             </tr>
             <tr>
-                <td id="SelectedCardStats">Selected Card Stats</td>
+                <td id="selectedCardStats">Selected Card Stats</td>
             </tr>
         </table>
     </div>
@@ -41,59 +42,59 @@
 
     <table>
         <tr>
-            <td id="Card1Name">Card 1 Name</td>
-            <td id="Card2Name">Card 2 Name</td>
-            <td id="Card3Name">Card 3 Name</td>
+            <td id="card1Name">Card 1 Name</td>
+            <td id="card2Name">Card 2 Name</td>
+            <td id="card3Name">Card 3 Name</td>
         </tr>
         <tr>
-            <td id="Card1Image">[Card 1 Image]</td>
-            <td id="Card2Image">[Card 2 Image]</td>
-            <td id="Card3Image">[Card 3 Image]</td>
+            <td id="card1Image">[Card 1 Image]</td>
+            <td id="card2Image">[Card 2 Image]</td>
+            <td id="card3Image">[Card 3 Image]</td>
         </tr>
         <tr>
-            <td id="Card1Stats">Card 1 Stats</td>
-            <td id="Card2Stats">Card 2 Stats</td>
-            <td id="Card3Stats">Card 3 Stats</td>
+            <td id="card1Stats">Card 1 Stats</td>
+            <td id="card2Stats">Card 2 Stats</td>
+            <td id="card3Stats">Card 3 Stats</td>
         </tr>
         <tr>
-            <td><input type="radio" id="DungeonCard1Selection" name="DungeonCard" value="Card1" onclick="DungeonSelectCard()"/></td>
-            <td><input type="radio" id="DungeonCard2Selection" name="DungeonCard" value="Card2" onclick="DungeonSelectCard()"/></td>
-            <td><input type="radio" id="DungeonCard3Selection" name="DungeonCard" value="Card3" onclick="DungeonSelectCard()"/></td>
+            <td><input type="radio" id="dungeonCard1Selection" name="dungeonCard" value="card1" onclick="DungeonSelectCard()"/></td>
+            <td><input type="radio" id="dungeonCard2Selection" name="dungeonCard" value="card2" onclick="DungeonSelectCard()"/></td>
+            <td><input type="radio" id="dungeonCard3Selection" name="dungeonCard" value="card3" onclick="DungeonSelectCard()"/></td>
         </tr>
     </table>
-    <input type="button" value="Confirm" name="DungeonCheck" onclick="DungeonEndTurn()">
+    <input type="button" value="Confirm" name="dungeonCheck" onclick="DungeonEndTurn()">
 </div>
     <br/><br/><br/>
     
-    <div id="ShowdownCards">
+    <div id="showdownCards" style="display: none;">
         <table>
             <tr>
                 <td>Main Attack</td>
-                <td id="SpecialAttackCardName">Special Attack Card Name</td>
-                <td id="DefenseCardName">Defense Card Name</td>
-                <td id="SkillCardName">Skill Card Name</td>
+                <td id="specialAttackCardName">Special Attack Card Name</td>
+                <td id="defenseCardName">Defense Card Name</td>
+                <td id="skillCardName">Skill Card Name</td>
             </tr>
             <tr>
                 <td>[Main Attack Image]</td>
-                <td id="SpecialAttackCardImage">[Special Attack Image]</td>
-                <td id="DefenseCardImage">[Defense Image]</td>
-                <td id="SkillCardImage">[Skill Image]</td>
+                <td id="specialAttackCardImage">[Special Attack Image]</td>
+                <td id="defenseCardImage">[Defense Image]</td>
+                <td id="skillCardImage">[Skill Image]</td>
             </tr>
             <tr>
                 <td>Attack for [Damage]</td>
-                <td id="SpecialAttackCardStats">[Special Attack Stats]</td>
-                <td id="DefenseCardStats">[Defense Stats]</td>
-                <td id="SkillCardStats">[Skill Stats]</td>
+                <td id="specialAttackCardStats">[Special Attack Stats]</td>
+                <td id="defenseCardStats">[Defense Stats]</td>
+                <td id="skillCardStats">[Skill Stats]</td>
             </tr>
             <tr>
-                <td><input type="checkbox" name="ShowdownCheck" onclick="SelectShowdownCard(1)"></td>
-                <td><input type="checkbox" name="ShowdownCheck" onclick="SelectShowdownCard(2)"></td>
-                <td><input type="checkbox" name="ShowdownCheck" onclick="SelectShowdownCard(3)"></td>
-                <td><input type="checkbox" name="ShowdownCheck" onclick="SelectShowdownCard(4)"></td>
+                <td><input type="checkbox" name="showdownCheck" onclick="SelectShowdownCard(1)"></td>
+                <td><input type="checkbox" name="showdownCheck" onclick="SelectShowdownCard(2)"></td>
+                <td><input type="checkbox" name="showdownCheck" onclick="SelectShowdownCard(3)"></td>
+                <td><input type="checkbox" name="showdownCheck" onclick="SelectShowdownCard(4)"></td>
             </tr>
         </table>
 
-        <button id="ShowdownConfirm" onclick="ShowdownEndTurn()">End Turn</button>
+        <button id="showdownConfirm" onclick="ShowdownEndTurn()">End Turn</button>
     </div>
 </body>
 </html>

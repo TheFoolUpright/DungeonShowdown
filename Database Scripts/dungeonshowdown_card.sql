@@ -59,7 +59,7 @@ INSERT INTO `card` (card_type_id, card_name, card_max_health, card_current_healt
 (5,'Ghost',0,0,0,-1,1,0,0,NULL),
 (5,'Bat',0,-2,2,1,0,0,0,NULL),
 (6,'Normal Attack',0,0,0,0,0,1,0,NULL),
-(6,'Heavy Attack',0,0,0,0,0,1.5,0,NULL),
+(6,'Heavy Attack',0,0,-2,0,0,1.5,0,NULL),
 (6,'Concussion Attack',0,0,-2,0,0,1,0,NULL), /*Does -3 insight to opponent*/
 (7,'Block 2',0,0,0,-1,0,0,2,NULL),
 (7,'Block 3',0,0,0,-2,0,0,3,NULL),

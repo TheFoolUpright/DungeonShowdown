@@ -3,7 +3,8 @@ var dungeonCard1Id
 var dungeonCard2Id
 var dungeonCard3Id
 var dungeonCard4Id
-var roomId
+var roomId = 1;
+var showdownTurn = 0;
 
 
 function SetDungeonState(){
@@ -31,47 +32,49 @@ function sortCards(cardA, cardB){
     return cardA.slot_id - cardB.slot_id
 }
 
-function GetGameState(){
+function GetGameState() {
 
 
     //If in Dungeon
-    if() {
+    if(roomId <= 5) {
+        document.getElementById("showdownCards").style.display = "none";
+
         var xhttp = new XMLHttpRequest();
         
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4) {
                 //console.log(this.responseText)
                 var data = JSON.parse(this.responseText)
-                //console.log(data)
+                console.log(data)
 
                 if (this.status == 200){
                     data.card.sort(sortCards)
 
                     //console.log("Data.Card: "+ data.card)
-                    document.getElementById("Max Health").innerHTML = "Max Health: " + data.max_health;
-                    document.getElementById("Current Health").innerHTML = "Current Health: " + data.current_health;
-                    document.getElementById("Energy").innerHTML = "Energy: " + data.energy;
-                    document.getElementById("Insight").innerHTML = "Insight: " + data.insight;
-                    document.getElementById("Damage").innerHTML = "Damage: " + data.damage;
+                    document.getElementById("maxHealth").innerHTML = "Max Health: " + data.max_health;
+                    document.getElementById("currentHealth").innerHTML = "Current Health: " + data.current_health;
+                    document.getElementById("energy").innerHTML = "Energy: " + data.energy;
+                    document.getElementById("insight").innerHTML = "Insight: " + data.insight;
+                    document.getElementById("damage").innerHTML = "Damage: " + data.damage;
                     
                     dungeonCard1Id = data.card[0].card_id
-                    document.getElementById("Card1Name").innerHTML = data.card[0].card_name
-                    document.getElementById("Card1Image").innerHTML = data.card[0].card_image_path
-                    document.getElementById("Card1Stats").innerHTML = UnwrapCardStats(data.card[0])
+                    document.getElementById("card1Name").innerHTML = data.card[0].card_name
+                    document.getElementById("card1Image").innerHTML = data.card[0].card_image_path
+                    document.getElementById("card1Stats").innerHTML = UnwrapDungeonCardStats(data.card[0])
                     
                     
                     dungeonCard2Id = data.card[1].card_id
-                    document.getElementById("Card2Name").innerHTML = data.card[1].card_name
-                    document.getElementById("Card2Image").innerHTML = data.card[1].card_image_path
-                    document.getElementById("Card2Stats").innerHTML = UnwrapCardStats(data.card[1])
+                    document.getElementById("card2Name").innerHTML = data.card[1].card_name
+                    document.getElementById("card2Image").innerHTML = data.card[1].card_image_path
+                    document.getElementById("card2Stats").innerHTML = UnwrapDungeonCardStats(data.card[1])
 
                     dungeonCard3Id = data.card[2].card_id
-                    document.getElementById("Card3Name").innerHTML = data.card[2].card_name
-                    document.getElementById("Card3Image").innerHTML = data.card[2].card_image_path
-                    document.getElementById("Card3Stats").innerHTML = UnwrapCardStats(data.card[2])
+                    document.getElementById("card3Name").innerHTML = data.card[2].card_name
+                    document.getElementById("card3Image").innerHTML = data.card[2].card_image_path
+                    document.getElementById("card3Stats").innerHTML = UnwrapDungeonCardStats(data.card[2])
 
                     roomId = data.room_id
-                    document.getElementById("RoomId").innerHTML = "Room " + roomId
+                    document.getElementById("roomId").innerHTML = "Room " + roomId
                 }
             }
         }
@@ -86,42 +89,47 @@ function GetGameState(){
     }
     //In Showdown Phase
     else{
+        document.getElementById("dungeonCards").style.display = "none";
+        document.getElementById("showdownCards").style.display = "block";
+
         var xhttp = new XMLHttpRequest();
         
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4) {
                 //console.log(this.responseText)
                 var data = JSON.parse(this.responseText)
-                //console.log(data)
+                console.log(data)
 
                 if (this.status == 200){
                     data.card.sort(sortCards)
 
                     //console.log("Data.Card: "+ data.card)
-                    document.getElementById("Max Health").innerHTML = "Max Health: " + data.max_health;
-                    document.getElementById("Current Health").innerHTML = "Current Health: " + data.current_health;
-                    document.getElementById("Energy").innerHTML = "Energy: " + data.energy;
-                    document.getElementById("Insight").innerHTML = "Insight: " + data.insight;
-                    document.getElementById("Damage").innerHTML = "Damage: " + data.damage;
+                    document.getElementById("maxHealth").innerHTML = "Max Health: " + data.max_health;
+                    document.getElementById("currentHealth").innerHTML = "Current Health: " + data.current_health;
+                    document.getElementById("energy").innerHTML = "Energy: " + data.energy;
+                    document.getElementById("insight").innerHTML = "Insight: " + data.insight;
+                    document.getElementById("damage").innerHTML = "Damage: " + data.damage;
                     
                     dungeonCard1Id = data.card[0].card_id
-                    document.getElementById("SpecialAttackCardName").innerHTML = data.card[0].card_name
-                    document.getElementById("SpecialAttackCardImage").innerHTML = data.card[0].card_image_path
-                    document.getElementById("SpecialAttackCardStats").innerHTML = UnwrapCardStats(data.card[0])
+                    document.getElementById("specialAttackCardName").innerHTML = data.card[0].card_name
+                    document.getElementById("specialAttackCardImage").innerHTML = data.card[0].card_image_path
+                    document.getElementById("specialAttackCardStats").innerHTML = UnwrapShowdownCardStats(data.card[0], data.damage)
                     
                     
                     dungeonCard2Id = data.card[1].card_id
-                    document.getElementById("DefenseCardName").innerHTML = data.card[1].card_name
-                    document.getElementById("DefenseCardImage").innerHTML = data.card[1].card_image_path
-                    document.getElementById("DefenseCardStats").innerHTML = UnwrapCardStats(data.card[1])
+                    document.getElementById("defenseCardName").innerHTML = data.card[1].card_name
+                    document.getElementById("defenseCardImage").innerHTML = data.card[1].card_image_path
+                    document.getElementById("defenseCardStats").innerHTML = UnwrapShowdownCardStats(data.card[1], data.damage)
 
                     dungeonCard3Id = data.card[2].card_id
-                    document.getElementById("SkillCardName").innerHTML = data.card[2].card_name
-                    document.getElementById("SkillCardImage").innerHTML = data.card[2].card_image_path
-                    document.getElementById("SkillCardStats").innerHTML = UnwrapCardStats(data.card[2])
+                    document.getElementById("skillCardName").innerHTML = data.card[2].card_name
+                    document.getElementById("skillCardImage").innerHTML = data.card[2].card_image_path
+                    document.getElementById("skillCardStats").innerHTML = UnwrapShowdownCardStats(data.card[2], data.damage)
 
+                    showdownTurn = data.showdown_turn
+                    document.getElementById("showdownTurn").innerHTML = "Turn " + showdownTurn
                     roomId = data.room_id
-                    document.getElementById("RoomId").innerHTML = "Room " + roomId
+                    document.getElementById("roomId").innerHTML = "Room " + roomId
                 }
             }
         }
@@ -137,7 +145,7 @@ function GetGameState(){
     }
 }
 
-function UnwrapCardStats(card)
+function UnwrapDungeonCardStats(card)
 {
     //console.log(card.card_type_id)
     var stringBuilder = "";
@@ -201,35 +209,108 @@ function UnwrapCardStats(card)
     return stringBuilder;
 }
 
+function UnwrapShowdownCardStats(card, playerDamage)
+{
+    var stringBuilder = "";
+    if(card.card_type_id == 6){
+
+        //Cost first
+        if(card.card_energy < 0)
+        {
+            stringBuilder = stringBuilder + " Energy Decrease by: " + card.card_energy
+        }
+        // Rewards
+        if (card.card_attack > 0)
+        {
+            stringBuilder = stringBuilder + " Attack is: " + (card.card_attack * playerDamage)
+        }
+    }
+    if(card.card_type_id == 7){
+        console.log(card.insight)
+        //Cost first
+        if(card.card_energy < 0)
+        {
+            stringBuilder = stringBuilder + " Energy Decrease by: " + card.card_energy
+        }
+        if(card.card_insight < 0)
+        {
+            stringBuilder = stringBuilder + " Insight Decrease by: " + card.card_insight
+        }
+        
+        // Rewards
+        if (card.card_defense > 0)
+        {
+            stringBuilder = stringBuilder + " Defense is: " +  card.card_defense
+        }
+    }
+    if(card.card_type_id == 8){
+         
+            //Cost first
+         if(card.card_energy < 0)
+        {
+            stringBuilder = stringBuilder + " Energy Decrease by: " + card.card_energy
+        }
+        if(card.card_insight < 0)
+        {
+            stringBuilder = stringBuilder + " Insight Decrease by: " + card.card_insight
+        }
+        
+        // Rewards
+        if (card.card_current_health > 0)
+            {
+                stringBuilder = stringBuilder + " Current Health Increase by: " + card.card_current_health
+            }
+        if (card.card_energy > 0)
+        {
+            stringBuilder = stringBuilder + " Energy Increase by: " + card.card_energy
+        }
+        if (card.card_insight > 0)
+        {
+                stringBuilder = stringBuilder + " Insight Increase by: " + card.card_insight
+        }
+        if (card.card_damage > 0)
+        {
+            stringBuilder = stringBuilder + " Damage Increase by: " + card.card_damage
+        }
+    }
+    
+    
+    return stringBuilder;
+}
+
 function DungeonSelectCard() {
-    if (document.getElementById("DungeonCard1Selection").checked) 
+    if (document.getElementById("dungeonCard1Selection").checked) 
     {
         dungeonCard4Id = dungeonCard1Id;
-        document.getElementById("SelectedCardName").innerHTML = document.getElementById("Card1Name").innerHTML;
-        document.getElementById("SelectedCardImage").innerHTML = document.getElementById("Card1Image").innerHTML;
-        document.getElementById("SelectedCardStats").innerHTML = document.getElementById("Card1Stats").innerHTML;
+        document.getElementById("selectedCardName").innerHTML = document.getElementById("card1Name").innerHTML;
+        document.getElementById("selectedCardImage").innerHTML = document.getElementById("card1Image").innerHTML;
+        document.getElementById("selectedCardStats").innerHTML = document.getElementById("card1Stats").innerHTML;
     }
-    if (document.getElementById("DungeonCard2Selection").checked) 
+    if (document.getElementById("dungeonCard2Selection").checked) 
     {
         dungeonCard4Id = dungeonCard2Id;
-        document.getElementById("SelectedCardName").innerHTML = document.getElementById("Card2Name").innerHTML;
-        document.getElementById("SelectedCardImage").innerHTML = document.getElementById("Card2Image").innerHTML;
-        document.getElementById("SelectedCardStats").innerHTML = document.getElementById("Card2Stats").innerHTML;
+        document.getElementById("selectedCardName").innerHTML = document.getElementById("card2Name").innerHTML;
+        document.getElementById("selectedCardImage").innerHTML = document.getElementById("card2Image").innerHTML;
+        document.getElementById("selectedCardStats").innerHTML = document.getElementById("card2Stats").innerHTML;
     }
-    if (document.getElementById("DungeonCard3Selection").checked) 
+    if (document.getElementById("dungeonCard3Selection").checked) 
     {
         dungeonCard4Id = dungeonCard3Id;
-        document.getElementById("SelectedCardName").innerHTML = document.getElementById("Card3Name").innerHTML;
-        document.getElementById("SelectedCardImage").innerHTML = document.getElementById("Card3Image").innerHTML;
-        document.getElementById("SelectedCardStats").innerHTML = document.getElementById("Card3Stats").innerHTML;
+        document.getElementById("selectedCardName").innerHTML = document.getElementById("card3Name").innerHTML;
+        document.getElementById("selectedCardImage").innerHTML = document.getElementById("card3Image").innerHTML;
+        document.getElementById("selectedCardStats").innerHTML = document.getElementById("card3Stats").innerHTML;
     }
     
 }
 
 function DungeonEndTurn() {
     
-    document.getElementById("DungeonCards").style.display = "none";
-    document.getElementById("OpponentChoiceSection").style.display = "block";
+    document.getElementById("dungeonCards").style.display = "none";
+    document.getElementById("opponentChoiceSection").style.display = "block";
+
+    document.getElementById("dungeonCard1Selection").checked = false;
+    document.getElementById("dungeonCard2Selection").checked = false;
+    document.getElementById("dungeonCard3Selection").checked = false;
 
     var xhttp = new XMLHttpRequest();
     console.log(dungeonCard4Id)
@@ -245,7 +326,8 @@ function DungeonEndTurn() {
             console.log(data)
 
             if (this.status == 200){
-                document.getElementById("OpponentChoice").innerHTML = "Your oppponent chose a(n) " + data.card_type_name + " card";
+                document.getElementById("opponentChoice").innerHTML = "Your oppponent chose a(n) " + data.card_type_name + " card";
+                GetGameState()
                 console.log("success")
             }
         }
@@ -265,8 +347,8 @@ function SetupDungeon() {
 function SetupNextRoom() {
 
     if(roomId <= 5){
-        document.getElementById("DungeonCards").style.display = "block";
-        document.getElementById("OpponentChoiceSection").style.display = "none";
+        document.getElementById("dungeonCards").style.display = "block";
+        document.getElementById("opponentChoiceSection").style.display = "none";
         
         var xhttp = new XMLHttpRequest();
         
@@ -303,11 +385,6 @@ function SetupNextRoom() {
     
         xhttp.send();
     }
-    
-
 }
 
-
 setInterval(GetGameState, 3000)
-
-

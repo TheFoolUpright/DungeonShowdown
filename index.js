@@ -42,6 +42,7 @@ var MatchID = 1;
 var PlayerID = 1;
 var PlayerStatusID = 1;
 var RoomID = 1;
+var ShowdownTurn = 1;
 
 
 app.post("/login", (req, res) => {
@@ -329,15 +330,9 @@ app.put("/joinMatch", (req, res) => {
     }
 })
 
-    
-    
-
-
-
-
 app.post("/setDungeonPhase", (req, res) => {
+    
     CreatePlayerStatus() 
-
 
     function CreatePlayerStatus() {
         console.log("CreatePlayerStatus start")
@@ -361,11 +356,28 @@ app.post("/setDungeonPhase", (req, res) => {
 
 app.get("/getGameState", (req, res) => {
     
-    GetGameState()
-    
+    GetLastRoom()
 
+
+    function GetLastRoom() {
+        connection.query("SELECT player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, showdown_turn, match_id, player_id, max_health, current_health, energy, insight, damage, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = ? AND match_id = ? ORDER BY room_id DESC LIMIT 3", [PlayerID, MatchID], 
+            function (err, rows, fields) {
+                if (err){
+                    console.log("Database Error: " + err);
+                    res.status(500).json({
+                        "message": err
+                    });
+                    return;
+                } 
+                RoomID = rows[0].room_id;
+                ShowdownTurn = rows[0].showdown_turn;
+                GetGameState()
+            }
+        )
+    }
+    
     function GetGameState() {
-        connection.query("SELECT player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, match_id, player_id, max_health, current_health, energy, insight, damage, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = ? AND match_id = ? AND room_id = ?;", [PlayerID, MatchID, RoomID],
+        connection.query("SELECT player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, showdown_turn, match_id, player_id, max_health, current_health, energy, insight, damage, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = ? AND match_id = ? AND room_id = ?;", [PlayerID, MatchID, RoomID],
             function (err, rows, fields) {
                 if (err){
                     console.log("Database Error: " + err);
@@ -380,10 +392,13 @@ app.get("/getGameState", (req, res) => {
                     var card1 = rows[0];
                     var card2 = rows[1];
                     var card3 = rows[2];
+                    
+                    console.log(card3.card_energy)
 
                     res.status(200).json({
                         "message": "Player stats and cards updated",
                         "room_id": RoomID,
+                        "showdown_turn": ShowdownTurn,
                         "max_health": rows[0].max_health,
                         "current_health": rows[0].current_health,
                         "energy": rows[0].energy,
@@ -632,7 +647,7 @@ app.post("/setupShowdown", (req, res) => {
             deck.splice(indexOfElement, 1)
             var card3 = deck[Math.floor(Math.random() * deck.length)].card_id
     
-            connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id) VALUES (?,?,?,?), (?,?,?,?), (?,?,?,?);", [playerStats[0].player_status_id, 1, card1, RoomID, playerStats[0].player_status_id, 2, card2, RoomID ,playerStats[0].player_status_id, 3, card3, RoomID],
+            connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn) VALUES (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?);", [playerStats[0].player_status_id, 1, card1, RoomID, ShowdownTurn, playerStats[0].player_status_id, 2, card2, RoomID, ShowdownTurn, playerStats[0].player_status_id, 3, card3, RoomID, ShowdownTurn],
             function (err, rows, fields) {
                 if (err){
                     console.log("Database Error: " + err);
