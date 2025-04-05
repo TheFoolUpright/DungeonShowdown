@@ -50,24 +50,21 @@ function GetGameState(){
                 document.getElementById("Insight").innerHTML = "Insight: " + data.insight;
                 document.getElementById("Damage").innerHTML = "Damage: " + data.damage;
                 
-                console.log(data.card[0].card_id + " " + data.card[0].card_name)
                 dungeonCard1Id = data.card[0].card_id
                 document.getElementById("Card1Name").innerHTML = data.card[0].card_name
                 document.getElementById("Card1Image").innerHTML = data.card[0].card_image_path
                 document.getElementById("Card1Stats").innerHTML = UnwrapCardStats(data.card[0])
                 
-                console.log(data.card[1].card_id + " " + data.card[1].card_name)
+                
                 dungeonCard2Id = data.card[1].card_id
                 document.getElementById("Card2Name").innerHTML = data.card[1].card_name
                 document.getElementById("Card2Image").innerHTML = data.card[1].card_image_path
                 document.getElementById("Card2Stats").innerHTML = UnwrapCardStats(data.card[1])
 
-                console.log(data.card[2].card_id + " " + data.card[2].card_name)
                 dungeonCard3Id = data.card[2].card_id
                 document.getElementById("Card3Name").innerHTML = data.card[2].card_name
                 document.getElementById("Card3Image").innerHTML = data.card[2].card_image_path
                 document.getElementById("Card3Stats").innerHTML = UnwrapCardStats(data.card[2])
-                console.log(dungeonCard4Id)
             }
         }
     }
@@ -173,7 +170,7 @@ function DungeonSelectCard() {
 function DungeonEndTurn() {
     
     var xhttp = new XMLHttpRequest();
-    
+    console.log(dungeonCard4Id)
     //Create a JSON object with the registration data
     var dataToSend = {  
         "cardId": dungeonCard4Id
@@ -182,10 +179,13 @@ function DungeonEndTurn() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
 
+            var data = JSON.parse(this.responseText)
+            console.log(data)
+
             if (this.status == 200){
-                
-                // update slot 4
+                document.getElementById("OpponentChoice").innerHTML = "Your oppponent chose a(n) " + data.card_type_name + " card";
                 // update stats
+                // show opponent card
                 // update room
                 console.log("success")
             }
