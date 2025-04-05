@@ -85,9 +85,12 @@ INSERT INTO `card_room` (card_id, room_id) VALUES
 (6,5),
 (7,5),
 
-(8,6),
 (9,6),
-(10,6);
+(10,6),
+(11,6),
+(12,6),
+(13,6),
+(14,6);
 /*!40000 ALTER TABLE `card_room` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
