@@ -46,19 +46,25 @@ CREATE TABLE `card` (
 -- Dumping data for table `card`
 --
 
+ALTER TABLE `card` AUTO_INCREMENT = 1;
+
 LOCK TABLES `card` WRITE;
 /*!40000 ALTER TABLE `card` DISABLE KEYS */;
-INSERT INTO `card` VALUES 
-(1,1,'Max Health',2,0,0,0,0,0,0,NULL),
-(2,2,'Healing',0,3,0,0,0,0,0,NULL),
-(3,3,'Damage',0,0,0,0,1,0,0,NULL),
-(4,4,'Rest',0,0,1,1,0,0,0,NULL),
-(5,5,'Slime',0,-1,1,1,0,0,0,NULL),
-(6,5,'Ghost',0,0,0,-1,1,0,0,NULL),
-(7,5,'Bat',0,-2,2,1,0,0,0,NULL),
-(8,6,'Heavy Attack',0,0,0,0,0,2,0,NULL),
-(9,7,'Block 2',0,0,0,0,0,0,2,NULL),
-(10,8,'Rage 1',0,0,-2,0,1,0,0,NULL);
+INSERT INTO `card` (card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path) VALUES 
+(1,'Max Health',2,0,0,0,0,0,0,NULL),
+(2,'Healing',0,3,0,0,0,0,0,NULL),
+(3,'Damage',0,0,0,0,1,0,0,NULL),
+(4,'Rest',0,0,1,1,0,0,0,NULL),
+(5,'Slime',0,-1,1,1,0,0,0,NULL),
+(5,'Ghost',0,0,0,-1,1,0,0,NULL),
+(5,'Bat',0,-2,2,1,0,0,0,NULL),
+(6,'Normal Attack',0,0,0,0,0,1,0,NULL),
+(6,'Heavy Attack',0,0,0,0,0,1.5,0,NULL),
+(6,'Concussion Attack',0,0,-2,0,0,1,0,NULL), /*Does -3 insight to opponent*/
+(7,'Block 2',0,0,0,-1,0,0,2,NULL),
+(7,'Block 3',0,0,0,-2,0,0,3,NULL),
+(8,'Rage 1',0,0,-2,0,1,0,0,NULL),
+(8,'Rage 2',0,0,-3,0,2,0,0,NULL);
 /*!40000 ALTER TABLE `card` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
