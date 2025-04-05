@@ -51,7 +51,11 @@ LOCK TABLES `player_card_slot` WRITE;
 INSERT INTO `player_card_slot` VALUES 
 (1,1,1,3,1),
 (2,1,2,1,1),
-(3,1,3,5,1);
+(3,1,3,5,1),
+
+(4,2,1,2,1),
+(5,2,4,4,1),
+(6,2,3,6,1);
 /*!40000 ALTER TABLE `player_card_slot` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
