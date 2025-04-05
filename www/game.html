@@ -8,14 +8,22 @@
 </head>
 <body>
     <h1>Dungeon Showdown</h1> <input type="button" value="SetupDungeonRoom1" name="SetupDungeonRoom1" onclick="SetupDungeon()">
+    <p id="RoomId">Room 1</p>
     <div id="Max Health"></div>
     <div id="Current Health"></div>
     <div id="Energy"></div>
     <div id="Insight"></div>
     <div id="Damage"></div><br>
     <br /> 
-    <div id="OpponentChoice">Opponent Selected Card Name</div>
+    <div id="OpponentChoiceSection" style="display: none;">
+        <p id="OpponentChoice">Opponent Selected Card Name</p>
+        <input type="button" value="Confirm" name="OpponentChoiceConfirm" onclick="SetupNextRoom()">
+    </div>
+
     <br /> 
+    
+<div id="DungeonCards">
+    
     <div id="SelectedDungeonCard">
         <table>
             <tr>
@@ -30,6 +38,7 @@
         </table>
     </div>
 <br /> <br /> 
+
     <table>
         <tr>
             <td id="Card1Name">Card 1 Name</td>
@@ -47,12 +56,13 @@
             <td id="Card3Stats">Card 3 Stats</td>
         </tr>
         <tr>
-            <td><input type="radio" id="DungeonCard1Selection" name="DungeonCard" value="Card1"/></td>
-            <td><input type="radio" id="DungeonCard2Selection" name="DungeonCard" value="Card2"/></td>
-            <td><input type="radio" id="DungeonCard3Selection" name="DungeonCard" value="Card3"/></td>
+            <td><input type="radio" id="DungeonCard1Selection" name="DungeonCard" value="Card1" onclick="DungeonSelectCard()"/></td>
+            <td><input type="radio" id="DungeonCard2Selection" name="DungeonCard" value="Card2" onclick="DungeonSelectCard()"/></td>
+            <td><input type="radio" id="DungeonCard3Selection" name="DungeonCard" value="Card3" onclick="DungeonSelectCard()"/></td>
         </tr>
     </table>
     <input type="button" value="Confirm" name="DungeonCheck" onclick="DungeonEndTurn()">
+</div>
     <br/><br/><br/>
     
     <div id="ShowdownCards">

@@ -335,7 +335,7 @@ app.put("/joinMatch", (req, res) => {
 
 
 
-app.post("/setGameState", (req, res) => {
+app.post("/setDungeonPhase", (req, res) => {
     CreatePlayerStatus() 
 
 
@@ -351,87 +351,21 @@ app.post("/setGameState", (req, res) => {
                     return;
                 }
 
-                GetPlayerStats();
+                SettingCards(req, res);
                 
             }
         )
     }
-    function GetPlayerStats(){
-        console.log("GetPlayerStats start")
-        connection.query("SELECT player_status_id, match_id, player_id, max_health, current_health, energy, insight, damage FROM player_status WHERE player_id = ? AND match_id = ?;", [PlayerID, MatchID],
-            function (err, rows, fields) {
-                if (err){
-                    console.log("Database Error : " + err);
-                    res.status(500).json({
-                        "message": err
-                    });
-                    return;
-                }
-                PlayerStatusID = rows[0].player_status_id
-                //Call function to get Deck
-                GetRoomDeck(rows);
-            }
-        )
-    }
-
-    function GetRoomDeck(playerStats) {
-        console.log("Get Room Deck: Start")
-        connection.query("SELECT c.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_image_path FROM card_room cr INNER JOIN card c ON c.card_id = cr.card_id INNER JOIN room r ON cr.room_id = r.room_id WHERE r.room_id = ?", [RoomID], 
-            function (err, rows, fields) {
-                if (err){
-                    console.log("Database Error: " + err);
-                    res.status(500).json({
-                        "message": err
-                    });
-                    return;
-                }
-                //call function to set cards
-                InsertCards(playerStats, rows)
-
-            }
-        )
-        console.log("Get Room Deck: End")
-    }
-
-    function InsertCards(playerStats, deck) {
-        console.log("Insert cards Start")
-        //Create Cards
-        var indexOfElement;
-
-        var card1 = deck[Math.floor(Math.random() * deck.length)].card_id
-        indexOfElement = deck.indexOf(card1[0]);
-        deck.splice(indexOfElement, 1)
-        var card2 = deck[Math.floor(Math.random() * deck.length)].card_id
-        indexOfElement = deck.indexOf(card2[0]);
-        deck.splice(indexOfElement, 1)
-        var card3 = deck[Math.floor(Math.random() * deck.length)].card_id
-
-        connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id) VALUES (?,?,?,?), (?,?,?,?), (?,?,?,?);", [playerStats[0].player_status_id, 1, card1, RoomID, playerStats[0].player_status_id, 2, card2, RoomID ,playerStats[0].player_status_id, 3, card3, RoomID],
-        function (err, rows, fields) {
-            if (err){
-                console.log("Database Error: " + err);
-                res.status(500).json({
-                    "message": err
-                });
-                return;
-            }
-            
-            res.status(200).json({
-                "message": "Cards Inserted!"
-            })
-
-        })
-            
-        }
         
-    })
+})
 
 app.get("/getGameState", (req, res) => {
     
     GetGameState()
     
+
     function GetGameState() {
-        connection.query("SELECT player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, match_id, player_id, max_health, current_health, energy, insight, damage, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = ? AND match_id = ?; ", [PlayerID, MatchID],
+        connection.query("SELECT player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, match_id, player_id, max_health, current_health, energy, insight, damage, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = ? AND match_id = ? AND room_id = ?;", [PlayerID, MatchID, RoomID],
             function (err, rows, fields) {
                 if (err){
                     console.log("Database Error: " + err);
@@ -449,6 +383,7 @@ app.get("/getGameState", (req, res) => {
 
                     res.status(200).json({
                         "message": "Player stats and cards updated",
+                        "room_id": RoomID,
                         "max_health": rows[0].max_health,
                         "current_health": rows[0].current_health,
                         "energy": rows[0].energy,
@@ -547,8 +482,6 @@ app.post("/resolveDungeonTurn", (req, res) => {
                     })
                     return
                 }
-                //Set roomID to next
-                RoomID++;
 
                 res.status(200).json({
                     "message": "Player stats updated and opponent card received",
@@ -556,13 +489,167 @@ app.post("/resolveDungeonTurn", (req, res) => {
                     "card_type_id": rows[0].card_type_id,
                     "card_type_name": rows[0].card_type_name
                 })
-                
             }
         )
         
-    } 
-
+    }
 });
+
+app.post("/setupNextDungeonRoom", (req, res) => {
+
+    SetupNextRoom()
+
+    function SetupNextRoom() {
+        //Set roomID to next
+        RoomID++;
+        SettingCards(req, res)
+    }
+})
+
+function SettingCards(req, res) {
+    GetPlayerStats()
+    function GetPlayerStats(){
+        console.log("GetPlayerStats start")
+        connection.query("SELECT player_status_id, match_id, player_id, max_health, current_health, energy, insight, damage FROM player_status WHERE player_id = ? AND match_id = ?;", [PlayerID, MatchID],
+            function (err, rows, fields) {
+                if (err){
+                    console.log("Database Error : " + err);
+                    res.status(500).json({
+                        "message": err
+                    });
+                    return;
+                }
+                PlayerStatusID = rows[0].player_status_id
+                //Call function to get Deck
+                GetRoomDeck(rows);
+            }
+        )
+    }
+
+    function GetRoomDeck(playerStats) {
+        console.log("Get Room Deck: Start")
+        connection.query("SELECT c.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_image_path FROM card_room cr INNER JOIN card c ON c.card_id = cr.card_id INNER JOIN room r ON cr.room_id = r.room_id WHERE r.room_id = ?", [RoomID], 
+            function (err, rows, fields) {
+                if (err){
+                    console.log("Database Error: " + err);
+                    res.status(500).json({
+                        "message": err
+                    });
+                    return;
+                }
+                //call function to set cards
+                InsertCards(playerStats, rows)
+
+            }
+        )
+        console.log("Get Room Deck: End")
+    }
+
+    function InsertCards(playerStats, deck) {
+        console.log("Insert cards Start")
+        //Create Cards
+        var indexOfElement;
+
+        var card1 = deck[Math.floor(Math.random() * deck.length)].card_id
+        indexOfElement = deck.indexOf(card1[0]);
+        deck.splice(indexOfElement, 1)
+        var card2 = deck[Math.floor(Math.random() * deck.length)].card_id
+        indexOfElement = deck.indexOf(card2[0]);
+        deck.splice(indexOfElement, 1)
+        var card3 = deck[Math.floor(Math.random() * deck.length)].card_id
+
+        connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id) VALUES (?,?,?,?), (?,?,?,?), (?,?,?,?);", [playerStats[0].player_status_id, 1, card1, RoomID, playerStats[0].player_status_id, 2, card2, RoomID ,playerStats[0].player_status_id, 3, card3, RoomID],
+        function (err, rows, fields) {
+            if (err){
+                console.log("Database Error: " + err);
+                res.status(500).json({
+                    "message": err
+                });
+                return;
+            }
+            
+            res.status(200).json({
+                "message": "Cards Inserted!"
+            })
+
+        })
+            
+    }
+}
+
+app.post("/setupShowdown", (req, res) => {
+
+    // select possible cards
+    // insert chosen cards
+        GetPlayerStats()
+        function GetPlayerStats(){
+            console.log("GetPlayerStats start")
+            connection.query("SELECT player_status_id, match_id, player_id, max_health, current_health, energy, insight, damage FROM player_status WHERE player_id = ? AND match_id = ?;", [PlayerID, MatchID],
+                function (err, rows, fields) {
+                    if (err){
+                        console.log("Database Error : " + err);
+                        res.status(500).json({
+                            "message": err
+                        });
+                        return;
+                    }
+                    PlayerStatusID = rows[0].player_status_id
+                    //Call function to get Deck
+                    GetRoomDeck(rows);
+                }
+            )
+        }
+    
+        function GetRoomDeck(playerStats) {
+            console.log("Get Room Deck: Start")
+            connection.query("SELECT c.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_image_path FROM card_room cr INNER JOIN card c ON c.card_id = cr.card_id INNER JOIN room r ON cr.room_id = r.room_id WHERE r.room_id = ?", [RoomID], 
+                function (err, rows, fields) {
+                    if (err){
+                        console.log("Database Error: " + err);
+                        res.status(500).json({
+                            "message": err
+                        });
+                        return;
+                    }
+                    //call function to set cards
+                    InsertCards(playerStats, rows)
+    
+                }
+            )
+            console.log("Get Room Deck: End")
+        }
+    
+        function InsertCards(playerStats, deck) {
+            console.log("Insert cards Start")
+            //Create Cards
+            var indexOfElement;
+    
+            var card1 = deck[Math.floor(Math.random() * deck.length)].card_id
+            indexOfElement = deck.indexOf(card1[0]);
+            deck.splice(indexOfElement, 1)
+            var card2 = deck[Math.floor(Math.random() * deck.length)].card_id
+            indexOfElement = deck.indexOf(card2[0]);
+            deck.splice(indexOfElement, 1)
+            var card3 = deck[Math.floor(Math.random() * deck.length)].card_id
+    
+            connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id) VALUES (?,?,?,?), (?,?,?,?), (?,?,?,?);", [playerStats[0].player_status_id, 1, card1, RoomID, playerStats[0].player_status_id, 2, card2, RoomID ,playerStats[0].player_status_id, 3, card3, RoomID],
+            function (err, rows, fields) {
+                if (err){
+                    console.log("Database Error: " + err);
+                    res.status(500).json({
+                        "message": err
+                    });
+                    return;
+                }
+                
+                res.status(200).json({
+                    "message": "Cards Inserted!"
+                })
+    
+            })
+                
+        }
+    })
 
 // listen for requests on port 
 app.listen(4000, () => {

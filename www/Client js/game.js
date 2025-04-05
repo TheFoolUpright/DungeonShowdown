@@ -3,9 +3,10 @@ var dungeonCard1Id
 var dungeonCard2Id
 var dungeonCard3Id
 var dungeonCard4Id
+var roomId
 
 
-function SetGameState(){
+function SetDungeonState(){
     
     var xhttp = new XMLHttpRequest();
     
@@ -18,7 +19,7 @@ function SetGameState(){
         }
     }
 
-    xhttp.open("POST", "/setGameState", true);
+    xhttp.open("POST", "/setDungeonState", true);
 
     xhttp.setRequestHeader("Content-Type", "application/json");
 
@@ -32,50 +33,108 @@ function sortCards(cardA, cardB){
 
 function GetGameState(){
 
-    var xhttp = new XMLHttpRequest();
-    
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4) {
-            //console.log(this.responseText)
-            var data = JSON.parse(this.responseText)
-            //console.log(data)
 
-            if (this.status == 200){
-                data.card.sort(sortCards)
+    //If in Dungeon
+    if() {
+        var xhttp = new XMLHttpRequest();
+        
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                //console.log(this.responseText)
+                var data = JSON.parse(this.responseText)
+                //console.log(data)
 
-                //console.log("Data.Card: "+ data.card)
-                document.getElementById("Max Health").innerHTML = "Max Health: " + data.max_health;
-                document.getElementById("Current Health").innerHTML = "Current Health: " + data.current_health;
-                document.getElementById("Energy").innerHTML = "Energy: " + data.energy;
-                document.getElementById("Insight").innerHTML = "Insight: " + data.insight;
-                document.getElementById("Damage").innerHTML = "Damage: " + data.damage;
-                
-                dungeonCard1Id = data.card[0].card_id
-                document.getElementById("Card1Name").innerHTML = data.card[0].card_name
-                document.getElementById("Card1Image").innerHTML = data.card[0].card_image_path
-                document.getElementById("Card1Stats").innerHTML = UnwrapCardStats(data.card[0])
-                
-                
-                dungeonCard2Id = data.card[1].card_id
-                document.getElementById("Card2Name").innerHTML = data.card[1].card_name
-                document.getElementById("Card2Image").innerHTML = data.card[1].card_image_path
-                document.getElementById("Card2Stats").innerHTML = UnwrapCardStats(data.card[1])
+                if (this.status == 200){
+                    data.card.sort(sortCards)
 
-                dungeonCard3Id = data.card[2].card_id
-                document.getElementById("Card3Name").innerHTML = data.card[2].card_name
-                document.getElementById("Card3Image").innerHTML = data.card[2].card_image_path
-                document.getElementById("Card3Stats").innerHTML = UnwrapCardStats(data.card[2])
+                    //console.log("Data.Card: "+ data.card)
+                    document.getElementById("Max Health").innerHTML = "Max Health: " + data.max_health;
+                    document.getElementById("Current Health").innerHTML = "Current Health: " + data.current_health;
+                    document.getElementById("Energy").innerHTML = "Energy: " + data.energy;
+                    document.getElementById("Insight").innerHTML = "Insight: " + data.insight;
+                    document.getElementById("Damage").innerHTML = "Damage: " + data.damage;
+                    
+                    dungeonCard1Id = data.card[0].card_id
+                    document.getElementById("Card1Name").innerHTML = data.card[0].card_name
+                    document.getElementById("Card1Image").innerHTML = data.card[0].card_image_path
+                    document.getElementById("Card1Stats").innerHTML = UnwrapCardStats(data.card[0])
+                    
+                    
+                    dungeonCard2Id = data.card[1].card_id
+                    document.getElementById("Card2Name").innerHTML = data.card[1].card_name
+                    document.getElementById("Card2Image").innerHTML = data.card[1].card_image_path
+                    document.getElementById("Card2Stats").innerHTML = UnwrapCardStats(data.card[1])
+
+                    dungeonCard3Id = data.card[2].card_id
+                    document.getElementById("Card3Name").innerHTML = data.card[2].card_name
+                    document.getElementById("Card3Image").innerHTML = data.card[2].card_image_path
+                    document.getElementById("Card3Stats").innerHTML = UnwrapCardStats(data.card[2])
+
+                    roomId = data.room_id
+                    document.getElementById("RoomId").innerHTML = "Room " + roomId
+                }
             }
         }
+
+        xhttp.open("GET", "/getGameState", true);
+
+        xhttp.setRequestHeader("Content-Type", "application/json");
+
+        xhttp.send();
+
+        DungeonSelectCard()
     }
+    //In Showdown Phase
+    else{
+        var xhttp = new XMLHttpRequest();
+        
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                //console.log(this.responseText)
+                var data = JSON.parse(this.responseText)
+                //console.log(data)
 
-    xhttp.open("GET", "/getGameState", true);
+                if (this.status == 200){
+                    data.card.sort(sortCards)
 
-    xhttp.setRequestHeader("Content-Type", "application/json");
+                    //console.log("Data.Card: "+ data.card)
+                    document.getElementById("Max Health").innerHTML = "Max Health: " + data.max_health;
+                    document.getElementById("Current Health").innerHTML = "Current Health: " + data.current_health;
+                    document.getElementById("Energy").innerHTML = "Energy: " + data.energy;
+                    document.getElementById("Insight").innerHTML = "Insight: " + data.insight;
+                    document.getElementById("Damage").innerHTML = "Damage: " + data.damage;
+                    
+                    dungeonCard1Id = data.card[0].card_id
+                    document.getElementById("SpecialAttackCardName").innerHTML = data.card[0].card_name
+                    document.getElementById("SpecialAttackCardImage").innerHTML = data.card[0].card_image_path
+                    document.getElementById("SpecialAttackCardStats").innerHTML = UnwrapCardStats(data.card[0])
+                    
+                    
+                    dungeonCard2Id = data.card[1].card_id
+                    document.getElementById("DefenseCardName").innerHTML = data.card[1].card_name
+                    document.getElementById("DefenseCardImage").innerHTML = data.card[1].card_image_path
+                    document.getElementById("DefenseCardStats").innerHTML = UnwrapCardStats(data.card[1])
 
-    xhttp.send();
+                    dungeonCard3Id = data.card[2].card_id
+                    document.getElementById("SkillCardName").innerHTML = data.card[2].card_name
+                    document.getElementById("SkillCardImage").innerHTML = data.card[2].card_image_path
+                    document.getElementById("SkillCardStats").innerHTML = UnwrapCardStats(data.card[2])
 
-    DungeonSelectCard()
+                    roomId = data.room_id
+                    document.getElementById("RoomId").innerHTML = "Room " + roomId
+                }
+            }
+        }
+
+        xhttp.open("GET", "/getGameState", true);
+
+        xhttp.setRequestHeader("Content-Type", "application/json");
+
+        xhttp.send();
+
+        DungeonSelectCard()
+
+    }
 }
 
 function UnwrapCardStats(card)
@@ -169,6 +228,9 @@ function DungeonSelectCard() {
 
 function DungeonEndTurn() {
     
+    document.getElementById("DungeonCards").style.display = "none";
+    document.getElementById("OpponentChoiceSection").style.display = "block";
+
     var xhttp = new XMLHttpRequest();
     console.log(dungeonCard4Id)
     //Create a JSON object with the registration data
@@ -184,9 +246,6 @@ function DungeonEndTurn() {
 
             if (this.status == 200){
                 document.getElementById("OpponentChoice").innerHTML = "Your oppponent chose a(n) " + data.card_type_name + " card";
-                // update stats
-                // show opponent card
-                // update room
                 console.log("success")
             }
         }
@@ -199,9 +258,55 @@ function DungeonEndTurn() {
     xhttp.send(JSON.stringify(dataToSend));
 }
 
-function SetupDungeon(){
+function SetupDungeon() {
     SetGameState()
 }
+
+function SetupNextRoom() {
+
+    if(roomId <= 5){
+        document.getElementById("DungeonCards").style.display = "block";
+        document.getElementById("OpponentChoiceSection").style.display = "none";
+        
+        var xhttp = new XMLHttpRequest();
+        
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4) {
+    
+                if (this.status == 200){
+                    console.log("success")
+                }
+            }
+        }
+    
+        xhttp.open("POST", "/setupNextDungeonRoom", true);
+    
+        xhttp.setRequestHeader("Content-Type", "application/json");
+    
+        xhttp.send();
+    }
+    else {
+        var xhttp = new XMLHttpRequest();
+        
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4) {
+    
+                if (this.status == 200){
+                    console.log("success")
+                }
+            }
+        }
+    
+        xhttp.open("POST", "/setupShowdown", true);
+    
+        xhttp.setRequestHeader("Content-Type", "application/json");
+    
+        xhttp.send();
+    }
+    
+
+}
+
 
 setInterval(GetGameState, 3000)
 
