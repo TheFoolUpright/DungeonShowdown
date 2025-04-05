@@ -30,6 +30,7 @@ CREATE TABLE `player_card_slot` (
   `slot_id` int DEFAULT NULL,
   `card_id` int DEFAULT NULL,
   `room_id` int DEFAULT NULL,
+  `showdown_turn` int DEFAULT NULL,
   PRIMARY KEY (`player_card_slot_id`),
   KEY `player_card_board_player_status_id_FK_idx` (`player_status_id`),
   KEY `player_card_board_board_status_id_FK_idx` (`slot_id`),
@@ -49,13 +50,13 @@ CREATE TABLE `player_card_slot` (
 LOCK TABLES `player_card_slot` WRITE;
 /*!40000 ALTER TABLE `player_card_slot` DISABLE KEYS */;
 INSERT INTO `player_card_slot` VALUES 
-(1,1,1,3,1),
-(2,1,2,1,1),
-(3,1,3,5,1),
+(1,1,1,3,1,NULL),
+(2,1,2,1,1,NULL),
+(3,1,3,5,1,NULL),
 
-(4,2,1,2,1),
-(5,2,4,4,1),
-(6,2,3,6,1);
+(4,2,1,2,1,NULL),
+(5,2,4,4,1,NULL),
+(6,2,3,6,1,NULL);
 /*!40000 ALTER TABLE `player_card_slot` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
