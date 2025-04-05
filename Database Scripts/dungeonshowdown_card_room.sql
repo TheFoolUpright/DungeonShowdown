@@ -39,6 +39,8 @@ CREATE TABLE `card_room` (
 --
 -- Dumping data for table `card_room`
 --
+ALTER TABLE `card_room` AUTO_INCREMENT = 1;
+
 
 LOCK TABLES `card_room` WRITE;
 /*!40000 ALTER TABLE `card_room` DISABLE KEYS */;
