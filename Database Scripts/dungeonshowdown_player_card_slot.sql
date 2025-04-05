@@ -48,7 +48,10 @@ CREATE TABLE `player_card_slot` (
 
 LOCK TABLES `player_card_slot` WRITE;
 /*!40000 ALTER TABLE `player_card_slot` DISABLE KEYS */;
-INSERT INTO `player_card_slot` VALUES (7,5,1,3,1),(8,5,2,1,1),(9,5,3,5,1);
+INSERT INTO `player_card_slot` VALUES 
+(1,5,1,3,1),
+(2,5,2,1,1),
+(3,5,3,5,1);
 /*!40000 ALTER TABLE `player_card_slot` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
