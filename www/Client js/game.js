@@ -2,7 +2,13 @@
 var dungeonCard1Id
 var dungeonCard2Id
 var dungeonCard3Id
-var dungeonCard4Id
+var dungeonSelectedCardId
+var showdownCard1Id = 8;
+var showdownCard2Id
+var showdownCard3Id
+var showdownCard4Id
+var showdownSelectedCard1Id = null;
+var showdownSelectedCard2Id = null;
 var roomId = 1;
 var showdownTurn = 0;
 
@@ -110,18 +116,18 @@ function GetGameState() {
                     document.getElementById("insight").innerHTML = "Insight: " + data.insight;
                     document.getElementById("damage").innerHTML = "Damage: " + data.damage;
                     
-                    dungeonCard1Id = data.card[0].card_id
+                    showdownCard2Id = data.card[0].card_id
                     document.getElementById("specialAttackCardName").innerHTML = data.card[0].card_name
                     document.getElementById("specialAttackCardImage").innerHTML = data.card[0].card_image_path
                     document.getElementById("specialAttackCardStats").innerHTML = UnwrapShowdownCardStats(data.card[0], data.damage)
                     
                     
-                    dungeonCard2Id = data.card[1].card_id
+                    showdownCard3Id = data.card[1].card_id
                     document.getElementById("defenseCardName").innerHTML = data.card[1].card_name
                     document.getElementById("defenseCardImage").innerHTML = data.card[1].card_image_path
                     document.getElementById("defenseCardStats").innerHTML = UnwrapShowdownCardStats(data.card[1], data.damage)
 
-                    dungeonCard3Id = data.card[2].card_id
+                    showdownCard4Id = data.card[2].card_id
                     document.getElementById("skillCardName").innerHTML = data.card[2].card_name
                     document.getElementById("skillCardImage").innerHTML = data.card[2].card_image_path
                     document.getElementById("skillCardStats").innerHTML = UnwrapShowdownCardStats(data.card[2], data.damage)
@@ -281,26 +287,165 @@ function UnwrapShowdownCardStats(card, playerDamage)
 function DungeonSelectCard() {
     if (document.getElementById("dungeonCard1Selection").checked) 
     {
-        dungeonCard4Id = dungeonCard1Id;
+        dungeonSelectedCardId = dungeonCard1Id;
         document.getElementById("selectedCardName").innerHTML = document.getElementById("card1Name").innerHTML;
         document.getElementById("selectedCardImage").innerHTML = document.getElementById("card1Image").innerHTML;
         document.getElementById("selectedCardStats").innerHTML = document.getElementById("card1Stats").innerHTML;
     }
     if (document.getElementById("dungeonCard2Selection").checked) 
     {
-        dungeonCard4Id = dungeonCard2Id;
+        dungeonSelectedCardId = dungeonCard2Id;
         document.getElementById("selectedCardName").innerHTML = document.getElementById("card2Name").innerHTML;
         document.getElementById("selectedCardImage").innerHTML = document.getElementById("card2Image").innerHTML;
         document.getElementById("selectedCardStats").innerHTML = document.getElementById("card2Stats").innerHTML;
     }
     if (document.getElementById("dungeonCard3Selection").checked) 
     {
-        dungeonCard4Id = dungeonCard3Id;
+        dungeonSelectedCardId = dungeonCard3Id;
         document.getElementById("selectedCardName").innerHTML = document.getElementById("card3Name").innerHTML;
         document.getElementById("selectedCardImage").innerHTML = document.getElementById("card3Image").innerHTML;
         document.getElementById("selectedCardStats").innerHTML = document.getElementById("card3Stats").innerHTML;
     }
     
+}
+
+function ShowdownSelectCard() {
+    console.log("showdownSelectedCard1Id = " + showdownSelectedCard1Id)
+    console.log("showdownSelectedCard2Id = " + showdownSelectedCard2Id)
+    if (document.getElementById("showdownCard1Selection").checked) 
+    {
+        if(showdownSelectedCard1Id == null && showdownSelectedCard2Id != showdownCard1Id) {
+            showdownSelectedCard1Id = showdownCard1Id;
+            document.getElementById("selectedCardName1").innerHTML = document.getElementById("normalAttackCardName").innerHTML;
+            document.getElementById("selectedCardImage1").innerHTML = document.getElementById("normalAttackCardImage").innerHTML;
+            document.getElementById("selectedCardStats1").innerHTML = document.getElementById("normalAttackCardStats").innerHTML;
+            return;
+        } 
+        else if(showdownSelectedCard2Id == null && showdownSelectedCard1Id != showdownCard1Id) {
+            showdownSelectedCard2Id = showdownCard1Id;
+            document.getElementById("selectedCardName2").innerHTML = document.getElementById("normalAttackCardName").innerHTML;
+            document.getElementById("selectedCardImage2").innerHTML = document.getElementById("normalAttackCardImage").innerHTML;
+            document.getElementById("selectedCardStats2").innerHTML = document.getElementById("normalAttackCardStats").innerHTML;
+            return;
+        } 
+    }
+    else {
+        if(showdownSelectedCard1Id == showdownCard1Id) {
+            showdownSelectedCard1Id = null;
+            document.getElementById("selectedCardName1").innerHTML = "Selected Card Name";
+            document.getElementById("selectedCardImage1").innerHTML = "[Selected Card Image]";
+            document.getElementById("selectedCardStats1").innerHTML = "Selected Card Stats";
+            
+
+        }
+        if(showdownSelectedCard2Id == showdownCard1Id) {
+            showdownSelectedCard2Id = null;
+            document.getElementById("selectedCardName2").innerHTML = "Selected Card Name";
+            document.getElementById("selectedCardImage2").innerHTML = "[Selected Card Image]";
+            document.getElementById("selectedCardStats2").innerHTML = "Selected Card Stats";
+        }
+    }
+
+    if (document.getElementById("showdownCard2Selection").checked) {
+        console.log("showdownCard2Selection")
+        if(showdownSelectedCard1Id == null && showdownSelectedCard2Id != showdownCard2Id) {
+            showdownSelectedCard1Id = showdownCard2Id;
+            document.getElementById("selectedCardName1").innerHTML = document.getElementById("specialAttackCardName").innerHTML;
+            document.getElementById("selectedCardImage1").innerHTML = document.getElementById("specialAttackCardImage").innerHTML;
+            document.getElementById("selectedCardStats1").innerHTML = document.getElementById("specialAttackCardStats").innerHTML;
+            return;
+        }
+        else if(showdownSelectedCard2Id == null && showdownSelectedCard1Id != showdownCard2Id) {
+            showdownSelectedCard2Id = showdownCard2Id;
+            document.getElementById("selectedCardName2").innerHTML = document.getElementById("specialAttackCardName").innerHTML;
+            document.getElementById("selectedCardImage2").innerHTML = document.getElementById("specialAttackCardImage").innerHTML;
+            document.getElementById("selectedCardStats2").innerHTML = document.getElementById("specialAttackCardStats").innerHTML;
+            return;
+        } 
+    }
+    else {
+        if(showdownSelectedCard1Id == showdownCard2Id) {
+            showdownSelectedCard1Id = null;
+            document.getElementById("selectedCardName1").innerHTML = "Selected Card Name";
+            document.getElementById("selectedCardImage1").innerHTML = "[Selected Card Image]";
+            document.getElementById("selectedCardStats1").innerHTML = "Selected Card Stats";
+            
+
+        }
+        if(showdownSelectedCard2Id == showdownCard2Id) {
+            showdownSelectedCard2Id = null;
+            document.getElementById("selectedCardName2").innerHTML = "Selected Card Name";
+            document.getElementById("selectedCardImage2").innerHTML = "[Selected Card Image]";
+            document.getElementById("selectedCardStats2").innerHTML = "Selected Card Stats";
+        }
+    }
+
+    if (document.getElementById("showdownCard3Selection").checked) {
+        if(showdownSelectedCard1Id == null && showdownSelectedCard2Id != showdownCard3Id) {
+            showdownSelectedCard1Id = showdownCard3Id;
+            document.getElementById("selectedCardName1").innerHTML = document.getElementById("defenseCardName").innerHTML;
+            document.getElementById("selectedCardImage1").innerHTML = document.getElementById("defenseCardImage").innerHTML;
+            document.getElementById("selectedCardStats1").innerHTML = document.getElementById("defenseCardStats").innerHTML;
+            return;
+        }
+        else if(showdownSelectedCard2Id == null && showdownSelectedCard1Id != showdownCard3Id) {
+            showdownSelectedCard2Id = showdownCard3Id;
+            document.getElementById("selectedCardName2").innerHTML = document.getElementById("defenseCardName").innerHTML;
+            document.getElementById("selectedCardImage2").innerHTML = document.getElementById("defenseCardImage").innerHTML;
+            document.getElementById("selectedCardStats2").innerHTML = document.getElementById("defenseCardStats").innerHTML;
+            return;
+        } 
+    }
+    else {
+        if(showdownSelectedCard1Id == showdownCard3Id) {
+            showdownSelectedCard1Id = null;
+            document.getElementById("selectedCardName1").innerHTML = "Selected Card Name";
+            document.getElementById("selectedCardImage1").innerHTML = "[Selected Card Image]";
+            document.getElementById("selectedCardStats1").innerHTML = "Selected Card Stats";
+            
+
+        }
+        if(showdownSelectedCard2Id == showdownCard3Id) {
+            showdownSelectedCard2Id = null;
+            document.getElementById("selectedCardName2").innerHTML = "Selected Card Name";
+            document.getElementById("selectedCardImage2").innerHTML = "[Selected Card Image]";
+            document.getElementById("selectedCardStats2").innerHTML = "Selected Card Stats";
+        }
+    }
+
+    if (document.getElementById("showdownCard4Selection").checked) {
+        if(showdownSelectedCard1Id == null && showdownSelectedCard2Id != showdownCard4Id) {
+            showdownSelectedCard1Id = showdownCard4Id;
+            document.getElementById("selectedCardName1").innerHTML = document.getElementById("skillCardName").innerHTML;
+            document.getElementById("selectedCardImage1").innerHTML = document.getElementById("skillCardImage").innerHTML;
+            document.getElementById("selectedCardStats1").innerHTML = document.getElementById("skillCardStats").innerHTML;
+            return;
+        }
+        else if(showdownSelectedCard2Id == null && showdownSelectedCard1Id != showdownCard4Id) {
+            showdownSelectedCard2Id = showdownCard4Id;
+            document.getElementById("selectedCardName2").innerHTML = document.getElementById("skillCardName").innerHTML;
+            document.getElementById("selectedCardImage2").innerHTML = document.getElementById("skillCardImage").innerHTML;
+            document.getElementById("selectedCardStats2").innerHTML = document.getElementById("skillCardStats").innerHTML;
+            return;
+        } 
+    }
+    else {
+        if(showdownSelectedCard1Id == showdownCard4Id) {
+            showdownSelectedCard1Id = null;
+            document.getElementById("selectedCardName1").innerHTML = "Selected Card Name";
+            document.getElementById("selectedCardImage1").innerHTML = "[Selected Card Image]";
+            document.getElementById("selectedCardStats1").innerHTML = "Selected Card Stats";
+            
+
+        }
+        if(showdownSelectedCard2Id == showdownCard4Id) {
+            showdownSelectedCard2Id = null;
+            document.getElementById("selectedCardName2").innerHTML = "Selected Card Name";
+            document.getElementById("selectedCardImage2").innerHTML = "[Selected Card Image]";
+            document.getElementById("selectedCardStats2").innerHTML = "Selected Card Stats";
+        }
+    }
+   
 }
 
 function DungeonEndTurn() {
@@ -313,10 +458,9 @@ function DungeonEndTurn() {
     document.getElementById("dungeonCard3Selection").checked = false;
 
     var xhttp = new XMLHttpRequest();
-    console.log(dungeonCard4Id)
     //Create a JSON object with the registration data
     var dataToSend = {  
-        "cardId": dungeonCard4Id
+        "cardId": dungeonSelectedCardId
     }
 
     xhttp.onreadystatechange = function () {
@@ -340,9 +484,37 @@ function DungeonEndTurn() {
     xhttp.send(JSON.stringify(dataToSend));
 }
 
-function SetupDungeon() {
-    SetGameState()
+function ShowdownEndTurn() {
+    var xhttp = new XMLHttpRequest();
+    //Create a JSON object with the registration data
+    var dataToSend = {  
+        "cardId1": showdownSelectedCard1Id,
+        "cardId2": showdownSelectedCard2Id
+    }
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4) {
+
+            var data = JSON.parse(this.responseText)
+            console.log(data)
+
+            if (this.status == 200){
+
+                console.log("success")
+            }
+        }
+    }
+
+    xhttp.open("POST", "/resolveShowdownTurn", true);
+
+    xhttp.setRequestHeader("Content-Type", "application/json");
+
+    xhttp.send(JSON.stringify(dataToSend));
 }
+
+// function SetupDungeon() {
+//     SetGameState()
+// }
 
 function SetupNextRoom() {
 
@@ -356,6 +528,7 @@ function SetupNextRoom() {
             if (this.readyState == 4) {
     
                 if (this.status == 200){
+                    GetGameState()
                     console.log("success")
                 }
             }

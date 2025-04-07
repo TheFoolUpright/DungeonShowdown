@@ -7,7 +7,7 @@
     <script src="../Client js/game.js"></script>
 </head>
 <body>
-    <h1>Dungeon Showdown</h1> <input type="button" value="SetupDungeonRoom1" name="SetupDungeonRoom1" onclick="SetupDungeon()">
+    <!-- <h1>Dungeon Showdown</h1> <input type="button" value="SetupDungeonRoom1" name="SetupDungeonRoom1" onclick="SetupDungeon()"> -->
     <p id="roomId">Room 1</p>
     <p id="showdownTurn">Turn 0</p>
 
@@ -85,30 +85,50 @@
     <br/><br/><br/>
     
     <div id="showdownCards" style="display: none;">
+
+        <div id="selectedShowdownCards">
+            <table>
+                <tr>
+                    <td id="selectedCardName1">Selected Card Name</td>
+                    <td id="selectedCardName2">Selected Card Name</td>
+                </tr>
+                <tr>
+                    <td id="selectedCardImage1">[Selected Card Image]</td>
+                    <td id="selectedCardImage2">[Selected Card Image]</td>
+                </tr>
+                <tr>
+                    <td id="selectedCardStats1">Selected Card Stats</td>
+                    <td id="selectedCardStats2">Selected Card Stats</td>
+                </tr>
+            </table>
+        </div>
+
+        <br/>
+
         <table>
             <tr>
-                <td>Main Attack</td>
+                <td id="normalAttackCardName">Main Attack</td>
                 <td id="specialAttackCardName">Special Attack Card Name</td>
                 <td id="defenseCardName">Defense Card Name</td>
                 <td id="skillCardName">Skill Card Name</td>
             </tr>
             <tr>
-                <td>[Main Attack Image]</td>
+                <td id="normalAttackCardImage">[Main Attack Image]</td>
                 <td id="specialAttackCardImage">[Special Attack Image]</td>
                 <td id="defenseCardImage">[Defense Image]</td>
                 <td id="skillCardImage">[Skill Image]</td>
             </tr>
             <tr>
-                <td>Attack for [Damage]</td>
+                <td id="normalAttackCardStats">Attack for [Damage]</td>
                 <td id="specialAttackCardStats">[Special Attack Stats]</td>
                 <td id="defenseCardStats">[Defense Stats]</td>
                 <td id="skillCardStats">[Skill Stats]</td>
             </tr>
             <tr>
-                <td><input type="checkbox" name="showdownCheck" onclick="SelectShowdownCard(1)"></td>
-                <td><input type="checkbox" name="showdownCheck" onclick="SelectShowdownCard(2)"></td>
-                <td><input type="checkbox" name="showdownCheck" onclick="SelectShowdownCard(3)"></td>
-                <td><input type="checkbox" name="showdownCheck" onclick="SelectShowdownCard(4)"></td>
+                <td><input id="showdownCard1Selection" type="checkbox" name="showdownCheck" onclick="ShowdownSelectCard()"></td>
+                <td><input id="showdownCard2Selection" type="checkbox" name="showdownCheck" onclick="ShowdownSelectCard()"></td>
+                <td><input id="showdownCard3Selection" type="checkbox" name="showdownCheck" onclick="ShowdownSelectCard()"></td>
+                <td><input id="showdownCard4Selection" type="checkbox" name="showdownCheck" onclick="ShowdownSelectCard()"></td>
             </tr>
         </table>
 

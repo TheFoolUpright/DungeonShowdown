@@ -369,6 +369,7 @@ app.get("/getGameState", (req, res) => {
                     });
                     return;
                 } 
+                console.log("showdown_turn " + rows[0].showdown_turn)
                 RoomID = rows[0].room_id;
                 ShowdownTurn = rows[0].showdown_turn;
                 GetGameState()
@@ -415,7 +416,10 @@ app.get("/getGameState", (req, res) => {
 })
 
 app.post("/resolveDungeonTurn", (req, res) => {
-    console.log("req.body.cardId")
+    if(RoomID > 5){
+        ShowdownTurn++;
+    }
+
     // req.body.cardId
     UpdateSelectedCardSlot()
 
@@ -510,6 +514,7 @@ app.post("/resolveDungeonTurn", (req, res) => {
     }
 });
 
+
 app.post("/setupNextDungeonRoom", (req, res) => {
 
     SetupNextRoom()
@@ -522,6 +527,10 @@ app.post("/setupNextDungeonRoom", (req, res) => {
 })
 
 function SettingCards(req, res) {
+    if(RoomID > 5){
+        ShowdownTurn++;
+    }
+
     GetPlayerStats()
     function GetPlayerStats(){
         console.log("GetPlayerStats start")
@@ -573,7 +582,7 @@ function SettingCards(req, res) {
         deck.splice(indexOfElement, 1)
         var card3 = deck[Math.floor(Math.random() * deck.length)].card_id
 
-        connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id) VALUES (?,?,?,?), (?,?,?,?), (?,?,?,?);", [playerStats[0].player_status_id, 1, card1, RoomID, playerStats[0].player_status_id, 2, card2, RoomID ,playerStats[0].player_status_id, 3, card3, RoomID],
+        connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn) VALUES (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?);", [playerStats[0].player_status_id, 1, card1, RoomID, ShowdownTurn, playerStats[0].player_status_id, 2, card2, RoomID, ShowdownTurn, playerStats[0].player_status_id, 3, card3, RoomID, ShowdownTurn],
         function (err, rows, fields) {
             if (err){
                 console.log("Database Error: " + err);
@@ -594,8 +603,6 @@ function SettingCards(req, res) {
 
 app.post("/setupShowdown", (req, res) => {
 
-    // select possible cards
-    // insert chosen cards
         GetPlayerStats()
         function GetPlayerStats(){
             console.log("GetPlayerStats start")
@@ -664,9 +671,77 @@ app.post("/setupShowdown", (req, res) => {
             })
                 
         }
-    })
+    });
 
-// listen for requests on port 
+
+
+app.post("/resolveShowdownTurn", (req, res) => {
+    
+    //save player cards to database
+    ShowdownTurn++;
+
+    // req.body.cardId
+    UpdateSelectedCardSlot1()
+
+    function UpdateSelectedCardSlot1() {
+        connection.query("UPDATE player_card_slot SET slot_id = 9 WHERE card_id = ? AND player_status_id = ?;", [req.body.cardId1, PlayerStatusID], 
+            function(err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+                UpdateSelectedCardSlot2()
+            }
+        )
+        
+    }
+
+    function UpdateSelectedCardSlot2() {
+        connection.query("UPDATE player_card_slot SET slot_id = 10 WHERE card_id = ? AND player_status_id = ?;", [req.body.cardId2, PlayerStatusID], 
+            function(err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+                
+            }
+        )
+    }
+
+    function GetCardStats(PlayerStats) {
+        connection.query("SELECT card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM dungeonshowdown.card WHERE card_id = ?;", [req.body.cardId], 
+            function(err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+                var updatedMaxHealth = PlayerStats[0].max_health + rows[0].card_max_health
+                var updatedCurrentHealth = PlayerStats[0].current_health + rows[0].card_current_health + rows[0].card_max_health
+                var updatedEnergy = PlayerStats[0].energy + rows[0].card_energy
+                var updatedInsight = PlayerStats[0].insight + rows[0].card_insight
+                var updatedDamage = PlayerStats[0].damage + rows[0].card_damage
+            }
+        )
+    }
+
+    //get opponent and player cards
+    //show opponent and player actions
+    //update player stats
+
+
+})
+
+    // listen for requests on port 
+
 app.listen(4000, () => {
     console.log("🙌 Server is running on port 4000. Check http://localhost:4000/")
 });
