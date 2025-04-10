@@ -55,7 +55,7 @@ function GetGameState() {
 
                 if (this.status == 200){
                     console.log(data.card[0])
-                    //data.card.sort(sortCards)
+                    data.card.sort(sortCards)
 
                     //console.log("Data.Card: "+ data.card)
                     document.getElementById("maxHealth").innerHTML = "Max Health: " + data.max_health;
@@ -109,7 +109,7 @@ function GetGameState() {
 
                 if (this.status == 200){
                     console.log(data.card)
-                    //data.card.sort(sortCards)
+                    data.card.sort(sortCards)
 
                     //console.log("Data.Card: "+ data.card)
                     document.getElementById("maxHealth").innerHTML = "Max Health: " + data.max_health;

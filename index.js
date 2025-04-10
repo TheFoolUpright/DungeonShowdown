@@ -463,31 +463,33 @@ app.post("/resolveDungeonTurn", (req, res) => {
                     })
                     return
                 }
-                var updatedMaxHealth
-                var updatedCurrentHealth
-                var updatedEnergy
-                var updatedInsight
-                var updatedDamage
+                var updatedMaxHealth = PlayerStats[0].max_health
+                var updatedCurrentHealth = PlayerStats[0].current_health
+                var updatedEnergy = PlayerStats[0].energy 
+                var updatedInsight = PlayerStats[0].insight
+                var updatedDamage = PlayerStats[0].damage 
 
                 for (let i = 0; i < rows.length; i++) {
                     if (rows[i].attribute_id == 1){
-                        updatedMaxHealth = PlayerStats[0].max_health + rows[i].card_attribute_value
-                        updatedCurrentHealth = PlayerStats[0].current_health + rows[i].card_attribute_value
+                        updatedMaxHealth = updatedMaxHealth + parseInt(rows[i].card_attribute_value)
+                        updatedCurrentHealth = updatedCurrentHealth + parseInt(rows[i].card_attribute_value)
                     }
                     if (rows[i].attribute_id == 2){
-                        updatedCurrentHealth = PlayerStats[0].current_health + rows[i].card_attribute_value
+                        updatedCurrentHealth = updatedCurrentHealth + parseInt(rows[i].card_attribute_value)
                     }
                     if (rows[i].attribute_id == 3){
-                        updatedEnergy = PlayerStats[0].energy + rows[i].card_attribute_value
+                        updatedEnergy = updatedEnergy + parseInt(rows[i].card_attribute_value)
                     }
                     if (rows[i].attribute_id == 4){
-                        updatedInsight = PlayerStats[0].insight + rows[i].card_attribute_value
+                        updatedInsight = updatedInsight + parseInt(rows[i].card_attribute_value)
                     }
                     if (rows[i].attribute_id == 5){
-                        updatedDamage = PlayerStats[0].damage + rows[i].card_attribute_value
+                        updatedDamage = updatedDamage + parseInt(rows[i].card_attribute_value)
                     }
                     
                 }
+
+
 
                 UpdatePlayerStats(updatedMaxHealth, updatedCurrentHealth, updatedEnergy, updatedInsight, updatedDamage)
             }
