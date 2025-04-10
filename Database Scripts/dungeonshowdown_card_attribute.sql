@@ -18,45 +18,43 @@ USE `dungeonshowdown`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `card`
+-- Table structure for table `card_attribute`
 --
 
-DROP TABLE IF EXISTS `card`;
+DROP TABLE IF EXISTS `card_attribute`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `card` (
-  `card_id` int NOT NULL AUTO_INCREMENT,
-  `card_type_id` int NOT NULL,
-  `card_name` varchar(45) DEFAULT NULL,
-  `card_image_path` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`card_id`),
-  KEY `card_deck_card_type_id_FK_idx` (`card_type_id`),
-  CONSTRAINT `card_deck_card_type_id_FK` FOREIGN KEY (`card_type_id`) REFERENCES `card_type` (`card_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `card_attribute` (
+  `card_attribute_id` int NOT NULL AUTO_INCREMENT,
+  `card_id` int DEFAULT NULL,
+  `attribute_id` int DEFAULT NULL,
+  `card_attribute_value` decimal(10,0) DEFAULT NULL,
+  `IsPlayer` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`card_attribute_id`),
+  KEY `card_attribute_card_id_FK_idx` (`card_id`),
+  KEY `card_attribute_attribute_id_FK_idx` (`attribute_id`),
+  CONSTRAINT `card_attribute_attribute_id_FK` FOREIGN KEY (`attribute_id`) REFERENCES `attribute` (`attribute_id`),
+  CONSTRAINT `card_attribute_card_id_FK` FOREIGN KEY (`card_id`) REFERENCES `card` (`card_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `card`
+-- Dumping data for table `card_attribute`
 --
 
-LOCK TABLES `card` WRITE;
-/*!40000 ALTER TABLE `card` DISABLE KEYS */;
-INSERT INTO `card` VALUES 
-(1,1,'Max Health',NULL),
-(2,2,'Healing',NULL),
-(3,3,'Damage',NULL),
-(4,4,'Rest',NULL),
-(5,5,'Slime',NULL),
-(6,5,'Ghost',NULL),
-(7,5,'Bat',NULL),
-(8,6,'Normal Attack',NULL),
-(9,6,'Heavy Attack',NULL),
-(10,6,'Concussion Attack',NULL),
-(11,7,'Block 2',NULL),
-(12,7,'Block 3',NULL),
-(13,8,'Rage 1',NULL),
-(14,8,'Rage 2',NULL);
-/*!40000 ALTER TABLE `card` ENABLE KEYS */;
+LOCK TABLES `card_attribute` WRITE;
+/*!40000 ALTER TABLE `card_attribute` DISABLE KEYS */;
+INSERT INTO `card_attribute` VALUES 
+(1,1,1,2,1),
+(2,2,2,3,1),
+(3,4,3,1,1),
+(4,5,3,1,1),
+(5,7,3,2,1),
+(6,4,4,1,1),
+(7,5,4,1,1),
+(8,7,4,1,1),
+(9,3,5,1,1),(10,6,5,1,1),(11,13,5,1,1),(12,14,5,2,1),(16,8,6,1,1),(17,9,6,2,1),(18,10,6,1,1),(19,11,7,2,1),(20,12,7,3,1),(22,6,4,-1,1),(23,11,4,-1,1),(24,12,4,-2,1),(25,9,3,-2,1),(26,10,3,-2,1),(27,13,3,-2,1),(28,14,3,-3,1),(32,5,2,-1,1),(33,7,2,-2,1);
+/*!40000 ALTER TABLE `card_attribute` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -68,4 +66,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-10 14:36:09
+-- Dump completed on 2025-04-10 14:36:08
