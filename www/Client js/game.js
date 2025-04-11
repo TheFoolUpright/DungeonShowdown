@@ -54,10 +54,6 @@ function GetGameState() {
                 console.log(data)
 
                 if (this.status == 200){
-<<<<<<< HEAD
-                    console.log(data.card[0])
-=======
->>>>>>> parent of 2b38209 (Broken Cards)
                     data.card.sort(sortCards)
 
                     //console.log("Data.Card: "+ data.card)
@@ -111,10 +107,6 @@ function GetGameState() {
                 console.log(data)
 
                 if (this.status == 200){
-<<<<<<< HEAD
-                    console.log(data.card)
-=======
->>>>>>> parent of 2b38209 (Broken Cards)
                     data.card.sort(sortCards)
 
                     //console.log("Data.Card: "+ data.card)

@@ -388,20 +388,7 @@ app.get("/getGameState", (req, res) => {
                     return;
                 }
                 if (rows.length != 0){
-<<<<<<< HEAD
-                  
-                    card[i].id = rows[r].id
-                    card[i].name = rows[r].name
-
-
-                    card[i].attributes[j].id = rows[r].attribute_id
-                    card[i].attributes[j].value = rows[r].card_attribute_value
-                    card[i].attributes[j].isPlayer = rows[r].isPlayer
-
-                    
-=======
                     //console.log("Sending Stats and Cards")
->>>>>>> parent of 2b38209 (Broken Cards)
 
                     var card1 = rows[0];
                     var card2 = rows[1];
@@ -478,42 +465,11 @@ app.post("/resolveDungeonTurn", (req, res) => {
                     })
                     return
                 }
-<<<<<<< HEAD
-                var updatedMaxHealth = PlayerStats[0].max_health
-                var updatedCurrentHealth = PlayerStats[0].current_health
-                var updatedEnergy = PlayerStats[0].energy 
-                var updatedInsight = PlayerStats[0].insight
-                var updatedDamage = PlayerStats[0]. damage 
-
-                for (let i = 0; i < rows.length; i++) {
-                    if (rows[i].attribute_id == 1){
-                        updatedMaxHealth = updatedMaxHealth + parseInt(rows[i].card_attribute_value)
-                        updatedCurrentHealth = updatedCurrentHealth + parseInt(rows[i].card_attribute_value)
-                    }
-                    if (rows[i].attribute_id == 2){
-                        updatedCurrentHealth = updatedCurrentHealth + parseInt(rows[i].card_attribute_value)
-                    }
-                    if (rows[i].attribute_id == 3){
-                        updatedEnergy = updatedEnergy + parseInt(rows[i].card_attribute_value)
-                    }
-                    if (rows[i].attribute_id == 4){
-                        updatedInsight = updatedInsight + parseInt(rows[i].card_attribute_value)
-                    }
-                    if (rows[i].attribute_id == 5){
-                        updatedDamage = updatedDamage + parseInt(rows[i].card_attribute_value)
-                    }
-                    
-                }
-
-
-
-=======
                 var updatedMaxHealth = PlayerStats[0].max_health + rows[0].card_max_health
                 var updatedCurrentHealth = PlayerStats[0].current_health + rows[0].card_current_health + rows[0].card_max_health
                 var updatedEnergy = PlayerStats[0].energy + rows[0].card_energy
                 var updatedInsight = PlayerStats[0].insight + rows[0].card_insight
                 var updatedDamage = PlayerStats[0].damage + rows[0].card_damage
->>>>>>> parent of 2b38209 (Broken Cards)
                 UpdatePlayerStats(updatedMaxHealth, updatedCurrentHealth, updatedEnergy, updatedInsight, updatedDamage)
             }
         )
@@ -618,15 +574,15 @@ function SettingCards(req, res) {
         //Create Cards
         var indexOfElement;
 
-        var card1 = deck[Math.floor(Math.random() * deck.length)].card_id
-        indexOfElement = deck.indexOf(card1[0]);
+        var card1 = deck[Math.floor(Math.random() * deck.length)]
+        indexOfElement = deck.indexOf(card1);
         deck.splice(indexOfElement, 1)
-        var card2 = deck[Math.floor(Math.random() * deck.length)].card_id
-        indexOfElement = deck.indexOf(card2[0]);
+        var card2 = deck[Math.floor(Math.random() * deck.length)]
+        indexOfElement = deck.indexOf(card2);
         deck.splice(indexOfElement, 1)
-        var card3 = deck[Math.floor(Math.random() * deck.length)].card_id
+        var card3 = deck[Math.floor(Math.random() * deck.length)]
 
-        connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn) VALUES (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?);", [playerStats[0].player_status_id, 1, card1, RoomID, ShowdownTurn, playerStats[0].player_status_id, 2, card2, RoomID, ShowdownTurn, playerStats[0].player_status_id, 3, card3, RoomID, ShowdownTurn],
+        connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn) VALUES (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?);", [playerStats[0].player_status_id, 1, card1.card_id, RoomID, ShowdownTurn, playerStats[0].player_status_id, 2, card2.card_id, RoomID, ShowdownTurn, playerStats[0].player_status_id, 3, card3.card_id, RoomID, ShowdownTurn],
         function (err, rows, fields) {
             if (err){
                 console.log("Database Error: " + err);
