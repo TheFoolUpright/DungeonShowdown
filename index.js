@@ -369,7 +369,6 @@ app.get("/getGameState", (req, res) => {
                     });
                     return;
                 } 
-                console.log("showdown_turn " + rows[0].showdown_turn)
                 RoomID = rows[0].room_id;
                 ShowdownTurn = rows[0].showdown_turn;
                 GetGameState()
@@ -394,8 +393,6 @@ app.get("/getGameState", (req, res) => {
                     var card2 = rows[1];
                     var card3 = rows[2];
                     
-                    console.log(card3.card_energy)
-
                     res.status(200).json({
                         "message": "Player stats and cards updated",
                         "room_id": RoomID,
@@ -678,13 +675,13 @@ app.post("/setupShowdown", (req, res) => {
 app.post("/resolveShowdownTurn", (req, res) => {
     
     //save player cards to database
-    ShowdownTurn++;
+    //ShowdownTurn++;
 
     // req.body.cardId
     UpdateSelectedCardSlot1()
 
     function UpdateSelectedCardSlot1() {
-        connection.query("UPDATE player_card_slot SET slot_id = 9 WHERE card_id = ? AND player_status_id = ?;", [req.body.cardId1, PlayerStatusID], 
+        connection.query("UPDATE player_card_slot SET slot_id = 9 WHERE card_id = ? AND player_status_id = ? AND showdown_turn = ?;", [req.body.cardId1, PlayerStatusID, ShowdownTurn], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -700,7 +697,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
     }
 
     function UpdateSelectedCardSlot2() {
-        connection.query("UPDATE player_card_slot SET slot_id = 10 WHERE card_id = ? AND player_status_id = ?;", [req.body.cardId2, PlayerStatusID], 
+        connection.query("UPDATE player_card_slot SET slot_id = 10 WHERE card_id = ? AND player_status_id = ? AND showdown_turn = ?;", [req.body.cardId2, PlayerStatusID, ShowdownTurn], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -709,13 +706,47 @@ app.post("/resolveShowdownTurn", (req, res) => {
                     })
                     return
                 }
+                GetOpponentShowdownCardStats()
+            }
+        )
+    }
+
+    
+    function GetOpponentShowdownCardStats() {
+        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (9,10) AND match_id = ?;", [PlayerStatusID, ShowdownTurn, MatchID], 
+            function(err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+                GetPlayerShowdownCardStats(rows)
+            }
+        )
+        
+    }
+
+    function GetPlayerShowdownCardStats(opponentCards) {
+        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id WHERE player_status_id = ? AND showdown_turn = ? AND slot_id IN (9,10);", [PlayerStatusID, ShowdownTurn], 
+            function(err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+
+                GetPlayerShowdownStats(opponentCards, rows);
                 
             }
         )
     }
 
-    function GetCardStats(PlayerStats) {
-        connection.query("SELECT card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM dungeonshowdown.card WHERE card_id = ?;", [req.body.cardId], 
+    function GetPlayerShowdownStats(opponentCards, playerCards) {
+        connection.query("SELECT player_status_id, Player.match_id, player_id, current_health, energy, insight, Player.damage, Opponent.damage op_damage FROM (SELECT damage, match_id FROM dungeonshowdown.player_status WHERE match_id = ? AND player_status_id != ?) Opponent INNER JOIN dungeonshowdown.player_status Player ON Opponent.match_id = Player.match_id WHERE player_status_id = ?;", [MatchID, PlayerStatusID, PlayerStatusID], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -724,11 +755,104 @@ app.post("/resolveShowdownTurn", (req, res) => {
                     })
                     return
                 }
-                var updatedMaxHealth = PlayerStats[0].max_health + rows[0].card_max_health
-                var updatedCurrentHealth = PlayerStats[0].current_health + rows[0].card_current_health + rows[0].card_max_health
-                var updatedEnergy = PlayerStats[0].energy + rows[0].card_energy
-                var updatedInsight = PlayerStats[0].insight + rows[0].card_insight
-                var updatedDamage = PlayerStats[0].damage + rows[0].card_damage
+                var opponentDamage = rows[0].op_damage;
+                var opponentAttack = 0
+                var playerCurrentHealth = rows[0].current_health;
+                var playerEnergy = rows[0].energy;
+                var playerInsight = rows[0].insight;
+                var playerDamage = rows[0].damage;
+                var playerDefense = 0;
+                var playerAttack = 0;
+                var IsParry = false;
+                var IsDodge = false;
+                var IsDoubleAttack = false;
+                var IsCounter = false;
+                var IsDoubleAttackOpponent = false;
+                var IsCounterOpponent = false;
+                var IsParryOpponent = false;
+                
+                //Player Skills
+                for (let i = 0; i < playerCards.length; i++) {
+                    if (playerCards.card_type_id == 8) {
+                        playerCurrentHealth = playerCurrentHealth + playerCards.card_current_health;
+                        playerInsight = playerInsight + playerCards.card_insight;
+                        playerEnergy = playerEnergy + playerCards.card_energy;
+                        playerDamage = playerDamage + playerCards.card_damage;
+                    }
+                }
+
+                //Opponent Skills
+                for (let i = 0; i < opponentCards.length; i++) {
+                    if (opponentCards.card_type_id == 8) {
+                        opponentDamage = opponentDamage + opponentCards.card_damage;
+                    }
+                }
+                
+                //Player Defense
+                for (let i = 0; i < playerCards.length; i++) {
+                    if (playerCards.card_type_id == 7) {
+                        playerDefense = playerDefense + playerCards.card_defense;
+                        playerInsight = playerInsight + playerCards.card_insight;
+                        playerEnergy = playerEnergy + playerCards.card_energy;
+
+                        if (playerCards.card_id = 1) {
+                            IsParry = true;
+                        }
+                        if (playerCards.card_id = 2) {
+                            IsDodge = true;
+                        }
+                    }
+                }
+
+                //Oponent Defense
+                for (let i = 0; i < opponentCards.length; i++) {
+                    if (opponentCards.card_type_id == 7) {
+                        if (opponentCards.card_id = 1) {
+                            IsParryOpponent = true;
+                        }
+                    }
+                }
+
+                //Player Attack
+                for (let i = 0; i < playerCards.length; i++) {
+                    if (playerCards.card_type_id == 6) {
+                        playerAttack = playerAttack + playerCards.card_attack;
+                        playerEnergy = playerEnergy + playerCards.card_energy;
+
+                        if (playerCards.card_id = 3) {
+                            IsDoubleAttack = true;
+                        }
+                        if (playerCards.card_id = 4) {
+                            IsCounter = true;
+                        }
+                    }
+                }
+
+                //Opponent Attack
+                for (let i = 0; i < opponentCards.length; i++) {
+                    if (opponentCards.card_type_id == 6) {
+                        opponentAttack = playerAttack + opponentCards.card_attack;
+
+                        if (opponentCards.card_id = 3) {
+                            IsDoubleAttackOpponent = true;
+                        }
+                        if (opponentCards.card_id = 4) {
+                            IsCounterOpponent = true;
+                        }
+                    }
+                }
+                /*
+                Combat Calculations and ordering
+                (is it a parry, counter or double attack, if not just do a normal attack)
+                (check the defense options)
+                Update Player Stats based on calculations
+                (Send Card actions to the client to make a message of what happened (later being replaced by an animation))
+
+                Different Endpoint
+                Proceed to the next turn (after confirmation from the player)
+                */
+
+
             }
         )
     }
