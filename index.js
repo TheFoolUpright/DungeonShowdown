@@ -388,6 +388,16 @@ app.get("/getGameState", (req, res) => {
                 }
                 if (rows.length != 0){
                   
+                    card[i].id = rows[r].id
+                    card[i].name = rows[r].name
+
+
+                    card[i].attributes[j].id = rows[r].attribute_id
+                    card[i].attributes[j].value = rows[r].card_attribute_value
+                    card[i].attributes[j].isPlayer = rows[r].isPlayer
+
+                    
+
                     var card1 = rows[0];
                     var card2 = rows[1];
                     var card3 = rows[2];
@@ -467,7 +477,7 @@ app.post("/resolveDungeonTurn", (req, res) => {
                 var updatedCurrentHealth = PlayerStats[0].current_health
                 var updatedEnergy = PlayerStats[0].energy 
                 var updatedInsight = PlayerStats[0].insight
-                var updatedDamage = PlayerStats[0].damage 
+                var updatedDamage = PlayerStats[0]. damage 
 
                 for (let i = 0; i < rows.length; i++) {
                     if (rows[i].attribute_id == 1){
