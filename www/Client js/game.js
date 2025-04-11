@@ -54,8 +54,7 @@ function GetGameState() {
                 console.log(data)
 
                 if (this.status == 200){
-                    console.log(data.card[0])
-                    //data.card.sort(sortCards)
+                    data.card.sort(sortCards)
 
                     //console.log("Data.Card: "+ data.card)
                     document.getElementById("maxHealth").innerHTML = "Max Health: " + data.max_health;
@@ -108,8 +107,7 @@ function GetGameState() {
                 console.log(data)
 
                 if (this.status == 200){
-                    console.log(data.card)
-                    //data.card.sort(sortCards)
+                    data.card.sort(sortCards)
 
                     //console.log("Data.Card: "+ data.card)
                     document.getElementById("maxHealth").innerHTML = "Max Health: " + data.max_health;
@@ -158,62 +156,130 @@ function UnwrapDungeonCardStats(card)
     //console.log(card.card_type_id)
     var stringBuilder = "";
 
-    if(card.attribute_id == 1){
-        if(card.card_attribute_value > 0) {
-            stringBuilder = stringBuilder + " Max Health Increase by: " + card.card_attribute_value;
-        }
-        if(card.card_attribute_value < 0) {
-            stringBuilder = stringBuilder + " Max Health Decrease by: " + card.card_attribute_value;
-        }  
+    if(card.card_type_id == 1){
+        stringBuilder = "Max Health Increase by: " + card.card_max_health;
     }
-    if(card.attribute_id == 2){
-        if(card.card_attribute_value > 0) {
-            stringBuilder = stringBuilder + " Current Health Increase by: " + card.card_attribute_value;
-        }
-        if(card.card_attribute_value < 0) {
-            stringBuilder = stringBuilder + " Current Health Decrease by: " + card.card_attribute_value;
-        }  
+    if(card.card_type_id == 2){
+        stringBuilder = "Current Health Increase by: " + card.card_current_health;
     }
-    if(card.attribute_id == 3){
-        if(card.card_attribute_value > 0) {
-            stringBuilder = stringBuilder + " Energy Increase by: " + card.card_attribute_value;
-        }
-        if(card.card_attribute_value < 0) {
-            stringBuilder = stringBuilder + " Energy Decrease by: " + card.card_attribute_value;
-        }  
+    if(card.card_type_id == 3){
+        stringBuilder = "Damage Increase by: " + card.card_damage;
     }
-    if(card.attribute_id == 4){
-        if(card.card_attribute_value > 0) {
-            stringBuilder = stringBuilder + " Insight Increase by: " + card.card_attribute_value;
+    if(card.card_type_id == 4){
+        
+        if (card.card_energy > 0)
+        {
+            stringBuilder = stringBuilder + " Energy Increase by: " + card.card_energy;
         }
-        if(card.card_attribute_value < 0) {
-            stringBuilder = stringBuilder + " Insight Decrease by: " + card.card_attribute_value;
-        }  
-    }
-    if(card.attribute_id == 5){
-        if(card.card_attribute_value > 0) {
-            stringBuilder = stringBuilder + " Damage Increase by: " + card.card_attribute_value;
+        if (card.card_insight > 0)
+        {
+            stringBuilder = stringBuilder + " Insight Increase by: " + card.card_insight;
         }
-        if(card.card_attribute_value < 0) {
-            stringBuilder = stringBuilder + " Damage Decrease by: " + card.card_attribute_value;
-        }  
     }
-    if(card.attribute_id == 6){
-        if(card.card_attribute_value > 0) {
-            stringBuilder = stringBuilder + " Attack Increase by: " + card.card_attribute_value;
+    if(card.card_type_id == 5){
+
+        //Costs first
+        if (card.card_current_health < 0)
+        {
+            stringBuilder = stringBuilder + " Current Health Decrease by: " + card.card_current_health
         }
-        if(card.card_attribute_value < 0) {
-            stringBuilder = stringBuilder + " Attack Decrease by: " + card.card_attribute_value;
-        }  
-    }
-    if(card.attribute_id == 7){
-        if(card.card_attribute_value > 0) {
-            stringBuilder = stringBuilder + " Defence Increase by: " + card.card_attribute_value;
+        if (card.card_energy < 0)
+        {
+            stringBuilder = stringBuilder + " Energy Decrease by: " + card.card_energy
         }
-        if(card.card_attribute_value < 0) {
-            stringBuilder = stringBuilder + " Defence Decrease by: " + card.card_attribute_value;
-        }  
+        if (card.card_insight < 0)
+        {
+            stringBuilder = stringBuilder + " Insight Decrease by: " + card.card_insight
+        }
+
+        //Rewards
+        if (card.card_max_health > 0)
+            {
+                stringBuilder = stringBuilder + " Max Health Increase by: " + card.card_max_health
+            }
+        if (card.card_energy > 0)
+        {
+            stringBuilder = stringBuilder + " Energy Increase by: " + card.card_energy
+        }
+        if (card.card_insight > 0)
+        {
+                stringBuilder = stringBuilder + " Insight Increase by: " + card.card_insight
+        }
+        if (card.card_damage > 0)
+        {
+            stringBuilder = stringBuilder + " Damage Increase by: " + card.card_damage
+        }
+       
     }
+    
+    return stringBuilder;
+}
+
+function UnwrapShowdownCardStats(card, playerDamage)
+{
+    var stringBuilder = "";
+    if(card.card_type_id == 6){
+
+        //Cost first
+        if(card.card_energy < 0)
+        {
+            stringBuilder = stringBuilder + " Energy Decrease by: " + card.card_energy
+        }
+        // Rewards
+        if (card.card_attack > 0)
+        {
+            stringBuilder = stringBuilder + " Attack is: " + (card.card_attack * playerDamage)
+        }
+    }
+    if(card.card_type_id == 7){
+        console.log(card.insight)
+        //Cost first
+        if(card.card_energy < 0)
+        {
+            stringBuilder = stringBuilder + " Energy Decrease by: " + card.card_energy
+        }
+        if(card.card_insight < 0)
+        {
+            stringBuilder = stringBuilder + " Insight Decrease by: " + card.card_insight
+        }
+        
+        // Rewards
+        if (card.card_defense > 0)
+        {
+            stringBuilder = stringBuilder + " Defense is: " +  card.card_defense
+        }
+    }
+    if(card.card_type_id == 8){
+         
+            //Cost first
+         if(card.card_energy < 0)
+        {
+            stringBuilder = stringBuilder + " Energy Decrease by: " + card.card_energy
+        }
+        if(card.card_insight < 0)
+        {
+            stringBuilder = stringBuilder + " Insight Decrease by: " + card.card_insight
+        }
+        
+        // Rewards
+        if (card.card_current_health > 0)
+            {
+                stringBuilder = stringBuilder + " Current Health Increase by: " + card.card_current_health
+            }
+        if (card.card_energy > 0)
+        {
+            stringBuilder = stringBuilder + " Energy Increase by: " + card.card_energy
+        }
+        if (card.card_insight > 0)
+        {
+                stringBuilder = stringBuilder + " Insight Increase by: " + card.card_insight
+        }
+        if (card.card_damage > 0)
+        {
+            stringBuilder = stringBuilder + " Damage Increase by: " + card.card_damage
+        }
+    }
+    
     
     return stringBuilder;
 }
