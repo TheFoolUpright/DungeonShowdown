@@ -44,7 +44,12 @@ var PlayerStatusID = 1;
 var RoomID = 1;
 var ShowdownTurn = 1;
 
-
+/**
+ * explain their purpose.
+ * @param {number} a - The first number.
+ * @param {string} b - The second number.
+ * @returns {JSON} The sum of a and b.
+ */
 app.post("/login", (req, res) => {
 
     username = req.body.username;
