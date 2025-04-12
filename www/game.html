@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>⛓️Dungeon Showdown!⛓️</title>
     <script src="../Client js/game.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/game.css">
 </head>
 <body>
     <!-- <h1>Dungeon Showdown</h1> <input type="button" value="SetupDungeonRoom1" name="SetupDungeonRoom1" onclick="SetupDungeon()"> -->
-    <p id="roomId">Room 1</p>
-    <p id="showdownTurn">Turn 0</p>
+    <!-- <p id="roomId">Room 1</p>
+    <p id="showdownTurn">Turn 0</p> -->
 
     <table id="statsContainer">
         <tr id="maxHealthContainer">
@@ -44,7 +45,7 @@
 <div id="dungeonCards">
     
     <div id="selectedDungeonCard">
-        <table>
+        <table class="cards">
             <tr>
                 <td id="selectedCardName">Selected Card Name</td>
             </tr>
@@ -56,9 +57,8 @@
             </tr>
         </table>
     </div>
-<br /> <br /> 
-
-    <table>
+<br /> <br />
+    <table class="cards">
         <tr>
             <td id="card1Name">Card 1 Name</td>
             <td id="card2Name">Card 2 Name</td>
@@ -80,19 +80,19 @@
             <td><input type="radio" id="dungeonCard3Selection" name="dungeonCard" value="card3" onclick="DungeonSelectCard()"/></td>
         </tr>
     </table>
-    <input type="button" value="Confirm" name="dungeonCheck" onclick="DungeonEndTurn()">
+    <input class="button" type="button" value="Confirm" name="dungeonCheck" onclick="DungeonEndTurn()">
 </div>
     <br/><br/><br/>
     
     <div id="opponentShowdownActionsSection" style="display: none;">
         <p id="opponentShowdownAction">Opponent and Player Action</p>
-        <input type="button" value="Confirm" name="opponentShowdownActionConfirm" onclick="SetupNextTurn()">
+        <input type="button" value="Confirm" name="opponentShowdownActionConfirm" onclick="SetupNextRoom()">
     </div>
     
     <div id="showdownCards" style="display: none;">
 
         <div id="selectedShowdownCards">
-            <table>
+            <table class="cards">
                 <tr>
                     <td id="selectedCardName1">Selected Card Name</td>
                     <td id="selectedCardName2">Selected Card Name</td>
@@ -110,7 +110,7 @@
 
         <br/>
 
-        <table>
+        <table class="cards">
             <tr>
                 <td id="normalAttackCardName">Main Attack</td>
                 <td id="specialAttackCardName">Special Attack Card Name</td>
@@ -136,8 +136,7 @@
                 <td><input id="showdownCard4Selection" type="checkbox" name="showdownCheck" onclick="ShowdownSelectCard()"></td>
             </tr>
         </table>
-
-        <button id="showdownConfirm" onclick="ShowdownEndTurn()">End Turn</button>
+        <input class="button" type="button" value="End Turn" id="showdownConfirm" name="ShowdownCheck" onclick="ShowdownEndTurn()">
     </div>
 </body>
 </html>

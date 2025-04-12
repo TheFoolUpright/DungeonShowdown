@@ -1,0 +1,26 @@
+table, th, td {
+  border: 1px solid;
+
+}
+
+table.cards {
+  height: 250px;
+}
+
+.cards td {
+  width: 150px;
+  text-align: center;
+}
+
+.cards {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input.button {
+    margin: 0;
+    position: relative;
+    left: 80%;
+    width: 200px;
+    height: 80px;
+}

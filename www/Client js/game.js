@@ -41,6 +41,7 @@ function sortCards(cardA, cardB){
 }
 
 function GetGameState() {
+    console.log("RoomID: " + roomId)
     //If in Dungeon
     if(roomId <= 5) {
         document.getElementById("showdownCards").style.display = "none";
@@ -116,21 +117,25 @@ function GetGameState() {
                     document.getElementById("insight").innerHTML = "Insight: " + data.insight;
                     document.getElementById("damage").innerHTML = "Damage: " + data.damage;
                     
-                    showdownCard2Id = data.card[0].card_id
-                    document.getElementById("specialAttackCardName").innerHTML = data.card[0].card_name
-                    document.getElementById("specialAttackCardImage").innerHTML = data.card[0].card_image_path
-                    document.getElementById("specialAttackCardStats").innerHTML = UnwrapShowdownCardStats(data.card[0], data.damage)
-                    
-                    
-                    showdownCard3Id = data.card[1].card_id
-                    document.getElementById("defenseCardName").innerHTML = data.card[1].card_name
-                    document.getElementById("defenseCardImage").innerHTML = data.card[1].card_image_path
-                    document.getElementById("defenseCardStats").innerHTML = UnwrapShowdownCardStats(data.card[1], data.damage)
+                    showdownCard1Id = 8
+                    document.getElementById("normalAttackCardName").innerHTML = data.card[0].card_name
+                    document.getElementById("normalAttackCardImage").innerHTML = data.card[0].card_image_path
+                    document.getElementById("normalAttackCardStats").innerHTML = UnwrapShowdownCardStats(data.card[0], data.damage)
 
-                    showdownCard4Id = data.card[2].card_id
-                    document.getElementById("skillCardName").innerHTML = data.card[2].card_name
-                    document.getElementById("skillCardImage").innerHTML = data.card[2].card_image_path
-                    document.getElementById("skillCardStats").innerHTML = UnwrapShowdownCardStats(data.card[2], data.damage)
+                    showdownCard2Id = data.card[1].card_id
+                    document.getElementById("specialAttackCardName").innerHTML = data.card[1].card_name
+                    document.getElementById("specialAttackCardImage").innerHTML = data.card[1].card_image_path
+                    document.getElementById("specialAttackCardStats").innerHTML = UnwrapShowdownCardStats(data.card[1], data.damage)
+                    
+                    showdownCard3Id = data.card[2].card_id
+                    document.getElementById("defenseCardName").innerHTML = data.card[2].card_name
+                    document.getElementById("defenseCardImage").innerHTML = data.card[2].card_image_path
+                    document.getElementById("defenseCardStats").innerHTML = UnwrapShowdownCardStats(data.card[2], data.damage)
+
+                    showdownCard4Id = data.card[3].card_id
+                    document.getElementById("skillCardName").innerHTML = data.card[3].card_name
+                    document.getElementById("skillCardImage").innerHTML = data.card[3].card_image_path
+                    document.getElementById("skillCardStats").innerHTML = UnwrapShowdownCardStats(data.card[3], data.damage)
 
                     showdownTurn = data.showdown_turn
                     document.getElementById("showdownTurn").innerHTML = "Turn " + showdownTurn
@@ -470,7 +475,12 @@ function DungeonEndTurn() {
             console.log(data)
 
             if (this.status == 200){
-                document.getElementById("opponentChoice").innerHTML = "Your oppponent chose a(n) " + data.card_type_name + " card";
+                if (data.card_type_id == 5) {
+                document.getElementById("opponentChoice").innerHTML = "Your oppponent chose an " + data.card_type_name + " card";
+                }
+                else {
+                    document.getElementById("opponentChoice").innerHTML = "Your oppponent chose a " + data.card_type_name + " card";
+                }
                 GetGameState()
                 console.log("success")
             }
@@ -494,7 +504,7 @@ function ShowdownEndTurn() {
 
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
-
+            console.log(this.responseText)
             var data = JSON.parse(this.responseText)
             console.log(data)
 
@@ -525,7 +535,8 @@ function ShowdownEndTurn() {
 
 function SetupNextRoom() {
 
-    if(roomId <= 5){
+    if(roomId <= 4){
+        
         document.getElementById("dungeonCards").style.display = "block";
         document.getElementById("opponentChoiceSection").style.display = "none";
         
@@ -548,6 +559,11 @@ function SetupNextRoom() {
         xhttp.send();
     }
     else {
+
+        document.getElementById("showdownCards").style.display = "block";
+        document.getElementById("opponentChoiceSection").style.display = "none";
+
+        console.log("RoomID: " + roomId)
         var xhttp = new XMLHttpRequest();
         
         xhttp.onreadystatechange = function () {
