@@ -360,7 +360,6 @@ app.post("/setDungeonPhase", (req, res) => {
 })
 
 app.get("/getGameState", (req, res) => {
-    
     GetLastRoom()
 
 
@@ -494,7 +493,7 @@ app.post("/resolveDungeonTurn", (req, res) => {
     }
 
     function GetOpponentCard() {
-        connection.query("SELECT c.card_id, ct.card_type_id, card_type_name FROM player_card_slot pcs INNER JOIN player_status ps ON pcs.player_status_id = ps.player_status_id INNER JOIN card c ON pcs.card_id = c.card_id INNER JOIN card_type ct ON c.card_type_id = ct.card_type_id WHERE pcs.player_status_id != ? AND match_id = ? AND slot_id = 4", [PlayerStatusID, MatchID], 
+        connection.query("SELECT c.card_id, ct.card_type_id, card_type_name FROM player_card_slot pcs INNER JOIN player_status ps ON pcs.player_status_id = ps.player_status_id INNER JOIN card c ON pcs.card_id = c.card_id INNER JOIN card_type ct ON c.card_type_id = ct.card_type_id WHERE pcs.player_status_id != ? AND match_id = ? AND slot_id = 4 AND room_id = ", [PlayerStatusID, MatchID, RoomID], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
