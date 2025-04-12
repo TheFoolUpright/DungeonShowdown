@@ -11,7 +11,7 @@
     <p id="roomId">Room 1</p>
     <p id="showdownTurn">Turn 0</p>
 
-    <table>
+    <table id="statsContainer">
         <tr id="maxHealthContainer">
             <td><img src="../Assets/Art/UI/1x/Max Health.png" alt="Max Health Icon" width="40" height="40"></td>
             <td><p id="maxHealth"></p></td>
@@ -83,6 +83,11 @@
     <input type="button" value="Confirm" name="dungeonCheck" onclick="DungeonEndTurn()">
 </div>
     <br/><br/><br/>
+    
+    <div id="opponentShowdownActionsSection" style="display: none;">
+        <p id="opponentShowdownAction">Opponent and Player Action</p>
+        <input type="button" value="Confirm" name="opponentShowdownActionConfirm" onclick="SetupNextTurn()">
+    </div>
     
     <div id="showdownCards" style="display: none;">
 

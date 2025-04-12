@@ -13,6 +13,8 @@ var roomId = 1;
 var showdownTurn = 0;
 
 
+
+
 function SetDungeonState(){
     
     var xhttp = new XMLHttpRequest();
@@ -39,8 +41,6 @@ function sortCards(cardA, cardB){
 }
 
 function GetGameState() {
-
-
     //If in Dungeon
     if(roomId <= 5) {
         document.getElementById("showdownCards").style.display = "none";
@@ -499,8 +499,15 @@ function ShowdownEndTurn() {
             console.log(data)
 
             if (this.status == 200){
+                //hide cards
+                document.getElementById("showdownCards").style.display = "none";
 
-                console.log("success")
+                //hide stats
+                document.getElementById("statsContainer").style.display = "none";
+
+                //show opponent actions 
+                document.getElementById("opponentShowdownActionsSection").style.display = "block";
+                document.getElementById("opponentShowdownAction").innerHTML = data.opponentActions + "\n" + data.playerActions;
             }
         }
     }
@@ -559,5 +566,6 @@ function SetupNextRoom() {
         xhttp.send();
     }
 }
+
 
 setInterval(GetGameState, 3000)

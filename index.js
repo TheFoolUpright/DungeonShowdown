@@ -762,19 +762,20 @@ app.post("/resolveShowdownTurn", (req, res) => {
                 }
                 var opponentDamage = rows[0].op_damage;
                 var opponentAttack = 0
+                var opponentParryAttack = 0
                 var playerCurrentHealth = rows[0].current_health;
                 var playerEnergy = rows[0].energy;
                 var playerInsight = rows[0].insight;
                 var playerDamage = rows[0].damage;
                 var playerDefense = 0;
                 var playerAttack = 0;
-                var IsParry = false;
-                var IsDodge = false;
-                var IsDoubleAttack = false;
-                var IsCounter = false;
-                var IsDoubleAttackOpponent = false;
-                var IsCounterOpponent = false;
-                var IsParryOpponent = false;
+                var isParry = false;
+                var isDodge = false;
+                var isDoubleAttack = false;
+                var isCounter = false;
+                var isDoubleAttackOpponent = false;
+                var isCounterOpponent = false;
+                var isParryOpponent = false;
                 
                 //Player Skills
                 for (let i = 0; i < playerCards.length; i++) {
@@ -801,19 +802,20 @@ app.post("/resolveShowdownTurn", (req, res) => {
                         playerEnergy = playerEnergy + playerCards.card_energy;
 
                         if (playerCards.card_id = 1) {
-                            IsParry = true;
+                            isParry = true;
                         }
                         if (playerCards.card_id = 2) {
-                            IsDodge = true;
+                            isDodge = true;
                         }
                     }
                 }
 
-                //Oponent Defense
+                //Opponent Defense
                 for (let i = 0; i < opponentCards.length; i++) {
                     if (opponentCards.card_type_id == 7) {
                         if (opponentCards.card_id = 1) {
-                            IsParryOpponent = true;
+                            opponentParryAttack = opponentCards.card_attack
+                            isParryOpponent = true;
                         }
                     }
                 }
@@ -825,10 +827,10 @@ app.post("/resolveShowdownTurn", (req, res) => {
                         playerEnergy = playerEnergy + playerCards.card_energy;
 
                         if (playerCards.card_id = 3) {
-                            IsDoubleAttack = true;
+                            isDoubleAttack = true;
                         }
                         if (playerCards.card_id = 4) {
-                            IsCounter = true;
+                            isCounter = true;
                         }
                     }
                 }
@@ -836,13 +838,13 @@ app.post("/resolveShowdownTurn", (req, res) => {
                 //Opponent Attack
                 for (let i = 0; i < opponentCards.length; i++) {
                     if (opponentCards.card_type_id == 6) {
-                        opponentAttack = playerAttack + opponentCards.card_attack;
+                        opponentAttack = opponentAttack + opponentCards.card_attack;
 
                         if (opponentCards.card_id = 3) {
-                            IsDoubleAttackOpponent = true;
+                            isDoubleAttackOpponent = true;
                         }
                         if (opponentCards.card_id = 4) {
-                            IsCounterOpponent = true;
+                            isCounterOpponent = true;
                         }
                     }
                 }
@@ -857,14 +859,125 @@ app.post("/resolveShowdownTurn", (req, res) => {
                 Proceed to the next turn (after confirmation from the player)
                 */
 
+                
+                if (isCounterOpponent) {
+                    if(!isDodge || !isParry){
+                        
+                        playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - (opponentAttack * opponentDamage));
+                        playerDefense = Math.max(0, playerDefense - (opponentAttack * opponentDamage))
+                    }
+                }
+                if(isDoubleAttackOpponent) {
+                    if(!isDodge || !isParry){
+                        playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - ((opponentAttack * opponentDamage) * 2));
+                        playerDefense = Math.max(0, playerDefense - ((opponentAttack * opponentDamage) * 2))
+                    }
+                    else{
+                        
+                        playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - (opponentAttack * opponentDamage))
+                        playerDefense = Math.max(0, playerDefense - (opponentAttack * opponentDamage))
+                    }
+                }
+                if (isParryOpponent) {
+                    if(opponentAttack != 0 || !isDodge) {
+                        playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - (opponentParryAttack * playerDamage));
+                        playerDefense = Math.max(0, playerDefense - (opponentParryAttack * playerDamage))
+                    }
+                }
+                
+                //Apply Normal, Heavy or Recovery Attack Damage
+                if(!isCounterOpponent && !isDoubleAttackOpponent) {
+                    playerCurrentHealth = playerCurrentHealth + playerDefense - (opponentAttack * opponentDamage)
+                    playerDefense = Math.max(0, playerDefense - (opponentAttack * opponentDamage))
+                }
+                
+                
+                UpdateShowdownPlayerStats(playerCurrentHealth, playerEnergy, playerInsight, playerDamage, opponentCards, playerCards)
+            }
+        )
+    }
+
+    function UpdateShowdownPlayerStats(playerCurrentHealth, playerEnergy, playerInsight, playerDamage, opponentCards, playerCards) {
+        connection.query("UPDATE player_status SET current_health = ?, energy = ?, insight = ?, damage = ? WHERE player_status_id = ?;", [playerCurrentHealth, playerEnergy, playerInsight, playerDamage, PlayerStatusID], 
+            function(err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+                
+                DisplayPlayerAndOpponentActions(opponentCards, playerCards)
 
             }
         )
     }
 
-    //get opponent and player cards
-    //show opponent and player actions
-    //update player stats
+    function DisplayPlayerAndOpponentActions(opponentCards, playerCards) {
+        var opponentActions;
+        var playerActions;
+
+        // 6	Attack
+        // 7	Defense
+        // 8	Skill
+        // console.log("opponentCards")
+        // console.log(opponentCards)
+
+        //Opponent Actions
+        if (opponentCards[0].card_type_id == 8 ) {
+            opponentActions = "Your opponent used " + opponentCards[0].card_name
+            if (opponentCards[1].card_type_id == 6) {
+                opponentActions = opponentActions + " and used a " + opponentCards[1].card_name + "."
+        
+            }
+        }
+        else if (opponentCards[1].card_type_id == 8) {
+            opponentActions = "Your opponent used " + opponentCards[1].card_name
+            if (opponentCards[0].card_type_id == 6) {
+                opponentActions = opponentActions + " and used a " + opponentCards[0].card_name + "."
+        
+            }
+        }
+        if (playerCards[0].card_type_id == 6) {
+            opponentActions = opponentActions + "\nYou used a " + playerCards[0].card_name + "."
+        }
+        else if (playerCards[1].card_type_id == 6) {
+            opponentActions = opponentActions + "\nYou used a " + playerCards[1].card_name + "."
+        }
+
+        //Player Actions
+        if (playerCards[0].card_type_id == 8 ) {
+            playerActions = "Your opponent used " + playerCards[0].card_name
+            if (playerCards[1].card_type_id == 6) {
+                playerActions = playerActions + " and used a " + playerCards[1].card_name + "."
+        
+            }
+        }
+        else if (playerCards[1].card_type_id == 8) {
+            playerActions = "Your opponent used " + playerCards[1].card_name
+            if (playerCards[0].card_type_id == 6) {
+                playerActions = playerActions + " and used a " + playerCards[0].card_name + "."
+        
+            }
+        }
+        if (opponentCards[0].card_type_id == 6) {
+            playerActions = playerActions + "\nYou used a " + opponentCards[0].card_name + "."
+        }
+        else if (opponentCards[1].card_type_id == 6) {
+            playerActions = playerActions + "\nYou used a " + opponentCards[1].card_name + "."
+        }
+
+
+        res.status(200).json(
+            {
+                "playerActions": playerActions,
+                "opponentActions": opponentActions
+            }
+        )
+    }
+
+
 
 
 })
