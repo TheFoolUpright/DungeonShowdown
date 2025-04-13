@@ -44,7 +44,9 @@ function GetGameState() {
     console.log("RoomID: " + roomId)
     //If in Dungeon
     if(roomId <= 5) {
+        if (roomId <= 4){
         document.getElementById("showdownCards").style.display = "none";
+        }
 
         var xhttp = new XMLHttpRequest();
         
@@ -55,33 +57,48 @@ function GetGameState() {
                 console.log(data)
 
                 if (this.status == 200){
-                    data.card.sort(sortCards)
+                    if(data.state == "WAITING_FOR_OPP"){
+                        document.getElementById("opponentChoiceSection").style.display = "none";
 
-                    //console.log("Data.Card: "+ data.card)
-                    document.getElementById("maxHealth").innerHTML = "Max Health: " + data.max_health;
-                    document.getElementById("currentHealth").innerHTML = "Current Health: " + data.current_health;
-                    document.getElementById("energy").innerHTML = "Energy: " + data.energy;
-                    document.getElementById("insight").innerHTML = "Insight: " + data.insight;
-                    document.getElementById("damage").innerHTML = "Damage: " + data.damage;
-                    
-                    dungeonCard1Id = data.card[0].card_id
-                    document.getElementById("card1Name").innerHTML = data.card[0].card_name
-                    document.getElementById("card1Image").innerHTML = data.card[0].card_image_path
-                    document.getElementById("card1Stats").innerHTML = UnwrapDungeonCardStats(data.card[0])
-                    
-                    
-                    dungeonCard2Id = data.card[1].card_id
-                    document.getElementById("card2Name").innerHTML = data.card[1].card_name
-                    document.getElementById("card2Image").innerHTML = data.card[1].card_image_path
-                    document.getElementById("card2Stats").innerHTML = UnwrapDungeonCardStats(data.card[1])
+                        DungeonOpponentChoice()
+                    }
+                    else if(data.state == "ROOM_LOADED"){
 
-                    dungeonCard3Id = data.card[2].card_id
-                    document.getElementById("card3Name").innerHTML = data.card[2].card_name
-                    document.getElementById("card3Image").innerHTML = data.card[2].card_image_path
-                    document.getElementById("card3Stats").innerHTML = UnwrapDungeonCardStats(data.card[2])
+                        if(document.getElementById("waitingForOpponent").style.display == "block"){
+                            console.log("hidden")
+                            document.getElementById("waitingForOpponent").style.display = "none";
+                            document.getElementById("opponentChoiceSection").style.display = "block";
+                        }
 
-                    roomId = data.room_id
-                    document.getElementById("roomId").innerHTML = "Room " + roomId
+
+                        data.card.sort(sortCards)
+
+                        //console.log("Data.Card: "+ data.card)
+                        document.getElementById("maxHealth").innerHTML = "Max Health: " + data.max_health;
+                        document.getElementById("currentHealth").innerHTML = "Current Health: " + data.current_health;
+                        document.getElementById("energy").innerHTML = "Energy: " + data.energy;
+                        document.getElementById("insight").innerHTML = "Insight: " + data.insight;
+                        document.getElementById("damage").innerHTML = "Damage: " + data.damage;
+                        
+                        dungeonCard1Id = data.card[0].card_id
+                        document.getElementById("card1Name").innerHTML = data.card[0].card_name
+                        document.getElementById("card1Image").innerHTML = data.card[0].card_image_path
+                        document.getElementById("card1Stats").innerHTML = UnwrapDungeonCardStats(data.card[0])
+                        
+                        
+                        dungeonCard2Id = data.card[1].card_id
+                        document.getElementById("card2Name").innerHTML = data.card[1].card_name
+                        document.getElementById("card2Image").innerHTML = data.card[1].card_image_path
+                        document.getElementById("card2Stats").innerHTML = UnwrapDungeonCardStats(data.card[1])
+    
+                        dungeonCard3Id = data.card[2].card_id
+                        document.getElementById("card3Name").innerHTML = data.card[2].card_name
+                        document.getElementById("card3Image").innerHTML = data.card[2].card_image_path
+                        document.getElementById("card3Stats").innerHTML = UnwrapDungeonCardStats(data.card[2])
+    
+                        roomId = data.room_id
+                        document.getElementById("roomId").innerHTML = "Room " + roomId 
+                    }
                 }
             }
         }
@@ -97,7 +114,13 @@ function GetGameState() {
     //In Showdown Phase
     else{
         document.getElementById("dungeonCards").style.display = "none";
-        document.getElementById("showdownCards").style.display = "block";
+        
+        if (document.getElementById("opponentShowdownActionsSection").style.display == "none") {
+            document.getElementById("showdownCards").style.display = "block"
+        }
+        else {
+            document.getElementById("showdownCards").style.display = "none"
+        }
 
         var xhttp = new XMLHttpRequest();
         
@@ -456,7 +479,6 @@ function ShowdownSelectCard() {
 function DungeonEndTurn() {
     
     document.getElementById("dungeonCards").style.display = "none";
-    document.getElementById("opponentChoiceSection").style.display = "block";
 
     document.getElementById("dungeonCard1Selection").checked = false;
     document.getElementById("dungeonCard2Selection").checked = false;
@@ -470,20 +492,32 @@ function DungeonEndTurn() {
 
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
-
+            console.log("here5")
             var data = JSON.parse(this.responseText)
             console.log(data)
 
+
             if (this.status == 200){
-                if (data.card_type_id == 5) {
-                document.getElementById("opponentChoice").innerHTML = "Your oppponent chose an " + data.card_type_name + " card";
+                if(data.state = "WAITING_FOR_OPP") {
+                    console.log("here1")
+                    //display a screen for wait for opponent choice
+                    document.getElementById("waitingForOpponent").style.display = "block";
                 }
-                else {
-                    document.getElementById("opponentChoice").innerHTML = "Your oppponent chose a " + data.card_type_name + " card";
+                else if (data.state = "NEXT_ROOM") {
+                    console.log("here2")
+                    document.getElementById("opponentChoiceSection").style.display = "block";
+
+                    if (data.card_type_id == 5) {
+                    document.getElementById("opponentChoice").innerHTML = "Your oppponent chose an " + data.card_type_name + " card";
+                    }
+                    else {
+                        document.getElementById("opponentChoice").innerHTML = "Your oppponent chose a " + data.card_type_name + " card";
+                    }
+                    GetGameState()
                 }
-                GetGameState()
-                console.log("success")
             }
+
+
         }
     }
 
@@ -492,6 +526,48 @@ function DungeonEndTurn() {
     xhttp.setRequestHeader("Content-Type", "application/json");
 
     xhttp.send(JSON.stringify(dataToSend));
+}
+
+function DungeonOpponentChoice(){
+
+
+    var xhttp = new XMLHttpRequest();
+
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4) {
+
+            var data = JSON.parse(this.responseText)
+            console.log(data)
+
+
+            if (this.status == 200){
+                if(data.state == "OPP_RECEIVED"){
+                    document.getElementById("opponentChoiceSection").style.display = "block";
+
+                if (data.card_type_id == 5) {
+                document.getElementById("opponentChoice").innerHTML = "Your oppponent chose an " + data.card_type_name + " card";
+                }
+                else {
+                    document.getElementById("opponentChoice").innerHTML = "Your oppponent chose a " + data.card_type_name + " card";
+                }
+
+                GetGameState()
+                }
+                else if (data.state == "WAITING_FOR_OPP") {
+                    
+                }
+                
+            }
+
+        }
+    }
+
+    xhttp.open("GET", "/dungeonOpponentChoice", true);
+
+    xhttp.setRequestHeader("Content-Type", "application/json");
+
+    xhttp.send();
 }
 
 function ShowdownEndTurn() {
@@ -559,9 +635,11 @@ function SetupNextRoom() {
         xhttp.send();
     }
     else {
-
         document.getElementById("showdownCards").style.display = "block";
+        document.getElementById("statsContainer").style.display = "block";
         document.getElementById("opponentChoiceSection").style.display = "none";
+        document.getElementById("opponentShowdownActionsSection").style.display = "none";
+
 
         console.log("RoomID: " + roomId)
         var xhttp = new XMLHttpRequest();
@@ -570,6 +648,7 @@ function SetupNextRoom() {
             if (this.readyState == 4) {
     
                 if (this.status == 200){
+
                     console.log("success")
                 }
             }

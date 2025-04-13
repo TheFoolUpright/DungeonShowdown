@@ -50,8 +50,8 @@ CREATE TABLE `player_card_slot` (
 LOCK TABLES `player_card_slot` WRITE;
 /*!40000 ALTER TABLE `player_card_slot` DISABLE KEYS */;
 INSERT INTO `player_card_slot` (player_status_id, slot_id, card_id, room_id, showdown_turn) VALUES 
-(1,4,3,1,NULL),
-(1,4,1,1,NULL),
+(1,1,3,1,NULL),
+(1,2,1,1,NULL),
 (1,3,5,1,NULL),
 
 (2,1,2,1,NULL),
@@ -69,9 +69,9 @@ INSERT INTO `player_card_slot` (player_status_id, slot_id, card_id, room_id, sho
 (2,1,5,5,NULL),
 (2,2,4,5,NULL),
 (2,4,7,5,NULL),
-(2,1,12,6,1),
-(2,2,11,6,1),
-(2,3,13,6,1);
+(2,7,12,6,1),
+(2,9,11,6,1),
+(2,10,13,6,1);
 /*!40000 ALTER TABLE `player_card_slot` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

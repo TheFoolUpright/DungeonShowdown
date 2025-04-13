@@ -359,12 +359,49 @@ app.post("/setDungeonPhase", (req, res) => {
         
 })
 
+
+app.get("/dungeonOpponentChoice", (req, res) => {
+    GetOpponentCard()
+
+    function GetOpponentCard() {
+        connection.query("SELECT c.card_id, ct.card_type_id, card_type_name FROM player_card_slot pcs INNER JOIN player_status ps ON pcs.player_status_id = ps.player_status_id INNER JOIN card c ON pcs.card_id = c.card_id INNER JOIN card_type ct ON c.card_type_id = ct.card_type_id WHERE pcs.player_status_id != ? AND match_id = ? AND slot_id = 4 AND room_id = ?", [PlayerStatusID, MatchID, RoomID], 
+            function(err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+                if(rows.length != 0){
+                    res.status(200).json({
+                        "message": "Player stats updated and opponent card received",
+                        "state": "OPP_RECEIVED",
+                        "card_id": rows[0].card_id,
+                        "card_type_id": rows[0].card_type_id,
+                        "card_type_name": rows[0].card_type_name
+                    })
+                }
+                else
+                {
+                    res.status(200).json({
+                        "message": "Opponent hasn't confirmed their card",
+                        "state": "WAITING_FOR_OPP"
+                    })
+                }
+                
+            }
+        )
+        
+    }
+})
+
+
 app.get("/getGameState", (req, res) => {
+    
     GetLastRoom()
-
-
     function GetLastRoom() {
-        connection.query("SELECT player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, showdown_turn, match_id, player_id, max_health, current_health, energy, insight, damage, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = ? AND match_id = ? ORDER BY room_id DESC LIMIT 3", [PlayerID, MatchID], 
+        connection.query("SELECT room_id, showdown_turn FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = ? AND match_id = ? AND slot_id IN (4,9,10) ORDER BY room_id DESC, showdown_turn DESC", [PlayerID, MatchID], 
             function (err, rows, fields) {
                 if (err){
                     console.log("Database Error: " + err);
@@ -373,14 +410,57 @@ app.get("/getGameState", (req, res) => {
                     });
                     return;
                 } 
-                RoomID = rows[0].room_id;
-                ShowdownTurn = rows[0].showdown_turn;
-                GetGameState()
+                if(rows.length != 0){
+                    RoomID = rows[0].room_id;
+                    ShowdownTurn = rows[0].showdown_turn;
+    
+                    GetOpponentStatus(true)
+                }
+                else{
+                    GetOpponentStatus(false)
+                }
+                
             }
         )
     }
     
-    function GetGameState() {
+    function GetOpponentStatus(playerIsConfirmed) {
+        connection.query("SELECT room_id, showdown_turn FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id != ? AND match_id = ? AND slot_id IN (4,9,10) ORDER BY room_id DESC, showdown_turn DESC", [PlayerID, MatchID], 
+            function (err, rows, fields) {
+                if (err){
+                    console.log("Database Error: " + err);
+                    res.status(500).json({
+                        "message": err
+                    });
+                    return;
+                } 
+                if (rows.length != 0) {
+                  if (RoomID <= 5) {
+                        GetDungeonCardsAndStats()
+                    }
+                    else {
+                        GetShowdownCardsAndStats()
+                    }  
+                }
+                else {
+                    if (RoomID == 1 && !playerIsConfirmed){
+                         GetDungeonCardsAndStats()
+                     }
+                     else{
+                        res.status(200).json({
+                            "message": "Opponent hasn't confirmed their card",
+                            "state": "WAITING_FOR_OPP"
+                        });
+                     }
+                }
+
+                
+                
+            }
+        )
+    }
+
+    function GetDungeonCardsAndStats() {
         connection.query("SELECT player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, showdown_turn, match_id, player_id, max_health, current_health, energy, insight, damage, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = ? AND match_id = ? AND room_id = ?;", [PlayerID, MatchID, RoomID],
             function (err, rows, fields) {
                 if (err){
@@ -399,6 +479,7 @@ app.get("/getGameState", (req, res) => {
                     
                         res.status(200).json({
                             "message": "Player stats and cards updated",
+                            "state": "ROOM_LOADED",
                             "room_id": RoomID,
                             "showdown_turn": ShowdownTurn,
                             "max_health": rows[0].max_health,
@@ -411,26 +492,46 @@ app.get("/getGameState", (req, res) => {
                             ]
                         })
                     }
-                    else {
-                        var card1 = rows[0];
-                        var card2 = rows[1];
-                        var card3 = rows[2];
-                        var card4 = rows[3];
+                }
+            }
+        )
+    }
+
+    function GetShowdownCardsAndStats() {
+        connection.query("SELECT player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, showdown_turn, match_id, player_id, max_health, current_health, energy, insight, damage, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = ? AND match_id = ? AND room_id = ? AND showdown_turn = ?;", [PlayerID, MatchID, RoomID, ShowdownTurn],
+            function (err, rows, fields) {
+                if (err){
+                    console.log("Database Error: " + err);
+                    res.status(500).json({
+                        "message": err
+                    });
+                    return;
+                }
+                if (rows.length != 0){
                     
-                        res.status(200).json({
-                            "message": "Player stats and cards updated",
-                            "room_id": RoomID,
-                            "showdown_turn": ShowdownTurn,
-                            "max_health": rows[0].max_health,
-                            "current_health": rows[0].current_health,
-                            "energy": rows[0].energy,
-                            "insight": rows[0].insight,
-                            "damage": rows[0].damage,
-                            "card" : [
-                                card1, card2, card3, card4
-                            ]
-                        })
-                    }
+                    var card1 = rows[0];
+                    var card2 = rows[1];
+                    var card3 = rows[2];
+                    var card4 = rows[3];
+
+                    console.log("Card 1" + card1)
+                    console.log("Card 1" + card1)
+                    console.log("Card 1" + card1)
+                    console.log("Card 1" + card1)
+                    res.status(200).json({
+                        "message": "Player stats and cards updated",
+                        "room_id": RoomID,
+                        "showdown_turn": ShowdownTurn,
+                        "max_health": rows[0].max_health,
+                        "current_health": rows[0].current_health,
+                        "energy": rows[0].energy,
+                        "insight": rows[0].insight,
+                        "damage": rows[0].damage,
+                        "card" : [
+                            card1, card2, card3, card4
+                        ]
+                    })
+                    
                 }
             }
         )
@@ -523,13 +624,23 @@ app.post("/resolveDungeonTurn", (req, res) => {
                     })
                     return
                 }
-
-                res.status(200).json({
-                    "message": "Player stats updated and opponent card received",
-                    "card_id": rows[0].card_id,
-                    "card_type_id": rows[0].card_type_id,
-                    "card_type_name": rows[0].card_type_name
-                })
+                if(rows.length != 0) {
+                    res.status(200).json({
+                        "message": "Player stats updated and opponent card received",
+                        "state": "NEXT_ROOM",
+                        "card_id": rows[0].card_id,
+                        "card_type_id": rows[0].card_type_id,
+                        "card_type_name": rows[0].card_type_name
+                    })
+                }
+                else
+                {
+                    res.status(200).json({
+                        "message": "Opponent hasn't confirmed their card",
+                        "state": "WAITING_FOR_OPP"
+                    })
+                }
+                
             }
         )
         
@@ -628,8 +739,9 @@ app.post("/setupShowdown", (req, res) => {
 
         if(RoomID == 5){
             RoomID++;
-            ShowdownTurn = 1;
+            ShowdownTurn = 0;
         }
+        ShowdownTurn++;
 
         GetPlayerStats()
         function GetPlayerStats(){
