@@ -60,7 +60,6 @@ function GetGameState() {
                     if(data.state == "WAITING_FOR_OPP"){
                         document.getElementById("opponentChoiceSection").style.display = "none";
 
-                        DungeonOpponentChoice()
                     }
                     else if(data.state == "ROOM_LOADED"){
 
@@ -77,15 +76,15 @@ function GetGameState() {
 
 
                                     if (this.status == 200){
-                                        console.log("adsnljkas.db")
+                                        
                                         if(data.state == "WAITING_FOR_OPP") {
-                                            console.log("ashdpoi;")
+                                            
                                             //display a screen for wait for opponent choice
                                             document.getElementById("waitingForOpponent").style.display = "block";
                                             document.getElementById("opponentChoiceSection").style.display = "none";
                                         }
                                         else if (data.state == "NEXT_ROOM") {
-                                            console.log("hnausjodblasl")
+                                            
                                             document.getElementById("waitingForOpponent").style.display = "none";
                                             document.getElementById("opponentChoiceSection").style.display = "block";
 
@@ -106,7 +105,6 @@ function GetGameState() {
 
                             xhttp.send();
                         }
-
 
                         data.card.sort(sortCards)
 
@@ -565,47 +563,7 @@ function DungeonEndTurn() {
     xhttp.send(JSON.stringify(dataToSend));
 }
 
-function DungeonOpponentChoice(){
 
-
-    var xhttp = new XMLHttpRequest();
-
-
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4) {
-
-            var data = JSON.parse(this.responseText)
-            console.log(data)
-
-
-            if (this.status == 200){
-                if(data.state == "OPP_RECEIVED"){
-                    document.getElementById("opponentChoiceSection").style.display = "block";
-
-                if (data.card_type_id == 5) {
-                document.getElementById("opponentChoice").innerHTML = "Your oppponent chose an " + data.card_type_name + " card";
-                }
-                else {
-                    document.getElementById("opponentChoice").innerHTML = "Your oppponent chose a " + data.card_type_name + " card";
-                }
-
-                GetGameState()
-                }
-                else if (data.state == "WAITING_FOR_OPP") {
-                    
-                }
-                
-            }
-
-        }
-    }
-
-    xhttp.open("GET", "/dungeonOpponentChoice", true);
-
-    xhttp.setRequestHeader("Content-Type", "application/json");
-
-    xhttp.send();
-}
 
 function ShowdownEndTurn() {
     var xhttp = new XMLHttpRequest();
