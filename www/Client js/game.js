@@ -1,3 +1,5 @@
+//#region Variables
+
 //Initialize Variables
 var dungeonCard1Id
 var dungeonCard2Id
@@ -13,161 +15,390 @@ var roomId = 1;
 var showdownTurn = 0;
 
 
+var states = {
+    "DungeonCardSelection": 1,
+    "WaitingOnOpponent": 2,
+    "DungeonResult": 3, 
+    "ShowdownCardSelection": 4,
+    "ShowdownResult": 5,
+    "Ending": 6
+}
+
+var currentState = 1
+//#endregion
 
 
-function SetDungeonState(){
+// function SetDungeonState(){
     
+//     var xhttp = new XMLHttpRequest();
+    
+//     xhttp.onreadystatechange = function () {
+//         if (this.readyState == 4) {
+
+//             if (this.status == 200){
+//                 console.log("success")
+//             }
+//         }
+//     }
+
+//     xhttp.open("POST", "/setDungeonState", true);
+
+//     xhttp.setRequestHeader("Content-Type", "application/json");
+
+//     xhttp.send();
+
+// }
+
+//#region Game
+
+setInterval(GetGameState, 3000)
+
+
+/**
+ * Displays the HTML element needed for the waiting for opponent state. 
+ * Called by GetGameState.
+ * @param none
+ * @returns none
+ */
+function getWaitingOnOpponent(){
+    //Display HTML Elements - ON
+    document.getElementById("statsContainer").style.display = "block";
+    document.getElementById("waitingForOpponent").style.display = "block";
+    
+    
+    //Display HTML Elements - OFF
+    document.getElementById("opponentChoiceSection").style.display = "none";
+    document.getElementById("opponentShowdownActionsSection").style.display = "none";
+    document.getElementById("dungeonCards").style.display = "none";
+    document.getElementById("showdownCards").style.display = "none";
+    return;
+}
+
+/**
+ * Assisting bubble sort function that sorts both dungeon and showdown cards by slot_id.
+ * Called by getDungeonCardSelection and getShowdownCardSelection.
+ * @param {object} cardA - The first card in the array.
+ * @param {object} cardB - The next card in the array.
+ * @returns {object} cardA.slot_id - cardB.slot_id
+ */
+function sortCards(cardA, cardB){
+    return cardA.slot_id - cardB.slot_id
+}
+
+
+/**
+ * Sends a XMLHTTPRequest to get the state and calls other functions depending on the state. 
+ * Called by setInterval every 3 seconds.
+ * @param none
+ * @returns none
+ */
+function GetGameState() {
+    console.log("RoomID: " + roomId)
+
+
+    //Get Room, state, etc
     var xhttp = new XMLHttpRequest();
     
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
 
+            var data = JSON.parse(this.responseText)
+            console.log(data)
+
             if (this.status == 200){
-                console.log("success")
+                roomId = data.room_id
+                document.getElementById("roomId").innerHTML = "Room " + roomId 
+
+                showdownTurn = data.showdown_turn
+                document.getElementById("showdownTurn").innerHTML = "Turn " + showdownTurn
+                
+                currentState = data.state_id
+
+
+                if(currentState = states.DungeonCardSelection) {
+                    getDungeonCardSelection()
+                    
+                }
+                else if (currentState = states.WaitingOnOpponent){
+                    getWaitingOnOpponent()
+                }
+                else if (currentState = states.DungeonResult) {
+                    getDungeonResult()
+                }
+                else if (currentState = states.ShowdownCardSelection){
+                    getShowdownCardSelection()
+                }
+                else if (currentState = states.ShowdownResult){
+                    getShowdownResult()
+                    return
+                }
             }
         }
     }
 
-    xhttp.open("POST", "/setDungeonState", true);
+    xhttp.open("GET", "/getState", true);
 
     xhttp.setRequestHeader("Content-Type", "application/json");
 
     xhttp.send();
-
 }
 
-function sortCards(cardA, cardB){
-    return cardA.slot_id - cardB.slot_id
-}
+// function GetGameState() {
 
-function GetGameState() {
-    console.log("RoomID: " + roomId)
-    //If in Dungeon
-    if(roomId <= 5) {
-        if (roomId <= 4){
-        document.getElementById("showdownCards").style.display = "none";
-        }
+//     //If in Dungeon
+//     if(roomId <= 5) {
+//         if (roomId <= 4){
+//         document.getElementById("showdownCards").style.display = "none";
+//         }
 
+//         var xhttp = new XMLHttpRequest();
+        
+//         xhttp.onreadystatechange = function () {
+//             if (this.readyState == 4) {
+//                 //console.log(this.responseText)
+//                 var data = JSON.parse(this.responseText)
+//                 console.log(data)
+
+//                 if (this.status == 200){
+//                     if(data.state == "WAITING_FOR_OPP") {
+//                         document.getElementById("opponentChoiceSection").style.display = "none";
+
+//                     }
+//                     else if(data.state == "ROOM_LOADED") {
+
+//                         if(document.getElementById("waitingForOpponent").style.display == "block") {
+
+//                             var xhttp = new XMLHttpRequest();
+
+
+//                             xhttp.onreadystatechange = function () {
+//                                 if (this.readyState == 4) {
+
+//                                     var data = JSON.parse(this.responseText)
+//                                     console.log(data)
+
+
+//                                     if (this.status == 200) {
+                                        
+//                                         if(data.state == "WAITING_FOR_OPP") {
+                                            
+//                                             //display a screen for wait for opponent choice
+//                                             document.getElementById("waitingForOpponent").style.display = "block";
+//                                             document.getElementById("opponentChoiceSection").style.display = "none";
+//                                         }
+//                                         else if (data.state == "NEXT_ROOM") {
+                                            
+//                                             document.getElementById("waitingForOpponent").style.display = "none";
+//                                             document.getElementById("opponentChoiceSection").style.display = "block";
+
+//                                             if (data.card_type_id == 5) {
+//                                             document.getElementById("opponentChoice").innerHTML = "Your oppponent chose an " + data.card_type_name + " card";
+//                                             }
+//                                             else {
+//                                                 document.getElementById("opponentChoice").innerHTML = "Your oppponent chose a " + data.card_type_name + " card";
+//                                             }
+//                                         }
+//                                     }
+//                                 }
+//                             }
+
+//                             xhttp.open("GET", "/getOpponentCard", true);
+
+//                             xhttp.setRequestHeader("Content-Type", "application/json");
+
+//                             xhttp.send();
+//                         }
+
+//                         data.card.sort(sortCards)
+
+//                         //console.log("Data.Card: "+ data.card)
+//                         document.getElementById("maxHealth").innerHTML = "Max Health: " + data.max_health;
+//                         document.getElementById("currentHealth").innerHTML = "Current Health: " + data.current_health;
+//                         document.getElementById("energy").innerHTML = "Energy: " + data.energy;
+//                         document.getElementById("insight").innerHTML = "Insight: " + data.insight;
+//                         document.getElementById("damage").innerHTML = "Damage: " + data.damage;
+                        
+//                         dungeonCard1Id = data.card[0].card_id
+//                         document.getElementById("card1Name").innerHTML = data.card[0].card_name
+//                         document.getElementById("card1Image").innerHTML = data.card[0].card_image_path
+//                         document.getElementById("card1Stats").innerHTML = UnwrapDungeonCardStats(data.card[0])
+                        
+                        
+//                         dungeonCard2Id = data.card[1].card_id
+//                         document.getElementById("card2Name").innerHTML = data.card[1].card_name
+//                         document.getElementById("card2Image").innerHTML = data.card[1].card_image_path
+//                         document.getElementById("card2Stats").innerHTML = UnwrapDungeonCardStats(data.card[1])
+    
+//                         dungeonCard3Id = data.card[2].card_id
+//                         document.getElementById("card3Name").innerHTML = data.card[2].card_name
+//                         document.getElementById("card3Image").innerHTML = data.card[2].card_image_path
+//                         document.getElementById("card3Stats").innerHTML = UnwrapDungeonCardStats(data.card[2])
+    
+//                         roomId = data.room_id
+//                         document.getElementById("roomId").innerHTML = "Room " + roomId 
+//                     }
+//                 }
+//             }
+//         }
+
+//         xhttp.open("GET", "/getGameState", true);
+
+//         xhttp.setRequestHeader("Content-Type", "application/json");
+
+//         xhttp.send();
+
+//         DungeonSelectCard()
+//     }
+//     //In Showdown Phase
+//     else{
+//         document.getElementById("dungeonCards").style.display = "none";
+        
+//         if (document.getElementById("opponentShowdownActionsSection").style.display == "none") {
+//             document.getElementById("showdownCards").style.display = "block"
+//         }
+//         else {
+//             document.getElementById("showdownCards").style.display = "none"
+//         }
+
+//         var xhttp = new XMLHttpRequest();
+        
+//         xhttp.onreadystatechange = function () {
+//             if (this.readyState == 4) {
+//                 //console.log(this.responseText)
+//                 var data = JSON.parse(this.responseText)
+//                 console.log(data)
+
+//                 if (this.status == 200){
+//                     data.card.sort(sortCards)
+
+//                     //console.log("Data.Card: "+ data.card)
+//                     document.getElementById("maxHealth").innerHTML = "Max Health: " + data.max_health;
+//                     document.getElementById("currentHealth").innerHTML = "Current Health: " + data.current_health;
+//                     document.getElementById("energy").innerHTML = "Energy: " + data.energy;
+//                     document.getElementById("insight").innerHTML = "Insight: " + data.insight;
+//                     document.getElementById("damage").innerHTML = "Damage: " + data.damage;
+                    
+//                     showdownCard1Id = 8
+//                     document.getElementById("normalAttackCardName").innerHTML = data.card[0].card_name
+//                     document.getElementById("normalAttackCardImage").innerHTML = data.card[0].card_image_path
+//                     document.getElementById("normalAttackCardStats").innerHTML = UnwrapShowdownCardStats(data.card[0], data.damage)
+
+//                     showdownCard2Id = data.card[1].card_id
+//                     document.getElementById("specialAttackCardName").innerHTML = data.card[1].card_name
+//                     document.getElementById("specialAttackCardImage").innerHTML = data.card[1].card_image_path
+//                     document.getElementById("specialAttackCardStats").innerHTML = UnwrapShowdownCardStats(data.card[1], data.damage)
+                    
+//                     showdownCard3Id = data.card[2].card_id
+//                     document.getElementById("defenseCardName").innerHTML = data.card[2].card_name
+//                     document.getElementById("defenseCardImage").innerHTML = data.card[2].card_image_path
+//                     document.getElementById("defenseCardStats").innerHTML = UnwrapShowdownCardStats(data.card[2], data.damage)
+
+//                     showdownCard4Id = data.card[3].card_id
+//                     document.getElementById("skillCardName").innerHTML = data.card[3].card_name
+//                     document.getElementById("skillCardImage").innerHTML = data.card[3].card_image_path
+//                     document.getElementById("skillCardStats").innerHTML = UnwrapShowdownCardStats(data.card[3], data.damage)
+
+//                     showdownTurn = data.showdown_turn
+//                     document.getElementById("showdownTurn").innerHTML = "Turn " + showdownTurn
+//                     roomId = data.room_id
+//                     document.getElementById("roomId").innerHTML = "Room " + roomId
+//                 }
+//             }
+//         }
+
+//         xhttp.open("GET", "/getGameState", true);
+
+//         xhttp.setRequestHeader("Content-Type", "application/json");
+
+//         xhttp.send();
+
+//         DungeonSelectCard()
+
+//     }
+// }
+
+/**
+ * Sends a XMLHTTPRequest to populate the next room in the dungeon or turn in the showdown.
+ * Called by opponentChoiceConfirm button and the opponentShowdownActionConfirm button.
+ * @param none
+ * @returns none
+ */
+function SetupNextRoom() {
+
+    if(roomId <= 4){
+        
+        document.getElementById("dungeonCards").style.display = "block";
+        document.getElementById("opponentChoiceSection").style.display = "none";
+        
         var xhttp = new XMLHttpRequest();
         
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4) {
-                //console.log(this.responseText)
-                var data = JSON.parse(this.responseText)
-                console.log(data)
-
+    
                 if (this.status == 200){
-                    if(data.state == "WAITING_FOR_OPP"){
-                        document.getElementById("opponentChoiceSection").style.display = "none";
-
-                    }
-                    else if(data.state == "ROOM_LOADED"){
-
-                        if(document.getElementById("waitingForOpponent").style.display == "block"){
-
-                            var xhttp = new XMLHttpRequest();
-
-
-                            xhttp.onreadystatechange = function () {
-                                if (this.readyState == 4) {
-
-                                    var data = JSON.parse(this.responseText)
-                                    console.log(data)
-
-
-                                    if (this.status == 200){
-                                        
-                                        if(data.state == "WAITING_FOR_OPP") {
-                                            
-                                            //display a screen for wait for opponent choice
-                                            document.getElementById("waitingForOpponent").style.display = "block";
-                                            document.getElementById("opponentChoiceSection").style.display = "none";
-                                        }
-                                        else if (data.state == "NEXT_ROOM") {
-                                            
-                                            document.getElementById("waitingForOpponent").style.display = "none";
-                                            document.getElementById("opponentChoiceSection").style.display = "block";
-
-                                            if (data.card_type_id == 5) {
-                                            document.getElementById("opponentChoice").innerHTML = "Your oppponent chose an " + data.card_type_name + " card";
-                                            }
-                                            else {
-                                                document.getElementById("opponentChoice").innerHTML = "Your oppponent chose a " + data.card_type_name + " card";
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            xhttp.open("GET", "/getOpponentCard", true);
-
-                            xhttp.setRequestHeader("Content-Type", "application/json");
-
-                            xhttp.send();
-                        }
-
-                        data.card.sort(sortCards)
-
-                        //console.log("Data.Card: "+ data.card)
-                        document.getElementById("maxHealth").innerHTML = "Max Health: " + data.max_health;
-                        document.getElementById("currentHealth").innerHTML = "Current Health: " + data.current_health;
-                        document.getElementById("energy").innerHTML = "Energy: " + data.energy;
-                        document.getElementById("insight").innerHTML = "Insight: " + data.insight;
-                        document.getElementById("damage").innerHTML = "Damage: " + data.damage;
-                        
-                        dungeonCard1Id = data.card[0].card_id
-                        document.getElementById("card1Name").innerHTML = data.card[0].card_name
-                        document.getElementById("card1Image").innerHTML = data.card[0].card_image_path
-                        document.getElementById("card1Stats").innerHTML = UnwrapDungeonCardStats(data.card[0])
-                        
-                        
-                        dungeonCard2Id = data.card[1].card_id
-                        document.getElementById("card2Name").innerHTML = data.card[1].card_name
-                        document.getElementById("card2Image").innerHTML = data.card[1].card_image_path
-                        document.getElementById("card2Stats").innerHTML = UnwrapDungeonCardStats(data.card[1])
-    
-                        dungeonCard3Id = data.card[2].card_id
-                        document.getElementById("card3Name").innerHTML = data.card[2].card_name
-                        document.getElementById("card3Image").innerHTML = data.card[2].card_image_path
-                        document.getElementById("card3Stats").innerHTML = UnwrapDungeonCardStats(data.card[2])
-    
-                        roomId = data.room_id
-                        document.getElementById("roomId").innerHTML = "Room " + roomId 
-                    }
+                    GetGameState()
+                    console.log("success")
                 }
             }
         }
-
-        xhttp.open("GET", "/getGameState", true);
-
+    
+        xhttp.open("POST", "/setupNextDungeonRoom", true);
+    
         xhttp.setRequestHeader("Content-Type", "application/json");
-
+    
         xhttp.send();
-
-        DungeonSelectCard()
     }
-    //In Showdown Phase
-    else{
-        document.getElementById("dungeonCards").style.display = "none";
-        
-        if (document.getElementById("opponentShowdownActionsSection").style.display == "none") {
-            document.getElementById("showdownCards").style.display = "block"
-        }
-        else {
-            document.getElementById("showdownCards").style.display = "none"
-        }
+    else {
+        document.getElementById("showdownCards").style.display = "block";
+        document.getElementById("statsContainer").style.display = "block";
+        document.getElementById("opponentChoiceSection").style.display = "none";
+        document.getElementById("opponentShowdownActionsSection").style.display = "none";
 
+
+        console.log("RoomID: " + roomId)
         var xhttp = new XMLHttpRequest();
         
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4) {
-                //console.log(this.responseText)
-                var data = JSON.parse(this.responseText)
-                console.log(data)
-
+    
                 if (this.status == 200){
+
+                    console.log("success")
+                }
+            }
+        }
+    
+        xhttp.open("POST", "/setupShowdown", true);
+    
+        xhttp.setRequestHeader("Content-Type", "application/json");
+    
+        xhttp.send();
+    }
+}
+
+//#endregion
+
+//#region Dungeon
+
+/**
+ * Sends a XMLHTTPRequest to populate the HTML elements for the dungeon cards and player stats.
+ * Called by getGameState when in the DungeonCardSelection state.
+ * @param none
+ * @returns none
+ */
+function getDungeonCardSelection() {
+    var xhttp = new XMLHttpRequest();
+        
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            //console.log(this.responseText)
+            var data = JSON.parse(this.responseText)
+            console.log(data)
+
+            if (this.status == 200){
                     data.card.sort(sortCards)
 
+                    //Update data on page
                     //console.log("Data.Card: "+ data.card)
                     document.getElementById("maxHealth").innerHTML = "Max Health: " + data.max_health;
                     document.getElementById("currentHealth").innerHTML = "Current Health: " + data.current_health;
@@ -175,60 +406,113 @@ function GetGameState() {
                     document.getElementById("insight").innerHTML = "Insight: " + data.insight;
                     document.getElementById("damage").innerHTML = "Damage: " + data.damage;
                     
-                    showdownCard1Id = 8
-                    document.getElementById("normalAttackCardName").innerHTML = data.card[0].card_name
-                    document.getElementById("normalAttackCardImage").innerHTML = data.card[0].card_image_path
-                    document.getElementById("normalAttackCardStats").innerHTML = UnwrapShowdownCardStats(data.card[0], data.damage)
-
-                    showdownCard2Id = data.card[1].card_id
-                    document.getElementById("specialAttackCardName").innerHTML = data.card[1].card_name
-                    document.getElementById("specialAttackCardImage").innerHTML = data.card[1].card_image_path
-                    document.getElementById("specialAttackCardStats").innerHTML = UnwrapShowdownCardStats(data.card[1], data.damage)
+                    dungeonCard1Id = data.card[0].card_id
+                    document.getElementById("card1Name").innerHTML = data.card[0].card_name
+                    document.getElementById("card1Image").innerHTML = data.card[0].card_image_path
+                    document.getElementById("card1Stats").innerHTML = UnwrapDungeonCardStats(data.card[0])
                     
-                    showdownCard3Id = data.card[2].card_id
-                    document.getElementById("defenseCardName").innerHTML = data.card[2].card_name
-                    document.getElementById("defenseCardImage").innerHTML = data.card[2].card_image_path
-                    document.getElementById("defenseCardStats").innerHTML = UnwrapShowdownCardStats(data.card[2], data.damage)
+                    
+                    dungeonCard2Id = data.card[1].card_id
+                    document.getElementById("card2Name").innerHTML = data.card[1].card_name
+                    document.getElementById("card2Image").innerHTML = data.card[1].card_image_path
+                    document.getElementById("card2Stats").innerHTML = UnwrapDungeonCardStats(data.card[1])
 
-                    showdownCard4Id = data.card[3].card_id
-                    document.getElementById("skillCardName").innerHTML = data.card[3].card_name
-                    document.getElementById("skillCardImage").innerHTML = data.card[3].card_image_path
-                    document.getElementById("skillCardStats").innerHTML = UnwrapShowdownCardStats(data.card[3], data.damage)
+                    dungeonCard3Id = data.card[2].card_id
+                    document.getElementById("card3Name").innerHTML = data.card[2].card_name
+                    document.getElementById("card3Image").innerHTML = data.card[2].card_image_path
+                    document.getElementById("card3Stats").innerHTML = UnwrapDungeonCardStats(data.card[2])
+                    
 
-                    showdownTurn = data.showdown_turn
-                    document.getElementById("showdownTurn").innerHTML = "Turn " + showdownTurn
-                    roomId = data.room_id
-                    document.getElementById("roomId").innerHTML = "Room " + roomId
+                    //Display HTML Elements - ON
+                    document.getElementById("statsContainer").style.display = "block";
+                    document.getElementById("dungeonCards").style.display = "block";
+                    
+                    //Display HTML Elements - OFF
+                    document.getElementById("opponentChoiceSection").style.display = "none";
+                    document.getElementById("waitingForOpponent").style.display = "none";
+                    document.getElementById("showdownCards").style.display = "none";
+                    document.getElementById("opponentShowdownActionsSection").style.display = "none";
+
+                    return;
                 }
             }
         }
 
-        xhttp.open("GET", "/getGameState", true);
+        xhttp.open("GET", "/getDungeonCardSelection", true);
 
         xhttp.setRequestHeader("Content-Type", "application/json");
 
         xhttp.send();
 
-        DungeonSelectCard()
-
-    }
 }
 
-function UnwrapDungeonCardStats(card)
-{
+/**
+ * Sends a XMLHTTPRequest to populate the HTML elements for the Opponent's card choice.
+ * Called by getGameState when in the DungeonResult state.
+ * @param none
+ * @returns none
+ */
+function getDungeonResult() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4) {
+
+            var data = JSON.parse(this.responseText)
+            console.log(data)
+
+            if (this.status == 200) {
+
+                if (data.card_type_id == 5) {
+                document.getElementById("opponentChoice").innerHTML = "Your oppponent chose an " + data.card_type_name + " card";
+                }
+                else {
+                    document.getElementById("opponentChoice").innerHTML = "Your oppponent chose a " + data.card_type_name + " card";
+                }
+
+                //Display HTML Elements - ON
+                document.getElementById("statsContainer").style.display = "block";
+                document.getElementById("opponentChoiceSection").style.display = "block";
+                
+                
+                //Display HTML Elements - OFF
+                document.getElementById("waitingForOpponent").style.display = "none";
+                document.getElementById("opponentShowdownActionsSection").style.display = "none";
+                document.getElementById("dungeonCards").style.display = "none";
+                document.getElementById("showdownCards").style.display = "none";
+                
+                return;
+            }
+        }
+    }
+
+    xhttp.open("GET", "/getOpponentCard", true);
+
+    xhttp.setRequestHeader("Content-Type", "application/json");
+
+    xhttp.send();
+}
+
+/**
+ * Builds a string for the dungeon cards description based on the type of card and value of the card's stats. 
+ * Called by getDungeonCardSelection.
+ * @param {object} card - One dungeon card object
+ * @returns {string} - returns the card description.
+ */
+function UnwrapDungeonCardStats(card) {
     //console.log(card.card_type_id)
     var stringBuilder = "";
 
-    if(card.card_type_id == 1){
+    if(card.card_type_id == 1) {
         stringBuilder = "Max Health Increase by: " + card.card_max_health;
     }
-    if(card.card_type_id == 2){
+    if(card.card_type_id == 2) {
         stringBuilder = "Current Health Increase by: " + card.card_current_health;
     }
-    if(card.card_type_id == 3){
+    if(card.card_type_id == 3) {
         stringBuilder = "Damage Increase by: " + card.card_damage;
     }
-    if(card.card_type_id == 4){
+    if(card.card_type_id == 4) {
         
         if (card.card_energy > 0)
         {
@@ -239,7 +523,7 @@ function UnwrapDungeonCardStats(card)
             stringBuilder = stringBuilder + " Insight Increase by: " + card.card_insight;
         }
     }
-    if(card.card_type_id == 5){
+    if(card.card_type_id == 5) {
 
         //Costs first
         if (card.card_current_health < 0)
@@ -278,10 +562,215 @@ function UnwrapDungeonCardStats(card)
     return stringBuilder;
 }
 
-function UnwrapShowdownCardStats(card, playerDamage)
-{
+/**
+ * Updates the selectedDungeonCard HTML elements for the current selected dungeon card 
+ * Called by radio inputs: dungeonCard1Selection, dungeonCard2Selection, dungeonCard3Selection.
+ * @param none
+ * @returns none
+ */
+function DungeonSelectCard() {
+    if (document.getElementById("dungeonCard1Selection").checked) 
+    {
+        dungeonSelectedCardId = dungeonCard1Id;
+        document.getElementById("selectedCardName").innerHTML = document.getElementById("card1Name").innerHTML;
+        document.getElementById("selectedCardImage").innerHTML = document.getElementById("card1Image").innerHTML;
+        document.getElementById("selectedCardStats").innerHTML = document.getElementById("card1Stats").innerHTML;
+    }
+    if (document.getElementById("dungeonCard2Selection").checked) 
+    {
+        dungeonSelectedCardId = dungeonCard2Id;
+        document.getElementById("selectedCardName").innerHTML = document.getElementById("card2Name").innerHTML;
+        document.getElementById("selectedCardImage").innerHTML = document.getElementById("card2Image").innerHTML;
+        document.getElementById("selectedCardStats").innerHTML = document.getElementById("card2Stats").innerHTML;
+    }
+    if (document.getElementById("dungeonCard3Selection").checked) 
+    {
+        dungeonSelectedCardId = dungeonCard3Id;
+        document.getElementById("selectedCardName").innerHTML = document.getElementById("card3Name").innerHTML;
+        document.getElementById("selectedCardImage").innerHTML = document.getElementById("card3Image").innerHTML;
+        document.getElementById("selectedCardStats").innerHTML = document.getElementById("card3Stats").innerHTML;
+    }
+    
+}
+
+/**
+ * Sends a XMLHTTPRequest to update the database on the selected dungeon card. 
+ * The callback populates the HTML elements for the Opponent's card choice.
+ * Called by the dungeon confirm button.
+ * @param none
+ * @returns none
+ */
+function DungeonEndTurn() {
+    
+    document.getElementById("dungeonCards").style.display = "none";
+
+    document.getElementById("dungeonCard1Selection").checked = false;
+    document.getElementById("dungeonCard2Selection").checked = false;
+    document.getElementById("dungeonCard3Selection").checked = false;
+
+    var xhttp = new XMLHttpRequest();
+    //Create a JSON object with the registration data
+    var dataToSend = {  
+        "cardId": dungeonSelectedCardId
+    }
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            console.log("here5")
+            var data = JSON.parse(this.responseText)
+            console.log(data)
+
+
+            if (this.status == 200){
+                if(data.state == "WAITING_FOR_OPP") {
+                    //display a screen for wait for opponent choice
+                    document.getElementById("waitingForOpponent").style.display = "block";
+                }
+                else if (data.state == "NEXT_ROOM") {
+                    document.getElementById("opponentChoiceSection").style.display = "block";
+
+                    if (data.card_type_id == 5) {
+                    document.getElementById("opponentChoice").innerHTML = "Your oppponent chose an " + data.card_type_name + " card";
+                    }
+                    else {
+                        document.getElementById("opponentChoice").innerHTML = "Your oppponent chose a " + data.card_type_name + " card";
+                    }
+                    GetGameState()
+                }
+            }
+
+
+        }
+    }
+
+    xhttp.open("POST", "/resolveDungeonTurn", true);
+
+    xhttp.setRequestHeader("Content-Type", "application/json");
+
+    xhttp.send(JSON.stringify(dataToSend));
+}
+
+
+//#endregion
+
+//#region Showdown
+
+
+/**
+ * Sends a XMLHTTPRequest to get card stats, name, and image for the showdown selectable cards.
+ * Called by GetGameState.
+ * @param none
+ * @returns none
+ */
+function getShowdownCardSelection() {
+    var xhttp = new XMLHttpRequest();
+        
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                //console.log(this.responseText)
+                var data = JSON.parse(this.responseText)
+                console.log(data)
+
+                if (this.status == 200){
+                    data.card.sort(sortCards)
+
+                    //Update page data
+                    //console.log("Data.Card: "+ data.card)
+                    document.getElementById("maxHealth").innerHTML = "Max Health: " + data.max_health;
+                    document.getElementById("currentHealth").innerHTML = "Current Health: " + data.current_health;
+                    document.getElementById("energy").innerHTML = "Energy: " + data.energy;
+                    document.getElementById("insight").innerHTML = "Insight: " + data.insight;
+                    document.getElementById("damage").innerHTML = "Damage: " + data.damage;
+                    
+                    showdownCard1Id = 8
+                    document.getElementById("normalAttackCardName").innerHTML = data.card[0].card_name
+                    document.getElementById("normalAttackCardImage").innerHTML = data.card[0].card_image_path
+                    document.getElementById("normalAttackCardStats").innerHTML = UnwrapShowdownCardStats(data.card[0], data.damage)
+
+                    showdownCard2Id = data.card[1].card_id
+                    document.getElementById("specialAttackCardName").innerHTML = data.card[1].card_name
+                    document.getElementById("specialAttackCardImage").innerHTML = data.card[1].card_image_path
+                    document.getElementById("specialAttackCardStats").innerHTML = UnwrapShowdownCardStats(data.card[1], data.damage)
+                    
+                    showdownCard3Id = data.card[2].card_id
+                    document.getElementById("defenseCardName").innerHTML = data.card[2].card_name
+                    document.getElementById("defenseCardImage").innerHTML = data.card[2].card_image_path
+                    document.getElementById("defenseCardStats").innerHTML = UnwrapShowdownCardStats(data.card[2], data.damage)
+
+                    showdownCard4Id = data.card[3].card_id
+                    document.getElementById("skillCardName").innerHTML = data.card[3].card_name
+                    document.getElementById("skillCardImage").innerHTML = data.card[3].card_image_path
+                    document.getElementById("skillCardStats").innerHTML = UnwrapShowdownCardStats(data.card[3], data.damage)
+
+                    //Display HTML Elements - ON
+                    document.getElementById("statsContainer").style.display = "block";
+                    document.getElementById("showdownCards").style.display = "block";
+                    
+                    //Display HTML Elements - OFF
+                    document.getElementById("opponentChoiceSection").style.display = "none";
+                    document.getElementById("waitingForOpponent").style.display = "none";
+                    document.getElementById("dungeonCards").style.display = "none";
+                    document.getElementById("opponentShowdownActionsSection").style.display = "none";
+
+                    return;
+                }
+            }
+        }
+        xhttp.open("GET", "/getShowdownCardSelection", true);
+
+        xhttp.setRequestHeader("Content-Type", "application/json");
+
+        xhttp.send();
+
+    
+}
+
+/**
+ * Displays the player's and opponent's actions at the end of a showdown turn and hides the stats and cards.
+ * Called by GetGameState.
+ * @param none
+ * @returns none
+ */
+function getShowdownResult() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            console.log(this.responseText)
+            var data = JSON.parse(this.responseText)
+            console.log(data)
+
+            if (this.status == 200){
+                //hide cards
+                document.getElementById("showdownCards").style.display = "none";
+
+                //hide stats
+                document.getElementById("statsContainer").style.display = "none";
+
+                //show opponent actions 
+                document.getElementById("opponentShowdownActionsSection").style.display = "block";
+                document.getElementById("opponentShowdownAction").innerHTML = data.opponentActions + "\n" + data.playerActions;
+            }
+        }
+    }
+
+    xhttp.open("POST", "/getShowdownResult", true);
+
+    xhttp.setRequestHeader("Content-Type", "application/json");
+
+    xhttp.send(JSON.stringify(dataToSend));
+}
+
+/**
+ * Creates the description of the Showdown cards.
+ * Called in GetShowdownCardSelection.
+ * @param {object} card - one card object that contains the information about the card's stats
+ * @param {number} playerDamage - the player's damage stat used to show how much damage the attack cards will make the player deal
+ * @returns - string that holds the cards description
+ */
+function UnwrapShowdownCardStats(card, playerDamage) {
     var stringBuilder = "";
-    if(card.card_type_id == 6){
+    if(card.card_type_id == 6) {
 
         //Cost first
         if(card.card_energy < 0)
@@ -294,7 +783,7 @@ function UnwrapShowdownCardStats(card, playerDamage)
             stringBuilder = stringBuilder + " Attack is: " + (card.card_attack * playerDamage)
         }
     }
-    if(card.card_type_id == 7){
+    if(card.card_type_id == 7) {
         console.log(card.insight)
         //Cost first
         if(card.card_energy < 0)
@@ -312,7 +801,7 @@ function UnwrapShowdownCardStats(card, playerDamage)
             stringBuilder = stringBuilder + " Defense is: " +  card.card_defense
         }
     }
-    if(card.card_type_id == 8){
+    if(card.card_type_id == 8) {
          
             //Cost first
          if(card.card_energy < 0)
@@ -342,36 +831,15 @@ function UnwrapShowdownCardStats(card, playerDamage)
             stringBuilder = stringBuilder + " Damage Increase by: " + card.card_damage
         }
     }
-    
-    
     return stringBuilder;
 }
 
-function DungeonSelectCard() {
-    if (document.getElementById("dungeonCard1Selection").checked) 
-    {
-        dungeonSelectedCardId = dungeonCard1Id;
-        document.getElementById("selectedCardName").innerHTML = document.getElementById("card1Name").innerHTML;
-        document.getElementById("selectedCardImage").innerHTML = document.getElementById("card1Image").innerHTML;
-        document.getElementById("selectedCardStats").innerHTML = document.getElementById("card1Stats").innerHTML;
-    }
-    if (document.getElementById("dungeonCard2Selection").checked) 
-    {
-        dungeonSelectedCardId = dungeonCard2Id;
-        document.getElementById("selectedCardName").innerHTML = document.getElementById("card2Name").innerHTML;
-        document.getElementById("selectedCardImage").innerHTML = document.getElementById("card2Image").innerHTML;
-        document.getElementById("selectedCardStats").innerHTML = document.getElementById("card2Stats").innerHTML;
-    }
-    if (document.getElementById("dungeonCard3Selection").checked) 
-    {
-        dungeonSelectedCardId = dungeonCard3Id;
-        document.getElementById("selectedCardName").innerHTML = document.getElementById("card3Name").innerHTML;
-        document.getElementById("selectedCardImage").innerHTML = document.getElementById("card3Image").innerHTML;
-        document.getElementById("selectedCardStats").innerHTML = document.getElementById("card3Stats").innerHTML;
-    }
-    
-}
-
+/**
+ * Displays on the client which cards are selected.
+ * Called when the player presses one of the showdownCheck checkboxes.
+ * @param none
+ * @returns none
+ */
 function ShowdownSelectCard() {
     console.log("showdownSelectedCard1Id = " + showdownSelectedCard1Id)
     console.log("showdownSelectedCard2Id = " + showdownSelectedCard2Id)
@@ -511,61 +979,14 @@ function ShowdownSelectCard() {
    
 }
 
-function DungeonEndTurn() {
-    
-    document.getElementById("dungeonCards").style.display = "none";
-
-    document.getElementById("dungeonCard1Selection").checked = false;
-    document.getElementById("dungeonCard2Selection").checked = false;
-    document.getElementById("dungeonCard3Selection").checked = false;
-
-    var xhttp = new XMLHttpRequest();
-    //Create a JSON object with the registration data
-    var dataToSend = {  
-        "cardId": dungeonSelectedCardId
-    }
-
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4) {
-            console.log("here5")
-            var data = JSON.parse(this.responseText)
-            console.log(data)
-
-
-            if (this.status == 200){
-                if(data.state == "WAITING_FOR_OPP") {
-                    console.log("here1")
-                    //display a screen for wait for opponent choice
-                    document.getElementById("waitingForOpponent").style.display = "block";
-                }
-                else if (data.state == "NEXT_ROOM") {
-                    console.log("here2")
-                    document.getElementById("opponentChoiceSection").style.display = "block";
-
-                    if (data.card_type_id == 5) {
-                    document.getElementById("opponentChoice").innerHTML = "Your oppponent chose an " + data.card_type_name + " card";
-                    }
-                    else {
-                        document.getElementById("opponentChoice").innerHTML = "Your oppponent chose a " + data.card_type_name + " card";
-                    }
-                    GetGameState()
-                }
-            }
-
-
-        }
-    }
-
-    xhttp.open("POST", "/resolveDungeonTurn", true);
-
-    xhttp.setRequestHeader("Content-Type", "application/json");
-
-    xhttp.send(JSON.stringify(dataToSend));
-}
-
-
-
+/**
+ * Sends the cards selected by the player in the showdown turn to the endpoint.
+ * Called when the plyer presses the showdownConfirm button.
+ * @param none
+ * @returns none
+ */
 function ShowdownEndTurn() {
+    
     var xhttp = new XMLHttpRequest();
     //Create a JSON object with the registration data
     var dataToSend = {  
@@ -599,63 +1020,19 @@ function ShowdownEndTurn() {
 
     xhttp.send(JSON.stringify(dataToSend));
 }
-
-// function SetupDungeon() {
-//     SetGameState()
-// }
-
-function SetupNextRoom() {
-
-    if(roomId <= 4){
-        
-        document.getElementById("dungeonCards").style.display = "block";
-        document.getElementById("opponentChoiceSection").style.display = "none";
-        
-        var xhttp = new XMLHttpRequest();
-        
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4) {
-    
-                if (this.status == 200){
-                    GetGameState()
-                    console.log("success")
-                }
-            }
-        }
-    
-        xhttp.open("POST", "/setupNextDungeonRoom", true);
-    
-        xhttp.setRequestHeader("Content-Type", "application/json");
-    
-        xhttp.send();
-    }
-    else {
-        document.getElementById("showdownCards").style.display = "block";
-        document.getElementById("statsContainer").style.display = "block";
-        document.getElementById("opponentChoiceSection").style.display = "none";
-        document.getElementById("opponentShowdownActionsSection").style.display = "none";
+//#endregion
 
 
-        console.log("RoomID: " + roomId)
-        var xhttp = new XMLHttpRequest();
-        
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4) {
-    
-                if (this.status == 200){
-
-                    console.log("success")
-                }
-            }
-        }
-    
-        xhttp.open("POST", "/setupShowdown", true);
-    
-        xhttp.setRequestHeader("Content-Type", "application/json");
-    
-        xhttp.send();
-    }
-}
 
 
-setInterval(GetGameState, 3000)
+
+
+
+
+
+
+
+
+
+
+
