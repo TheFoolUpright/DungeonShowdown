@@ -18,38 +18,27 @@ USE `dungeonshowdown`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `player_status`
+-- Table structure for table `game_state`
 --
 
-DROP TABLE IF EXISTS `player_status`;
+DROP TABLE IF EXISTS `game_state`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `player_status` (
-  `player_status_id` int NOT NULL AUTO_INCREMENT,
-  `match_id` int NOT NULL,
-  `player_id` int NOT NULL,
-  `max_health` int DEFAULT '20',
-  `current_health` int DEFAULT '20',
-  `energy` int DEFAULT '10',
-  `insight` int DEFAULT '10',
-  `damage` int DEFAULT '1',
-  `state_id` int DEFAULT '1',
-  PRIMARY KEY (`player_status_id`),
-  KEY `player_status_match_id_FK_idx` (`match_id`),
-  KEY `player_status_player_id_FK_idx` (`player_id`),
-  CONSTRAINT `player_status_match_id_FK` FOREIGN KEY (`match_id`) REFERENCES `game_match` (`match_id`),
-  CONSTRAINT `player_status_player_id_FK` FOREIGN KEY (`player_id`) REFERENCES `player` (`player_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `game_state` (
+  `state_id` int NOT NULL AUTO_INCREMENT,
+  `state_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`state_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `player_status`
+-- Dumping data for table `game_state`
 --
 
-LOCK TABLES `player_status` WRITE;
-/*!40000 ALTER TABLE `player_status` DISABLE KEYS */;
-INSERT INTO `player_status` VALUES (1,1,1,20,20,10,10,1,NULL),(2,1,2,20,20,10,10,1,NULL);
-/*!40000 ALTER TABLE `player_status` ENABLE KEYS */;
+LOCK TABLES `game_state` WRITE;
+/*!40000 ALTER TABLE `game_state` DISABLE KEYS */;
+INSERT INTO `game_state` VALUES (1,'DungeonCardSelection'),(2,'WaitingOnOpponent'),(3,'DungeonResult'),(4,'ShowdownCardSelection'),(5,'ShowdownResult'),(6,'Ending');
+/*!40000 ALTER TABLE `game_state` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
