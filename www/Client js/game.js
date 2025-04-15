@@ -22,7 +22,9 @@ var states = {
     "ShowdownCardSelection": 4,
     "WaitingOnOpponentShowdown": 5,
     "ShowdownResult": 6,
-    "Ending": 7
+    "Won": 7,
+    "Lost": 8,
+    "Draw": 9
 }
 
 var currentState = 1
@@ -75,6 +77,7 @@ function getWaitingOnOpponentShowdown() {
                 document.getElementById("waitingForOpponent").style.display = "block";
                 
                 //Display HTML Elements - OFF
+                document.getElementById("endingContainer").style.display = "none";
                 document.getElementById("opponentChoiceSection").style.display = "none";  
                 document.getElementById("opponentShowdownActionsSection").style.display = "none";
                 document.getElementById("dungeonCards").style.display = "none";
@@ -107,6 +110,7 @@ function getWaitingOnOpponentDungeon() {
 
 
     //Display HTML Elements - OFF
+    document.getElementById("endingContainer").style.display = "none";
     document.getElementById("opponentChoiceSection").style.display = "none";
     document.getElementById("opponentShowdownActionsSection").style.display = "none";
     document.getElementById("dungeonCards").style.display = "none";
@@ -189,6 +193,16 @@ function GetGameState() {
                 else if (currentState == states.ShowdownResult){
                     getShowdownResult()
                 }
+                else if (currentState == states.Won){
+                    showWonEnding()
+                }
+                else if (currentState == states.Lost){
+                    showLostEnding()
+                }
+                else if (currentState == states.Draw){
+                    showDrawEnding()
+                }
+
             }
         }
     }
@@ -260,6 +274,51 @@ function SetupNextRoom() {
     }
 }
 
+
+function showWonEnding() {
+    document.getElementById("endingText").innerHTML = "You Won!";
+    
+    //Display HTML Elements - ON
+    document.getElementById("endingContainer").style.display = "block";
+  
+    //Display HTML Elements - OFF
+    document.getElementById("statsContainer").style.display = "none";
+    document.getElementById("opponentChoiceSection").style.display = "none";
+    document.getElementById("waitingForOpponent").style.display = "none";
+    document.getElementById("opponentShowdownActionsSection").style.display = "none";
+    document.getElementById("dungeonCards").style.display = "none";
+    document.getElementById("showdownCards").style.display = "none";
+}
+
+function showLostEnding() {
+    document.getElementById("endingText").innerHTML = "You Lost..."
+    //Display HTML Elements - ON
+    document.getElementById("endingContainer").style.display = "block";
+    
+    //Display HTML Elements - OFF
+    document.getElementById("statsContainer").style.display = "none";
+    document.getElementById("opponentChoiceSection").style.display = "none";
+    document.getElementById("waitingForOpponent").style.display = "none";
+    document.getElementById("opponentShowdownActionsSection").style.display = "none";
+    document.getElementById("dungeonCards").style.display = "none";
+    document.getElementById("showdownCards").style.display = "none";
+
+}
+
+function showDrawEnding() {
+    document.getElementById("endingText").innerHTML = "It's a Draw...";
+    
+    //Display HTML Elements - ON
+    document.getElementById("endingContainer").style.display = "block";
+  
+    //Display HTML Elements - OFF
+    document.getElementById("statsContainer").style.display = "none";
+    document.getElementById("opponentChoiceSection").style.display = "none";
+    document.getElementById("waitingForOpponent").style.display = "none";
+    document.getElementById("opponentShowdownActionsSection").style.display = "none";
+    document.getElementById("dungeonCards").style.display = "none";
+    document.getElementById("showdownCards").style.display = "none";
+}
 //#endregion
 
 //#region Dungeon
@@ -312,6 +371,7 @@ function getDungeonCardSelection() {
                     document.getElementById("dungeonCards").style.display = "block";
                     
                     //Display HTML Elements - OFF
+                    document.getElementById("endingContainer").style.display = "none";
                     document.getElementById("opponentChoiceSection").style.display = "none";
                     document.getElementById("waitingForOpponent").style.display = "none";
                     document.getElementById("showdownCards").style.display = "none";
@@ -360,6 +420,7 @@ function getDungeonResult() {
                 
                 
                 //Display HTML Elements - OFF
+                document.getElementById("endingContainer").style.display = "none";
                 document.getElementById("waitingForOpponent").style.display = "none";
                 document.getElementById("opponentShowdownActionsSection").style.display = "none";
                 document.getElementById("dungeonCards").style.display = "none";
@@ -590,6 +651,7 @@ function getShowdownCardSelection() {
                     document.getElementById("showdownCards").style.display = "block";
                     
                     //Display HTML Elements - OFF
+                    document.getElementById("endingContainer").style.display = "none";
                     document.getElementById("opponentChoiceSection").style.display = "none";
                     document.getElementById("waitingForOpponent").style.display = "none";
                     document.getElementById("dungeonCards").style.display = "none";
@@ -632,6 +694,7 @@ function getShowdownResult() {
                 document.getElementById("opponentShowdownActionsSection").style.display = "block";
                 
                 //Display HTML Elements - OFF
+                document.getElementById("endingContainer").style.display = "none";
                 document.getElementById("statsContainer").style.display = "none";    
                 document.getElementById("waitingForOpponent").style.display = "none";
                 document.getElementById("opponentChoiceSection").style.display = "none";

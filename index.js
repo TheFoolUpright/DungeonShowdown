@@ -1097,6 +1097,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
          * @param {object} playerCards - An array of the player's selected cards.
          * @returns none
          */
+        //getWaitingOnOpponentShowdown
         function DisplayPlayerAndOpponentActions(opponentCards, playerCards) {
             var opponentActions = "";
             var playerActions = "";
@@ -1109,67 +1110,186 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
             // console.log("playerCards")
             // console.log(playerCards)
     
-            //Opponent Actions
-            if (opponentCards[0].card_type_id == 8 ) {
-                opponentActions = "Your opponent used " + opponentCards[0].card_name
-                if (opponentCards[1].card_type_id == 6) {
-                    opponentActions = opponentActions + " and used a " + opponentCards[1].card_name + ". "
-            
-                }
-            }
-            else if (opponentCards[1].card_type_id == 8) {
-                opponentActions = "Your opponent used " + opponentCards[1].card_name
-                if (opponentCards[0].card_type_id == 6) {
-                    opponentActions = opponentActions + " and used a " + opponentCards[0].card_name + ". "
-            
-                }
-            }
-            else{
+            if (playerCards.length == 2 && opponentCards.length == 2) {
+                //Opponent Actions
+                if (opponentCards[0].card_type_id == 8 ) {
+                    opponentActions = "Your opponent used " + opponentCards[0].card_name
+                    if (opponentCards[1].card_type_id == 6) {
+                        opponentActions = opponentActions + " and used a " + opponentCards[1].card_name + ". "
                 
-                if (opponentCards[0].card_type_id == 6) {
-                    opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
+                    }
                 }
-                else if (opponentCards[1].card_type_id == 6) {
-                    opponentActions = opponentActions + "Your opponent used a " + opponentCards[1].card_name + ". "
+                else if (opponentCards[1].card_type_id == 8) {
+                    opponentActions = "Your opponent used " + opponentCards[1].card_name
+                    if (opponentCards[0].card_type_id == 6) {
+                        opponentActions = opponentActions + " and used a " + opponentCards[0].card_name + ". "
+                
+                    }
                 }
-            }
-            
+                else{
+                    
+                    if (opponentCards[0].card_type_id == 6) {
+                        opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
+                    }
+                    else if (opponentCards[1].card_type_id == 6) {
+                        opponentActions = opponentActions + "Your opponent used a " + opponentCards[1].card_name + ". "
+                    }
+                }
+                
     
-            if (playerCards[0].card_type_id == 7) {
-                opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
-            }
-            else if (playerCards[1].card_type_id == 7) {
-                opponentActions = opponentActions + "You used a " + playerCards[1].card_name + "."
-            }
+                if (playerCards[0].card_type_id == 7) {
+                    opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
+                }
+                else if (playerCards[1].card_type_id == 7) {
+                    opponentActions = opponentActions + "You used a " + playerCards[1].card_name + "."
+                }
     
-            //Player Actions
-            if (playerCards[0].card_type_id == 8 ) {
-                playerActions = "You used " + playerCards[0].card_name
-                if (playerCards[1].card_type_id == 6) {
-                    playerActions = playerActions + " and used a " + playerCards[1].card_name + "."
-            
+                //Player Actions
+                if (playerCards[0].card_type_id == 8 ) {
+                    playerActions = "You used " + playerCards[0].card_name
+                    if (playerCards[1].card_type_id == 6) {
+                        playerActions = playerActions + " and used a " + playerCards[1].card_name + "."
+                
+                    }
+                }
+                else if (playerCards[1].card_type_id == 8) {
+                    playerActions = "You used " + playerCards[1].card_name
+                    if (playerCards[0].card_type_id == 6) {
+                        playerActions = playerActions + " and used a " + playerCards[0].card_name + "."
+                
+                    }
+                }
+                else{
+                    if (playerCards[0].card_type_id == 6) {
+                        playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
+                    }
+                    else if (playerCards[1].card_type_id == 6) {
+                        playerActions = playerActions + " You used a " + playerCards[1].card_name + ". "
+                    }
+                }
+                if (opponentCards[0].card_type_id == 7) {
+                    playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
+                }
+                else if (opponentCards[1].card_type_id == 7) {
+                    playerActions = playerActions + "Your opponent used a " + opponentCards[1].card_name + "."
                 }
             }
-            else if (playerCards[1].card_type_id == 8) {
-                playerActions = "You used " + playerCards[1].card_name
-                if (playerCards[0].card_type_id == 6) {
-                    playerActions = playerActions + " and used a " + playerCards[0].card_name + "."
-            
+            else if (playerCards.length == 1 && opponentCards.length == 2) {
+                //Opponent Actions
+                if (opponentCards[0].card_type_id == 8 ) {
+                    opponentActions = "Your opponent used " + opponentCards[0].card_name
+                    if (opponentCards[1].card_type_id == 6) {
+                        opponentActions = opponentActions + " and used a " + opponentCards[1].card_name + ". "
+                
+                    }
                 }
-            }
-            else{
-                if (playerCards[0].card_type_id == 6) {
+                else if (opponentCards[1].card_type_id == 8) {
+                    opponentActions = "Your opponent used " + opponentCards[1].card_name
+                    if (opponentCards[0].card_type_id == 6) {
+                        opponentActions = opponentActions + " and used a " + opponentCards[0].card_name + ". "
+                
+                    }
+                }
+                else{
+                    
+                    if (opponentCards[0].card_type_id == 6) {
+                        opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
+                    }
+                    else if (opponentCards[1].card_type_id == 6) {
+                        opponentActions = opponentActions + "Your opponent used a " + opponentCards[1].card_name + ". "
+                    }
+                }
+                
+    
+                if (playerCards[0].card_type_id == 7) {
+                    opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
+                }
+    
+                //Player Actions
+                if (playerCards[0].card_type_id == 8 ) {
+                    playerActions = "You used " + playerCards[0].card_name
+                }
+                else if (playerCards[0].card_type_id == 6) {
                     playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
                 }
-                else if (playerCards[1].card_type_id == 6) {
-                    playerActions = playerActions + " You used a " + playerCards[1].card_name + ". "
+                if (opponentCards[0].card_type_id == 7) {
+                    playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
+                }
+                else if (opponentCards[1].card_type_id == 7) {
+                    playerActions = playerActions + "Your opponent used a " + opponentCards[1].card_name + "."
+                }
+    
+            }
+            else if (playerCards.length == 2 && opponentCards.length == 1) {
+                //Opponent Actions
+                if (opponentCards[0].card_type_id == 8 ) {
+                    opponentActions = "Your opponent used " + opponentCards[0].card_name
+                }
+                else if (opponentCards[0].card_type_id == 6) {
+                    opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
+                }
+                    
+                if (playerCards[0].card_type_id == 7) {
+                    opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
+                }
+                else if (playerCards[1].card_type_id == 7) {
+                    opponentActions = opponentActions + "You used a " + playerCards[1].card_name + "."
+                }
+    
+                //Player Actions
+                if (playerCards[0].card_type_id == 8 ) {
+                    playerActions = "You used " + playerCards[0].card_name
+                    if (playerCards[1].card_type_id == 6) {
+                        playerActions = playerActions + " and used a " + playerCards[1].card_name + "."
+                
+                    }
+                }
+                else if (playerCards[1].card_type_id == 8) {
+                    playerActions = "You used " + playerCards[1].card_name
+                    if (playerCards[0].card_type_id == 6) {
+                        playerActions = playerActions + " and used a " + playerCards[0].card_name + "."
+                
+                    }
+                }
+                else{
+                    if (playerCards[0].card_type_id == 6) {
+                        playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
+                    }
+                    else if (playerCards[1].card_type_id == 6) {
+                        playerActions = playerActions + " You used a " + playerCards[1].card_name + ". "
+                    }
+                }
+                if (opponentCards[0].card_type_id == 7) {
+                    playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
                 }
             }
-            if (opponentCards[0].card_type_id == 7) {
-                playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
-            }
-            else if (opponentCards[1].card_type_id == 7) {
-                playerActions = playerActions + "Your opponent used a " + opponentCards[1].card_name + "."
+            else if (playerCards.length == 1 && opponentCards.length == 1) {
+                //Opponent Actions
+                if (opponentCards[0].card_type_id == 8 ) {
+                    opponentActions = "Your opponent used " + opponentCards[0].card_name
+                }
+                else{
+                    if (opponentCards[0].card_type_id == 6) {
+                        opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
+                    }
+                }
+                
+                if (playerCards[0].card_type_id == 7) {
+                    opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
+                }
+    
+                //Player Actions
+                if (playerCards[0].card_type_id == 8 ) {
+                    playerActions = "You used " + playerCards[0].card_name
+                }
+                else{
+                    if (playerCards[0].card_type_id == 6) {
+                        playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
+                    }
+                }
+                if (opponentCards[0].card_type_id == 7) {
+                    playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
+                }
             }
     
     
@@ -1207,10 +1327,7 @@ app.get("/getShowdownCardSelection", (req, res) => {
                 var card3 = rows[2];
                 var card4 = rows[3];
 
-                console.log("Card 1" + card1)
-                console.log("Card 1" + card1)
-                console.log("Card 1" + card1)
-                console.log("Card 1" + card1)
+
                 res.status(200).json({
                     "message": "Player stats and cards updated",
                     "room_id": RoomID,
@@ -1295,6 +1412,7 @@ app.get("/getShowdownResult", (req, res) => {
      * @param {object} playerCards - An array of the player's selected cards.
      * @returns none.
      */
+    //getShowdownResult
     function DisplayPlayerAndOpponentActions(opponentCards, playerCards) {
         var opponentActions = "";
         var playerActions = "";
@@ -1307,68 +1425,188 @@ app.get("/getShowdownResult", (req, res) => {
         // console.log("playerCards")
         // console.log(playerCards)
 
-        //Opponent Actions
-        if (opponentCards[0].card_type_id == 8 ) {
-            opponentActions = "Your opponent used " + opponentCards[0].card_name
-            if (opponentCards[1].card_type_id == 6) {
-                opponentActions = opponentActions + " and used a " + opponentCards[1].card_name + "."
-        
-            }
-        }
-        else if (opponentCards[1].card_type_id == 8) {
-            opponentActions = "Your opponent used " + opponentCards[1].card_name
-            if (opponentCards[0].card_type_id == 6) {
-                opponentActions = opponentActions + " and used a " + opponentCards[0].card_name + "."
-        
-            }
-        }
-        else{
+        if (playerCards.length == 2 && opponentCards.length == 2) {
+            //Opponent Actions
+            if (opponentCards[0].card_type_id == 8 ) {
+                opponentActions = "Your opponent used " + opponentCards[0].card_name
+                if (opponentCards[1].card_type_id == 6) {
+                    opponentActions = opponentActions + " and used a " + opponentCards[1].card_name + ". "
             
-            if (opponentCards[0].card_type_id == 6) {
-                opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + "."
+                }
             }
-            else if (opponentCards[1].card_type_id == 6) {
-                opponentActions = opponentActions + "Your opponent used a " + opponentCards[1].card_name + "."
+            else if (opponentCards[1].card_type_id == 8) {
+                opponentActions = "Your opponent used " + opponentCards[1].card_name
+                if (opponentCards[0].card_type_id == 6) {
+                    opponentActions = opponentActions + " and used a " + opponentCards[0].card_name + ". "
+            
+                }
             }
-        }
-        
+            else{
+                
+                if (opponentCards[0].card_type_id == 6) {
+                    opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
+                }
+                else if (opponentCards[1].card_type_id == 6) {
+                    opponentActions = opponentActions + "Your opponent used a " + opponentCards[1].card_name + ". "
+                }
+            }
+            
 
-        if (playerCards[0].card_type_id == 7) {
-            opponentActions = opponentActions + " You used a " + playerCards[0].card_name + "."
+            if (playerCards[0].card_type_id == 7) {
+                opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
+            }
+            else if (playerCards[1].card_type_id == 7) {
+                opponentActions = opponentActions + "You used a " + playerCards[1].card_name + "."
+            }
+
+            //Player Actions
+            if (playerCards[0].card_type_id == 8 ) {
+                playerActions = "You used " + playerCards[0].card_name
+                if (playerCards[1].card_type_id == 6) {
+                    playerActions = playerActions + " and used a " + playerCards[1].card_name + "."
+            
+                }
+            }
+            else if (playerCards[1].card_type_id == 8) {
+                playerActions = "You used " + playerCards[1].card_name
+                if (playerCards[0].card_type_id == 6) {
+                    playerActions = playerActions + " and used a " + playerCards[0].card_name + "."
+            
+                }
+            }
+            else{
+                if (playerCards[0].card_type_id == 6) {
+                    playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
+                }
+                else if (playerCards[1].card_type_id == 6) {
+                    playerActions = playerActions + " You used a " + playerCards[1].card_name + ". "
+                }
+            }
+            if (opponentCards[0].card_type_id == 7) {
+                playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
+            }
+            else if (opponentCards[1].card_type_id == 7) {
+                playerActions = playerActions + "Your opponent used a " + opponentCards[1].card_name + "."
+            }
         }
-        else if (playerCards[1].card_type_id == 7) {
-            opponentActions = opponentActions + " You used a " + playerCards[1].card_name + "."
+        else if (playerCards.length == 1 && opponentCards.length == 2) {
+            //Opponent Actions
+            if (opponentCards[0].card_type_id == 8 ) {
+                opponentActions = "Your opponent used " + opponentCards[0].card_name
+                if (opponentCards[1].card_type_id == 6) {
+                    opponentActions = opponentActions + " and used a " + opponentCards[1].card_name + ". "
+            
+                }
+            }
+            else if (opponentCards[1].card_type_id == 8) {
+                opponentActions = "Your opponent used " + opponentCards[1].card_name
+                if (opponentCards[0].card_type_id == 6) {
+                    opponentActions = opponentActions + " and used a " + opponentCards[0].card_name + ". "
+            
+                }
+            }
+            else{
+                
+                if (opponentCards[0].card_type_id == 6) {
+                    opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
+                }
+                else if (opponentCards[1].card_type_id == 6) {
+                    opponentActions = opponentActions + "Your opponent used a " + opponentCards[1].card_name + ". "
+                }
+            }
+            
+
+            if (playerCards[0].card_type_id == 7) {
+                opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
+            }
+
+            //Player Actions
+            if (playerCards[0].card_type_id == 8 ) {
+                playerActions = "You used " + playerCards[0].card_name
+            }
+            else if (playerCards[0].card_type_id == 6) {
+                playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
+            }
+            if (opponentCards[0].card_type_id == 7) {
+                playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
+            }
+            else if (opponentCards[1].card_type_id == 7) {
+                playerActions = playerActions + "Your opponent used a " + opponentCards[1].card_name + "."
+            }
+
+        }
+        else if (playerCards.length == 2 && opponentCards.length == 1) {
+            //Opponent Actions
+            if (opponentCards[0].card_type_id == 8 ) {
+                opponentActions = "Your opponent used " + opponentCards[0].card_name
+            }
+            else if (opponentCards[0].card_type_id == 6) {
+                opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
+            }
+                
+            if (playerCards[0].card_type_id == 7) {
+                opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
+            }
+            else if (playerCards[1].card_type_id == 7) {
+                opponentActions = opponentActions + "You used a " + playerCards[1].card_name + "."
+            }
+
+            //Player Actions
+            if (playerCards[0].card_type_id == 8 ) {
+                playerActions = "You used " + playerCards[0].card_name
+                if (playerCards[1].card_type_id == 6) {
+                    playerActions = playerActions + " and used a " + playerCards[1].card_name + "."
+            
+                }
+            }
+            else if (playerCards[1].card_type_id == 8) {
+                playerActions = "You used " + playerCards[1].card_name
+                if (playerCards[0].card_type_id == 6) {
+                    playerActions = playerActions + " and used a " + playerCards[0].card_name + "."
+            
+                }
+            }
+            else{
+                if (playerCards[0].card_type_id == 6) {
+                    playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
+                }
+                else if (playerCards[1].card_type_id == 6) {
+                    playerActions = playerActions + " You used a " + playerCards[1].card_name + ". "
+                }
+            }
+            if (opponentCards[0].card_type_id == 7) {
+                playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
+            }
+        }
+        else if (playerCards.length == 1 && opponentCards.length == 1) {
+            //Opponent Actions
+            if (opponentCards[0].card_type_id == 8 ) {
+                opponentActions = "Your opponent used " + opponentCards[0].card_name
+            }
+            else{
+                if (opponentCards[0].card_type_id == 6) {
+                    opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
+                }
+            }
+            
+            if (playerCards[0].card_type_id == 7) {
+                opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
+            }
+
+            //Player Actions
+            if (playerCards[0].card_type_id == 8 ) {
+                playerActions = "You used " + playerCards[0].card_name
+            }
+            else{
+                if (playerCards[0].card_type_id == 6) {
+                    playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
+                }
+            }
+            if (opponentCards[0].card_type_id == 7) {
+                playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
+            }
         }
 
-        //Player Actions
-        if (playerCards[0].card_type_id == 8 ) {
-            playerActions = "You used " + playerCards[0].card_name
-            if (playerCards[1].card_type_id == 6) {
-                playerActions = playerActions + " and used a " + playerCards[1].card_name + "."
-        
-            }
-        }
-        else if (playerCards[1].card_type_id == 8) {
-            playerActions = "You used " + playerCards[1].card_name
-            if (playerCards[0].card_type_id == 6) {
-                playerActions = playerActions + " and used a " + playerCards[0].card_name + "."
-        
-            }
-        }
-        else{
-            if (playerCards[0].card_type_id == 6) {
-                playerActions = playerActions + "You used a " + playerCards[0].card_name + "."
-            }
-            else if (playerCards[1].card_type_id == 6) {
-                playerActions = playerActions + "You used a " + playerCards[1].card_name + "."
-            }
-        }
-        if (opponentCards[0].card_type_id == 7) {
-            playerActions = playerActions + " Your opponent used a " + opponentCards[0].card_name + "."
-        }
-        else if (opponentCards[1].card_type_id == 7) {
-            playerActions = playerActions + " Your opponent used a " + opponentCards[1].card_name + "."
-        }
 
         res.status(200).json(
             {
@@ -1377,6 +1615,7 @@ app.get("/getShowdownResult", (req, res) => {
             }
         )
     }
+
 })
 
 
@@ -1413,11 +1652,61 @@ app.post("/setupShowdown", (req, res) => {
                     return;
                 }
                 PlayerStatusID = rows[0].player_status_id
-                //Call function to get Deck
-                GetRoomDeck(rows);
+                
+                CheckOpponentHealth(rows[0].current_health, rows)
+
             }
         )
     }
+
+
+    function CheckOpponentHealth(playerCurrentHealth, playerStats) {
+        connection.query("SELECT current_health FROM player_status WHERE player_status_id != ? AND match_id = ?;", [PlayerStatusID, MatchID], 
+            function(err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+                var state;
+                if (playerCurrentHealth > 0 && rows[0].current_health <= 0) {
+                    state = 7
+                    UpdatePlayerStateToEnding(playerStats, state)
+                }
+                else if (playerCurrentHealth <= 0 && rows[0].current_health > 0) {
+                    state = 8
+                    UpdatePlayerStateToEnding(playerStats, state)
+                }
+                else if(playerCurrentHealth <= 0 && rows[0].current_health <= 0) {
+                    state = 9
+                    UpdatePlayerStateToEnding(playerStats, state)
+                }
+                else {
+                    GetRoomDeck(playerStats);
+                }
+            }
+        )
+    }
+    function UpdatePlayerStateToEnding(playerStats, state) {
+        connection.query("UPDATE player_status SET state_id = ? WHERE player_status_id = ?", [state, PlayerStatusID], 
+            function(err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+
+                res.status(200).json({
+                    "message": "Ending state change!"
+                })
+            }
+        )
+    }
+
 
     /**
      * Gets the rows containing the cards available in a room.
@@ -1624,7 +1913,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
                     })
                     return
                 }
-
+                
                 GetPlayerShowdownStats(opponentCards, rows);
                 
             }
@@ -1655,8 +1944,8 @@ app.post("/resolveShowdownTurn", (req, res) => {
                 var playerEnergy = rows[0].energy;
                 var playerInsight = rows[0].insight;
                 var playerDamage = rows[0].damage;
-                var playerDefense = 0;
                 var playerAttack = 0;
+                var playerDefense = 0;
                 var isParry = false;
                 var isDodge = false;
                 var isDoubleAttack = false;
@@ -1664,35 +1953,35 @@ app.post("/resolveShowdownTurn", (req, res) => {
                 var isDoubleAttackOpponent = false;
                 var isCounterOpponent = false;
                 var isParryOpponent = false;
-                
+
                 //Player Skills
                 for (let i = 0; i < playerCards.length; i++) {
-                    if (playerCards.card_type_id == 8) {
-                        playerCurrentHealth = playerCurrentHealth + playerCards.card_current_health;
-                        playerInsight = playerInsight + playerCards.card_insight;
-                        playerEnergy = playerEnergy + playerCards.card_energy;
-                        playerDamage = playerDamage + playerCards.card_damage;
+                    if (playerCards[i].card_type_id == 8) {
+                        playerCurrentHealth = playerCurrentHealth + playerCards[i].card_current_health;
+                        playerInsight = playerInsight + playerCards[i].card_insight;
+                        playerEnergy = playerEnergy + playerCards[i].card_energy;
+                        playerDamage = playerDamage + playerCards[i].card_damage;
                     }
                 }
 
                 //Opponent Skills
                 for (let i = 0; i < opponentCards.length; i++) {
-                    if (opponentCards.card_type_id == 8) {
-                        opponentDamage = opponentDamage + opponentCards.card_damage;
+                    if (opponentCards[i].card_type_id == 8) {
+                        opponentDamage = opponentDamage + opponentCards[i].card_damage;
                     }
                 }
                 
                 //Player Defense
                 for (let i = 0; i < playerCards.length; i++) {
-                    if (playerCards.card_type_id == 7) {
-                        playerDefense = playerDefense + playerCards.card_defense;
-                        playerInsight = playerInsight + playerCards.card_insight;
-                        playerEnergy = playerEnergy + playerCards.card_energy;
+                    if (playerCards[i].card_type_id == 7) {
+                        playerDefense = playerDefense + playerCards[i].card_defense;
+                        playerInsight = playerInsight + playerCards[i].card_insight;
+                        playerEnergy = playerEnergy + playerCards[i].card_energy;
 
-                        if (playerCards.card_id = 1) {
+                        if (playerCards[i].card_id == 1) {
                             isParry = true;
                         }
-                        if (playerCards.card_id = 2) {
+                        if (playerCards[i].card_id == 2) {
                             isDodge = true;
                         }
                     }
@@ -1700,9 +1989,9 @@ app.post("/resolveShowdownTurn", (req, res) => {
 
                 //Opponent Defense
                 for (let i = 0; i < opponentCards.length; i++) {
-                    if (opponentCards.card_type_id == 7) {
-                        if (opponentCards.card_id = 1) {
-                            opponentParryAttack = opponentCards.card_attack
+                    if (opponentCards[i].card_type_id == 7) {
+                        if (opponentCards[i].card_id == 1) {
+                            opponentParryAttack = opponentCards[i].card_attack
                             isParryOpponent = true;
                         }
                     }
@@ -1710,14 +1999,14 @@ app.post("/resolveShowdownTurn", (req, res) => {
 
                 //Player Attack
                 for (let i = 0; i < playerCards.length; i++) {
-                    if (playerCards.card_type_id == 6) {
-                        playerAttack = playerAttack + playerCards.card_attack;
-                        playerEnergy = playerEnergy + playerCards.card_energy;
+                    if (playerCards[i].card_type_id == 6) {
+                        playerAttack = playerAttack + playerCards[i].card_attack;
+                        playerEnergy = playerEnergy + playerCards[i].card_energy;
 
-                        if (playerCards.card_id = 3) {
+                        if (playerCards[i].card_id == 3) {
                             isDoubleAttack = true;
                         }
-                        if (playerCards.card_id = 4) {
+                        if (playerCards[i].card_id == 4) {
                             isCounter = true;
                         }
                     }
@@ -1725,13 +2014,13 @@ app.post("/resolveShowdownTurn", (req, res) => {
 
                 //Opponent Attack
                 for (let i = 0; i < opponentCards.length; i++) {
-                    if (opponentCards.card_type_id == 6) {
-                        opponentAttack = opponentAttack + opponentCards.card_attack;
+                    if (opponentCards[i].card_type_id == 6) {
+                        opponentAttack = opponentAttack + opponentCards[i].card_attack;
 
-                        if (opponentCards.card_id = 3) {
+                        if (opponentCards[i].card_id == 3) {
                             isDoubleAttackOpponent = true;
                         }
-                        if (opponentCards.card_id = 4) {
+                        if (opponentCards[i].card_id == 4) {
                             isCounterOpponent = true;
                         }
                     }
@@ -1768,7 +2057,6 @@ app.post("/resolveShowdownTurn", (req, res) => {
                     playerDefense = Math.max(0, playerDefense - (opponentAttack * opponentDamage))
                 }
                 
-                
                 UpdateShowdownPlayerStats(playerCurrentHealth, playerEnergy, playerInsight, playerDamage, opponentCards, playerCards)
             }
         )
@@ -1795,6 +2083,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
                     })
                     return
                 }
+                //
                 DisplayPlayerAndOpponentActions(opponentCards, playerCards)
             }
         )
@@ -1808,6 +2097,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
      * @param {object} playerCards - An array of the player's selected cards.
      * @returns none
      */
+    //resolveShowdownTurn
     function DisplayPlayerAndOpponentActions(opponentCards, playerCards) {
         var opponentActions = "";
         var playerActions = "";
@@ -1820,67 +2110,186 @@ app.post("/resolveShowdownTurn", (req, res) => {
         // console.log("playerCards")
         // console.log(playerCards)
 
-        //Opponent Actions
-        if (opponentCards[0].card_type_id == 8 ) {
-            opponentActions = "Your opponent used " + opponentCards[0].card_name
-            if (opponentCards[1].card_type_id == 6) {
-                opponentActions = opponentActions + " and used a " + opponentCards[1].card_name + ". "
-        
-            }
-        }
-        else if (opponentCards[1].card_type_id == 8) {
-            opponentActions = "Your opponent used " + opponentCards[1].card_name
-            if (opponentCards[0].card_type_id == 6) {
-                opponentActions = opponentActions + " and used a " + opponentCards[0].card_name + ". "
-        
-            }
-        }
-        else{
+        if (playerCards.length == 2 && opponentCards.length == 2) {
+            //Opponent Actions
+            if (opponentCards[0].card_type_id == 8 ) {
+                opponentActions = "Your opponent used " + opponentCards[0].card_name
+                if (opponentCards[1].card_type_id == 6) {
+                    opponentActions = opponentActions + " and used a " + opponentCards[1].card_name + ". "
             
-            if (opponentCards[0].card_type_id == 6) {
-                opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
+                }
             }
-            else if (opponentCards[1].card_type_id == 6) {
-                opponentActions = opponentActions + "Your opponent used a " + opponentCards[1].card_name + ". "
+            else if (opponentCards[1].card_type_id == 8) {
+                opponentActions = "Your opponent used " + opponentCards[1].card_name
+                if (opponentCards[0].card_type_id == 6) {
+                    opponentActions = opponentActions + " and used a " + opponentCards[0].card_name + ". "
+            
+                }
             }
-        }
-        
+            else{
+                
+                if (opponentCards[0].card_type_id == 6) {
+                    opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
+                }
+                else if (opponentCards[1].card_type_id == 6) {
+                    opponentActions = opponentActions + "Your opponent used a " + opponentCards[1].card_name + ". "
+                }
+            }
+            
 
-        if (playerCards[0].card_type_id == 7) {
-            opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
-        }
-        else if (playerCards[1].card_type_id == 7) {
-            opponentActions = opponentActions + "You used a " + playerCards[1].card_name + "."
-        }
+            if (playerCards[0].card_type_id == 7) {
+                opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
+            }
+            else if (playerCards[1].card_type_id == 7) {
+                opponentActions = opponentActions + "You used a " + playerCards[1].card_name + "."
+            }
 
-        //Player Actions
-        if (playerCards[0].card_type_id == 8 ) {
-            playerActions = "You used " + playerCards[0].card_name
-            if (playerCards[1].card_type_id == 6) {
-                playerActions = playerActions + " and used a " + playerCards[1].card_name + "."
-        
+            //Player Actions
+            if (playerCards[0].card_type_id == 8 ) {
+                playerActions = "You used " + playerCards[0].card_name
+                if (playerCards[1].card_type_id == 6) {
+                    playerActions = playerActions + " and used a " + playerCards[1].card_name + "."
+            
+                }
+            }
+            else if (playerCards[1].card_type_id == 8) {
+                playerActions = "You used " + playerCards[1].card_name
+                if (playerCards[0].card_type_id == 6) {
+                    playerActions = playerActions + " and used a " + playerCards[0].card_name + "."
+            
+                }
+            }
+            else{
+                if (playerCards[0].card_type_id == 6) {
+                    playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
+                }
+                else if (playerCards[1].card_type_id == 6) {
+                    playerActions = playerActions + " You used a " + playerCards[1].card_name + ". "
+                }
+            }
+            if (opponentCards[0].card_type_id == 7) {
+                playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
+            }
+            else if (opponentCards[1].card_type_id == 7) {
+                playerActions = playerActions + "Your opponent used a " + opponentCards[1].card_name + "."
             }
         }
-        else if (playerCards[1].card_type_id == 8) {
-            playerActions = "You used " + playerCards[1].card_name
-            if (playerCards[0].card_type_id == 6) {
-                playerActions = playerActions + " and used a " + playerCards[0].card_name + "."
-        
+        else if (playerCards.length == 1 && opponentCards.length == 2) {
+            //Opponent Actions
+            if (opponentCards[0].card_type_id == 8 ) {
+                opponentActions = "Your opponent used " + opponentCards[0].card_name
+                if (opponentCards[1].card_type_id == 6) {
+                    opponentActions = opponentActions + " and used a " + opponentCards[1].card_name + ". "
+            
+                }
             }
-        }
-        else{
-            if (playerCards[0].card_type_id == 6) {
+            else if (opponentCards[1].card_type_id == 8) {
+                opponentActions = "Your opponent used " + opponentCards[1].card_name
+                if (opponentCards[0].card_type_id == 6) {
+                    opponentActions = opponentActions + " and used a " + opponentCards[0].card_name + ". "
+            
+                }
+            }
+            else{
+                
+                if (opponentCards[0].card_type_id == 6) {
+                    opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
+                }
+                else if (opponentCards[1].card_type_id == 6) {
+                    opponentActions = opponentActions + "Your opponent used a " + opponentCards[1].card_name + ". "
+                }
+            }
+            
+
+            if (playerCards[0].card_type_id == 7) {
+                opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
+            }
+
+            //Player Actions
+            if (playerCards[0].card_type_id == 8 ) {
+                playerActions = "You used " + playerCards[0].card_name
+            }
+            else if (playerCards[0].card_type_id == 6) {
                 playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
             }
-            else if (playerCards[1].card_type_id == 6) {
-                playerActions = playerActions + " You used a " + playerCards[1].card_name + ". "
+            if (opponentCards[0].card_type_id == 7) {
+                playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
+            }
+            else if (opponentCards[1].card_type_id == 7) {
+                playerActions = playerActions + "Your opponent used a " + opponentCards[1].card_name + "."
+            }
+
+        }
+        else if (playerCards.length == 2 && opponentCards.length == 1) {
+            //Opponent Actions
+            if (opponentCards[0].card_type_id == 8 ) {
+                opponentActions = "Your opponent used " + opponentCards[0].card_name
+            }
+            else if (opponentCards[0].card_type_id == 6) {
+                opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
+            }
+                
+            if (playerCards[0].card_type_id == 7) {
+                opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
+            }
+            else if (playerCards[1].card_type_id == 7) {
+                opponentActions = opponentActions + "You used a " + playerCards[1].card_name + "."
+            }
+
+            //Player Actions
+            if (playerCards[0].card_type_id == 8 ) {
+                playerActions = "You used " + playerCards[0].card_name
+                if (playerCards[1].card_type_id == 6) {
+                    playerActions = playerActions + " and used a " + playerCards[1].card_name + "."
+            
+                }
+            }
+            else if (playerCards[1].card_type_id == 8) {
+                playerActions = "You used " + playerCards[1].card_name
+                if (playerCards[0].card_type_id == 6) {
+                    playerActions = playerActions + " and used a " + playerCards[0].card_name + "."
+            
+                }
+            }
+            else{
+                if (playerCards[0].card_type_id == 6) {
+                    playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
+                }
+                else if (playerCards[1].card_type_id == 6) {
+                    playerActions = playerActions + " You used a " + playerCards[1].card_name + ". "
+                }
+            }
+            if (opponentCards[0].card_type_id == 7) {
+                playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
             }
         }
-        if (opponentCards[0].card_type_id == 7) {
-            playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
-        }
-        else if (opponentCards[1].card_type_id == 7) {
-            playerActions = playerActions + "Your opponent used a " + opponentCards[1].card_name + "."
+        else if (playerCards.length == 1 && opponentCards.length == 1) {
+            //Opponent Actions
+            if (opponentCards[0].card_type_id == 8 ) {
+                opponentActions = "Your opponent used " + opponentCards[0].card_name
+            }
+            else{
+                if (opponentCards[0].card_type_id == 6) {
+                    opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
+                }
+            }
+            
+            if (playerCards[0].card_type_id == 7) {
+                opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
+            }
+
+            //Player Actions
+            if (playerCards[0].card_type_id == 8 ) {
+                playerActions = "You used " + playerCards[0].card_name
+            }
+            else{
+                if (playerCards[0].card_type_id == 6) {
+                    playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
+                }
+            }
+            if (opponentCards[0].card_type_id == 7) {
+                playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
+            }
         }
 
 
