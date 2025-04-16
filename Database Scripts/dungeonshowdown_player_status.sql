@@ -34,6 +34,7 @@ CREATE TABLE `player_status` (
   `insight` int DEFAULT '10',
   `damage` int DEFAULT '1',
   `state_id` int DEFAULT '1',
+  `showdown_initiative` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`player_status_id`),
   KEY `player_status_match_id_FK_idx` (`match_id`),
   KEY `player_status_player_id_FK_idx` (`player_id`),
@@ -48,7 +49,7 @@ CREATE TABLE `player_status` (
 
 LOCK TABLES `player_status` WRITE;
 /*!40000 ALTER TABLE `player_status` DISABLE KEYS */;
-INSERT INTO `player_status` VALUES (1,1,1,20,20,10,10,1,NULL),(2,1,2,20,20,10,10,1,NULL);
+INSERT INTO `player_status` VALUES (1,1,1,20,20,10,10,1,1,0),(2,1,2,20,20,10,10,1,1,1);
 /*!40000 ALTER TABLE `player_status` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

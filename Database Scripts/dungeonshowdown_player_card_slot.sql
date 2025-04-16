@@ -69,8 +69,9 @@ INSERT INTO `player_card_slot` (player_status_id, slot_id, card_id, room_id, sho
 (2,1,5,5,NULL),
 (2,2,4,5,NULL),
 (2,4,7,5,NULL),
-(2,7,12,6,1),
-(2,9,11,6,1),
+(2,5,8,6,1),
+(2,6,10,6,1),
+(2,9,12,6,1),
 (2,10,13,6,1);
 /*!40000 ALTER TABLE `player_card_slot` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -741,7 +741,7 @@ app.post("/setupNextDungeonRoom", (req, res) => {
                     return;
                 }
                 //call function to set cards
-                InsertCards(playerStats, rows)
+                InsertDungeonCards(playerStats, rows)
 
             }
         )
@@ -754,10 +754,44 @@ app.post("/setupNextDungeonRoom", (req, res) => {
      * @param {array} deck - an array with all the dungeon cards for the room
      * @returns {JSON} - returns a message 
      */
-    function InsertCards(playerStats, deck) {
+    function InsertDungeonCards(playerStats, deck) {
 
-        //Create Cards
+        //Create Cards - Mary here
         var indexOfElement;
+        var MaxHealthDeck = [];
+        var MaxHealthIterator = 0;
+        var HealingDeck = [];
+        var HealingIterator  = 0;
+        var DamageDeck = [];
+        var DamageIterator = 0;
+        var RestDeck = [];
+        var RestIterator = 0;
+        var EnemyDeck = [];
+        var EnemyIterator = 0;
+
+        for (let i = 0; i < deck.length; i++) {
+            if(deck[i].card_type_id == 1){
+                MaxHealthDeck[MaxHealthIterator] = deck[i]
+                MaxHealthIterator++;
+            }
+            if(deck[i].card_type_id == 2){
+                HealingDeck[HealingIterator] = deck[i];
+                HealingIterator++;
+            }
+            if(deck[i].card_type_id == 3){
+                DamageDeck[DamageIterator] = deck[i];
+                DamageIterator++;
+            }
+            if(deck[i].card_type_id == 4){
+                RestDeck[RestIterator] = deck[i];
+                RestIterator++
+            }
+            if(deck[i].card_type_id == 5){
+                EnemyDeck[EnemyIterator] = deck[i];
+                EnemyIterator++;
+            }
+            
+        }
 
         var card1 = deck[Math.floor(Math.random() * deck.length)]
         indexOfElement = deck.indexOf(card1);
@@ -978,10 +1012,10 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
                             playerInsight = playerInsight + playerCards.card_insight;
                             playerEnergy = playerEnergy + playerCards.card_energy;
     
-                            if (playerCards.card_id = 1) {
+                            if (playerCards.card_id == 1) {
                                 isParry = true;
                             }
-                            if (playerCards.card_id = 2) {
+                            if (playerCards.card_id == 2) {
                                 isDodge = true;
                             }
                         }
@@ -990,7 +1024,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
                     //Opponent Defense
                     for (let i = 0; i < opponentCards.length; i++) {
                         if (opponentCards.card_type_id == 7) {
-                            if (opponentCards.card_id = 1) {
+                            if (opponentCards.card_id == 1) {
                                 opponentParryAttack = opponentCards.card_attack
                                 isParryOpponent = true;
                             }
@@ -1003,10 +1037,10 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
                             playerAttack = playerAttack + playerCards.card_attack;
                             playerEnergy = playerEnergy + playerCards.card_energy;
     
-                            if (playerCards.card_id = 3) {
+                            if (playerCards.card_id == 3) {
                                 isDoubleAttack = true;
                             }
-                            if (playerCards.card_id = 4) {
+                            if (playerCards.card_id == 4) {
                                 isCounter = true;
                             }
                         }
@@ -1017,10 +1051,10 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
                         if (opponentCards.card_type_id == 6) {
                             opponentAttack = opponentAttack + opponentCards.card_attack;
     
-                            if (opponentCards.card_id = 3) {
+                            if (opponentCards.card_id == 3) {
                                 isDoubleAttackOpponent = true;
                             }
-                            if (opponentCards.card_id = 4) {
+                            if (opponentCards.card_id == 4) {
                                 isCounterOpponent = true;
                             }
                         }
@@ -1633,16 +1667,10 @@ app.post("/setupShowdown", (req, res) => {
     }
     ShowdownTurn++;
 
-    /**
-     * Gets the rows containing the information relating to the player.
-     * Called by the setupShowdown endpoint.
-     * @param none
-     * @returns none
-     */
-    GetPlayerStats()
-    function GetPlayerStats(){
-        console.log("GetPlayerStats start")
-        connection.query("SELECT player_status_id, match_id, player_id, max_health, current_health, energy, insight, damage FROM player_status WHERE player_id = ? AND match_id = ?;", [PlayerID, MatchID],
+    CheckIfInitiativeIsSet()
+
+    function CheckIfInitiativeIsSet() {
+        connection.query("SELECT showdown_initiative FROM player_status WHERE match_id = ?;", [MatchID],
             function (err, rows, fields) {
                 if (err){
                     console.log("Database Error : " + err);
@@ -1652,12 +1680,61 @@ app.post("/setupShowdown", (req, res) => {
                     return;
                 }
                 PlayerStatusID = rows[0].player_status_id
-                
-                CheckOpponentHealth(rows[0].current_health, rows)
+                if (rows[0].showdown_initiative == 1 || rows[1].showdown_initiative == 1) {
+                    GetPlayerStats()
+                }
+                else {
+                    UpdatePlayerInitiative()
+                }
+                // check op intiative, if 1 then GetPlayerStats, else update initiative to 1
 
             }
         )
     }
+
+    function UpdatePlayerInitiative() {
+        connection.query("UPDATE player_status SET showdown_initiative = 1 WHERE player_id = ?;", [PlayerID],
+            function (err, rows, fields) {
+                if (err){
+                    console.log("Database Error : " + err);
+                    res.status(500).json({
+                        "message": err
+                    });
+                    return;
+                }
+
+                GetPlayerStats()
+
+            }
+        )
+    }
+    
+    /**
+     * Gets the rows containing the information relating to the player.
+     * Called by the setupShowdown endpoint.
+     * @param none
+     * @returns none
+     */
+
+    function GetPlayerStats(){
+        // Now checks whether the current player is player 1 or 2
+        connection.query("SELECT player_status_id, player_id, max_health, current_health, energy, insight, damage, showdown_initiative FROM player_status WHERE player_id = ? AND match_id = ?;", [PlayerID, MatchID],
+            function (err, rows, fields) {
+                if (err){
+                    console.log("Database Error : " + err);
+                    res.status(500).json({
+                        "message": err
+                    });
+                    return;
+                }
+                PlayerStatusID = rows[0].player_status_id
+
+                CheckOpponentHealth(rows[0].current_health, rows)
+            }
+        )
+    }
+
+
 
 
     function CheckOpponentHealth(playerCurrentHealth, playerStats) {
@@ -1689,6 +1766,7 @@ app.post("/setupShowdown", (req, res) => {
             }
         )
     }
+
     function UpdatePlayerStateToEnding(playerStats, state) {
         connection.query("UPDATE player_status SET state_id = ? WHERE player_status_id = ?", [state, PlayerStatusID], 
             function(err, rows, fields) {
@@ -1707,7 +1785,6 @@ app.post("/setupShowdown", (req, res) => {
         )
     }
 
-
     /**
      * Gets the rows containing the cards available in a room.
      * Called by GetPlayerStats.
@@ -1715,7 +1792,6 @@ app.post("/setupShowdown", (req, res) => {
      * @returns none
      */
     function GetRoomDeck(playerStats) {
-        console.log("Get Room Deck: Start")
         connection.query("SELECT c.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_image_path FROM card_room cr INNER JOIN card c ON c.card_id = cr.card_id INNER JOIN room r ON cr.room_id = r.room_id WHERE r.room_id = ?", [RoomID], 
             function (err, rows, fields) {
                 if (err){
@@ -1726,11 +1802,9 @@ app.post("/setupShowdown", (req, res) => {
                     return;
                 }
                 //call function to set cards
-                InsertCards(playerStats, rows)
-
+                GetForInsertingCards(playerStats, rows)
             }
         )
-        console.log("Get Room Deck: End")
     }
 
     /**
@@ -1740,39 +1814,109 @@ app.post("/setupShowdown", (req, res) => {
      * @param {object} deck - the rows containing the cards available in a room.
      * @returns none
      */
-    function InsertCards(playerStats, deck) {
-        console.log("Insert cards Start")
+    function GetForInsertingCards(playerStats, deck) {
         //Create Cards
 
-        // Eventually we'll need to check whether player 1 or 2 is getting the cards to make sure they get different ones
+        if (playerStats[0].showdown_initiative == 1) {
+            var attackDeck = [];
+            var attackIterator = 0;
+            var defenseDeck = [];
+            var defenseIterator = 0;
+            var skillDeck = [];
+            var skillIterator = 0;
 
-        // var indexOfElement;
-
-        // var card1 = deck[Math.floor(Math.random() * deck.length)]
-        // indexOfElement = deck.indexOf(card1);
-        // deck.splice(indexOfElement, 1)
-        // var card2 = deck[Math.floor(Math.random() * deck.length)]
-        // indexOfElement = deck.indexOf(card2);
-        // deck.splice(indexOfElement, 1)
-        // var card3 = deck[Math.floor(Math.random() * deck.length)]
-
-        //Runs until card1 is an attack card
-        var card1 = deck[Math.floor(Math.random() * deck.length)]
-        while (card1.card_type_id != 6) {
-            card1 = deck[Math.floor(Math.random() * deck.length)]
+            for (let i = 0; i < deck.length; i++) {
+                if (deck[i].card_type_id == 6) {
+                    attackDeck[attackIterator] = deck[i];
+                    attackIterator++;
+                }
+                else if (deck[i].card_type_id == 7) {
+                    defenseDeck[defenseIterator] = deck[i];
+                    defenseIterator++;
+                }
+                else if (deck[i].card_type_id == 8) {
+                    skillDeck[skillIterator] = deck[i];
+                    skillIterator++;
+                }
+            }
+            var card1 = attackDeck[Math.floor(Math.random() * deck.length)]
+            var card2 = defenseDeck[Math.floor(Math.random() * deck.length)]
+            var card3 = skillDeck[Math.floor(Math.random() * deck.length)]
+            
+            InsertCards(playerStats, card1, card2, card3)
         }
-        //Runs until card2 is a defense card
-        var card2 = deck[Math.floor(Math.random() * deck.length)]
-        while (card2.card_type_id != 7) {
-            card2 = deck[Math.floor(Math.random() * deck.length)]
-        }
-        //Runs until card3 is a skill card
-        var card3 = deck[Math.floor(Math.random() * deck.length)]
-        while (card3.card_type_id != 8) {
-            card3 = deck[Math.floor(Math.random() * deck.length)]
-        }
+        else {
+            connection.query("SELECT c.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (6,7,8,9,10) AND PCS.card_id != 8 AND match_id = ?;",[PlayerStatusID, ShowdownTurn, MatchID],
+                function (err, rows, fields) {
+                    if (err){
+        
+                        console.log("Database Error: " + err);
+                        res.status(500).json({
+                            "message": err
+                        });
+                        return;
+                    }
+                    if (rows.length != 0) {
 
+                        console.log("Before splice")
+                        console.log(deck)
 
+                        var indexOfElement;
+
+                        for (let i = 0; i < rows.length; i++) {
+                            indexOfElement = deck.indexOf(rows[i]);
+                            deck.splice(indexOfElement, 0)
+                        }
+                        
+                        console.log("After splice")
+                        console.log(deck)
+                        
+                        var attackDeck = [];
+                        var attackIterator = 0;
+                        var defenseDeck = [];
+                        var defenseIterator = 0;
+                        var skillDeck = [];
+                        var skillIterator = 0;
+
+                        for (let i = 0; i < deck.length; i++) {
+
+                            if (deck[i].card_type_id == 6) {
+                                attackDeck[attackIterator] = deck[i];
+                                attackIterator++;
+                            }
+                            else if (deck[i].card_type_id == 7) {
+                                defenseDeck[defenseIterator] = deck[i];
+                                defenseIterator++;
+                            }
+                            else if (deck[i].card_type_id == 8) {
+                                skillDeck[skillIterator] = deck[i];
+                                skillIterator++;
+                            }
+                        }
+                        console.log("Skill cards: "+skillDeck.length)
+                        console.log("defense cards: "+defenseDeck.length)
+                        console.log("attack cards: "+attackDeck.length)
+                        var card1 = attackDeck[Math.floor(Math.random() * attackDeck.length)]
+                        var card2 = defenseDeck[Math.floor(Math.random() * defenseDeck.length)]
+                        var card3 = skillDeck[Math.floor(Math.random() * skillDeck.length)]
+                        
+                        console.log("card1 " + card1.card_id)
+                        console.log("card2 " + card2.card_id)
+                        console.log("card3 " + card3.card_id)
+
+                        InsertCards(playerStats, card1, card2, card3)
+                        
+                    }
+                    else {
+                        console.log("Opponent Cards are missing")
+                    }
+                }
+            )
+        }
+    }
+
+    function InsertCards(playerStats, card1, card2, card3) {
+        console.log("Insert cards Start")
         connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn) VALUES (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?);", [playerStats[0].player_status_id, 5, 8, RoomID, ShowdownTurn, playerStats[0].player_status_id, 6, card1.card_id, RoomID, ShowdownTurn, playerStats[0].player_status_id, 7, card2.card_id, RoomID, ShowdownTurn, playerStats[0].player_status_id, 8, card3.card_id, RoomID, ShowdownTurn],
         function (err, rows, fields) {
             if (err){
@@ -1787,9 +1931,8 @@ app.post("/setupShowdown", (req, res) => {
             UpdateGameStateToShowdownCardSelection()
 
         })
-            
     }
-
+    
     function UpdateGameStateToShowdownCardSelection() {
         connection.query("UPDATE player_status SET state_id = 4 WHERE match_id = ? AND player_status_id = ?;", [MatchID, PlayerStatusID], 
             function(err, rows, fields) {
