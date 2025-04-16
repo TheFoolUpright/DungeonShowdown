@@ -1743,15 +1743,34 @@ app.post("/setupShowdown", (req, res) => {
     function InsertCards(playerStats, deck) {
         console.log("Insert cards Start")
         //Create Cards
-        var indexOfElement;
 
+        // Eventually we'll need to check whether player 1 or 2 is getting the cards to make sure they get different ones
+
+        // var indexOfElement;
+
+        // var card1 = deck[Math.floor(Math.random() * deck.length)]
+        // indexOfElement = deck.indexOf(card1);
+        // deck.splice(indexOfElement, 1)
+        // var card2 = deck[Math.floor(Math.random() * deck.length)]
+        // indexOfElement = deck.indexOf(card2);
+        // deck.splice(indexOfElement, 1)
+        // var card3 = deck[Math.floor(Math.random() * deck.length)]
+
+        //Runs until card1 is an attack card
         var card1 = deck[Math.floor(Math.random() * deck.length)]
-        indexOfElement = deck.indexOf(card1);
-        deck.splice(indexOfElement, 1)
+        while (card1.card_type_id != 6) {
+            card1 = deck[Math.floor(Math.random() * deck.length)]
+        }
+        //Runs until card2 is a defense card
         var card2 = deck[Math.floor(Math.random() * deck.length)]
-        indexOfElement = deck.indexOf(card2);
-        deck.splice(indexOfElement, 1)
+        while (card2.card_type_id != 7) {
+            card2 = deck[Math.floor(Math.random() * deck.length)]
+        }
+        //Runs until card3 is a skill card
         var card3 = deck[Math.floor(Math.random() * deck.length)]
+        while (card3.card_type_id != 8) {
+            card3 = deck[Math.floor(Math.random() * deck.length)]
+        }
 
 
         connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn) VALUES (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?);", [playerStats[0].player_status_id, 5, 8, RoomID, ShowdownTurn, playerStats[0].player_status_id, 6, card1.card_id, RoomID, ShowdownTurn, playerStats[0].player_status_id, 7, card2.card_id, RoomID, ShowdownTurn, playerStats[0].player_status_id, 8, card3.card_id, RoomID, ShowdownTurn],
