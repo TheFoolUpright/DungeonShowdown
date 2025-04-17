@@ -51,12 +51,12 @@ ALTER TABLE `card` AUTO_INCREMENT = 1;
 LOCK TABLES `card` WRITE;
 /*!40000 ALTER TABLE `card` DISABLE KEYS */;
 INSERT INTO `card` (card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path) VALUES 
-(1,'Max Health',2,0,0,0,0,0,0,NULL),
-(2,'Healing',0,3,0,0,0,0,0,NULL),
-(3,'Damage',0,0,0,0,1,0,0,NULL),
-(4,'Rest',0,0,1,1,0,0,0,NULL),
-(5,'Slime',0,-1,1,1,0,0,0,NULL),
-(5,'Ghost',0,0,0,-1,1,0,0,NULL),
+(1,'Max Health',2,0,0,0,0,0,0,'../Assets/Art/Cards/Dungeon/1x/MaxHealthDraft.png'),
+(2,'Healing',0,3,0,0,0,0,0,'../Assets/Art/Cards/Dungeon/1x/HealingDraft.png'),
+(3,'Damage',0,0,0,0,1,0,0,'../Assets/Art/Cards/Dungeon/1x/DamageDraft.png'),
+(4,'Rest',0,0,1,1,0,0,0,'../Assets/Art/Cards/Dungeon/1x/RestDraft.png'),
+(5,'Slime',0,-1,1,1,0,0,0,'../Assets/Art/Cards/Dungeon/1x/SlimeDraft.png'),
+(5,'Ghost',0,0,0,-1,1,0,0,'../Assets/Art/Cards/Dungeon/1x/GhostDraft.png'),
 (5,'Bat',0,-2,2,1,0,0,0,NULL),
 (6,'Normal Attack',0,0,0,0,0,1,0,NULL),
 (6,'Heavy Attack',0,0,-2,0,0,1.5,0,NULL),
