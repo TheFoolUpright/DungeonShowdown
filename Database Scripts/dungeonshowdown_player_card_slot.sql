@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `dungeonshowdown` /*!40100 DEFAULT CHARACTER SET 
 USE `dungeonshowdown`;
 -- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
 --
--- Host: localhost    Database: dungeonshowdown
+-- Host: 127.0.0.1    Database: dungeonshowdown
 -- ------------------------------------------------------
 -- Server version	8.0.41
 
@@ -31,6 +31,7 @@ CREATE TABLE `player_card_slot` (
   `card_id` int DEFAULT NULL,
   `room_id` int DEFAULT NULL,
   `showdown_turn` int DEFAULT NULL,
+  `is_visible` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`player_card_slot_id`),
   KEY `player_card_board_player_status_id_FK_idx` (`player_status_id`),
   KEY `player_card_board_board_status_id_FK_idx` (`slot_id`),
@@ -40,7 +41,7 @@ CREATE TABLE `player_card_slot` (
   CONSTRAINT `player_card_board_player_status_id_FK` FOREIGN KEY (`player_status_id`) REFERENCES `player_status` (`player_status_id`),
   CONSTRAINT `player_card_slot_room_id_FK` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`),
   CONSTRAINT `player_card_slot_slot_id_FK` FOREIGN KEY (`slot_id`) REFERENCES `slot` (`slot_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,30 +50,7 @@ CREATE TABLE `player_card_slot` (
 
 LOCK TABLES `player_card_slot` WRITE;
 /*!40000 ALTER TABLE `player_card_slot` DISABLE KEYS */;
-INSERT INTO `player_card_slot` (player_status_id, slot_id, card_id, room_id, showdown_turn) VALUES 
-(1,1,3,1,NULL),
-(1,2,1,1,NULL),
-(1,3,5,1,NULL),
-
-(2,1,2,1,NULL),
-(2,4,4,1,NULL),
-(2,3,6,1,NULL),
-(2,1,5,2,NULL),
-(2,4,3,2,NULL),
-(2,4,7,2,NULL),
-(2,1,2,3,NULL),
-(2,4,1,3,NULL),
-(2,3,6,3,NULL),
-(2,1,5,4,NULL),
-(2,4,3,4,NULL),
-(2,3,1,4,NULL),
-(2,1,5,5,NULL),
-(2,2,4,5,NULL),
-(2,4,7,5,NULL),
-(2,5,8,6,1),
-(2,6,10,6,1),
-(2,9,12,6,1),
-(2,10,13,6,1);
+INSERT INTO `player_card_slot` VALUES (10,1,1,3,1,NULL,NULL),(11,1,2,1,1,NULL,NULL),(12,1,4,6,1,NULL,NULL),(13,2,1,2,1,NULL,NULL),(14,2,4,4,1,NULL,NULL),(15,2,3,6,1,NULL,NULL),(16,2,1,5,2,NULL,NULL),(17,2,4,3,2,NULL,NULL),(18,2,4,7,2,NULL,NULL),(19,2,1,2,3,NULL,NULL),(20,2,4,1,3,NULL,NULL),(21,2,3,6,3,NULL,NULL),(22,2,1,5,4,NULL,NULL),(23,2,4,3,4,NULL,NULL),(24,2,3,1,4,NULL,NULL),(25,2,1,5,5,NULL,NULL),(26,2,2,4,5,NULL,NULL),(27,2,4,7,5,NULL,NULL),(28,2,5,8,6,1,NULL),(29,2,6,10,6,1,NULL),(30,2,9,12,6,1,NULL),(31,2,10,13,6,1,NULL),(32,1,1,6,2,NULL,NULL),(33,1,2,3,2,NULL,NULL),(34,1,3,1,2,NULL,NULL);
 /*!40000 ALTER TABLE `player_card_slot` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -85,4 +63,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-04 22:10:36
+-- Dump completed on 2025-04-17 17:43:49

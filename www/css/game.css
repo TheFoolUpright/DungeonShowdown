@@ -4,11 +4,11 @@ table, th, td {
 }
 
 table.cards {
-  height: 250px;
+  height: 350px;
 }
 
 .cards td {
-  width: 150px;
+  width: 250px;
   text-align: center;
 }
 

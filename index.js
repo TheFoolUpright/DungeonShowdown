@@ -495,7 +495,8 @@ app.get("/getDungeonCardSelection", (req, res) => {
                 var card1 = rows[0];
                 var card2 = rows[1];
                 var card3 = rows[2];
-            
+                
+           
                 res.status(200).json({
                     "message": "Player stats and cards updated",
                     "state": "ROOM_LOADED",
@@ -901,7 +902,49 @@ app.post("/setupNextDungeonRoom", (req, res) => {
         // deck.splice(indexOfElement, 1)
         // var card3 = deck[Math.floor(Math.random() * deck.length)]
 
-        connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn) VALUES (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?);", [playerStats[0].player_status_id, 1, card1.card_id, RoomID, ShowdownTurn, playerStats[0].player_status_id, 2, card2.card_id, RoomID, ShowdownTurn, playerStats[0].player_status_id, 3, card3.card_id, RoomID, ShowdownTurn],
+
+        //Make cards visable by default
+        card1.IsVisible = true;
+        card2.IsVisible = true;
+        card3.IsVisible = true;
+        
+        if (playerStats[0].insight < 9 && playerStats[0].insight > 5) {
+            var randomChoice =  Math.floor((Math.random() * 3) + 1)
+            console.log("1 card: " + randomChoice)
+            if (randomChoice == 1) {
+                card1.IsVisible = false;
+            }
+            else if (randomChoice == 2) {
+                card2.IsVisible = false;
+            }
+            else if (randomChoice == 3) {
+                card3.IsVisible = false;
+            }
+            
+        }
+        if (playerStats[0].insight < 6 && playerStats[0].insight > 2) {
+            var randomChoice =  Math.floor((Math.random() * 3) + 1)
+            console.log("2 cards: " + randomChoice)
+            if (randomChoice == 1) {
+                card1.IsVisible = false;
+                card2.IsVisible = false;
+            }
+            else if (randomChoice == 2) {
+                card2.IsVisible = false;
+                card3.IsVisible = false;
+            }
+            else if (randomChoice == 3) {
+                card1.IsVisible = false;
+                card3.IsVisible = false;
+            }
+        }
+        if (playerStats[0].insight < 3) {
+            card1.IsVisible = false;
+            card2.IsVisible = false;
+            card3.IsVisible = false;
+        }
+
+        connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn, is_visible) VALUES (?,?,?,?,?,?), (?,?,?,?,?,?), (?,?,?,?,?,?);", [playerStats[0].player_status_id, 1, card1.card_id, RoomID, ShowdownTurn, card1.IsVisible, playerStats[0].player_status_id, 2, card2.card_id, RoomID, ShowdownTurn, card2.IsVisible,  playerStats[0].player_status_id, 3, card3.card_id, RoomID, ShowdownTurn, card3.IsVisible],
         function (err, rows, fields) {
             if (err) {
                 console.log("Database Error: " + err);

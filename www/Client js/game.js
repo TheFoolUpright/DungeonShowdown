@@ -202,7 +202,6 @@ function GetGameState() {
                 else if (currentState == states.Draw) {
                     showDrawEnding()
                 }
-
             }
         }
     }
@@ -349,22 +348,44 @@ function getDungeonCardSelection() {
                     document.getElementById("insight").innerHTML = "Insight: " + data.insight;
                     document.getElementById("damage").innerHTML = "Damage: " + data.damage;
                     
-                    dungeonCard1Id = data.card[0].card_id
-                    document.getElementById("card1Name").innerHTML = data.card[0].card_name
-                    document.getElementById("card1Image").src = data.card[0].card_image_path
-                    document.getElementById("card1Stats").innerHTML = UnwrapDungeonCardStats(data.card[0])
+                    if (data.card[0].is_visible) {
+                        dungeonCard1Id = data.card[0].card_id
+                        document.getElementById("card1Name").innerHTML = data.card[0].card_name
+                        document.getElementById("card1Image").src = data.card[0].card_image_path
+                        document.getElementById("card1Stats").innerHTML = UnwrapDungeonCardStats(data.card[0])
+                    }
+                    else{
+                        dungeonCard1Id = data.card[0].card_id
+                        document.getElementById("card1Name").innerHTML = "???"
+                        document.getElementById("card1Image").src = "???"
+                        document.getElementById("card1Stats").innerHTML = "???"
+                    }
                     
-                    
-                    dungeonCard2Id = data.card[1].card_id
-                    document.getElementById("card2Name").innerHTML = data.card[1].card_name
-                    document.getElementById("card2Image").src = data.card[1].card_image_path
-                    document.getElementById("card2Stats").innerHTML = UnwrapDungeonCardStats(data.card[1])
+                    if (data.card[1].is_visible) {
+                        dungeonCard2Id = data.card[1].card_id
+                        document.getElementById("card2Name").innerHTML = data.card[1].card_name
+                        document.getElementById("card2Image").src = data.card[1].card_image_path
+                        document.getElementById("card2Stats").innerHTML = UnwrapDungeonCardStats(data.card[1])
+                    }
+                    else{
+                        dungeonCard2Id = data.card[1].card_id
+                        document.getElementById("card2Name").innerHTML = "???"
+                        document.getElementById("card2Image").src = "???"
+                        document.getElementById("card2Stats").innerHTML = "???"
+                    }
 
-                    dungeonCard3Id = data.card[2].card_id
-                    document.getElementById("card3Name").innerHTML = data.card[2].card_name
-                    document.getElementById("card3Image").src = data.card[2].card_image_path
-                    document.getElementById("card3Stats").innerHTML = UnwrapDungeonCardStats(data.card[2])
-                    
+                    if (data.card[2].is_visible) {
+                        dungeonCard3Id = data.card[2].card_id
+                        document.getElementById("card3Name").innerHTML = data.card[2].card_name
+                        document.getElementById("card3Image").src = data.card[2].card_image_path
+                        document.getElementById("card3Stats").innerHTML = UnwrapDungeonCardStats(data.card[2])
+                    }
+                    else{
+                        dungeonCard3Id = data.card[2].card_id
+                        document.getElementById("card3Name").innerHTML = "???"
+                        document.getElementById("card3Image").src = "???"
+                        document.getElementById("card3Stats").innerHTML = "???"
+                    }
 
                     //Display HTML Elements - ON
                     document.getElementById("statsContainer").style.display = "block";
@@ -800,6 +821,9 @@ function ShowdownSelectCard() {
 
     if (document.getElementById("showdownCard1Selection").checked) 
     {
+        //disable the second attack
+        document.getElementById("showdownCard2Selection").disabled = true
+
         if(showdownSelectedCard1Id == null && showdownSelectedCard2Id != showdownCard1Id) {
             showdownSelectedCard1Id = showdownCard1Id;
             document.getElementById("selectedCardName1").innerHTML = document.getElementById("normalAttackCardName").innerHTML;
@@ -816,6 +840,9 @@ function ShowdownSelectCard() {
         } 
     }
     else {
+        //enable the second attack
+        document.getElementById("showdownCard2Selection").disabled = false
+
         if(showdownSelectedCard1Id == showdownCard1Id) {
             showdownSelectedCard1Id = null;
             document.getElementById("selectedCardName1").innerHTML = "Selected Card Name";
@@ -833,6 +860,10 @@ function ShowdownSelectCard() {
     }
 
     if (document.getElementById("showdownCard2Selection").checked) {
+        
+        //disable the first attack
+        document.getElementById("showdownCard1Selection").disabled = true
+
         if(showdownSelectedCard1Id == null && showdownSelectedCard2Id != showdownCard2Id) {
             showdownSelectedCard1Id = showdownCard2Id;
             document.getElementById("selectedCardName1").innerHTML = document.getElementById("specialAttackCardName").innerHTML;
@@ -849,6 +880,10 @@ function ShowdownSelectCard() {
         } 
     }
     else {
+
+        //enable the first attack
+        document.getElementById("showdownCard1Selection").disabled = false
+
         if(showdownSelectedCard1Id == showdownCard2Id) {
             showdownSelectedCard1Id = null;
             document.getElementById("selectedCardName1").innerHTML = "Selected Card Name";
