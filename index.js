@@ -731,7 +731,7 @@ app.post("/setupNextDungeonRoom", (req, res) => {
      */
     function GetRoomDeck(playerStats) {
         
-        connection.query("SELECT c.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_image_path FROM card_room cr INNER JOIN card c ON c.card_id = cr.card_id INNER JOIN room r ON cr.room_id = r.room_id WHERE r.room_id = ?", [RoomID], 
+        connection.query("SELECT c.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_image_path FROM (SELECT max_health, current_health, energy, insight FROM player_status WHERE player_status_id = ?) ps, card_room cr INNER JOIN card c ON c.card_id = cr.card_id INNER JOIN room r ON cr.room_id = r.room_id WHERE  (ps.current_health + card_current_health <= ps.max_health) AND (ps.energy + card_energy <= 10) AND (ps.insight + card_insight <= 10) AND (ps.current_health + card_current_health > 0) AND (ps.energy + card_energy >= 0) AND (ps.insight + card_insight >= 0) AND r.room_id = ?", [PlayerStatusID, RoomID], 
             function (err, rows, fields) {
                 if (err){
                     console.log("Database Error: " + err);
@@ -770,36 +770,136 @@ app.post("/setupNextDungeonRoom", (req, res) => {
         var EnemyIterator = 0;
 
         for (let i = 0; i < deck.length; i++) {
-            if(deck[i].card_type_id == 1){
-                MaxHealthDeck[MaxHealthIterator] = deck[i]
+            if(deck[i].card_type_id == 1) {
+                MaxHealthDeck[MaxHealthIterator] = deck[i];
                 MaxHealthIterator++;
             }
-            if(deck[i].card_type_id == 2){
+            if(deck[i].card_type_id == 2) {
                 HealingDeck[HealingIterator] = deck[i];
                 HealingIterator++;
             }
-            if(deck[i].card_type_id == 3){
+            if(deck[i].card_type_id == 3) {
                 DamageDeck[DamageIterator] = deck[i];
                 DamageIterator++;
             }
-            if(deck[i].card_type_id == 4){
+            if(deck[i].card_type_id == 4) {
                 RestDeck[RestIterator] = deck[i];
                 RestIterator++
             }
-            if(deck[i].card_type_id == 5){
+            if(deck[i].card_type_id == 5) {
                 EnemyDeck[EnemyIterator] = deck[i];
                 EnemyIterator++;
-            }
-            
+            }   
         }
 
-        var card1 = deck[Math.floor(Math.random() * deck.length)]
-        indexOfElement = deck.indexOf(card1);
-        deck.splice(indexOfElement, 1)
-        var card2 = deck[Math.floor(Math.random() * deck.length)]
-        indexOfElement = deck.indexOf(card2);
-        deck.splice(indexOfElement, 1)
-        var card3 = deck[Math.floor(Math.random() * deck.length)]
+        var typesDeck = []
+        var typeIterator = 0
+
+        if (MaxHealthDeck.length != 0) {
+            typesDeck[typeIterator] = MaxHealthDeck[0].card_type_id
+            typeIterator++;
+        }
+        if (HealingDeck.length != 0) {
+            typesDeck[typeIterator] = HealingDeck[0].card_type_id
+            typeIterator++;
+        }
+        if (DamageDeck.length != 0) {
+            typesDeck[typeIterator] = DamageDeck[0].card_type_id
+            typeIterator++;
+        }
+        if (RestDeck.length != 0) {
+            typesDeck[typeIterator] = RestDeck[0].card_type_id
+            typeIterator++;
+        }
+        if (EnemyDeck.length != 0) {
+            typesDeck[typeIterator] = EnemyDeck[0].card_type_id
+            typeIterator++;
+        }
+
+        var type1 = typesDeck[Math.floor(Math.random() * typesDeck.length)]
+        indexOfElement = typesDeck.indexOf(type1);
+        typesDeck.splice(indexOfElement, 1)
+        
+        var type2 = typesDeck[Math.floor(Math.random() * typesDeck.length)]
+        indexOfElement = typesDeck.indexOf(type2);
+        typesDeck.splice(indexOfElement, 1)
+        
+        var type3 = typesDeck[Math.floor(Math.random() * typesDeck.length)]
+
+        var card1
+        var card2
+        var card3
+
+
+        switch(type1) {
+            case 1:
+                card1 = MaxHealthDeck[Math.floor(Math.random() * MaxHealthDeck.length)]
+              break;
+            case 2:
+                card1 = HealingDeck[Math.floor(Math.random() * HealingDeck.length)]
+              break;
+            case 3:
+                card1 = DamageDeck[Math.floor(Math.random() * DamageDeck.length)]
+              break;
+            case 4:
+                card1 = RestDeck[Math.floor(Math.random() * RestDeck.length)]
+              break;
+            case 5:
+                card1 = EnemyDeck[Math.floor(Math.random() * EnemyDeck.length)]
+              break;
+            default:
+                console.log("Case Error")
+        }
+        switch(type2) {
+            case 1:
+                card2 = MaxHealthDeck[Math.floor(Math.random() * MaxHealthDeck.length)]
+              break;
+            case 2:
+                card2 = HealingDeck[Math.floor(Math.random() * HealingDeck.length)]
+              break;
+            case 3:
+                card2 = DamageDeck[Math.floor(Math.random() * DamageDeck.length)]
+              break;
+            case 4:
+                card2 = RestDeck[Math.floor(Math.random() * RestDeck.length)]
+              break;
+            case 5:
+                card2 = EnemyDeck[Math.floor(Math.random() * EnemyDeck.length)]
+              break;
+            default:
+                console.log("Case Error")
+        }
+        switch(type3) {
+            case 1:
+                card3 = MaxHealthDeck[Math.floor(Math.random() * MaxHealthDeck.length)]
+              break;
+            case 2:
+                card3 = HealingDeck[Math.floor(Math.random() * HealingDeck.length)]
+              break;
+            case 3:
+                card3 = DamageDeck[Math.floor(Math.random() * DamageDeck.length)]
+              break;
+            case 4:
+                card3 = RestDeck[Math.floor(Math.random() * RestDeck.length)]
+              break;
+            case 5:
+                card3 = EnemyDeck[Math.floor(Math.random() * EnemyDeck.length)]
+              break;
+            default:
+                console.log("Case Error")
+        }
+
+        console.log(card1)
+        console.log(card2)
+        console.log(card3)
+        
+        // var card1 = deck[Math.floor(Math.random() * deck.length)]
+        // indexOfElement = deck.indexOf(card1);
+        // deck.splice(indexOfElement, 1)
+        // var card2 = deck[Math.floor(Math.random() * deck.length)]
+        // indexOfElement = deck.indexOf(card2);
+        // deck.splice(indexOfElement, 1)
+        // var card3 = deck[Math.floor(Math.random() * deck.length)]
 
         connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn) VALUES (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?);", [playerStats[0].player_status_id, 1, card1.card_id, RoomID, ShowdownTurn, playerStats[0].player_status_id, 2, card2.card_id, RoomID, ShowdownTurn, playerStats[0].player_status_id, 3, card3.card_id, RoomID, ShowdownTurn],
         function (err, rows, fields) {
@@ -1858,15 +1958,19 @@ app.post("/setupShowdown", (req, res) => {
                     }
                     if (rows.length != 0) {
 
-                        console.log("Before splice")
-                        console.log(deck)
-
-                        var indexOfElement;
-
                         for (let i = 0; i < rows.length; i++) {
-                            indexOfElement = deck.indexOf(rows[i]);
-                            deck.splice(indexOfElement, 0)
+                            for (let j = 0; j < deck.length; j++) {
+                                if(rows[i].card_id == deck[j].card_id) {
+                                    deck.splice(j, 1)
+                                }                              
+                            }
                         }
+                        // for (let i = 0; i < rows.length; i++) {
+                        //     console.log(rows[i])
+                        //     indexOfElement = deck.indexOf(rows[i], 1);
+                        //     console.log("indexOfElement: " + indexOfElement)
+                        //     deck.splice(indexOfElement, 1)
+                        // }
                         
                         console.log("After splice")
                         console.log(deck)
@@ -1893,9 +1997,9 @@ app.post("/setupShowdown", (req, res) => {
                                 skillIterator++;
                             }
                         }
-                        console.log("Skill cards: "+skillDeck.length)
-                        console.log("defense cards: "+defenseDeck.length)
-                        console.log("attack cards: "+attackDeck.length)
+                        console.log("Skill cards: " + skillDeck.length)
+                        console.log("defense cards: " + defenseDeck.length)
+                        console.log("attack cards: " + attackDeck.length)
                         var card1 = attackDeck[Math.floor(Math.random() * attackDeck.length)]
                         var card2 = defenseDeck[Math.floor(Math.random() * defenseDeck.length)]
                         var card3 = skillDeck[Math.floor(Math.random() * skillDeck.length)]
