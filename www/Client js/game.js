@@ -351,18 +351,18 @@ function getDungeonCardSelection() {
                     
                     dungeonCard1Id = data.card[0].card_id
                     document.getElementById("card1Name").innerHTML = data.card[0].card_name
-                    document.getElementById("card1Image").innerHTML = data.card[0].card_image_path
+                    document.getElementById("card1Image").src = data.card[0].card_image_path
                     document.getElementById("card1Stats").innerHTML = UnwrapDungeonCardStats(data.card[0])
                     
                     
                     dungeonCard2Id = data.card[1].card_id
                     document.getElementById("card2Name").innerHTML = data.card[1].card_name
-                    document.getElementById("card2Image").innerHTML = data.card[1].card_image_path
+                    document.getElementById("card2Image").src = data.card[1].card_image_path
                     document.getElementById("card2Stats").innerHTML = UnwrapDungeonCardStats(data.card[1])
 
                     dungeonCard3Id = data.card[2].card_id
                     document.getElementById("card3Name").innerHTML = data.card[2].card_name
-                    document.getElementById("card3Image").innerHTML = data.card[2].card_image_path
+                    document.getElementById("card3Image").src = data.card[2].card_image_path
                     document.getElementById("card3Stats").innerHTML = UnwrapDungeonCardStats(data.card[2])
                     
 
