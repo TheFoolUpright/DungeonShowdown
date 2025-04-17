@@ -104,7 +104,7 @@ app.get("/register", (req, res) => {
 //Post Endpoint for Register
 app.post("/register", (req, res) => {
     //Check if the username and password are sent. If not, return an error.
-    if (!req.body.username || !req.body.email || !req.body.password1 || !req.body.password2){
+    if (!req.body.username || !req.body.email || !req.body.password1 || !req.body.password2) {
         res.status(400).send({
             "message": "Missing username, email or password"
         })
@@ -146,7 +146,7 @@ app.post("/register", (req, res) => {
     //Select 
     connection.query("SELECT player_username, player_email FROM player WHERE player_username = ?", [receivedUsername],
         function (err, rows, fields) {
-            if (err){
+            if (err) {
                 console.log("Database Error: " + err);
                 res.status(500).json({
                     "message": err
@@ -154,7 +154,7 @@ app.post("/register", (req, res) => {
                 return;
             }
 
-            if (rows.length > 0){
+            if (rows.length > 0) {
                 res.status(409).send({
                     "message": "Username already in database"
                 })
@@ -167,7 +167,7 @@ app.post("/register", (req, res) => {
     //Insert into the Database
     connection.query("INSERT INTO player (player_username, player_email, player_password) VALUES (?,?,?)", [receivedUsername, receivedemail, receivedPassword1],
             function (err, rows, fields) {
-                if (err){
+                if (err) {
                     console.log("Database Error: " + err);
                     res.status(500).json({
                         "message": err
@@ -200,7 +200,7 @@ app.get("/getMatchState", (req, res) => {
 
     connection.query("SELECT match_id FROM game_match WHERE (player_1_id = ? OR player_2_id = ?) AND is_match_finished = 0;", [PlayerID, PlayerID],
         function (err, rows, fields) {
-            if (err){
+            if (err) {
                 console.log("Database Error: " + err);
                 res.status(500).json({
                     "message": err
@@ -208,7 +208,7 @@ app.get("/getMatchState", (req, res) => {
                 return;
             }
             if (rows.length == 0) {
-                if(rows.length == 0){
+                if(rows.length == 0) {
                     //Send waiting for matches
                     res.status(200).json({
                         "message": "Waiting for Match!",
@@ -254,7 +254,7 @@ app.put("/joinMatch", (req, res) => {
     function UpdateWaitingForMatchSearch() {
         connection.query("UPDATE player SET is_waiting_for_match = 1 WHERE player_id = ?;", [PlayerID], 
             function (err, rows, fields) {
-                if (err){
+                if (err) {
                     console.log("Database Error: " + err);
                     res.status(500).json({
                         "message": err
@@ -272,7 +272,7 @@ app.put("/joinMatch", (req, res) => {
     function FindAnOpponent() {
         connection.query("SELECT player_id FROM player WHERE is_waiting_for_match = 1 AND player_id != ? ", [PlayerID], 
             function (err, rows, fields) {
-                if (err){
+                if (err) {
                     console.log("Database Error: " + err);
                     res.status(500).json({
                         "message": err
@@ -280,7 +280,7 @@ app.put("/joinMatch", (req, res) => {
                     return;
                 }
 
-                if(rows.length == 0){
+                if(rows.length == 0) {
                     //Send waiting for matches
                     res.status(200).json({
                         "message": "Waiting for Match!",
@@ -297,7 +297,7 @@ app.put("/joinMatch", (req, res) => {
     function CreateAMatch(player1) {
         connection.query("INSERT INTO game_match (player_1_id, player_2_id) VALUES (?, ?)", [player1, PlayerID],
             function (err, rows, fields) {
-                if (err){
+                if (err) {
                     console.log("Database Error: " + err);
                     res.status(500).json({
                         "message": err
@@ -314,7 +314,7 @@ app.put("/joinMatch", (req, res) => {
     function FindMatch(player1, player2) {
         connection.query("SELECT match_id FROM game_match WHERE player_1_id = ? AND player_2_id = ? AND is_match_finished = 0;", [player1, player2],
             function (err, rows, fields) {
-                if (err){
+                if (err) {
                     console.log("FindMatch")
                     console.log("Database Error: " + err);
                     res.status(500).json({
@@ -331,7 +331,7 @@ app.put("/joinMatch", (req, res) => {
     function UpdateWaitingForMatchFound() {
         connection.query("UPDATE player p INNER JOIN game_match m ON m.player_1_id = p.player_id or m.player_2_id = p.player_id SET p.is_waiting_for_match = 0 WHERE m.match_id = ?", [MatchID], 
             function (err, rows, fields) {
-                if (err){
+                if (err) {
                     console.log("Database Error: " + err);
                     res.status(500).json({
                         "message": err
@@ -365,14 +365,14 @@ app.get("/getGameState", (req, res) => {
     function GetLastRoom() {
         connection.query("SELECT room_id, showdown_turn, state_id FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = 1 AND match_id = 1 ORDER BY room_id DESC, showdown_turn DESC", [PlayerID, MatchID], 
             function (err, rows, fields) {
-                if (err){
+                if (err) {
                     console.log("Database Error: " + err);
                     res.status(500).json({
                         "message": err
                     });
                     return;
                 } 
-                if(rows.length != 0){
+                if(rows.length != 0) {
 
                     RoomID = rows[0].room_id;
                     ShowdownTurn = rows[0].showdown_turn;
@@ -398,7 +398,7 @@ app.get("/getWaitingOnOpponentDungeon", (req, res) => {
     function GetOpponentStatus() {
         connection.query("SELECT state_id FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id WHERE player_id != ? AND match_id = ? AND room_id = ? AND slot_id = 4", [PlayerID, MatchID, RoomID], 
             function (err, rows, fields) {
-                if (err){
+                if (err) {
                     console.log("Database Error: " + err);
                     res.status(500).json({
                         "message": err
@@ -422,7 +422,7 @@ app.get("/getWaitingOnOpponentDungeon", (req, res) => {
     function UpdateGameState() {
         connection.query("UPDATE player_status SET state_id = 3 WHERE player_status_id = ?", [PlayerStatusID], 
             function (err, rows, fields) {
-                if (err){
+                if (err) {
                     console.log("Database Error: " + err);
                     res.status(500).json({
                         "message": err
@@ -457,7 +457,7 @@ app.post("/setDungeonPhase", (req, res) => {
         console.log("CreatePlayerStatus start")
         connection.query("INSERT INTO player_status (match_id, player_id) VALUES (?, ?)", [MatchID, PlayerID],
             function (err, rows, fields) {
-                if (err){
+                if (err) {
                     console.log("Database Error: " + err);
                     res.status(500).json({
                         "message": err
@@ -483,14 +483,14 @@ app.get("/getDungeonCardSelection", (req, res) => {
 
     connection.query("SELECT player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, showdown_turn, match_id, player_id, max_health, current_health, energy, insight, damage, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = ? AND match_id = ? AND room_id = ?;", [PlayerID, MatchID, RoomID],
         function (err, rows, fields) {
-            if (err){
+            if (err) {
                 console.log("Database Error: " + err);
                 res.status(500).json({
                     "message": err
                 });
                 return;
             }
-            if (rows.length != 0){
+            if (rows.length != 0) {
                 
                 var card1 = rows[0];
                 var card2 = rows[1];
@@ -706,10 +706,10 @@ app.post("/setupNextDungeonRoom", (req, res) => {
      * @param none
      * @returns none
      */
-    function GetPlayerStats(){
+    function GetPlayerStats() {
         connection.query("SELECT player_status_id, match_id, player_id, max_health, current_health, energy, insight, damage FROM player_status WHERE player_id = ? AND match_id = ?;", [PlayerID, MatchID],
             function (err, rows, fields) {
-                if (err){
+                if (err) {
                     console.log("Database Error : " + err);
                     res.status(500).json({
                         "message": err
@@ -733,7 +733,7 @@ app.post("/setupNextDungeonRoom", (req, res) => {
         
         connection.query("SELECT c.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_image_path FROM (SELECT max_health, current_health, energy, insight FROM player_status WHERE player_status_id = ?) ps, card_room cr INNER JOIN card c ON c.card_id = cr.card_id INNER JOIN room r ON cr.room_id = r.room_id WHERE  (ps.current_health + card_current_health <= ps.max_health) AND (ps.energy + card_energy <= 10) AND (ps.insight + card_insight <= 10) AND (ps.current_health + card_current_health > 0) AND (ps.energy + card_energy >= 0) AND (ps.insight + card_insight >= 0) AND r.room_id = ?", [PlayerStatusID, RoomID], 
             function (err, rows, fields) {
-                if (err){
+                if (err) {
                     console.log("Database Error: " + err);
                     res.status(500).json({
                         "message": err
@@ -903,7 +903,7 @@ app.post("/setupNextDungeonRoom", (req, res) => {
 
         connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn) VALUES (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?);", [playerStats[0].player_status_id, 1, card1.card_id, RoomID, ShowdownTurn, playerStats[0].player_status_id, 2, card2.card_id, RoomID, ShowdownTurn, playerStats[0].player_status_id, 3, card3.card_id, RoomID, ShowdownTurn],
         function (err, rows, fields) {
-            if (err){
+            if (err) {
                 console.log("Database Error: " + err);
                 res.status(500).json({
                     "message": err
@@ -1018,7 +1018,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
     function UpdateGameStateToShowdownResult() {
         connection.query("UPDATE player_status SET state_id = 6 WHERE player_status_id = ?", [PlayerStatusID], 
             function (err, rows, fields) {
-                if (err){
+                if (err) {
                     console.log("Database Error: " + err);
                     res.status(500).json({
                         "message": err
@@ -1161,14 +1161,14 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
                     }
     
                     if (isCounterOpponent) {
-                        if(!isDodge || !isParry){
+                        if(!isDodge || !isParry) {
                             
                             playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - (opponentAttack * opponentDamage));
                             playerDefense = Math.max(0, playerDefense - (opponentAttack * opponentDamage))
                         }
                     }
                     if(isDoubleAttackOpponent) {
-                        if(!isDodge || !isParry){
+                        if(!isDodge || !isParry) {
                             playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - ((opponentAttack * opponentDamage) * 2));
                             playerDefense = Math.max(0, playerDefense - ((opponentAttack * opponentDamage) * 2))
                         }
@@ -1447,14 +1447,14 @@ app.get("/getShowdownCardSelection", (req, res) => {
 
     connection.query("SELECT player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, showdown_turn, match_id, player_id, max_health, current_health, energy, insight, damage, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = ? AND match_id = ? AND room_id = ? AND showdown_turn = ?;", [PlayerID, MatchID, RoomID, ShowdownTurn],
         function (err, rows, fields) {
-            if (err){
+            if (err) {
                 console.log("Database Error: " + err);
                 res.status(500).json({
                     "message": err
                 });
                 return;
             }
-            if (rows.length != 0){
+            if (rows.length != 0) {
                 
                 var card1 = rows[0];
                 var card2 = rows[1];
@@ -1761,7 +1761,7 @@ app.get("/getShowdownResult", (req, res) => {
  */
 app.post("/setupShowdown", (req, res) => {
 
-    if(RoomID == 5){
+    if(RoomID == 5) {
         RoomID++;
         ShowdownTurn = 0;
     }
@@ -1772,7 +1772,7 @@ app.post("/setupShowdown", (req, res) => {
     function CheckIfInitiativeIsSet() {
         connection.query("SELECT showdown_initiative FROM player_status WHERE match_id = ?;", [MatchID],
             function (err, rows, fields) {
-                if (err){
+                if (err) {
                     console.log("Database Error : " + err);
                     res.status(500).json({
                         "message": err
@@ -1795,7 +1795,7 @@ app.post("/setupShowdown", (req, res) => {
     function UpdatePlayerInitiative() {
         connection.query("UPDATE player_status SET showdown_initiative = 1 WHERE player_id = ?;", [PlayerID],
             function (err, rows, fields) {
-                if (err){
+                if (err) {
                     console.log("Database Error : " + err);
                     res.status(500).json({
                         "message": err
@@ -1816,11 +1816,11 @@ app.post("/setupShowdown", (req, res) => {
      * @returns none
      */
 
-    function GetPlayerStats(){
+    function GetPlayerStats() {
         // Now checks whether the current player is player 1 or 2
         connection.query("SELECT player_status_id, player_id, max_health, current_health, energy, insight, damage, showdown_initiative FROM player_status WHERE player_id = ? AND match_id = ?;", [PlayerID, MatchID],
             function (err, rows, fields) {
-                if (err){
+                if (err) {
                     console.log("Database Error : " + err);
                     res.status(500).json({
                         "message": err
@@ -1894,7 +1894,7 @@ app.post("/setupShowdown", (req, res) => {
     function GetRoomDeck(playerStats) {
         connection.query("SELECT c.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_image_path FROM card_room cr INNER JOIN card c ON c.card_id = cr.card_id INNER JOIN room r ON cr.room_id = r.room_id WHERE r.room_id = ?", [RoomID], 
             function (err, rows, fields) {
-                if (err){
+                if (err) {
                     console.log("Database Error: " + err);
                     res.status(500).json({
                         "message": err
@@ -1939,16 +1939,18 @@ app.post("/setupShowdown", (req, res) => {
                     skillIterator++;
                 }
             }
-            var card1 = attackDeck[Math.floor(Math.random() * deck.length)]
-            var card2 = defenseDeck[Math.floor(Math.random() * deck.length)]
-            var card3 = skillDeck[Math.floor(Math.random() * deck.length)]
-            
+
+            var card1 = attackDeck[Math.floor(Math.random() * attackDeck.length)]
+            var card2 = defenseDeck[Math.floor(Math.random() * defenseDeck.length)]
+            var card3 = skillDeck[Math.floor(Math.random() * skillDeck.length)]
+
+
             InsertCards(playerStats, card1, card2, card3)
         }
         else {
             connection.query("SELECT c.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (6,7,8,9,10) AND PCS.card_id != 8 AND match_id = ?;",[PlayerStatusID, ShowdownTurn, MatchID],
                 function (err, rows, fields) {
-                    if (err){
+                    if (err) {
         
                         console.log("Database Error: " + err);
                         res.status(500).json({
@@ -1972,9 +1974,6 @@ app.post("/setupShowdown", (req, res) => {
                         //     deck.splice(indexOfElement, 1)
                         // }
                         
-                        console.log("After splice")
-                        console.log(deck)
-                        
                         var attackDeck = [];
                         var attackIterator = 0;
                         var defenseDeck = [];
@@ -1997,16 +1996,9 @@ app.post("/setupShowdown", (req, res) => {
                                 skillIterator++;
                             }
                         }
-                        console.log("Skill cards: " + skillDeck.length)
-                        console.log("defense cards: " + defenseDeck.length)
-                        console.log("attack cards: " + attackDeck.length)
                         var card1 = attackDeck[Math.floor(Math.random() * attackDeck.length)]
                         var card2 = defenseDeck[Math.floor(Math.random() * defenseDeck.length)]
                         var card3 = skillDeck[Math.floor(Math.random() * skillDeck.length)]
-                        
-                        console.log("card1 " + card1.card_id)
-                        console.log("card2 " + card2.card_id)
-                        console.log("card3 " + card3.card_id)
 
                         InsertCards(playerStats, card1, card2, card3)
                         
@@ -2023,7 +2015,7 @@ app.post("/setupShowdown", (req, res) => {
         console.log("Insert cards Start")
         connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn) VALUES (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?);", [playerStats[0].player_status_id, 5, 8, RoomID, ShowdownTurn, playerStats[0].player_status_id, 6, card1.card_id, RoomID, ShowdownTurn, playerStats[0].player_status_id, 7, card2.card_id, RoomID, ShowdownTurn, playerStats[0].player_status_id, 8, card3.card_id, RoomID, ShowdownTurn],
         function (err, rows, fields) {
-            if (err){
+            if (err) {
 
                 console.log("Database Error: " + err);
                 res.status(500).json({
@@ -2031,9 +2023,7 @@ app.post("/setupShowdown", (req, res) => {
                 });
                 return;
             }
-            
             UpdateGameStateToShowdownCardSelection()
-
         })
     }
     
@@ -2293,14 +2283,14 @@ app.post("/resolveShowdownTurn", (req, res) => {
                 }
 
                 if (isCounterOpponent) {
-                    if(!isDodge || !isParry){
+                    if(!isDodge || !isParry) {
                         
                         playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - (opponentAttack * opponentDamage));
                         playerDefense = Math.max(0, playerDefense - (opponentAttack * opponentDamage))
                     }
                 }
                 if(isDoubleAttackOpponent) {
-                    if(!isDodge || !isParry){
+                    if(!isDodge || !isParry) {
                         playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - ((opponentAttack * opponentDamage) * 2));
                         playerDefense = Math.max(0, playerDefense - ((opponentAttack * opponentDamage) * 2))
                     }

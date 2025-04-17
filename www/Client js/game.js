@@ -31,14 +31,14 @@ var currentState = 1
 //#endregion
 
 
-// function SetDungeonState(){
+// function SetDungeonState() {
     
 //     var xhttp = new XMLHttpRequest();
     
 //     xhttp.onreadystatechange = function () {
 //         if (this.readyState == 4) {
 
-//             if (this.status == 200){
+//             if (this.status == 200) {
 //                 console.log("success")
 //             }
 //         }
@@ -71,7 +71,7 @@ function getWaitingOnOpponentShowdown() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
 
-            if (this.status == 200){
+            if (this.status == 200) {
                 //Display HTML Elements - ON
                 document.getElementById("statsContainer").style.display = "block";
                 document.getElementById("waitingForOpponent").style.display = "block";
@@ -121,7 +121,7 @@ function getWaitingOnOpponentDungeon() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
 
-            if (this.status == 200){
+            if (this.status == 200) {
                 
                 return;
             }
@@ -144,7 +144,7 @@ function getWaitingOnOpponentDungeon() {
  * @param {object} cardB - The next card in the array.
  * @returns {object} cardA.slot_id - cardB.slot_id
  */
-function sortCards(cardA, cardB){
+function sortCards(cardA, cardB) {
     return cardA.slot_id - cardB.slot_id
 }
 
@@ -165,7 +165,7 @@ function GetGameState() {
             var data = JSON.parse(this.responseText)
             console.log(data)
 
-            if (this.status == 200){
+            if (this.status == 200) {
                 roomId = data.room_id
                 document.getElementById("roomId").innerHTML = "Room " + roomId 
 
@@ -178,28 +178,28 @@ function GetGameState() {
                 if(currentState == states.DungeonCardSelection) {
                     getDungeonCardSelection()
                 }
-                else if (currentState == states.WaitingOnOpponentDungeon){
+                else if (currentState == states.WaitingOnOpponentDungeon) {
                     getWaitingOnOpponentDungeon()
                 }
                 else if (currentState == states.DungeonResult) {
                     getDungeonResult()
                 }
-                else if (currentState == states.ShowdownCardSelection){
+                else if (currentState == states.ShowdownCardSelection) {
                     getShowdownCardSelection()
                 }
-                else if (currentState == states.WaitingOnOpponentShowdown){
+                else if (currentState == states.WaitingOnOpponentShowdown) {
                     getWaitingOnOpponentShowdown()
                 }
-                else if (currentState == states.ShowdownResult){
+                else if (currentState == states.ShowdownResult) {
                     getShowdownResult()
                 }
-                else if (currentState == states.Won){
+                else if (currentState == states.Won) {
                     showWonEnding()
                 }
-                else if (currentState == states.Lost){
+                else if (currentState == states.Lost) {
                     showLostEnding()
                 }
-                else if (currentState == states.Draw){
+                else if (currentState == states.Draw) {
                     showDrawEnding()
                 }
 
@@ -223,7 +223,7 @@ function GetGameState() {
  */
 function SetupNextRoom() {
 
-    if(roomId <= 4){
+    if(roomId <= 4) {
         
         document.getElementById("dungeonCards").style.display = "block";
         document.getElementById("opponentChoiceSection").style.display = "none";
@@ -233,7 +233,7 @@ function SetupNextRoom() {
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4) {
     
-                if (this.status == 200){
+                if (this.status == 200) {
                     GetGameState()
                     console.log("success")
                 }
@@ -259,7 +259,7 @@ function SetupNextRoom() {
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4) {
     
-                if (this.status == 200){
+                if (this.status == 200) {
 
                     console.log("success")
                 }
@@ -338,7 +338,7 @@ function getDungeonCardSelection() {
             var data = JSON.parse(this.responseText)
             console.log(data)
 
-            if (this.status == 200){
+            if (this.status == 200) {
                     data.card.sort(sortCards)
 
                     //Update data on page
@@ -565,7 +565,7 @@ function DungeonEndTurn() {
             console.log(data)
 
 
-            if (this.status == 200){
+            if (this.status == 200) {
                 if(data.state == "WAITING_FOR_OPP") {
                     //display a screen for wait for opponent choice
                     document.getElementById("waitingForOpponent").style.display = "block";
@@ -615,7 +615,7 @@ function getShowdownCardSelection() {
                 var data = JSON.parse(this.responseText)
                 console.log(data)
 
-                if (this.status == 200){
+                if (this.status == 200) {
                     data.card.sort(sortCards)
 
                     //Update page data
@@ -685,7 +685,7 @@ function getShowdownResult() {
             var data = JSON.parse(this.responseText)
             console.log(data)
 
-            if (this.status == 200){
+            if (this.status == 200) {
                 //show opponent actions 
                 document.getElementById("opponentShowdownActionsSection").style.display = "block";
                 document.getElementById("opponentShowdownAction").innerHTML = data.opponentActions + "\n" + data.playerActions;
@@ -954,7 +954,7 @@ function ShowdownEndTurn() {
             var data = JSON.parse(this.responseText)
             console.log(data)
 
-            if (this.status == 200){
+            if (this.status == 200) {
                 // //hide cards
                 // document.getElementById("showdownCards").style.display = "none";
 

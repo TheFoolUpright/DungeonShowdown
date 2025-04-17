@@ -61,7 +61,7 @@ function ValidateInputs(username, email, password1, password2) {
     }
 
     //Passwords need to have a lowercase, uppercase, number, symbol, and length of 4
-    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(\W|_)).{4,}$/.test(password1)){
+    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(\W|_)).{4,}$/.test(password1)) {
         document.getElementById("password1message").innerHTML = "* Password must have a lowercase, uppercase, number, symbol and be more then 4 charaters"
         return
     }else {
