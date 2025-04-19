@@ -1155,10 +1155,10 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
                             playerInsight = playerInsight + playerCards.card_insight;
                             playerEnergy = playerEnergy + playerCards.card_energy;
     
-                            if (playerCards.card_id == 1) {
+                            if (playerCards.card_id == 10) {
                                 isParry = true;
                             }
-                            if (playerCards.card_id == 2) {
+                            if (playerCards.card_id == 9) {
                                 isDodge = true;
                             }
                         }
@@ -1167,7 +1167,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
                     //Opponent Defense
                     for (let i = 0; i < opponentCards.length; i++) {
                         if (opponentCards.card_type_id == 7) {
-                            if (opponentCards.card_id == 1) {
+                            if (opponentCards.card_id == 10) {
                                 opponentParryAttack = opponentCards.card_attack
                                 isParryOpponent = true;
                             }
@@ -1183,7 +1183,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
                             if (playerCards.card_id == 3) {
                                 isDoubleAttack = true;
                             }
-                            if (playerCards.card_id == 4) {
+                            if (playerCards.card_id == 5) {
                                 isCounter = true;
                             }
                         }
@@ -1197,7 +1197,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
                             if (opponentCards.card_id == 3) {
                                 isDoubleAttackOpponent = true;
                             }
-                            if (opponentCards.card_id == 4) {
+                            if (opponentCards.card_id == 5) {
                                 isCounterOpponent = true;
                             }
                         }
@@ -2277,10 +2277,10 @@ app.post("/resolveShowdownTurn", (req, res) => {
                         playerInsight = playerInsight + playerCards[i].card_insight;
                         playerEnergy = playerEnergy + playerCards[i].card_energy;
 
-                        if (playerCards[i].card_id == 1) {
+                        if (playerCards[i].card_id == 10) {
                             isParry = true;
                         }
-                        if (playerCards[i].card_id == 2) {
+                        if (playerCards[i].card_id == 9) {
                             isDodge = true;
                         }
                     }
@@ -2289,7 +2289,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
                 //Opponent Defense
                 for (let i = 0; i < opponentCards.length; i++) {
                     if (opponentCards[i].card_type_id == 7) {
-                        if (opponentCards[i].card_id == 1) {
+                        if (opponentCards[i].card_id == 10) {
                             opponentParryAttack = opponentCards[i].card_attack
                             isParryOpponent = true;
                         }
@@ -2305,7 +2305,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
                         if (playerCards[i].card_id == 3) {
                             isDoubleAttack = true;
                         }
-                        if (playerCards[i].card_id == 4) {
+                        if (playerCards[i].card_id == 5) {
                             isCounter = true;
                         }
                     }
@@ -2319,7 +2319,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
                         if (opponentCards[i].card_id == 3) {
                             isDoubleAttackOpponent = true;
                         }
-                        if (opponentCards[i].card_id == 4) {
+                        if (opponentCards[i].card_id == 5) {
                             isCounterOpponent = true;
                         }
                     }
