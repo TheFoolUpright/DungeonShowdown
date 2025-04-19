@@ -347,7 +347,7 @@ function getDungeonCardSelection() {
                     document.getElementById("energy").innerHTML = "Energy: " + data.energy;
                     document.getElementById("insight").innerHTML = "Insight: " + data.insight;
                     document.getElementById("damage").innerHTML = "Damage: " + data.damage;
-                    
+                    console.log(data.card[0].is_visible)
                     if (data.card[0].is_visible) {
                         dungeonCard1Id = data.card[0].card_id
                         document.getElementById("card1Name").innerHTML = data.card[0].card_name
