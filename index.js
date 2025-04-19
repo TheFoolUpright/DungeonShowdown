@@ -39,12 +39,12 @@ app.use(session({
 //#region Variables
 
 //Varible
-var MatchID = 1;
-var PlayerID = 1;
-var PlayerStatusID = 1;
-var RoomID = 1;
-var ShowdownTurn = 1;
-var State
+//var req.session.matchId = 1;
+//var req.session.playerId = 1;
+//var req.session.playerStatusId = 1;
+//var  req.session.roomId = 1;
+//var  req.session.showdownTurn = 1;
+//var  req.session.state
 
 //#endregion
 
@@ -80,7 +80,7 @@ app.post("/login", (req, res) => {
             }
 
             //Save login to session
-            PlayerID = rows[0].player_id
+            req.session.playerId = rows[0].player_id
 
             // res.redirect("/game.html")
             res.status(200).json({
@@ -190,7 +190,7 @@ app.post("/register", (req, res) => {
 //#region Match
 
 app.get("/getMatchState", (req, res) => {
-    if (MatchID) {
+    if (req.session.matchID) {
        res.status(200).json({
            "message": "Player already in a match",
            "state": "MATCH_FOUND"
@@ -198,7 +198,7 @@ app.get("/getMatchState", (req, res) => {
        return;
     }
 
-    connection.query("SELECT match_id FROM game_match WHERE (player_1_id = ? OR player_2_id = ?) AND is_match_finished = 0;", [PlayerID, PlayerID],
+    connection.query("SELECT match_id FROM game_match WHERE (player_1_id = ? OR player_2_id = ?) AND is_match_finished = 0;", [req.session.playerId, req.session.playerId],
         function (err, rows, fields) {
             if (err) {
                 console.log("Database Error: " + err);
@@ -217,8 +217,8 @@ app.get("/getMatchState", (req, res) => {
                 }
             }
             else {
-                MatchID = rows[0].match_id
-                if (MatchID) {
+                req.session.matchId = rows[0].match_id
+                if (req.session.matchID) {
                    res.status(200).json({
                        "message": "Player already in a match",
                        "state": "MATCH_FOUND"
@@ -232,7 +232,7 @@ app.get("/getMatchState", (req, res) => {
 })
 
 app.put("/joinMatch", (req, res) => {
-     if (!PlayerID) {
+     if (!req.session.playerId) {
         //not logged in
         res.status(401).json({
             "message": "Player not logged in"
@@ -241,7 +241,7 @@ app.put("/joinMatch", (req, res) => {
         
      }
 
-     if (MatchID) {
+     if (req.session.matchID) {
         res.status(200).json({
             "message": "Player already in a match",
             "state": "MATCH_FOUND"
@@ -252,7 +252,7 @@ app.put("/joinMatch", (req, res) => {
      UpdateWaitingForMatchSearch()
 
     function UpdateWaitingForMatchSearch() {
-        connection.query("UPDATE player SET is_waiting_for_match = 1 WHERE player_id = ?;", [PlayerID], 
+        connection.query("UPDATE player SET is_waiting_for_match = 1 WHERE player_id = ?;", [req.session.playerId], 
             function (err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err);
@@ -270,7 +270,7 @@ app.put("/joinMatch", (req, res) => {
     }
 
     function FindAnOpponent() {
-        connection.query("SELECT player_id FROM player WHERE is_waiting_for_match = 1 AND player_id != ? ", [PlayerID], 
+        connection.query("SELECT player_id FROM player WHERE is_waiting_for_match = 1 AND player_id != ? ", [req.session.playerId], 
             function (err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err);
@@ -295,7 +295,7 @@ app.put("/joinMatch", (req, res) => {
     }
 
     function CreateAMatch(player1) {
-        connection.query("INSERT INTO game_match (player_1_id, player_2_id) VALUES (?, ?)", [player1, PlayerID],
+        connection.query("INSERT INTO game_match (player_1_id, player_2_id) VALUES (?, ?)", [player1, req.session.playerId],
             function (err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err);
@@ -305,7 +305,7 @@ app.put("/joinMatch", (req, res) => {
                     return;
                 }
 
-                FindMatch(player1, PlayerID)
+                FindMatch(player1, req.session.playerId)
 
             }
         );
@@ -322,14 +322,14 @@ app.put("/joinMatch", (req, res) => {
                     });
                     return;
                 }
-                MatchID = rows[0].match_id
+                req.session.matchId = rows[0].match_id
                 UpdateWaitingForMatchFound()
                 
             }
         )
     }
     function UpdateWaitingForMatchFound() {
-        connection.query("UPDATE player p INNER JOIN game_match m ON m.player_1_id = p.player_id or m.player_2_id = p.player_id SET p.is_waiting_for_match = 0 WHERE m.match_id = ?", [MatchID], 
+        connection.query("UPDATE player p INNER JOIN game_match m ON m.player_1_id = p.player_id or m.player_2_id = p.player_id SET p.is_waiting_for_match = 0 WHERE m.match_id = ?", [req.session.matchID], 
             function (err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err);
@@ -353,17 +353,17 @@ app.put("/joinMatch", (req, res) => {
 //#region Game
 
 /**
- * Gets the RoomID, ShowdownTurn, and State from the database
+ * Gets the  req.session.roomId,  req.session.showdownTurn, and  req.session.state from the database
  * Called by client side function getGameState.
  * @param none
- * @returns {JSON} - returns the RoomID, ShowdownTurn, and State to the client side. 
+ * @returns {JSON} - returns the  req.session.roomId,  req.session.showdownTurn, and  req.session.state to the client side. 
  */
 //TODO: Add the state in and only retern the room, turn and state
 app.get("/getGameState", (req, res) => {
 
     GetLastRoom()
     function GetLastRoom() {
-        connection.query("SELECT room_id, showdown_turn, state_id FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = 1 AND match_id = 1 ORDER BY room_id DESC, showdown_turn DESC", [PlayerID, MatchID], 
+        connection.query("SELECT room_id, showdown_turn, state_id FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = 1 AND match_id = 1 ORDER BY room_id DESC, showdown_turn DESC", [req.session.playerId, req.session.matchId], 
             function (err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err);
@@ -374,15 +374,15 @@ app.get("/getGameState", (req, res) => {
                 } 
                 if(rows.length != 0) {
 
-                    RoomID = rows[0].room_id;
-                    ShowdownTurn = rows[0].showdown_turn;
-                    State = rows[0].state_id;
+                     req.session.roomId = rows[0].room_id;
+                     req.session.showdownTurn = rows[0].showdown_turn;
+                     req.session.state = rows[0].state_id;
                     
                     
                     res.status(200).json({
-                        "room_id": RoomID,
-                        "showdown_turn": ShowdownTurn,
-                        "state_id": State
+                        "room_id":  req.session.roomId,
+                        "showdown_turn":  req.session.showdownTurn,
+                        "state_id":  req.session.state
                     })
                 }
             }
@@ -396,7 +396,7 @@ app.get("/getWaitingOnOpponentDungeon", (req, res) => {
     GetOpponentStatus()
 
     function GetOpponentStatus() {
-        connection.query("SELECT state_id FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id WHERE player_id != ? AND match_id = ? AND room_id = ? AND slot_id = 4", [PlayerID, MatchID, RoomID], 
+        connection.query("SELECT state_id FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id WHERE player_id != ? AND match_id = ? AND room_id = ? AND slot_id = 4", [req.session.playerId, req.session.matchId,  req.session.roomId], 
             function (err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err);
@@ -420,7 +420,7 @@ app.get("/getWaitingOnOpponentDungeon", (req, res) => {
     }
 
     function UpdateGameState() {
-        connection.query("UPDATE player_status SET state_id = 3 WHERE player_status_id = ?", [PlayerStatusID], 
+        connection.query("UPDATE player_status SET state_id = 3 WHERE player_status_id = ?", [req.session.playerStatusId], 
             function (err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err);
@@ -431,7 +431,7 @@ app.get("/getWaitingOnOpponentDungeon", (req, res) => {
                 } 
                 
                 res.status(200).json({
-                    "message": "State changed",
+                    "message": " req.session.state changed",
                 });
 
             }
@@ -455,7 +455,7 @@ app.post("/setDungeonPhase", (req, res) => {
 
     function CreatePlayerStatus() {
         console.log("CreatePlayerStatus start")
-        connection.query("INSERT INTO player_status (match_id, player_id) VALUES (?, ?)", [MatchID, PlayerID],
+        connection.query("INSERT INTO player_status (match_id, player_id) VALUES (?, ?)", [req.session.matchID, req.session.playerId],
             function (err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err);
@@ -481,7 +481,7 @@ app.post("/setDungeonPhase", (req, res) => {
  */
 app.get("/getDungeonCardSelection", (req, res) => {
 
-    connection.query("SELECT player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, showdown_turn, is_visible, match_id, player_id, max_health, current_health, energy, insight, damage, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = ? AND match_id = ? AND room_id = ?;", [PlayerID, MatchID, RoomID],
+    connection.query("SELECT player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, showdown_turn, is_visible, match_id, player_id, max_health, current_health, energy, insight, damage, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = ? AND match_id = ? AND room_id = ?;", [req.session.playerId, req.session.matchId,  req.session.roomId],
         function (err, rows, fields) {
             if (err) {
                 console.log("Database Error: " + err);
@@ -500,8 +500,8 @@ app.get("/getDungeonCardSelection", (req, res) => {
                 res.status(200).json({
                     "message": "Player stats and cards updated",
                     "state": "ROOM_LOADED",
-                    "room_id": RoomID,
-                    "showdown_turn": ShowdownTurn,
+                    "room_id":  req.session.roomId,
+                    "showdown_turn":  req.session.showdownTurn,
                     "max_health": rows[0].max_health,
                     "current_health": rows[0].current_health,
                     "energy": rows[0].energy,
@@ -539,7 +539,7 @@ app.post("/resolveDungeonTurn", (req, res) => {
      * @returns none
      */
     function UpdateGameStateToWaitingForOpponentDungeon() {
-        connection.query("UPDATE player_status SET state_id = 2 WHERE match_id = ? AND player_status_id = ?;", [MatchID, PlayerStatusID], 
+        connection.query("UPDATE player_status SET state_id = 2 WHERE match_id = ? AND player_status_id = ?;", [req.session.matchID, req.session.playerStatusId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -562,7 +562,7 @@ app.post("/resolveDungeonTurn", (req, res) => {
      * @returns none
      */
     function UpdateSelectedCardSlot() {
-        connection.query("UPDATE player_card_slot SET slot_id = 4 WHERE card_id = ? AND player_status_id = ?;", [req.body.cardId, PlayerStatusID], 
+        connection.query("UPDATE player_card_slot SET slot_id = 4 WHERE card_id = ? AND player_status_id = ?;", [req.body.cardId, req.session.playerStatusId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -583,7 +583,7 @@ app.post("/resolveDungeonTurn", (req, res) => {
      * @returns none
      */
     function GetPlayerStats() {
-        connection.query("SELECT player_status_id, match_id, player_id, max_health, current_health, energy, insight, damage FROM dungeonshowdown.player_status WHERE player_status_id = ?;", [PlayerStatusID], 
+        connection.query("SELECT player_status_id, match_id, player_id, max_health, current_health, energy, insight, damage FROM dungeonshowdown.player_status WHERE player_status_id = ?;", [req.session.playerStatusId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -635,7 +635,7 @@ app.post("/resolveDungeonTurn", (req, res) => {
      * @returns none
      */
     function UpdatePlayerStats(updatedMaxHealth, updatedCurrentHealth, updatedEnergy, updatedInsight, updatedDamage) {
-        connection.query("UPDATE player_status SET max_health = ?, current_health = ?, energy = ?, insight = ?, damage = ? WHERE player_status_id = ?;", [updatedMaxHealth, updatedCurrentHealth, updatedEnergy, updatedInsight, updatedDamage, PlayerStatusID], 
+        connection.query("UPDATE player_status SET max_health = ?, current_health = ?, energy = ?, insight = ?, damage = ? WHERE player_status_id = ?;", [updatedMaxHealth, updatedCurrentHealth, updatedEnergy, updatedInsight, updatedDamage, req.session.playerStatusId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -657,7 +657,7 @@ app.post("/resolveDungeonTurn", (req, res) => {
      * @returns {JSON} - returns the opponents card selection or if the player is waiting on the opponent
      */
     function GetOpponentCard() {
-        connection.query("SELECT c.card_id, ct.card_type_id, card_type_name FROM player_card_slot pcs INNER JOIN player_status ps ON pcs.player_status_id = ps.player_status_id INNER JOIN card c ON pcs.card_id = c.card_id INNER JOIN card_type ct ON c.card_type_id = ct.card_type_id WHERE pcs.player_status_id != ? AND match_id = ? AND slot_id = 4 AND room_id = ?", [PlayerStatusID, MatchID, RoomID], 
+        connection.query("SELECT c.card_id, ct.card_type_id, card_type_name FROM player_card_slot pcs INNER JOIN player_status ps ON pcs.player_status_id = ps.player_status_id INNER JOIN card c ON pcs.card_id = c.card_id INNER JOIN card_type ct ON c.card_type_id = ct.card_type_id WHERE pcs.player_status_id != ? AND match_id = ? AND slot_id = 4 AND room_id = ?", [req.session.playerStatusId, req.session.matchId,  req.session.roomId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -698,17 +698,17 @@ app.post("/resolveDungeonTurn", (req, res) => {
 //TODO: Write stuff for setting cards
 app.post("/setupNextDungeonRoom", (req, res) => {
 
-    RoomID++;
+     req.session.roomId++;
     GetPlayerStats()
         
     /**
-     * Reads the player stats from the database and updates the PlayerStatusID. 
+     * Reads the player stats from the database and updates the req.session.playerStatusId. 
      * Called by SettingCards function.
      * @param none
      * @returns none
      */
     function GetPlayerStats() {
-        connection.query("SELECT player_status_id, match_id, player_id, max_health, current_health, energy, insight, damage FROM player_status WHERE player_id = ? AND match_id = ?;", [PlayerID, MatchID],
+        connection.query("SELECT player_status_id, match_id, player_id, max_health, current_health, energy, insight, damage FROM player_status WHERE player_id = ? AND match_id = ?;", [req.session.playerId, req.session.matchId],
             function (err, rows, fields) {
                 if (err) {
                     console.log("Database Error : " + err);
@@ -717,7 +717,7 @@ app.post("/setupNextDungeonRoom", (req, res) => {
                     });
                     return;
                 }
-                PlayerStatusID = rows[0].player_status_id
+                req.session.playerStatusId = rows[0].player_status_id
                 //Call function to get Deck
                 GetRoomDeck(rows);
             }
@@ -732,7 +732,7 @@ app.post("/setupNextDungeonRoom", (req, res) => {
      */
     function GetRoomDeck(playerStats) {
         
-        connection.query("SELECT c.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_image_path FROM (SELECT max_health, current_health, energy, insight FROM player_status WHERE player_status_id = ?) ps, card_room cr INNER JOIN card c ON c.card_id = cr.card_id INNER JOIN room r ON cr.room_id = r.room_id WHERE  (ps.current_health + card_current_health <= ps.max_health) AND (ps.energy + card_energy <= 10) AND (ps.insight + card_insight <= 10) AND (ps.current_health + card_current_health > 0) AND (ps.energy + card_energy >= 0) AND (ps.insight + card_insight >= 0) AND r.room_id = ?", [PlayerStatusID, RoomID], 
+        connection.query("SELECT c.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_image_path FROM (SELECT max_health, current_health, energy, insight FROM player_status WHERE player_status_id = ?) ps, card_room cr INNER JOIN card c ON c.card_id = cr.card_id INNER JOIN room r ON cr.room_id = r.room_id WHERE  (ps.current_health + card_current_health <= ps.max_health) AND (ps.energy + card_energy <= 10) AND (ps.insight + card_insight <= 10) AND (ps.current_health + card_current_health > 0) AND (ps.energy + card_energy >= 0) AND (ps.insight + card_insight >= 0) AND r.room_id = ?", [req.session.playerStatusId,  req.session.roomId], 
             function (err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err);
@@ -944,7 +944,7 @@ app.post("/setupNextDungeonRoom", (req, res) => {
             card3.IsVisible = false;
         }
 
-        connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn, is_visible) VALUES (?,?,?,?,?,?), (?,?,?,?,?,?), (?,?,?,?,?,?);", [playerStats[0].player_status_id, 1, card1.card_id, RoomID, ShowdownTurn, card1.IsVisible, playerStats[0].player_status_id, 2, card2.card_id, RoomID, ShowdownTurn, card2.IsVisible,  playerStats[0].player_status_id, 3, card3.card_id, RoomID, ShowdownTurn, card3.IsVisible],
+        connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn, is_visible) VALUES (?,?,?,?,?,?), (?,?,?,?,?,?), (?,?,?,?,?,?);", [playerStats[0].player_status_id, 1, card1.card_id,  req.session.roomId,  req.session.showdownTurn, card1.IsVisible, playerStats[0].player_status_id, 2, card2.card_id,  req.session.roomId,  req.session.showdownTurn, card2.IsVisible,  playerStats[0].player_status_id, 3, card3.card_id,  req.session.roomId,  req.session.showdownTurn, card3.IsVisible],
         function (err, rows, fields) {
             if (err) {
                 console.log("Database Error: " + err);
@@ -959,7 +959,7 @@ app.post("/setupNextDungeonRoom", (req, res) => {
     }
 
     function UpdateGameStateToDungeonCardSelection() {
-        connection.query("UPDATE player_status SET state_id = 1 WHERE match_id = ? AND player_status_id = ?;", [MatchID, PlayerStatusID], 
+        connection.query("UPDATE player_status SET state_id = 1 WHERE match_id = ? AND player_status_id = ?;", [req.session.matchID, req.session.playerStatusId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -986,7 +986,7 @@ app.post("/setupNextDungeonRoom", (req, res) => {
  */
 app.get("/getOpponentCard", (req, res) => {
 
-    connection.query("SELECT c.card_id, ct.card_type_id, card_type_name FROM player_card_slot pcs INNER JOIN player_status ps ON pcs.player_status_id = ps.player_status_id INNER JOIN card c ON pcs.card_id = c.card_id INNER JOIN card_type ct ON c.card_type_id = ct.card_type_id WHERE pcs.player_status_id != ? AND match_id = ? AND slot_id = 4 AND room_id = ?", [PlayerStatusID, MatchID, RoomID], 
+    connection.query("SELECT c.card_id, ct.card_type_id, card_type_name FROM player_card_slot pcs INNER JOIN player_status ps ON pcs.player_status_id = ps.player_status_id INNER JOIN card c ON pcs.card_id = c.card_id INNER JOIN card_type ct ON c.card_type_id = ct.card_type_id WHERE pcs.player_status_id != ? AND match_id = ? AND slot_id = 4 AND room_id = ?", [req.session.playerStatusId, req.session.matchId,  req.session.roomId], 
         function(err, rows, fields) {
             if (err) {
                 console.log("Database Error: " + err)
@@ -1034,7 +1034,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
      * @returns none
      */
      function GetOpponentShowdownCardStats() {
-        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (9,10) AND match_id = ?;", [PlayerStatusID, ShowdownTurn, MatchID], 
+        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (9,10) AND match_id = ?;", [req.session.playerStatusId,  req.session.showdownTurn, req.session.matchId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -1059,7 +1059,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
     }
 
     function UpdateGameStateToShowdownResult() {
-        connection.query("UPDATE player_status SET state_id = 6 WHERE player_status_id = ?", [PlayerStatusID], 
+        connection.query("UPDATE player_status SET state_id = 6 WHERE player_status_id = ?", [req.session.playerStatusId], 
             function (err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err);
@@ -1081,7 +1081,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
          * @returns none
          */
         function GetPlayerShowdownCardStats(opponentCards) {
-            connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id WHERE player_status_id = ? AND showdown_turn = ? AND slot_id IN (9,10);", [PlayerStatusID, ShowdownTurn], 
+            connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id WHERE player_status_id = ? AND showdown_turn = ? AND slot_id IN (9,10);", [req.session.playerStatusId,  req.session.showdownTurn], 
                 function(err, rows, fields) {
                     if (err) {
                         console.log("Database Error: " + err)
@@ -1105,7 +1105,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
          * @returns none
          */
         function GetPlayerShowdownStats(opponentCards, playerCards) {
-            connection.query("SELECT player_status_id, Player.match_id, player_id, current_health, energy, insight, Player.damage, Opponent.damage op_damage FROM (SELECT damage, match_id FROM dungeonshowdown.player_status WHERE match_id = ? AND player_status_id != ?) Opponent INNER JOIN dungeonshowdown.player_status Player ON Opponent.match_id = Player.match_id WHERE player_status_id = ?;", [MatchID, PlayerStatusID, PlayerStatusID], 
+            connection.query("SELECT player_status_id, Player.match_id, player_id, current_health, energy, insight, Player.damage, Opponent.damage op_damage FROM (SELECT damage, match_id FROM dungeonshowdown.player_status WHERE match_id = ? AND player_status_id != ?) Opponent INNER JOIN dungeonshowdown.player_status Player ON Opponent.match_id = Player.match_id WHERE player_status_id = ?;", [req.session.matchID, req.session.playerStatusId, req.session.playerStatusId], 
                 function(err, rows, fields) {
                     if (err) {
                         console.log("Database Error: " + err)
@@ -1252,7 +1252,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
          * @returns {JSON} The sum of a and b.
          */
         function UpdateShowdownPlayerStats(playerCurrentHealth, playerEnergy, playerInsight, playerDamage, opponentCards, playerCards) {
-            connection.query("UPDATE player_status SET current_health = ?, energy = ?, insight = ?, damage = ? WHERE player_status_id = ?;", [playerCurrentHealth, playerEnergy, playerInsight, playerDamage, PlayerStatusID], 
+            connection.query("UPDATE player_status SET current_health = ?, energy = ?, insight = ?, damage = ? WHERE player_status_id = ?;", [playerCurrentHealth, playerEnergy, playerInsight, playerDamage, req.session.playerStatusId], 
                 function(err, rows, fields) {
                     if (err) {
                         console.log("Database Error: " + err)
@@ -1488,7 +1488,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
  */
 app.get("/getShowdownCardSelection", (req, res) => {
 
-    connection.query("SELECT player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, showdown_turn, match_id, player_id, max_health, current_health, energy, insight, damage, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = ? AND match_id = ? AND room_id = ? AND showdown_turn = ?;", [PlayerID, MatchID, RoomID, ShowdownTurn],
+    connection.query("SELECT player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, showdown_turn, match_id, player_id, max_health, current_health, energy, insight, damage, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = ? AND match_id = ? AND room_id = ? AND showdown_turn = ?;", [req.session.playerId, req.session.matchId,  req.session.roomId,  req.session.showdownTurn],
         function (err, rows, fields) {
             if (err) {
                 console.log("Database Error: " + err);
@@ -1507,8 +1507,8 @@ app.get("/getShowdownCardSelection", (req, res) => {
 
                 res.status(200).json({
                     "message": "Player stats and cards updated",
-                    "room_id": RoomID,
-                    "showdown_turn": ShowdownTurn,
+                    "room_id":  req.session.roomId,
+                    "showdown_turn":  req.session.showdownTurn,
                     "max_health": rows[0].max_health,
                     "current_health": rows[0].current_health,
                     "energy": rows[0].energy,
@@ -1543,7 +1543,7 @@ app.get("/getShowdownResult", (req, res) => {
      * @returns none
      */
     function GetOpponentShowdownCardStats() {
-        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (9,10) AND match_id = ?;", [PlayerStatusID, ShowdownTurn, MatchID], 
+        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (9,10) AND match_id = ?;", [req.session.playerStatusId,  req.session.showdownTurn, req.session.matchId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -1565,7 +1565,7 @@ app.get("/getShowdownResult", (req, res) => {
      * @returns none
      */
     function GetPlayerShowdownCardStats(opponentCards) {
-        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id WHERE player_status_id = ? AND showdown_turn = ? AND slot_id IN (9,10);", [PlayerStatusID, ShowdownTurn], 
+        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id WHERE player_status_id = ? AND showdown_turn = ? AND slot_id IN (9,10);", [req.session.playerStatusId,  req.session.showdownTurn], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -1804,16 +1804,16 @@ app.get("/getShowdownResult", (req, res) => {
  */
 app.post("/setupShowdown", (req, res) => {
 
-    if(RoomID == 5) {
-        RoomID++;
-        ShowdownTurn = 0;
+    if( req.session.roomId == 5) {
+         req.session.roomId++;
+         req.session.showdownTurn = 0;
     }
-    ShowdownTurn++;
+     req.session.showdownTurn++;
 
     CheckIfInitiativeIsSet()
 
     function CheckIfInitiativeIsSet() {
-        connection.query("SELECT showdown_initiative FROM player_status WHERE match_id = ?;", [MatchID],
+        connection.query("SELECT showdown_initiative FROM player_status WHERE match_id = ?;", [req.session.matchID],
             function (err, rows, fields) {
                 if (err) {
                     console.log("Database Error : " + err);
@@ -1822,7 +1822,7 @@ app.post("/setupShowdown", (req, res) => {
                     });
                     return;
                 }
-                PlayerStatusID = rows[0].player_status_id
+                req.session.playerStatusId = rows[0].player_status_id
                 if (rows[0].showdown_initiative == 1 || rows[1].showdown_initiative == 1) {
                     GetPlayerStats()
                 }
@@ -1836,7 +1836,7 @@ app.post("/setupShowdown", (req, res) => {
     }
 
     function UpdatePlayerInitiative() {
-        connection.query("UPDATE player_status SET showdown_initiative = 1 WHERE player_id = ?;", [PlayerID],
+        connection.query("UPDATE player_status SET showdown_initiative = 1 WHERE player_id = ?;", [req.session.playerId],
             function (err, rows, fields) {
                 if (err) {
                     console.log("Database Error : " + err);
@@ -1861,7 +1861,7 @@ app.post("/setupShowdown", (req, res) => {
 
     function GetPlayerStats() {
         // Now checks whether the current player is player 1 or 2
-        connection.query("SELECT player_status_id, player_id, max_health, current_health, energy, insight, damage, showdown_initiative FROM player_status WHERE player_id = ? AND match_id = ?;", [PlayerID, MatchID],
+        connection.query("SELECT player_status_id, player_id, max_health, current_health, energy, insight, damage, showdown_initiative FROM player_status WHERE player_id = ? AND match_id = ?;", [req.session.playerId, req.session.matchId],
             function (err, rows, fields) {
                 if (err) {
                     console.log("Database Error : " + err);
@@ -1870,7 +1870,7 @@ app.post("/setupShowdown", (req, res) => {
                     });
                     return;
                 }
-                PlayerStatusID = rows[0].player_status_id
+                req.session.playerStatusId = rows[0].player_status_id
 
                 CheckOpponentHealth(rows[0].current_health, rows)
             }
@@ -1881,7 +1881,7 @@ app.post("/setupShowdown", (req, res) => {
 
 
     function CheckOpponentHealth(playerCurrentHealth, playerStats) {
-        connection.query("SELECT current_health FROM player_status WHERE player_status_id != ? AND match_id = ?;", [PlayerStatusID, MatchID], 
+        connection.query("SELECT current_health FROM player_status WHERE player_status_id != ? AND match_id = ?;", [req.session.playerStatusId, req.session.matchId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -1911,7 +1911,7 @@ app.post("/setupShowdown", (req, res) => {
     }
 
     function UpdatePlayerStateToEnding(playerStats, state) {
-        connection.query("UPDATE player_status SET state_id = ? WHERE player_status_id = ?", [state, PlayerStatusID], 
+        connection.query("UPDATE player_status SET state_id = ? WHERE player_status_id = ?", [state, req.session.playerStatusId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -1935,7 +1935,7 @@ app.post("/setupShowdown", (req, res) => {
      * @returns none
      */
     function GetRoomDeck(playerStats) {
-        connection.query("SELECT c.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_image_path FROM card_room cr INNER JOIN card c ON c.card_id = cr.card_id INNER JOIN room r ON cr.room_id = r.room_id WHERE r.room_id = ?", [RoomID], 
+        connection.query("SELECT c.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_image_path FROM card_room cr INNER JOIN card c ON c.card_id = cr.card_id INNER JOIN room r ON cr.room_id = r.room_id WHERE r.room_id = ?", [ req.session.roomId], 
             function (err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err);
@@ -1991,7 +1991,7 @@ app.post("/setupShowdown", (req, res) => {
             InsertCards(playerStats, card1, card2, card3)
         }
         else {
-            connection.query("SELECT c.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (6,7,8,9,10) AND PCS.card_id != 8 AND match_id = ?;",[PlayerStatusID, ShowdownTurn, MatchID],
+            connection.query("SELECT c.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (6,7,8,9,10) AND PCS.card_id != 8 AND match_id = ?;",[req.session.playerStatusId,  req.session.showdownTurn, req.session.matchId],
                 function (err, rows, fields) {
                     if (err) {
         
@@ -2056,7 +2056,7 @@ app.post("/setupShowdown", (req, res) => {
 
     function InsertCards(playerStats, card1, card2, card3) {
         console.log("Insert cards Start")
-        connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn) VALUES (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?);", [playerStats[0].player_status_id, 5, 8, RoomID, ShowdownTurn, playerStats[0].player_status_id, 6, card1.card_id, RoomID, ShowdownTurn, playerStats[0].player_status_id, 7, card2.card_id, RoomID, ShowdownTurn, playerStats[0].player_status_id, 8, card3.card_id, RoomID, ShowdownTurn],
+        connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn) VALUES (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?);", [playerStats[0].player_status_id, 5, 8,  req.session.roomId,  req.session.showdownTurn, playerStats[0].player_status_id, 6, card1.card_id,  req.session.roomId,  req.session.showdownTurn, playerStats[0].player_status_id, 7, card2.card_id,  req.session.roomId,  req.session.showdownTurn, playerStats[0].player_status_id, 8, card3.card_id,  req.session.roomId,  req.session.showdownTurn],
         function (err, rows, fields) {
             if (err) {
 
@@ -2071,7 +2071,7 @@ app.post("/setupShowdown", (req, res) => {
     }
     
     function UpdateGameStateToShowdownCardSelection() {
-        connection.query("UPDATE player_status SET state_id = 4 WHERE match_id = ? AND player_status_id = ?;", [MatchID, PlayerStatusID], 
+        connection.query("UPDATE player_status SET state_id = 4 WHERE match_id = ? AND player_status_id = ?;", [req.session.matchID, req.session.playerStatusId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -2096,10 +2096,10 @@ app.post("/setupShowdown", (req, res) => {
  * @param none
  * @returns {JSON} - returns the srings for the playerActions and opponentActions stating which cards each one chose
  */
-app.post("/resolveShowdownTurn", (req, res) => {
+app.post("/resolve req.session.showdownTurn", (req, res) => {
 
 //save player cards to database
-//ShowdownTurn++;
+// req.session.showdownTurn++;
 
 // req.body.cardId
 
@@ -2107,12 +2107,12 @@ app.post("/resolveShowdownTurn", (req, res) => {
 
     /**
      * Update in the database what card is in the first selection slot at the end of the showdown turn.
-     * Called by resolveShowdownTurn endpoint.
+     * Called by resolve req.session.showdownTurn endpoint.
      * @param none
      * @returns none
      */
     function UpdateSelectedCardSlot1() {
-        connection.query("UPDATE player_card_slot SET slot_id = 9 WHERE card_id = ? AND player_status_id = ? AND showdown_turn = ?;", [req.body.cardId1, PlayerStatusID, ShowdownTurn], 
+        connection.query("UPDATE player_card_slot SET slot_id = 9 WHERE card_id = ? AND player_status_id = ? AND showdown_turn = ?;", [req.body.cardId1, req.session.playerStatusId,  req.session.showdownTurn], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -2134,7 +2134,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
      * @returns none
      */
     function UpdateSelectedCardSlot2() {
-        connection.query("UPDATE player_card_slot SET slot_id = 10 WHERE card_id = ? AND player_status_id = ? AND showdown_turn = ?;", [req.body.cardId2, PlayerStatusID, ShowdownTurn], 
+        connection.query("UPDATE player_card_slot SET slot_id = 10 WHERE card_id = ? AND player_status_id = ? AND showdown_turn = ?;", [req.body.cardId2, req.session.playerStatusId,  req.session.showdownTurn], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -2151,7 +2151,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
 
     
     function UpdateGameStateToWaitingForOpponentShowdown() {
-        connection.query("UPDATE player_status SET state_id = 5 WHERE match_id = ? AND player_status_id = ?;", [MatchID, PlayerStatusID], 
+        connection.query("UPDATE player_status SET state_id = 5 WHERE match_id = ? AND player_status_id = ?;", [req.session.matchID, req.session.playerStatusId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -2172,7 +2172,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
      * @returns none
      */
     function GetOpponentShowdownCardStats() {
-        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (9,10) AND match_id = ?;", [PlayerStatusID, ShowdownTurn, MatchID], 
+        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (9,10) AND match_id = ?;", [req.session.playerStatusId,  req.session.showdownTurn, req.session.matchId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -2203,7 +2203,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
      * @returns none
      */
     function GetPlayerShowdownCardStats(opponentCards) {
-        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id WHERE player_status_id = ? AND showdown_turn = ? AND slot_id IN (9,10);", [PlayerStatusID, ShowdownTurn], 
+        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id WHERE player_status_id = ? AND showdown_turn = ? AND slot_id IN (9,10);", [req.session.playerStatusId,  req.session.showdownTurn], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -2227,7 +2227,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
      * @returns none
      */
     function GetPlayerShowdownStats(opponentCards, playerCards) {
-        connection.query("SELECT player_status_id, Player.match_id, player_id, current_health, energy, insight, Player.damage, Opponent.damage op_damage FROM (SELECT damage, match_id FROM dungeonshowdown.player_status WHERE match_id = ? AND player_status_id != ?) Opponent INNER JOIN dungeonshowdown.player_status Player ON Opponent.match_id = Player.match_id WHERE player_status_id = ?;", [MatchID, PlayerStatusID, PlayerStatusID], 
+        connection.query("SELECT player_status_id, Player.match_id, player_id, current_health, energy, insight, Player.damage, Opponent.damage op_damage FROM (SELECT damage, match_id FROM dungeonshowdown.player_status WHERE match_id = ? AND player_status_id != ?) Opponent INNER JOIN dungeonshowdown.player_status Player ON Opponent.match_id = Player.match_id WHERE player_status_id = ?;", [req.session.matchID, req.session.playerStatusId, req.session.playerStatusId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -2373,7 +2373,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
      * @returns {JSON} The sum of a and b.
      */
     function UpdateShowdownPlayerStats(playerCurrentHealth, playerEnergy, playerInsight, playerDamage, opponentCards, playerCards) {
-        connection.query("UPDATE player_status SET current_health = ?, energy = ?, insight = ?, damage = ? WHERE player_status_id = ?;", [playerCurrentHealth, playerEnergy, playerInsight, playerDamage, PlayerStatusID], 
+        connection.query("UPDATE player_status SET current_health = ?, energy = ?, insight = ?, damage = ? WHERE player_status_id = ?;", [playerCurrentHealth, playerEnergy, playerInsight, playerDamage, req.session.playerStatusId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -2396,7 +2396,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
      * @param {object} playerCards - An array of the player's selected cards.
      * @returns none
      */
-    //resolveShowdownTurn
+    //resolve req.session.showdownTurn
     function DisplayPlayerAndOpponentActions(opponentCards, playerCards) {
         var opponentActions = "";
         var playerActions = "";
