@@ -26,12 +26,13 @@ function JoinMatch() {
 
 function GetMatchState() {
 
-
+    console.log("here")
     var xhttp = new XMLHttpRequest();
     
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
 
+            console.log("here2")
             var data = JSON.parse(this.responseText)
             console.log(data)
 
