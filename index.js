@@ -2104,14 +2104,34 @@ app.get("/getShowdownResult", (req, res) => {
  * @returns {JSON} - returns a success message
  */
 app.post("/setupShowdown", (req, res) => {
-
     if( req.session.roomId == 5) {
-         req.session.roomId++;
-         req.session.showdownTurn = 0;
-    }
-     req.session.showdownTurn++;
+        req.session.roomId++;
+        req.session.showdownTurn = 0;
+   }
+    req.session.showdownTurn++;
 
-    CheckIfInitiativeIsSet()
+    if (!req.session.playerStatusId) {
+        GetSessionPlayerStatusId()
+    }
+    else{
+        CheckIfInitiativeIsSet()
+    }
+
+    function GetSessionPlayerStatusId() {
+        connection.query("SELECT player_status_id FROM player_status WHERE player_id = ? AND match_id = ?", [req.session.playerId, req.session.matchId], 
+            function(err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+                req.session.playerStatusId = rows[0].player_status_id;
+                CheckIfInitiativeIsSet()
+            }
+        )
+    }
 
     function CheckIfInitiativeIsSet() {
         connection.query("SELECT showdown_initiative FROM player_status WHERE match_id = ?;", [req.session.matchId],
@@ -2399,12 +2419,35 @@ app.post("/setupShowdown", (req, res) => {
  */
 app.post("/resolveShowdownTurn", (req, res) => {
 
+    if (!req.session.playerStatusId) {
+        console.log("got here")
+        GetSessionPlayerStatusId()
+    }
+    else{
+        UpdateSelectedCardSlot1()
+    }
+
+    function GetSessionPlayerStatusId() {
+        connection.query("SELECT player_status_id FROM player_status WHERE player_id = ? AND match_id = ?", [req.session.playerId, req.session.matchId], 
+            function(err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+                req.session.playerStatusId = rows[0].player_status_id;
+                UpdateSelectedCardSlot1()
+            }
+        )
+    }
+
 //save player cards to database
 // req.session.showdownTurn++;
 
-// req.body.cardId
 
-    UpdateSelectedCardSlot1()
+    
 
     /**
      * Update in the database what card is in the first selection slot at the end of the showdown turn.
@@ -2449,10 +2492,9 @@ app.post("/resolveShowdownTurn", (req, res) => {
         )
     }
 
-
     
     function UpdateGameStateToWaitingForOpponentShowdown() {
-        connection.query("UPDATE player_status SET state_id = 5 WHERE match_id = ? AND player_status_id = ?;", [req.session.matchId, req.session.playerStatusId], 
+        connection.query("UPDATE player_status SET state_id = 5, showdown_initiative = 0 WHERE match_id = ? AND player_status_id = ?;", [req.session.matchId, req.session.playerStatusId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)

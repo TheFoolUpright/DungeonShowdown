@@ -28,7 +28,7 @@ CREATE TABLE `game_state` (
   `state_id` int NOT NULL AUTO_INCREMENT,
   `state_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`state_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `game_state` (
 
 LOCK TABLES `game_state` WRITE;
 /*!40000 ALTER TABLE `game_state` DISABLE KEYS */;
-INSERT INTO `game_state` VALUES (1,'DungeonCardSelection'),(2,'WaitingOnOpponent'),(3,'DungeonResult'),(4,'ShowdownCardSelection'),(5,'ShowdownResult'),(6,'Ending');
+INSERT INTO `game_state` VALUES (1,'DungeonCardSelection'),(2,'WaitingOnOpponentDungeon'),(3,'DungeonResult'),(4,'ShowdownCardSelection'),(5,'WaitingOnOpponentShowdown'),(6,'ShowdownResult'),(7,'Won'),(8,'Lost'),(9,'Draw');
 /*!40000 ALTER TABLE `game_state` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-14 15:55:07
+-- Dump completed on 2025-04-23 14:36:42

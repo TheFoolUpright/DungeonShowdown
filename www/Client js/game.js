@@ -5,7 +5,7 @@ var dungeonCard1Id
 var dungeonCard2Id
 var dungeonCard3Id
 var dungeonSelectedCardId
-var showdownCard1Id = 8;
+var showdownCard1Id = 1;
 var showdownCard2Id
 var showdownCard3Id
 var showdownCard4Id
@@ -347,6 +347,7 @@ function getDungeonCardSelection() {
                     document.getElementById("energy").innerHTML = "Energy: " + data.energy;
                     document.getElementById("insight").innerHTML = "Insight: " + data.insight;
                     document.getElementById("damage").innerHTML = "Damage: " + data.damage;
+                    
                     console.log(data.card[0].is_visible)
                     if (data.card[0].is_visible) {
                         dungeonCard1Id = data.card[0].card_id
@@ -357,7 +358,7 @@ function getDungeonCardSelection() {
                     else{
                         dungeonCard1Id = data.card[0].card_id
                         document.getElementById("card1Name").innerHTML = "???"
-                        document.getElementById("card1Image").src = "???"
+                        document.getElementById("card1Image").src = "../Assets/Art/Cards/1x/HiddenDraft.png"
                         document.getElementById("card1Stats").innerHTML = "???"
                     }
                     
@@ -370,7 +371,7 @@ function getDungeonCardSelection() {
                     else{
                         dungeonCard2Id = data.card[1].card_id
                         document.getElementById("card2Name").innerHTML = "???"
-                        document.getElementById("card2Image").src = "???"
+                        document.getElementById("card2Image").src = "../Assets/Art/Cards/1x/HiddenDraft.png"
                         document.getElementById("card2Stats").innerHTML = "???"
                     }
 
@@ -383,7 +384,7 @@ function getDungeonCardSelection() {
                     else{
                         dungeonCard3Id = data.card[2].card_id
                         document.getElementById("card3Name").innerHTML = "???"
-                        document.getElementById("card3Image").src = "???"
+                        document.getElementById("card3Image").src = "../Assets/Art/Cards/1x/HiddenDraft.png"
                         document.getElementById("card3Stats").innerHTML = "???"
                     }
 
@@ -539,21 +540,21 @@ function DungeonSelectCard() {
     {
         dungeonSelectedCardId = dungeonCard1Id;
         document.getElementById("selectedCardName").innerHTML = document.getElementById("card1Name").innerHTML;
-        document.getElementById("selectedCardImage").innerHTML = document.getElementById("card1Image").innerHTML;
+        document.getElementById("selectedCardImage").src = document.getElementById("card1Image").src;
         document.getElementById("selectedCardStats").innerHTML = document.getElementById("card1Stats").innerHTML;
     }
     if (document.getElementById("dungeonCard2Selection").checked) 
     {
         dungeonSelectedCardId = dungeonCard2Id;
         document.getElementById("selectedCardName").innerHTML = document.getElementById("card2Name").innerHTML;
-        document.getElementById("selectedCardImage").innerHTML = document.getElementById("card2Image").innerHTML;
+        document.getElementById("selectedCardImage").src = document.getElementById("card2Image").src;
         document.getElementById("selectedCardStats").innerHTML = document.getElementById("card2Stats").innerHTML;
     }
     if (document.getElementById("dungeonCard3Selection").checked) 
     {
         dungeonSelectedCardId = dungeonCard3Id;
         document.getElementById("selectedCardName").innerHTML = document.getElementById("card3Name").innerHTML;
-        document.getElementById("selectedCardImage").innerHTML = document.getElementById("card3Image").innerHTML;
+        document.getElementById("selectedCardImage").src = document.getElementById("card3Image").src;
         document.getElementById("selectedCardStats").innerHTML = document.getElementById("card3Stats").innerHTML;
     }
     
@@ -587,6 +588,12 @@ function DungeonEndTurn() {
 
 
             if (this.status == 200) {
+                dungeonSelectedCardId = null
+
+                document.getElementById("selectedCardName").innerHTML = "Selected Card Name";
+                document.getElementById("selectedCardImage").src = "../Assets/Art/Cards/1x/HiddenDraft.png";
+                document.getElementById("selectedCardStats").innerHTML = "Selected Card Stats";
+
                 if(data.state == "WAITING_FOR_OPP") {
                     //display a screen for wait for opponent choice
                     document.getElementById("waitingForOpponent").style.display = "block";
@@ -647,24 +654,24 @@ function getShowdownCardSelection() {
                     document.getElementById("insight").innerHTML = "Insight: " + data.insight;
                     document.getElementById("damage").innerHTML = "Damage: " + data.damage;
                     
-                    showdownCard1Id = 8
+                    showdownCard1Id = 1
                     document.getElementById("normalAttackCardName").innerHTML = data.card[0].card_name
-                    document.getElementById("normalAttackCardImage").innerHTML = data.card[0].card_image_path
+                    document.getElementById("normalAttackCardImage").src = data.card[0].card_image_path
                     document.getElementById("normalAttackCardStats").innerHTML = UnwrapShowdownCardStats(data.card[0], data.damage)
 
                     showdownCard2Id = data.card[1].card_id
                     document.getElementById("specialAttackCardName").innerHTML = data.card[1].card_name
-                    document.getElementById("specialAttackCardImage").innerHTML = data.card[1].card_image_path
+                    document.getElementById("specialAttackCardImage").src = data.card[1].card_image_path
                     document.getElementById("specialAttackCardStats").innerHTML = UnwrapShowdownCardStats(data.card[1], data.damage)
                     
                     showdownCard3Id = data.card[2].card_id
                     document.getElementById("defenseCardName").innerHTML = data.card[2].card_name
-                    document.getElementById("defenseCardImage").innerHTML = data.card[2].card_image_path
+                    document.getElementById("defenseCardImage").src = data.card[2].card_image_path
                     document.getElementById("defenseCardStats").innerHTML = UnwrapShowdownCardStats(data.card[2], data.damage)
 
                     showdownCard4Id = data.card[3].card_id
                     document.getElementById("skillCardName").innerHTML = data.card[3].card_name
-                    document.getElementById("skillCardImage").innerHTML = data.card[3].card_image_path
+                    document.getElementById("skillCardImage").src = data.card[3].card_image_path
                     document.getElementById("skillCardStats").innerHTML = UnwrapShowdownCardStats(data.card[3], data.damage)
 
                     //Display HTML Elements - ON
@@ -827,14 +834,14 @@ function ShowdownSelectCard() {
         if(showdownSelectedCard1Id == null && showdownSelectedCard2Id != showdownCard1Id) {
             showdownSelectedCard1Id = showdownCard1Id;
             document.getElementById("selectedCardName1").innerHTML = document.getElementById("normalAttackCardName").innerHTML;
-            document.getElementById("selectedCardImage1").innerHTML = document.getElementById("normalAttackCardImage").innerHTML;
+            document.getElementById("selectedCardImage1").src = document.getElementById("normalAttackCardImage").src;
             document.getElementById("selectedCardStats1").innerHTML = document.getElementById("normalAttackCardStats").innerHTML;
             return;
         } 
         else if(showdownSelectedCard2Id == null && showdownSelectedCard1Id != showdownCard1Id) {
             showdownSelectedCard2Id = showdownCard1Id;
             document.getElementById("selectedCardName2").innerHTML = document.getElementById("normalAttackCardName").innerHTML;
-            document.getElementById("selectedCardImage2").innerHTML = document.getElementById("normalAttackCardImage").innerHTML;
+            document.getElementById("selectedCardImage2").src = document.getElementById("normalAttackCardImage").src;
             document.getElementById("selectedCardStats2").innerHTML = document.getElementById("normalAttackCardStats").innerHTML;
             return;
         } 
@@ -846,7 +853,7 @@ function ShowdownSelectCard() {
         if(showdownSelectedCard1Id == showdownCard1Id) {
             showdownSelectedCard1Id = null;
             document.getElementById("selectedCardName1").innerHTML = "Selected Card Name";
-            document.getElementById("selectedCardImage1").innerHTML = "[Selected Card Image]";
+            document.getElementById("selectedCardImage1").src = "../Assets/Art/Cards/1x/HiddenDraft.png";
             document.getElementById("selectedCardStats1").innerHTML = "Selected Card Stats";
             
 
@@ -854,7 +861,7 @@ function ShowdownSelectCard() {
         if(showdownSelectedCard2Id == showdownCard1Id) {
             showdownSelectedCard2Id = null;
             document.getElementById("selectedCardName2").innerHTML = "Selected Card Name";
-            document.getElementById("selectedCardImage2").innerHTML = "[Selected Card Image]";
+            document.getElementById("selectedCardImage2").src = "../Assets/Art/Cards/1x/HiddenDraft.png";
             document.getElementById("selectedCardStats2").innerHTML = "Selected Card Stats";
         }
     }
@@ -867,14 +874,14 @@ function ShowdownSelectCard() {
         if(showdownSelectedCard1Id == null && showdownSelectedCard2Id != showdownCard2Id) {
             showdownSelectedCard1Id = showdownCard2Id;
             document.getElementById("selectedCardName1").innerHTML = document.getElementById("specialAttackCardName").innerHTML;
-            document.getElementById("selectedCardImage1").innerHTML = document.getElementById("specialAttackCardImage").innerHTML;
+            document.getElementById("selectedCardImage1").src = document.getElementById("specialAttackCardImage").src;
             document.getElementById("selectedCardStats1").innerHTML = document.getElementById("specialAttackCardStats").innerHTML;
             return;
         }
         else if(showdownSelectedCard2Id == null && showdownSelectedCard1Id != showdownCard2Id) {
             showdownSelectedCard2Id = showdownCard2Id;
             document.getElementById("selectedCardName2").innerHTML = document.getElementById("specialAttackCardName").innerHTML;
-            document.getElementById("selectedCardImage2").innerHTML = document.getElementById("specialAttackCardImage").innerHTML;
+            document.getElementById("selectedCardImage2").src = document.getElementById("specialAttackCardImage").src;
             document.getElementById("selectedCardStats2").innerHTML = document.getElementById("specialAttackCardStats").innerHTML;
             return;
         } 
@@ -887,7 +894,7 @@ function ShowdownSelectCard() {
         if(showdownSelectedCard1Id == showdownCard2Id) {
             showdownSelectedCard1Id = null;
             document.getElementById("selectedCardName1").innerHTML = "Selected Card Name";
-            document.getElementById("selectedCardImage1").innerHTML = "[Selected Card Image]";
+            document.getElementById("selectedCardImage1").src = "../Assets/Art/Cards/1x/HiddenDraft.png";
             document.getElementById("selectedCardStats1").innerHTML = "Selected Card Stats";
             
 
@@ -895,7 +902,7 @@ function ShowdownSelectCard() {
         if(showdownSelectedCard2Id == showdownCard2Id) {
             showdownSelectedCard2Id = null;
             document.getElementById("selectedCardName2").innerHTML = "Selected Card Name";
-            document.getElementById("selectedCardImage2").innerHTML = "[Selected Card Image]";
+            document.getElementById("selectedCardImage2").src = "../Assets/Art/Cards/1x/HiddenDraft.png";
             document.getElementById("selectedCardStats2").innerHTML = "Selected Card Stats";
         }
     }
@@ -904,14 +911,14 @@ function ShowdownSelectCard() {
         if(showdownSelectedCard1Id == null && showdownSelectedCard2Id != showdownCard3Id) {
             showdownSelectedCard1Id = showdownCard3Id;
             document.getElementById("selectedCardName1").innerHTML = document.getElementById("defenseCardName").innerHTML;
-            document.getElementById("selectedCardImage1").innerHTML = document.getElementById("defenseCardImage").innerHTML;
+            document.getElementById("selectedCardImage1").src = document.getElementById("defenseCardImage").src;
             document.getElementById("selectedCardStats1").innerHTML = document.getElementById("defenseCardStats").innerHTML;
             return;
         }
         else if(showdownSelectedCard2Id == null && showdownSelectedCard1Id != showdownCard3Id) {
             showdownSelectedCard2Id = showdownCard3Id;
             document.getElementById("selectedCardName2").innerHTML = document.getElementById("defenseCardName").innerHTML;
-            document.getElementById("selectedCardImage2").innerHTML = document.getElementById("defenseCardImage").innerHTML;
+            document.getElementById("selectedCardImage2").src = document.getElementById("defenseCardImage").src;
             document.getElementById("selectedCardStats2").innerHTML = document.getElementById("defenseCardStats").innerHTML;
             return;
         } 
@@ -920,7 +927,7 @@ function ShowdownSelectCard() {
         if(showdownSelectedCard1Id == showdownCard3Id) {
             showdownSelectedCard1Id = null;
             document.getElementById("selectedCardName1").innerHTML = "Selected Card Name";
-            document.getElementById("selectedCardImage1").innerHTML = "[Selected Card Image]";
+            document.getElementById("selectedCardImage1").src = "../Assets/Art/Cards/1x/HiddenDraft.png";
             document.getElementById("selectedCardStats1").innerHTML = "Selected Card Stats";
             
 
@@ -928,7 +935,7 @@ function ShowdownSelectCard() {
         if(showdownSelectedCard2Id == showdownCard3Id) {
             showdownSelectedCard2Id = null;
             document.getElementById("selectedCardName2").innerHTML = "Selected Card Name";
-            document.getElementById("selectedCardImage2").innerHTML = "[Selected Card Image]";
+            document.getElementById("selectedCardImage2").src = "../Assets/Art/Cards/1x/HiddenDraft.png";
             document.getElementById("selectedCardStats2").innerHTML = "Selected Card Stats";
         }
     }
@@ -937,14 +944,14 @@ function ShowdownSelectCard() {
         if(showdownSelectedCard1Id == null && showdownSelectedCard2Id != showdownCard4Id) {
             showdownSelectedCard1Id = showdownCard4Id;
             document.getElementById("selectedCardName1").innerHTML = document.getElementById("skillCardName").innerHTML;
-            document.getElementById("selectedCardImage1").innerHTML = document.getElementById("skillCardImage").innerHTML;
+            document.getElementById("selectedCardImage1").src = document.getElementById("skillCardImage").src;
             document.getElementById("selectedCardStats1").innerHTML = document.getElementById("skillCardStats").innerHTML;
             return;
         }
         else if(showdownSelectedCard2Id == null && showdownSelectedCard1Id != showdownCard4Id) {
             showdownSelectedCard2Id = showdownCard4Id;
             document.getElementById("selectedCardName2").innerHTML = document.getElementById("skillCardName").innerHTML;
-            document.getElementById("selectedCardImage2").innerHTML = document.getElementById("skillCardImage").innerHTML;
+            document.getElementById("selectedCardImage2").src = document.getElementById("skillCardImage").src;
             document.getElementById("selectedCardStats2").innerHTML = document.getElementById("skillCardStats").innerHTML;
             return;
         } 
@@ -953,7 +960,7 @@ function ShowdownSelectCard() {
         if(showdownSelectedCard1Id == showdownCard4Id) {
             showdownSelectedCard1Id = null;
             document.getElementById("selectedCardName1").innerHTML = "Selected Card Name";
-            document.getElementById("selectedCardImage1").innerHTML = "[Selected Card Image]";
+            document.getElementById("selectedCardImage1").src = "../Assets/Art/Cards/1x/HiddenDraft.png";
             document.getElementById("selectedCardStats1").innerHTML = "Selected Card Stats";
             
 
@@ -961,7 +968,7 @@ function ShowdownSelectCard() {
         if(showdownSelectedCard2Id == showdownCard4Id) {
             showdownSelectedCard2Id = null;
             document.getElementById("selectedCardName2").innerHTML = "Selected Card Name";
-            document.getElementById("selectedCardImage2").innerHTML = "[Selected Card Image]";
+            document.getElementById("selectedCardImage2").src = "../Assets/Art/Cards/1x/HiddenDraft.png";
             document.getElementById("selectedCardStats2").innerHTML = "Selected Card Stats";
         }
     }
@@ -982,6 +989,8 @@ function ShowdownEndTurn() {
         "cardId1": showdownSelectedCard1Id,
         "cardId2": showdownSelectedCard2Id
     }
+    
+    
 
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
@@ -990,6 +999,21 @@ function ShowdownEndTurn() {
             console.log(data)
 
             if (this.status == 200) {
+                console.log("server responded")
+                document.getElementById("showdownCard1Selection").checked = false;
+                document.getElementById("showdownCard2Selection").checked = false;
+                document.getElementById("showdownCard3Selection").checked = false;
+                document.getElementById("showdownCard4Selection").checked = false;
+
+                showdownSelectedCard1Id = null
+                showdownSelectedCard2Id = null
+
+                document.getElementById("selectedCardName1").innerHTML = "Selected Card Name";
+                document.getElementById("selectedCardName2").innerHTML = "Selected Card Name";
+                document.getElementById("selectedCardImage1").src = "../Assets/Art/Cards/1x/HiddenDraft.png";
+                document.getElementById("selectedCardImage2").src = "../Assets/Art/Cards/1x/HiddenDraft.png";
+                document.getElementById("selectedCardStats1").innerHTML = "Selected Card Stats";
+                document.getElementById("selectedCardStats2").innerHTML = "Selected Card Stats";
                 // //hide cards
                 // document.getElementById("showdownCards").style.display = "none";
 
@@ -1008,6 +1032,7 @@ function ShowdownEndTurn() {
     xhttp.setRequestHeader("Content-Type", "application/json");
 
     xhttp.send(JSON.stringify(dataToSend));
+    console.log("sent to the server")
 }
 //#endregion
 
