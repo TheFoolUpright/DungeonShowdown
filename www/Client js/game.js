@@ -75,9 +75,11 @@ function getWaitingOnOpponentShowdown() {
                 //Display HTML Elements - ON
                 document.getElementById("statsContainer").style.display = "block";
                 document.getElementById("waitingForOpponent").style.display = "block";
+                document.getElementById("showdownTurn").style.display = "block";
                 
                 //Display HTML Elements - OFF
                 document.getElementById("endingContainer").style.display = "none";
+                document.getElementById("dungeonRoom").style.display = "none";
                 document.getElementById("opponentChoiceSection").style.display = "none";  
                 document.getElementById("opponentShowdownActionsSection").style.display = "none";
                 document.getElementById("dungeonCards").style.display = "none";
@@ -107,10 +109,12 @@ function getWaitingOnOpponentDungeon() {
     //Display HTML Elements - ON
     document.getElementById("statsContainer").style.display = "block";
     document.getElementById("waitingForOpponent").style.display = "block";
+    document.getElementById("dungeonRoom").style.display = "block";
 
 
     //Display HTML Elements - OFF
     document.getElementById("endingContainer").style.display = "none";
+    document.getElementById("showdownTurn").style.display = "none";
     document.getElementById("opponentChoiceSection").style.display = "none";
     document.getElementById("opponentShowdownActionsSection").style.display = "none";
     document.getElementById("dungeonCards").style.display = "none";
@@ -170,7 +174,7 @@ function GetGameState() {
                 document.getElementById("roomId").innerHTML = "Room " + roomId 
 
                 showdownTurn = data.showdown_turn
-                document.getElementById("showdownTurn").innerHTML = "Turn " + showdownTurn
+                document.getElementById("turnId").innerHTML = "Turn " + showdownTurn
                 
                 currentState = data.state_id
                 console.log("currentState " + currentState)
@@ -282,6 +286,8 @@ function showWonEnding() {
   
     //Display HTML Elements - OFF
     document.getElementById("statsContainer").style.display = "none";
+    document.getElementById("dungeonRoom").style.display = "none";
+    document.getElementById("showdownTurn").style.display = "none";
     document.getElementById("opponentChoiceSection").style.display = "none";
     document.getElementById("waitingForOpponent").style.display = "none";
     document.getElementById("opponentShowdownActionsSection").style.display = "none";
@@ -296,6 +302,8 @@ function showLostEnding() {
     
     //Display HTML Elements - OFF
     document.getElementById("statsContainer").style.display = "none";
+    document.getElementById("dungeonRoom").style.display = "none";
+    document.getElementById("showdownTurn").style.display = "none";
     document.getElementById("opponentChoiceSection").style.display = "none";
     document.getElementById("waitingForOpponent").style.display = "none";
     document.getElementById("opponentShowdownActionsSection").style.display = "none";
@@ -312,6 +320,8 @@ function showDrawEnding() {
   
     //Display HTML Elements - OFF
     document.getElementById("statsContainer").style.display = "none";
+    document.getElementById("dungeonRoom").style.display = "none";
+    document.getElementById("showdownTurn").style.display = "none";
     document.getElementById("opponentChoiceSection").style.display = "none";
     document.getElementById("waitingForOpponent").style.display = "none";
     document.getElementById("opponentShowdownActionsSection").style.display = "none";
@@ -390,9 +400,11 @@ function getDungeonCardSelection() {
 
                     //Display HTML Elements - ON
                     document.getElementById("statsContainer").style.display = "block";
+                    document.getElementById("dungeonRoom").style.display = "block";
                     document.getElementById("dungeonCards").style.display = "block";
                     
                     //Display HTML Elements - OFF
+                    document.getElementById("showdownTurn").style.display = "none";
                     document.getElementById("endingContainer").style.display = "none";
                     document.getElementById("opponentChoiceSection").style.display = "none";
                     document.getElementById("waitingForOpponent").style.display = "none";
@@ -439,10 +451,12 @@ function getDungeonResult() {
                 //Display HTML Elements - ON
                 document.getElementById("statsContainer").style.display = "block";
                 document.getElementById("opponentChoiceSection").style.display = "block";
+                document.getElementById("dungeonRoom").style.display = "block";
                 
                 
                 //Display HTML Elements - OFF
                 document.getElementById("endingContainer").style.display = "none";
+                document.getElementById("showdownTurn").style.display = "none";
                 document.getElementById("waitingForOpponent").style.display = "none";
                 document.getElementById("opponentShowdownActionsSection").style.display = "none";
                 document.getElementById("dungeonCards").style.display = "none";
@@ -676,9 +690,11 @@ function getShowdownCardSelection() {
 
                     //Display HTML Elements - ON
                     document.getElementById("statsContainer").style.display = "block";
+                    document.getElementById("showdownTurn").style.display = "block";
                     document.getElementById("showdownCards").style.display = "block";
                     
                     //Display HTML Elements - OFF
+                    document.getElementById("dungeonRoom").style.display = "none";
                     document.getElementById("endingContainer").style.display = "none";
                     document.getElementById("opponentChoiceSection").style.display = "none";
                     document.getElementById("waitingForOpponent").style.display = "none";
@@ -720,8 +736,10 @@ function getShowdownResult() {
 
                 //Display HTML Elements - ON          
                 document.getElementById("opponentShowdownActionsSection").style.display = "block";
-                
+                document.getElementById("showdownTurn").style.display = "block";
+
                 //Display HTML Elements - OFF
+                document.getElementById("dungeonRoom").style.display = "none";
                 document.getElementById("endingContainer").style.display = "none";
                 document.getElementById("statsContainer").style.display = "none";    
                 document.getElementById("waitingForOpponent").style.display = "none";

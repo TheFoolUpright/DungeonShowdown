@@ -9,9 +9,14 @@
 </head>
 <body>
     <!-- <h1>Dungeon Showdown</h1> <input type="button" value="SetupDungeonRoom1" name="SetupDungeonRoom1" onclick="SetupDungeon()"> -->
-    <p id="roomId">Room 1</p>
-    <p id="showdownTurn">Turn 0</p>
-
+     <div id="dungeonRoom">
+        <h1>Dungeon</h1>
+        <p id="roomId">Room 1</p>
+     </div>
+     <div id="showdownTurn" style="display: none;">
+        <h1>Showdown</h1>
+    <p id="turnId">Turn 0</p>
+    </div>
     <table class="stats" id="statsContainer">
         <tr id="maxHealthContainer">
             <td><img src="../Assets/Art/UI/1x/Max Health.png" alt="Max Health Icon" width="40" height="40"></td>

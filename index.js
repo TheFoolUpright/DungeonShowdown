@@ -2107,18 +2107,60 @@ app.post("/setupShowdown", (req, res) => {
     if( req.session.roomId == 5) {
         req.session.roomId++;
         req.session.showdownTurn = 0;
-   }
-    req.session.showdownTurn++;
 
+        console.log("SetupRoom5Working")
+        if (!req.session.playerStatusId) {
+            GetSessionPlayerStatusId()
+        }
+        else{
+            CheckIfInitiativeIsSet()
+        }
+
+   }
+   else {
+
+    console.log("Resolving Showdown")
+    
     if (!req.session.playerStatusId) {
         GetSessionPlayerStatusId()
     }
     else{
-        CheckIfInitiativeIsSet()
+        GetOpponentShowdownCardStats()
     }
+   }
+   
+   function GetSessionPlayerStatusId() {
+    connection.query("SELECT player_status_id FROM player_status WHERE player_id = ? AND match_id = ?", [req.session.playerId, req.session.matchId], 
+        function(err, rows, fields) {
+            if (err) {
+                console.log("Database Error: " + err)
+                res.status(500).json({
+                    "message": err
+                })
+                return
+            }
+            req.session.playerStatusId = rows[0].player_status_id;
+            if( req.session.roomId == 5){
+                CheckIfInitiativeIsSet()
+            }
+            else{
+                GetOpponentShowdownCardStats()
+            }
+            
+        }
+    )
+} 
 
-    function GetSessionPlayerStatusId() {
-        connection.query("SELECT player_status_id FROM player_status WHERE player_id = ? AND match_id = ?", [req.session.playerId, req.session.matchId], 
+
+
+    /**
+     * Get all the information from the opponent's selected cards to use in the next function.
+     * Called by UpdateSelectedCardSlot2.
+     * @param none
+     * @returns none
+     */
+    function GetOpponentShowdownCardStats() {
+        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (9,10) AND match_id = ?;", [req.session.playerStatusId,  req.session.showdownTurn, req.session.matchId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -2127,11 +2169,240 @@ app.post("/setupShowdown", (req, res) => {
                     })
                     return
                 }
-                req.session.playerStatusId = rows[0].player_status_id;
+                if (rows.length != 0) {
+                    console.log("sadjbka")
+                    GetPlayerShowdownCardStats(rows)
+                }
+                else {
+                    console.log("playerStatusId "+req.session.playerStatusId)
+                    console.log("showdownTurn "+req.session.showdownTurn)
+                    console.log("matchId "+req.session.matchId)
+
+                    console.log("opponent's choice not saved")
+                    res.status(200).json({  
+                        "message": "Waiting for opponent's choice"
+                    })
+                }
+                
+            }
+        )
+        
+    }
+
+
+    /**
+     * Get all the information from the player's selected cards to use in the next function.
+     * Called by GetOpponentShowdownCardStats.
+     * @param {object} opponentCards - An array of the opponent's selected cards.
+     * @returns none
+     */
+    function GetPlayerShowdownCardStats(opponentCards) {
+        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id WHERE player_status_id = ? AND showdown_turn = ? AND slot_id IN (9,10);", [req.session.playerStatusId,  req.session.showdownTurn], 
+            function(err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+
+                if(rows.length != 0){
+                    console.log("asdbjuksa")
+                    GetPlayerShowdownStats(opponentCards, rows);
+                }
+                else{
+                    console.log("asdbikfasdbol")
+                }
+                
+            }
+        )
+    }
+
+    /**
+     * Save in variables what stats need to be changed and by how much once the showdown turn concludes.
+     * Called by GetPlayerShowdownCardStats.
+     * @param {object} opponentCards - An array of the opponent's selected cards.
+     * @param {object} playerCards - An array of the player's selected cards.
+     * @returns none
+     */
+    function GetPlayerShowdownStats(opponentCards, playerCards) {
+        connection.query("SELECT player_status_id, Player.match_id, player_id, current_health, energy, insight, Player.damage, Opponent.damage op_damage FROM (SELECT damage, match_id FROM dungeonshowdown.player_status WHERE match_id = ? AND player_status_id != ?) Opponent INNER JOIN dungeonshowdown.player_status Player ON Opponent.match_id = Player.match_id WHERE player_status_id = ?;", [req.session.matchId, req.session.playerStatusId, req.session.playerStatusId], 
+            function(err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+                console.log("nasudbiopb")
+                var opponentDamage = rows[0].op_damage;
+                var opponentAttack = 0
+                var opponentParryAttack = 0
+                var playerCurrentHealth = rows[0].current_health;
+                var playerEnergy = rows[0].energy;
+                var playerInsight = rows[0].insight;
+                var playerDamage = rows[0].damage;
+                var playerAttack = 0;
+                var playerDefense = 0;
+                var isParry = false;
+                var isDodge = false;
+                var isDoubleAttack = false;
+                var isCounter = false;
+                var isDoubleAttackOpponent = false;
+                var isCounterOpponent = false;
+                var isParryOpponent = false;
+
+                console.log("Before Calculation")
+                console.log("playerCurrentHealth: "+ playerCurrentHealth)
+                console.log("playerEnergy: "+ playerEnergy)
+                console.log("playerInsight: "+ playerInsight)
+                console.log("playerDamage: "+ playerDamage)
+
+                //Player Skills
+                for (let i = 0; i < playerCards.length; i++) {
+                    if (playerCards[i].card_type_id == 8) {
+                        playerCurrentHealth = playerCurrentHealth + playerCards[i].card_current_health;
+                        playerInsight = playerInsight + playerCards[i].card_insight;
+                        playerEnergy = playerEnergy + playerCards[i].card_energy;
+                        playerDamage = playerDamage + playerCards[i].card_damage;
+                    }
+                }
+
+                //Opponent Skills
+                for (let i = 0; i < opponentCards.length; i++) {
+                    if (opponentCards[i].card_type_id == 8) {
+                        opponentDamage = opponentDamage + opponentCards[i].card_damage;
+                    }
+                }
+                
+                //Player Defense
+                for (let i = 0; i < playerCards.length; i++) {
+                    if (playerCards[i].card_type_id == 7) {
+                        playerDefense = playerDefense + playerCards[i].card_defense;
+                        playerInsight = playerInsight + playerCards[i].card_insight;
+                        playerEnergy = playerEnergy + playerCards[i].card_energy;
+
+                        if (playerCards[i].card_id == 10) {
+                            isParry = true;
+                        }
+                        if (playerCards[i].card_id == 9) {
+                            isDodge = true;
+                        }
+                    }
+                }
+
+                //Opponent Defense
+                for (let i = 0; i < opponentCards.length; i++) {
+                    if (opponentCards[i].card_type_id == 7) {
+                        if (opponentCards[i].card_id == 10) {
+                            opponentParryAttack = opponentCards[i].card_attack
+                            isParryOpponent = true;
+                        }
+                    }
+                }
+
+                //Player Attack
+                for (let i = 0; i < playerCards.length; i++) {
+                    if (playerCards[i].card_type_id == 6) {
+                        playerAttack = playerAttack + playerCards[i].card_attack;
+                        playerEnergy = playerEnergy + playerCards[i].card_energy;
+
+                        if (playerCards[i].card_id == 3) {
+                            isDoubleAttack = true;
+                        }
+                        if (playerCards[i].card_id == 5) {
+                            isCounter = true;
+                        }
+                    }
+                }
+
+                //Opponent Attack
+                for (let i = 0; i < opponentCards.length; i++) {
+                    if (opponentCards[i].card_type_id == 6) {
+                        opponentAttack = opponentAttack + opponentCards[i].card_attack;
+
+                        if (opponentCards[i].card_id == 3) {
+                            isDoubleAttackOpponent = true;
+                        }
+                        if (opponentCards[i].card_id == 5) {
+                            isCounterOpponent = true;
+                        }
+                    }
+                }
+
+                if (isCounterOpponent) {
+                    if(!isDodge || !isParry) {
+                        
+                        playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - (opponentAttack * opponentDamage));
+                        playerDefense = Math.max(0, playerDefense - (opponentAttack * opponentDamage))
+                    }
+                }
+                if(isDoubleAttackOpponent) {
+                    if(!isDodge || !isParry) {
+                        playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - ((opponentAttack * opponentDamage) * 2));
+                        playerDefense = Math.max(0, playerDefense - ((opponentAttack * opponentDamage) * 2))
+                    }
+                    else{
+                        
+                        playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - (opponentAttack * opponentDamage))
+                        playerDefense = Math.max(0, playerDefense - (opponentAttack * opponentDamage))
+                    }
+                }
+                if (isParryOpponent) {
+                    if(opponentAttack != 0 || !isDodge) {
+                        playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - (opponentParryAttack * playerDamage));
+                        playerDefense = Math.max(0, playerDefense - (opponentParryAttack * playerDamage))
+                    }
+                }
+                
+                //Apply Normal, Heavy or Recovery Attack Damage
+                if(!isCounterOpponent && !isDoubleAttackOpponent) {
+                    playerCurrentHealth = playerCurrentHealth + playerDefense - (opponentAttack * opponentDamage)
+                    playerDefense = Math.max(0, playerDefense - (opponentAttack * opponentDamage))
+                }
+                
+                console.log("After Calculation")
+                console.log("playerCurrentHealth: "+ playerCurrentHealth)
+                console.log("playerEnergy: "+ playerEnergy)
+                console.log("playerInsight: "+ playerInsight)
+                console.log("playerDamage: "+ playerDamage)
+
+                UpdateShowdownPlayerStats(playerCurrentHealth, playerEnergy, playerInsight, playerDamage, opponentCards, playerCards)
+            }
+        )
+    }
+
+    /**
+     * Update the player stats in the database according to the selected cards in the showdown.
+     * Called by GetPlayerShowdownStats.
+     * @param {number} playerCurrentHealth - The new Current Health value to be updated into the database.
+     * @param {number} playerEnergy - The new Energy value to be updated into the database.
+     * @param {number} playerInsight - The new Insight value to be updated into the database.
+     * @param {number} playerDamage - The new Damage value to be updated into the database.
+     * @param {object} opponentCards - An array of the opponent's selected cards.
+     * @param {object} playerCards - An array of the player's selected cards.
+     * @returns {JSON} The sum of a and b.
+     */
+    function UpdateShowdownPlayerStats(playerCurrentHealth, playerEnergy, playerInsight, playerDamage, opponentCards, playerCards) {
+        connection.query("UPDATE player_status SET current_health = ?, energy = ?, insight = ?, damage = ? WHERE player_status_id = ?;", [playerCurrentHealth, playerEnergy, playerInsight, playerDamage, req.session.playerStatusId], 
+            function(err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+                //
                 CheckIfInitiativeIsSet()
             }
         )
     }
+
+
+   
 
     function CheckIfInitiativeIsSet() {
         connection.query("SELECT showdown_initiative FROM player_status WHERE match_id = ?;", [req.session.matchId],
@@ -2377,7 +2648,7 @@ app.post("/setupShowdown", (req, res) => {
 
     function InsertCards(playerStats, card1, card2, card3) {
         console.log("Insert cards Start")
-        connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn) VALUES (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?);", [playerStats[0].player_status_id, 5, 1,  req.session.roomId,  req.session.showdownTurn, playerStats[0].player_status_id, 6, card1.card_id,  req.session.roomId,  req.session.showdownTurn, playerStats[0].player_status_id, 7, card2.card_id,  req.session.roomId,  req.session.showdownTurn, playerStats[0].player_status_id, 8, card3.card_id,  req.session.roomId,  req.session.showdownTurn],
+        connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn) VALUES (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?);", [playerStats[0].player_status_id, 5, 1,  req.session.roomId,  req.session.showdownTurn+1, playerStats[0].player_status_id, 6, card1.card_id,  req.session.roomId,  req.session.showdownTurn+1, playerStats[0].player_status_id, 7, card2.card_id,  req.session.roomId,  req.session.showdownTurn+1, playerStats[0].player_status_id, 8, card3.card_id,  req.session.roomId,  req.session.showdownTurn+1],
         function (err, rows, fields) {
             if (err) {
 
@@ -2503,457 +2774,459 @@ app.post("/resolveShowdownTurn", (req, res) => {
                     })
                     return
                 }
-                GetOpponentShowdownCardStats()
+                res.status(200).json({
+                    "message": "Updated database with player selection"
+                })
             }
         )
     } 
 
-    /**
-     * Get all the information from the opponent's selected cards to use in the next function.
-     * Called by UpdateSelectedCardSlot2.
-     * @param none
-     * @returns none
-     */
-    function GetOpponentShowdownCardStats() {
-        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (9,10) AND match_id = ?;", [req.session.playerStatusId,  req.session.showdownTurn, req.session.matchId], 
-            function(err, rows, fields) {
-                if (err) {
-                    console.log("Database Error: " + err)
-                    res.status(500).json({
-                        "message": err
-                    })
-                    return
-                }
-                if (rows.length != 0) {
-                    GetPlayerShowdownCardStats(rows)
-                }
-                else {
-                    res.status(200).json({
-                        "message": "Waiting for opponent's choice"
-                    })
-                }
+    // /**
+    //  * Get all the information from the opponent's selected cards to use in the next function.
+    //  * Called by UpdateSelectedCardSlot2.
+    //  * @param none
+    //  * @returns none
+    //  */
+    // function GetOpponentShowdownCardStats() {
+    //     connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (9,10) AND match_id = ?;", [req.session.playerStatusId,  req.session.showdownTurn, req.session.matchId], 
+    //         function(err, rows, fields) {
+    //             if (err) {
+    //                 console.log("Database Error: " + err)
+    //                 res.status(500).json({
+    //                     "message": err
+    //                 })
+    //                 return
+    //             }
+    //             if (rows.length != 0) {
+    //                 GetPlayerShowdownCardStats(rows)
+    //             }
+    //             else {
+    //                 res.status(200).json({
+    //                     "message": "Waiting for opponent's choice"
+    //                 })
+    //             }
                 
-            }
-        )
+    //         }
+    //     )
         
-    }
+    // }
 
 
-    /**
-     * Get all the information from the player's selected cards to use in the next function.
-     * Called by GetOpponentShowdownCardStats.
-     * @param {object} opponentCards - An array of the opponent's selected cards.
-     * @returns none
-     */
-    function GetPlayerShowdownCardStats(opponentCards) {
-        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id WHERE player_status_id = ? AND showdown_turn = ? AND slot_id IN (9,10);", [req.session.playerStatusId,  req.session.showdownTurn], 
-            function(err, rows, fields) {
-                if (err) {
-                    console.log("Database Error: " + err)
-                    res.status(500).json({
-                        "message": err
-                    })
-                    return
-                }
+    // /**
+    //  * Get all the information from the player's selected cards to use in the next function.
+    //  * Called by GetOpponentShowdownCardStats.
+    //  * @param {object} opponentCards - An array of the opponent's selected cards.
+    //  * @returns none
+    //  */
+    // function GetPlayerShowdownCardStats(opponentCards) {
+    //     connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id WHERE player_status_id = ? AND showdown_turn = ? AND slot_id IN (9,10);", [req.session.playerStatusId,  req.session.showdownTurn], 
+    //         function(err, rows, fields) {
+    //             if (err) {
+    //                 console.log("Database Error: " + err)
+    //                 res.status(500).json({
+    //                     "message": err
+    //                 })
+    //                 return
+    //             }
                 
-                GetPlayerShowdownStats(opponentCards, rows);
+    //             GetPlayerShowdownStats(opponentCards, rows);
                 
-            }
-        )
-    }
+    //         }
+    //     )
+    // }
 
-    /**
-     * Save in variables what stats need to be changed and by how much once the showdown turn concludes.
-     * Called by GetPlayerShowdownCardStats.
-     * @param {object} opponentCards - An array of the opponent's selected cards.
-     * @param {object} playerCards - An array of the player's selected cards.
-     * @returns none
-     */
-    function GetPlayerShowdownStats(opponentCards, playerCards) {
-        connection.query("SELECT player_status_id, Player.match_id, player_id, current_health, energy, insight, Player.damage, Opponent.damage op_damage FROM (SELECT damage, match_id FROM dungeonshowdown.player_status WHERE match_id = ? AND player_status_id != ?) Opponent INNER JOIN dungeonshowdown.player_status Player ON Opponent.match_id = Player.match_id WHERE player_status_id = ?;", [req.session.matchId, req.session.playerStatusId, req.session.playerStatusId], 
-            function(err, rows, fields) {
-                if (err) {
-                    console.log("Database Error: " + err)
-                    res.status(500).json({
-                        "message": err
-                    })
-                    return
-                }
-                var opponentDamage = rows[0].op_damage;
-                var opponentAttack = 0
-                var opponentParryAttack = 0
-                var playerCurrentHealth = rows[0].current_health;
-                var playerEnergy = rows[0].energy;
-                var playerInsight = rows[0].insight;
-                var playerDamage = rows[0].damage;
-                var playerAttack = 0;
-                var playerDefense = 0;
-                var isParry = false;
-                var isDodge = false;
-                var isDoubleAttack = false;
-                var isCounter = false;
-                var isDoubleAttackOpponent = false;
-                var isCounterOpponent = false;
-                var isParryOpponent = false;
+    // /**
+    //  * Save in variables what stats need to be changed and by how much once the showdown turn concludes.
+    //  * Called by GetPlayerShowdownCardStats.
+    //  * @param {object} opponentCards - An array of the opponent's selected cards.
+    //  * @param {object} playerCards - An array of the player's selected cards.
+    //  * @returns none
+    //  */
+    // function GetPlayerShowdownStats(opponentCards, playerCards) {
+    //     connection.query("SELECT player_status_id, Player.match_id, player_id, current_health, energy, insight, Player.damage, Opponent.damage op_damage FROM (SELECT damage, match_id FROM dungeonshowdown.player_status WHERE match_id = ? AND player_status_id != ?) Opponent INNER JOIN dungeonshowdown.player_status Player ON Opponent.match_id = Player.match_id WHERE player_status_id = ?;", [req.session.matchId, req.session.playerStatusId, req.session.playerStatusId], 
+    //         function(err, rows, fields) {
+    //             if (err) {
+    //                 console.log("Database Error: " + err)
+    //                 res.status(500).json({
+    //                     "message": err
+    //                 })
+    //                 return
+    //             }
+    //             var opponentDamage = rows[0].op_damage;
+    //             var opponentAttack = 0
+    //             var opponentParryAttack = 0
+    //             var playerCurrentHealth = rows[0].current_health;
+    //             var playerEnergy = rows[0].energy;
+    //             var playerInsight = rows[0].insight;
+    //             var playerDamage = rows[0].damage;
+    //             var playerAttack = 0;
+    //             var playerDefense = 0;
+    //             var isParry = false;
+    //             var isDodge = false;
+    //             var isDoubleAttack = false;
+    //             var isCounter = false;
+    //             var isDoubleAttackOpponent = false;
+    //             var isCounterOpponent = false;
+    //             var isParryOpponent = false;
 
-                console.log("Before Calculation")
-                console.log("playerCurrentHealth: "+ playerCurrentHealth)
-                console.log("playerEnergy: "+ playerEnergy)
-                console.log("playerInsight: "+ playerInsight)
-                console.log("playerDamage: "+ playerDamage)
+    //             console.log("Before Calculation")
+    //             console.log("playerCurrentHealth: "+ playerCurrentHealth)
+    //             console.log("playerEnergy: "+ playerEnergy)
+    //             console.log("playerInsight: "+ playerInsight)
+    //             console.log("playerDamage: "+ playerDamage)
 
-                //Player Skills
-                for (let i = 0; i < playerCards.length; i++) {
-                    if (playerCards[i].card_type_id == 8) {
-                        playerCurrentHealth = playerCurrentHealth + playerCards[i].card_current_health;
-                        playerInsight = playerInsight + playerCards[i].card_insight;
-                        playerEnergy = playerEnergy + playerCards[i].card_energy;
-                        playerDamage = playerDamage + playerCards[i].card_damage;
-                    }
-                }
+    //             //Player Skills
+    //             for (let i = 0; i < playerCards.length; i++) {
+    //                 if (playerCards[i].card_type_id == 8) {
+    //                     playerCurrentHealth = playerCurrentHealth + playerCards[i].card_current_health;
+    //                     playerInsight = playerInsight + playerCards[i].card_insight;
+    //                     playerEnergy = playerEnergy + playerCards[i].card_energy;
+    //                     playerDamage = playerDamage + playerCards[i].card_damage;
+    //                 }
+    //             }
 
-                //Opponent Skills
-                for (let i = 0; i < opponentCards.length; i++) {
-                    if (opponentCards[i].card_type_id == 8) {
-                        opponentDamage = opponentDamage + opponentCards[i].card_damage;
-                    }
-                }
+    //             //Opponent Skills
+    //             for (let i = 0; i < opponentCards.length; i++) {
+    //                 if (opponentCards[i].card_type_id == 8) {
+    //                     opponentDamage = opponentDamage + opponentCards[i].card_damage;
+    //                 }
+    //             }
                 
-                //Player Defense
-                for (let i = 0; i < playerCards.length; i++) {
-                    if (playerCards[i].card_type_id == 7) {
-                        playerDefense = playerDefense + playerCards[i].card_defense;
-                        playerInsight = playerInsight + playerCards[i].card_insight;
-                        playerEnergy = playerEnergy + playerCards[i].card_energy;
+    //             //Player Defense
+    //             for (let i = 0; i < playerCards.length; i++) {
+    //                 if (playerCards[i].card_type_id == 7) {
+    //                     playerDefense = playerDefense + playerCards[i].card_defense;
+    //                     playerInsight = playerInsight + playerCards[i].card_insight;
+    //                     playerEnergy = playerEnergy + playerCards[i].card_energy;
 
-                        if (playerCards[i].card_id == 10) {
-                            isParry = true;
-                        }
-                        if (playerCards[i].card_id == 9) {
-                            isDodge = true;
-                        }
-                    }
-                }
+    //                     if (playerCards[i].card_id == 10) {
+    //                         isParry = true;
+    //                     }
+    //                     if (playerCards[i].card_id == 9) {
+    //                         isDodge = true;
+    //                     }
+    //                 }
+    //             }
 
-                //Opponent Defense
-                for (let i = 0; i < opponentCards.length; i++) {
-                    if (opponentCards[i].card_type_id == 7) {
-                        if (opponentCards[i].card_id == 10) {
-                            opponentParryAttack = opponentCards[i].card_attack
-                            isParryOpponent = true;
-                        }
-                    }
-                }
+    //             //Opponent Defense
+    //             for (let i = 0; i < opponentCards.length; i++) {
+    //                 if (opponentCards[i].card_type_id == 7) {
+    //                     if (opponentCards[i].card_id == 10) {
+    //                         opponentParryAttack = opponentCards[i].card_attack
+    //                         isParryOpponent = true;
+    //                     }
+    //                 }
+    //             }
 
-                //Player Attack
-                for (let i = 0; i < playerCards.length; i++) {
-                    if (playerCards[i].card_type_id == 6) {
-                        playerAttack = playerAttack + playerCards[i].card_attack;
-                        playerEnergy = playerEnergy + playerCards[i].card_energy;
+    //             //Player Attack
+    //             for (let i = 0; i < playerCards.length; i++) {
+    //                 if (playerCards[i].card_type_id == 6) {
+    //                     playerAttack = playerAttack + playerCards[i].card_attack;
+    //                     playerEnergy = playerEnergy + playerCards[i].card_energy;
 
-                        if (playerCards[i].card_id == 3) {
-                            isDoubleAttack = true;
-                        }
-                        if (playerCards[i].card_id == 5) {
-                            isCounter = true;
-                        }
-                    }
-                }
+    //                     if (playerCards[i].card_id == 3) {
+    //                         isDoubleAttack = true;
+    //                     }
+    //                     if (playerCards[i].card_id == 5) {
+    //                         isCounter = true;
+    //                     }
+    //                 }
+    //             }
 
-                //Opponent Attack
-                for (let i = 0; i < opponentCards.length; i++) {
-                    if (opponentCards[i].card_type_id == 6) {
-                        opponentAttack = opponentAttack + opponentCards[i].card_attack;
+    //             //Opponent Attack
+    //             for (let i = 0; i < opponentCards.length; i++) {
+    //                 if (opponentCards[i].card_type_id == 6) {
+    //                     opponentAttack = opponentAttack + opponentCards[i].card_attack;
 
-                        if (opponentCards[i].card_id == 3) {
-                            isDoubleAttackOpponent = true;
-                        }
-                        if (opponentCards[i].card_id == 5) {
-                            isCounterOpponent = true;
-                        }
-                    }
-                }
+    //                     if (opponentCards[i].card_id == 3) {
+    //                         isDoubleAttackOpponent = true;
+    //                     }
+    //                     if (opponentCards[i].card_id == 5) {
+    //                         isCounterOpponent = true;
+    //                     }
+    //                 }
+    //             }
 
-                if (isCounterOpponent) {
-                    if(!isDodge || !isParry) {
+    //             if (isCounterOpponent) {
+    //                 if(!isDodge || !isParry) {
                         
-                        playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - (opponentAttack * opponentDamage));
-                        playerDefense = Math.max(0, playerDefense - (opponentAttack * opponentDamage))
-                    }
-                }
-                if(isDoubleAttackOpponent) {
-                    if(!isDodge || !isParry) {
-                        playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - ((opponentAttack * opponentDamage) * 2));
-                        playerDefense = Math.max(0, playerDefense - ((opponentAttack * opponentDamage) * 2))
-                    }
-                    else{
+    //                     playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - (opponentAttack * opponentDamage));
+    //                     playerDefense = Math.max(0, playerDefense - (opponentAttack * opponentDamage))
+    //                 }
+    //             }
+    //             if(isDoubleAttackOpponent) {
+    //                 if(!isDodge || !isParry) {
+    //                     playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - ((opponentAttack * opponentDamage) * 2));
+    //                     playerDefense = Math.max(0, playerDefense - ((opponentAttack * opponentDamage) * 2))
+    //                 }
+    //                 else{
                         
-                        playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - (opponentAttack * opponentDamage))
-                        playerDefense = Math.max(0, playerDefense - (opponentAttack * opponentDamage))
-                    }
-                }
-                if (isParryOpponent) {
-                    if(opponentAttack != 0 || !isDodge) {
-                        playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - (opponentParryAttack * playerDamage));
-                        playerDefense = Math.max(0, playerDefense - (opponentParryAttack * playerDamage))
-                    }
-                }
+    //                     playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - (opponentAttack * opponentDamage))
+    //                     playerDefense = Math.max(0, playerDefense - (opponentAttack * opponentDamage))
+    //                 }
+    //             }
+    //             if (isParryOpponent) {
+    //                 if(opponentAttack != 0 || !isDodge) {
+    //                     playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - (opponentParryAttack * playerDamage));
+    //                     playerDefense = Math.max(0, playerDefense - (opponentParryAttack * playerDamage))
+    //                 }
+    //             }
                 
-                //Apply Normal, Heavy or Recovery Attack Damage
-                if(!isCounterOpponent && !isDoubleAttackOpponent) {
-                    playerCurrentHealth = playerCurrentHealth + playerDefense - (opponentAttack * opponentDamage)
-                    playerDefense = Math.max(0, playerDefense - (opponentAttack * opponentDamage))
-                }
+    //             //Apply Normal, Heavy or Recovery Attack Damage
+    //             if(!isCounterOpponent && !isDoubleAttackOpponent) {
+    //                 playerCurrentHealth = playerCurrentHealth + playerDefense - (opponentAttack * opponentDamage)
+    //                 playerDefense = Math.max(0, playerDefense - (opponentAttack * opponentDamage))
+    //             }
                 
-                console.log("After Calculation")
-                console.log("playerCurrentHealth: "+ playerCurrentHealth)
-                console.log("playerEnergy: "+ playerEnergy)
-                console.log("playerInsight: "+ playerInsight)
-                console.log("playerDamage: "+ playerDamage)
+    //             console.log("After Calculation")
+    //             console.log("playerCurrentHealth: "+ playerCurrentHealth)
+    //             console.log("playerEnergy: "+ playerEnergy)
+    //             console.log("playerInsight: "+ playerInsight)
+    //             console.log("playerDamage: "+ playerDamage)
 
-                UpdateShowdownPlayerStats(playerCurrentHealth, playerEnergy, playerInsight, playerDamage, opponentCards, playerCards)
-            }
-        )
-    }
+    //             UpdateShowdownPlayerStats(playerCurrentHealth, playerEnergy, playerInsight, playerDamage, opponentCards, playerCards)
+    //         }
+    //     )
+    // }
 
-    /**
-     * Update the player stats in the database according to the selected cards in the showdown.
-     * Called by GetPlayerShowdownStats.
-     * @param {number} playerCurrentHealth - The new Current Health value to be updated into the database.
-     * @param {number} playerEnergy - The new Energy value to be updated into the database.
-     * @param {number} playerInsight - The new Insight value to be updated into the database.
-     * @param {number} playerDamage - The new Damage value to be updated into the database.
-     * @param {object} opponentCards - An array of the opponent's selected cards.
-     * @param {object} playerCards - An array of the player's selected cards.
-     * @returns {JSON} The sum of a and b.
-     */
-    function UpdateShowdownPlayerStats(playerCurrentHealth, playerEnergy, playerInsight, playerDamage, opponentCards, playerCards) {
-        connection.query("UPDATE player_status SET current_health = ?, energy = ?, insight = ?, damage = ? WHERE player_status_id = ?;", [playerCurrentHealth, playerEnergy, playerInsight, playerDamage, req.session.playerStatusId], 
-            function(err, rows, fields) {
-                if (err) {
-                    console.log("Database Error: " + err)
-                    res.status(500).json({
-                        "message": err
-                    })
-                    return
-                }
-                //
-                DisplayPlayerAndOpponentActions(opponentCards, playerCards)
-            }
-        )
-    }
+    // /**
+    //  * Update the player stats in the database according to the selected cards in the showdown.
+    //  * Called by GetPlayerShowdownStats.
+    //  * @param {number} playerCurrentHealth - The new Current Health value to be updated into the database.
+    //  * @param {number} playerEnergy - The new Energy value to be updated into the database.
+    //  * @param {number} playerInsight - The new Insight value to be updated into the database.
+    //  * @param {number} playerDamage - The new Damage value to be updated into the database.
+    //  * @param {object} opponentCards - An array of the opponent's selected cards.
+    //  * @param {object} playerCards - An array of the player's selected cards.
+    //  * @returns {JSON} The sum of a and b.
+    //  */
+    // function UpdateShowdownPlayerStats(playerCurrentHealth, playerEnergy, playerInsight, playerDamage, opponentCards, playerCards) {
+    //     connection.query("UPDATE player_status SET current_health = ?, energy = ?, insight = ?, damage = ? WHERE player_status_id = ?;", [playerCurrentHealth, playerEnergy, playerInsight, playerDamage, req.session.playerStatusId], 
+    //         function(err, rows, fields) {
+    //             if (err) {
+    //                 console.log("Database Error: " + err)
+    //                 res.status(500).json({
+    //                     "message": err
+    //                 })
+    //                 return
+    //             }
+    //             //
+    //            DisplayPlayerAndOpponentActions(opponentCards, playerCards)
+    //         }
+    //     )
+    // }
 
 
-    /**
-     * Creates the strings that show the opponent and player actions in the showdown.
-     * Called by UpdateShowdownPlayerStats.
-     * @param {object} opponentCards - An array of the opponent's selected cards.
-     * @param {object} playerCards - An array of the player's selected cards.
-     * @returns none
-     */
-    //resolve req.session.showdownTurn
-    function DisplayPlayerAndOpponentActions(opponentCards, playerCards) {
-        var opponentActions = "";
-        var playerActions = "";
+    // /**
+    //  * Creates the strings that show the opponent and player actions in the showdown.
+    //  * Called by UpdateShowdownPlayerStats.
+    //  * @param {object} opponentCards - An array of the opponent's selected cards.
+    //  * @param {object} playerCards - An array of the player's selected cards.
+    //  * @returns none
+    //  */
+    // //resolve req.session.showdownTurn
+    // function DisplayPlayerAndOpponentActions(opponentCards, playerCards) {
+    //     var opponentActions = "";
+    //     var playerActions = "";
 
-        // 6	Attack
-        // 7	Defense
-        // 8	Skill
-        // console.log("opponentCards")
-        // console.log(opponentCards)
-        // console.log("playerCards")
-        // console.log(playerCards)
+    //     // 6	Attack
+    //     // 7	Defense
+    //     // 8	Skill
+    //     // console.log("opponentCards")
+    //     // console.log(opponentCards)
+    //     // console.log("playerCards")
+    //     // console.log(playerCards)
 
-        if (playerCards.length == 2 && opponentCards.length == 2) {
-            //Opponent Actions
-            if (opponentCards[0].card_type_id == 8 ) {
-                opponentActions = "Your opponent used " + opponentCards[0].card_name
-                if (opponentCards[1].card_type_id == 6) {
-                    opponentActions = opponentActions + " and used a " + opponentCards[1].card_name + ". "
+    //     if (playerCards.length == 2 && opponentCards.length == 2) {
+    //         //Opponent Actions
+    //         if (opponentCards[0].card_type_id == 8 ) {
+    //             opponentActions = "Your opponent used " + opponentCards[0].card_name
+    //             if (opponentCards[1].card_type_id == 6) {
+    //                 opponentActions = opponentActions + " and used a " + opponentCards[1].card_name + ". "
             
-                }
-            }
-            else if (opponentCards[1].card_type_id == 8) {
-                opponentActions = "Your opponent used " + opponentCards[1].card_name
-                if (opponentCards[0].card_type_id == 6) {
-                    opponentActions = opponentActions + " and used a " + opponentCards[0].card_name + ". "
+    //             }
+    //         }
+    //         else if (opponentCards[1].card_type_id == 8) {
+    //             opponentActions = "Your opponent used " + opponentCards[1].card_name
+    //             if (opponentCards[0].card_type_id == 6) {
+    //                 opponentActions = opponentActions + " and used a " + opponentCards[0].card_name + ". "
             
-                }
-            }
-            else{
+    //             }
+    //         }
+    //         else{
                 
-                if (opponentCards[0].card_type_id == 6) {
-                    opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
-                }
-                else if (opponentCards[1].card_type_id == 6) {
-                    opponentActions = opponentActions + "Your opponent used a " + opponentCards[1].card_name + ". "
-                }
-            }
+    //             if (opponentCards[0].card_type_id == 6) {
+    //                 opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
+    //             }
+    //             else if (opponentCards[1].card_type_id == 6) {
+    //                 opponentActions = opponentActions + "Your opponent used a " + opponentCards[1].card_name + ". "
+    //             }
+    //         }
             
 
-            if (playerCards[0].card_type_id == 7) {
-                opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
-            }
-            else if (playerCards[1].card_type_id == 7) {
-                opponentActions = opponentActions + "You used a " + playerCards[1].card_name + "."
-            }
+    //         if (playerCards[0].card_type_id == 7) {
+    //             opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
+    //         }
+    //         else if (playerCards[1].card_type_id == 7) {
+    //             opponentActions = opponentActions + "You used a " + playerCards[1].card_name + "."
+    //         }
 
-            //Player Actions
-            if (playerCards[0].card_type_id == 8 ) {
-                playerActions = "You used " + playerCards[0].card_name
-                if (playerCards[1].card_type_id == 6) {
-                    playerActions = playerActions + " and used a " + playerCards[1].card_name + "."
+    //         //Player Actions
+    //         if (playerCards[0].card_type_id == 8 ) {
+    //             playerActions = "You used " + playerCards[0].card_name
+    //             if (playerCards[1].card_type_id == 6) {
+    //                 playerActions = playerActions + " and used a " + playerCards[1].card_name + "."
             
-                }
-            }
-            else if (playerCards[1].card_type_id == 8) {
-                playerActions = "You used " + playerCards[1].card_name
-                if (playerCards[0].card_type_id == 6) {
-                    playerActions = playerActions + " and used a " + playerCards[0].card_name + "."
+    //             }
+    //         }
+    //         else if (playerCards[1].card_type_id == 8) {
+    //             playerActions = "You used " + playerCards[1].card_name
+    //             if (playerCards[0].card_type_id == 6) {
+    //                 playerActions = playerActions + " and used a " + playerCards[0].card_name + "."
             
-                }
-            }
-            else{
-                if (playerCards[0].card_type_id == 6) {
-                    playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
-                }
-                else if (playerCards[1].card_type_id == 6) {
-                    playerActions = playerActions + " You used a " + playerCards[1].card_name + ". "
-                }
-            }
-            if (opponentCards[0].card_type_id == 7) {
-                playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
-            }
-            else if (opponentCards[1].card_type_id == 7) {
-                playerActions = playerActions + "Your opponent used a " + opponentCards[1].card_name + "."
-            }
-        }
-        else if (playerCards.length == 1 && opponentCards.length == 2) {
-            //Opponent Actions
-            if (opponentCards[0].card_type_id == 8 ) {
-                opponentActions = "Your opponent used " + opponentCards[0].card_name
-                if (opponentCards[1].card_type_id == 6) {
-                    opponentActions = opponentActions + " and used a " + opponentCards[1].card_name + ". "
+    //             }
+    //         }
+    //         else{
+    //             if (playerCards[0].card_type_id == 6) {
+    //                 playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
+    //             }
+    //             else if (playerCards[1].card_type_id == 6) {
+    //                 playerActions = playerActions + " You used a " + playerCards[1].card_name + ". "
+    //             }
+    //         }
+    //         if (opponentCards[0].card_type_id == 7) {
+    //             playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
+    //         }
+    //         else if (opponentCards[1].card_type_id == 7) {
+    //             playerActions = playerActions + "Your opponent used a " + opponentCards[1].card_name + "."
+    //         }
+    //     }
+    //     else if (playerCards.length == 1 && opponentCards.length == 2) {
+    //         //Opponent Actions
+    //         if (opponentCards[0].card_type_id == 8 ) {
+    //             opponentActions = "Your opponent used " + opponentCards[0].card_name
+    //             if (opponentCards[1].card_type_id == 6) {
+    //                 opponentActions = opponentActions + " and used a " + opponentCards[1].card_name + ". "
             
-                }
-            }
-            else if (opponentCards[1].card_type_id == 8) {
-                opponentActions = "Your opponent used " + opponentCards[1].card_name
-                if (opponentCards[0].card_type_id == 6) {
-                    opponentActions = opponentActions + " and used a " + opponentCards[0].card_name + ". "
+    //             }
+    //         }
+    //         else if (opponentCards[1].card_type_id == 8) {
+    //             opponentActions = "Your opponent used " + opponentCards[1].card_name
+    //             if (opponentCards[0].card_type_id == 6) {
+    //                 opponentActions = opponentActions + " and used a " + opponentCards[0].card_name + ". "
             
-                }
-            }
-            else{
+    //             }
+    //         }
+    //         else{
                 
-                if (opponentCards[0].card_type_id == 6) {
-                    opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
-                }
-                else if (opponentCards[1].card_type_id == 6) {
-                    opponentActions = opponentActions + "Your opponent used a " + opponentCards[1].card_name + ". "
-                }
-            }
+    //             if (opponentCards[0].card_type_id == 6) {
+    //                 opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
+    //             }
+    //             else if (opponentCards[1].card_type_id == 6) {
+    //                 opponentActions = opponentActions + "Your opponent used a " + opponentCards[1].card_name + ". "
+    //             }
+    //         }
             
 
-            if (playerCards[0].card_type_id == 7) {
-                opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
-            }
+    //         if (playerCards[0].card_type_id == 7) {
+    //             opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
+    //         }
 
-            //Player Actions
-            if (playerCards[0].card_type_id == 8 ) {
-                playerActions = "You used " + playerCards[0].card_name
-            }
-            else if (playerCards[0].card_type_id == 6) {
-                playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
-            }
-            if (opponentCards[0].card_type_id == 7) {
-                playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
-            }
-            else if (opponentCards[1].card_type_id == 7) {
-                playerActions = playerActions + "Your opponent used a " + opponentCards[1].card_name + "."
-            }
+    //         //Player Actions
+    //         if (playerCards[0].card_type_id == 8 ) {
+    //             playerActions = "You used " + playerCards[0].card_name
+    //         }
+    //         else if (playerCards[0].card_type_id == 6) {
+    //             playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
+    //         }
+    //         if (opponentCards[0].card_type_id == 7) {
+    //             playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
+    //         }
+    //         else if (opponentCards[1].card_type_id == 7) {
+    //             playerActions = playerActions + "Your opponent used a " + opponentCards[1].card_name + "."
+    //         }
 
-        }
-        else if (playerCards.length == 2 && opponentCards.length == 1) {
-            //Opponent Actions
-            if (opponentCards[0].card_type_id == 8 ) {
-                opponentActions = "Your opponent used " + opponentCards[0].card_name
-            }
-            else if (opponentCards[0].card_type_id == 6) {
-                opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
-            }
+    //     }
+    //     else if (playerCards.length == 2 && opponentCards.length == 1) {
+    //         //Opponent Actions
+    //         if (opponentCards[0].card_type_id == 8 ) {
+    //             opponentActions = "Your opponent used " + opponentCards[0].card_name
+    //         }
+    //         else if (opponentCards[0].card_type_id == 6) {
+    //             opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
+    //         }
                 
-            if (playerCards[0].card_type_id == 7) {
-                opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
-            }
-            else if (playerCards[1].card_type_id == 7) {
-                opponentActions = opponentActions + "You used a " + playerCards[1].card_name + "."
-            }
+    //         if (playerCards[0].card_type_id == 7) {
+    //             opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
+    //         }
+    //         else if (playerCards[1].card_type_id == 7) {
+    //             opponentActions = opponentActions + "You used a " + playerCards[1].card_name + "."
+    //         }
 
-            //Player Actions
-            if (playerCards[0].card_type_id == 8 ) {
-                playerActions = "You used " + playerCards[0].card_name
-                if (playerCards[1].card_type_id == 6) {
-                    playerActions = playerActions + " and used a " + playerCards[1].card_name + "."
+    //         //Player Actions
+    //         if (playerCards[0].card_type_id == 8 ) {
+    //             playerActions = "You used " + playerCards[0].card_name
+    //             if (playerCards[1].card_type_id == 6) {
+    //                 playerActions = playerActions + " and used a " + playerCards[1].card_name + "."
             
-                }
-            }
-            else if (playerCards[1].card_type_id == 8) {
-                playerActions = "You used " + playerCards[1].card_name
-                if (playerCards[0].card_type_id == 6) {
-                    playerActions = playerActions + " and used a " + playerCards[0].card_name + "."
+    //             }
+    //         }
+    //         else if (playerCards[1].card_type_id == 8) {
+    //             playerActions = "You used " + playerCards[1].card_name
+    //             if (playerCards[0].card_type_id == 6) {
+    //                 playerActions = playerActions + " and used a " + playerCards[0].card_name + "."
             
-                }
-            }
-            else{
-                if (playerCards[0].card_type_id == 6) {
-                    playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
-                }
-                else if (playerCards[1].card_type_id == 6) {
-                    playerActions = playerActions + " You used a " + playerCards[1].card_name + ". "
-                }
-            }
-            if (opponentCards[0].card_type_id == 7) {
-                playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
-            }
-        }
-        else if (playerCards.length == 1 && opponentCards.length == 1) {
-            //Opponent Actions
-            if (opponentCards[0].card_type_id == 8 ) {
-                opponentActions = "Your opponent used " + opponentCards[0].card_name
-            }
-            else{
-                if (opponentCards[0].card_type_id == 6) {
-                    opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
-                }
-            }
+    //             }
+    //         }
+    //         else{
+    //             if (playerCards[0].card_type_id == 6) {
+    //                 playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
+    //             }
+    //             else if (playerCards[1].card_type_id == 6) {
+    //                 playerActions = playerActions + " You used a " + playerCards[1].card_name + ". "
+    //             }
+    //         }
+    //         if (opponentCards[0].card_type_id == 7) {
+    //             playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
+    //         }
+    //     }
+    //     else if (playerCards.length == 1 && opponentCards.length == 1) {
+    //         //Opponent Actions
+    //         if (opponentCards[0].card_type_id == 8 ) {
+    //             opponentActions = "Your opponent used " + opponentCards[0].card_name
+    //         }
+    //         else{
+    //             if (opponentCards[0].card_type_id == 6) {
+    //                 opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
+    //             }
+    //         }
             
-            if (playerCards[0].card_type_id == 7) {
-                opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
-            }
+    //         if (playerCards[0].card_type_id == 7) {
+    //             opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
+    //         }
 
-            //Player Actions
-            if (playerCards[0].card_type_id == 8 ) {
-                playerActions = "You used " + playerCards[0].card_name
-            }
-            else{
-                if (playerCards[0].card_type_id == 6) {
-                    playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
-                }
-            }
-            if (opponentCards[0].card_type_id == 7) {
-                playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
-            }
-        }
+    //         //Player Actions
+    //         if (playerCards[0].card_type_id == 8 ) {
+    //             playerActions = "You used " + playerCards[0].card_name
+    //         }
+    //         else{
+    //             if (playerCards[0].card_type_id == 6) {
+    //                 playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
+    //             }
+    //         }
+    //         if (opponentCards[0].card_type_id == 7) {
+    //             playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
+    //         }
+    //     }
 
 
-        res.status(200).json(
-            {
-                "playerActions": playerActions,
-                "opponentActions": opponentActions
-            }
-        )
-    }
+    //     res.status(200).json(
+    //         {
+    //             "playerActions": playerActions,
+    //             "opponentActions": opponentActions
+    //         }
+    //     )
+    // }
 })
 
 //#endregion
