@@ -54,7 +54,7 @@ var currentState = 1
 
 //#region Game
 
-setInterval(GetGameState, 3000)
+setInterval(GetGameState, 1000)
 
 
 /**
@@ -763,6 +763,10 @@ function UnwrapShowdownCardStats(card, playerDamage) {
         {
             stringBuilder = stringBuilder + " Attack is: " + (card.card_attack * playerDamage)
         }
+        if(card.card_energy > 0)
+        {
+            stringBuilder = stringBuilder + " Energy Increase by: " + card.card_energy
+        }
     }
     if(card.card_type_id == 7) {
 
@@ -1004,6 +1008,11 @@ function ShowdownEndTurn() {
                 document.getElementById("showdownCard2Selection").checked = false;
                 document.getElementById("showdownCard3Selection").checked = false;
                 document.getElementById("showdownCard4Selection").checked = false;
+
+                document.getElementById("showdownCard1Selection").disabled = false;
+                document.getElementById("showdownCard2Selection").disabled = false;
+                document.getElementById("showdownCard3Selection").disabled = false;
+                document.getElementById("showdownCard4Selection").disabled = false;
 
                 showdownSelectedCard1Id = null
                 showdownSelectedCard2Id = null

@@ -12,26 +12,26 @@
     <p id="roomId">Room 1</p>
     <p id="showdownTurn">Turn 0</p>
 
-    <table id="statsContainer">
+    <table class="stats" id="statsContainer">
         <tr id="maxHealthContainer">
             <td><img src="../Assets/Art/UI/1x/Max Health.png" alt="Max Health Icon" width="40" height="40"></td>
-            <td><p id="maxHealth"></p></td>
+            <td><p id="maxHealth">Max Health</p></td>
         </tr>
         <tr id="currentHealthContainer">
             <td><img src="../Assets/Art/UI/1x/CurrentHealth.png" alt="Current Health Icon" width="40" height="40"></td>
-            <td><p id="currentHealth"></p></td>
+            <td><p id="currentHealth">Current Health</p></td>
         </tr>
         <tr id="energyContainer">
             <td><img src="../Assets/Art/UI/1x/Energy.png" alt="Energy Icon" width="40" height="40"></td>
-            <td><p id="energy"></p></td>
+            <td><p id="energy">Stamina</p></td>
         </tr>
         <tr id="insightContainer">
             <td><img src="../Assets/Art/UI/1x/Insight.png" alt="Insight Icon" width="40" height="40"></td>
-            <td><p id="insight"></p></td>
+            <td><p id="insight">Insight</p></td>
         </tr>
         <tr id="damageContainer">
             <td><img src="../Assets/Art/UI/1x/Damage.png" alt="Damage Icon" width="40" height="40"></td>
-            <td><p id="damage"></p></td>
+            <td><p id="damage">Power</p></td>
         </tr>
     </table>
 
@@ -48,8 +48,7 @@
 
     
     
-<div id="dungeonCards">
-    
+<div id="dungeonCards"> 
     <div id="selectedDungeonCard">
         <table class="cards">
             <tr>
@@ -63,30 +62,32 @@
             </tr>
         </table>
     </div>
-<br /> <br />
-    <table class="cards">
-        <tr>
-            <td id="card1Name">Card 1 Name</td>
-            <td id="card2Name">Card 2 Name</td>
-            <td id="card3Name">Card 3 Name</td>
-        </tr>
-        <tr>
-            <td><img id="card1Image" src="../Assets/Art/Cards/1x/HiddenDraft.png" width="250" height="200"></td>
-            <td><img id="card2Image" src="../Assets/Art/Cards/1x/HiddenDraft.png" width="250" height="200"></td>
-            <td><img id="card3Image" src="../Assets/Art/Cards/1x/HiddenDraft.png" width="250" height="200"></td>
-        </tr>
-        <tr>
-            <td id="card1Stats">Card 1 Stats</td>
-            <td id="card2Stats">Card 2 Stats</td>
-            <td id="card3Stats">Card 3 Stats</td>
-        </tr>
-        <tr>
-            <td><input type="radio" id="dungeonCard1Selection" name="dungeonCard" value="card1" onclick="DungeonSelectCard()"/></td>
-            <td><input type="radio" id="dungeonCard2Selection" name="dungeonCard" value="card2" onclick="DungeonSelectCard()"/></td>
-            <td><input type="radio" id="dungeonCard3Selection" name="dungeonCard" value="card3" onclick="DungeonSelectCard()"/></td>
-        </tr>
-    </table>
-    <input class="button" type="button" value="Confirm" name="dungeonCheck" onclick="DungeonEndTurn()">
+<br /> 
+    <div style="display: inline;">
+        <table class="cards">
+            <tr>
+                <td id="card1Name">Card 1 Name</td>
+                <td id="card2Name">Card 2 Name</td>
+                <td id="card3Name">Card 3 Name</td>
+            </tr>
+            <tr>
+                <td><img id="card1Image" src="../Assets/Art/Cards/1x/HiddenDraft.png" width="250" height="200"></td>
+                <td><img id="card2Image" src="../Assets/Art/Cards/1x/HiddenDraft.png" width="250" height="200"></td>
+                <td><img id="card3Image" src="../Assets/Art/Cards/1x/HiddenDraft.png" width="250" height="200"></td>
+            </tr>
+            <tr>
+                <td id="card1Stats">Card 1 Stats</td>
+                <td id="card2Stats">Card 2 Stats</td>
+                <td id="card3Stats">Card 3 Stats</td>
+            </tr>
+            <tr>
+                <td><input type="radio" id="dungeonCard1Selection" name="dungeonCard" value="card1" onclick="DungeonSelectCard()"/></td>
+                <td><input type="radio" id="dungeonCard2Selection" name="dungeonCard" value="card2" onclick="DungeonSelectCard()"/></td>
+                <td><input type="radio" id="dungeonCard3Selection" name="dungeonCard" value="card3" onclick="DungeonSelectCard()"/></td>
+            </tr>
+        </table>
+        <input class="button" type="button" value="Confirm" name="dungeonCheck" onclick="DungeonEndTurn()">
+    </div>
 </div>
     <br/><br/><br/>
     
