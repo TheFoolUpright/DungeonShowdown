@@ -673,20 +673,46 @@ function getShowdownCardSelection() {
                     document.getElementById("normalAttackCardImage").src = data.card[0].card_image_path
                     document.getElementById("normalAttackCardStats").innerHTML = UnwrapShowdownCardStats(data.card[0], data.damage)
 
-                    showdownCard2Id = data.card[1].card_id
-                    document.getElementById("specialAttackCardName").innerHTML = data.card[1].card_name
-                    document.getElementById("specialAttackCardImage").src = data.card[1].card_image_path
-                    document.getElementById("specialAttackCardStats").innerHTML = UnwrapShowdownCardStats(data.card[1], data.damage)
+                    console.log("visible " + data.card[1].is_visible)
+                    if (data.card[1].is_visible) {
+                        showdownCard2Id = data.card[1].card_id
+                        document.getElementById("specialAttackCardName").innerHTML = data.card[1].card_name
+                        document.getElementById("specialAttackCardImage").src = data.card[1].card_image_path
+                        document.getElementById("specialAttackCardStats").innerHTML = UnwrapShowdownCardStats(data.card[1], data.damage)
+                    }
+                    else{
+                        showdownCard2Id = data.card[1].card_id
+                        document.getElementById("specialAttackCardName").innerHTML = "???"
+                        document.getElementById("specialAttackCardImage").src = "../Assets/Art/Cards/1x/HiddenDraft.png"
+                        document.getElementById("specialAttackCardStats").innerHTML = "???"
+                    }
                     
-                    showdownCard3Id = data.card[2].card_id
-                    document.getElementById("defenseCardName").innerHTML = data.card[2].card_name
-                    document.getElementById("defenseCardImage").src = data.card[2].card_image_path
-                    document.getElementById("defenseCardStats").innerHTML = UnwrapShowdownCardStats(data.card[2], data.damage)
+                    if (data.card[2].is_visible) {
+                        showdownCard3Id = data.card[2].card_id
+                        document.getElementById("defenseCardName").innerHTML = data.card[2].card_name
+                        document.getElementById("defenseCardImage").src = data.card[2].card_image_path
+                        document.getElementById("defenseCardStats").innerHTML = UnwrapShowdownCardStats(data.card[2], data.damage)
+                    }
+                    else{
+                        showdownCard3Id = data.card[2].card_id
+                        document.getElementById("specialAttackCardName").innerHTML = "???"
+                        document.getElementById("specialAttackCardImage").src = "../Assets/Art/Cards/1x/HiddenDraft.png"
+                        document.getElementById("specialAttackCardStats").innerHTML = "???"
+                    }
 
-                    showdownCard4Id = data.card[3].card_id
-                    document.getElementById("skillCardName").innerHTML = data.card[3].card_name
-                    document.getElementById("skillCardImage").src = data.card[3].card_image_path
-                    document.getElementById("skillCardStats").innerHTML = UnwrapShowdownCardStats(data.card[3], data.damage)
+                    
+                    if (data.card[3].is_visible) {
+                        showdownCard4Id = data.card[3].card_id
+                        document.getElementById("skillCardName").innerHTML = data.card[3].card_name
+                        document.getElementById("skillCardImage").src = data.card[3].card_image_path
+                        document.getElementById("skillCardStats").innerHTML = UnwrapShowdownCardStats(data.card[3], data.damage)
+                    }
+                    else{
+                        showdownCard4Id = data.card[3].card_id
+                        document.getElementById("specialAttackCardName").innerHTML = "???"
+                        document.getElementById("specialAttackCardImage").src = "../Assets/Art/Cards/1x/HiddenDraft.png"
+                        document.getElementById("specialAttackCardStats").innerHTML = "???"
+                    }
 
                     //Display HTML Elements - ON
                     document.getElementById("statsContainer").style.display = "block";
@@ -779,7 +805,7 @@ function UnwrapShowdownCardStats(card, playerDamage) {
         // Rewards
         if (card.card_attack > 0)
         {
-            stringBuilder = stringBuilder + " Attack is: " + (card.card_attack * playerDamage)
+            stringBuilder = stringBuilder + " Attack is: " + Math.ceil(card.card_attack * playerDamage)
         }
         if(card.card_energy > 0)
         {
@@ -807,6 +833,10 @@ function UnwrapShowdownCardStats(card, playerDamage) {
     if(card.card_type_id == 8) {
          
             //Cost first
+        if (card.card_current_health < 0)
+            {
+                stringBuilder = stringBuilder + " Current Health Decrease by: " + card.card_current_health
+            }
          if(card.card_energy < 0)
         {
             stringBuilder = stringBuilder + " Energy Decrease by: " + card.card_energy

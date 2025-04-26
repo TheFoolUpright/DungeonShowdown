@@ -522,18 +522,6 @@ app.put("/joinMatch", (req, res) => {
                 console.log("Case Error")
         }
 
-        console.log(card1)
-        console.log(card2)
-        console.log(card3)
-        
-        // var card1 = deck[Math.floor(Math.random() * deck.length)]
-        // indexOfElement = deck.indexOf(card1);
-        // deck.splice(indexOfElement, 1)
-        // var card2 = deck[Math.floor(Math.random() * deck.length)]
-        // indexOfElement = deck.indexOf(card2);
-        // deck.splice(indexOfElement, 1)
-        // var card3 = deck[Math.floor(Math.random() * deck.length)]
-
 
         //Make cards visable by default
         card1.IsVisible = true;
@@ -865,7 +853,6 @@ app.post("/resolveDungeonTurn", (req, res) => {
      * @returns none
      */
     function GetPlayerStats() {
-        console.log("req.session.playerStatusId " + req.session.playerStatusId)
         connection.query("SELECT player_status_id, match_id, player_id, max_health, current_health, energy, insight, damage FROM dungeonshowdown.player_status WHERE player_status_id = ?;", [req.session.playerStatusId], 
             function(err, rows, fields) {
                 if (err) {
@@ -1192,7 +1179,7 @@ function setupNextDungeonRoom(req, res) {
         // var card3 = deck[Math.floor(Math.random() * deck.length)]
 
 
-        //Make cards visable by default
+        //Make cards visible by default
         card1.IsVisible = true;
         card2.IsVisible = true;
         card3.IsVisible = true;
@@ -1789,7 +1776,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
  */
 app.get("/getShowdownCardSelection", (req, res) => {
 
-    connection.query("SELECT player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, showdown_turn, match_id, player_id, max_health, current_health, energy, insight, damage, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = ? AND match_id = ? AND room_id = ? AND showdown_turn = ?;", [req.session.playerId, req.session.matchId,  req.session.roomId,  req.session.showdownTurn],
+    connection.query("SELECT player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, showdown_turn, is_visible, match_id, player_id, max_health, current_health, energy, insight, damage, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = ? AND match_id = ? AND room_id = ? AND showdown_turn = ?;", [req.session.playerId, req.session.matchId,  req.session.roomId,  req.session.showdownTurn],
         function (err, rows, fields) {
             if (err) {
                 console.log("Database Error: " + err);
@@ -2104,27 +2091,24 @@ app.get("/getShowdownResult", (req, res) => {
  * @returns {JSON} - returns a success message
  */
 app.post("/setupShowdown", (req, res) => {
-    if( req.session.roomId == 5) {
+    if (req.session.roomId == 5) {
         req.session.roomId++;
-        req.session.showdownTurn = 0;
+        req.session.showdownTurn = 1;
 
-        console.log("SetupRoom5Working")
         if (!req.session.playerStatusId) {
             GetSessionPlayerStatusId()
         }
         else{
             CheckIfInitiativeIsSet()
         }
-
    }
    else {
+    req.session.showdownTurn++;
 
-    console.log("Resolving Showdown")
-    
     if (!req.session.playerStatusId) {
         GetSessionPlayerStatusId()
     }
-    else{
+    else {
         GetOpponentShowdownCardStats()
     }
    }
@@ -2140,18 +2124,16 @@ app.post("/setupShowdown", (req, res) => {
                 return
             }
             req.session.playerStatusId = rows[0].player_status_id;
-            if( req.session.roomId == 5){
+            if (req.session.roomId == 5) {
                 CheckIfInitiativeIsSet()
             }
-            else{
+            else {
                 GetOpponentShowdownCardStats()
             }
             
         }
     )
 } 
-
-
 
     /**
      * Get all the information from the opponent's selected cards to use in the next function.
@@ -2160,7 +2142,7 @@ app.post("/setupShowdown", (req, res) => {
      * @returns none
      */
     function GetOpponentShowdownCardStats() {
-        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (9,10) AND match_id = ?;", [req.session.playerStatusId,  req.session.showdownTurn, req.session.matchId], 
+        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (9,10) AND match_id = ?;", [req.session.playerStatusId,  req.session.showdownTurn - 1, req.session.matchId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -2170,7 +2152,6 @@ app.post("/setupShowdown", (req, res) => {
                     return
                 }
                 if (rows.length != 0) {
-                    console.log("sadjbka")
                     GetPlayerShowdownCardStats(rows)
                 }
                 else {
@@ -2197,7 +2178,7 @@ app.post("/setupShowdown", (req, res) => {
      * @returns none
      */
     function GetPlayerShowdownCardStats(opponentCards) {
-        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id WHERE player_status_id = ? AND showdown_turn = ? AND slot_id IN (9,10);", [req.session.playerStatusId,  req.session.showdownTurn], 
+        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id WHERE player_status_id = ? AND showdown_turn = ? AND slot_id IN (9,10);", [req.session.playerStatusId,  req.session.showdownTurn - 1], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -2212,7 +2193,7 @@ app.post("/setupShowdown", (req, res) => {
                     GetPlayerShowdownStats(opponentCards, rows);
                 }
                 else{
-                    console.log("asdbikfasdbol")
+                    console.log("Error in GetPlayerShowdownCardStats")
                 }
                 
             }
@@ -2335,8 +2316,8 @@ app.post("/setupShowdown", (req, res) => {
                 if (isCounterOpponent) {
                     if(!isDodge || !isParry) {
                         
-                        playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - (opponentAttack * opponentDamage));
-                        playerDefense = Math.max(0, playerDefense - (opponentAttack * opponentDamage))
+                        playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - Math.ceil(opponentAttack * opponentDamage));
+                        playerDefense = Math.max(0, playerDefense - Math.ceil(opponentAttack * opponentDamage))
                     }
                 }
                 if(isDoubleAttackOpponent) {
@@ -2345,29 +2326,28 @@ app.post("/setupShowdown", (req, res) => {
                         playerDefense = Math.max(0, playerDefense - ((opponentAttack * opponentDamage) * 2))
                     }
                     else{
-                        
-                        playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - (opponentAttack * opponentDamage))
-                        playerDefense = Math.max(0, playerDefense - (opponentAttack * opponentDamage))
+                        playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - Math.ceil(opponentAttack * opponentDamage))
+                        playerDefense = Math.max(0, playerDefense - Math.ceil(opponentAttack * opponentDamage))
                     }
                 }
                 if (isParryOpponent) {
                     if(opponentAttack != 0 || !isDodge) {
-                        playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - (opponentParryAttack * playerDamage));
-                        playerDefense = Math.max(0, playerDefense - (opponentParryAttack * playerDamage))
+                        playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - Math.ceil(opponentParryAttack * (playerAttack * playerDamage)));
+                        playerDefense = Math.max(0, playerDefense - Math.ceil(opponentParryAttack * playerDamage))
                     }
                 }
                 
                 //Apply Normal, Heavy or Recovery Attack Damage
                 if(!isCounterOpponent && !isDoubleAttackOpponent) {
-                    playerCurrentHealth = playerCurrentHealth + playerDefense - (opponentAttack * opponentDamage)
-                    playerDefense = Math.max(0, playerDefense - (opponentAttack * opponentDamage))
+                    playerCurrentHealth = playerCurrentHealth + playerDefense - Math.ceil(opponentAttack * opponentDamage)
+                    playerDefense = Math.max(0, playerDefense - Math.ceil(opponentAttack * opponentDamage))
                 }
                 
                 console.log("After Calculation")
-                console.log("playerCurrentHealth: "+ playerCurrentHealth)
-                console.log("playerEnergy: "+ playerEnergy)
-                console.log("playerInsight: "+ playerInsight)
-                console.log("playerDamage: "+ playerDamage)
+                console.log("playerCurrentHealth: " + playerCurrentHealth)
+                console.log("playerEnergy: " + playerEnergy)
+                console.log("playerInsight: " + playerInsight)
+                console.log("playerDamage: " + playerDamage)
 
                 UpdateShowdownPlayerStats(playerCurrentHealth, playerEnergy, playerInsight, playerDamage, opponentCards, playerCards)
             }
@@ -2401,9 +2381,6 @@ app.post("/setupShowdown", (req, res) => {
         )
     }
 
-
-   
-
     function CheckIfInitiativeIsSet() {
         connection.query("SELECT showdown_initiative FROM player_status WHERE match_id = ?;", [req.session.matchId],
             function (err, rows, fields) {
@@ -2414,14 +2391,15 @@ app.post("/setupShowdown", (req, res) => {
                     });
                     return;
                 }
-                req.session.playerStatusId = rows[0].player_status_id
+                // req.session.playerStatusId = rows[0].player_status_id
+                console.log("req: " + req.session.playerStatusId)
+
                 if (rows[0].showdown_initiative == 1 || rows[1].showdown_initiative == 1) {
                     GetPlayerStats()
                 }
                 else {
                     UpdatePlayerInitiative()
                 }
-                // check op intiative, if 1 then GetPlayerStats, else update initiative to 1
 
             }
         )
@@ -2583,6 +2561,7 @@ app.post("/setupShowdown", (req, res) => {
             InsertCards(playerStats, card1, card2, card3)
         }
         else {
+            console.log("turn: " + req.session.showdownTurn)
             connection.query("SELECT c.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_image_path FROM card C INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (6,7,8,9,10) AND PCS.card_id != 8 AND match_id = ?;",[req.session.playerStatusId,  req.session.showdownTurn, req.session.matchId],
                 function (err, rows, fields) {
                     if (err) {
@@ -2647,8 +2626,50 @@ app.post("/setupShowdown", (req, res) => {
     }
 
     function InsertCards(playerStats, card1, card2, card3) {
+
+        //Make cards visable by default
+        card1.IsVisible = true;
+        card2.IsVisible = true;
+        card3.IsVisible = true;
+        
+        if (playerStats[0].insight < 9 && playerStats[0].insight > 5) {
+            var randomChoice =  Math.floor((Math.random() * 3) + 1)
+            console.log("1 card: " + randomChoice)
+            if (randomChoice == 1) {
+                card1.IsVisible = false;
+            }
+            else if (randomChoice == 2) {
+                card2.IsVisible = false;
+            }
+            else if (randomChoice == 3) {
+                card3.IsVisible = false;
+            }
+            
+        }
+        if (playerStats[0].insight < 6 && playerStats[0].insight > 2) {
+            var randomChoice =  Math.floor((Math.random() * 3) + 1)
+            console.log("2 cards: " + randomChoice)
+            if (randomChoice == 1) {
+                card1.IsVisible = false;
+                card2.IsVisible = false;
+            }
+            else if (randomChoice == 2) {
+                card2.IsVisible = false;
+                card3.IsVisible = false;
+            }
+            else if (randomChoice == 3) {
+                card1.IsVisible = false;
+                card3.IsVisible = false;
+            }
+        }
+        if (playerStats[0].insight < 3) {
+            card1.IsVisible = false;
+            card2.IsVisible = false;
+            card3.IsVisible = false;
+        }
+
         console.log("Insert cards Start")
-        connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn) VALUES (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?);", [playerStats[0].player_status_id, 5, 1,  req.session.roomId,  req.session.showdownTurn+1, playerStats[0].player_status_id, 6, card1.card_id,  req.session.roomId,  req.session.showdownTurn+1, playerStats[0].player_status_id, 7, card2.card_id,  req.session.roomId,  req.session.showdownTurn+1, playerStats[0].player_status_id, 8, card3.card_id,  req.session.roomId,  req.session.showdownTurn+1],
+        connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn, is_visible) VALUES (?,?,?,?,?,?), (?,?,?,?,?,?), (?,?,?,?,?,?), (?,?,?,?,?,?);", [playerStats[0].player_status_id, 5, 1,  req.session.roomId,  req.session.showdownTurn, 1,playerStats[0].player_status_id, 6, card1.card_id,  req.session.roomId,  req.session.showdownTurn, card1.IsVisible, playerStats[0].player_status_id, 7, card2.card_id,  req.session.roomId,  req.session.showdownTurn, card2.IsVisible, playerStats[0].player_status_id, 8, card3.card_id,  req.session.roomId,  req.session.showdownTurn, card3.IsVisible],
         function (err, rows, fields) {
             if (err) {
 
@@ -2691,7 +2712,6 @@ app.post("/setupShowdown", (req, res) => {
 app.post("/resolveShowdownTurn", (req, res) => {
 
     if (!req.session.playerStatusId) {
-        console.log("got here")
         GetSessionPlayerStatusId()
     }
     else{
