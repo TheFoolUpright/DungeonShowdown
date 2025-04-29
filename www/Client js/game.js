@@ -22,9 +22,10 @@ var states = {
     "ShowdownCardSelection": 4,
     "WaitingOnOpponentShowdown": 5,
     "ShowdownResult": 6,
-    "Won": 7,
-    "Lost": 8,
-    "Draw": 9
+    "EndingCheck": 7, 
+    "Won": 8,
+    "Lost": 9,
+    "Draw": 10
 }
 
 var currentState = 1
@@ -152,6 +153,7 @@ function sortCards(cardA, cardB) {
     return cardA.slot_id - cardB.slot_id
 }
 
+var setIntervalID 
 
 /**
  * Sends a XMLHTTPRequest to get the state and calls other functions depending on the state. 
@@ -196,6 +198,9 @@ function GetGameState() {
                 }
                 else if (currentState == states.ShowdownResult) {
                     getShowdownResult()
+                }
+                else if (currentState == states.EndingCheck) {
+                    getEndingCheck()
                 }
                 else if (currentState == states.Won) {
                     showWonEnding()
@@ -660,6 +665,9 @@ function getShowdownCardSelection() {
                 if (this.status == 200) {
                     data.card.sort(sortCards)
 
+                    //Update state
+                    currentState = data.state_id
+
                     //Update page data
                     //console.log("Data.Card: "+ data.card)
                     document.getElementById("maxHealth").innerHTML = "Max Health: " + data.max_health;
@@ -693,11 +701,11 @@ function getShowdownCardSelection() {
                         document.getElementById("defenseCardImage").src = data.card[2].card_image_path
                         document.getElementById("defenseCardStats").innerHTML = UnwrapShowdownCardStats(data.card[2], data.damage)
                     }
-                    else{
+                    else{                       
                         showdownCard3Id = data.card[2].card_id
-                        document.getElementById("specialAttackCardName").innerHTML = "???"
-                        document.getElementById("specialAttackCardImage").src = "../Assets/Art/Cards/1x/HiddenDraft.png"
-                        document.getElementById("specialAttackCardStats").innerHTML = "???"
+                        document.getElementById("defenseCardName").innerHTML = "???"
+                        document.getElementById("defenseCardImage").src = "../Assets/Art/Cards/1x/HiddenDraft.png"
+                        document.getElementById("defenseCardStats").innerHTML = "???"
                     }
 
                     
@@ -709,9 +717,9 @@ function getShowdownCardSelection() {
                     }
                     else{
                         showdownCard4Id = data.card[3].card_id
-                        document.getElementById("specialAttackCardName").innerHTML = "???"
-                        document.getElementById("specialAttackCardImage").src = "../Assets/Art/Cards/1x/HiddenDraft.png"
-                        document.getElementById("specialAttackCardStats").innerHTML = "???"
+                        document.getElementById("skillCardName").innerHTML = "???"
+                        document.getElementById("skillCardImage").src = "../Assets/Art/Cards/1x/HiddenDraft.png"
+                        document.getElementById("skillCardStats").innerHTML = "???"
                     }
 
                     //Display HTML Elements - ON
@@ -740,6 +748,41 @@ function getShowdownCardSelection() {
     
 }
 
+function getEndingCheck() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            console.log(this.responseText)
+            var data = JSON.parse(this.responseText)
+            console.log(data)
+
+            if (this.status == 200) {
+                //Display HTML Elements - ON
+                document.getElementById("statsContainer").style.display = "block";
+                document.getElementById("waitingForOpponent").style.display = "block";
+                document.getElementById("showdownTurn").style.display = "block";
+
+                //Display HTML Elements - OFF
+                document.getElementById("endingContainer").style.display = "none";
+                document.getElementById("dungeonRoom").style.display = "none";
+                document.getElementById("opponentChoiceSection").style.display = "none";  
+                document.getElementById("opponentShowdownActionsSection").style.display = "none";
+                document.getElementById("dungeonCards").style.display = "none";
+                document.getElementById("showdownCards").style.display = "none";
+
+                return;
+            }
+        }
+    }
+
+    xhttp.open("GET", "/getEndingCheck", true);
+
+    xhttp.setRequestHeader("Content-Type", "application/json");
+
+    xhttp.send();
+
+}
 /**
  * Displays the player's and opponent's actions at the end of a showdown turn and hides the stats and cards.
  * Called by GetGameState.

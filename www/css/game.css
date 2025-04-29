@@ -3,16 +3,15 @@
 }
 
 
-table, th, td {
-  border: 1px solid;
-
+table {
+  border: 0px solid;
 }
 
-/* table.stats {
-  height: 405px;
-  width: 235px;
+th, td {
+  border: 1px solid;
+}
 
-} */
+
 
 table.cards {
   height: 350px;
