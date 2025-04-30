@@ -1039,6 +1039,9 @@ function ShowdownSelectCard() {
         else {
             document.getElementById("showdownCard3Selection").disabled = false
         }
+        console.log("showdownCard2.card_energy: " + showdownCard2.card_energy)
+        console.log("showdownCard4.card_energy: " + showdownCard4.card_energy)
+        console.log("energy: " + energy)
         if(showdownCard2.card_energy + showdownCard4.card_energy + energy < 0) {
             document.getElementById("showdownCard4Selection").disabled = true
             console.log("disabling check1")
