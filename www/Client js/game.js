@@ -5,14 +5,26 @@ var dungeonCard1Id
 var dungeonCard2Id
 var dungeonCard3Id
 var dungeonSelectedCardId
+
 var showdownCard1Id = 1;
 var showdownCard2Id
 var showdownCard3Id
 var showdownCard4Id
+var showdownCard1
+var showdownCard2
+var showdownCard3
+var showdownCard4
 var showdownSelectedCard1Id = null;
 var showdownSelectedCard2Id = null;
+
 var roomId = 1;
 var showdownTurn = 0;
+
+var maxHealth
+var currentHealth
+var energy
+var insight
+var damage
 
 
 var states = {
@@ -73,6 +85,8 @@ function getWaitingOnOpponentShowdown() {
         if (this.readyState == 4) {
 
             if (this.status == 200) {
+                document.getElementById("waitingForOpponentText").innerHTML = "Waiting for your opponent to select a card..."
+
                 //Display HTML Elements - ON
                 document.getElementById("statsContainer").style.display = "block";
                 document.getElementById("waitingForOpponent").style.display = "block";
@@ -107,6 +121,7 @@ function getWaitingOnOpponentShowdown() {
  * @returns none
  */
 function getWaitingOnOpponentDungeon() {
+    document.getElementById("waitingForOpponentText").innerHTML = "Waiting for your opponent to select a card..."
     //Display HTML Elements - ON
     document.getElementById("statsContainer").style.display = "block";
     document.getElementById("waitingForOpponent").style.display = "block";
@@ -615,6 +630,7 @@ function DungeonEndTurn() {
 
                 if(data.state == "WAITING_FOR_OPP") {
                     //display a screen for wait for opponent choice
+                    document.getElementById("waitingForOpponentText").innerHTML = "Waiting for your opponent to select a card..."
                     document.getElementById("waitingForOpponent").style.display = "block";
                 }
                 else if (data.state == "NEXT_ROOM") {
@@ -670,53 +686,83 @@ function getShowdownCardSelection() {
 
                     //Update page data
                     //console.log("Data.Card: "+ data.card)
+                    maxHealth = data.max_health
+                    currentHealth = data.current_health
+                    energy = data.energy
+                    insight = data.insight
+                    damage = data.damage
                     document.getElementById("maxHealth").innerHTML = "Max Health: " + data.max_health;
                     document.getElementById("currentHealth").innerHTML = "Current Health: " + data.current_health;
                     document.getElementById("energy").innerHTML = "Energy: " + data.energy;
                     document.getElementById("insight").innerHTML = "Insight: " + data.insight;
                     document.getElementById("damage").innerHTML = "Damage: " + data.damage;
                     
-                    showdownCard1Id = 1
-                    document.getElementById("normalAttackCardName").innerHTML = data.card[0].card_name
-                    document.getElementById("normalAttackCardImage").src = data.card[0].card_image_path
-                    document.getElementById("normalAttackCardStats").innerHTML = UnwrapShowdownCardStats(data.card[0], data.damage)
+                    showdownCard1 = data.card[0]
+                    showdownCard1Id = showdownCard1.card_id
+                    document.getElementById("normalAttackCardName").innerHTML = showdownCard1.card_name
+                    document.getElementById("normalAttackCardImage").src = showdownCard1.card_image_path
+                    document.getElementById("normalAttackCardStats").innerHTML = UnwrapShowdownCardStats(showdownCard1, data.damage)
 
-                    console.log("visible " + data.card[1].is_visible)
-                    if (data.card[1].is_visible) {
-                        showdownCard2Id = data.card[1].card_id
-                        document.getElementById("specialAttackCardName").innerHTML = data.card[1].card_name
-                        document.getElementById("specialAttackCardImage").src = data.card[1].card_image_path
-                        document.getElementById("specialAttackCardStats").innerHTML = UnwrapShowdownCardStats(data.card[1], data.damage)
+                    showdownCard2 = data.card[1]
+                    if (showdownCard2.isEnabled) {
+                        document.getElementById("showdownCard2Selection").disabled = false
                     }
                     else{
-                        showdownCard2Id = data.card[1].card_id
+                        document.getElementById("showdownCard2Selection").disabled = true
+                    }
+                    //if (showdownCard2.is_visible) {
+                    if (true) {
+                        showdownCard2Id = showdownCard2.card_id
+                        document.getElementById("specialAttackCardName").innerHTML = showdownCard2.card_name
+                        document.getElementById("specialAttackCardImage").src = showdownCard2.card_image_path
+                        document.getElementById("specialAttackCardStats").innerHTML = UnwrapShowdownCardStats(showdownCard2, data.damage)
+                    }
+                    else{
+                        showdownCard2Id = showdownCard2.card_id
                         document.getElementById("specialAttackCardName").innerHTML = "???"
                         document.getElementById("specialAttackCardImage").src = "../Assets/Art/Cards/1x/HiddenDraft.png"
                         document.getElementById("specialAttackCardStats").innerHTML = "???"
                     }
-                    
-                    if (data.card[2].is_visible) {
-                        showdownCard3Id = data.card[2].card_id
-                        document.getElementById("defenseCardName").innerHTML = data.card[2].card_name
-                        document.getElementById("defenseCardImage").src = data.card[2].card_image_path
-                        document.getElementById("defenseCardStats").innerHTML = UnwrapShowdownCardStats(data.card[2], data.damage)
+
+                    showdownCard3 = data.card[2]
+                    if (showdownCard3.isEnabled) {
+                        document.getElementById("showdownCard3Selection").disabled = false
+                    }
+                    else{
+                        document.getElementById("showdownCard3Selection").disabled = true
+                    }
+
+                    //if (showdownCard3.is_visible) {
+                    if (true) {
+                        showdownCard3Id = showdownCard3.card_id
+                        document.getElementById("defenseCardName").innerHTML = showdownCard3.card_name
+                        document.getElementById("defenseCardImage").src = showdownCard3.card_image_path
+                        document.getElementById("defenseCardStats").innerHTML = UnwrapShowdownCardStats(showdownCard3, data.damage)
                     }
                     else{                       
-                        showdownCard3Id = data.card[2].card_id
+                        showdownCard3Id = showdownCard3.card_id
                         document.getElementById("defenseCardName").innerHTML = "???"
                         document.getElementById("defenseCardImage").src = "../Assets/Art/Cards/1x/HiddenDraft.png"
                         document.getElementById("defenseCardStats").innerHTML = "???"
                     }
 
-                    
-                    if (data.card[3].is_visible) {
-                        showdownCard4Id = data.card[3].card_id
-                        document.getElementById("skillCardName").innerHTML = data.card[3].card_name
-                        document.getElementById("skillCardImage").src = data.card[3].card_image_path
-                        document.getElementById("skillCardStats").innerHTML = UnwrapShowdownCardStats(data.card[3], data.damage)
+                    showdownCard4 = data.card[3]
+                    if (showdownCard4.isEnabled) {
+                        document.getElementById("showdownCard4Selection").disabled = false
                     }
                     else{
-                        showdownCard4Id = data.card[3].card_id
+                        document.getElementById("showdownCard4Selection").disabled = true
+                    }
+
+                    //if (showdownCard4.is_visible) {
+                    if (true) {
+                        showdownCard4Id = showdownCard4.card_id
+                        document.getElementById("skillCardName").innerHTML = showdownCard4.card_name
+                        document.getElementById("skillCardImage").src = showdownCard4.card_image_path
+                        document.getElementById("skillCardStats").innerHTML = UnwrapShowdownCardStats(showdownCard4, data.damage)
+                    }
+                    else{
+                        showdownCard4Id = showdownCard4.card_id
                         document.getElementById("skillCardName").innerHTML = "???"
                         document.getElementById("skillCardImage").src = "../Assets/Art/Cards/1x/HiddenDraft.png"
                         document.getElementById("skillCardStats").innerHTML = "???"
@@ -758,12 +804,14 @@ function getEndingCheck() {
             console.log(data)
 
             if (this.status == 200) {
+                document.getElementById("waitingForOpponentText").innerHTML = "..."
+
                 //Display HTML Elements - ON
-                document.getElementById("statsContainer").style.display = "block";
                 document.getElementById("waitingForOpponent").style.display = "block";
                 document.getElementById("showdownTurn").style.display = "block";
 
                 //Display HTML Elements - OFF
+                document.getElementById("statsContainer").style.display = "none";
                 document.getElementById("endingContainer").style.display = "none";
                 document.getElementById("dungeonRoom").style.display = "none";
                 document.getElementById("opponentChoiceSection").style.display = "none";  
@@ -980,6 +1028,28 @@ function ShowdownSelectCard() {
             document.getElementById("selectedCardStats2").innerHTML = document.getElementById("specialAttackCardStats").innerHTML;
             return;
         } 
+
+
+        //Evaulate if others should be disabled
+        if(showdownCard2.card_energy + showdownCard3.card_energy + energy < 0) {
+            document.getElementById("showdownCard3Selection").disabled = true
+            document.getElementById("showdownCard3Selection").checked = false
+            
+        }
+        else {
+            document.getElementById("showdownCard3Selection").disabled = false
+        }
+        if(showdownCard2.card_energy + showdownCard4.card_energy + energy < 0) {
+            document.getElementById("showdownCard4Selection").disabled = true
+            console.log("disabling check1")
+            document.getElementById("showdownCard4Selection").checked = false
+            
+        }
+        else {
+            document.getElementById("showdownCard4Selection").disabled = false
+        }
+        
+
     }
     else {
 
@@ -1017,6 +1087,27 @@ function ShowdownSelectCard() {
             document.getElementById("selectedCardStats2").innerHTML = document.getElementById("defenseCardStats").innerHTML;
             return;
         } 
+
+        //Evaulate if others should be disabled
+        if((showdownCard3.card_energy + showdownCard2.card_energy + energy < 0) || 
+           (showdownCard3.card_insight + showdownCard2.card_insight + insight < 0)) {
+            document.getElementById("showdownCard2Selection").disabled = true
+            document.getElementById("showdownCard2Selection").checked = false
+            
+        }
+        else {
+            document.getElementById("showdownCard2Selection").disabled = false
+        }
+        if ((showdownCard3.card_energy + showdownCard4.card_energy + energy < 0) || 
+            (showdownCard3.card_insight + showdownCard4.card_insight + insight < 0)) {
+            document.getElementById("showdownCard4Selection").disabled = true
+            console.log("disabling check2")
+            document.getElementById("showdownCard4Selection").checked = false
+            
+        }
+        else {
+            document.getElementById("showdownCard4Selection").disabled = false
+        }
     }
     else {
         if(showdownSelectedCard1Id == showdownCard3Id) {
@@ -1050,6 +1141,26 @@ function ShowdownSelectCard() {
             document.getElementById("selectedCardStats2").innerHTML = document.getElementById("skillCardStats").innerHTML;
             return;
         } 
+        
+        //Evaulate if others should be disabled
+        if((showdownCard4.card_energy + showdownCard2.card_energy + energy < 0) || 
+           (showdownCard4.card_insight + showdownCard2.card_insight + insight < 0)) {
+            document.getElementById("showdownCard2Selection").disabled = true
+            document.getElementById("showdownCard2Selection").checked = false
+            
+        }
+        else {
+            document.getElementById("showdownCard2Selection").disabled = false
+        }
+        if ((showdownCard4.card_energy + showdownCard3.card_energy + energy < 0) || 
+            (showdownCard4.card_insight + showdownCard3.card_insight + insight < 0)) {
+            document.getElementById("showdownCard3Selection").disabled = true
+            document.getElementById("showdownCard3Selection").checked = false
+            8
+        }
+        else {
+            document.getElementById("showdownCard3Selection").disabled = false
+        }
     }
     else {
         if(showdownSelectedCard1Id == showdownCard4Id) {
@@ -1098,6 +1209,7 @@ function ShowdownEndTurn() {
                 document.getElementById("showdownCard1Selection").checked = false;
                 document.getElementById("showdownCard2Selection").checked = false;
                 document.getElementById("showdownCard3Selection").checked = false;
+                console.log("disabling check3")
                 document.getElementById("showdownCard4Selection").checked = false;
 
                 document.getElementById("showdownCard1Selection").disabled = false;
