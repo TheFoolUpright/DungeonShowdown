@@ -1587,16 +1587,16 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
             if (playerCards.length == 2 && opponentCards.length == 2) {
                 //Opponent Actions
                 if (opponentCards[0].card_type_id == 8 ) {
-                    opponentActions = "Your opponent used " + opponentCards[0].card_name
+                    opponentActions = "Your opponent used " + opponentCards[0].card_name + " "
                     if (opponentCards[1].card_type_id == 6) {
-                        opponentActions = opponentActions + " and used a " + opponentCards[1].card_name + ". "
+                        opponentActions = opponentActions + "and used a " + opponentCards[1].card_name + ". "
                 
                     }
                 }
                 else if (opponentCards[1].card_type_id == 8) {
-                    opponentActions = "Your opponent used " + opponentCards[1].card_name
+                    opponentActions = "Your opponent used " + opponentCards[1].card_name + " "
                     if (opponentCards[0].card_type_id == 6) {
-                        opponentActions = opponentActions + " and used a " + opponentCards[0].card_name + ". "
+                        opponentActions = opponentActions + "and used a " + opponentCards[0].card_name + ". "
                 
                     }
                 }
@@ -1620,16 +1620,16 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
     
                 //Player Actions
                 if (playerCards[0].card_type_id == 8 ) {
-                    playerActions = "You used " + playerCards[0].card_name
+                    playerActions = "You used " + playerCards[0].card_name + " "
                     if (playerCards[1].card_type_id == 6) {
-                        playerActions = playerActions + " and used a " + playerCards[1].card_name + "."
+                        playerActions = playerActions + "and used a " + playerCards[1].card_name + "."
                 
                     }
                 }
                 else if (playerCards[1].card_type_id == 8) {
-                    playerActions = "You used " + playerCards[1].card_name
+                    playerActions = "You used " + playerCards[1].card_name + " "
                     if (playerCards[0].card_type_id == 6) {
-                        playerActions = playerActions + " and used a " + playerCards[0].card_name + "."
+                        playerActions = playerActions + "and used a " + playerCards[0].card_name + "."
                 
                     }
                 }
@@ -1665,7 +1665,6 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
                     }
                 }
                 else{
-                    
                     if (opponentCards[0].card_type_id == 6) {
                         opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
                     }
@@ -2491,31 +2490,31 @@ app.post("/setupShowdown", (req, res) => {
                 }
 
                 if (isCounterOpponent) {
-                    if(!isDodge || !isParry) {
+                    if ((!isDodge || !isParry) && playerAttack != 0) {
                         
                         playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - Math.ceil(opponentAttack * opponentDamage));
                         playerDefense = Math.max(0, playerDefense - Math.ceil(opponentAttack * opponentDamage))
                     }
                 }
                 if(isDoubleAttackOpponent) {
-                    if(!isDodge || !isParry) {
+                    if (!isDodge || !isParry) {
                         playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - ((opponentAttack * opponentDamage) * 2));
                         playerDefense = Math.max(0, playerDefense - ((opponentAttack * opponentDamage) * 2))
                     }
-                    else{
+                    else {
                         playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - Math.ceil(opponentAttack * opponentDamage))
                         playerDefense = Math.max(0, playerDefense - Math.ceil(opponentAttack * opponentDamage))
                     }
                 }
                 if (isParryOpponent) {
-                    if(opponentAttack != 0 || !isDodge) {
+                    if ((opponentAttack != 0 || !isDodge) && playerAttack != 0) {
                         playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - Math.ceil(opponentParryAttack * (playerAttack * playerDamage)));
                         playerDefense = Math.max(0, playerDefense - Math.ceil(opponentParryAttack * playerDamage))
                     }
                 }
                 
                 //Apply Normal, Heavy or Recovery Attack Damage
-                if(!isCounterOpponent && !isDoubleAttackOpponent) {
+                if (!isCounterOpponent && !isDoubleAttackOpponent) {
                     playerCurrentHealth = playerCurrentHealth + playerDefense - Math.ceil(opponentAttack * opponentDamage)
                     playerDefense = Math.max(0, playerDefense - Math.ceil(opponentAttack * opponentDamage))
                 }
