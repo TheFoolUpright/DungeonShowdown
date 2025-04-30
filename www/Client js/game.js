@@ -704,12 +704,13 @@ function getShowdownCardSelection() {
                     document.getElementById("normalAttackCardStats").innerHTML = UnwrapShowdownCardStats(showdownCard1, data.damage)
 
                     showdownCard2 = data.card[1]
-                    if (showdownCard2.isEnabled) {
-                        document.getElementById("showdownCard2Selection").disabled = false
-                    }
-                    else{
+                    if (!showdownCard2.isEnabled) {
                         document.getElementById("showdownCard2Selection").disabled = true
                     }
+                    // else{
+                    //     document.getElementById("showdownCard2Selection").disabled = true
+                    // }
+
                     //if (showdownCard2.is_visible) {
                     if (true) {
                         showdownCard2Id = showdownCard2.card_id
@@ -725,12 +726,12 @@ function getShowdownCardSelection() {
                     }
 
                     showdownCard3 = data.card[2]
-                    if (showdownCard3.isEnabled) {
-                        document.getElementById("showdownCard3Selection").disabled = false
-                    }
-                    else{
+                    if (!showdownCard3.isEnabled) {
                         document.getElementById("showdownCard3Selection").disabled = true
                     }
+                    // else{
+                    //     document.getElementById("showdownCard3Selection").disabled = true
+                    // }
 
                     //if (showdownCard3.is_visible) {
                     if (true) {
@@ -747,12 +748,12 @@ function getShowdownCardSelection() {
                     }
 
                     showdownCard4 = data.card[3]
-                    if (showdownCard4.isEnabled) {
-                        document.getElementById("showdownCard4Selection").disabled = false
-                    }
-                    else{
+                    if (!showdownCard4.isEnabled) {
                         document.getElementById("showdownCard4Selection").disabled = true
                     }
+                    // else{
+                    //     document.getElementById("showdownCard4Selection").disabled = true
+                    // }
 
                     //if (showdownCard4.is_visible) {
                     if (true) {
@@ -957,7 +958,7 @@ function UnwrapShowdownCardStats(card, playerDamage) {
     }
     return stringBuilder;
 }
-
+//Todo:work here
 /**
  * Displays on the client which cards are selected.
  * Called when the player presses one of the showdownCheck checkboxes.
@@ -979,14 +980,12 @@ function ShowdownSelectCard() {
             document.getElementById("selectedCardName1").innerHTML = document.getElementById("normalAttackCardName").innerHTML;
             document.getElementById("selectedCardImage1").src = document.getElementById("normalAttackCardImage").src;
             document.getElementById("selectedCardStats1").innerHTML = document.getElementById("normalAttackCardStats").innerHTML;
-            return;
         } 
         else if(showdownSelectedCard2Id == null && showdownSelectedCard1Id != showdownCard1Id) {
             showdownSelectedCard2Id = showdownCard1Id;
             document.getElementById("selectedCardName2").innerHTML = document.getElementById("normalAttackCardName").innerHTML;
             document.getElementById("selectedCardImage2").src = document.getElementById("normalAttackCardImage").src;
             document.getElementById("selectedCardStats2").innerHTML = document.getElementById("normalAttackCardStats").innerHTML;
-            return;
         } 
     }
     else {
@@ -1010,7 +1009,6 @@ function ShowdownSelectCard() {
     }
 
     if (document.getElementById("showdownCard2Selection").checked) {
-        
         //disable the first attack
         document.getElementById("showdownCard1Selection").disabled = true
 
@@ -1019,14 +1017,12 @@ function ShowdownSelectCard() {
             document.getElementById("selectedCardName1").innerHTML = document.getElementById("specialAttackCardName").innerHTML;
             document.getElementById("selectedCardImage1").src = document.getElementById("specialAttackCardImage").src;
             document.getElementById("selectedCardStats1").innerHTML = document.getElementById("specialAttackCardStats").innerHTML;
-            return;
         }
         else if(showdownSelectedCard2Id == null && showdownSelectedCard1Id != showdownCard2Id) {
             showdownSelectedCard2Id = showdownCard2Id;
             document.getElementById("selectedCardName2").innerHTML = document.getElementById("specialAttackCardName").innerHTML;
             document.getElementById("selectedCardImage2").src = document.getElementById("specialAttackCardImage").src;
             document.getElementById("selectedCardStats2").innerHTML = document.getElementById("specialAttackCardStats").innerHTML;
-            return;
         } 
 
 
@@ -1039,9 +1035,7 @@ function ShowdownSelectCard() {
         else {
             document.getElementById("showdownCard3Selection").disabled = false
         }
-        console.log("showdownCard2.card_energy: " + showdownCard2.card_energy)
-        console.log("showdownCard4.card_energy: " + showdownCard4.card_energy)
-        console.log("energy: " + energy)
+
         if(showdownCard2.card_energy + showdownCard4.card_energy + energy < 0) {
             document.getElementById("showdownCard4Selection").disabled = true
             console.log("disabling check1")
@@ -1049,17 +1043,18 @@ function ShowdownSelectCard() {
             
         }
         else {
+            console.log("disabling check2")
             document.getElementById("showdownCard4Selection").disabled = false
         }
         
 
     }
     else {
-
+        console.log("showdownCard2Selection else")
         //enable the first attack
         document.getElementById("showdownCard1Selection").disabled = false
 
-        if(showdownSelectedCard1Id == showdownCard2Id) {
+        if (showdownSelectedCard1Id == showdownCard2Id) {
             showdownSelectedCard1Id = null;
             document.getElementById("selectedCardName1").innerHTML = "Selected Card Name";
             document.getElementById("selectedCardImage1").src = "../Assets/Art/Cards/1x/HiddenDraft.png";
@@ -1067,12 +1062,22 @@ function ShowdownSelectCard() {
             
 
         }
-        if(showdownSelectedCard2Id == showdownCard2Id) {
+        if (showdownSelectedCard2Id == showdownCard2Id) {
             showdownSelectedCard2Id = null;
             document.getElementById("selectedCardName2").innerHTML = "Selected Card Name";
             document.getElementById("selectedCardImage2").src = "../Assets/Art/Cards/1x/HiddenDraft.png";
             document.getElementById("selectedCardStats2").innerHTML = "Selected Card Stats";
         }
+
+        //Evaulate if others should be disabled
+        if(showdownCard2.card_energy + showdownCard3.card_energy + energy < 0) {
+            document.getElementById("showdownCard3Selection").disabled = false            
+        }
+
+        if(showdownCard2.card_energy + showdownCard4.card_energy + energy < 0) {
+            document.getElementById("showdownCard4Selection").disabled = false          
+        }
+
     }
 
     if (document.getElementById("showdownCard3Selection").checked) {
@@ -1081,19 +1086,26 @@ function ShowdownSelectCard() {
             document.getElementById("selectedCardName1").innerHTML = document.getElementById("defenseCardName").innerHTML;
             document.getElementById("selectedCardImage1").src = document.getElementById("defenseCardImage").src;
             document.getElementById("selectedCardStats1").innerHTML = document.getElementById("defenseCardStats").innerHTML;
-            return;
+            
         }
-        else if(showdownSelectedCard2Id == null && showdownSelectedCard1Id != showdownCard3Id) {
+        else if (showdownSelectedCard2Id == null && showdownSelectedCard1Id != showdownCard3Id) {
             showdownSelectedCard2Id = showdownCard3Id;
             document.getElementById("selectedCardName2").innerHTML = document.getElementById("defenseCardName").innerHTML;
             document.getElementById("selectedCardImage2").src = document.getElementById("defenseCardImage").src;
             document.getElementById("selectedCardStats2").innerHTML = document.getElementById("defenseCardStats").innerHTML;
-            return;
+            
         } 
 
         //Evaulate if others should be disabled
+        console.log("showdownCard3.card_energy: "+ showdownCard3.card_energy)
+        console.log("showdownCard2.card_energy: "+ showdownCard2.card_energy)
+        console.log("energy: "+ energy)
+        console.log("showdownCard3.card_insight: "+ showdownCard3.card_insight)
+        console.log("showdownCard2.card_insight: "+ showdownCard2.card_insight)
+        console.log("insight: "+ insight)
         if((showdownCard3.card_energy + showdownCard2.card_energy + energy < 0) || 
            (showdownCard3.card_insight + showdownCard2.card_insight + insight < 0)) {
+            console.log("sdnjfi")
             document.getElementById("showdownCard2Selection").disabled = true
             document.getElementById("showdownCard2Selection").checked = false
             
@@ -1104,7 +1116,6 @@ function ShowdownSelectCard() {
         if ((showdownCard3.card_energy + showdownCard4.card_energy + energy < 0) || 
             (showdownCard3.card_insight + showdownCard4.card_insight + insight < 0)) {
             document.getElementById("showdownCard4Selection").disabled = true
-            console.log("disabling check2")
             document.getElementById("showdownCard4Selection").checked = false
             
         }
@@ -1127,6 +1138,17 @@ function ShowdownSelectCard() {
             document.getElementById("selectedCardImage2").src = "../Assets/Art/Cards/1x/HiddenDraft.png";
             document.getElementById("selectedCardStats2").innerHTML = "Selected Card Stats";
         }
+
+        //Evaulate if others should be disabled
+        if((showdownCard3.card_energy + showdownCard2.card_energy + energy < 0) || 
+           (showdownCard3.card_insight + showdownCard2.card_insight + insight < 0)) {
+            document.getElementById("showdownCard2Selection").disabled = false            
+        }
+        if ((showdownCard3.card_energy + showdownCard4.card_energy + energy < 0) || 
+            (showdownCard3.card_insight + showdownCard4.card_insight + insight < 0)) {
+            document.getElementById("showdownCard4Selection").disabled = false            
+        }
+
     }
 
     if (document.getElementById("showdownCard4Selection").checked) {
@@ -1135,14 +1157,14 @@ function ShowdownSelectCard() {
             document.getElementById("selectedCardName1").innerHTML = document.getElementById("skillCardName").innerHTML;
             document.getElementById("selectedCardImage1").src = document.getElementById("skillCardImage").src;
             document.getElementById("selectedCardStats1").innerHTML = document.getElementById("skillCardStats").innerHTML;
-            return;
+            
         }
         else if(showdownSelectedCard2Id == null && showdownSelectedCard1Id != showdownCard4Id) {
             showdownSelectedCard2Id = showdownCard4Id;
             document.getElementById("selectedCardName2").innerHTML = document.getElementById("skillCardName").innerHTML;
             document.getElementById("selectedCardImage2").src = document.getElementById("skillCardImage").src;
             document.getElementById("selectedCardStats2").innerHTML = document.getElementById("skillCardStats").innerHTML;
-            return;
+            
         } 
         
         //Evaulate if others should be disabled
@@ -1159,7 +1181,7 @@ function ShowdownSelectCard() {
             (showdownCard4.card_insight + showdownCard3.card_insight + insight < 0)) {
             document.getElementById("showdownCard3Selection").disabled = true
             document.getElementById("showdownCard3Selection").checked = false
-            8
+            
         }
         else {
             document.getElementById("showdownCard3Selection").disabled = false
@@ -1180,6 +1202,18 @@ function ShowdownSelectCard() {
             document.getElementById("selectedCardImage2").src = "../Assets/Art/Cards/1x/HiddenDraft.png";
             document.getElementById("selectedCardStats2").innerHTML = "Selected Card Stats";
         }
+
+        //Evaulate if others should be disabled
+        if((showdownCard4.card_energy + showdownCard2.card_energy + energy < 0) || 
+           (showdownCard4.card_insight + showdownCard2.card_insight + insight < 0)) {
+            document.getElementById("showdownCard2Selection").disabled = false            
+        }
+
+        if ((showdownCard4.card_energy + showdownCard3.card_energy + energy < 0) || 
+            (showdownCard4.card_insight + showdownCard3.card_insight + insight < 0)) {
+            document.getElementById("showdownCard3Selection").disabled = false            
+        }
+
     }
    
 }
