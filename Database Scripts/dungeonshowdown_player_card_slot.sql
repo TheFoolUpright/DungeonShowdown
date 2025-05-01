@@ -37,8 +37,8 @@ CREATE TABLE `player_card_slot` (
   KEY `player_card_board_board_status_id_FK_idx` (`slot_id`),
   KEY `player_card_board_card_id_FK_idx` (`card_id`),
   KEY `player_card_slot_room_id_FK_idx` (`room_id`),
-  CONSTRAINT `player_card_board_card_id_FK` FOREIGN KEY (`card_id`) REFERENCES `card` (`card_id`),
-  CONSTRAINT `player_card_board_player_status_id_FK` FOREIGN KEY (`player_status_id`) REFERENCES `player_status` (`player_status_id`),
+  CONSTRAINT `player_card_slot_card_id_FK` FOREIGN KEY (`card_id`) REFERENCES `card` (`card_id`),
+  CONSTRAINT `player_card_slot_player_status_id_FK` FOREIGN KEY (`player_status_id`) REFERENCES `player_status` (`player_status_id`),
   CONSTRAINT `player_card_slot_room_id_FK` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`),
   CONSTRAINT `player_card_slot_slot_id_FK` FOREIGN KEY (`slot_id`) REFERENCES `slot` (`slot_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
