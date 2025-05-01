@@ -45,7 +45,7 @@ LOCK TABLES `player` WRITE;
 /*!40000 ALTER TABLE `player` DISABLE KEYS */;
 INSERT INTO `player` VALUES 
 (1,'mary','mary@test.com','Daisy1!','#a2293e',0),
-(2,'EDY_Pen','Edy@test.com','#1eDy','#a2293e',0),
+(2,'EDY_Pen','Edy@test.com','Edy1!','#a2293e',0),
 (3,'Data','some@test.com','D@ta1','#a2293e',0),
 (4,'Testy','test@gmail.com','M@ster1','#a2293e',0);
 /*!40000 ALTER TABLE `player` ENABLE KEYS */;
