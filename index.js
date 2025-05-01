@@ -361,14 +361,12 @@ app.put("/joinMatch", (req, res) => {
                 var player2Status = rows[1]
 
                 req.session.roomId = 1
-                GetRoomDeck(player1Status)
-                GetRoomDeck(player2Status)
-                UpdateWaitingForMatchFound()
+                GetRoomDeck(player1Status, player2Status)
             }
         )
     }
 
-    function GetRoomDeck(playerStatus) {
+    function GetRoomDeck(playerStatus, opponentStatus) {
         
         connection.query("SELECT c.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_image_path FROM (SELECT max_health, current_health, energy, insight FROM player_status WHERE player_status_id = ?) ps, card_room cr INNER JOIN card c ON c.card_id = cr.card_id INNER JOIN room r ON cr.room_id = r.room_id WHERE  (ps.current_health + card_current_health <= ps.max_health) AND (ps.energy + card_energy <= 10) AND (ps.insight + card_insight <= 10) AND (ps.current_health + card_current_health > 0) AND (ps.energy + card_energy >= 0) AND (ps.insight + card_insight >= 0) AND r.room_id = ?", [playerStatus.player_status_id,  req.session.roomId], 
             function (err, rows, fields) {
@@ -380,16 +378,16 @@ app.put("/joinMatch", (req, res) => {
                     return;
                 }
                 //call function to set cards
-                InsertDungeonCards(playerStatus, rows)
+                InsertDungeonCards(playerStatus, opponentStatus, rows)
 
             }
         )
     }
 
 
-    function InsertDungeonCards(playerStats, deck) {
+    function InsertDungeonCards(playerStats, opponentStatus, deck) {
 
-        //Create Cards - Mary here
+        //Create Cards 
         var indexOfElement;
         var MaxHealthDeck = [];
         var MaxHealthIterator = 0;
@@ -425,146 +423,197 @@ app.put("/joinMatch", (req, res) => {
             }   
         }
 
-        var typesDeck = []
+        var playerTypesDeck = []
+        var opponentTypesDeck = []
         var typeIterator = 0
 
         if (MaxHealthDeck.length != 0) {
-            typesDeck[typeIterator] = MaxHealthDeck[0].card_type_id
+            playerTypesDeck[typeIterator] = MaxHealthDeck[0].card_type_id
+            opponentTypesDeck[typeIterator] = MaxHealthDeck[0].card_type_id
             typeIterator++;
         }
         if (HealingDeck.length != 0) {
-            typesDeck[typeIterator] = HealingDeck[0].card_type_id
+            playerTypesDeck[typeIterator] = HealingDeck[0].card_type_id
+            opponentTypesDeck[typeIterator] = HealingDeck[0].card_type_id
             typeIterator++;
         }
         if (DamageDeck.length != 0) {
-            typesDeck[typeIterator] = DamageDeck[0].card_type_id
+            playerTypesDeck[typeIterator] = DamageDeck[0].card_type_id
+            opponentTypesDeck[typeIterator] = DamageDeck[0].card_type_id
             typeIterator++;
         }
         if (RestDeck.length != 0) {
-            typesDeck[typeIterator] = RestDeck[0].card_type_id
+            playerTypesDeck[typeIterator] = RestDeck[0].card_type_id
+            opponentTypesDeck[typeIterator] = RestDeck[0].card_type_id
             typeIterator++;
         }
         if (EnemyDeck.length != 0) {
-            typesDeck[typeIterator] = EnemyDeck[0].card_type_id
+            playerTypesDeck[typeIterator] = EnemyDeck[0].card_type_id
+            opponentTypesDeck[typeIterator] = EnemyDeck[0].card_type_id
             typeIterator++;
         }
 
-        var type1 = typesDeck[Math.floor(Math.random() * typesDeck.length)]
-        indexOfElement = typesDeck.indexOf(type1);
-        typesDeck.splice(indexOfElement, 1)
+        var playerType1 = playerTypesDeck[Math.floor(Math.random() * playerTypesDeck.length)]
+        indexOfElement = playerTypesDeck.indexOf(playerType1);
+        playerTypesDeck.splice(indexOfElement, 1)
         
-        var type2 = typesDeck[Math.floor(Math.random() * typesDeck.length)]
-        indexOfElement = typesDeck.indexOf(type2);
-        typesDeck.splice(indexOfElement, 1)
+        var playerType2 = playerTypesDeck[Math.floor(Math.random() * playerTypesDeck.length)]
+        indexOfElement = playerTypesDeck.indexOf(playerType2);
+        playerTypesDeck.splice(indexOfElement, 1)
         
-        var type3 = typesDeck[Math.floor(Math.random() * typesDeck.length)]
+        var playerType3 = playerTypesDeck[Math.floor(Math.random() * playerTypesDeck.length)]
 
-        var card1
-        var card2
-        var card3
+        var opponentType1 = opponentTypesDeck[Math.floor(Math.random() * opponentTypesDeck.length)]
+        indexOfElement = opponentTypesDeck.indexOf(opponentType1);
+        opponentTypesDeck.splice(indexOfElement, 1)
+        
+        var opponentType2 = opponentTypesDeck[Math.floor(Math.random() * opponentTypesDeck.length)]
+        indexOfElement = opponentTypesDeck.indexOf(opponentType2);
+        opponentTypesDeck.splice(indexOfElement, 1)
+        
+        var opponentType3 = opponentTypesDeck[Math.floor(Math.random() * opponentTypesDeck.length)]
 
 
-        switch(type1) {
+        var playerCard1
+        var playerCard2
+        var playerCard3
+
+        var opponentCard1
+        var opponentCard2
+        var opponentCard3
+
+        switch(playerType1) {
             case 1:
-                card1 = MaxHealthDeck[Math.floor(Math.random() * MaxHealthDeck.length)]
+                playerCard1 = MaxHealthDeck[Math.floor(Math.random() * MaxHealthDeck.length)]
               break;
             case 2:
-                card1 = HealingDeck[Math.floor(Math.random() * HealingDeck.length)]
+                playerCard1 = HealingDeck[Math.floor(Math.random() * HealingDeck.length)]
               break;
             case 3:
-                card1 = DamageDeck[Math.floor(Math.random() * DamageDeck.length)]
+                playerCard1 = DamageDeck[Math.floor(Math.random() * DamageDeck.length)]
               break;
             case 4:
-                card1 = RestDeck[Math.floor(Math.random() * RestDeck.length)]
+                playerCard1 = RestDeck[Math.floor(Math.random() * RestDeck.length)]
               break;
             case 5:
-                card1 = EnemyDeck[Math.floor(Math.random() * EnemyDeck.length)]
+                playerCard1 = EnemyDeck[Math.floor(Math.random() * EnemyDeck.length)]
               break;
             default:
                 console.log("Case Error")
         }
-        switch(type2) {
+        switch(playerType2) {
             case 1:
-                card2 = MaxHealthDeck[Math.floor(Math.random() * MaxHealthDeck.length)]
+                playerCard2 = MaxHealthDeck[Math.floor(Math.random() * MaxHealthDeck.length)]
               break;
             case 2:
-                card2 = HealingDeck[Math.floor(Math.random() * HealingDeck.length)]
+                playerCard2 = HealingDeck[Math.floor(Math.random() * HealingDeck.length)]
               break;
             case 3:
-                card2 = DamageDeck[Math.floor(Math.random() * DamageDeck.length)]
+                playerCard2 = DamageDeck[Math.floor(Math.random() * DamageDeck.length)]
               break;
             case 4:
-                card2 = RestDeck[Math.floor(Math.random() * RestDeck.length)]
+                playerCard2 = RestDeck[Math.floor(Math.random() * RestDeck.length)]
               break;
             case 5:
-                card2 = EnemyDeck[Math.floor(Math.random() * EnemyDeck.length)]
+                playerCard2 = EnemyDeck[Math.floor(Math.random() * EnemyDeck.length)]
               break;
             default:
                 console.log("Case Error")
         }
-        switch(type3) {
+        switch(playerType3) {
             case 1:
-                card3 = MaxHealthDeck[Math.floor(Math.random() * MaxHealthDeck.length)]
+                playerCard3 = MaxHealthDeck[Math.floor(Math.random() * MaxHealthDeck.length)]
               break;
             case 2:
-                card3 = HealingDeck[Math.floor(Math.random() * HealingDeck.length)]
+                playerCard3 = HealingDeck[Math.floor(Math.random() * HealingDeck.length)]
               break;
             case 3:
-                card3 = DamageDeck[Math.floor(Math.random() * DamageDeck.length)]
+                playerCard3 = DamageDeck[Math.floor(Math.random() * DamageDeck.length)]
               break;
             case 4:
-                card3 = RestDeck[Math.floor(Math.random() * RestDeck.length)]
+                playerCard3 = RestDeck[Math.floor(Math.random() * RestDeck.length)]
               break;
             case 5:
-                card3 = EnemyDeck[Math.floor(Math.random() * EnemyDeck.length)]
+                playerCard3 = EnemyDeck[Math.floor(Math.random() * EnemyDeck.length)]
               break;
             default:
                 console.log("Case Error")
         }
 
+        switch(opponentType1) {
+            case 1:
+                opponentCard1 = MaxHealthDeck[Math.floor(Math.random() * MaxHealthDeck.length)]
+              break;
+            case 2:
+                opponentCard1 = HealingDeck[Math.floor(Math.random() * HealingDeck.length)]
+              break;
+            case 3:
+                opponentCard1 = DamageDeck[Math.floor(Math.random() * DamageDeck.length)]
+              break;
+            case 4:
+                opponentCard1 = RestDeck[Math.floor(Math.random() * RestDeck.length)]
+              break;
+            case 5:
+                opponentCard1 = EnemyDeck[Math.floor(Math.random() * EnemyDeck.length)]
+              break;
+            default:
+                console.log("Case Error")
+        }
+        switch(opponentType2) {
+            case 1:
+                opponentCard2 = MaxHealthDeck[Math.floor(Math.random() * MaxHealthDeck.length)]
+              break;
+            case 2:
+                opponentCard2 = HealingDeck[Math.floor(Math.random() * HealingDeck.length)]
+              break;
+            case 3:
+                opponentCard2 = DamageDeck[Math.floor(Math.random() * DamageDeck.length)]
+              break;
+            case 4:
+                opponentCard2 = RestDeck[Math.floor(Math.random() * RestDeck.length)]
+              break;
+            case 5:
+                opponentCard2 = EnemyDeck[Math.floor(Math.random() * EnemyDeck.length)]
+              break;
+            default:
+                console.log("Case Error")
+        }
+        switch(opponentType3) {
+            case 1:
+                opponentCard3 = MaxHealthDeck[Math.floor(Math.random() * MaxHealthDeck.length)]
+              break;
+            case 2:
+                opponentCard3 = HealingDeck[Math.floor(Math.random() * HealingDeck.length)]
+              break;
+            case 3:
+                opponentCard3 = DamageDeck[Math.floor(Math.random() * DamageDeck.length)]
+              break;
+            case 4:
+                opponentCard3 = RestDeck[Math.floor(Math.random() * RestDeck.length)]
+              break;
+            case 5:
+                opponentCard3 = EnemyDeck[Math.floor(Math.random() * EnemyDeck.length)]
+              break;
+            default:
+                console.log("Case Error")
+        }
 
         //Make cards visable by default
-        card1.IsVisible = true;
-        card2.IsVisible = true;
-        card3.IsVisible = true;
+        playerCard1.IsVisible = true;
+        playerCard2.IsVisible = true;
+        playerCard3.IsVisible = true;
+        opponentCard1.IsVisible = true;
+        opponentCard2.IsVisible = true;
+        opponentCard3.IsVisible = true;
         
-        if (playerStats.insight < 9 && playerStats.insight > 5) {
-            var randomChoice =  Math.floor((Math.random() * 3) + 1)
-            console.log("1 card: " + randomChoice)
-            if (randomChoice == 1) {
-                card1.IsVisible = false;
-            }
-            else if (randomChoice == 2) {
-                card2.IsVisible = false;
-            }
-            else if (randomChoice == 3) {
-                card3.IsVisible = false;
-            }
-            
-        }
-        if (playerStats.insight < 6 && playerStats.insight > 2) {
-            var randomChoice =  Math.floor((Math.random() * 3) + 1)
-            console.log("2 cards: " + randomChoice)
-            if (randomChoice == 1) {
-                card1.IsVisible = false;
-                card2.IsVisible = false;
-            }
-            else if (randomChoice == 2) {
-                card2.IsVisible = false;
-                card3.IsVisible = false;
-            }
-            else if (randomChoice == 3) {
-                card1.IsVisible = false;
-                card3.IsVisible = false;
-            }
-        }
-        if (playerStats.insight < 3) {
-            card1.IsVisible = false;
-            card2.IsVisible = false;
-            card3.IsVisible = false;
-        }
 
-        connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn, is_visible) VALUES (?,?,?,?,?,?), (?,?,?,?,?,?), (?,?,?,?,?,?);", [playerStats.player_status_id, 1, card1.card_id,  req.session.roomId,  req.session.showdownTurn, card1.IsVisible, playerStats.player_status_id, 2, card2.card_id,  req.session.roomId,  req.session.showdownTurn, card2.IsVisible,  playerStats.player_status_id, 3, card3.card_id,  req.session.roomId,  req.session.showdownTurn, card3.IsVisible],
+        connection.query("INSERT INTO player_card_slot (player_status_id, slot_id, card_id, room_id, showdown_turn, is_visible) VALUES (?,?,?,?,?,?), (?,?,?,?,?,?), (?,?,?,?,?,?), (?,?,?,?,?,?), (?,?,?,?,?,?), (?,?,?,?,?,?);", 
+            [playerStats.player_status_id, 1, playerCard1.card_id,  req.session.roomId,  req.session.showdownTurn, playerCard1.IsVisible, 
+             playerStats.player_status_id, 2, playerCard2.card_id,  req.session.roomId,  req.session.showdownTurn, playerCard2.IsVisible,  
+             playerStats.player_status_id, 3, playerCard3.card_id,  req.session.roomId,  req.session.showdownTurn, playerCard3.IsVisible,
+             opponentStatus.player_status_id, 1, opponentCard1.card_id,  req.session.roomId,  req.session.showdownTurn, opponentCard1.IsVisible, 
+             opponentStatus.player_status_id, 2, opponentCard2.card_id,  req.session.roomId,  req.session.showdownTurn, opponentCard2.IsVisible,  
+             opponentStatus.player_status_id, 3, opponentCard3.card_id,  req.session.roomId,  req.session.showdownTurn, opponentCard3.IsVisible],
         function (err, rows, fields) {
             if (err) {
                 console.log("Database Error: " + err);
@@ -573,6 +622,8 @@ app.put("/joinMatch", (req, res) => {
                 });
                 return;
             }
+
+            UpdateWaitingForMatchFound()
         })
     }
 
