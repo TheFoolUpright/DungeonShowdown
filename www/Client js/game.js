@@ -26,6 +26,12 @@ var energy
 var insight
 var damage
 
+var previousMaxHealth
+var previousCurrentHealth
+var previousEnergy
+var previousInsight
+var previousDamage
+
 
 var states = {
     "DungeonCardSelection": 1,
@@ -372,11 +378,104 @@ function getDungeonCardSelection() {
 
                     //Update data on page
                     //console.log("Data.Card: "+ data.card)
-                    document.getElementById("maxHealth").innerHTML = "Max Health: " + data.max_health;
-                    document.getElementById("currentHealth").innerHTML = "Current Health: " + data.current_health;
-                    document.getElementById("energy").innerHTML = "Energy: " + data.energy;
-                    document.getElementById("insight").innerHTML = "Insight: " + data.insight;
-                    document.getElementById("damage").innerHTML = "Damage: " + data.damage;
+                    maxHealth = data.max_health
+                    currentHealth = data.current_health
+                    energy = data.energy
+                    insight = data.insight
+                    damage = data.damage
+
+                    document.getElementById("maxHealth").innerHTML = "Max Health: " + maxHealth;
+                    document.getElementById("currentHealth").innerHTML = "Current Health: " + currentHealth;
+                    document.getElementById("energy").innerHTML = "Energy: " + energy;
+                    document.getElementById("insight").innerHTML = "Insight: " + insight;
+                    document.getElementById("damage").innerHTML = "Damage: " + damage;
+
+                    if(isNaN(previousMaxHealth)){
+                        previousMaxHealth = maxHealth
+                    }
+                    if(isNaN(previousCurrentHealth)){
+                        previousCurrentHealth = currentHealth
+                    }
+                    if(isNaN(previousEnergy)){
+                        previousEnergy = energy
+                    }
+                    if(isNaN(previousInsight)){
+                        previousInsight = insight
+                    }
+                    if(isNaN(previousDamage)){
+                        previousDamage = damage
+                    }
+
+                    if (previousMaxHealth == maxHealth) {
+                        //disable html element
+                        document.getElementById("maxHealthDifference").style.display = "none";
+                    }
+                    else{
+                        document.getElementById("maxHealthDifference").style.display = "block"
+                        if(maxHealth - previousMaxHealth > 0) {
+                            document.getElementById("maxHealthDifference").innerHTML = "+" + (maxHealth - previousMaxHealth)
+                        }
+                        else {
+                            document.getElementById("maxHealthDifference").innerHTML = maxHealth - previousMaxHealth
+                        }
+                    }
+
+                    if (previousCurrentHealth == currentHealth) {
+                        //disable html element
+                        document.getElementById("currentHealthDifference").style.display = "none";
+                    }
+                    else{
+                        document.getElementById("currentHealthDifference").style.display = "block";
+                        if(currentHealth - previousCurrentHealth > 0) {
+                            document.getElementById("currentHealthDifference").innerHTML =  "+" + (currentHealth - previousCurrentHealth)
+                        }
+                        else {
+                            document.getElementById("currentHealthDifference").innerHTML = currentHealth - previousCurrentHealth
+                        }
+                    }
+                    
+                    if (previousEnergy == energy) {
+                        //disable html element
+                        document.getElementById("energyDifference").style.display = "none";
+                    }
+                    else{
+                        document.getElementById("energyDifference").style.display = "block";
+                        if(energy - previousEnergy > 0) {
+                            document.getElementById("energyDifference").innerHTML =  "+" + (energy - previousEnergy)
+                        }
+                        else {
+                            document.getElementById("energyDifference").innerHTML = energy - previousEnergy
+                        }
+                    }
+                    
+                    if (previousInsight == insight) {
+                        //disable html element
+                        document.getElementById("insightDifference").style.display = "none";
+                    }
+                    else{
+                        document.getElementById("insightDifference").style.display = "block";
+                        if(insight - previousInsight > 0) {
+                            document.getElementById("insightDifference").innerHTML =  "+" + (insight - previousInsight)
+                        }
+                        else {
+                            document.getElementById("insightDifference").innerHTML = insight - previousInsight
+                        }
+                    }
+                    
+                    if (previousDamage == damage) {
+                        //disable html element
+                        document.getElementById("damageDifference").style.display = "none";
+                    }
+                    else{
+                        document.getElementById("damageDifference").style.display = "block";
+                        if(damage - previousDamage > 0) {
+                            document.getElementById("damageDifference").innerHTML =  "+" + (damage - previousDamage)
+                        }
+                        else {
+                            document.getElementById("damageDifference").innerHTML = damage - previousDamage
+                        }
+                    }
+                    
                     
                     console.log(data.card[0].is_visible)
                     if (data.card[0].is_visible) {
@@ -609,6 +708,12 @@ function DungeonEndTurn() {
     document.getElementById("dungeonCard2Selection").checked = false;
     document.getElementById("dungeonCard3Selection").checked = false;
 
+    previousMaxHealth = maxHealth
+    previousCurrentHealth = currentHealth
+    previousEnergy = energy
+    previousInsight = insight
+    previousDamage = damage
+
     var xhttp = new XMLHttpRequest();
     //Create a JSON object with the registration data
     var dataToSend = {  
@@ -691,11 +796,82 @@ function getShowdownCardSelection() {
                     energy = data.energy
                     insight = data.insight
                     damage = data.damage
-                    document.getElementById("maxHealth").innerHTML = "Max Health: " + data.max_health;
-                    document.getElementById("currentHealth").innerHTML = "Current Health: " + data.current_health;
-                    document.getElementById("energy").innerHTML = "Energy: " + data.energy;
-                    document.getElementById("insight").innerHTML = "Insight: " + data.insight;
-                    document.getElementById("damage").innerHTML = "Damage: " + data.damage;
+
+                    document.getElementById("maxHealth").innerHTML = "Max Health: " + maxHealth;
+                    document.getElementById("currentHealth").innerHTML = "Current Health: " + currentHealth;
+                    document.getElementById("energy").innerHTML = "Energy: " + energy;
+                    document.getElementById("insight").innerHTML = "Insight: " + insight;
+                    document.getElementById("damage").innerHTML = "Damage: " + damage;
+
+                    if (previousMaxHealth == maxHealth) {
+                        //disable html element
+                        document.getElementById("maxHealthDifference").style.display = "none";
+                    }
+                    else{
+                        document.getElementById("maxHealthDifference").style.display = "block"
+                        if(maxHealth - previousMaxHealth > 0) {
+                            document.getElementById("maxHealthDifference").innerHTML = "+" + (maxHealth - previousMaxHealth)
+                        }
+                        else {
+                            document.getElementById("maxHealthDifference").innerHTML = maxHealth - previousMaxHealth
+                        }
+                    }
+
+                    if (previousCurrentHealth == currentHealth) {
+                        //disable html element
+                        document.getElementById("currentHealthDifference").style.display = "none";
+                    }
+                    else{
+                        document.getElementById("currentHealthDifference").style.display = "block";
+                        if(currentHealth - previousCurrentHealth > 0) {
+                            document.getElementById("currentHealthDifference").innerHTML =  "+" + (currentHealth - previousCurrentHealth)
+                        }
+                        else {
+                            document.getElementById("currentHealthDifference").innerHTML = currentHealth - previousCurrentHealth
+                        }
+                    }
+                    
+                    if (previousEnergy == energy) {
+                        //disable html element
+                        document.getElementById("energyDifference").style.display = "none";
+                    }
+                    else{
+                        document.getElementById("energyDifference").style.display = "block";
+                        if(energy - previousEnergy > 0) {
+                            document.getElementById("energyDifference").innerHTML =  "+" + (energy - previousEnergy)
+                        }
+                        else {
+                            document.getElementById("energyDifference").innerHTML = energy - previousEnergy
+                        }
+                    }
+                    
+                    if (previousInsight == insight) {
+                        //disable html element
+                        document.getElementById("insightDifference").style.display = "none";
+                    }
+                    else{
+                        document.getElementById("insightDifference").style.display = "block";
+                        if(insight - previousInsight > 0) {
+                            document.getElementById("insightDifference").innerHTML =  "+" + (insight - previousInsight)
+                        }
+                        else {
+                            document.getElementById("insightDifference").innerHTML = insight - previousInsight
+                        }
+                    }
+                    
+                    if (previousDamage == damage) {
+                        //disable html element
+                        document.getElementById("damageDifference").style.display = "none";
+                    }
+                    else{
+                        document.getElementById("damageDifference").style.display = "block";
+                        if(damage - previousDamage > 0) {
+                            document.getElementById("damageDifference").innerHTML =  "+" + (damage - previousDamage)
+                        }
+                        else {
+                            document.getElementById("damageDifference").innerHTML = damage - previousDamage
+                        }
+                    }
                     
                     showdownCard1 = data.card[0]
                     showdownCard1Id = showdownCard1.card_id
@@ -990,6 +1166,7 @@ function ShowdownSelectCard() {
     }
     else {
         //enable the second attack
+        console.log("here 3")
         document.getElementById("showdownCard2Selection").disabled = false
 
         if(showdownSelectedCard1Id == showdownCard1Id) {
@@ -1008,6 +1185,7 @@ function ShowdownSelectCard() {
         }
     }
 
+    //Special Attack Cards
     if (document.getElementById("showdownCard2Selection").checked) {
         //disable the first attack
         document.getElementById("showdownCard1Selection").disabled = true
@@ -1070,16 +1248,19 @@ function ShowdownSelectCard() {
         }
 
         //Evaulate if others should be disabled
-        if(showdownCard2.card_energy + showdownCard3.card_energy + energy < 0) {
+        if(showdownCard2.card_energy + showdownCard3.card_energy + energy < 0 &&
+        !document.getElementById("showdownCard4Selection").checked) {
             document.getElementById("showdownCard3Selection").disabled = false            
         }
 
-        if(showdownCard2.card_energy + showdownCard4.card_energy + energy < 0) {
+        if(showdownCard2.card_energy + showdownCard4.card_energy + energy < 0 &&
+        !document.getElementById("showdownCard3Selection").checked) {
             document.getElementById("showdownCard4Selection").disabled = false          
         }
 
     }
 
+    //Defense Cards
     if (document.getElementById("showdownCard3Selection").checked) {
         if(showdownSelectedCard1Id == null && showdownSelectedCard2Id != showdownCard3Id) {
             showdownSelectedCard1Id = showdownCard3Id;
@@ -1111,6 +1292,7 @@ function ShowdownSelectCard() {
             
         }
         else {
+            console.log("here 1")
             document.getElementById("showdownCard2Selection").disabled = false
         }
         if ((showdownCard3.card_energy + showdownCard4.card_energy + energy < 0) || 
@@ -1140,17 +1322,22 @@ function ShowdownSelectCard() {
         }
 
         //Evaulate if others should be disabled
-        if((showdownCard3.card_energy + showdownCard2.card_energy + energy < 0) || 
-           (showdownCard3.card_insight + showdownCard2.card_insight + insight < 0)) {
+        if(((showdownCard3.card_energy + showdownCard2.card_energy + energy < 0) || 
+           (showdownCard3.card_insight + showdownCard2.card_insight + insight < 0)) &&
+           !document.getElementById("showdownCard4Selection").checked) {
+            console.log("here 2")
             document.getElementById("showdownCard2Selection").disabled = false            
         }
-        if ((showdownCard3.card_energy + showdownCard4.card_energy + energy < 0) || 
-            (showdownCard3.card_insight + showdownCard4.card_insight + insight < 0)) {
+        if (((showdownCard3.card_energy + showdownCard4.card_energy + energy < 0) || 
+            (showdownCard3.card_insight + showdownCard4.card_insight + insight < 0)) &&
+            !document.getElementById("showdownCard2Selection").checked) {
             document.getElementById("showdownCard4Selection").disabled = false            
         }
 
     }
 
+
+    //Skill Cards
     if (document.getElementById("showdownCard4Selection").checked) {
         if(showdownSelectedCard1Id == null && showdownSelectedCard2Id != showdownCard4Id) {
             showdownSelectedCard1Id = showdownCard4Id;
@@ -1175,6 +1362,7 @@ function ShowdownSelectCard() {
             
         }
         else {
+            console.log("here 6")
             document.getElementById("showdownCard2Selection").disabled = false
         }
         if ((showdownCard4.card_energy + showdownCard3.card_energy + energy < 0) || 
@@ -1204,13 +1392,16 @@ function ShowdownSelectCard() {
         }
 
         //Evaulate if others should be disabled
-        if((showdownCard4.card_energy + showdownCard2.card_energy + energy < 0) || 
-           (showdownCard4.card_insight + showdownCard2.card_insight + insight < 0)) {
+        if(((showdownCard4.card_energy + showdownCard2.card_energy + energy < 0) || 
+           (showdownCard4.card_insight + showdownCard2.card_insight + insight < 0)) &&
+           !document.getElementById("showdownCard3Selection").checked) {
+            console.log("here 5")
             document.getElementById("showdownCard2Selection").disabled = false            
         }
 
-        if ((showdownCard4.card_energy + showdownCard3.card_energy + energy < 0) || 
-            (showdownCard4.card_insight + showdownCard3.card_insight + insight < 0)) {
+        if (((showdownCard4.card_energy + showdownCard3.card_energy + energy < 0) || 
+            (showdownCard4.card_insight + showdownCard3.card_insight + insight < 0)) &&
+            !document.getElementById("showdownCard2Selection").checked) {
             document.getElementById("showdownCard3Selection").disabled = false            
         }
 
@@ -1233,7 +1424,11 @@ function ShowdownEndTurn() {
         "cardId2": showdownSelectedCard2Id
     }
     
-    
+    previousMaxHealth = maxHealth
+    previousCurrentHealth = currentHealth
+    previousEnergy = energy
+    previousInsight = insight
+    previousDamage = damage
 
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
@@ -1246,10 +1441,11 @@ function ShowdownEndTurn() {
                 document.getElementById("showdownCard1Selection").checked = false;
                 document.getElementById("showdownCard2Selection").checked = false;
                 document.getElementById("showdownCard3Selection").checked = false;
-                console.log("disabling check3")
+               
                 document.getElementById("showdownCard4Selection").checked = false;
 
                 document.getElementById("showdownCard1Selection").disabled = false;
+                console.log("here 4")
                 document.getElementById("showdownCard2Selection").disabled = false;
                 document.getElementById("showdownCard3Selection").disabled = false;
                 document.getElementById("showdownCard4Selection").disabled = false;
