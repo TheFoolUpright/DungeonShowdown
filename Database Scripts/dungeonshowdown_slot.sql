@@ -28,7 +28,9 @@ CREATE TABLE `slot` (
   `slot_id` int NOT NULL AUTO_INCREMENT,
   `slot_position_name` varchar(250) DEFAULT NULL,
   `phase_id` int DEFAULT NULL,
-  PRIMARY KEY (`slot_id`)
+  PRIMARY KEY (`slot_id`),
+  KEY `slot_phase_id_FK_idx` (`phase_id`),
+  CONSTRAINT `slot_phase_id_FK` FOREIGN KEY (`phase_id`) REFERENCES `game_phase` (`phase_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -38,17 +40,7 @@ CREATE TABLE `slot` (
 
 LOCK TABLES `slot` WRITE;
 /*!40000 ALTER TABLE `slot` DISABLE KEYS */;
-INSERT INTO `slot` VALUES 
-(1,'Hand 1',1),
-(2,'Hand 2',1),
-(3,'Hand 3',1),
-(4,'Selected',1),
-(5,'Normal Attack',2),
-(6,'Special Attack',2),
-(7,'Defense',2),
-(8,'Skill',2),
-(9,'Selected 1',2),
-(10,'Selected 2',2);
+INSERT INTO `slot` VALUES (1,'Hand 1',1),(2,'Hand 2',1),(3,'Hand 3',1),(4,'Selected',1),(5,'Normal Attack',2),(6,'Special Attack',2),(7,'Defense',2),(8,'Skill',2),(9,'Selected 1',2),(10,'Selected 2',2);
 /*!40000 ALTER TABLE `slot` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -61,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-04 22:10:36
+-- Dump completed on 2025-05-01 23:14:01

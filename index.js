@@ -904,7 +904,7 @@ app.post("/resolveDungeonTurn", (req, res) => {
      * @returns none
      */
     function GetPlayerStats() {
-        connection.query("SELECT player_status_id, match_id, player_id, max_health, current_health, energy, insight, damage FROM dungeonshowdown.player_status WHERE player_status_id = ?;", [req.session.playerStatusId], 
+        connection.query("SELECT player_status_id, match_id, player_id, max_health, current_health, energy, insight, damage FROM player_status WHERE player_status_id = ?;", [req.session.playerStatusId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -933,7 +933,7 @@ app.post("/resolveDungeonTurn", (req, res) => {
      * @returns none
      */
     function GetCardStats(PlayerStats) {
-        connection.query("SELECT card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM dungeonshowdown.card WHERE card_id = ?;", [req.body.cardId], 
+        connection.query("SELECT card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card WHERE card_id = ?;", [req.body.cardId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -2263,7 +2263,7 @@ app.post("/setupShowdown", (req, res) => {
      * @returns none
      */
     function GetPlayerShowdownStats(opponentCards, playerCards) {
-        connection.query("SELECT player_status_id, Player.match_id, player_id, max_health, current_health, energy, insight, Player.damage, Opponent.damage op_damage FROM (SELECT damage, match_id FROM dungeonshowdown.player_status WHERE match_id = ? AND player_status_id != ?) Opponent INNER JOIN dungeonshowdown.player_status Player ON Opponent.match_id = Player.match_id WHERE player_status_id = ?;", [req.session.matchId, req.session.playerStatusId, req.session.playerStatusId], 
+        connection.query("SELECT player_status_id, Player.match_id, player_id, max_health, current_health, energy, insight, Player.damage, Opponent.damage op_damage FROM (SELECT damage, match_id FROM player_status WHERE match_id = ? AND player_status_id != ?) Opponent INNER JOIN player_status Player ON Opponent.match_id = Player.match_id WHERE player_status_id = ?;", [req.session.matchId, req.session.playerStatusId, req.session.playerStatusId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
