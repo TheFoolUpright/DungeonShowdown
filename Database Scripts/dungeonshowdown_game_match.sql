@@ -34,7 +34,7 @@ CREATE TABLE `game_match` (
   KEY `match_player_2_id_FK_idx` (`player_2_id`),
   CONSTRAINT `match_player_1_id_FK` FOREIGN KEY (`player_1_id`) REFERENCES `player` (`player_id`),
   CONSTRAINT `match_player_2_id_FK` FOREIGN KEY (`player_2_id`) REFERENCES `player` (`player_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,6 +43,7 @@ CREATE TABLE `game_match` (
 
 LOCK TABLES `game_match` WRITE;
 /*!40000 ALTER TABLE `game_match` DISABLE KEYS */;
+INSERT INTO `game_match` VALUES (1,2,1,0),(2,4,3,0),(3,5,6,1);
 /*!40000 ALTER TABLE `game_match` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-01 23:14:01
+-- Dump completed on 2025-05-02 15:32:54

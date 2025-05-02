@@ -1842,6 +1842,23 @@ app.get("/getEndingCheck", (req, res) => {
                     return
                 }
 
+                UpdateMatchFinished()
+            }
+        )
+    }
+
+    
+    function UpdateMatchFinished() {
+        connection.query("UPDATE game_match SET is_match_finished = 1 WHERE match_id = ?;", [req.session.matchId],
+            function(err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+
                 res.status(200).json({
                     "message": "Ending state change!"
                 })
@@ -2302,6 +2319,7 @@ app.post("/setupShowdown", (req, res) => {
                         playerInsight = playerInsight + playerCards[i].card_insight;
                         playerEnergy = playerEnergy + playerCards[i].card_energy;
                         playerDamage = playerDamage + playerCards[i].card_damage;
+                        console.log("here 1: " + playerCurrentHealth)
                     }
                 }
 
@@ -2372,22 +2390,28 @@ app.post("/setupShowdown", (req, res) => {
                         
                         playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - Math.ceil(opponentAttack * opponentDamage));
                         playerDefense = Math.max(0, playerDefense - Math.ceil(opponentAttack * opponentDamage))
+                        console.log("here 2: " + playerCurrentHealth)
+
                     }
                 }
                 if(isDoubleAttackOpponent) {
                     if (!isDodge || !isParry) {
                         playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - ((opponentAttack * opponentDamage) * 2));
                         playerDefense = Math.max(0, playerDefense - ((opponentAttack * opponentDamage) * 2))
+                        console.log("here 3: " + playerCurrentHealth)
+
                     }
                     else {
                         playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - Math.ceil(opponentAttack * opponentDamage))
                         playerDefense = Math.max(0, playerDefense - Math.ceil(opponentAttack * opponentDamage))
+                        console.log("here 4: " + playerCurrentHealth)
                     }
                 }
                 if (isParryOpponent) {
                     if ((opponentAttack != 0 || !isDodge) && playerAttack != 0) {
                         playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - Math.ceil(opponentParryAttack * (playerAttack * playerDamage)));
                         playerDefense = Math.max(0, playerDefense - Math.ceil(opponentParryAttack * playerDamage))
+                        console.log("here 5: " + playerCurrentHealth)
                     }
                 }
                 
@@ -2395,6 +2419,7 @@ app.post("/setupShowdown", (req, res) => {
                 if (!isCounterOpponent && !isDoubleAttackOpponent) {
                     playerCurrentHealth = playerCurrentHealth + playerDefense - Math.ceil(opponentAttack * opponentDamage)
                     playerDefense = Math.max(0, playerDefense - Math.ceil(opponentAttack * opponentDamage))
+                    console.log("here 6: " + playerCurrentHealth)
                 }
                 
                 console.log("After Calculation")

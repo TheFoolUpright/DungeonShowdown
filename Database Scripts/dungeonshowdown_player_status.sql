@@ -28,8 +28,8 @@ CREATE TABLE `player_status` (
   `player_status_id` int NOT NULL AUTO_INCREMENT,
   `match_id` int NOT NULL,
   `player_id` int NOT NULL,
-  `max_health` int DEFAULT '20',
-  `current_health` int DEFAULT '20',
+  `max_health` int DEFAULT '30',
+  `current_health` int DEFAULT '30',
   `energy` int DEFAULT '10',
   `insight` int DEFAULT '10',
   `damage` int DEFAULT '1',
@@ -42,7 +42,7 @@ CREATE TABLE `player_status` (
   CONSTRAINT `player_status_match_id_FK` FOREIGN KEY (`match_id`) REFERENCES `game_match` (`match_id`),
   CONSTRAINT `player_status_player_id_FK` FOREIGN KEY (`player_id`) REFERENCES `player` (`player_id`),
   CONSTRAINT `player_status_state_id_FK` FOREIGN KEY (`state_id`) REFERENCES `game_state` (`state_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,6 +51,7 @@ CREATE TABLE `player_status` (
 
 LOCK TABLES `player_status` WRITE;
 /*!40000 ALTER TABLE `player_status` DISABLE KEYS */;
+INSERT INTO `player_status` VALUES (1,1,1,32,32,12,10,1,1,0),(2,1,2,32,32,10,9,2,1,0),(3,2,3,39,34,13,9,5,4,0),(4,2,4,37,35,10,8,5,4,1),(5,3,6,38,6,3,6,7,8,0),(6,3,5,34,-1,8,5,11,9,1);
 /*!40000 ALTER TABLE `player_status` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -63,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-02  0:56:35
+-- Dump completed on 2025-05-02 15:32:54

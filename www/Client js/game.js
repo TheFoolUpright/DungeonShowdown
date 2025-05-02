@@ -887,8 +887,8 @@ function getShowdownCardSelection() {
                     //     document.getElementById("showdownCard2Selection").disabled = true
                     // }
 
-                    //if (showdownCard2.is_visible) {
-                    if (true) {
+                    if (showdownCard2.is_visible) {
+                    //if (true) {
                         showdownCard2Id = showdownCard2.card_id
                         document.getElementById("specialAttackCardName").innerHTML = showdownCard2.card_name
                         document.getElementById("specialAttackCardImage").src = showdownCard2.card_image_path
@@ -909,8 +909,8 @@ function getShowdownCardSelection() {
                     //     document.getElementById("showdownCard3Selection").disabled = true
                     // }
 
-                    //if (showdownCard3.is_visible) {
-                    if (true) {
+                    if (showdownCard3.is_visible) {
+                    //if (true) {
                         showdownCard3Id = showdownCard3.card_id
                         document.getElementById("defenseCardName").innerHTML = showdownCard3.card_name
                         document.getElementById("defenseCardImage").src = showdownCard3.card_image_path
@@ -931,8 +931,8 @@ function getShowdownCardSelection() {
                     //     document.getElementById("showdownCard4Selection").disabled = true
                     // }
 
-                    //if (showdownCard4.is_visible) {
-                    if (true) {
+                    if (showdownCard4.is_visible) {
+                    //if (true) {
                         showdownCard4Id = showdownCard4.card_id
                         document.getElementById("skillCardName").innerHTML = showdownCard4.card_name
                         document.getElementById("skillCardImage").src = showdownCard4.card_image_path

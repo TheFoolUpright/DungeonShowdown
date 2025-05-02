@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `dungeonshowdown` /*!40100 DEFAULT CHARACTER SET 
 USE `dungeonshowdown`;
 -- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: dungeonshowdown
+-- Host: localhost    Database: dungeonshowdown
 -- ------------------------------------------------------
 -- Server version	8.0.41
 
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-02 14:27:52
+-- Dump completed on 2025-05-02 15:32:54

@@ -37,9 +37,7 @@ CREATE TABLE `game_phase` (
 
 LOCK TABLES `game_phase` WRITE;
 /*!40000 ALTER TABLE `game_phase` DISABLE KEYS */;
-INSERT INTO `game_phase` VALUES 
-(1,'Dungeon Phase'),
-(2,'Showdown Phase');
+INSERT INTO `game_phase` VALUES (1,'Dungeon Phase'),(2,'Showdown Phase');
 /*!40000 ALTER TABLE `game_phase` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-04 22:10:36
+-- Dump completed on 2025-05-02 15:32:54

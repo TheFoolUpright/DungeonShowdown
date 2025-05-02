@@ -40,13 +40,7 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES 
-(1,'Room 1',1),
-(2,'Room 2',1),
-(3,'Room 3',1),
-(4,'Room 4',1),
-(5,'Room 5',1),
-(6,'Showdown',2);
+INSERT INTO `room` VALUES (1,'Room 1',1),(2,'Room 2',1),(3,'Room 3',1),(4,'Room 4',1),(5,'Room 5',1),(6,'Showdown',2);
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-04 22:10:36
+-- Dump completed on 2025-05-02 15:32:54
