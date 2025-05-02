@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `dungeonshowdown` /*!40100 DEFAULT CHARACTER SET 
 USE `dungeonshowdown`;
 -- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: dungeonshowdown
+-- Host: localhost    Database: dungeonshowdown
 -- ------------------------------------------------------
 -- Server version	8.0.41
 
@@ -38,9 +38,11 @@ CREATE TABLE `player_status` (
   PRIMARY KEY (`player_status_id`),
   KEY `player_status_match_id_FK_idx` (`match_id`),
   KEY `player_status_player_id_FK_idx` (`player_id`),
+  KEY `player_status_state_id_FK_idx` (`state_id`),
   CONSTRAINT `player_status_match_id_FK` FOREIGN KEY (`match_id`) REFERENCES `game_match` (`match_id`),
-  CONSTRAINT `player_status_player_id_FK` FOREIGN KEY (`player_id`) REFERENCES `player` (`player_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `player_status_player_id_FK` FOREIGN KEY (`player_id`) REFERENCES `player` (`player_id`),
+  CONSTRAINT `player_status_state_id_FK` FOREIGN KEY (`state_id`) REFERENCES `game_state` (`state_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,7 +51,6 @@ CREATE TABLE `player_status` (
 
 LOCK TABLES `player_status` WRITE;
 /*!40000 ALTER TABLE `player_status` DISABLE KEYS */;
-INSERT INTO `player_status` VALUES (1,1,1,20,20,10,10,1,1,0),(2,1,2,20,20,10,10,1,1,1);
 /*!40000 ALTER TABLE `player_status` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -62,4 +63,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-14 15:55:07
+-- Dump completed on 2025-05-02  0:56:35

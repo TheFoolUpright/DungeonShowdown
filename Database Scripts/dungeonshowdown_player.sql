@@ -34,7 +34,7 @@ CREATE TABLE `player` (
   PRIMARY KEY (`player_id`),
   UNIQUE KEY `PlayerID_UNIQUE` (`player_id`),
   UNIQUE KEY `PlayerUsername_UNIQUE` (`player_username`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,11 +43,7 @@ CREATE TABLE `player` (
 
 LOCK TABLES `player` WRITE;
 /*!40000 ALTER TABLE `player` DISABLE KEYS */;
-INSERT INTO `player` VALUES 
-(1,'mary','mary@test.com','Daisy1!','#a2293e',0),
-(2,'EDY_Pen','Edy@test.com','Edy1!','#a2293e',0),
-(3,'Data','some@test.com','D@ta1','#a2293e',0),
-(4,'Testy','test@gmail.com','M@ster1','#a2293e',0);
+INSERT INTO `player` VALUES (1,'Mary','mary@test.com','Daisy1!','#a2293e',0),(2,'Edy_PEN','Edy@test.com','Edy1!','#a2293e',0),(3,'Data','some@test.com','D@ta1','#a2293e',0),(4,'Testy','test@gmail.com','M@ster1','#a2293e',0),(5,'Mike','mike@yahoo.com','Cha0s#','#a2293e',0),(6,'Jane','jane@outlook.com','Pl@1n','#a2293e',0),(7,'Luke','luke@bing.com','Fl0ers#','#a2293e',0),(8,'Angel','angel@heaven.com','B3ll$','#a2293e',0);
 /*!40000 ALTER TABLE `player` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-04 22:10:36
+-- Dump completed on 2025-05-01 23:14:01

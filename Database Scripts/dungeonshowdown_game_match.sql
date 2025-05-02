@@ -29,15 +29,12 @@ CREATE TABLE `game_match` (
   `player_1_id` int DEFAULT NULL,
   `player_2_id` int DEFAULT NULL,
   `is_match_finished` tinyint(1) DEFAULT '0',
-  `player_won_id` int DEFAULT NULL,
   PRIMARY KEY (`match_id`),
   KEY `PlayerID1_idx` (`player_1_id`,`player_2_id`),
   KEY `match_player_2_id_FK_idx` (`player_2_id`),
-  KEY `game_match_player_won_id_FK_idx` (`player_won_id`),
-  CONSTRAINT `game_match_player_won_id_FK` FOREIGN KEY (`player_won_id`) REFERENCES `player` (`player_id`),
   CONSTRAINT `match_player_1_id_FK` FOREIGN KEY (`player_1_id`) REFERENCES `player` (`player_id`),
   CONSTRAINT `match_player_2_id_FK` FOREIGN KEY (`player_2_id`) REFERENCES `player` (`player_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,8 +43,6 @@ CREATE TABLE `game_match` (
 
 LOCK TABLES `game_match` WRITE;
 /*!40000 ALTER TABLE `game_match` DISABLE KEYS */;
-INSERT INTO `game_match` VALUES 
-(1,2,1,0,NULL);
 /*!40000 ALTER TABLE `game_match` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-04 22:10:35
+-- Dump completed on 2025-05-01 23:14:01
