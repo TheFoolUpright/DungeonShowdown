@@ -73,7 +73,7 @@ var currentState = 1
 
 //#region Game
 
-setInterval(GetGameState, 1000)
+setInterval(GetGameState, 2000)
 
 
 /**
