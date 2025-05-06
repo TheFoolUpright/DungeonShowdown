@@ -561,10 +561,10 @@ function getDungeonResult() {
             if (this.status == 200) {
 
                 if (data.card_type_id == 5) {
-                document.getElementById("opponentChoice").innerHTML = "Your oppponent chose an " + data.card_type_name + " card";
+                document.getElementById("opponentChoice").innerHTML = "Your opponent chose an " + data.card_type_name + " card";
                 }
                 else {
-                    document.getElementById("opponentChoice").innerHTML = "Your oppponent chose a " + data.card_type_name + " card";
+                    document.getElementById("opponentChoice").innerHTML = "Your opponent chose a " + data.card_type_name + " card";
                 }
 
                 //Display HTML Elements - ON
@@ -742,10 +742,10 @@ function DungeonEndTurn() {
                     document.getElementById("opponentChoiceSection").style.display = "block";
 
                     if (data.card_type_id == 5) {
-                    document.getElementById("opponentChoice").innerHTML = "Your oppponent chose an " + data.card_type_name + " card";
+                    document.getElementById("opponentChoice").innerHTML = "Your opponent chose an " + data.card_type_name + " card";
                     }
                     else {
-                        document.getElementById("opponentChoice").innerHTML = "Your oppponent chose a " + data.card_type_name + " card";
+                        document.getElementById("opponentChoice").innerHTML = "Your opponent chose a " + data.card_type_name + " card";
                     }
                     GetGameState()
                 }
