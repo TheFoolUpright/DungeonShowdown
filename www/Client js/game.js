@@ -49,28 +49,6 @@ var states = {
 var currentState = 1
 //#endregion
 
-
-// function SetDungeonState() {
-    
-//     var xhttp = new XMLHttpRequest();
-    
-//     xhttp.onreadystatechange = function () {
-//         if (this.readyState == 4) {
-
-//             if (this.status == 200) {
-//                 console.log("success")
-//             }
-//         }
-//     }
-
-//     xhttp.open("POST", "/setDungeonState", true);
-
-//     xhttp.setRequestHeader("Content-Type", "application/json");
-
-//     xhttp.send();
-
-// }
-
 //#region Game
 
 setInterval(GetGameState, 2000)
