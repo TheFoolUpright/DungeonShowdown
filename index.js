@@ -1958,10 +1958,6 @@ app.get("/getShowdownResult", (req, res) => {
         // 6	Attack
         // 7	Defense
         // 8	Skill
-        // console.log("opponentCards")
-        // console.log(opponentCards)
-        // console.log("playerCards")
-        // console.log(playerCards)
 
         if (playerCards.length == 2 && opponentCards.length == 2) {
             //Opponent Actions
@@ -1969,14 +1965,12 @@ app.get("/getShowdownResult", (req, res) => {
                 opponentActions = "Your opponent used " + opponentCards[0].card_name
                 if (opponentCards[1].card_type_id == 6) {
                     opponentActions = opponentActions + " and used a " + opponentCards[1].card_name + ". "
-            
                 }
             }
             else if (opponentCards[1].card_type_id == 8) {
                 opponentActions = "Your opponent used " + opponentCards[1].card_name
                 if (opponentCards[0].card_type_id == 6) {
                     opponentActions = opponentActions + " and used a " + opponentCards[0].card_name + ". "
-            
                 }
             }
             else{
@@ -1999,17 +1993,15 @@ app.get("/getShowdownResult", (req, res) => {
 
             //Player Actions
             if (playerCards[0].card_type_id == 8 ) {
-                playerActions = "You used " + playerCards[0].card_name
+                playerActions = "You used " + playerCards[0].card_name + " "
                 if (playerCards[1].card_type_id == 6) {
                     playerActions = playerActions + " and used a " + playerCards[1].card_name + "."
-            
                 }
             }
             else if (playerCards[1].card_type_id == 8) {
-                playerActions = "You used " + playerCards[1].card_name
+                playerActions = "You used " + playerCards[1].card_name + " "
                 if (playerCards[0].card_type_id == 6) {
                     playerActions = playerActions + " and used a " + playerCards[0].card_name + "."
-            
                 }
             }
             else{
@@ -2030,17 +2022,15 @@ app.get("/getShowdownResult", (req, res) => {
         else if (playerCards.length == 1 && opponentCards.length == 2) {
             //Opponent Actions
             if (opponentCards[0].card_type_id == 8 ) {
-                opponentActions = "Your opponent used " + opponentCards[0].card_name
+                opponentActions = "Your opponent used " + opponentCards[0].card_name + " "
                 if (opponentCards[1].card_type_id == 6) {
                     opponentActions = opponentActions + " and used a " + opponentCards[1].card_name + ". "
-            
                 }
             }
             else if (opponentCards[1].card_type_id == 8) {
-                opponentActions = "Your opponent used " + opponentCards[1].card_name
+                opponentActions = "Your opponent used " + opponentCards[1].card_name + " "
                 if (opponentCards[0].card_type_id == 6) {
                     opponentActions = opponentActions + " and used a " + opponentCards[0].card_name + ". "
-            
                 }
             }
             else{
@@ -2060,7 +2050,7 @@ app.get("/getShowdownResult", (req, res) => {
 
             //Player Actions
             if (playerCards[0].card_type_id == 8 ) {
-                playerActions = "You used " + playerCards[0].card_name
+                playerActions = "You used " + playerCards[0].card_name + " "
             }
             else if (playerCards[0].card_type_id == 6) {
                 playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
@@ -2076,7 +2066,7 @@ app.get("/getShowdownResult", (req, res) => {
         else if (playerCards.length == 2 && opponentCards.length == 1) {
             //Opponent Actions
             if (opponentCards[0].card_type_id == 8 ) {
-                opponentActions = "Your opponent used " + opponentCards[0].card_name
+                opponentActions = "Your opponent used " + opponentCards[0].card_name + " "
             }
             else if (opponentCards[0].card_type_id == 6) {
                 opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
@@ -2091,17 +2081,16 @@ app.get("/getShowdownResult", (req, res) => {
 
             //Player Actions
             if (playerCards[0].card_type_id == 8 ) {
-                playerActions = "You used " + playerCards[0].card_name
+                playerActions = "You used " + playerCards[0].card_name + " "
                 if (playerCards[1].card_type_id == 6) {
                     playerActions = playerActions + " and used a " + playerCards[1].card_name + "."
             
                 }
             }
             else if (playerCards[1].card_type_id == 8) {
-                playerActions = "You used " + playerCards[1].card_name
+                playerActions = "You used " + playerCards[1].card_name + " "
                 if (playerCards[0].card_type_id == 6) {
                     playerActions = playerActions + " and used a " + playerCards[0].card_name + "."
-            
                 }
             }
             else{
@@ -2119,7 +2108,7 @@ app.get("/getShowdownResult", (req, res) => {
         else if (playerCards.length == 1 && opponentCards.length == 1) {
             //Opponent Actions
             if (opponentCards[0].card_type_id == 8 ) {
-                opponentActions = "Your opponent used " + opponentCards[0].card_name
+                opponentActions = "Your opponent used " + opponentCards[0].card_name + " "
             }
             else{
                 if (opponentCards[0].card_type_id == 6) {
@@ -2133,7 +2122,7 @@ app.get("/getShowdownResult", (req, res) => {
 
             //Player Actions
             if (playerCards[0].card_type_id == 8 ) {
-                playerActions = "You used " + playerCards[0].card_name
+                playerActions = "You used " + playerCards[0].card_name + " "
             }
             else{
                 if (playerCards[0].card_type_id == 6) {

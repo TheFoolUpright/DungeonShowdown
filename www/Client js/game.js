@@ -49,28 +49,6 @@ var states = {
 var currentState = 1
 //#endregion
 
-
-// function SetDungeonState() {
-    
-//     var xhttp = new XMLHttpRequest();
-    
-//     xhttp.onreadystatechange = function () {
-//         if (this.readyState == 4) {
-
-//             if (this.status == 200) {
-//                 console.log("success")
-//             }
-//         }
-//     }
-
-//     xhttp.open("POST", "/setDungeonState", true);
-
-//     xhttp.setRequestHeader("Content-Type", "application/json");
-
-//     xhttp.send();
-
-// }
-
 //#region Game
 
 setInterval(GetGameState, 2000)
@@ -561,10 +539,10 @@ function getDungeonResult() {
             if (this.status == 200) {
 
                 if (data.card_type_id == 5) {
-                document.getElementById("opponentChoice").innerHTML = "Your oppponent chose an " + data.card_type_name + " card";
+                document.getElementById("opponentChoice").innerHTML = "Your opponent chose an " + data.card_type_name + " card";
                 }
                 else {
-                    document.getElementById("opponentChoice").innerHTML = "Your oppponent chose a " + data.card_type_name + " card";
+                    document.getElementById("opponentChoice").innerHTML = "Your opponent chose a " + data.card_type_name + " card";
                 }
 
                 //Display HTML Elements - ON
@@ -742,10 +720,10 @@ function DungeonEndTurn() {
                     document.getElementById("opponentChoiceSection").style.display = "block";
 
                     if (data.card_type_id == 5) {
-                    document.getElementById("opponentChoice").innerHTML = "Your oppponent chose an " + data.card_type_name + " card";
+                    document.getElementById("opponentChoice").innerHTML = "Your opponent chose an " + data.card_type_name + " card";
                     }
                     else {
-                        document.getElementById("opponentChoice").innerHTML = "Your oppponent chose a " + data.card_type_name + " card";
+                        document.getElementById("opponentChoice").innerHTML = "Your opponent chose a " + data.card_type_name + " card";
                     }
                     GetGameState()
                 }
