@@ -1,5 +1,4 @@
 
-
 window.addEventListener('load', function () {
 
 	var game = new Phaser.Game({
@@ -10,12 +9,6 @@ window.addEventListener('load', function () {
 		scale: {
 			mode: Phaser.Scale.FIT,
 			autoCenter: Phaser.Scale.CENTER_BOTH
-		},
-		physics: {
-			default: "arcade",
-			arcade: {
-				gravity: { y: 200 }
-			}
 		}
 	});
 
