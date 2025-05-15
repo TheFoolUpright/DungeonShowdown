@@ -60,6 +60,13 @@ class Preload extends Phaser.Scene {
 
 		this.editorPreload();
 
+		//Is the player Logged in?
+		
+		//Is the Match known?
+		//getMatchState
+		
+		//Get State
+
 		this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("Dungeon"));
 	}
 

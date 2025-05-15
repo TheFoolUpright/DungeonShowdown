@@ -8,104 +8,94 @@
     },
     "displayList": [
         {
-            "type": "Rectangle",
-            "id": "00aad6f1-52eb-48c2-b1e5-0e0923d770be",
-            "label": "MaxHealthFill",
-            "x": 80,
-            "y": 30,
-            "isFilled": true,
-            "width": 100,
-            "height": 20
-        },
-        {
-            "type": "Rectangle",
-            "id": "ca0602f4-d150-40a4-a597-921844380ce6",
-            "label": "HealthFill",
-            "x": 80,
-            "y": 70,
-            "isFilled": true,
-            "width": 100,
-            "height": 20
-        },
-        {
-            "type": "Rectangle",
-            "id": "1e9feedc-9837-4ccc-a7c1-4337e9e99ecf",
-            "label": "EnergyFill",
-            "x": 80,
-            "y": 110,
-            "isFilled": true,
-            "width": 100,
-            "height": 20
-        },
-        {
-            "type": "Rectangle",
-            "id": "7ad91f71-821c-4bfd-bf2d-53bfb8157b57",
-            "label": "InsightFill",
-            "x": 80,
-            "y": 150,
-            "isFilled": true,
-            "width": 100,
-            "height": 20
-        },
-        {
-            "type": "Rectangle",
-            "id": "2b220eb8-642d-47f0-a336-b07c2e255338",
-            "label": "MightFill",
-            "x": 80,
-            "y": 190,
-            "isFilled": true,
-            "width": 100,
-            "height": 20
-        },
-        {
-            "type": "Image",
-            "id": "6917da75-7003-4dcf-8a7d-53e8a761a4a7",
-            "label": "max_Health",
-            "texture": {
-                "key": "Max Health"
-            },
-            "x": 30,
-            "y": 30
-        },
-        {
-            "type": "Image",
-            "id": "afd2aa58-7ef6-4ec9-84be-10dee8aebe30",
-            "label": "damage",
-            "texture": {
-                "key": "Damage"
-            },
-            "x": 30,
-            "y": 190
-        },
-        {
-            "type": "Image",
-            "id": "9e99bd26-5fb3-4ce4-b93b-eccd6f0b51f5",
-            "label": "insight",
-            "texture": {
-                "key": "Insight"
-            },
-            "x": 30,
-            "y": 149
-        },
-        {
-            "type": "Image",
-            "id": "68a8395f-463c-47c9-9f13-8103cb8630d4",
-            "label": "energy",
-            "texture": {
-                "key": "Energy"
-            },
-            "x": 30,
-            "y": 111
-        },
-        {
-            "type": "Image",
-            "id": "ba5cb70a-71e8-4490-9cb3-4cdcf60e737b",
-            "label": "currentHealth",
-            "texture": {
-                "key": "CurrentHealth"
-            },
-            "x": 30,
-            "y": 70
+            "type": "Container",
+            "id": "e2735596-df47-4d95-a685-8658c309ccea",
+            "label": "StatsContainer",
+            "scope": "PUBLIC",
+            "x": 50,
+            "y": 20,
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "4674a90a-d9c2-4942-a03d-2d43cd00be7e",
+                    "label": "healthBar",
+                    "texture": {
+                        "key": "MaxHealthBar"
+                    },
+                    "y": 10
+                },
+                {
+                    "type": "Text",
+                    "id": "0c80c82c-0ccf-4178-892e-2a628865f419",
+                    "label": "healthText",
+                    "scope": "PUBLIC",
+                    "x": -3,
+                    "text": "20/20",
+                    "fontFamily": "ROCKEY",
+                    "fontSize": "13px",
+                    "color": "#000000ff"
+                },
+                {
+                    "type": "Image",
+                    "id": "7138b0a3-f44c-4467-a4e0-6be18ff6ff0d",
+                    "label": "energyBar",
+                    "texture": {
+                        "key": "EnergyBar"
+                    },
+                    "y": 90
+                },
+                {
+                    "type": "Text",
+                    "id": "513942af-2984-4120-8c4e-4a023aa0b1e0",
+                    "label": "energyText",
+                    "scope": "PUBLIC",
+                    "y": 80,
+                    "text": "30",
+                    "fontFamily": "ROCKEY",
+                    "fontSize": "13px",
+                    "color": "#000000ff"
+                },
+                {
+                    "type": "Image",
+                    "id": "63faf848-5cb4-4c48-962f-c61cf8959aa0",
+                    "label": "insightBar",
+                    "texture": {
+                        "key": "InsightBar"
+                    },
+                    "y": 50
+                },
+                {
+                    "type": "Text",
+                    "id": "aab8be25-12ec-4391-a670-abf325d17331",
+                    "label": "insightText",
+                    "scope": "PUBLIC",
+                    "y": 40,
+                    "text": "10/10",
+                    "fontFamily": "ROCKEY",
+                    "fontSize": "13px",
+                    "color": "#000000ff"
+                },
+                {
+                    "type": "Image",
+                    "id": "0b5cc028-d76a-42c1-9b04-7d13a67098be",
+                    "label": "mightBar",
+                    "texture": {
+                        "key": "MightBar"
+                    },
+                    "y": 130
+                },
+                {
+                    "type": "Text",
+                    "id": "4c789d74-f359-486e-8f8d-92d03266b247",
+                    "label": "mightText",
+                    "scope": "PUBLIC",
+                    "y": 120,
+                    "text": "30",
+                    "fontFamily": "ROCKEY",
+                    "fontSize": "13px",
+                    "color": "#000000ff"
+                }
+            ]
         }
     ],
     "plainObjects": [],
