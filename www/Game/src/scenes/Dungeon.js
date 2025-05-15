@@ -16,43 +16,68 @@ class Dungeon extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
-		// MaxHealthFill
-		const maxHealthFill = this.add.rectangle(80, 30, 100, 20);
-		maxHealthFill.isFilled = true;
+		// StatsContainer
+		const statsContainer = this.add.container(50, 20);
 
-		// HealthFill
-		const healthFill = this.add.rectangle(80, 70, 100, 20);
-		healthFill.isFilled = true;
+		// healthBar
+		const healthBar = this.add.image(0, 10, "MaxHealthBar");
+		statsContainer.add(healthBar);
 
-		// EnergyFill
-		const energyFill = this.add.rectangle(80, 110, 100, 20);
-		energyFill.isFilled = true;
+		// healthText
+		const healthText = this.add.text(-3, 0, "", {});
+		healthText.text = "20/20";
+		healthText.setStyle({ "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
+		statsContainer.add(healthText);
 
-		// InsightFill
-		const insightFill = this.add.rectangle(80, 150, 100, 20);
-		insightFill.isFilled = true;
+		// energyBar
+		const energyBar = this.add.image(0, 90, "EnergyBar");
+		statsContainer.add(energyBar);
 
-		// MightFill
-		const mightFill = this.add.rectangle(80, 190, 100, 20);
-		mightFill.isFilled = true;
+		// energyText
+		const energyText = this.add.text(0, 80, "", {});
+		energyText.text = "30";
+		energyText.setStyle({ "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
+		statsContainer.add(energyText);
 
-		// max_Health
-		this.add.image(30, 30, "Max Health");
+		// insightBar
+		const insightBar = this.add.image(0, 50, "InsightBar");
+		statsContainer.add(insightBar);
 
-		// damage
-		this.add.image(30, 190, "Damage");
+		// insightText
+		const insightText = this.add.text(0, 40, "", {});
+		insightText.text = "10/10";
+		insightText.setStyle({ "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
+		statsContainer.add(insightText);
 
-		// insight
-		this.add.image(30, 149, "Insight");
+		// mightBar
+		const mightBar = this.add.image(0, 130, "MightBar");
+		statsContainer.add(mightBar);
 
-		// energy
-		this.add.image(30, 111, "Energy");
+		// mightText
+		const mightText = this.add.text(0, 120, "", {});
+		mightText.text = "30";
+		mightText.setStyle({ "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
+		statsContainer.add(mightText);
 
-		// currentHealth
-		this.add.image(30, 70, "CurrentHealth");
+		this.healthText = healthText;
+		this.energyText = energyText;
+		this.insightText = insightText;
+		this.mightText = mightText;
+		this.statsContainer = statsContainer;
 
 		this.events.emit("scene-awake");
 	}
+
+	/** @type {Phaser.GameObjects.Text} */
+	healthText;
+	/** @type {Phaser.GameObjects.Text} */
+	energyText;
+	/** @type {Phaser.GameObjects.Text} */
+	insightText;
+	/** @type {Phaser.GameObjects.Text} */
+	mightText;
+	/** @type {Phaser.GameObjects.Container} */
+	statsContainer;
 
 	/* START-USER-CODE */
 

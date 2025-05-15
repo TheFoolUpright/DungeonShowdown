@@ -2,12 +2,12 @@
     "section1": {
         "files": [
             {
-                "url": "assets/CurrentHealth.png",
+                "url": "assets/UI/CurrentHealth.png",
                 "type": "image",
                 "key": "CurrentHealth"
             },
             {
-                "url": "assets/Damage.png",
+                "url": "assets/UI/Damage.png",
                 "type": "image",
                 "key": "Damage"
             },
@@ -22,24 +22,49 @@
                 "key": "Empty Card"
             },
             {
-                "url": "assets/Energy.png",
+                "url": "assets/UI/Energy.png",
                 "type": "image",
                 "key": "Energy"
             },
             {
-                "url": "assets/Insight.png",
+                "url": "assets/UI/EnergyBar.png",
                 "type": "image",
-                "key": "Insight"
-            },
-            {
-                "url": "assets/Max Health.png",
-                "type": "image",
-                "key": "Max Health"
+                "key": "EnergyBar"
             },
             {
                 "url": "src/prefabs/PrefabCard.js",
                 "type": "script",
                 "key": "PrefabCard"
+            },
+            {
+                "url": "assets/Hidden_Card.png",
+                "type": "image",
+                "key": "Hidden_Card"
+            },
+            {
+                "url": "assets/UI/Insight.png",
+                "type": "image",
+                "key": "Insight"
+            },
+            {
+                "url": "assets/UI/InsightBar.png",
+                "type": "image",
+                "key": "InsightBar"
+            },
+            {
+                "url": "assets/UI/Max Health.png",
+                "type": "image",
+                "key": "Max Health"
+            },
+            {
+                "url": "assets/UI/MaxHealthBar.png",
+                "type": "image",
+                "key": "MaxHealthBar"
+            },
+            {
+                "url": "assets/UI/MightBar.png",
+                "type": "image",
+                "key": "MightBar"
             }
         ]
     },
