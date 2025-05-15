@@ -1,0 +1,68 @@
+{
+    "id": "5d269ebb-4ba0-4d0b-89b3-b9445f549efb",
+    "sceneType": "SCENE",
+    "settings": {
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "Showdown",
+        "borderWidth": 1280,
+        "borderHeight": 720
+    },
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "d032494e-7271-4e75-b255-67ceb9161d2e",
+            "label": "hidden_Card",
+            "texture": {
+                "key": "Hidden_Card"
+            },
+            "x": 302,
+            "y": 558,
+            "scaleX": 0.6,
+            "scaleY": 0.6
+        },
+        {
+            "type": "Image",
+            "id": "dfc1e27c-fedd-4703-aa0f-46248ef035fc",
+            "label": "hidden_Card_1",
+            "texture": {
+                "key": "Hidden_Card"
+            },
+            "x": 541,
+            "y": 557,
+            "scaleX": 0.6,
+            "scaleY": 0.6
+        },
+        {
+            "type": "Image",
+            "id": "ec082ebc-f4c1-4a47-91d2-e2c6b3315780",
+            "label": "hidden_Card_2",
+            "texture": {
+                "key": "Hidden_Card"
+            },
+            "x": 775,
+            "y": 554,
+            "scaleX": 0.6,
+            "scaleY": 0.6
+        },
+        {
+            "type": "Image",
+            "id": "6a7d3909-9ca8-4893-ace9-22aa349bde3e",
+            "label": "hidden_Card_3",
+            "texture": {
+                "key": "Hidden_Card"
+            },
+            "x": 988,
+            "y": 550,
+            "scaleX": 0.6,
+            "scaleY": 0.6
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}
