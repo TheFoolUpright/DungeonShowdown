@@ -10,52 +10,64 @@
     },
     "displayList": [
         {
-            "type": "Image",
-            "id": "d032494e-7271-4e75-b255-67ceb9161d2e",
-            "label": "hidden_Card",
-            "texture": {
-                "key": "Hidden_Card"
-            },
-            "x": 302,
-            "y": 558,
-            "scaleX": 0.6,
-            "scaleY": 0.6
+            "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
+            "id": "ac9a7ecc-c5c6-45da-a3e0-1881553cff5b",
+            "unlock": [
+                "x",
+                "y",
+                "cardId",
+                "isVisible"
+            ],
+            "label": "empty_Card",
+            "cardId": 0,
+            "isVisible": true,
+            "x": 340,
+            "y": 550
         },
         {
-            "type": "Image",
-            "id": "dfc1e27c-fedd-4703-aa0f-46248ef035fc",
-            "label": "hidden_Card_1",
-            "texture": {
-                "key": "Hidden_Card"
-            },
-            "x": 541,
-            "y": 557,
-            "scaleX": 0.6,
-            "scaleY": 0.6
+            "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
+            "id": "0302022f-3b56-4d5c-81e5-c8fa925b6f63",
+            "unlock": [
+                "x",
+                "y",
+                "cardId",
+                "isVisible"
+            ],
+            "label": "empty_Card_1",
+            "cardId": 0,
+            "isVisible": true,
+            "x": 540,
+            "y": 550
         },
         {
-            "type": "Image",
-            "id": "ec082ebc-f4c1-4a47-91d2-e2c6b3315780",
-            "label": "hidden_Card_2",
-            "texture": {
-                "key": "Hidden_Card"
-            },
-            "x": 775,
-            "y": 554,
-            "scaleX": 0.6,
-            "scaleY": 0.6
+            "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
+            "id": "1b400de7-c20d-4f4e-8740-b3cbf3ed86f2",
+            "unlock": [
+                "x",
+                "y",
+                "cardId",
+                "isVisible"
+            ],
+            "label": "empty_Card_2",
+            "cardId": 0,
+            "isVisible": true,
+            "x": 740,
+            "y": 550
         },
         {
-            "type": "Image",
-            "id": "6a7d3909-9ca8-4893-ace9-22aa349bde3e",
-            "label": "hidden_Card_3",
-            "texture": {
-                "key": "Hidden_Card"
-            },
-            "x": 990,
-            "y": 552,
-            "scaleX": 0.6,
-            "scaleY": 0.6
+            "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
+            "id": "c11849c7-0c24-4670-a9b8-46df41b0cefc",
+            "unlock": [
+                "x",
+                "y",
+                "cardId",
+                "isVisible"
+            ],
+            "label": "empty_Card_3",
+            "cardId": 0,
+            "isVisible": true,
+            "x": 940,
+            "y": 550
         }
     ],
     "plainObjects": [],

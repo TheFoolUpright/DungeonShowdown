@@ -17,6 +17,11 @@
                 "type": "image"
             },
             {
+                "url": "assets/Empty Card.png",
+                "type": "image",
+                "key": "Empty Card"
+            },
+            {
                 "url": "assets/Energy.png",
                 "type": "image",
                 "key": "Energy"
@@ -32,9 +37,9 @@
                 "key": "Max Health"
             },
             {
-                "url": "assets/Hidden_Card.png",
-                "type": "image",
-                "key": "Hidden_Card"
+                "url": "src/prefabs/PrefabCard.js",
+                "type": "script",
+                "key": "PrefabCard"
             }
         ]
     },
