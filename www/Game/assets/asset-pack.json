@@ -2,9 +2,34 @@
     "section1": {
         "files": [
             {
+                "url": "assets/CurrentHealth.png",
+                "type": "image",
+                "key": "CurrentHealth"
+            },
+            {
+                "url": "assets/Damage.png",
+                "type": "image",
+                "key": "Damage"
+            },
+            {
                 "url": "assets/dino.png",
                 "key": "dino",
                 "type": "image"
+            },
+            {
+                "url": "assets/Energy.png",
+                "type": "image",
+                "key": "Energy"
+            },
+            {
+                "url": "assets/Insight.png",
+                "type": "image",
+                "key": "Insight"
+            },
+            {
+                "url": "assets/Max Health.png",
+                "type": "image",
+                "key": "Max Health"
             }
         ]
     },
@@ -12,6 +37,7 @@
         "app": "Phaser Editor 2D - Asset Pack Editor",
         "contentType": "phasereditor2d.pack.core.AssetContentType",
         "url": "https://phasereditor2d.com",
-        "version": 2
+        "version": 2,
+        "showAllFilesInBlocks": false
     }
 }

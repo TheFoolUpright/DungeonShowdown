@@ -1,0 +1,118 @@
+{
+    "id": "7247b9ae-fd4a-44d2-b08d-dad3099f496e",
+    "sceneType": "SCENE",
+    "settings": {
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "Dungeon"
+    },
+    "displayList": [
+        {
+            "type": "Rectangle",
+            "id": "00aad6f1-52eb-48c2-b1e5-0e0923d770be",
+            "label": "MaxHealthFill",
+            "x": 80,
+            "y": 30,
+            "isFilled": true,
+            "width": 100,
+            "height": 20
+        },
+        {
+            "type": "Rectangle",
+            "id": "ca0602f4-d150-40a4-a597-921844380ce6",
+            "label": "HealthFill",
+            "x": 80,
+            "y": 70,
+            "isFilled": true,
+            "width": 100,
+            "height": 20
+        },
+        {
+            "type": "Rectangle",
+            "id": "1e9feedc-9837-4ccc-a7c1-4337e9e99ecf",
+            "label": "EnergyFill",
+            "x": 80,
+            "y": 110,
+            "isFilled": true,
+            "width": 100,
+            "height": 20
+        },
+        {
+            "type": "Rectangle",
+            "id": "7ad91f71-821c-4bfd-bf2d-53bfb8157b57",
+            "label": "InsightFill",
+            "x": 80,
+            "y": 150,
+            "isFilled": true,
+            "width": 100,
+            "height": 20
+        },
+        {
+            "type": "Rectangle",
+            "id": "2b220eb8-642d-47f0-a336-b07c2e255338",
+            "label": "MightFill",
+            "x": 80,
+            "y": 190,
+            "isFilled": true,
+            "width": 100,
+            "height": 20
+        },
+        {
+            "type": "Image",
+            "id": "6917da75-7003-4dcf-8a7d-53e8a761a4a7",
+            "label": "max_Health",
+            "texture": {
+                "key": "Max Health"
+            },
+            "x": 30,
+            "y": 30
+        },
+        {
+            "type": "Image",
+            "id": "afd2aa58-7ef6-4ec9-84be-10dee8aebe30",
+            "label": "damage",
+            "texture": {
+                "key": "Damage"
+            },
+            "x": 30,
+            "y": 190
+        },
+        {
+            "type": "Image",
+            "id": "9e99bd26-5fb3-4ce4-b93b-eccd6f0b51f5",
+            "label": "insight",
+            "texture": {
+                "key": "Insight"
+            },
+            "x": 30,
+            "y": 149
+        },
+        {
+            "type": "Image",
+            "id": "68a8395f-463c-47c9-9f13-8103cb8630d4",
+            "label": "energy",
+            "texture": {
+                "key": "Energy"
+            },
+            "x": 30,
+            "y": 111
+        },
+        {
+            "type": "Image",
+            "id": "ba5cb70a-71e8-4490-9cb3-4cdcf60e737b",
+            "label": "currentHealth",
+            "texture": {
+                "key": "CurrentHealth"
+            },
+            "x": 30,
+            "y": 70
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}
