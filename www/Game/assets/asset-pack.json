@@ -30,6 +30,11 @@
                 "url": "assets/Max Health.png",
                 "type": "image",
                 "key": "Max Health"
+            },
+            {
+                "url": "assets/Hidden_Card.png",
+                "type": "image",
+                "key": "Hidden_Card"
             }
         ]
     },

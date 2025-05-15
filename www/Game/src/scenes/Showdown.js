@@ -16,6 +16,26 @@ class Showdown extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
+		// hidden_Card
+		const hidden_Card = this.add.image(302, 558, "Hidden_Card");
+		hidden_Card.scaleX = 0.6;
+		hidden_Card.scaleY = 0.6;
+
+		// hidden_Card_1
+		const hidden_Card_1 = this.add.image(541, 557, "Hidden_Card");
+		hidden_Card_1.scaleX = 0.6;
+		hidden_Card_1.scaleY = 0.6;
+
+		// hidden_Card_2
+		const hidden_Card_2 = this.add.image(775, 554, "Hidden_Card");
+		hidden_Card_2.scaleX = 0.6;
+		hidden_Card_2.scaleY = 0.6;
+
+		// hidden_Card_3
+		const hidden_Card_3 = this.add.image(988, 550, "Hidden_Card");
+		hidden_Card_3.scaleX = 0.6;
+		hidden_Card_3.scaleY = 0.6;
+
 		this.events.emit("scene-awake");
 	}
 

@@ -1217,9 +1217,9 @@ function setupNextDungeonRoom(req, res) {
                 console.log("Case Error")
         }
 
-        console.log(card1)
-        console.log(card2)
-        console.log(card3)
+        // console.log(card1)
+        // console.log(card2)
+        // console.log(card3)
         
         // var card1 = deck[Math.floor(Math.random() * deck.length)]
         // indexOfElement = deck.indexOf(card1);
@@ -1695,9 +1695,9 @@ app.get("/getShowdownCardSelection", (req, res) => {
                     card4.isEnabled = false
                 }
 
-                console.log(card2)
-                console.log(card3)
-                console.log(card4)
+                // console.log(card2)
+                // console.log(card3)
+                // console.log(card4)
 
                 res.status(200).json({
                     "message": "Player stats and cards updated",
@@ -2278,7 +2278,6 @@ app.post("/setupShowdown", (req, res) => {
                     })
                     return
                 }
-                console.log("nasudbiopb")
                 var opponentDamage = rows[0].op_damage;
                 var opponentAttack = 0
                 var opponentParryAttack = 0
@@ -2300,6 +2299,8 @@ app.post("/setupShowdown", (req, res) => {
                 console.log("playerEnergy: "+ playerEnergy)
                 console.log("playerInsight: "+ playerInsight)
                 console.log("playerDamage: "+ playerDamage)
+                console.log(playerCards)
+                console.log(opponentCards)
 
                 //Player Skills
                 for (let i = 0; i < playerCards.length; i++) {
@@ -2375,7 +2376,7 @@ app.post("/setupShowdown", (req, res) => {
                 }
 
                 if (isCounterOpponent) {
-                    if ((!isDodge || !isParry) && playerAttack != 0) {
+                    if ((!isDodge && !isParry) && playerAttack != 0) {
                         
                         playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - Math.ceil(opponentAttack * opponentDamage));
                         playerDefense = Math.max(0, playerDefense - Math.ceil(opponentAttack * opponentDamage))
@@ -2384,7 +2385,7 @@ app.post("/setupShowdown", (req, res) => {
                     }
                 }
                 if(isDoubleAttackOpponent) {
-                    if (!isDodge || !isParry) {
+                    if (!isDodge && !isParry) {
                         playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - ((opponentAttack * opponentDamage) * 2));
                         playerDefense = Math.max(0, playerDefense - ((opponentAttack * opponentDamage) * 2))
                         console.log("here 3: " + playerCurrentHealth)
@@ -2405,7 +2406,7 @@ app.post("/setupShowdown", (req, res) => {
                 }
                 
                 //Apply Normal, Heavy or Recovery Attack Damage
-                if (!isCounterOpponent && !isDoubleAttackOpponent) {
+                if (!isCounterOpponent && !isDoubleAttackOpponent && !isDodge && !isParry) {
                     playerCurrentHealth = playerCurrentHealth + playerDefense - Math.ceil(opponentAttack * opponentDamage)
                     playerDefense = Math.max(0, playerDefense - Math.ceil(opponentAttack * opponentDamage))
                     console.log("here 6: " + playerCurrentHealth)
