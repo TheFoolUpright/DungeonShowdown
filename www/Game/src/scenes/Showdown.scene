@@ -1,26 +1,4 @@
 {
-  "id": "451d9591-4e73-4737-809c-35c8db64f6af",
-  "settings": {
-    "compilerOutputLanguage": "JAVA_SCRIPT",
-    "javaScriptInitFieldsInConstructor": false,
-    "exportClass": false,
-    "autoImport": false,
-    "createMethodName": "editorCreate",
-    "compilerInsertSpaces": false,
-    "compilerTabSize": 4,
-    "borderWidth": 800,
-    "borderHeight": 600,
-    "borderX": 0,
-    "borderY": 0,
-    "sceneKey": "Showdown"
-  },
-  "sceneType": "SCENE",
-  "displayList": [],
-  "meta": {
-    "app": "Phaser Editor 2D - Scene Editor",
-    "url": "https://phasereditor2d.com",
-    "contentType": "phasereditor2d.core.scene.SceneContentType"
-  }
     "id": "5d269ebb-4ba0-4d0b-89b3-b9445f549efb",
     "sceneType": "SCENE",
     "settings": {
@@ -74,8 +52,8 @@
             "texture": {
                 "key": "Hidden_Card"
             },
-            "x": 988,
-            "y": 550,
+            "x": 990,
+            "y": 552,
             "scaleX": 0.6,
             "scaleY": 0.6
         }

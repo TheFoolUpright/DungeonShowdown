@@ -32,7 +32,7 @@ class Showdown extends Phaser.Scene {
 		hidden_Card_2.scaleY = 0.6;
 
 		// hidden_Card_3
-		const hidden_Card_3 = this.add.image(988, 550, "Hidden_Card");
+		const hidden_Card_3 = this.add.image(990, 552, "Hidden_Card");
 		hidden_Card_3.scaleX = 0.6;
 		hidden_Card_3.scaleY = 0.6;
 
