@@ -1,4 +1,4 @@
-USE `dungeonshowdown2`;
+USE `dungeonshowdown`;
 
 --
 -- Inserting data for table `player`
