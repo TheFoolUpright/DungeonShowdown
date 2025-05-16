@@ -17,6 +17,11 @@
                 "type": "image"
             },
             {
+                "url": "assets/Empty Card.png",
+                "type": "image",
+                "key": "Empty Card"
+            },
+            {
                 "url": "assets/UI/Energy.png",
                 "type": "image",
                 "key": "Energy"
@@ -25,6 +30,11 @@
                 "url": "assets/UI/EnergyBar.png",
                 "type": "image",
                 "key": "EnergyBar"
+            },
+            {
+                "url": "src/prefabs/PrefabCard.js",
+                "type": "script",
+                "key": "PrefabCard"
             },
             {
                 "url": "assets/Hidden_Card.png",

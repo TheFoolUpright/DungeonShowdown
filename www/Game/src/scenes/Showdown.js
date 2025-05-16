@@ -16,25 +16,37 @@ class Showdown extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
-		// hidden_Card
-		const hidden_Card = this.add.image(302, 558, "Hidden_Card");
-		hidden_Card.scaleX = 0.6;
-		hidden_Card.scaleY = 0.6;
+		// empty_Card
+		const empty_Card = new PrefabCard(this, 340, 550);
+		this.add.existing(empty_Card);
 
-		// hidden_Card_1
-		const hidden_Card_1 = this.add.image(541, 557, "Hidden_Card");
-		hidden_Card_1.scaleX = 0.6;
-		hidden_Card_1.scaleY = 0.6;
+		// empty_Card_1
+		const empty_Card_1 = new PrefabCard(this, 540, 550);
+		this.add.existing(empty_Card_1);
 
-		// hidden_Card_2
-		const hidden_Card_2 = this.add.image(775, 554, "Hidden_Card");
-		hidden_Card_2.scaleX = 0.6;
-		hidden_Card_2.scaleY = 0.6;
+		// empty_Card_2
+		const empty_Card_2 = new PrefabCard(this, 740, 550);
+		this.add.existing(empty_Card_2);
 
-		// hidden_Card_3
-		const hidden_Card_3 = this.add.image(990, 552, "Hidden_Card");
-		hidden_Card_3.scaleX = 0.6;
-		hidden_Card_3.scaleY = 0.6;
+		// empty_Card_3
+		const empty_Card_3 = new PrefabCard(this, 940, 550);
+		this.add.existing(empty_Card_3);
+
+		// empty_Card (prefab fields)
+		empty_Card.cardId = 0;
+		empty_Card.isVisible = true;
+
+		// empty_Card_1 (prefab fields)
+		empty_Card_1.cardId = 0;
+		empty_Card_1.isVisible = true;
+
+		// empty_Card_2 (prefab fields)
+		empty_Card_2.cardId = 0;
+		empty_Card_2.isVisible = true;
+
+		// empty_Card_3 (prefab fields)
+		empty_Card_3.cardId = 0;
+		empty_Card_3.isVisible = true;
 
 		this.events.emit("scene-awake");
 	}
@@ -43,9 +55,18 @@ class Showdown extends Phaser.Scene {
 
 	// Write your code here
 
+	awake () {
+this.parent.on('pointerdown', () => {
+console.log('Clicked');
+});
+}
+
 	create() {
 
 		this.editorCreate();
+	}
+
+	update() {
 	}
 
 	/* END-USER-CODE */

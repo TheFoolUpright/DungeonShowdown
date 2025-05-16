@@ -67,7 +67,7 @@ class Preload extends Phaser.Scene {
 		
 		//Get State
 
-		this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("Dungeon"));
+		this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("Showdown"));
 	}
 
 	LoginCheck() {
