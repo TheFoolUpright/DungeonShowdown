@@ -92,6 +92,24 @@ app.post("/login", (req, res) => {
 
 });
 
+
+app.get("/idLoggedIn", (req, res) => {
+    if(!req.session.playerId){
+        res.status(200).json({
+                "message": "The user is not logged in",
+                "state": "NOT_LOGGED_IN"
+            })
+        return
+    }
+    else{
+        res.status(200).json({
+                "message": "The user is logged in",
+                "state": "LOGGED_IN"
+            })
+        return
+    }    
+
+});
 //#endregion
 
 //#region Register
@@ -191,6 +209,16 @@ app.post("/register", (req, res) => {
 //#region Match
 
 app.get("/getMatchState", (req, res) => {
+
+    //if in a match
+    //return MATCH_FOUND
+
+    //If waiting for a match
+    //return WAITING_FOR_MATCH
+
+    //if not in a match 
+    //return NOT_IN_MATCH
+
     if (req.session.matchId) {
        res.status(200).json({
            "message": "Player already in a match",
@@ -199,7 +227,10 @@ app.get("/getMatchState", (req, res) => {
        return;
     }
 
-    connection.query("SELECT match_id FROM game_match WHERE (player_1_id = ? OR player_2_id = ?) AND is_match_finished = 0;", [req.session.playerId, req.session.playerId],
+    MatchCheck()
+
+    function MatchCheck(){
+        connection.query("SELECT match_id, player_id, is_waiting_for_match FROM game_match INNER JOIN player ON player_id = player_1_id OR player_id = player_2_id WHERE player_id = ? AND is_match_finished = 0;", [req.session.playerId],
         function (err, rows, fields) {
             if (err) {
                 console.log("Database Error: " + err);
@@ -209,27 +240,57 @@ app.get("/getMatchState", (req, res) => {
                 return;
             }
             if (rows.length == 0) {
-                if(rows.length == 0) {
-                    //Send waiting for matches
-                    res.status(200).json({
-                        "message": "Waiting for Match!",
-                        "state": "WAITING_FOR_MATCH"
-                    })
-                }
+                WaitingForMatchCheck()
             }
             else {
                 req.session.matchId = rows[0].match_id
-                if (req.session.matchId) {
-                   res.status(200).json({
-                       "message": "Player already in a match",
-                       "state": "MATCH_FOUND"
-                   })
-                   return;
-                }
 
+                res.status(200).json({
+                    "message": "Player already in a match",
+                    "state": "MATCH_FOUND"
+                })
+                return;   
             }
-        }
-    )
+        });
+    }
+
+    function WaitingForMatchCheck(){
+        connection.query("SELECT player_id, is_waiting_for_match FROM player WHERE player_id = ?;", [req.session.playerId],
+        function (err, rows, fields) {
+            if (err) {
+                console.log("Database Error: " + err);
+                res.status(500).json({
+                    "message": err
+                });
+                return;
+            }
+            if (rows.length == 0) {
+                if(rows.is_waiting_for_match = 1){
+                    res.status(200).json({
+                    "message": "Player already in a match",
+                    "state": "WAITING_FOR_MATCH"
+                    })
+                    return;  
+                }
+                else{
+                    res.status(200).json({
+                    "message": "Player already in a match",
+                    "state": "NOT_IN_MATCH"
+                    })
+                    return; 
+                }
+            }
+            else {
+                res.status(500).json({
+                    "message": "Player Not Found"
+                })
+                return;   
+            }
+        });
+    }
+
+
+    
 })
 
 app.put("/joinMatch", (req, res) => {

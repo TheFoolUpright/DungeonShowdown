@@ -70,6 +70,93 @@ class Preload extends Phaser.Scene {
 		this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("Dungeon"));
 	}
 
+	LoginCheck() {
+
+		var xhttp = new XMLHttpRequest();
+		
+		xhttp.onreadystatechange = function () {
+			if (this.readyState == 4) {
+				var data = JSON.parse(this.responseText)
+				console.log(data)
+
+				if (this.status == 200){
+					if(data.state = "NOT_LOGGED_IN") {
+						window.location.href = "/login.html";
+						return
+					}
+					else {
+						MatchCheck()
+					}
+					
+				}
+			}
+		}
+
+		xhttp.open("GET", "/idLoggedIn", true);
+
+		xhttp.setRequestHeader("Content-Type", "application/json");
+
+		xhttp.send();
+	}
+
+	MatchCheck() {
+
+		var xhttp = new XMLHttpRequest();
+		
+		xhttp.onreadystatechange = function () {
+			if (this.readyState == 4) {
+				var data = JSON.parse(this.responseText)
+				console.log(data)
+
+				if (this.status == 200){
+					if(data.state = "MATCH_FOUND") {
+						//Get State
+						GetGameState()
+					}
+					else if (data.state = "NOT_IN_MATCH"){
+						//Go to Main Menu 
+						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("JoinMatch"));
+
+					}
+					else if (data.state = "WAITING_FOR_MATCH"){
+						//Go to waiting for a Match
+						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("WaitingForMatch"));
+
+					}
+					
+				}
+			}
+		}
+
+		xhttp.open("GET", "/getMatchState", true);
+
+		xhttp.setRequestHeader("Content-Type", "application/json");
+
+		xhttp.send();
+	}
+
+	GetGameState(){
+		var xhttp = new XMLHttpRequest();
+		
+		xhttp.onreadystatechange = function () {
+			if (this.readyState == 4) {
+				var data = JSON.parse(this.responseText)
+				console.log(data)
+
+				if (this.status == 200){
+					//All the differenet states
+				}
+			}
+		}
+
+		xhttp.open("GET", "/getGameState", true);
+
+		xhttp.setRequestHeader("Content-Type", "application/json");
+
+		xhttp.send();
+	}
+
+
 	/* END-USER-CODE */
 }
 
