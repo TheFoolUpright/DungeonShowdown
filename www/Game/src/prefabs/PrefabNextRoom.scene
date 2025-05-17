@@ -1,0 +1,79 @@
+{
+    "id": "2f15ddb5-a4d8-4a13-9237-ebf5b4a7f47e",
+    "sceneType": "PREFAB",
+    "settings": {
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1280,
+        "borderHeight": 720
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "23c9c265-670d-4982-9e8f-de07404925f4",
+            "label": "container_1",
+            "x": null,
+            "y": null,
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "7436fd48-762f-4fb9-881d-6124c6a69d8a",
+                    "label": "confirm___End_Turn_Button_1",
+                    "texture": {
+                        "key": "Confirm & End Turn Button"
+                    },
+                    "scaleX": 0.5,
+                    "scaleY": 0.5
+                },
+                {
+                    "prefabId": "a06ed60b-79f1-4444-bf35-89046f71f954",
+                    "id": "b51e3be9-efae-473a-97dd-e59f25bebc93",
+                    "label": "onPointerDownScript",
+                    "list": [
+                        {
+                            "prefabId": "0e39177a-6e19-4b56-a7c2-2360a2e41505",
+                            "id": "a6623680-4013-45aa-beba-84ce369d315f",
+                            "label": "pushActionScript"
+                        }
+                    ]
+                },
+                {
+                    "prefabId": "7028a0e2-cd14-44b7-b2a4-68dac16ece00",
+                    "id": "777b0d48-e0e4-4013-ad75-314d42d5eb12",
+                    "label": "onAwakeScript",
+                    "list": [
+                        {
+                            "prefabId": "3d337935-cdca-4937-9126-9f75bc2486de",
+                            "id": "5a02a8a1-2ec8-4e28-b297-c40e25e07573",
+                            "unlock": [
+                                "from"
+                            ],
+                            "label": "moveInSceneActionScript",
+                            "from": "RIGHT"
+                        }
+                    ]
+                },
+                {
+                    "type": "Text",
+                    "id": "23a35d44-d874-492e-a983-293dd2ddf5f0",
+                    "label": "nextRoom",
+                    "x": null,
+                    "y": -12,
+                    "originX": 0.5,
+                    "text": "Onward!",
+                    "align": "center",
+                    "fontFamily": "Rockey",
+                    "color": "#000000ff"
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

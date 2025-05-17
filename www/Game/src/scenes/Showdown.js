@@ -32,6 +32,18 @@ class Showdown extends Phaser.Scene {
 		const empty_Card_3 = new PrefabCard(this, 940, 550);
 		this.add.existing(empty_Card_3);
 
+		// confirm___End_Turn_Button
+		const confirm___End_Turn_Button = new PrefabEndTurn(this, 1140, 550);
+		this.add.existing(confirm___End_Turn_Button);
+
+		// prefabStats
+		const prefabStats = new PrefabStats(this, 50, 30);
+		this.add.existing(prefabStats);
+
+		// info
+		const info = new PrefabInfo(this, 1140, 20);
+		this.add.existing(info);
+
 		// empty_Card (prefab fields)
 		empty_Card.cardId = 0;
 		empty_Card.isVisible = true;

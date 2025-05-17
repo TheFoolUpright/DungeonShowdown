@@ -1,0 +1,119 @@
+{
+    "id": "6ead72a9-5342-419b-a399-b6b1ee837549",
+    "sceneType": "PREFAB",
+    "settings": {
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1280,
+        "borderHeight": 720
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "9231f8d1-9a14-44fd-96ad-c7051822b95f",
+            "label": "StatsContainer",
+            "scope": "PUBLIC",
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "4674a90a-d9c2-4942-a03d-2d43cd00be7e",
+                    "label": "healthBar",
+                    "texture": {
+                        "key": "MaxHealthBar"
+                    }
+                },
+                {
+                    "type": "Text",
+                    "id": "0c80c82c-0ccf-4178-892e-2a628865f419",
+                    "label": "healthText",
+                    "scope": "PUBLIC",
+                    "x": 12,
+                    "y": -3,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "20/20",
+                    "fontFamily": "ROCKEY",
+                    "fontSize": "13px",
+                    "color": "#000000ff"
+                },
+                {
+                    "type": "Image",
+                    "id": "7138b0a3-f44c-4467-a4e0-6be18ff6ff0d",
+                    "label": "energyBar",
+                    "texture": {
+                        "key": "EnergyBar"
+                    },
+                    "y": 80
+                },
+                {
+                    "type": "Text",
+                    "id": "513942af-2984-4120-8c4e-4a023aa0b1e0",
+                    "label": "energyText",
+                    "scope": "PUBLIC",
+                    "x": 12,
+                    "y": 77,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "30",
+                    "fontFamily": "ROCKEY",
+                    "fontSize": "13px",
+                    "color": "#000000ff"
+                },
+                {
+                    "type": "Image",
+                    "id": "63faf848-5cb4-4c48-962f-c61cf8959aa0",
+                    "label": "insightBar",
+                    "texture": {
+                        "key": "InsightBar"
+                    },
+                    "y": 40
+                },
+                {
+                    "type": "Text",
+                    "id": "aab8be25-12ec-4391-a670-abf325d17331",
+                    "label": "insightText",
+                    "scope": "PUBLIC",
+                    "x": 12,
+                    "y": 37,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "10/10",
+                    "fontFamily": "ROCKEY",
+                    "fontSize": "13px",
+                    "color": "#000000ff"
+                },
+                {
+                    "type": "Image",
+                    "id": "0b5cc028-d76a-42c1-9b04-7d13a67098be",
+                    "label": "mightBar",
+                    "texture": {
+                        "key": "MightBar"
+                    },
+                    "y": 120
+                },
+                {
+                    "type": "Text",
+                    "id": "4c789d74-f359-486e-8f8d-92d03266b247",
+                    "label": "mightText",
+                    "scope": "PUBLIC",
+                    "x": 12,
+                    "y": 117,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "30",
+                    "fontFamily": "ROCKEY",
+                    "fontSize": "13px",
+                    "color": "#000000ff"
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

@@ -1,0 +1,68 @@
+{
+    "id": "58151c15-b33f-4514-a7c8-de8a701ab360",
+    "sceneType": "PREFAB",
+    "settings": {
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1280,
+        "borderHeight": 720
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "e981eebb-7390-40b7-8dd4-6387c7c7bdbb",
+            "label": "info",
+            "list": [
+                {
+                    "type": "Text",
+                    "id": "24764946-0b63-443c-805a-8bad017e0613",
+                    "label": "playerName",
+                    "y": 100,
+                    "originX": 0.5,
+                    "text": "Username",
+                    "align": "center",
+                    "fontFamily": "Rockey",
+                    "fontSize": "24px",
+                    "color": "#ffffffff",
+                    "stroke": "#000000ff",
+                    "strokeThickness": 10
+                },
+                {
+                    "type": "Text",
+                    "id": "63a17860-3cf6-4535-8b2d-6506757fa251",
+                    "label": "phaseName",
+                    "originX": 0.5,
+                    "text": "DUNGEON",
+                    "align": "center",
+                    "fontFamily": "Rockey",
+                    "fontSize": "32px",
+                    "color": "#ffffffff",
+                    "stroke": "#000000ff",
+                    "strokeThickness": 10
+                },
+                {
+                    "type": "Text",
+                    "id": "e3432cce-9ab2-4bee-85e2-02df62003e6c",
+                    "label": "roomOrTurn",
+                    "y": 40,
+                    "originX": 0.5,
+                    "text": "Room 1",
+                    "align": "center",
+                    "fontFamily": "Rockey",
+                    "fontSize": "24px",
+                    "color": "#ffffffff",
+                    "stroke": "#000000ff",
+                    "strokeThickness": 10
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

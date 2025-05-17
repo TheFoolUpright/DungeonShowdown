@@ -4,98 +4,89 @@
     "settings": {
         "preloadPackFiles": [],
         "createMethodName": "editorCreate",
-        "sceneKey": "Dungeon"
+        "sceneKey": "Dungeon",
+        "borderWidth": 1280,
+        "borderHeight": 720
     },
     "displayList": [
         {
-            "type": "Container",
+            "prefabId": "6ead72a9-5342-419b-a399-b6b1ee837549",
             "id": "e2735596-df47-4d95-a685-8658c309ccea",
+            "unlock": [
+                "x",
+                "y"
+            ],
             "label": "StatsContainer",
             "scope": "PUBLIC",
             "x": 50,
-            "y": 20,
-            "list": [
-                {
-                    "type": "Image",
-                    "id": "4674a90a-d9c2-4942-a03d-2d43cd00be7e",
-                    "label": "healthBar",
-                    "texture": {
-                        "key": "MaxHealthBar"
-                    },
-                    "y": 10
-                },
-                {
-                    "type": "Text",
-                    "id": "0c80c82c-0ccf-4178-892e-2a628865f419",
-                    "label": "healthText",
-                    "scope": "PUBLIC",
-                    "x": -3,
-                    "text": "20/20",
-                    "fontFamily": "ROCKEY",
-                    "fontSize": "13px",
-                    "color": "#000000ff"
-                },
-                {
-                    "type": "Image",
-                    "id": "7138b0a3-f44c-4467-a4e0-6be18ff6ff0d",
-                    "label": "energyBar",
-                    "texture": {
-                        "key": "EnergyBar"
-                    },
-                    "y": 90
-                },
-                {
-                    "type": "Text",
-                    "id": "513942af-2984-4120-8c4e-4a023aa0b1e0",
-                    "label": "energyText",
-                    "scope": "PUBLIC",
-                    "y": 80,
-                    "text": "30",
-                    "fontFamily": "ROCKEY",
-                    "fontSize": "13px",
-                    "color": "#000000ff"
-                },
-                {
-                    "type": "Image",
-                    "id": "63faf848-5cb4-4c48-962f-c61cf8959aa0",
-                    "label": "insightBar",
-                    "texture": {
-                        "key": "InsightBar"
-                    },
-                    "y": 50
-                },
-                {
-                    "type": "Text",
-                    "id": "aab8be25-12ec-4391-a670-abf325d17331",
-                    "label": "insightText",
-                    "scope": "PUBLIC",
-                    "y": 40,
-                    "text": "10/10",
-                    "fontFamily": "ROCKEY",
-                    "fontSize": "13px",
-                    "color": "#000000ff"
-                },
-                {
-                    "type": "Image",
-                    "id": "0b5cc028-d76a-42c1-9b04-7d13a67098be",
-                    "label": "mightBar",
-                    "texture": {
-                        "key": "MightBar"
-                    },
-                    "y": 130
-                },
-                {
-                    "type": "Text",
-                    "id": "4c789d74-f359-486e-8f8d-92d03266b247",
-                    "label": "mightText",
-                    "scope": "PUBLIC",
-                    "y": 120,
-                    "text": "30",
-                    "fontFamily": "ROCKEY",
-                    "fontSize": "13px",
-                    "color": "#000000ff"
-                }
-            ]
+            "y": 30
+        },
+        {
+            "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
+            "id": "6ef26fb2-15ea-4645-89bd-e7a59a61b03a",
+            "unlock": [
+                "x",
+                "y",
+                "cardId",
+                "isVisible"
+            ],
+            "label": "empty_Card",
+            "cardId": 0,
+            "isVisible": true,
+            "x": 640,
+            "y": 550
+        },
+        {
+            "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
+            "id": "01982d89-8d67-49de-9ca8-e0e80e6d45df",
+            "unlock": [
+                "x",
+                "y",
+                "cardId",
+                "isVisible"
+            ],
+            "label": "empty_Card_1",
+            "cardId": 0,
+            "isVisible": true,
+            "x": 840,
+            "y": 550
+        },
+        {
+            "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
+            "id": "6d2808ab-3708-4595-b395-bf9a9add16b2",
+            "unlock": [
+                "x",
+                "y",
+                "cardId",
+                "isVisible"
+            ],
+            "label": "empty_Card_2",
+            "cardId": 0,
+            "isVisible": true,
+            "x": 440,
+            "y": 550
+        },
+        {
+            "prefabId": "2f15ddb5-a4d8-4a13-9237-ebf5b4a7f47e",
+            "id": "4f345899-7816-4dce-bdab-20b5ad9de616",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "prefabNextRoom",
+            "x": 1140,
+            "y": 550
+        },
+        {
+            "prefabId": "58151c15-b33f-4514-a7c8-de8a701ab360",
+            "id": "7dfb4d8a-3183-40aa-90df-bdbb5cf8f403",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "info",
+            "x": 1140,
+            "y": 20
         }
     ],
     "plainObjects": [],

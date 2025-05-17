@@ -17,66 +17,47 @@ class Dungeon extends Phaser.Scene {
 	editorCreate() {
 
 		// StatsContainer
-		const statsContainer = this.add.container(50, 20);
+		const statsContainer = new PrefabStats(this, 50, 30);
+		this.add.existing(statsContainer);
 
-		// healthBar
-		const healthBar = this.add.image(0, 10, "MaxHealthBar");
-		statsContainer.add(healthBar);
+		// empty_Card
+		const empty_Card = new PrefabCard(this, 640, 550);
+		this.add.existing(empty_Card);
 
-		// healthText
-		const healthText = this.add.text(-3, 0, "", {});
-		healthText.text = "20/20";
-		healthText.setStyle({ "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
-		statsContainer.add(healthText);
+		// empty_Card_1
+		const empty_Card_1 = new PrefabCard(this, 840, 550);
+		this.add.existing(empty_Card_1);
 
-		// energyBar
-		const energyBar = this.add.image(0, 90, "EnergyBar");
-		statsContainer.add(energyBar);
+		// empty_Card_2
+		const empty_Card_2 = new PrefabCard(this, 440, 550);
+		this.add.existing(empty_Card_2);
 
-		// energyText
-		const energyText = this.add.text(0, 80, "", {});
-		energyText.text = "30";
-		energyText.setStyle({ "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
-		statsContainer.add(energyText);
+		// prefabNextRoom
+		const prefabNextRoom = new PrefabNextRoom(this, 1140, 550);
+		this.add.existing(prefabNextRoom);
 
-		// insightBar
-		const insightBar = this.add.image(0, 50, "InsightBar");
-		statsContainer.add(insightBar);
+		// info
+		const info = new PrefabInfo(this, 1140, 20);
+		this.add.existing(info);
 
-		// insightText
-		const insightText = this.add.text(0, 40, "", {});
-		insightText.text = "10/10";
-		insightText.setStyle({ "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
-		statsContainer.add(insightText);
+		// empty_Card (prefab fields)
+		empty_Card.cardId = 0;
+		empty_Card.isVisible = true;
 
-		// mightBar
-		const mightBar = this.add.image(0, 130, "MightBar");
-		statsContainer.add(mightBar);
+		// empty_Card_1 (prefab fields)
+		empty_Card_1.cardId = 0;
+		empty_Card_1.isVisible = true;
 
-		// mightText
-		const mightText = this.add.text(0, 120, "", {});
-		mightText.text = "30";
-		mightText.setStyle({ "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
-		statsContainer.add(mightText);
+		// empty_Card_2 (prefab fields)
+		empty_Card_2.cardId = 0;
+		empty_Card_2.isVisible = true;
 
-		this.healthText = healthText;
-		this.energyText = energyText;
-		this.insightText = insightText;
-		this.mightText = mightText;
 		this.statsContainer = statsContainer;
 
 		this.events.emit("scene-awake");
 	}
 
-	/** @type {Phaser.GameObjects.Text} */
-	healthText;
-	/** @type {Phaser.GameObjects.Text} */
-	energyText;
-	/** @type {Phaser.GameObjects.Text} */
-	insightText;
-	/** @type {Phaser.GameObjects.Text} */
-	mightText;
-	/** @type {Phaser.GameObjects.Container} */
+	/** @type {PrefabStats} */
 	statsContainer;
 
 	/* START-USER-CODE */

@@ -68,6 +68,39 @@
             "isVisible": true,
             "x": 940,
             "y": 550
+        },
+        {
+            "prefabId": "49ef177b-61c6-4ad2-88be-e0e625ae067c",
+            "id": "fbb24ee5-911b-433d-8b64-7f3c128cae0b",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "confirm___End_Turn_Button",
+            "x": 1140,
+            "y": 550
+        },
+        {
+            "prefabId": "6ead72a9-5342-419b-a399-b6b1ee837549",
+            "id": "e92c9d6c-6394-4ce3-9e7a-3e5792c7962e",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "prefabStats",
+            "x": 50,
+            "y": 30
+        },
+        {
+            "prefabId": "58151c15-b33f-4514-a7c8-de8a701ab360",
+            "id": "effcac74-0a5b-44b4-ace6-a59094b7436c",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "info",
+            "x": 1140,
+            "y": 20
         }
     ],
     "plainObjects": [],
