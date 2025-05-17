@@ -24,9 +24,10 @@ class Dungeon extends Phaser.Scene {
 		statsContainer.add(healthBar);
 
 		// healthText
-		const healthText = this.add.text(-3, 0, "", {});
+		const healthText = this.add.text(13, 0, "", {});
+		healthText.setOrigin(0.5, 0);
 		healthText.text = "20/20";
-		healthText.setStyle({ "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
+		healthText.setStyle({ "align": "center", "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
 		statsContainer.add(healthText);
 
 		// energyBar
@@ -34,9 +35,10 @@ class Dungeon extends Phaser.Scene {
 		statsContainer.add(energyBar);
 
 		// energyText
-		const energyText = this.add.text(0, 80, "", {});
+		const energyText = this.add.text(10, 80, "", {});
+		energyText.setOrigin(0.5, 0);
 		energyText.text = "30";
-		energyText.setStyle({ "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
+		energyText.setStyle({ "align": "center", "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
 		statsContainer.add(energyText);
 
 		// insightBar
@@ -44,9 +46,10 @@ class Dungeon extends Phaser.Scene {
 		statsContainer.add(insightBar);
 
 		// insightText
-		const insightText = this.add.text(0, 40, "", {});
+		const insightText = this.add.text(16, 39, "", {});
+		insightText.setOrigin(0.6, 0);
 		insightText.text = "10/10";
-		insightText.setStyle({ "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
+		insightText.setStyle({ "align": "center", "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
 		statsContainer.add(insightText);
 
 		// mightBar
@@ -54,9 +57,10 @@ class Dungeon extends Phaser.Scene {
 		statsContainer.add(mightBar);
 
 		// mightText
-		const mightText = this.add.text(0, 120, "", {});
-		mightText.text = "30";
-		mightText.setStyle({ "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
+		const mightText = this.add.text(10, 120, "", {});
+		mightText.setOrigin(0.5, 0);
+		mightText.text = "15";
+		mightText.setStyle({ "align": "center", "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
 		statsContainer.add(mightText);
 
 		this.healthText = healthText;

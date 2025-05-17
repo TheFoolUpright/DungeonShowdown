@@ -1,24 +1,31 @@
 {
-  "id": "10071ec8-56ad-4ddd-9e6d-ad5c5c42eb4e",
-  "settings": {
-    "compilerOutputLanguage": "JAVA_SCRIPT",
-    "javaScriptInitFieldsInConstructor": false,
-    "exportClass": false,
-    "autoImport": false,
-    "createMethodName": "editorCreate",
-    "compilerInsertSpaces": false,
-    "compilerTabSize": 4,
-    "borderWidth": 1280,
-    "borderHeight": 720,
-    "borderX": 0,
-    "borderY": 0,
-    "sceneKey": "ShowdownResult"
-  },
-  "sceneType": "SCENE",
-  "displayList": [],
-  "meta": {
-    "app": "Phaser Editor 2D - Scene Editor",
-    "url": "https://phasereditor2d.com",
-    "contentType": "phasereditor2d.core.scene.SceneContentType"
-  }
+    "id": "10071ec8-56ad-4ddd-9e6d-ad5c5c42eb4e",
+    "sceneType": "SCENE",
+    "settings": {
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "ShowdownResult",
+        "borderWidth": 1280,
+        "borderHeight": 720
+    },
+    "displayList": [
+        {
+            "type": "Rectangle",
+            "id": "1e738d39-20bc-47b6-8818-fa652d556faf",
+            "label": "rectangle_1",
+            "x": 941,
+            "y": 407,
+            "isFilled": true,
+            "fillColor": "#e2c36d",
+            "width": 128,
+            "height": 128
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
 }

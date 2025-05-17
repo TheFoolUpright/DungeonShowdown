@@ -1,24 +1,31 @@
 {
-  "id": "0eea8ed6-2d0f-4b66-8384-20e812027c9e",
-  "settings": {
-    "compilerOutputLanguage": "JAVA_SCRIPT",
-    "javaScriptInitFieldsInConstructor": false,
-    "exportClass": false,
-    "autoImport": false,
-    "createMethodName": "editorCreate",
-    "compilerInsertSpaces": false,
-    "compilerTabSize": 4,
-    "borderWidth": 1280,
-    "borderHeight": 720,
-    "borderX": 0,
-    "borderY": 0,
-    "sceneKey": "DungeonResult"
-  },
-  "sceneType": "SCENE",
-  "displayList": [],
-  "meta": {
-    "app": "Phaser Editor 2D - Scene Editor",
-    "url": "https://phasereditor2d.com",
-    "contentType": "phasereditor2d.core.scene.SceneContentType"
-  }
+    "id": "0eea8ed6-2d0f-4b66-8384-20e812027c9e",
+    "sceneType": "SCENE",
+    "settings": {
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "DungeonResult",
+        "borderWidth": 1280,
+        "borderHeight": 720
+    },
+    "displayList": [
+        {
+            "type": "Rectangle",
+            "id": "a612925d-ce3f-493f-9d5b-4d07868daa7f",
+            "label": "rectangle_1",
+            "x": 868,
+            "y": 367,
+            "isFilled": true,
+            "fillColor": "#5b4e99",
+            "width": 128,
+            "height": 128
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
 }

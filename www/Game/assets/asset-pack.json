@@ -32,16 +32,6 @@
                 "key": "EnergyBar"
             },
             {
-                "url": "src/prefabs/PrefabCard.js",
-                "type": "script",
-                "key": "PrefabCard"
-            },
-            {
-                "url": "assets/Hidden_Card.png",
-                "type": "image",
-                "key": "Hidden_Card"
-            },
-            {
                 "url": "assets/UI/Insight.png",
                 "type": "image",
                 "key": "Insight"
@@ -65,6 +55,11 @@
                 "url": "assets/UI/MightBar.png",
                 "type": "image",
                 "key": "MightBar"
+            },
+            {
+                "url": "src/prefabs/PrefabCard.js",
+                "type": "script",
+                "key": "PrefabCard"
             }
         ]
     },

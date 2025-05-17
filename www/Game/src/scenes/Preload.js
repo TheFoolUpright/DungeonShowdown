@@ -1,5 +1,19 @@
 
 // You can write more code here
+var states = {
+    "DungeonCardSelection": 1,
+    "DungeonWaitingOnOpponent": 2,
+    "DungeonResult": 3, 
+    "ShowdownCardSelection": 4,
+    "ShowdownWaitingOnOpponent": 5,
+    "ShowdownResult": 6,
+    "EndingCheck": 7, 
+    "Won": 8,
+    "Lost": 9,
+    "Draw": 10
+}
+
+
 
 /* START OF COMPILED CODE */
 
@@ -60,14 +74,9 @@ class Preload extends Phaser.Scene {
 
 		this.editorPreload();
 
-		//Is the player Logged in?
-		
-		//Is the Match known?
-		//getMatchState
-		
-		//Get State
 
-		this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("Showdown"));
+		this.LoginCheck();
+		//this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("Showdown"));
 	}
 
 	LoginCheck() {
@@ -80,12 +89,12 @@ class Preload extends Phaser.Scene {
 				console.log(data)
 
 				if (this.status == 200){
-					if(data.state = "NOT_LOGGED_IN") {
+					if(data.state == "NOT_LOGGED_IN") {
 						window.location.href = "/login.html";
 						return
 					}
-					else {
-						MatchCheck()
+					else if(data.state == "LOGGED_IN") {
+						this.parent.MatchCheck();
 					}
 					
 				}
@@ -109,16 +118,16 @@ class Preload extends Phaser.Scene {
 				console.log(data)
 
 				if (this.status == 200){
-					if(data.state = "MATCH_FOUND") {
+					if(data.state == "MATCH_FOUND") {
 						//Get State
-						GetGameState()
+						this.GetGameState()
 					}
-					else if (data.state = "NOT_IN_MATCH"){
+					else if (data.state == "NOT_IN_MATCH"){
 						//Go to Main Menu 
 						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("JoinMatch"));
 
 					}
-					else if (data.state = "WAITING_FOR_MATCH"){
+					else if (data.state == "WAITING_FOR_MATCH"){
 						//Go to waiting for a Match
 						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("WaitingForMatch"));
 
@@ -144,7 +153,25 @@ class Preload extends Phaser.Scene {
 				console.log(data)
 
 				if (this.status == 200){
-					//All the differenet states
+					if(data.state == states.DungeonCardSelection){
+						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("Dungeon"));
+					}
+					else if(data.state == states.DungeonWaitingOnOpponent){
+						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("DungeonWaitingOnOpponent"));
+					}
+					else if(data.state == states.DungeonResult){
+						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("DungeonResult"));
+					}
+					else if(data.state == states.ShowdownCardSelection){
+						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("Showdown"));
+					}
+					else if(data.state == states.ShowdownWaitingOnOpponent){
+						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("ShowdownWaitingOnOpponent"));
+					}
+					else if(data.state == states.ShowdownResult){
+						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("ShowdownResult"));
+					}
+				
 				}
 			}
 		}
