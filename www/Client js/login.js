@@ -14,7 +14,7 @@ function LoginRequest() {
         if (this.readyState == 4) {
 
             if (this.status == 200){
-                window.location.href = "/mainMenu.html";
+                window.location.href = "/game/";
             }
             console.log(this.response)
             document.getElementById("success").innerHTML = this.responseText;

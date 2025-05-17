@@ -16,6 +16,11 @@ class ShowdownResult extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
+		// rectangle_1
+		const rectangle_1 = this.add.rectangle(941, 407, 128, 128);
+		rectangle_1.isFilled = true;
+		rectangle_1.fillColor = 14861165;
+
 		this.events.emit("scene-awake");
 	}
 

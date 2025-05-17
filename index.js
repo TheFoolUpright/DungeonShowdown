@@ -209,16 +209,6 @@ app.post("/register", (req, res) => {
 //#region Match
 
 app.get("/getMatchState", (req, res) => {
-
-    //if in a match
-    //return MATCH_FOUND
-
-    //If waiting for a match
-    //return WAITING_FOR_MATCH
-
-    //if not in a match 
-    //return NOT_IN_MATCH
-
     if (req.session.matchId) {
        res.status(200).json({
            "message": "Player already in a match",
@@ -265,7 +255,7 @@ app.get("/getMatchState", (req, res) => {
                 return;
             }
             if (rows.length == 0) {
-                if(rows.is_waiting_for_match = 1){
+                if(rows[0].is_waiting_for_match == 1){
                     res.status(200).json({
                     "message": "Player already in a match",
                     "state": "WAITING_FOR_MATCH"
