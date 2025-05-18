@@ -26,6 +26,7 @@
                             "texture": {
                                 "key": "Character"
                             },
+                            "y": 30,
                             "scaleX": 0.4,
                             "scaleY": 0.4
                         },
