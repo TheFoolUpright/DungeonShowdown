@@ -94,6 +94,7 @@ app.post("/login", (req, res) => {
 
 
 app.get("/idLoggedIn", (req, res) => {
+    console.log("here3")
     if(!req.session.playerId){
         res.status(200).json({
                 "message": "The user is not logged in",
@@ -108,7 +109,7 @@ app.get("/idLoggedIn", (req, res) => {
             })
         return
     }    
-
+    
 });
 //#endregion
 

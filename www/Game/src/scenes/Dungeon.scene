@@ -10,6 +10,18 @@
     },
     "displayList": [
         {
+            "type": "Image",
+            "id": "b61f815e-aec1-4a1d-9bc1-916d57f735db",
+            "label": "dungeonBackground",
+            "texture": {
+                "key": "DungeonBackground"
+            },
+            "x": 640,
+            "y": 309,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+        },
+        {
             "prefabId": "6ead72a9-5342-419b-a399-b6b1ee837549",
             "id": "e2735596-df47-4d95-a685-8658c309ccea",
             "unlock": [
