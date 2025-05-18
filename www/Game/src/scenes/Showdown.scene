@@ -10,6 +10,18 @@
     },
     "displayList": [
         {
+            "type": "Image",
+            "id": "6146ffb8-a8d5-4d47-bc8a-976c57a57ced",
+            "label": "showdownBackground",
+            "texture": {
+                "key": "ShowdownBackground"
+            },
+            "x": 640,
+            "y": 360,
+            "scaleX": 0.7,
+            "scaleY": 0.7
+        },
+        {
             "prefabId": "f15fd942-db03-4ecd-b587-9299358545a5",
             "id": "ccc840ab-c8af-4c85-beba-696e67355920",
             "unlock": [
@@ -18,7 +30,7 @@
             ],
             "label": "prefabOpponent",
             "x": 640,
-            "y": 360
+            "y": 380
         },
         {
             "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
@@ -116,6 +128,19 @@
             "label": "info",
             "x": 1140,
             "y": 20
+        },
+        {
+            "prefabId": "9e174a37-c4f5-4ab3-8739-d16babf6c161",
+            "id": "1ef9ba08-02a7-4c2e-a7ed-204ba3bacdd5",
+            "unlock": [
+                "x",
+                "y",
+                "angle"
+            ],
+            "label": "prefabAttacks",
+            "x": 675,
+            "y": 400,
+            "angle": 0
         }
     ],
     "plainObjects": [],

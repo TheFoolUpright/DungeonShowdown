@@ -17,9 +17,9 @@ class Dungeon extends Phaser.Scene {
 	editorCreate() {
 
 		// dungeonBackground
-		const dungeonBackground = this.add.image(640, 309, "DungeonBackground");
-		dungeonBackground.scaleX = 0.8;
-		dungeonBackground.scaleY = 0.8;
+		const dungeonBackground = this.add.image(640, 360, "DungeonBackground");
+		dungeonBackground.scaleX = 0.7;
+		dungeonBackground.scaleY = 0.7;
 
 		// StatsContainer
 		const statsContainer = new PrefabStats(this, 50, 30);

@@ -13,6 +13,11 @@
             "type": "Container",
             "id": "23c9c265-670d-4982-9e8f-de07404925f4",
             "label": "container_1",
+            "hitArea.shape": "RECTANGLE",
+            "hitArea.x": -62.5,
+            "hitArea.y": -37.5,
+            "hitArea.width": 125,
+            "hitArea.height": 75,
             "x": null,
             "y": null,
             "list": [
@@ -27,34 +32,6 @@
                     "scaleY": 0.5
                 },
                 {
-                    "prefabId": "a06ed60b-79f1-4444-bf35-89046f71f954",
-                    "id": "b51e3be9-efae-473a-97dd-e59f25bebc93",
-                    "label": "onPointerDownScript",
-                    "list": [
-                        {
-                            "prefabId": "0e39177a-6e19-4b56-a7c2-2360a2e41505",
-                            "id": "a6623680-4013-45aa-beba-84ce369d315f",
-                            "label": "pushActionScript"
-                        }
-                    ]
-                },
-                {
-                    "prefabId": "7028a0e2-cd14-44b7-b2a4-68dac16ece00",
-                    "id": "777b0d48-e0e4-4013-ad75-314d42d5eb12",
-                    "label": "onAwakeScript",
-                    "list": [
-                        {
-                            "prefabId": "3d337935-cdca-4937-9126-9f75bc2486de",
-                            "id": "5a02a8a1-2ec8-4e28-b297-c40e25e07573",
-                            "unlock": [
-                                "from"
-                            ],
-                            "label": "moveInSceneActionScript",
-                            "from": "RIGHT"
-                        }
-                    ]
-                },
-                {
                     "type": "Text",
                     "id": "23a35d44-d874-492e-a983-293dd2ddf5f0",
                     "label": "nextRoom",
@@ -65,6 +42,34 @@
                     "align": "center",
                     "fontFamily": "Rockey",
                     "color": "#000000ff"
+                },
+                {
+                    "prefabId": "a06ed60b-79f1-4444-bf35-89046f71f954",
+                    "id": "7b69e5b0-27fa-433f-8516-9d22ee56cf6e",
+                    "label": "onPointerDownScript",
+                    "list": [
+                        {
+                            "prefabId": "0e39177a-6e19-4b56-a7c2-2360a2e41505",
+                            "id": "6a40dd5d-f2b4-40fe-8765-901939858ad9",
+                            "label": "pushActionScript"
+                        }
+                    ]
+                },
+                {
+                    "prefabId": "7028a0e2-cd14-44b7-b2a4-68dac16ece00",
+                    "id": "9a3f4fd4-7e53-4dd0-98fe-d6f439ce1c39",
+                    "label": "onAwakeScript",
+                    "list": [
+                        {
+                            "prefabId": "3d337935-cdca-4937-9126-9f75bc2486de",
+                            "id": "0df8b798-1594-4ea3-bbe1-ba7ea9094303",
+                            "unlock": [
+                                "from"
+                            ],
+                            "label": "moveInSceneActionScript",
+                            "from": "RIGHT"
+                        }
+                    ]
                 }
             ]
         }

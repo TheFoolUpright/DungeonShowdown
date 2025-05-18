@@ -8,11 +8,20 @@ class PrefabNextRoom extends Phaser.GameObjects.Container {
 	constructor(scene, x, y) {
 		super(scene, x ?? null, y ?? null);
 
+		this.setInteractive(new Phaser.Geom.Rectangle(-62.5, -37.5, 125, 75), Phaser.Geom.Rectangle.Contains);
+
 		// confirm___End_Turn_Button_1
 		const confirm___End_Turn_Button_1 = scene.add.image(0, 0, "Confirm & End Turn Button");
 		confirm___End_Turn_Button_1.scaleX = 0.5;
 		confirm___End_Turn_Button_1.scaleY = 0.5;
 		this.add(confirm___End_Turn_Button_1);
+
+		// nextRoom
+		const nextRoom = scene.add.text(null, -12, "", {});
+		nextRoom.setOrigin(0.5, 0);
+		nextRoom.text = "Onward!";
+		nextRoom.setStyle({ "align": "center", "color": "#000000ff", "fontFamily": "Rockey" });
+		this.add(nextRoom);
 
 		// onPointerDownScript
 		const onPointerDownScript = new OnPointerDownScript(this);
@@ -25,13 +34,6 @@ class PrefabNextRoom extends Phaser.GameObjects.Container {
 
 		// moveInSceneActionScript
 		const moveInSceneActionScript = new MoveInSceneActionScript(onAwakeScript);
-
-		// nextRoom
-		const nextRoom = scene.add.text(null, -12, "", {});
-		nextRoom.setOrigin(0.5, 0);
-		nextRoom.text = "Onward!";
-		nextRoom.setStyle({ "align": "center", "color": "#000000ff", "fontFamily": "Rockey" });
-		this.add(nextRoom);
 
 		// moveInSceneActionScript (prefab fields)
 		moveInSceneActionScript.from = "RIGHT";

@@ -14,12 +14,12 @@ class PrefabOpponent extends Phaser.GameObjects.Container {
 
 		// character
 		const character = scene.add.image(0, 0, "Character");
-		character.scaleX = 0.45;
-		character.scaleY = 0.45;
+		character.scaleX = 0.4;
+		character.scaleY = 0.4;
 		container_1.add(character);
 
 		// opponentName
-		const opponentName = scene.add.text(0, -300, "", {});
+		const opponentName = scene.add.text(0, -275, "", {});
 		opponentName.setOrigin(0.5, 0);
 		opponentName.text = "Username";
 		opponentName.setStyle({ "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff", "strokeThickness":10});
@@ -40,10 +40,6 @@ class PrefabOpponent extends Phaser.GameObjects.Container {
 	focus = false;
 	/** @type {boolean} */
 	heal = false;
-	/** @type {boolean} */
-	anger_5 = false;
-	/** @type {boolean} */
-	anger_6 = false;
 
 	/* START-USER-CODE */
 
