@@ -91,12 +91,10 @@ class Preload extends Phaser.Scene {
 
 				if (xhttp.status == 200) {
 					if(data.state == "NOT_LOGGED_IN") {
-						console.log("Not Logged in");
 						window.location.href = "/login.html";
 						return
 					}
 					else if(data.state == "LOGGED_IN") {
-						console.log("Logged in");
 						this.MatchCheck();
 					}
 				}
@@ -121,7 +119,6 @@ class Preload extends Phaser.Scene {
 
 				if (xhttp.status == 200){
 					if(data.state == "MATCH_FOUND") {
-						console.log("MATCH_FOUND");
 						//Get State
 						this.GetGameState()
 					}
@@ -156,8 +153,6 @@ class Preload extends Phaser.Scene {
 
 
 				if (xhttp.status == 200){
-					console.log("here")
-					console.log("data.state_id: "+data.state_id)
 					if(data.state_id == states.DungeonCardSelection){
 						console.log("here1")
 						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("Dungeon"));
