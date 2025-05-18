@@ -87,6 +87,11 @@
                 "key": "Normal Slash"
             },
             {
+                "url": "src/prefabs/PrefabAttacks.js",
+                "type": "script",
+                "key": "PrefabAttacks"
+            },
+            {
                 "url": "src/prefabs/PrefabCard.js",
                 "type": "script",
                 "key": "PrefabCard"
