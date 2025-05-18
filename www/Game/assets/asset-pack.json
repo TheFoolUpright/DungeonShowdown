@@ -70,6 +70,11 @@
                 "url": "src/prefabs/PrefabCard.js",
                 "type": "script",
                 "key": "PrefabCard"
+            },
+            {
+                "url": "src/prefabs/PrefabOpponent.js",
+                "type": "script",
+                "key": "PrefabOpponent"
             }
         ]
     },

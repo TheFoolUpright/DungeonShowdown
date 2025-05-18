@@ -120,17 +120,16 @@ class Preload extends Phaser.Scene {
 						//Get State
 						this.GetGameState()
 					}
-					else if (data.state == "NOT_IN_MATCH"){
+					else if (data.state == "NOT_IN_MATCH") {
 						//Go to Main Menu 
 						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("JoinMatch"));
 
 					}
-					else if (data.state == "WAITING_FOR_MATCH"){
+					else if (data.state == "WAITING_FOR_MATCH") {
 						//Go to waiting for a Match
 						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("WaitingForMatch"));
 
 					}
-					
 				}
 			}
 		}

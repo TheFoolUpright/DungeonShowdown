@@ -10,16 +10,15 @@
     },
     "displayList": [
         {
-            "type": "Image",
-            "id": "d771ef3d-ab21-47e9-b8dd-4525bc9980a5",
-            "label": "character",
-            "texture": {
-                "key": "Character"
-            },
-            "x": 624,
-            "y": 340,
-            "scaleX": 0.45,
-            "scaleY": 0.45
+            "prefabId": "f15fd942-db03-4ecd-b587-9299358545a5",
+            "id": "ccc840ab-c8af-4c85-beba-696e67355920",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "prefabOpponent",
+            "x": 640,
+            "y": 360
         },
         {
             "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
@@ -97,11 +96,15 @@
             "id": "e92c9d6c-6394-4ce3-9e7a-3e5792c7962e",
             "unlock": [
                 "x",
-                "y"
+                "y",
+                "scaleX",
+                "scaleY"
             ],
             "label": "prefabStats",
             "x": 50,
-            "y": 30
+            "y": 30,
+            "scaleX": 1,
+            "scaleY": 1
         },
         {
             "prefabId": "58151c15-b33f-4514-a7c8-de8a701ab360",

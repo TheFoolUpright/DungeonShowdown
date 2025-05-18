@@ -1,0 +1,128 @@
+{
+    "id": "f15fd942-db03-4ecd-b587-9299358545a5",
+    "sceneType": "PREFAB",
+    "settings": {
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1280,
+        "borderHeight": 720
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "0b6ed1fa-6702-4c6e-a8e9-5ce2beff7c8c",
+            "label": "container_2",
+            "list": [
+                {
+                    "type": "Container",
+                    "id": "96781faf-df90-4253-9223-0c7ec877423f",
+                    "label": "container_1",
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "30a7409f-5f03-410d-9665-093fe57f6eb1",
+                            "label": "character",
+                            "texture": {
+                                "key": "Character"
+                            },
+                            "scaleX": 0.45,
+                            "scaleY": 0.45
+                        },
+                        {
+                            "type": "Text",
+                            "id": "1a559f85-5d14-4339-90f7-06cbfffef30a",
+                            "label": "opponentName",
+                            "y": -300,
+                            "originX": 0.5,
+                            "text": "Username",
+                            "fontFamily": "Rockey",
+                            "fontSize": "32px",
+                            "stroke": "#000000ff",
+                            "strokeThickness": 10
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    },
+    "prefabProperties": [
+        {
+            "name": "anger",
+            "label": "Anger",
+            "tooltip": "",
+            "defValue": false,
+            "customDefinition": false,
+            "type": {
+                "id": "boolean"
+            }
+        },
+        {
+            "name": "rage",
+            "label": "Rage",
+            "tooltip": "",
+            "defValue": false,
+            "customDefinition": false,
+            "type": {
+                "id": "boolean"
+            }
+        },
+        {
+            "name": "adrenaline",
+            "label": "Adrenaline",
+            "tooltip": "",
+            "defValue": false,
+            "customDefinition": false,
+            "type": {
+                "id": "boolean"
+            }
+        },
+        {
+            "name": "focus",
+            "label": "Focus",
+            "tooltip": "",
+            "defValue": false,
+            "customDefinition": false,
+            "type": {
+                "id": "boolean"
+            }
+        },
+        {
+            "name": "heal",
+            "label": "Heal",
+            "tooltip": "",
+            "defValue": false,
+            "customDefinition": false,
+            "type": {
+                "id": "boolean"
+            }
+        },
+        {
+            "name": "anger_5",
+            "label": "Anger 5",
+            "tooltip": "",
+            "defValue": false,
+            "customDefinition": false,
+            "type": {
+                "id": "boolean"
+            }
+        },
+        {
+            "name": "anger_6",
+            "label": "Anger 6",
+            "tooltip": "",
+            "defValue": false,
+            "customDefinition": false,
+            "type": {
+                "id": "boolean"
+            }
+        }
+    ]
+}
