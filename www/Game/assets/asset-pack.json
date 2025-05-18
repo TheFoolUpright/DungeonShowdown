@@ -22,6 +22,11 @@
                 "type": "image"
             },
             {
+                "url": "assets/DungeonBackground.png",
+                "type": "image",
+                "key": "DungeonBackground"
+            },
+            {
                 "url": "assets/Empty Card.png",
                 "type": "image",
                 "key": "Empty Card"
@@ -65,6 +70,26 @@
                 "url": "src/prefabs/PrefabCard.js",
                 "type": "script",
                 "key": "PrefabCard"
+            },
+            {
+                "url": "src/prefabs/PrefabEndTurn.js",
+                "type": "script",
+                "key": "PrefabEndTurn"
+            },
+            {
+                "url": "src/prefabs/PrefabInfo.js",
+                "type": "script",
+                "key": "PrefabInfo"
+            },
+            {
+                "url": "src/prefabs/PrefabNextRoom.js",
+                "type": "script",
+                "key": "PrefabNextRoom"
+            },
+            {
+                "url": "src/prefabs/PrefabStats.js",
+                "type": "script",
+                "key": "PrefabStats"
             }
         ]
     },
