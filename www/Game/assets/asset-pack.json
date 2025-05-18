@@ -7,17 +7,17 @@
                 "key": "Character"
             },
             {
-                "url": "assets/ui/Confirm & End Turn Button.png",
+                "url": "assets/UI/Confirm & End Turn Button.png",
                 "type": "image",
                 "key": "Confirm & End Turn Button"
             },
             {
-                "url": "assets/ui/CurrentHealth.png",
+                "url": "assets/UI/CurrentHealth.png",
                 "type": "image",
                 "key": "CurrentHealth"
             },
             {
-                "url": "assets/ui/Damage.png",
+                "url": "assets/UI/Damage.png",
                 "type": "image",
                 "key": "Damage"
             },
@@ -32,42 +32,42 @@
                 "key": "DungeonBackground"
             },
             {
-                "url": "assets/ui/Empty Card.png",
+                "url": "assets/UI/Empty Card.png",
                 "type": "image",
                 "key": "Empty Card"
             },
             {
-                "url": "assets/ui/Energy.png",
+                "url": "assets/UI/Energy.png",
                 "type": "image",
                 "key": "Energy"
             },
             {
-                "url": "assets/ui/EnergyBar.png",
+                "url": "assets/UI/EnergyBar.png",
                 "type": "image",
                 "key": "EnergyBar"
             },
             {
-                "url": "assets/ui/Insight.png",
+                "url": "assets/UI/Insight.png",
                 "type": "image",
                 "key": "Insight"
             },
             {
-                "url": "assets/ui/InsightBar.png",
+                "url": "assets/UI/InsightBar.png",
                 "type": "image",
                 "key": "InsightBar"
             },
             {
-                "url": "assets/ui/Max Health.png",
+                "url": "assets/UI/Max Health.png",
                 "type": "image",
                 "key": "Max Health"
             },
             {
-                "url": "assets/ui/MaxHealthBar.png",
+                "url": "assets/UI/MaxHealthBar.png",
                 "type": "image",
                 "key": "MaxHealthBar"
             },
             {
-                "url": "assets/ui/MightBar.png",
+                "url": "assets/UI/MightBar.png",
                 "type": "image",
                 "key": "MightBar"
             },

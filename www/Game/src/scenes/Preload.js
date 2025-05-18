@@ -73,26 +73,30 @@ class Preload extends Phaser.Scene {
 		this.editorCreate();
 
 		this.editorPreload();
+		console.log("Here")
 
 		this.LoginCheck();
 		//this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("Showdown"));
 	}
 
 	LoginCheck() {
-
 		var xhttp = new XMLHttpRequest();
 		
 		xhttp.onreadystatechange = () => {
-			if (this.readyState == 4) {
-				var data = JSON.parse(this.responseText)
+			console.log(xhttp.readyState)
+			if (xhttp.readyState == 4) {
+				
+				var data = JSON.parse(xhttp.responseText)
 				console.log(data)
 
-				if (this.status == 200) {
+				if (xhttp.status == 200) {
 					if(data.state == "NOT_LOGGED_IN") {
+						console.log("Not Logged in");
 						window.location.href = "/login.html";
 						return
 					}
 					else if(data.state == "LOGGED_IN") {
+						console.log("Logged in");
 						this.MatchCheck();
 					}
 				}
@@ -111,21 +115,24 @@ class Preload extends Phaser.Scene {
 		var xhttp = new XMLHttpRequest();
 		
 		xhttp.onreadystatechange = () => {
-			if (this.readyState == 4) {
-				var data = JSON.parse(this.responseText)
+			if (xhttp.readyState == 4) {
+				var data = JSON.parse(xhttp.responseText)
 				console.log(data)
 
-				if (this.status == 200){
+				if (xhttp.status == 200){
 					if(data.state == "MATCH_FOUND") {
+						console.log("MATCH_FOUND");
 						//Get State
 						this.GetGameState()
 					}
 					else if (data.state == "NOT_IN_MATCH"){
+						console.log("NOT_IN_MATCH");
 						//Go to Main Menu 
 						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("JoinMatch"));
 
 					}
 					else if (data.state == "WAITING_FOR_MATCH"){
+						console.log("WAITING_FOR_MATCH");
 						//Go to waiting for a Match
 						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("WaitingForMatch"));
 
@@ -146,27 +153,31 @@ class Preload extends Phaser.Scene {
 		var xhttp = new XMLHttpRequest();
 		
 		xhttp.onreadystatechange = () => {
-			if (this.readyState == 4) {
-				var data = JSON.parse(this.responseText)
+			if (xhttp.readyState == 4) {
+				var data = JSON.parse(xhttp.responseText)
 				console.log(data)
 
-				if (this.status == 200){
-					if(data.state == states.DungeonCardSelection){
+
+				if (xhttp.status == 200){
+					console.log("here")
+					console.log("data.state_id: "+data.state_id)
+					if(data.state_id == states.DungeonCardSelection){
+						console.log("here1")
 						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("Dungeon"));
 					}
-					else if(data.state == states.DungeonWaitingOnOpponent){
+					else if(data.state_id == states.DungeonWaitingOnOpponent){
 						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("DungeonWaitingOnOpponent"));
 					}
-					else if(data.state == states.DungeonResult){
+					else if(data.state_id == states.DungeonResult){
 						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("DungeonResult"));
 					}
-					else if(data.state == states.ShowdownCardSelection){
+					else if(data.state_id == states.ShowdownCardSelection){
 						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("Showdown"));
 					}
-					else if(data.state == states.ShowdownWaitingOnOpponent){
+					else if(data.state_id == states.ShowdownWaitingOnOpponent){
 						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("ShowdownWaitingOnOpponent"));
 					}
-					else if(data.state == states.ShowdownResult){
+					else if(data.state_id == states.ShowdownResult){
 						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("ShowdownResult"));
 					}
 				
