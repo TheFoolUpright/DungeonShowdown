@@ -74,7 +74,6 @@ class Preload extends Phaser.Scene {
 
 		this.editorPreload();
 
-
 		this.LoginCheck();
 		//this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("Showdown"));
 	}
@@ -83,20 +82,19 @@ class Preload extends Phaser.Scene {
 
 		var xhttp = new XMLHttpRequest();
 		
-		xhttp.onreadystatechange = function () {
+		xhttp.onreadystatechange = () => {
 			if (this.readyState == 4) {
 				var data = JSON.parse(this.responseText)
 				console.log(data)
 
-				if (this.status == 200){
+				if (this.status == 200) {
 					if(data.state == "NOT_LOGGED_IN") {
 						window.location.href = "/login.html";
 						return
 					}
 					else if(data.state == "LOGGED_IN") {
-						this.parent.MatchCheck();
+						this.MatchCheck();
 					}
-					
 				}
 			}
 		}
@@ -112,7 +110,7 @@ class Preload extends Phaser.Scene {
 
 		var xhttp = new XMLHttpRequest();
 		
-		xhttp.onreadystatechange = function () {
+		xhttp.onreadystatechange = () => {
 			if (this.readyState == 4) {
 				var data = JSON.parse(this.responseText)
 				console.log(data)
@@ -147,7 +145,7 @@ class Preload extends Phaser.Scene {
 	GetGameState(){
 		var xhttp = new XMLHttpRequest();
 		
-		xhttp.onreadystatechange = function () {
+		xhttp.onreadystatechange = () => {
 			if (this.readyState == 4) {
 				var data = JSON.parse(this.responseText)
 				console.log(data)

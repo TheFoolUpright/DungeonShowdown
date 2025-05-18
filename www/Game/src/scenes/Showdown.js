@@ -16,6 +16,11 @@ class Showdown extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
+		// character
+		const character = this.add.image(624, 340, "Character");
+		character.scaleX = 0.45;
+		character.scaleY = 0.45;
+
 		// empty_Card
 		const empty_Card = new PrefabCard(this, 340, 550);
 		this.add.existing(empty_Card);

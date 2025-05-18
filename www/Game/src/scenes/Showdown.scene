@@ -10,6 +10,18 @@
     },
     "displayList": [
         {
+            "type": "Image",
+            "id": "d771ef3d-ab21-47e9-b8dd-4525bc9980a5",
+            "label": "character",
+            "texture": {
+                "key": "Character"
+            },
+            "x": 624,
+            "y": 340,
+            "scaleX": 0.45,
+            "scaleY": 0.45
+        },
+        {
             "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
             "id": "ac9a7ecc-c5c6-45da-a3e0-1881553cff5b",
             "unlock": [

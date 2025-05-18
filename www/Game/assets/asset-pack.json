@@ -2,17 +2,22 @@
     "section1": {
         "files": [
             {
-                "url": "assets/Confirm & End Turn Button.png",
+                "url": "assets/opponent/Character.png",
+                "type": "image",
+                "key": "Character"
+            },
+            {
+                "url": "assets/ui/Confirm & End Turn Button.png",
                 "type": "image",
                 "key": "Confirm & End Turn Button"
             },
             {
-                "url": "assets/UI/CurrentHealth.png",
+                "url": "assets/ui/CurrentHealth.png",
                 "type": "image",
                 "key": "CurrentHealth"
             },
             {
-                "url": "assets/UI/Damage.png",
+                "url": "assets/ui/Damage.png",
                 "type": "image",
                 "key": "Damage"
             },
@@ -22,42 +27,42 @@
                 "type": "image"
             },
             {
-                "url": "assets/Empty Card.png",
+                "url": "assets/ui/Empty Card.png",
                 "type": "image",
                 "key": "Empty Card"
             },
             {
-                "url": "assets/UI/Energy.png",
+                "url": "assets/ui/Energy.png",
                 "type": "image",
                 "key": "Energy"
             },
             {
-                "url": "assets/UI/EnergyBar.png",
+                "url": "assets/ui/EnergyBar.png",
                 "type": "image",
                 "key": "EnergyBar"
             },
             {
-                "url": "assets/UI/Insight.png",
+                "url": "assets/ui/Insight.png",
                 "type": "image",
                 "key": "Insight"
             },
             {
-                "url": "assets/UI/InsightBar.png",
+                "url": "assets/ui/InsightBar.png",
                 "type": "image",
                 "key": "InsightBar"
             },
             {
-                "url": "assets/UI/Max Health.png",
+                "url": "assets/ui/Max Health.png",
                 "type": "image",
                 "key": "Max Health"
             },
             {
-                "url": "assets/UI/MaxHealthBar.png",
+                "url": "assets/ui/MaxHealthBar.png",
                 "type": "image",
                 "key": "MaxHealthBar"
             },
             {
-                "url": "assets/UI/MightBar.png",
+                "url": "assets/ui/MightBar.png",
                 "type": "image",
                 "key": "MightBar"
             },
