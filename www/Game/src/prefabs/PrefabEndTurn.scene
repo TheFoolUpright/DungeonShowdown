@@ -41,22 +41,6 @@
                     "color": "#000000ff"
                 },
                 {
-                    "prefabId": "7028a0e2-cd14-44b7-b2a4-68dac16ece00",
-                    "id": "a809594d-a90a-4b2f-9de4-24381e38e187",
-                    "label": "onAwakeScript",
-                    "list": [
-                        {
-                            "prefabId": "3d337935-cdca-4937-9126-9f75bc2486de",
-                            "id": "345ef940-bcbd-4cb8-88a1-d60b6b5953d1",
-                            "unlock": [
-                                "from"
-                            ],
-                            "label": "moveInSceneActionScript",
-                            "from": "RIGHT"
-                        }
-                    ]
-                },
-                {
                     "prefabId": "a06ed60b-79f1-4444-bf35-89046f71f954",
                     "id": "389b43ad-5a6c-4756-b6b9-40ed693b2763",
                     "label": "onPointerDownScript",
@@ -65,6 +49,22 @@
                             "prefabId": "0e39177a-6e19-4b56-a7c2-2360a2e41505",
                             "id": "794fdb17-15e6-415c-951b-098fdf1fc7f2",
                             "label": "pushActionScript"
+                        }
+                    ]
+                },
+                {
+                    "prefabId": "7028a0e2-cd14-44b7-b2a4-68dac16ece00",
+                    "id": "afb8a274-3736-452a-a209-89f40fa64253",
+                    "label": "onAwakeScript",
+                    "list": [
+                        {
+                            "prefabId": "3d337935-cdca-4937-9126-9f75bc2486de",
+                            "id": "995c10ba-289b-450a-91d4-2d34d7c5cc16",
+                            "unlock": [
+                                "from"
+                            ],
+                            "label": "moveInSceneActionScript",
+                            "from": "RIGHT"
                         }
                     ]
                 }

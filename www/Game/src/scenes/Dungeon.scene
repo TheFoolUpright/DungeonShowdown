@@ -17,9 +17,9 @@
                 "key": "DungeonBackground"
             },
             "x": 640,
-            "y": 309,
-            "scaleX": 0.8,
-            "scaleY": 0.8
+            "y": 360,
+            "scaleX": 0.7,
+            "scaleY": 0.7
         },
         {
             "prefabId": "6ead72a9-5342-419b-a399-b6b1ee837549",

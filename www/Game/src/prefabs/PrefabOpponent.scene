@@ -26,14 +26,15 @@
                             "texture": {
                                 "key": "Character"
                             },
-                            "scaleX": 0.45,
-                            "scaleY": 0.45
+                            "y": 30,
+                            "scaleX": 0.4,
+                            "scaleY": 0.4
                         },
                         {
                             "type": "Text",
                             "id": "1a559f85-5d14-4339-90f7-06cbfffef30a",
                             "label": "opponentName",
-                            "y": -300,
+                            "y": -275,
                             "originX": 0.5,
                             "text": "Username",
                             "fontFamily": "Rockey",
@@ -97,26 +98,6 @@
         {
             "name": "heal",
             "label": "Heal",
-            "tooltip": "",
-            "defValue": false,
-            "customDefinition": false,
-            "type": {
-                "id": "boolean"
-            }
-        },
-        {
-            "name": "anger_5",
-            "label": "Anger 5",
-            "tooltip": "",
-            "defValue": false,
-            "customDefinition": false,
-            "type": {
-                "id": "boolean"
-            }
-        },
-        {
-            "name": "anger_6",
-            "label": "Anger 6",
             "tooltip": "",
             "defValue": false,
             "customDefinition": false,

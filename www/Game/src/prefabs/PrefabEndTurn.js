@@ -23,17 +23,17 @@ class PrefabEndTurn extends Phaser.GameObjects.Container {
 		endTurn.setStyle({ "align": "center", "color": "#000000ff", "fontFamily": "Rockey" });
 		this.add(endTurn);
 
-		// onAwakeScript
-		const onAwakeScript = new OnAwakeScript(this);
-
-		// moveInSceneActionScript
-		const moveInSceneActionScript = new MoveInSceneActionScript(onAwakeScript);
-
 		// onPointerDownScript
 		const onPointerDownScript = new OnPointerDownScript(this);
 
 		// pushActionScript
 		new PushActionScript(onPointerDownScript);
+
+		// onAwakeScript
+		const onAwakeScript = new OnAwakeScript(this);
+
+		// moveInSceneActionScript
+		const moveInSceneActionScript = new MoveInSceneActionScript(onAwakeScript);
 
 		// moveInSceneActionScript (prefab fields)
 		moveInSceneActionScript.from = "RIGHT";

@@ -1,0 +1,81 @@
+{
+    "id": "9e174a37-c4f5-4ab3-8739-d16babf6c161",
+    "sceneType": "PREFAB",
+    "settings": {
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1280,
+        "borderHeight": 720
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "443c140c-84ad-4824-8a26-eae63ac2529a",
+            "label": "container_2",
+            "scaleX": 1.5,
+            "scaleY": 1.5,
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "52de4182-b032-4fd6-8d0e-3f16ebf8fb36",
+                    "label": "counter_Slash",
+                    "texture": {
+                        "key": "Counter Slash"
+                    },
+                    "x": -25.08209727543968,
+                    "y": -0.5433564941523041,
+                    "angle": 30,
+                    "originX": 0,
+                    "originY": 1,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "291971bb-41ac-4dd3-8877-5b1e72987c0f",
+                    "label": "heavy_Slash",
+                    "texture": {
+                        "key": "Heavy Slash"
+                    },
+                    "x": 11.91790272456032,
+                    "y": -0.5433564941523041,
+                    "angle": 30,
+                    "originX": 0,
+                    "originY": 1,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "e8fde90e-955a-4f8d-ad01-fc4cc71fc920",
+                    "label": "normal_Slash",
+                    "texture": {
+                        "key": "Normal Slash"
+                    },
+                    "x": 22.91790272456032,
+                    "y": 5.456643505847696,
+                    "angle": 30,
+                    "originX": 0,
+                    "originY": 1
+                },
+                {
+                    "type": "Image",
+                    "id": "42670786-d085-4323-9563-b050f88c90fc",
+                    "label": "recovery_Hit",
+                    "texture": {
+                        "key": "Recovery Hit"
+                    },
+                    "x": 121,
+                    "y": 29,
+                    "visible": false
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}
