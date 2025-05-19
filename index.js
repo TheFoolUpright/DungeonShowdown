@@ -221,7 +221,9 @@ app.get("/getMatchState", (req, res) => {
     MatchCheck()
 
     function MatchCheck(){
-        connection.query("SELECT match_id, player_id, is_waiting_for_match FROM game_match INNER JOIN player ON player_id = player_1_id OR player_id = player_2_id WHERE player_id = ? AND is_match_finished = 0;", [req.session.playerId],
+        connection.query("SELECT match_id, player_id, is_waiting_for_match \
+            FROM game_match INNER JOIN player ON player_id = player_1_id OR player_id = player_2_id \
+            WHERE player_id = ? AND is_match_finished = 0;", [req.session.playerId],
         function (err, rows, fields) {
             if (err) {
                 console.log("Database Error: " + err);

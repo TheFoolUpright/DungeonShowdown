@@ -24,6 +24,8 @@ class Showdown extends Phaser.Scene {
 		// prefabOpponent
 		const prefabOpponent = new PrefabOpponent(this, 640, 380);
 		this.add.existing(prefabOpponent);
+		prefabOpponent.scaleX = 1;
+		prefabOpponent.scaleY = 1;
 
 		// empty_Card
 		const empty_Card = new PrefabCard(this, 340, 550);
@@ -89,8 +91,9 @@ console.log('Clicked');
 });
 }
 
-	create() {
+	create(data) {
 
+		console.log(data.bla);
 		this.editorCreate();
 	}
 
