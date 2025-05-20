@@ -27,20 +27,18 @@
                     "label": "confirm___End_Turn_Button_1",
                     "texture": {
                         "key": "Confirm & End Turn Button"
-                    },
-                    "scaleX": 0.5,
-                    "scaleY": 0.5
+                    }
                 },
                 {
                     "type": "Text",
                     "id": "23a35d44-d874-492e-a983-293dd2ddf5f0",
                     "label": "nextRoom",
-                    "x": null,
-                    "y": -12,
+                    "y": -16,
                     "originX": 0.5,
                     "text": "Onward!",
                     "align": "center",
                     "fontFamily": "Rockey",
+                    "fontSize": "32px",
                     "color": "#000000ff"
                 },
                 {

@@ -2,6 +2,11 @@
     "section1": {
         "files": [
             {
+                "url": "assets/card/BatDraft.png",
+                "type": "image",
+                "key": "BatDraft"
+            },
+            {
                 "url": "assets/opponent/Character.png",
                 "type": "image",
                 "key": "Character"
@@ -25,6 +30,11 @@
                 "url": "assets/ui/Damage.png",
                 "type": "image",
                 "key": "Damage"
+            },
+            {
+                "url": "assets/card/DamageDraft.png",
+                "type": "image",
+                "key": "DamageDraft"
             },
             {
                 "url": "assets/dino.png",
@@ -52,9 +62,24 @@
                 "key": "EnergyBar"
             },
             {
+                "url": "assets/card/GhostDraft.png",
+                "type": "image",
+                "key": "GhostDraft"
+            },
+            {
+                "url": "assets/card/HealingDraft.png",
+                "type": "image",
+                "key": "HealingDraft"
+            },
+            {
                 "url": "assets/opponent/Heavy Slash.png",
                 "type": "image",
                 "key": "Heavy Slash"
+            },
+            {
+                "url": "assets/card/HiddenDraft.png",
+                "type": "image",
+                "key": "HiddenDraft"
             },
             {
                 "url": "assets/ui/Insight.png",
@@ -75,6 +100,11 @@
                 "url": "assets/ui/MaxHealthBar.png",
                 "type": "image",
                 "key": "MaxHealthBar"
+            },
+            {
+                "url": "assets/card/MaxHealthDraft.png",
+                "type": "image",
+                "key": "MaxHealthDraft"
             },
             {
                 "url": "assets/ui/MightBar.png",
@@ -127,9 +157,19 @@
                 "key": "Recovery Hit"
             },
             {
+                "url": "assets/card/RestDraft.png",
+                "type": "image",
+                "key": "RestDraft"
+            },
+            {
                 "url": "assets/background/ShowdownBackground.png",
                 "type": "image",
                 "key": "ShowdownBackground"
+            },
+            {
+                "url": "assets/card/SlimeDraft.png",
+                "type": "image",
+                "key": "SlimeDraft"
             }
         ]
     },

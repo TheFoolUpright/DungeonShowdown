@@ -25,19 +25,18 @@
                     "label": "confirm___End_Turn_Button",
                     "texture": {
                         "key": "Confirm & End Turn Button"
-                    },
-                    "scaleX": 0.55,
-                    "scaleY": 0.55
+                    }
                 },
                 {
                     "type": "Text",
                     "id": "92220912-c30d-4d14-85b0-45db8bd01ef9",
                     "label": "endTurn",
-                    "y": -12,
+                    "y": -16,
                     "originX": 0.5,
                     "text": "Rip and Tear!",
                     "align": "center",
                     "fontFamily": "Rockey",
+                    "fontSize": "32px",
                     "color": "#000000ff"
                 },
                 {

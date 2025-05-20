@@ -12,15 +12,13 @@ class PrefabNextRoom extends Phaser.GameObjects.Container {
 
 		// confirm___End_Turn_Button_1
 		const confirm___End_Turn_Button_1 = scene.add.image(0, 0, "Confirm & End Turn Button");
-		confirm___End_Turn_Button_1.scaleX = 0.5;
-		confirm___End_Turn_Button_1.scaleY = 0.5;
 		this.add(confirm___End_Turn_Button_1);
 
 		// nextRoom
-		const nextRoom = scene.add.text(null, -12, "", {});
+		const nextRoom = scene.add.text(0, -16, "", {});
 		nextRoom.setOrigin(0.5, 0);
 		nextRoom.text = "Onward!";
-		nextRoom.setStyle({ "align": "center", "color": "#000000ff", "fontFamily": "Rockey" });
+		nextRoom.setStyle({ "align": "center", "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px" });
 		this.add(nextRoom);
 
 		// onPointerDownScript

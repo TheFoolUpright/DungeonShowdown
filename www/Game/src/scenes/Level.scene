@@ -13,6 +13,7 @@
             "type": "Image",
             "id": "7d5827fd-34f6-473f-90e0-b9424a51d5fa",
             "label": "dino",
+            "scope": "PUBLIC",
             "hitArea.shape": "RECTANGLE",
             "hitArea.width": 250,
             "hitArea.height": 250,

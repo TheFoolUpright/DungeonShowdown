@@ -26,11 +26,15 @@
             "id": "ccc840ab-c8af-4c85-beba-696e67355920",
             "unlock": [
                 "x",
-                "y"
+                "y",
+                "scaleX",
+                "scaleY"
             ],
             "label": "prefabOpponent",
             "x": 640,
-            "y": 380
+            "y": 380,
+            "scaleX": 1,
+            "scaleY": 1
         },
         {
             "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
@@ -42,6 +46,7 @@
                 "isVisible"
             ],
             "label": "empty_Card",
+            "scope": "PUBLIC",
             "cardId": 0,
             "isVisible": true,
             "x": 340,
@@ -57,6 +62,7 @@
                 "isVisible"
             ],
             "label": "empty_Card_1",
+            "scope": "PUBLIC",
             "cardId": 0,
             "isVisible": true,
             "x": 540,
@@ -72,6 +78,7 @@
                 "isVisible"
             ],
             "label": "empty_Card_2",
+            "scope": "PUBLIC",
             "cardId": 0,
             "isVisible": true,
             "x": 740,
@@ -87,6 +94,7 @@
                 "isVisible"
             ],
             "label": "empty_Card_3",
+            "scope": "PUBLIC",
             "cardId": 0,
             "isVisible": true,
             "x": 940,
