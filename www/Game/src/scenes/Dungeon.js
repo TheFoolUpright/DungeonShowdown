@@ -72,7 +72,11 @@ class Dungeon extends Phaser.Scene {
 	create() {
 
 		this.editorCreate();
+
+		
 	}
+
+	
 
 	/* END-USER-CODE */
 }
