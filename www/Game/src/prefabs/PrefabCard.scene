@@ -25,16 +25,7 @@
                     "label": "empty_Card",
                     "texture": {
                         "key": "Empty Card_1"
-                    },
-                    "list": [
-                        {
-                            "type": "Glow",
-                            "id": "fad59d95-70be-49e5-af60-694ed3943f23",
-                            "label": "glowFx",
-                            "outerStrength": 0,
-                            "preFX": true
-                        }
-                    ]
+                    }
                 },
                 {
                     "type": "Text",
@@ -50,13 +41,26 @@
                     "color": "#000000ff"
                 },
                 {
+                    "type": "Image",
+                    "id": "ecbc001e-b475-415a-8bb0-19cbe30abe5f",
+                    "label": "cardBorder",
+                    "texture": {
+                        "key": "CardBorder"
+                    }
+                },
+                {
                     "type": "Text",
                     "id": "eda211a7-946d-40d1-87c6-29ac4d5014f2",
                     "label": "cardDescription",
                     "scope": "PUBLIC",
-                    "y": 80,
+                    "y": -260,
                     "originX": 0.5,
+                    "originY": 1,
                     "text": "Take no damage from one of the opponent's attacks and hit them back for half of their _",
+                    "paddingLeft": 5,
+                    "paddingTop": 5,
+                    "paddingRight": 5,
+                    "paddingBottom": 5,
                     "align": "center",
                     "fontFamily": "Rockey",
                     "fontSize": "24px",
@@ -64,17 +68,22 @@
                     "wordWrapWidth": 248
                 },
                 {
-                    "type": "Image",
-                    "id": "ecbc001e-b475-415a-8bb0-19cbe30abe5f",
-                    "label": "cardBorder",
-                    "texture": {
-                        "key": "CardBorder"
-                    },
-                    "tintTopLeft": "#e60808",
-                    "tintTopRight": "#e60808",
-                    "tintBottomLeft": "#e60808",
-                    "tintBottomRight": "#e60808",
-                    "tintFill": true
+                    "prefabId": "7028a0e2-cd14-44b7-b2a4-68dac16ece00",
+                    "id": "0dc21418-28d1-4973-b2a8-45b31b3aad4b",
+                    "label": "onAwakeScript",
+                    "scope": "NESTED_PREFAB",
+                    "list": [
+                        {
+                            "prefabId": "3d337935-cdca-4937-9126-9f75bc2486de",
+                            "id": "18eed155-760e-4919-8e2f-5eebff79eb71",
+                            "unlock": [
+                                "from"
+                            ],
+                            "label": "moveInSceneActionScript",
+                            "scope": "NESTED_PREFAB",
+                            "from": "BOTTOM"
+                        }
+                    ]
                 },
                 {
                     "prefabId": "a06ed60b-79f1-4444-bf35-89046f71f954",
@@ -96,24 +105,6 @@
                             ],
                             "label": "setYActionScript",
                             "y": 400
-                        }
-                    ]
-                },
-                {
-                    "prefabId": "7028a0e2-cd14-44b7-b2a4-68dac16ece00",
-                    "id": "0dc21418-28d1-4973-b2a8-45b31b3aad4b",
-                    "label": "onAwakeScript",
-                    "scope": "NESTED_PREFAB",
-                    "list": [
-                        {
-                            "prefabId": "3d337935-cdca-4937-9126-9f75bc2486de",
-                            "id": "18eed155-760e-4919-8e2f-5eebff79eb71",
-                            "unlock": [
-                                "from"
-                            ],
-                            "label": "moveInSceneActionScript",
-                            "scope": "NESTED_PREFAB",
-                            "from": "BOTTOM"
                         }
                     ]
                 }

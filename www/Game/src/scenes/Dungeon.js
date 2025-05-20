@@ -115,7 +115,12 @@ class Dungeon extends Phaser.Scene {
 
 		this.slot1Card.cardId = data.card[0].card_id
 		this.slot1Card.isVisible = data.card[0].is_visible
-		this.slot1Card.cardBorder.setTint(data.player_color)
+
+		// this.slot1Card.cardBorder.setTint(data.player_color)
+
+		const cardColor = data.player_color.replace("#", "0x")
+		
+		this.slot1Card.cardBorder.setTint(cardColor)
 
 		if(this.slot1Card.isVisible){
 			this.slot1Card.cardName.text = data.card[0].card_name
@@ -130,6 +135,8 @@ class Dungeon extends Phaser.Scene {
 
 		this.slot2Card.cardId = data.card[1].card_id
 		this.slot2Card.isVisible = data.card[1].is_visible
+		
+		this.slot2Card.cardBorder.setTint(cardColor)
 
 		if(this.slot2Card.isVisible){
 			this.slot2Card.cardName.text = data.card[1].card_name
@@ -145,6 +152,8 @@ class Dungeon extends Phaser.Scene {
 		this.slot3Card.cardId = data.card[2].card_id
 		this.slot3Card.isVisible = data.card[2].is_visible
 
+		this.slot3Card.cardBorder.setTint(cardColor)
+		
 		if(this.slot3Card.isVisible){
 			this.slot3Card.cardName.text = data.card[2].card_name
 			//this.slot3Card.cardImage.setTexture(data.card[2].card_image_path); 

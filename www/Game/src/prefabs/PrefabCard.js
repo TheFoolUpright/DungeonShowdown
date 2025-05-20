@@ -14,9 +14,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		const empty_Card = scene.add.image(0, 0, "Empty Card_1");
 		this.add(empty_Card);
 
-		// glowFx
-		empty_Card.preFX.addGlow(16777215, 0, 0, false);
-
 		// cardName
 		const cardName = scene.add.text(0, -190, "", {});
 		cardName.setOrigin(0.5, 0);
@@ -24,22 +21,24 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		cardName.setStyle({ "align": "center", "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px" });
 		this.add(cardName);
 
+		// cardBorder
+		const cardBorder = scene.add.image(0, 0, "CardBorder");
+		this.add(cardBorder);
+
 		// cardDescription
-		const cardDescription = scene.add.text(0, 80, "", {});
-		cardDescription.setOrigin(0.5, 0);
+		const cardDescription = scene.add.text(0, -260, "", {});
+		cardDescription.setOrigin(0.5, 1);
 		cardDescription.text = "Take no damage from one of the opponent's attacks and hit them back for half of their _";
 		cardDescription.setStyle({ "align": "center", "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px" });
+		cardDescription.setPadding({"left":5,"top":5,"right":5,"bottom":5});
 		cardDescription.setWordWrapWidth(248);
 		this.add(cardDescription);
 
-		// cardBorder
-		const cardBorder = scene.add.image(0, 0, "CardBorder");
-		cardBorder.tintFill = true;
-		cardBorder.tintTopLeft = 15075336;
-		cardBorder.tintTopRight = 15075336;
-		cardBorder.tintBottomLeft = 15075336;
-		cardBorder.tintBottomRight = 15075336;
-		this.add(cardBorder);
+		// onAwakeScript
+		const onAwakeScript = new OnAwakeScript(this);
+
+		// moveInSceneActionScript
+		const moveInSceneActionScript = new MoveInSceneActionScript(onAwakeScript);
 
 		// onPointerDownScript
 		const onPointerDownScript = new OnPointerDownScript(this);
@@ -50,27 +49,22 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		// setYActionScript
 		const setYActionScript = new SetYActionScript(onPointerDownScript);
 
-		// onAwakeScript
-		const onAwakeScript = new OnAwakeScript(this);
-
-		// moveInSceneActionScript
-		const moveInSceneActionScript = new MoveInSceneActionScript(onAwakeScript);
+		// moveInSceneActionScript (prefab fields)
+		moveInSceneActionScript.from = "BOTTOM";
 
 		// setYActionScript (prefab fields)
 		setYActionScript.y = 400;
 
-		// moveInSceneActionScript (prefab fields)
-		moveInSceneActionScript.from = "BOTTOM";
-
 		this.cardName = cardName;
 		this.cardDescription = cardDescription;
-		this.pushActionScript = pushActionScript;
-		this.onPointerDownScript = onPointerDownScript;
 		this.moveInSceneActionScript = moveInSceneActionScript;
 		this.onAwakeScript = onAwakeScript;
+		this.pushActionScript = pushActionScript;
+		this.onPointerDownScript = onPointerDownScript;
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.
+
 		/* END-USER-CTR-CODE */
 	}
 
@@ -78,14 +72,14 @@ class PrefabCard extends Phaser.GameObjects.Container {
 	cardName;
 	/** @type {Phaser.GameObjects.Text} */
 	cardDescription;
-	/** @type {PushActionScript} */
-	pushActionScript;
-	/** @type {OnPointerDownScript} */
-	onPointerDownScript;
 	/** @type {MoveInSceneActionScript} */
 	moveInSceneActionScript;
 	/** @type {OnAwakeScript} */
 	onAwakeScript;
+	/** @type {PushActionScript} */
+	pushActionScript;
+	/** @type {OnPointerDownScript} */
+	onPointerDownScript;
 	/** @type {number} */
 	cardId = 0;
 	/** @type {boolean} */
