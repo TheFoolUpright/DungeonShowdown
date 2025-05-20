@@ -94,6 +94,7 @@ app.post("/login", (req, res) => {
 
 
 app.get("/idLoggedIn", (req, res) => {
+    console.log("here3")
     if(!req.session.playerId){
         res.status(200).json({
                 "message": "The user is not logged in",
@@ -220,9 +221,7 @@ app.get("/getMatchState", (req, res) => {
     MatchCheck()
 
     function MatchCheck(){
-        connection.query("SELECT match_id, player_id, is_waiting_for_match \
-            FROM game_match INNER JOIN player ON player_id = player_1_id OR player_id = player_2_id \
-            WHERE player_id = ? AND is_match_finished = 0;", [req.session.playerId],
+        connection.query("SELECT match_id, player_id, is_waiting_for_match FROM game_match INNER JOIN player ON player_id = player_1_id OR player_id = player_2_id WHERE player_id = ? AND is_match_finished = 0;", [req.session.playerId],
         function (err, rows, fields) {
             if (err) {
                 console.log("Database Error: " + err);
@@ -832,15 +831,7 @@ app.post("/setDungeonPhase", (req, res) => {
  */
 app.get("/getDungeonCardSelection", (req, res) => {
 
-    connection.query("SELECT player_username, player_color, \
-    player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, showdown_turn, is_visible, \
-    match_id, PS.player_id, max_health, current_health, energy, insight, damage, \
-    card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path \
-    FROM player_card_slot PCS \
-    INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id \
-    INNER JOIN player P ON P.player_id = PS.player_id \
-    INNER JOIN card C ON PCS.card_id = C.card_id \
-    WHERE PS.player_id = ? AND match_id = ? AND room_id = ?;", [req.session.playerId, req.session.matchId,  req.session.roomId],
+    connection.query("SELECT player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, showdown_turn, is_visible, match_id, player_id, max_health, current_health, energy, insight, damage, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM player_card_slot PCS INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id INNER JOIN card C ON PCS.card_id = C.card_id WHERE player_id = ? AND match_id = ? AND room_id = ?;", [req.session.playerId, req.session.matchId,  req.session.roomId],
         function (err, rows, fields) {
             if (err) {
                 console.log("Database Error: " + err);
@@ -859,8 +850,6 @@ app.get("/getDungeonCardSelection", (req, res) => {
                 res.status(200).json({
                     "message": "Player stats and cards updated",
                     "state": "ROOM_LOADED",
-                    "player_username": rows[0].player_username,
-                    "player_color": rows[0].player_color,
                     "room_id":  req.session.roomId,
                     "showdown_turn":  req.session.showdownTurn,
                     "max_health": rows[0].max_health,
@@ -891,6 +880,7 @@ app.get("/getDungeonCardSelection", (req, res) => {
  */
 app.post("/resolveDungeonTurn", (req, res) => {
     if (!req.session.playerStatusId) {
+        console.log("got here")
         GetSessionPlayerStatusId()
     }
     else{

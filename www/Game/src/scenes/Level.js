@@ -58,13 +58,8 @@ class Level extends Phaser.Scene {
 		const fadeActionScriptDurationConfigComp = new DurationConfigComp(fadeActionScript);
 		fadeActionScriptDurationConfigComp.duration = 1500;
 
-		this.dino = dino;
-
 		this.events.emit("scene-awake");
 	}
-
-	/** @type {Phaser.GameObjects.Image} */
-	dino;
 
 	/* START-USER-CODE */
 

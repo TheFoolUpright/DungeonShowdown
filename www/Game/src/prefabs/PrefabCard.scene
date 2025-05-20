@@ -25,42 +25,42 @@
                     "label": "empty_Card",
                     "texture": {
                         "key": "Empty Card"
-                    }
+                    },
+                    "scaleX": 0.55,
+                    "scaleY": 0.55
                 },
                 {
                     "type": "Text",
                     "id": "1e1eec29-23bc-4ec6-93e6-b50c7e9893e9",
                     "label": "cardName",
-                    "scope": "PUBLIC",
-                    "y": -190,
+                    "y": -108,
                     "originX": 0.5,
                     "text": "Normal Attack\n",
+                    "fixedWidth": 128,
                     "align": "center",
                     "fontFamily": "Rockey",
-                    "fontSize": "24px",
                     "color": "#000000ff"
                 },
                 {
                     "type": "Text",
                     "id": "eda211a7-946d-40d1-87c6-29ac4d5014f2",
                     "label": "cardDescription",
-                    "scope": "PUBLIC",
-                    "y": 80,
+                    "y": 40,
                     "originX": 0.5,
                     "text": "Take no damage from one of the opponent's attacks and hit them back for half of their _",
+                    "fixedWidth": 128,
                     "align": "center",
                     "fontFamily": "Rockey",
-                    "fontSize": "24px",
+                    "fontSize": "13px",
                     "color": "#000000ff",
-                    "wordWrapWidth": 248
+                    "wordWrapWidth": 128
                 },
                 {
                     "type": "Image",
                     "id": "dd22828c-63e2-44bd-ab98-411b6df51670",
                     "label": "cardImage",
-                    "scope": "PUBLIC",
                     "texture": {},
-                    "y": -40
+                    "y": -20
                 },
                 {
                     "prefabId": "a06ed60b-79f1-4444-bf35-89046f71f954",
@@ -135,13 +135,13 @@
             }
         },
         {
-            "name": "isSelected",
-            "label": "IsSelected",
+            "name": "slotId",
+            "label": "SlotId",
             "tooltip": "",
             "defValue": 0,
             "customDefinition": false,
             "type": {
-                "id": "boolean"
+                "id": "number"
             }
         },
         {

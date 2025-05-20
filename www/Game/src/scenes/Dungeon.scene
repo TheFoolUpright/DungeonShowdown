@@ -5,8 +5,8 @@
         "preloadPackFiles": [],
         "createMethodName": "editorCreate",
         "sceneKey": "Dungeon",
-        "borderWidth": 1920,
-        "borderHeight": 1080
+        "borderWidth": 1280,
+        "borderHeight": 720
     },
     "displayList": [
         {
@@ -16,8 +16,10 @@
             "texture": {
                 "key": "DungeonBackground"
             },
-            "x": 960,
-            "y": 540
+            "x": 640,
+            "y": 360,
+            "scaleX": 0.7,
+            "scaleY": 0.7
         },
         {
             "prefabId": "6ead72a9-5342-419b-a399-b6b1ee837549",
@@ -28,27 +30,8 @@
             ],
             "label": "StatsContainer",
             "scope": "PUBLIC",
-            "x": 120,
-            "y": 50
-        },
-        {
-            "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
-            "id": "01982d89-8d67-49de-9ca8-e0e80e6d45df",
-            "unlock": [
-                "x",
-                "y",
-                "cardId",
-                "isVisible",
-                "slotId",
-                "isDisabled"
-            ],
-            "label": "slot3Card",
-            "scope": "PUBLIC",
-            "cardId": 0,
-            "isVisible": true,
-            "isDisabled": false,
-            "x": 1320,
-            "y": 800
+            "x": 50,
+            "y": 30
         },
         {
             "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
@@ -57,17 +40,28 @@
                 "x",
                 "y",
                 "cardId",
-                "isVisible",
-                "slotId",
-                "isDisabled"
+                "isVisible"
             ],
-            "label": "slot2Card",
-            "scope": "PUBLIC",
+            "label": "empty_Card",
             "cardId": 0,
             "isVisible": true,
-            "isDisabled": false,
-            "x": 960,
-            "y": 800
+            "x": 640,
+            "y": 550
+        },
+        {
+            "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
+            "id": "01982d89-8d67-49de-9ca8-e0e80e6d45df",
+            "unlock": [
+                "x",
+                "y",
+                "cardId",
+                "isVisible"
+            ],
+            "label": "empty_Card_1",
+            "cardId": 0,
+            "isVisible": true,
+            "x": 840,
+            "y": 550
         },
         {
             "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
@@ -76,17 +70,13 @@
                 "x",
                 "y",
                 "cardId",
-                "isVisible",
-                "slotId",
-                "isDisabled"
+                "isVisible"
             ],
-            "label": "slot1Card",
-            "scope": "PUBLIC",
+            "label": "empty_Card_2",
             "cardId": 0,
             "isVisible": true,
-            "isDisabled": false,
-            "x": 600,
-            "y": 800
+            "x": 440,
+            "y": 550
         },
         {
             "prefabId": "2f15ddb5-a4d8-4a13-9237-ebf5b4a7f47e",
@@ -96,9 +86,8 @@
                 "y"
             ],
             "label": "prefabNextRoom",
-            "scope": "PUBLIC",
-            "x": 1680,
-            "y": 800
+            "x": 1140,
+            "y": 550
         },
         {
             "prefabId": "58151c15-b33f-4514-a7c8-de8a701ab360",
@@ -108,9 +97,8 @@
                 "y"
             ],
             "label": "info",
-            "scope": "PUBLIC",
-            "x": 1720,
-            "y": 40
+            "x": 1140,
+            "y": 20
         }
     ],
     "plainObjects": [],

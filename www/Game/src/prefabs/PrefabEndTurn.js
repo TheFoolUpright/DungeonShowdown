@@ -12,13 +12,15 @@ class PrefabEndTurn extends Phaser.GameObjects.Container {
 
 		// confirm___End_Turn_Button
 		const confirm___End_Turn_Button = scene.add.image(0, 0, "Confirm & End Turn Button");
+		confirm___End_Turn_Button.scaleX = 0.55;
+		confirm___End_Turn_Button.scaleY = 0.55;
 		this.add(confirm___End_Turn_Button);
 
 		// endTurn
-		const endTurn = scene.add.text(0, -16, "", {});
+		const endTurn = scene.add.text(0, -12, "", {});
 		endTurn.setOrigin(0.5, 0);
 		endTurn.text = "Rip and Tear!";
-		endTurn.setStyle({ "align": "center", "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px" });
+		endTurn.setStyle({ "align": "center", "color": "#000000ff", "fontFamily": "Rockey" });
 		this.add(endTurn);
 
 		// onPointerDownScript

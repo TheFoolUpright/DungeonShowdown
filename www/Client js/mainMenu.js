@@ -26,6 +26,7 @@ function JoinMatch() {
 
 function GetMatchState() {
 
+    console.log("here")
     var xhttp = new XMLHttpRequest();
     
     xhttp.onreadystatechange = function () {
