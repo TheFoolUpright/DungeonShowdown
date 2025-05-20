@@ -73,12 +73,11 @@ class Preload extends Phaser.Scene {
 		this.editorCreate();
 
 		this.editorPreload();
-		console.log("Here");
 
 		var someData = { bla: 3};
 
-		//this.LoginCheck();
-		this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("Showdown", someData));
+		this.LoginCheck();
+		//this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("Dungeon"));
 	}
 
 	LoginCheck() {
@@ -156,8 +155,7 @@ class Preload extends Phaser.Scene {
 
 				if (xhttp.status == 200){
 					if(data.state_id == states.DungeonCardSelection){
-						console.log("here1")
-						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("Dungeon"));
+						this.GetDungeonData()
 					}
 					else if(data.state_id == states.DungeonWaitingOnOpponent){
 						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("DungeonWaitingOnOpponent"));
@@ -186,10 +184,6 @@ class Preload extends Phaser.Scene {
 		xhttp.send();
 	}
 
-	sortCards(cardA, cardB) {
-    return cardA.slot_id - cardB.slot_id
-	}
-
 	GetDungeonData() {
 		var xhttp = new XMLHttpRequest();
 		
@@ -198,22 +192,8 @@ class Preload extends Phaser.Scene {
 				var data = JSON.parse(xhttp.responseText)
 				console.log(data)
 
-
 				if (xhttp.status == 200){
-					data.card.sort(sortCards)  
-					
-					maxHealth = data.max_health
-                    currentHealth = data.current_health
-                    energy = data.energy
-                    insight = data.insight
-                    damage = data.damage
-
-                    document.getElementById("maxHealth").innerHTML = "Max Health: " + maxHealth;
-                    document.getElementById("currentHealth").innerHTML = "Current Health: " + currentHealth;
-                    document.getElementById("energy").innerHTML = "Energy: " + energy;
-                    document.getElementById("insight").innerHTML = "Insight: " + insight;
-                    document.getElementById("damage").innerHTML = "Damage: " + damage;
-				
+				this.scene.start("Dungeon", data);
 				}
 			}
 		}

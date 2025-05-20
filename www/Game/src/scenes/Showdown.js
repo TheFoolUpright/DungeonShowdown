@@ -78,8 +78,22 @@ class Showdown extends Phaser.Scene {
 		empty_Card_3.cardId = 0;
 		empty_Card_3.isVisible = true;
 
+		this.empty_Card = empty_Card;
+		this.empty_Card_1 = empty_Card_1;
+		this.empty_Card_2 = empty_Card_2;
+		this.empty_Card_3 = empty_Card_3;
+
 		this.events.emit("scene-awake");
 	}
+
+	/** @type {PrefabCard} */
+	empty_Card;
+	/** @type {PrefabCard} */
+	empty_Card_1;
+	/** @type {PrefabCard} */
+	empty_Card_2;
+	/** @type {PrefabCard} */
+	empty_Card_3;
 
 	/* START-USER-CODE */
 
