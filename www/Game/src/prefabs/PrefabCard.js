@@ -11,8 +11,11 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		this.setInteractive(new Phaser.Geom.Rectangle(-79.75, -118.525, 159.5, 237.05), Phaser.Geom.Rectangle.Contains);
 
 		// empty_Card
-		const empty_Card = scene.add.image(0, 0, "Empty Card");
+		const empty_Card = scene.add.image(0, 0, "Empty Card_1");
 		this.add(empty_Card);
+
+		// glowFx
+		empty_Card.preFX.addGlow(16777215, 0, 0, false);
 
 		// cardName
 		const cardName = scene.add.text(0, -190, "", {});
@@ -29,9 +32,14 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		cardDescription.setWordWrapWidth(248);
 		this.add(cardDescription);
 
-		// cardImage
-		const cardImage = scene.add.image(0, -40, "_MISSING");
-		this.add(cardImage);
+		// cardBorder
+		const cardBorder = scene.add.image(0, 0, "CardBorder");
+		cardBorder.tintFill = true;
+		cardBorder.tintTopLeft = 15075336;
+		cardBorder.tintTopRight = 15075336;
+		cardBorder.tintBottomLeft = 15075336;
+		cardBorder.tintBottomRight = 15075336;
+		this.add(cardBorder);
 
 		// onPointerDownScript
 		const onPointerDownScript = new OnPointerDownScript(this);
@@ -56,7 +64,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		this.cardName = cardName;
 		this.cardDescription = cardDescription;
-		this.cardImage = cardImage;
 		this.pushActionScript = pushActionScript;
 		this.onPointerDownScript = onPointerDownScript;
 		this.moveInSceneActionScript = moveInSceneActionScript;
@@ -71,8 +78,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 	cardName;
 	/** @type {Phaser.GameObjects.Text} */
 	cardDescription;
-	/** @type {Phaser.GameObjects.Image} */
-	cardImage;
 	/** @type {PushActionScript} */
 	pushActionScript;
 	/** @type {OnPointerDownScript} */

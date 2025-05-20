@@ -21,11 +21,20 @@
             "list": [
                 {
                     "type": "Image",
-                    "id": "ebedae98-c2be-4313-9542-4107a41e3b1f",
+                    "id": "ff4cd563-8bb7-44a8-a20c-d016ae04da87",
                     "label": "empty_Card",
                     "texture": {
-                        "key": "Empty Card"
-                    }
+                        "key": "Empty Card_1"
+                    },
+                    "list": [
+                        {
+                            "type": "Glow",
+                            "id": "fad59d95-70be-49e5-af60-694ed3943f23",
+                            "label": "glowFx",
+                            "outerStrength": 0,
+                            "preFX": true
+                        }
+                    ]
                 },
                 {
                     "type": "Text",
@@ -56,11 +65,16 @@
                 },
                 {
                     "type": "Image",
-                    "id": "dd22828c-63e2-44bd-ab98-411b6df51670",
-                    "label": "cardImage",
-                    "scope": "PUBLIC",
-                    "texture": {},
-                    "y": -40
+                    "id": "ecbc001e-b475-415a-8bb0-19cbe30abe5f",
+                    "label": "cardBorder",
+                    "texture": {
+                        "key": "CardBorder"
+                    },
+                    "tintTopLeft": "#e60808",
+                    "tintTopRight": "#e60808",
+                    "tintBottomLeft": "#e60808",
+                    "tintBottomRight": "#e60808",
+                    "tintFill": true
                 },
                 {
                     "prefabId": "a06ed60b-79f1-4444-bf35-89046f71f954",

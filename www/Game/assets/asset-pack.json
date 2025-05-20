@@ -7,6 +7,11 @@
                 "key": "BatDraft"
             },
             {
+                "url": "assets/card/CardBorder.png",
+                "type": "image",
+                "key": "CardBorder"
+            },
+            {
                 "url": "assets/opponent/Character.png",
                 "type": "image",
                 "key": "Character"
@@ -47,9 +52,9 @@
                 "key": "DungeonBackground"
             },
             {
-                "url": "assets/ui/Empty Card.png",
+                "url": "assets/card/Empty Card.png",
                 "type": "image",
-                "key": "Empty Card"
+                "key": "Empty Card_1"
             },
             {
                 "url": "assets/ui/Energy.png",
