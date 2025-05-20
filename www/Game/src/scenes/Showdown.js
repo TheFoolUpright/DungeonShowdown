@@ -24,6 +24,8 @@ class Showdown extends Phaser.Scene {
 		// prefabOpponent
 		const prefabOpponent = new PrefabOpponent(this, 640, 380);
 		this.add.existing(prefabOpponent);
+		prefabOpponent.scaleX = 1;
+		prefabOpponent.scaleY = 1;
 
 		// empty_Card
 		const empty_Card = new PrefabCard(this, 340, 550);
@@ -76,8 +78,22 @@ class Showdown extends Phaser.Scene {
 		empty_Card_3.cardId = 0;
 		empty_Card_3.isVisible = true;
 
+		this.empty_Card = empty_Card;
+		this.empty_Card_1 = empty_Card_1;
+		this.empty_Card_2 = empty_Card_2;
+		this.empty_Card_3 = empty_Card_3;
+
 		this.events.emit("scene-awake");
 	}
+
+	/** @type {PrefabCard} */
+	empty_Card;
+	/** @type {PrefabCard} */
+	empty_Card_1;
+	/** @type {PrefabCard} */
+	empty_Card_2;
+	/** @type {PrefabCard} */
+	empty_Card_3;
 
 	/* START-USER-CODE */
 
@@ -89,8 +105,9 @@ console.log('Clicked');
 });
 }
 
-	create() {
+	create(data) {
 
+		console.log(data.bla);
 		this.editorCreate();
 	}
 

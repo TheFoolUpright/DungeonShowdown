@@ -13,8 +13,8 @@
             "type": "Container",
             "id": "443c140c-84ad-4824-8a26-eae63ac2529a",
             "label": "container_2",
-            "scaleX": 1.5,
-            "scaleY": 1.5,
+            "scaleX": 1.2,
+            "scaleY": 1.2,
             "list": [
                 {
                     "type": "Image",
@@ -23,11 +23,8 @@
                     "texture": {
                         "key": "Counter Slash"
                     },
-                    "x": -25.08209727543968,
-                    "y": -0.5433564941523041,
-                    "angle": 30,
-                    "originX": 0,
-                    "originY": 1,
+                    "originX": 0.56,
+                    "originY": 1.1,
                     "visible": false
                 },
                 {
@@ -37,11 +34,8 @@
                     "texture": {
                         "key": "Heavy Slash"
                     },
-                    "x": 11.91790272456032,
-                    "y": -0.5433564941523041,
-                    "angle": 30,
-                    "originX": 0,
-                    "originY": 1,
+                    "originX": 0.51,
+                    "originY": 1.1,
                     "visible": false
                 },
                 {
@@ -51,11 +45,8 @@
                     "texture": {
                         "key": "Normal Slash"
                     },
-                    "x": 22.91790272456032,
-                    "y": 5.456643505847696,
-                    "angle": 30,
-                    "originX": 0,
-                    "originY": 1
+                    "originX": 0.56,
+                    "originY": 1.1
                 },
                 {
                     "type": "Image",
@@ -64,8 +55,8 @@
                     "texture": {
                         "key": "Recovery Hit"
                     },
-                    "x": 121,
-                    "y": 29,
+                    "originX": 0.63,
+                    "originY": 1.1,
                     "visible": false
                 }
             ]

@@ -12,27 +12,25 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		// empty_Card
 		const empty_Card = scene.add.image(0, 0, "Empty Card");
-		empty_Card.scaleX = 0.55;
-		empty_Card.scaleY = 0.55;
 		this.add(empty_Card);
 
 		// cardName
-		const cardName = scene.add.text(0, -108, "", {});
+		const cardName = scene.add.text(0, -190, "", {});
 		cardName.setOrigin(0.5, 0);
 		cardName.text = "Normal Attack\n";
-		cardName.setStyle({ "align": "center", "color": "#000000ff", "fixedWidth":128,"fontFamily": "Rockey" });
+		cardName.setStyle({ "align": "center", "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px" });
 		this.add(cardName);
 
 		// cardDescription
-		const cardDescription = scene.add.text(0, 40, "", {});
+		const cardDescription = scene.add.text(0, 80, "", {});
 		cardDescription.setOrigin(0.5, 0);
 		cardDescription.text = "Take no damage from one of the opponent's attacks and hit them back for half of their _";
-		cardDescription.setStyle({ "align": "center", "color": "#000000ff", "fixedWidth":128,"fontFamily": "Rockey", "fontSize": "13px" });
-		cardDescription.setWordWrapWidth(128);
+		cardDescription.setStyle({ "align": "center", "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px" });
+		cardDescription.setWordWrapWidth(248);
 		this.add(cardDescription);
 
 		// cardImage
-		const cardImage = scene.add.image(0, -20, "_MISSING");
+		const cardImage = scene.add.image(0, -40, "_MISSING");
 		this.add(cardImage);
 
 		// onPointerDownScript
@@ -56,6 +54,9 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		// moveInSceneActionScript (prefab fields)
 		moveInSceneActionScript.from = "BOTTOM";
 
+		this.cardName = cardName;
+		this.cardDescription = cardDescription;
+		this.cardImage = cardImage;
 		this.pushActionScript = pushActionScript;
 		this.onPointerDownScript = onPointerDownScript;
 		this.moveInSceneActionScript = moveInSceneActionScript;
@@ -66,6 +67,12 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		/* END-USER-CTR-CODE */
 	}
 
+	/** @type {Phaser.GameObjects.Text} */
+	cardName;
+	/** @type {Phaser.GameObjects.Text} */
+	cardDescription;
+	/** @type {Phaser.GameObjects.Image} */
+	cardImage;
 	/** @type {PushActionScript} */
 	pushActionScript;
 	/** @type {OnPointerDownScript} */
@@ -78,8 +85,8 @@ class PrefabCard extends Phaser.GameObjects.Container {
 	cardId = 0;
 	/** @type {boolean} */
 	isVisible = true;
-	/** @type {number} */
-	slotId = 0;
+	/** @type {boolean} */
+	isSelected = 0;
 	/** @type {boolean} */
 	isDisabled = false;
 

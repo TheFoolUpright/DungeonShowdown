@@ -17,66 +17,150 @@ class Dungeon extends Phaser.Scene {
 	editorCreate() {
 
 		// dungeonBackground
-		const dungeonBackground = this.add.image(640, 360, "DungeonBackground");
-		dungeonBackground.scaleX = 0.7;
-		dungeonBackground.scaleY = 0.7;
+		this.add.image(960, 540, "DungeonBackground");
 
 		// StatsContainer
-		const statsContainer = new PrefabStats(this, 50, 30);
+		const statsContainer = new PrefabStats(this, 120, 50);
 		this.add.existing(statsContainer);
 
-		// empty_Card
-		const empty_Card = new PrefabCard(this, 640, 550);
-		this.add.existing(empty_Card);
+		// slot3Card
+		const slot3Card = new PrefabCard(this, 1320, 800);
+		this.add.existing(slot3Card);
 
-		// empty_Card_1
-		const empty_Card_1 = new PrefabCard(this, 840, 550);
-		this.add.existing(empty_Card_1);
+		// slot2Card
+		const slot2Card = new PrefabCard(this, 960, 800);
+		this.add.existing(slot2Card);
 
-		// empty_Card_2
-		const empty_Card_2 = new PrefabCard(this, 440, 550);
-		this.add.existing(empty_Card_2);
+		// slot1Card
+		const slot1Card = new PrefabCard(this, 600, 800);
+		this.add.existing(slot1Card);
 
 		// prefabNextRoom
-		const prefabNextRoom = new PrefabNextRoom(this, 1140, 550);
+		const prefabNextRoom = new PrefabNextRoom(this, 1680, 800);
 		this.add.existing(prefabNextRoom);
 
 		// info
-		const info = new PrefabInfo(this, 1140, 20);
+		const info = new PrefabInfo(this, 1720, 40);
 		this.add.existing(info);
 
-		// empty_Card (prefab fields)
-		empty_Card.cardId = 0;
-		empty_Card.isVisible = true;
+		// slot3Card (prefab fields)
+		slot3Card.cardId = 0;
+		slot3Card.isVisible = true;
+		slot3Card.isDisabled = false;
 
-		// empty_Card_1 (prefab fields)
-		empty_Card_1.cardId = 0;
-		empty_Card_1.isVisible = true;
+		// slot2Card (prefab fields)
+		slot2Card.cardId = 0;
+		slot2Card.isVisible = true;
+		slot2Card.isDisabled = false;
 
-		// empty_Card_2 (prefab fields)
-		empty_Card_2.cardId = 0;
-		empty_Card_2.isVisible = true;
+		// slot1Card (prefab fields)
+		slot1Card.cardId = 0;
+		slot1Card.isVisible = true;
+		slot1Card.isDisabled = false;
 
 		this.statsContainer = statsContainer;
+		this.slot3Card = slot3Card;
+		this.slot2Card = slot2Card;
+		this.slot1Card = slot1Card;
+		this.prefabNextRoom = prefabNextRoom;
+		this.info = info;
 
 		this.events.emit("scene-awake");
 	}
 
 	/** @type {PrefabStats} */
 	statsContainer;
+	/** @type {PrefabCard} */
+	slot3Card;
+	/** @type {PrefabCard} */
+	slot2Card;
+	/** @type {PrefabCard} */
+	slot1Card;
+	/** @type {PrefabNextRoom} */
+	prefabNextRoom;
+	/** @type {PrefabInfo} */
+	info;
 
 	/* START-USER-CODE */
 
 	// Write your code here
 
-	create() {
+	create(data) {
 
 		this.editorCreate();
 
+
+		//Load Info
+		console.log(data.player_color)
+		this.info.phaseName.text = "DUNGEON"
+		this.info.roomOrTurn.text = "Room " + data.room_id
+		this.info.playerName.text = data.player_username
+		this.info.playerName.setColor(data.player_color)
 		
+		//Load Stats
+		var maxHealth = data.max_health
+		var currentHealth = data.current_health
+		var energy = data.energy
+		var insight = data.insight
+		var damage = data.damage
+
+		this.statsContainer.healthText.text = currentHealth + "/" +  maxHealth;
+		this.statsContainer.insightText.text = insight + "/10";
+		this.statsContainer.energyText.text = energy;
+		this.statsContainer.mightText.text = damage;
+
+
+		//Load Cards
+		data.card.sort(this.sortCards);
+
+		this.slot1Card.cardId = data.card[0].card_id
+		this.slot1Card.isVisible = data.card[0].is_visible
+
+		if(this.slot1Card.isVisible){
+			this.slot1Card.cardName.text = data.card[0].card_name
+			this.slot1Card.cardImage.setTexture(data.card[1].card_image_path);
+			this.slot1Card.cardDescription.text
+		}
+		else{
+			this.slot1Card.cardName.text = "? ? ?"
+			this.slot1Card.cardImage.setTexture("HiddenDraft.png");
+			this.slot1Card.cardDescription.text = "Not enough insight to see the card"
+		}
+
+		this.slot2Card.cardId = data.card[1].card_id
+		this.slot2Card.isVisible = data.card[1].is_visible
+
+		if(this.slot2Card.isVisible){
+			this.slot2Card.cardName.text = data.card[1].card_name
+			this.slot2Card.cardImage.setTexture(data.card[1].card_image_path);
+			this.slot2Card.cardDescription.text
+		}
+		else{
+			this.slot2Card.cardName.text = "? ? ?"
+			this.slot2Card.cardImage.setTexture("HiddenDraft.png");
+			this.slot2Card.cardDescription.text = "Not enough insight to see the card"
+		}
+
+		this.slot3Card.cardId = data.card[2].card_id
+		this.slot3Card.isVisible = data.card[2].is_visible
+
+		if(this.slot3Card.isVisible){
+			this.slot3Card.cardName.text = data.card[2].card_name
+			this.slot3Card.cardImage.setTexture(data.card[2].card_image_path); 
+			this.slot3Card.cardDescription.text
+		}
+		else{
+			this.slot3Card.cardName.text = "? ? ?"
+			this.slot3Card.cardImage.setTexture("HiddenDraft.png");
+			this.slot3Card.cardDescription.text = "Not enough insight to see the card"
+		}
+
+
 	}
 
-	
+	sortCards(cardA, cardB) {
+			return cardA.slot_id - cardB.slot_id
+	};
 
 	/* END-USER-CODE */
 }
