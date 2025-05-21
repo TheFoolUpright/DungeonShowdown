@@ -408,7 +408,9 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		setYActionScript.y = 400;
 
 		this.cardDescription = cardDescription;
+		this.empty_Card = empty_Card;
 		this.cardName = cardName;
+		this.cardBorder = cardBorder;
 		this.option1RewardIcon1 = option1RewardIcon1;
 		this.option1RewardText1 = option1RewardText1;
 		this.option1Container = option1Container;
@@ -478,8 +480,12 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 	/** @type {Phaser.GameObjects.Text} */
 	cardDescription;
+	/** @type {Phaser.GameObjects.Image} */
+	empty_Card;
 	/** @type {Phaser.GameObjects.Text} */
 	cardName;
+	/** @type {Phaser.GameObjects.Image} */
+	cardBorder;
 	/** @type {Phaser.GameObjects.Image} */
 	option1RewardIcon1;
 	/** @type {Phaser.GameObjects.Text} */

@@ -2,11 +2,6 @@
 // You can write more code here
 
 /* START OF COMPILED CODE */
-var previousMaxHealth
-var previousCurrentHealth
-var previousEnergy
-var previousInsight
-var previousDamage
 
 class Dungeon extends Phaser.Scene {
 
@@ -101,7 +96,7 @@ class Dungeon extends Phaser.Scene {
 		this.info.roomOrTurn.text = "Room " + data.room_id
 		this.info.playerName.text = data.player_username
 		this.info.playerName.setColor(data.player_color)
-		
+
 		//Load Stats
 
 		var maxHealth = data.max_health
@@ -109,6 +104,12 @@ class Dungeon extends Phaser.Scene {
 		var energy = data.energy
 		var insight = data.insight
 		var damage = data.damage
+		
+		var previousMaxHealth
+		var previousCurrentHealth
+		var previousEnergy
+		var previousInsight
+		var previousDamage
 
 		if(isNaN(previousMaxHealth)) {
 				previousMaxHealth = maxHealth
@@ -139,7 +140,7 @@ class Dungeon extends Phaser.Scene {
 		this.slot1Card.isVisible = data.card[0].is_visible
 
 		const cardColor = data.player_color.replace("#", "0x")
-		
+
 		this.slot1Card.cardBorder.setTint(cardColor)
 
 		if(this.slot1Card.isVisible){
@@ -155,7 +156,7 @@ class Dungeon extends Phaser.Scene {
 
 		this.slot2Card.cardId = data.card[1].card_id
 		this.slot2Card.isVisible = data.card[1].is_visible
-		
+
 		this.slot2Card.cardBorder.setTint(cardColor)
 
 		if(this.slot2Card.isVisible){
@@ -173,7 +174,7 @@ class Dungeon extends Phaser.Scene {
 		this.slot3Card.isVisible = data.card[2].is_visible
 
 		this.slot3Card.cardBorder.setTint(cardColor)
-		
+
 		if(this.slot3Card.isVisible){
 			this.slot3Card.cardName.text = data.card[2].card_name
 			//this.slot3Card.cardImage.setTexture(data.card[2].card_image_path); 
@@ -184,8 +185,12 @@ class Dungeon extends Phaser.Scene {
 			this.slot3Card.cardImage.setTexture("HiddenDraft.png");
 			this.slot3Card.cardDescription.text = "Not enough insight to see the card"
 		}
+	}
 
-
+	update(data) {
+		this.slot1Card.on("pointerdown", () => {
+			console.log("Card 1 Selected")
+		})
 	}
 
 	sortCards(cardA, cardB) {

@@ -23,22 +23,23 @@
                             "type": "Image",
                             "id": "30a7409f-5f03-410d-9665-093fe57f6eb1",
                             "label": "character",
+                            "scope": "PUBLIC",
                             "texture": {
                                 "key": "Character"
                             },
                             "y": 30,
-                            "scaleX": 0.4,
-                            "scaleY": 0.4
+                            "scaleX": 0.6,
+                            "scaleY": 0.6
                         },
                         {
                             "type": "Text",
                             "id": "1a559f85-5d14-4339-90f7-06cbfffef30a",
                             "label": "opponentName",
-                            "y": -275,
+                            "y": -420,
                             "originX": 0.5,
                             "text": "Username",
                             "fontFamily": "Rockey",
-                            "fontSize": "32px",
+                            "fontSize": "48px",
                             "stroke": "#000000ff",
                             "strokeThickness": 10
                         }

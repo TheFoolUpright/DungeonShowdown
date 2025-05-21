@@ -42,6 +42,7 @@
                     "type": "Image",
                     "id": "ff4cd563-8bb7-44a8-a20c-d016ae04da87",
                     "label": "empty_Card",
+                    "scope": "PUBLIC",
                     "texture": {
                         "key": "Empty Card_1"
                     }
@@ -63,6 +64,7 @@
                     "type": "Image",
                     "id": "ecbc001e-b475-415a-8bb0-19cbe30abe5f",
                     "label": "cardBorder",
+                    "scope": "PUBLIC",
                     "texture": {
                         "key": "CardBorder"
                     }

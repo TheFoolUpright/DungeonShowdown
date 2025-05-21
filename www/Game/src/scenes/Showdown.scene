@@ -5,8 +5,8 @@
         "preloadPackFiles": [],
         "createMethodName": "editorCreate",
         "sceneKey": "Showdown",
-        "borderWidth": 1280,
-        "borderHeight": 720
+        "borderWidth": 1920,
+        "borderHeight": 1080
     },
     "displayList": [
         {
@@ -16,10 +16,8 @@
             "texture": {
                 "key": "ShowdownBackground"
             },
-            "x": 640,
-            "y": 360,
-            "scaleX": 0.7,
-            "scaleY": 0.7
+            "x": 960,
+            "y": 540
         },
         {
             "prefabId": "f15fd942-db03-4ecd-b587-9299358545a5",
@@ -31,8 +29,9 @@
                 "scaleY"
             ],
             "label": "prefabOpponent",
-            "x": 640,
-            "y": 380,
+            "scope": "PUBLIC",
+            "x": 960,
+            "y": 600,
             "scaleX": 1,
             "scaleY": 1
         },
@@ -43,14 +42,16 @@
                 "x",
                 "y",
                 "cardId",
-                "isVisible"
+                "isVisible",
+                "visible"
             ],
             "label": "empty_Card",
             "scope": "PUBLIC",
             "cardId": 0,
             "isVisible": true,
-            "x": 340,
-            "y": 550
+            "x": 480,
+            "y": 800,
+            "visible": true
         },
         {
             "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
@@ -59,14 +60,16 @@
                 "x",
                 "y",
                 "cardId",
-                "isVisible"
+                "isVisible",
+                "visible"
             ],
             "label": "empty_Card_1",
             "scope": "PUBLIC",
             "cardId": 0,
             "isVisible": true,
-            "x": 540,
-            "y": 550
+            "x": 800,
+            "y": 800,
+            "visible": true
         },
         {
             "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
@@ -75,14 +78,16 @@
                 "x",
                 "y",
                 "cardId",
-                "isVisible"
+                "isVisible",
+                "visible"
             ],
             "label": "empty_Card_2",
             "scope": "PUBLIC",
             "cardId": 0,
             "isVisible": true,
-            "x": 740,
-            "y": 550
+            "x": 1120,
+            "y": 800,
+            "visible": true
         },
         {
             "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
@@ -91,14 +96,16 @@
                 "x",
                 "y",
                 "cardId",
-                "isVisible"
+                "isVisible",
+                "visible"
             ],
             "label": "empty_Card_3",
             "scope": "PUBLIC",
             "cardId": 0,
             "isVisible": true,
-            "x": 940,
-            "y": 550
+            "x": 1440,
+            "y": 800,
+            "visible": true
         },
         {
             "prefabId": "49ef177b-61c6-4ad2-88be-e0e625ae067c",
@@ -108,8 +115,8 @@
                 "y"
             ],
             "label": "confirm___End_Turn_Button",
-            "x": 1140,
-            "y": 550
+            "x": 1760,
+            "y": 800
         },
         {
             "prefabId": "6ead72a9-5342-419b-a399-b6b1ee837549",
@@ -121,10 +128,10 @@
                 "scaleY"
             ],
             "label": "prefabStats",
-            "x": 50,
-            "y": 30,
-            "scaleX": 1,
-            "scaleY": 1
+            "x": 120,
+            "y": 50,
+            "scaleX": 2,
+            "scaleY": 2
         },
         {
             "prefabId": "58151c15-b33f-4514-a7c8-de8a701ab360",
@@ -134,8 +141,8 @@
                 "y"
             ],
             "label": "info",
-            "x": 1140,
-            "y": 20
+            "x": 1720,
+            "y": 40
         },
         {
             "prefabId": "9e174a37-c4f5-4ab3-8739-d16babf6c161",
@@ -146,8 +153,9 @@
                 "angle"
             ],
             "label": "prefabAttacks",
-            "x": 675,
-            "y": 400,
+            "scope": "PUBLIC",
+            "x": 960,
+            "y": 600,
             "angle": 0
         }
     ],
