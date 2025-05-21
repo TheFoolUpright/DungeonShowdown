@@ -20,6 +20,25 @@
             "hitArea.height": 237.05,
             "list": [
                 {
+                    "type": "Text",
+                    "id": "eda211a7-946d-40d1-87c6-29ac4d5014f2",
+                    "label": "cardDescription",
+                    "scope": "PUBLIC",
+                    "y": -260,
+                    "originX": 0.5,
+                    "originY": 1,
+                    "text": "Take no damage from one of the opponent's attacks and hit them back for half of their _",
+                    "paddingLeft": 5,
+                    "paddingTop": 5,
+                    "paddingRight": 5,
+                    "paddingBottom": 5,
+                    "align": "center",
+                    "fontFamily": "Rockey",
+                    "fontSize": "24px",
+                    "color": "#000000ff",
+                    "wordWrapWidth": 248
+                },
+                {
                     "type": "Image",
                     "id": "ff4cd563-8bb7-44a8-a20c-d016ae04da87",
                     "label": "empty_Card",
@@ -49,23 +68,748 @@
                     }
                 },
                 {
-                    "type": "Text",
-                    "id": "eda211a7-946d-40d1-87c6-29ac4d5014f2",
-                    "label": "cardDescription",
+                    "type": "Container",
+                    "id": "2b0081f4-d02f-4a39-aed4-37e8c04f1236",
+                    "label": "option1Container",
                     "scope": "PUBLIC",
-                    "y": -260,
-                    "originX": 0.5,
-                    "originY": 1,
-                    "text": "Take no damage from one of the opponent's attacks and hit them back for half of their _",
-                    "paddingLeft": 5,
-                    "paddingTop": 5,
-                    "paddingRight": 5,
-                    "paddingBottom": 5,
-                    "align": "center",
-                    "fontFamily": "Rockey",
-                    "fontSize": "24px",
-                    "color": "#000000ff",
-                    "wordWrapWidth": 248
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "88282715-f1e2-4d26-9657-45dffdfe38ee",
+                            "label": "option1RewardIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": -15,
+                            "y": 130,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Text",
+                            "id": "45f858e4-d3f9-46ee-a236-a3f9f3a04f4f",
+                            "label": "option1RewardText1",
+                            "scope": "PUBLIC",
+                            "x": 15,
+                            "y": 130,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "6f8a6f87-0eb8-4c18-9564-d2e68a676c37",
+                    "label": "option2Container",
+                    "scope": "PUBLIC",
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "56c1d402-243e-4dc7-9a25-840a826efd06",
+                            "label": "option2RewardIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": -50,
+                            "y": 130,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Text",
+                            "id": "fa43c172-940a-46f5-abbd-c392fa2fba92",
+                            "label": "option2RewardText2",
+                            "scope": "PUBLIC",
+                            "x": 60,
+                            "y": 130,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "e3de8279-c0a9-49be-8c06-84bd12e6c4dc",
+                            "label": "option2RewardIcon2",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": 30,
+                            "y": 130,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Text",
+                            "id": "1f373732-64c3-40ee-a1fc-289393373461",
+                            "label": "option2RewardText1",
+                            "scope": "PUBLIC",
+                            "x": -20,
+                            "y": 130,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "e9212c6e-605e-4041-ad53-74b968db3e3b",
+                    "label": "option1_1Container",
+                    "scope": "PUBLIC",
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Text",
+                            "id": "22981238-7713-4596-b7b9-70ac6cef5d4e",
+                            "label": "option1_1CostText1",
+                            "scope": "PUBLIC",
+                            "x": 15,
+                            "y": 100,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "- 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "d93d9e87-009e-4c48-aacd-05c0dae9301e",
+                            "label": "option1_1CostIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": -15,
+                            "y": 100,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Image",
+                            "id": "18d5fac2-9fc8-4a90-a6aa-e4cb6a3c7606",
+                            "label": "option1_1RewardIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": -15,
+                            "y": 160,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Text",
+                            "id": "09544179-533b-427d-9b55-d99a2a67f116",
+                            "label": "option1_1RewardText1",
+                            "scope": "PUBLIC",
+                            "x": 15,
+                            "y": 160,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "fbca86d7-bfd9-443a-a9ce-26e8894f4713",
+                    "label": "option1_2Container",
+                    "scope": "PUBLIC",
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Text",
+                            "id": "db78b62d-775b-4919-b8ff-7fc659f2fd4b",
+                            "label": "option1_2CostText1",
+                            "scope": "PUBLIC",
+                            "x": 15,
+                            "y": 100,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "- 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "f61b32d7-71b0-4332-8fe2-13e9565f150e",
+                            "label": "option1_2CostIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": -15,
+                            "y": 100,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Image",
+                            "id": "22e058e6-0ff1-4755-94a3-e9e37c1e0c4e",
+                            "label": "option1_2RewardIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": -50,
+                            "y": 160,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Text",
+                            "id": "bc08e451-6a1b-402a-ac74-caa44fcd2af5",
+                            "label": "option1_2RewardText1",
+                            "scope": "PUBLIC",
+                            "x": -20,
+                            "y": 160,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "52d94fda-fe40-4050-a009-a7252ed0c625",
+                            "label": "option1_2RewardIcon2",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": 30,
+                            "y": 160,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Text",
+                            "id": "efed48a7-10ff-4ee8-a46d-8159b30a6361",
+                            "label": "option1_2RewardText2",
+                            "scope": "PUBLIC",
+                            "x": 60,
+                            "y": 160,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "a39109a7-8c21-4a0e-bc5b-e2ea372c2273",
+                    "label": "option2_1Container",
+                    "scope": "PUBLIC",
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Text",
+                            "id": "5433a073-2f57-4af7-bbeb-90b0613a75b7",
+                            "label": "option2_1RewardText1",
+                            "scope": "PUBLIC",
+                            "x": 15,
+                            "y": 160,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "1783b7ab-d591-4819-b3f0-1ce3c4d8588e",
+                            "label": "option2_1RewardIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": -15,
+                            "y": 160,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Image",
+                            "id": "b3d01344-43f7-43b3-8df2-d951f5ba4d4e",
+                            "label": "option2_1CostIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": -50,
+                            "y": 100,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Text",
+                            "id": "2cb428e4-9e14-4c16-bb09-79eca879abc9",
+                            "label": "option2_1CostText1",
+                            "scope": "PUBLIC",
+                            "x": -20,
+                            "y": 100,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "- 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "5168dcfb-dae5-4275-ad9a-01e0a40f8f11",
+                            "label": "option2_1CostIcon2",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": 30,
+                            "y": 100,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Text",
+                            "id": "96434c87-eaa2-4763-95d9-7f6f638db61a",
+                            "label": "option2_1CostText2",
+                            "scope": "PUBLIC",
+                            "x": 60,
+                            "y": 100,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "- 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "4ad5cc8c-bf0c-49e9-a10b-af28046fc84a",
+                    "label": "option1_3Container",
+                    "scope": "PUBLIC",
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "365736f6-a557-41dd-ad58-0edd7c6a47ab",
+                            "label": "option1_3RewardIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": -95,
+                            "y": 160,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Text",
+                            "id": "d820f785-a509-4ef0-b5a3-10d11ee0e359",
+                            "label": "option1_3RewardText1",
+                            "scope": "PUBLIC",
+                            "x": -65,
+                            "y": 160,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Text",
+                            "id": "5dbc35b1-7900-42be-b329-4e375051d86a",
+                            "label": "option1_3RewardText2",
+                            "scope": "PUBLIC",
+                            "x": 15,
+                            "y": 160,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "b620d41b-67af-47d4-ae25-839f35dec621",
+                            "label": "option1_3RewardIcon2",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": -15,
+                            "y": 160,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Image",
+                            "id": "149f78b9-2750-4533-9e27-e2e6dd4e7142",
+                            "label": "option1_3RewardIcon3",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": 65,
+                            "y": 160,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Text",
+                            "id": "fef5a984-22d9-4c16-bddf-e647524f42e6",
+                            "label": "option1_3RewardText3",
+                            "scope": "PUBLIC",
+                            "x": 95,
+                            "y": 160,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "6a06cdc1-691d-484b-821a-c663edd838f0",
+                            "label": "option1_3CostIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": -15,
+                            "y": 100,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Text",
+                            "id": "3e2e7787-6042-4fb8-871b-44f012ae9b6c",
+                            "label": "option1_3CostText1",
+                            "scope": "PUBLIC",
+                            "x": 15,
+                            "y": 100,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "- 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "26366ac3-4394-4566-828e-54c8937a2bbe",
+                    "label": "option2_2Container",
+                    "scope": "PUBLIC",
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "e639386f-e710-44f1-bb33-d8351755f673",
+                            "label": "option2_2CostIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": -50,
+                            "y": 100,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Text",
+                            "id": "c0abedff-7412-4195-9378-6a07026fce91",
+                            "label": "option2_2CostText1",
+                            "scope": "PUBLIC",
+                            "x": -20,
+                            "y": 100,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "- 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "0d902d67-8a0b-4425-960a-b03d40b3a15c",
+                            "label": "option2_2CostIcon2",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": 30,
+                            "y": 100,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Text",
+                            "id": "0a7d8104-7555-4518-8729-38a088349dfb",
+                            "label": "option2_2CostText2",
+                            "scope": "PUBLIC",
+                            "x": 62,
+                            "y": 100,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "- 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "6744f758-fdfe-4cff-94c1-623f7aed039c",
+                            "label": "option2_2RewardIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": -50,
+                            "y": 160,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Text",
+                            "id": "4ef912b4-eb24-430e-897d-fd8bd532d8c8",
+                            "label": "option2_2RewardText2",
+                            "scope": "PUBLIC",
+                            "x": 60,
+                            "y": 160,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "89846ba1-55e2-4af6-9ce2-e55fc5ba0af0",
+                            "label": "option2_2RewardIcon2",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": 30,
+                            "y": 160,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Text",
+                            "id": "bffe888a-062a-4c17-8f22-bb5ee2739924",
+                            "label": "option2_2RewardText1",
+                            "scope": "PUBLIC",
+                            "x": -20,
+                            "y": 160,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "6db96062-4937-4f01-aaf6-52c8a363c82e",
+                    "label": "option2_3Container",
+                    "scope": "PUBLIC",
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "73d6df3a-1208-4f93-9163-a3e4400f21c4",
+                            "label": "option2_3RewardIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": -95,
+                            "y": 160,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Text",
+                            "id": "fa29ed7e-df21-4a7d-a173-22417772f576",
+                            "label": "option2_3RewardText1",
+                            "scope": "PUBLIC",
+                            "x": -65,
+                            "y": 160,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Text",
+                            "id": "46ad875f-1116-40e6-a474-93d506d59335",
+                            "label": "option2_3RewardText2",
+                            "scope": "PUBLIC",
+                            "x": 15,
+                            "y": 160,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "bf73315c-391d-4510-b11c-b0626985273d",
+                            "label": "option2_3RewardIcon2",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": -15,
+                            "y": 160,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Image",
+                            "id": "bd821cb5-dbc0-4108-93ee-644aa24f5a14",
+                            "label": "option2_3RewardIcon3",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": 65,
+                            "y": 160,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Text",
+                            "id": "0b366025-8c10-49d7-b0e8-142d23a394d4",
+                            "label": "option2_3RewardText3",
+                            "scope": "PUBLIC",
+                            "x": 95,
+                            "y": 160,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "8d45dfc0-d487-4550-8032-a032fd2e3845",
+                            "label": "option2_3CostIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": -50,
+                            "y": 100,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Text",
+                            "id": "d9bab1c8-d258-4dee-932f-535fce0c71d4",
+                            "label": "option2_3CostText1",
+                            "scope": "PUBLIC",
+                            "x": -20,
+                            "y": 100,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "- 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "b906c1a6-bed6-41e6-b2e4-00968a1fe30e",
+                            "label": "option2_3CostIcon2",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "x": 30,
+                            "y": 100,
+                            "scaleX": 0.2,
+                            "scaleY": 0.2
+                        },
+                        {
+                            "type": "Text",
+                            "id": "cffcf57d-05ba-4998-a509-f76642ea965f",
+                            "label": "option2_3CostText2",
+                            "scope": "PUBLIC",
+                            "x": 60,
+                            "y": 100,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "- 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "24px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        }
+                    ]
                 },
                 {
                     "prefabId": "7028a0e2-cd14-44b7-b2a4-68dac16ece00",

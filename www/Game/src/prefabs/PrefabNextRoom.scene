@@ -25,6 +25,7 @@
                     "type": "Image",
                     "id": "7436fd48-762f-4fb9-881d-6124c6a69d8a",
                     "label": "confirm___End_Turn_Button_1",
+                    "scope": "PUBLIC",
                     "texture": {
                         "key": "Confirm & End Turn Button"
                     }
@@ -33,6 +34,7 @@
                     "type": "Text",
                     "id": "23a35d44-d874-492e-a983-293dd2ddf5f0",
                     "label": "nextRoom",
+                    "scope": "PUBLIC",
                     "y": -16,
                     "originX": 0.5,
                     "text": "Onward!",
@@ -45,6 +47,7 @@
                     "prefabId": "a06ed60b-79f1-4444-bf35-89046f71f954",
                     "id": "7b69e5b0-27fa-433f-8516-9d22ee56cf6e",
                     "label": "onPointerDownScript",
+                    "scope": "NESTED_PREFAB",
                     "list": [
                         {
                             "prefabId": "0e39177a-6e19-4b56-a7c2-2360a2e41505",
@@ -57,6 +60,7 @@
                     "prefabId": "7028a0e2-cd14-44b7-b2a4-68dac16ece00",
                     "id": "9a3f4fd4-7e53-4dd0-98fe-d6f439ce1c39",
                     "label": "onAwakeScript",
+                    "scope": "NESTED_PREFAB",
                     "list": [
                         {
                             "prefabId": "3d337935-cdca-4937-9126-9f75bc2486de",

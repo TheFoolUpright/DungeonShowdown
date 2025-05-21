@@ -36,10 +36,24 @@ class PrefabNextRoom extends Phaser.GameObjects.Container {
 		// moveInSceneActionScript (prefab fields)
 		moveInSceneActionScript.from = "RIGHT";
 
+		this.confirm___End_Turn_Button_1 = confirm___End_Turn_Button_1;
+		this.nextRoom = nextRoom;
+		this.onPointerDownScript = onPointerDownScript;
+		this.onAwakeScript = onAwakeScript;
+
 		/* START-USER-CTR-CODE */
 		// Write your code here.
 		/* END-USER-CTR-CODE */
 	}
+
+	/** @type {Phaser.GameObjects.Image} */
+	confirm___End_Turn_Button_1;
+	/** @type {Phaser.GameObjects.Text} */
+	nextRoom;
+	/** @type {OnPointerDownScript} */
+	onPointerDownScript;
+	/** @type {OnAwakeScript} */
+	onAwakeScript;
 
 	/* START-USER-CODE */
 

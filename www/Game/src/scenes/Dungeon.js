@@ -2,6 +2,11 @@
 // You can write more code here
 
 /* START OF COMPILED CODE */
+var previousMaxHealth
+var previousCurrentHealth
+var previousEnergy
+var previousInsight
+var previousDamage
 
 class Dungeon extends Phaser.Scene {
 
@@ -98,11 +103,28 @@ class Dungeon extends Phaser.Scene {
 		this.info.playerName.setColor(data.player_color)
 		
 		//Load Stats
+
 		var maxHealth = data.max_health
 		var currentHealth = data.current_health
 		var energy = data.energy
 		var insight = data.insight
 		var damage = data.damage
+
+		if(isNaN(previousMaxHealth)) {
+				previousMaxHealth = maxHealth
+			}
+			if(isNaN(previousCurrentHealth)) {
+				previousCurrentHealth = currentHealth
+			}
+			if(isNaN(previousEnergy)) {
+				previousEnergy = energy
+			}
+			if(isNaN(previousInsight)) {
+				previousInsight = insight
+			}
+			if(isNaN(previousDamage)) {
+				previousDamage = damage
+		}
 
 		this.statsContainer.healthText.text = currentHealth + "/" +  maxHealth;
 		this.statsContainer.insightText.text = insight + "/10";
@@ -115,8 +137,6 @@ class Dungeon extends Phaser.Scene {
 
 		this.slot1Card.cardId = data.card[0].card_id
 		this.slot1Card.isVisible = data.card[0].is_visible
-
-		// this.slot1Card.cardBorder.setTint(data.player_color)
 
 		const cardColor = data.player_color.replace("#", "0x")
 		
