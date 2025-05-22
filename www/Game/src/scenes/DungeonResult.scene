@@ -20,15 +20,34 @@
             "y": 540
         },
         {
-            "type": "Rectangle",
-            "id": "a612925d-ce3f-493f-9d5b-4d07868daa7f",
-            "label": "rectangle_1",
-            "x": 868,
-            "y": 367,
-            "isFilled": true,
-            "fillColor": "#5b4e99",
-            "width": 128,
-            "height": 128
+            "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
+            "id": "9ec00645-be0a-4cad-856a-6bdb965163c8",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "prefabCard",
+            "scope": "PUBLIC",
+            "x": 1680,
+            "y": 540,
+            "nestedPrefabs": [
+                {
+                    "prefabId": "0dc21418-28d1-4973-b2a8-45b31b3aad4b",
+                    "id": "6e5cea92-5d13-412e-8124-e94c62c3c24e",
+                    "label": "onAwakeScript",
+                    "list": [
+                        {
+                            "prefabId": "3d337935-cdca-4937-9126-9f75bc2486de",
+                            "id": "b06e7b7b-e91d-40dd-8d17-f8d035d11039",
+                            "unlock": [
+                                "from"
+                            ],
+                            "label": "moveInSceneActionScript",
+                            "from": "RIGHT"
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "plainObjects": [],

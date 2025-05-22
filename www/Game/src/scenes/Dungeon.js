@@ -19,7 +19,7 @@ class Dungeon extends Phaser.Scene {
 		// dungeonBackground
 		this.add.image(960, 540, "DungeonBackground");
 
-		// StatsContainer
+		// statsContainer
 		const statsContainer = new PrefabStats(this, 120, 50);
 		this.add.existing(statsContainer);
 
@@ -27,13 +27,22 @@ class Dungeon extends Phaser.Scene {
 		const slot3Card = new PrefabCard(this, 1320, 800);
 		this.add.existing(slot3Card);
 
+		// moveInSceneActionScript_1
+		const moveInSceneActionScript_1 = new MoveInSceneActionScript(slot3Card.onAwakeScript);
+
 		// slot2Card
 		const slot2Card = new PrefabCard(this, 960, 800);
 		this.add.existing(slot2Card);
 
+		// moveInSceneActionScript_2
+		const moveInSceneActionScript_2 = new MoveInSceneActionScript(slot2Card.onAwakeScript);
+
 		// slot1Card
 		const slot1Card = new PrefabCard(this, 600, 800);
 		this.add.existing(slot1Card);
+
+		// moveInSceneActionScript_3
+		const moveInSceneActionScript_3 = new MoveInSceneActionScript(slot1Card.onAwakeScript);
 
 		// info
 		const info = new PrefabInfo(this, 1720, 40);
@@ -49,19 +58,31 @@ class Dungeon extends Phaser.Scene {
 		slot3Card.isVisible = true;
 		slot3Card.isDisabled = false;
 
+		// moveInSceneActionScript_1 (prefab fields)
+		moveInSceneActionScript_1.from = "BOTTOM";
+
 		// slot2Card (prefab fields)
 		slot2Card.cardId = 0;
 		slot2Card.isVisible = true;
 		slot2Card.isDisabled = false;
+
+		// moveInSceneActionScript_2 (prefab fields)
+		moveInSceneActionScript_2.from = "BOTTOM";
 
 		// slot1Card (prefab fields)
 		slot1Card.cardId = 0;
 		slot1Card.isVisible = true;
 		slot1Card.isDisabled = false;
 
+		// moveInSceneActionScript_3 (prefab fields)
+		moveInSceneActionScript_3.from = "BOTTOM";
+
 		this.statsContainer = statsContainer;
+		this.moveInSceneActionScript_1 = moveInSceneActionScript_1;
 		this.slot3Card = slot3Card;
+		this.moveInSceneActionScript_2 = moveInSceneActionScript_2;
 		this.slot2Card = slot2Card;
+		this.moveInSceneActionScript_3 = moveInSceneActionScript_3;
 		this.slot1Card = slot1Card;
 		this.info = info;
 		this.onwardButton = onwardButton;
@@ -71,10 +92,16 @@ class Dungeon extends Phaser.Scene {
 
 	/** @type {PrefabStats} */
 	statsContainer;
+	/** @type {MoveInSceneActionScript} */
+	moveInSceneActionScript_1;
 	/** @type {PrefabCard} */
 	slot3Card;
+	/** @type {MoveInSceneActionScript} */
+	moveInSceneActionScript_2;
 	/** @type {PrefabCard} */
 	slot2Card;
+	/** @type {MoveInSceneActionScript} */
+	moveInSceneActionScript_3;
 	/** @type {PrefabCard} */
 	slot1Card;
 	/** @type {PrefabInfo} */
@@ -235,7 +262,7 @@ class Dungeon extends Phaser.Scene {
 		this.slot1Card.on("pointerover", () => {
 			//this.slot1Card.empty_Card.postFX.addGlow()
 			this.slot1Card.cardDescription.visible = true
-		
+
 		})
 		this.slot1Card.on("pointerout", () => {
 			this.slot1Card.cardDescription.visible = false
@@ -244,7 +271,7 @@ class Dungeon extends Phaser.Scene {
 		this.slot2Card.on("pointerover", () => {
 			//this.slot1Card.empty_Card.postFX.addGlow()
 			this.slot2Card.cardDescription.visible = true
-		
+
 		})
 		this.slot2Card.on("pointerout", () => {
 			this.slot2Card.cardDescription.visible = false
@@ -253,7 +280,7 @@ class Dungeon extends Phaser.Scene {
 		this.slot3Card.on("pointerover", () => {
 			//this.slot1Card.empty_Card.postFX.addGlow()
 			this.slot3Card.cardDescription.visible = true
-		
+
 		})
 		this.slot3Card.on("pointerout", () => {
 			this.slot3Card.cardDescription.visible = false
@@ -305,7 +332,7 @@ class Dungeon extends Phaser.Scene {
 
 		xhttp.onreadystatechange = () => {
 			if (xhttp.readyState == 4) {
-				
+
 				var data = JSON.parse(xhttp.responseText)
 				console.log(data)
 
@@ -327,7 +354,7 @@ class Dungeon extends Phaser.Scene {
 		xhttp.send(JSON.stringify(dataToSend));
 	}
 
-	
+
 
 	/* END-USER-CODE */
 }

@@ -2,6 +2,7 @@
     "id": "e1809619-8dfb-4d1f-81da-7c8b7ab9511a",
     "sceneType": "SCENE",
     "settings": {
+        "javaScriptInitFieldsInConstructor": true,
         "preloadPackFiles": [],
         "createMethodName": "editorCreate",
         "sceneKey": "DungeonWaitingOnOpponent",

@@ -26,7 +26,7 @@
                 "x",
                 "y"
             ],
-            "label": "StatsContainer",
+            "label": "statsContainer",
             "scope": "PUBLIC",
             "x": 120,
             "y": 50
@@ -48,7 +48,26 @@
             "isVisible": true,
             "isDisabled": false,
             "x": 1320,
-            "y": 800
+            "y": 800,
+            "nestedPrefabs": [
+                {
+                    "prefabId": "0dc21418-28d1-4973-b2a8-45b31b3aad4b",
+                    "id": "7f3a1319-c2e4-490d-83ef-0de1286ba8a3",
+                    "label": "onAwakeScript",
+                    "list": [
+                        {
+                            "prefabId": "3d337935-cdca-4937-9126-9f75bc2486de",
+                            "id": "03309598-d07f-429f-846e-41fc67669a76",
+                            "unlock": [
+                                "from"
+                            ],
+                            "label": "moveInSceneActionScript_1",
+                            "scope": "PUBLIC",
+                            "from": "BOTTOM"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
@@ -67,7 +86,26 @@
             "isVisible": true,
             "isDisabled": false,
             "x": 960,
-            "y": 800
+            "y": 800,
+            "nestedPrefabs": [
+                {
+                    "prefabId": "0dc21418-28d1-4973-b2a8-45b31b3aad4b",
+                    "id": "6da17b0f-40f2-4f48-b5ee-dc853c8a252a",
+                    "label": "onAwakeScript",
+                    "list": [
+                        {
+                            "prefabId": "3d337935-cdca-4937-9126-9f75bc2486de",
+                            "id": "eb9d007a-276b-4aff-877e-ecb6441bec68",
+                            "unlock": [
+                                "from"
+                            ],
+                            "label": "moveInSceneActionScript_2",
+                            "scope": "PUBLIC",
+                            "from": "BOTTOM"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
@@ -86,7 +124,26 @@
             "isVisible": true,
             "isDisabled": false,
             "x": 600,
-            "y": 800
+            "y": 800,
+            "nestedPrefabs": [
+                {
+                    "prefabId": "0dc21418-28d1-4973-b2a8-45b31b3aad4b",
+                    "id": "7b408558-0ecd-4e0e-83af-06c93eb49e00",
+                    "label": "onAwakeScript",
+                    "list": [
+                        {
+                            "prefabId": "3d337935-cdca-4937-9126-9f75bc2486de",
+                            "id": "abe21074-7ae5-4c54-a34b-40a7db691b9a",
+                            "unlock": [
+                                "from"
+                            ],
+                            "label": "moveInSceneActionScript_3",
+                            "scope": "PUBLIC",
+                            "from": "BOTTOM"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "prefabId": "58151c15-b33f-4514-a7c8-de8a701ab360",

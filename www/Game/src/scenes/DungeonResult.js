@@ -19,13 +19,23 @@ class DungeonResult extends Phaser.Scene {
 		// dungeonBackground
 		this.add.image(960, 540, "DungeonBackground");
 
-		// rectangle_1
-		const rectangle_1 = this.add.rectangle(868, 367, 128, 128);
-		rectangle_1.isFilled = true;
-		rectangle_1.fillColor = 5983897;
+		// prefabCard
+		const prefabCard = new PrefabCard(this, 1680, 540);
+		this.add.existing(prefabCard);
+
+		// moveInSceneActionScript
+		const moveInSceneActionScript = new MoveInSceneActionScript(prefabCard.onAwakeScript);
+
+		// moveInSceneActionScript (prefab fields)
+		moveInSceneActionScript.from = "RIGHT";
+
+		this.prefabCard = prefabCard;
 
 		this.events.emit("scene-awake");
 	}
+
+	/** @type {PrefabCard} */
+	prefabCard;
 
 	/* START-USER-CODE */
 

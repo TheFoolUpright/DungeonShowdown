@@ -8,6 +8,10 @@ class DungeonWaitingOnOpponent extends Phaser.Scene {
 	constructor() {
 		super("DungeonWaitingOnOpponent");
 
+		/** @type {Phaser.GameObjects.Text} */
+		this.waitingForOpponentText;
+
+
 		/* START-USER-CTR-CODE */
 		// Write your code here.
 		/* END-USER-CTR-CODE */
@@ -16,13 +20,20 @@ class DungeonWaitingOnOpponent extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
-		// rectangle_1
-		const rectangle_1 = this.add.rectangle(868, 367, 128, 128);
-		rectangle_1.isFilled = true;
-		rectangle_1.fillColor = 2785204;
+		// dungeonBackground
+		this.add.image(960, 540, "DungeonBackground");
+
+		// waitingForOpponentText
+		const waitingForOpponentText = this.add.text(960, 540, "", {});
+		waitingForOpponentText.setOrigin(0.5, 0.5);
+		waitingForOpponentText.text = "Your opponent was struck with an indecisiveness spell. \nWait while they recover…";
+		waitingForOpponentText.setStyle({ "align": "center", "fontFamily": "Rockey", "fontSize": "64px", "stroke": "#000000ff", "strokeThickness":25});
+
+		this.waitingForOpponentText = waitingForOpponentText;
 
 		this.events.emit("scene-awake");
 	}
+
 
 	/* START-USER-CODE */
 
@@ -34,21 +45,21 @@ class DungeonWaitingOnOpponent extends Phaser.Scene {
 
 	}
 
-	update(dt) {
-		
+	update() {
+		this.CheckOpponentSelectionState()
 	}
-	
+
 	CheckOpponentSelectionState() {
 		var xhttp = new XMLHttpRequest();
-    
+
 		xhttp.onreadystatechange = () => {
 			if (xhttp.readyState == 4) {
 
 				var data = JSON.parse(xhttp.responseText)
 				console.log(data)
-				
+
 				if (xhttp.status == 200) {
-					
+
 					if (data.state == "NEXT_ROOM") {
 						this.scene.start("DungeonResult", data)
 					}
@@ -64,43 +75,6 @@ class DungeonWaitingOnOpponent extends Phaser.Scene {
 		xhttp.setRequestHeader("Content-Type", "application/json");
 
 		xhttp.send();
-
-	}
-
-	 getWaitingOnOpponentDungeon() {
-    document.getElementById("waitingForOpponentText").innerHTML = "Waiting for your opponent to select a card..."
-    //Display HTML Elements - ON
-    document.getElementById("statsContainer").style.display = "block";
-    document.getElementById("waitingForOpponent").style.display = "block";
-    document.getElementById("dungeonRoom").style.display = "block";
-
-
-    //Display HTML Elements - OFF
-    document.getElementById("endingContainer").style.display = "none";
-    document.getElementById("showdownTurn").style.display = "none";
-    document.getElementById("opponentChoiceSection").style.display = "none";
-    document.getElementById("opponentShowdownActionsSection").style.display = "none";
-    document.getElementById("dungeonCards").style.display = "none";
-    document.getElementById("showdownCards").style.display = "none";
-
-    var xhttp = new XMLHttpRequest();
-    
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4) {
-
-            if (this.status == 200) {
-                
-                return;
-            }
-        }
-    }
-
-    xhttp.open("GET", "/getWaitingOnOpponentDungeon", true);
-
-    xhttp.setRequestHeader("Content-Type", "application/json");
-
-    xhttp.send();
-
 
 	}
 

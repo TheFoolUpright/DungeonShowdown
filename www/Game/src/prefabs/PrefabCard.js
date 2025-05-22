@@ -13,6 +13,7 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		// cardDescription
 		const cardDescription = scene.add.text(0, -260, "", {});
 		cardDescription.setOrigin(0.5, 1);
+		cardDescription.visible = false;
 		cardDescription.text = "Take no damage from one of the opponent's attacks and hit them back for half of their _";
 		cardDescription.setStyle({ "align": "center", "color": "#ffffffff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff", "strokeThickness":10});
 		cardDescription.setPadding({"left":5,"top":5,"right":5,"bottom":5});
@@ -402,12 +403,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		// onAwakeScript
 		const onAwakeScript = new OnAwakeScript(this);
 
-		// moveInSceneActionScript
-		const moveInSceneActionScript = new MoveInSceneActionScript(onAwakeScript);
-
-		// moveInSceneActionScript (prefab fields)
-		moveInSceneActionScript.from = "BOTTOM";
-
 		this.cardDescription = cardDescription;
 		this.cardGlow = cardGlow;
 		this.empty_Card = empty_Card;
@@ -472,7 +467,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		this.cardImage = cardImage;
 		this.pushActionScript = pushActionScript;
 		this.onPointerDownScript = onPointerDownScript;
-		this.moveInSceneActionScript = moveInSceneActionScript;
 		this.onAwakeScript = onAwakeScript;
 
 		/* START-USER-CTR-CODE */
@@ -609,8 +603,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 	pushActionScript;
 	/** @type {OnPointerDownScript} */
 	onPointerDownScript;
-	/** @type {MoveInSceneActionScript} */
-	moveInSceneActionScript;
 	/** @type {OnAwakeScript} */
 	onAwakeScript;
 	/** @type {number} */
