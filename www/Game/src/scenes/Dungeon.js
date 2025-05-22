@@ -143,9 +143,9 @@ class Dungeon extends Phaser.Scene {
 
 		this.slot1Card.cardBorder.setTint(cardColor)
 
-		if(this.slot1Card.isVisible){
+		if(this.slot1Card.isVisible) {
 			this.slot1Card.cardName.text = data.card[0].card_name
-			//this.slot1Card.cardImage.setTexture(data.card[0].card_image_path);
+			this.slot1Card.cardImage.setTexture(data.card[0].card_image_path);
 			this.slot1Card.cardDescription.text
 		}
 		else{
@@ -159,9 +159,9 @@ class Dungeon extends Phaser.Scene {
 
 		this.slot2Card.cardBorder.setTint(cardColor)
 
-		if(this.slot2Card.isVisible){
+		if(this.slot2Card.isVisible) {
 			this.slot2Card.cardName.text = data.card[1].card_name
-			//this.slot2Card.cardImage.setTexture(data.card[1].card_image_path);
+			this.slot2Card.cardImage.setTexture(data.card[1].card_image_path);
 			this.slot2Card.cardDescription.text
 		}
 		else{
@@ -175,9 +175,9 @@ class Dungeon extends Phaser.Scene {
 
 		this.slot3Card.cardBorder.setTint(cardColor)
 
-		if(this.slot3Card.isVisible){
+		if(this.slot3Card.isVisible) {
 			this.slot3Card.cardName.text = data.card[2].card_name
-			//this.slot3Card.cardImage.setTexture(data.card[2].card_image_path); 
+			this.slot3Card.cardImage.setTexture(data.card[2].card_image_path); 
 			this.slot3Card.cardDescription.text
 		}
 		else{
@@ -185,12 +185,21 @@ class Dungeon extends Phaser.Scene {
 			this.slot3Card.cardImage.setTexture("HiddenDraft.png");
 			this.slot3Card.cardDescription.text = "Not enough insight to see the card"
 		}
+		
+		this.slot1Card.on("pointerdown", () => {
+			if (!this.slot1Card.isSelected) {
+				this.slot1Card.setY(600)
+				this.slot1Card.isSelected = true
+			}
+			else {
+				this.slot1Card.setY(800)
+				this.slot1Card.isSelected = false
+			}
+		})
 	}
 
 	update(data) {
-		this.slot1Card.on("pointerdown", () => {
-			console.log("Card 1 Selected")
-		})
+		// Im crazy and Im making a subscription EVERY FRAME
 	}
 
 	sortCards(cardA, cardB) {

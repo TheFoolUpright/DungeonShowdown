@@ -21,6 +21,7 @@
                     "type": "Image",
                     "id": "4674a90a-d9c2-4942-a03d-2d43cd00be7e",
                     "label": "healthBar",
+                    "scope": "PUBLIC",
                     "texture": {
                         "key": "MaxHealthBar"
                     }
@@ -43,6 +44,7 @@
                     "type": "Image",
                     "id": "7138b0a3-f44c-4467-a4e0-6be18ff6ff0d",
                     "label": "energyBar",
+                    "scope": "PUBLIC",
                     "texture": {
                         "key": "EnergyBar"
                     },
@@ -66,6 +68,7 @@
                     "type": "Image",
                     "id": "63faf848-5cb4-4c48-962f-c61cf8959aa0",
                     "label": "insightBar",
+                    "scope": "PUBLIC",
                     "texture": {
                         "key": "InsightBar"
                     },
@@ -89,6 +92,7 @@
                     "type": "Image",
                     "id": "0b5cc028-d76a-42c1-9b04-7d13a67098be",
                     "label": "mightBar",
+                    "scope": "PUBLIC",
                     "texture": {
                         "key": "MightBar"
                     },

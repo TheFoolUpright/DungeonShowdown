@@ -55,9 +55,13 @@ class PrefabStats extends Phaser.GameObjects.Container {
 		mightText.setStyle({ "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
 		this.add(mightText);
 
+		this.healthBar = healthBar;
 		this.healthText = healthText;
+		this.energyBar = energyBar;
 		this.energyText = energyText;
+		this.insightBar = insightBar;
 		this.insightText = insightText;
+		this.mightBar = mightBar;
 		this.mightText = mightText;
 
 		/* START-USER-CTR-CODE */
@@ -65,12 +69,20 @@ class PrefabStats extends Phaser.GameObjects.Container {
 		/* END-USER-CTR-CODE */
 	}
 
+	/** @type {Phaser.GameObjects.Image} */
+	healthBar;
 	/** @type {Phaser.GameObjects.Text} */
 	healthText;
+	/** @type {Phaser.GameObjects.Image} */
+	energyBar;
 	/** @type {Phaser.GameObjects.Text} */
 	energyText;
+	/** @type {Phaser.GameObjects.Image} */
+	insightBar;
 	/** @type {Phaser.GameObjects.Text} */
 	insightText;
+	/** @type {Phaser.GameObjects.Image} */
+	mightBar;
 	/** @type {Phaser.GameObjects.Text} */
 	mightText;
 

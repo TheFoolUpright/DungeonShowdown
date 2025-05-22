@@ -8,7 +8,7 @@ class PrefabCard extends Phaser.GameObjects.Container {
 	constructor(scene, x, y) {
 		super(scene, x ?? 0, y ?? 0);
 
-		this.setInteractive(new Phaser.Geom.Rectangle(-79.75, -118.525, 159.5, 237.05), Phaser.Geom.Rectangle.Contains);
+		this.setInteractive(new Phaser.Geom.Rectangle(-150, -218, 300, 442.1498283792502), Phaser.Geom.Rectangle.Contains);
 
 		// cardDescription
 		const cardDescription = scene.add.text(0, -260, "", {});
@@ -386,11 +386,9 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		option2_3CostText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
 		option2_3Container.add(option2_3CostText2);
 
-		// onAwakeScript
-		const onAwakeScript = new OnAwakeScript(this);
-
-		// moveInSceneActionScript
-		const moveInSceneActionScript = new MoveInSceneActionScript(onAwakeScript);
+		// cardImage
+		const cardImage = scene.add.image(0, 0, "_MISSING");
+		this.add(cardImage);
 
 		// onPointerDownScript
 		const onPointerDownScript = new OnPointerDownScript(this);
@@ -398,14 +396,14 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		// pushActionScript
 		const pushActionScript = new PushActionScript(onPointerDownScript);
 
-		// setYActionScript
-		const setYActionScript = new SetYActionScript(onPointerDownScript);
+		// onAwakeScript
+		const onAwakeScript = new OnAwakeScript(this);
+
+		// moveInSceneActionScript
+		const moveInSceneActionScript = new MoveInSceneActionScript(onAwakeScript);
 
 		// moveInSceneActionScript (prefab fields)
 		moveInSceneActionScript.from = "BOTTOM";
-
-		// setYActionScript (prefab fields)
-		setYActionScript.y = 400;
 
 		this.cardDescription = cardDescription;
 		this.empty_Card = empty_Card;
@@ -467,10 +465,11 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		this.option2_3CostIcon2 = option2_3CostIcon2;
 		this.option2_3CostText2 = option2_3CostText2;
 		this.option2_3Container = option2_3Container;
-		this.moveInSceneActionScript = moveInSceneActionScript;
-		this.onAwakeScript = onAwakeScript;
+		this.cardImage = cardImage;
 		this.pushActionScript = pushActionScript;
 		this.onPointerDownScript = onPointerDownScript;
+		this.moveInSceneActionScript = moveInSceneActionScript;
+		this.onAwakeScript = onAwakeScript;
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.
@@ -598,14 +597,16 @@ class PrefabCard extends Phaser.GameObjects.Container {
 	option2_3CostText2;
 	/** @type {Phaser.GameObjects.Container} */
 	option2_3Container;
-	/** @type {MoveInSceneActionScript} */
-	moveInSceneActionScript;
-	/** @type {OnAwakeScript} */
-	onAwakeScript;
+	/** @type {Phaser.GameObjects.Image} */
+	cardImage;
 	/** @type {PushActionScript} */
 	pushActionScript;
 	/** @type {OnPointerDownScript} */
 	onPointerDownScript;
+	/** @type {MoveInSceneActionScript} */
+	moveInSceneActionScript;
+	/** @type {OnAwakeScript} */
+	onAwakeScript;
 	/** @type {number} */
 	cardId = 0;
 	/** @type {boolean} */
