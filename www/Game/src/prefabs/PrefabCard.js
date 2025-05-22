@@ -25,7 +25,7 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		this.add(empty_Card);
 
 		// cardGlow
-		const cardGlow = empty_Card.preFX.addGlow(16777215, 0, 0, false);
+		const cardGlow = empty_Card.preFX.addGlow(16777215, 10, 0, false);
 
 		// cardName
 		const cardName = scene.add.text(0, -175, "", {});
@@ -37,6 +37,17 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		// cardBorder
 		const cardBorder = scene.add.image(0, 0, "CardBorder");
 		this.add(cardBorder);
+
+		// opponentContainer
+		const opponentContainer = scene.add.container(0, 0);
+		opponentContainer.visible = false;
+		this.add(opponentContainer);
+
+		// option1RewardIcon
+		const option1RewardIcon = scene.add.image(0, 130, "HiddenDraft");
+		option1RewardIcon.scaleX = 0.3;
+		option1RewardIcon.scaleY = 0.3;
+		opponentContainer.add(option1RewardIcon);
 
 		// option1Container
 		const option1Container = scene.add.container(0, 0);
@@ -394,12 +405,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		const cardImage = scene.add.image(0, -37, "_MISSING");
 		this.add(cardImage);
 
-		// onPointerDownScript
-		const onPointerDownScript = new OnPointerDownScript(this);
-
-		// pushActionScript
-		const pushActionScript = new PushActionScript(onPointerDownScript);
-
 		// onAwakeScript
 		const onAwakeScript = new OnAwakeScript(this);
 
@@ -408,6 +413,8 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		this.empty_Card = empty_Card;
 		this.cardName = cardName;
 		this.cardBorder = cardBorder;
+		this.option1RewardIcon = option1RewardIcon;
+		this.opponentContainer = opponentContainer;
 		this.option1RewardIcon1 = option1RewardIcon1;
 		this.option1RewardText1 = option1RewardText1;
 		this.option1Container = option1Container;
@@ -465,8 +472,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		this.option2_3CostText2 = option2_3CostText2;
 		this.option2_3Container = option2_3Container;
 		this.cardImage = cardImage;
-		this.pushActionScript = pushActionScript;
-		this.onPointerDownScript = onPointerDownScript;
 		this.onAwakeScript = onAwakeScript;
 
 		/* START-USER-CTR-CODE */
@@ -485,6 +490,10 @@ class PrefabCard extends Phaser.GameObjects.Container {
 	cardName;
 	/** @type {Phaser.GameObjects.Image} */
 	cardBorder;
+	/** @type {Phaser.GameObjects.Image} */
+	option1RewardIcon;
+	/** @type {Phaser.GameObjects.Container} */
+	opponentContainer;
 	/** @type {Phaser.GameObjects.Image} */
 	option1RewardIcon1;
 	/** @type {Phaser.GameObjects.Text} */
@@ -599,10 +608,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 	option2_3Container;
 	/** @type {Phaser.GameObjects.Image} */
 	cardImage;
-	/** @type {PushActionScript} */
-	pushActionScript;
-	/** @type {OnPointerDownScript} */
-	onPointerDownScript;
 	/** @type {OnAwakeScript} */
 	onAwakeScript;
 	/** @type {number} */

@@ -67,6 +67,22 @@
                         }
                     ]
                 }
+            ],
+            "list": [
+                {
+                    "prefabId": "a06ed60b-79f1-4444-bf35-89046f71f954",
+                    "id": "7046c6a5-10ee-4dcd-aa24-0083bff27f83",
+                    "label": "onPointerDownScript_3",
+                    "scope": "NESTED_PREFAB",
+                    "list": [
+                        {
+                            "prefabId": "0e39177a-6e19-4b56-a7c2-2360a2e41505",
+                            "id": "0cfbacc2-e41a-4849-9c44-f3c9c356a1c9",
+                            "label": "pushActionScript_3",
+                            "scope": "NESTED_PREFAB"
+                        }
+                    ]
+                }
             ]
         },
         {
@@ -105,6 +121,22 @@
                         }
                     ]
                 }
+            ],
+            "list": [
+                {
+                    "prefabId": "a06ed60b-79f1-4444-bf35-89046f71f954",
+                    "id": "3df22fa3-a8ff-4d3e-9062-6248195ca534",
+                    "label": "onPointerDownScript_2",
+                    "scope": "NESTED_PREFAB",
+                    "list": [
+                        {
+                            "prefabId": "0e39177a-6e19-4b56-a7c2-2360a2e41505",
+                            "id": "867d056d-a758-472e-94a5-cedb167a52ae",
+                            "label": "pushActionScript_2",
+                            "scope": "NESTED_PREFAB"
+                        }
+                    ]
+                }
             ]
         },
         {
@@ -140,6 +172,22 @@
                             "label": "moveInSceneActionScript_3",
                             "scope": "PUBLIC",
                             "from": "BOTTOM"
+                        }
+                    ]
+                }
+            ],
+            "list": [
+                {
+                    "prefabId": "a06ed60b-79f1-4444-bf35-89046f71f954",
+                    "id": "be7d4fb6-cebe-4554-9e72-497d6f9e0757",
+                    "label": "onPointerDownScript_1",
+                    "scope": "NESTED_PREFAB",
+                    "list": [
+                        {
+                            "prefabId": "0e39177a-6e19-4b56-a7c2-2360a2e41505",
+                            "id": "58f0ed85-8570-4224-b1cd-77b54ba9eda4",
+                            "label": "pushActionScript_1",
+                            "scope": "NESTED_PREFAB"
                         }
                     ]
                 }

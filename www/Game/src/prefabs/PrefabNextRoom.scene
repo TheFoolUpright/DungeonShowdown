@@ -22,24 +22,36 @@
                 {
                     "type": "Image",
                     "id": "9eb7f473-d40b-456f-905c-814641f0197e",
-                    "label": "confirm___End_Turn_Button_1",
+                    "label": "confirmButtonImage",
                     "scope": "PUBLIC",
                     "texture": {
                         "key": "Confirm & End Turn Button"
-                    }
+                    },
+                    "list": [
+                        {
+                            "type": "Glow",
+                            "id": "df12a535-e3cc-4886-b745-0185a287bdbf",
+                            "label": "glowFx",
+                            "scope": "PUBLIC",
+                            "outerStrength": 10,
+                            "preFX": true
+                        }
+                    ]
                 },
                 {
                     "type": "Text",
                     "id": "d720db54-e190-42fe-ae49-810c9b934e8d",
-                    "label": "nextRoom",
+                    "label": "confirmButtonText",
                     "scope": "PUBLIC",
                     "originX": 0.5,
                     "originY": 0.5,
-                    "text": "Onward!",
+                    "text": "Confirm",
                     "align": "center",
                     "fontFamily": "Rockey",
                     "fontSize": "32px",
-                    "color": "#000000ff"
+                    "color": "#ffffffff",
+                    "stroke": "#000000ff",
+                    "strokeThickness": 10
                 },
                 {
                     "prefabId": "a06ed60b-79f1-4444-bf35-89046f71f954",

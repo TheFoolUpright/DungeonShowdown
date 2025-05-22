@@ -74,10 +74,12 @@ class Preload extends Phaser.Scene {
 
 		this.editorPreload();
 
-		var someData = { bla: 3};
+        this.load.on(Phaser.Loader.Events.COMPLETE, () => {
+            this.LoginCheck();
+        });
 
-		this.LoginCheck();
-		//this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("Dungeon"));
+		
+		
 	}
 
 	LoginCheck() {
@@ -125,12 +127,12 @@ class Preload extends Phaser.Scene {
 					}
 					else if (data.state == "NOT_IN_MATCH") {
 						//Go to Main Menu 
-						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("JoinMatch"));
+						 this.scene.start("JoinMatch");
 
 					}
 					else if (data.state == "WAITING_FOR_MATCH") {
 						//Go to waiting for a Match
-						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("WaitingForMatch"));
+						 this.scene.start("WaitingForMatch");
 
 					}
 				}
@@ -158,19 +160,19 @@ class Preload extends Phaser.Scene {
 						this.GetDungeonData()
 					}
 					else if(data.state_id == states.DungeonWaitingOnOpponent){
-						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("DungeonWaitingOnOpponent"));
+						 this.scene.start("DungeonWaitingOnOpponent");
 					}
 					else if(data.state_id == states.DungeonResult){
-						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("DungeonResult"));
+						 this.scene.start("DungeonResult");
 					}
 					else if(data.state_id == states.ShowdownCardSelection){
-						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("Showdown"));
+						 this.scene.start("Showdown");
 					}
 					else if(data.state_id == states.ShowdownWaitingOnOpponent){
-						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("ShowdownWaitingOnOpponent"));
+						 this.scene.start("ShowdownWaitingOnOpponent");
 					}
 					else if(data.state_id == states.ShowdownResult){
-						this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("ShowdownResult"));
+						 this.scene.start("ShowdownResult");
 					}
 				
 				}
@@ -193,7 +195,10 @@ class Preload extends Phaser.Scene {
 				console.log(data)
 
 				if (xhttp.status == 200){
-				this.scene.start("Dungeon", data);
+                    if(this.load){
+
+                    }
+				    this.scene.start("Dungeon", data);
 				}
 			}
 		}

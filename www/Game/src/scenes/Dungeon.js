@@ -30,6 +30,12 @@ class Dungeon extends Phaser.Scene {
 		// moveInSceneActionScript_1
 		const moveInSceneActionScript_1 = new MoveInSceneActionScript(slot3Card.onAwakeScript);
 
+		// onPointerDownScript_3
+		const onPointerDownScript_3 = new OnPointerDownScript(slot3Card);
+
+		// pushActionScript_3
+		const pushActionScript_3 = new PushActionScript(onPointerDownScript_3);
+
 		// slot2Card
 		const slot2Card = new PrefabCard(this, 960, 800);
 		this.add.existing(slot2Card);
@@ -37,12 +43,24 @@ class Dungeon extends Phaser.Scene {
 		// moveInSceneActionScript_2
 		const moveInSceneActionScript_2 = new MoveInSceneActionScript(slot2Card.onAwakeScript);
 
+		// onPointerDownScript_2
+		const onPointerDownScript_2 = new OnPointerDownScript(slot2Card);
+
+		// pushActionScript_2
+		const pushActionScript_2 = new PushActionScript(onPointerDownScript_2);
+
 		// slot1Card
 		const slot1Card = new PrefabCard(this, 600, 800);
 		this.add.existing(slot1Card);
 
 		// moveInSceneActionScript_3
 		const moveInSceneActionScript_3 = new MoveInSceneActionScript(slot1Card.onAwakeScript);
+
+		// onPointerDownScript_1
+		const onPointerDownScript_1 = new OnPointerDownScript(slot1Card);
+
+		// pushActionScript_1
+		const pushActionScript_1 = new PushActionScript(onPointerDownScript_1);
 
 		// info
 		const info = new PrefabInfo(this, 1720, 40);
@@ -79,10 +97,16 @@ class Dungeon extends Phaser.Scene {
 
 		this.statsContainer = statsContainer;
 		this.moveInSceneActionScript_1 = moveInSceneActionScript_1;
+		this.pushActionScript_3 = pushActionScript_3;
+		this.onPointerDownScript_3 = onPointerDownScript_3;
 		this.slot3Card = slot3Card;
 		this.moveInSceneActionScript_2 = moveInSceneActionScript_2;
+		this.pushActionScript_2 = pushActionScript_2;
+		this.onPointerDownScript_2 = onPointerDownScript_2;
 		this.slot2Card = slot2Card;
 		this.moveInSceneActionScript_3 = moveInSceneActionScript_3;
+		this.pushActionScript_1 = pushActionScript_1;
+		this.onPointerDownScript_1 = onPointerDownScript_1;
 		this.slot1Card = slot1Card;
 		this.info = info;
 		this.onwardButton = onwardButton;
@@ -94,14 +118,26 @@ class Dungeon extends Phaser.Scene {
 	statsContainer;
 	/** @type {MoveInSceneActionScript} */
 	moveInSceneActionScript_1;
+	/** @type {PushActionScript} */
+	pushActionScript_3;
+	/** @type {OnPointerDownScript} */
+	onPointerDownScript_3;
 	/** @type {PrefabCard} */
 	slot3Card;
 	/** @type {MoveInSceneActionScript} */
 	moveInSceneActionScript_2;
+	/** @type {PushActionScript} */
+	pushActionScript_2;
+	/** @type {OnPointerDownScript} */
+	onPointerDownScript_2;
 	/** @type {PrefabCard} */
 	slot2Card;
 	/** @type {MoveInSceneActionScript} */
 	moveInSceneActionScript_3;
+	/** @type {PushActionScript} */
+	pushActionScript_1;
+	/** @type {OnPointerDownScript} */
+	onPointerDownScript_1;
 	/** @type {PrefabCard} */
 	slot1Card;
 	/** @type {PrefabInfo} */
@@ -121,6 +157,7 @@ class Dungeon extends Phaser.Scene {
 		//Load Info
 		console.log(data.player_color)
 		this.info.phaseName.text = "DUNGEON"
+		this.onwardButton.text = "Onward!"
 		this.info.roomOrTurn.text = "Room " + data.room_id
 		this.info.playerName.text = data.player_username
 		this.info.playerName.setColor(data.player_color)
@@ -178,7 +215,7 @@ class Dungeon extends Phaser.Scene {
 		}
 		else{
 			this.slot1Card.cardName.text = "? ? ?"
-			this.slot1Card.cardImage.setTexture("HiddenDraft.png");
+			this.slot1Card.cardImage.setTexture("HiddenDraft");
 			this.slot1Card.cardDescription.text = "Not enough insight to see the card"
 		}
 
@@ -194,7 +231,7 @@ class Dungeon extends Phaser.Scene {
 		}
 		else{
 			this.slot2Card.cardName.text = "? ? ?"
-			this.slot2Card.cardImage.setTexture("HiddenDraft.png");
+			this.slot2Card.cardImage.setTexture("HiddenDraft");
 			this.slot2Card.cardDescription.text = "Not enough insight to see the card"
 		}
 
@@ -210,7 +247,7 @@ class Dungeon extends Phaser.Scene {
 		}
 		else{
 			this.slot3Card.cardName.text = "? ? ?"
-			this.slot3Card.cardImage.setTexture("HiddenDraft.png");
+			this.slot3Card.cardImage.setTexture("HiddenDraft");
 			this.slot3Card.cardDescription.text = "Not enough insight to see the card"
 		}
 
@@ -260,11 +297,13 @@ class Dungeon extends Phaser.Scene {
 		})
 
 		this.slot1Card.on("pointerover", () => {
-			//this.slot1Card.empty_Card.postFX.addGlow()
+			console.log(this.slot1Card)
+			this.slot1Card.cardGlow.active = true
 			this.slot1Card.cardDescription.visible = true
 
 		})
 		this.slot1Card.on("pointerout", () => {
+			this.slot1Card.cardGlow.active = false
 			this.slot1Card.cardDescription.visible = false
 		})
 

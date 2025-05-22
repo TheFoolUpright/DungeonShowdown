@@ -26,7 +26,7 @@
                 "x",
                 "y"
             ],
-            "label": "prefabCard",
+            "label": "opponentCard",
             "scope": "PUBLIC",
             "x": 1680,
             "y": 540,

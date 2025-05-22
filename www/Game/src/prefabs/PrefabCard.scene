@@ -55,7 +55,7 @@
                             "id": "95243a4d-e10c-4a0b-8702-aed2600fc6d6",
                             "label": "cardGlow",
                             "scope": "PUBLIC",
-                            "outerStrength": 0,
+                            "outerStrength": 10,
                             "preFX": true
                         }
                     ]
@@ -84,6 +84,27 @@
                     "texture": {
                         "key": "CardBorder"
                     }
+                },
+                {
+                    "type": "Container",
+                    "id": "ef12ad03-54ce-4638-9850-70f25e4c8816",
+                    "label": "opponentContainer",
+                    "scope": "PUBLIC",
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "5d71bf77-c821-4181-86f9-604d2fb9a2fa",
+                            "label": "option1RewardIcon",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenDraft"
+                            },
+                            "y": 130,
+                            "scaleX": 0.3,
+                            "scaleY": 0.3
+                        }
+                    ]
                 },
                 {
                     "type": "Container",
@@ -837,20 +858,6 @@
                     "scope": "PUBLIC",
                     "texture": {},
                     "y": -37
-                },
-                {
-                    "prefabId": "a06ed60b-79f1-4444-bf35-89046f71f954",
-                    "id": "aefdc1db-b0f0-41c6-a7f7-f26b397e44ae",
-                    "label": "onPointerDownScript",
-                    "scope": "NESTED_PREFAB",
-                    "list": [
-                        {
-                            "prefabId": "0e39177a-6e19-4b56-a7c2-2360a2e41505",
-                            "id": "efafa70b-b4d3-4f69-891a-3923464eca40",
-                            "label": "pushActionScript",
-                            "scope": "NESTED_PREFAB"
-                        }
-                    ]
                 },
                 {
                     "prefabId": "7028a0e2-cd14-44b7-b2a4-68dac16ece00",

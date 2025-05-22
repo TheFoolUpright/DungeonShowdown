@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `dungeonshowdown` /*!40100 DEFAULT CHARACTER SET 
 USE `dungeonshowdown`;
 -- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
 --
--- Host: localhost    Database: dungeonshowdown
+-- Host: 127.0.0.1    Database: dungeonshowdown
 -- ------------------------------------------------------
 -- Server version	8.0.41
 
@@ -40,7 +40,7 @@ CREATE TABLE `card_type` (
 
 LOCK TABLES `card_type` WRITE;
 /*!40000 ALTER TABLE `card_type` DISABLE KEYS */;
-INSERT INTO `card_type` VALUES (1,'Max Health',1),(2,'Healing',1),(3,'Damage',1),(4,'Rest',1),(5,'Enemy',1),(6,'Attack',2),(7,'Defense',2),(8,'Skill',2);
+INSERT INTO `card_type` VALUES (1,'Vitality Brew',1),(2,'Rejuvenating Cloth',1),(3,'Stone of Power',1),(4,'Restful Dwelling',1),(5,'Enemy Encounter',1),(6,'Attack',2),(7,'Defense',2),(8,'Skill',2);
 /*!40000 ALTER TABLE `card_type` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-02 15:32:54
+-- Dump completed on 2025-05-22 20:04:02

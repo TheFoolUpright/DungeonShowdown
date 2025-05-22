@@ -789,7 +789,13 @@ app.get("/getWaitingOnOpponentDungeon", (req, res) => {
     }
 
     function GetOpponentCard() {
-        connection.query("SELECT c.card_id, ct.card_type_id, card_type_name FROM player_card_slot pcs INNER JOIN player_status ps ON pcs.player_status_id = ps.player_status_id INNER JOIN card c ON pcs.card_id = c.card_id INNER JOIN card_type ct ON c.card_type_id = ct.card_type_id WHERE pcs.player_status_id != ? AND match_id = ? AND slot_id = 4 AND room_id = ?", [req.session.playerStatusId, req.session.matchId,  req.session.roomId], 
+        connection.query("SELECT c.card_id, card_image_path, ct.card_type_id, card_type_name, p.player_color \
+            FROM player_card_slot pcs \
+            INNER JOIN player_status ps ON pcs.player_status_id = ps.player_status_id \
+            INNER JOIN player p ON p.player_id = ps.player_id \
+            INNER JOIN card c ON pcs.card_id = c.card_id \
+            INNER JOIN card_type ct ON c.card_type_id = ct.card_type_id \
+            WHERE pcs.player_status_id != ? AND match_id = ? AND slot_id = 4 AND room_id = ?", [req.session.playerStatusId, req.session.matchId,  req.session.roomId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -800,11 +806,14 @@ app.get("/getWaitingOnOpponentDungeon", (req, res) => {
                 }
                 if(rows.length != 0) {
                     res.status(200).json({
-                        "message": "opponent card received",
+                        "message": "Player stats updated and opponent card received",
                         "state": "NEXT_ROOM",
                         "card_id": rows[0].card_id,
+                        "room_id": req.session.roomId,
+                        "card_image_path": rows[0].card_image_path,
                         "card_type_id": rows[0].card_type_id,
-                        "card_type_name": rows[0].card_type_name
+                        "card_type_name": rows[0].card_type_name,
+                        "player_color": rows[0].player_color
                     })
                 }
                 else
@@ -953,7 +962,9 @@ app.post("/resolveDungeonTurn", (req, res) => {
      * @returns none
      */
     function UpdateGameStateToWaitingForOpponentDungeon() {
-        connection.query("UPDATE player_status SET state_id = 2 WHERE match_id = ? AND player_status_id = ?;", [req.session.matchId, req.session.playerStatusId], 
+        connection.query("UPDATE player_status \
+                        SET state_id = 2 \
+                        WHERE match_id = ? AND player_status_id = ?;", [req.session.matchId, req.session.playerStatusId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -976,7 +987,9 @@ app.post("/resolveDungeonTurn", (req, res) => {
      * @returns none
      */
     function UpdateSelectedCardSlot() {
-        connection.query("UPDATE player_card_slot SET slot_id = 4 WHERE card_id = ? AND player_status_id = ?;", [req.body.cardId, req.session.playerStatusId], 
+        connection.query("UPDATE player_card_slot \
+                        SET slot_id = 4 \
+                        WHERE card_id = ? AND player_status_id = ?;", [req.body.cardId, req.session.playerStatusId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -1084,7 +1097,13 @@ app.post("/resolveDungeonTurn", (req, res) => {
      * @returns {JSON} - returns the opponents card selection or if the player is waiting on the opponent
      */
     function GetOpponentCard() {
-        connection.query("SELECT c.card_id, ct.card_type_id, card_type_name FROM player_card_slot pcs INNER JOIN player_status ps ON pcs.player_status_id = ps.player_status_id INNER JOIN card c ON pcs.card_id = c.card_id INNER JOIN card_type ct ON c.card_type_id = ct.card_type_id WHERE pcs.player_status_id != ? AND match_id = ? AND slot_id = 4 AND room_id = ?", [req.session.playerStatusId, req.session.matchId,  req.session.roomId], 
+        connection.query("SELECT c.card_id, card_image_path, ct.card_type_id, card_type_name, p.player_color \
+            FROM player_card_slot pcs \
+            INNER JOIN player_status ps ON pcs.player_status_id = ps.player_status_id \
+            INNER JOIN player p ON p.player_id = ps.player_id \
+            INNER JOIN card c ON pcs.card_id = c.card_id \
+            INNER JOIN card_type ct ON c.card_type_id = ct.card_type_id \
+            WHERE pcs.player_status_id != ? AND match_id = ? AND slot_id = 4 AND room_id = ?", [req.session.playerStatusId, req.session.matchId,  req.session.roomId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -1098,8 +1117,11 @@ app.post("/resolveDungeonTurn", (req, res) => {
                         "message": "Player stats updated and opponent card received",
                         "state": "NEXT_ROOM",
                         "card_id": rows[0].card_id,
+                        "room_id": req.session.roomId,
+                        "card_image_path": rows[0].card_image_path,
                         "card_type_id": rows[0].card_type_id,
-                        "card_type_name": rows[0].card_type_name
+                        "card_type_name": rows[0].card_type_name,
+                        "player_color": rows[0].player_color
                     })
                 }
                 else
@@ -1389,9 +1411,55 @@ function setupNextDungeonRoom(req, res) {
                     return
                 }
 
-                res.status(200).json({
-                    "message": "Cards inserted and game state changed!"
-                })
+                GetPlayerCardsAndStats()
+            }
+        )
+    }
+
+    function GetPlayerCardsAndStats()
+    {
+         connection.query("SELECT player_username, player_color, \
+                        player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, showdown_turn, is_visible, \
+                        match_id, PS.player_id, max_health, current_health, energy, insight, damage, \
+                        card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path \
+                        FROM player_card_slot PCS \
+                        INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id \
+                        INNER JOIN player P ON P.player_id = PS.player_id \
+                        INNER JOIN card C ON PCS.card_id = C.card_id \
+                        WHERE PS.player_id = ? AND match_id = ? AND room_id = ?;", [req.session.playerId, req.session.matchId,  req.session.roomId],
+            function (err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err);
+                    res.status(500).json({
+                        "message": err
+                    });
+                    return;
+                }
+                if (rows.length != 0) {
+                    
+                    var card1 = rows[0];
+                    var card2 = rows[1];
+                    var card3 = rows[2];
+                    
+            
+                    res.status(200).json({
+                        "message": "Player stats and cards updated",
+                        "state": "ROOM_LOADED",
+                        "player_username": rows[0].player_username,
+                        "player_color": rows[0].player_color,
+                        "room_id":  req.session.roomId,
+                        "showdown_turn":  req.session.showdownTurn,
+                        "max_health": rows[0].max_health,
+                        "current_health": rows[0].current_health,
+                        "energy": rows[0].energy,
+                        "insight": rows[0].insight,
+                        "damage": rows[0].damage,
+                        "card" : [
+                            card1, card2, card3
+                        ]
+                    })
+                
+                }
             }
         )
     }

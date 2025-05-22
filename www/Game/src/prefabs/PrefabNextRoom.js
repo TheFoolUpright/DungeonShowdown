@@ -10,16 +10,19 @@ class PrefabNextRoom extends Phaser.GameObjects.Container {
 
 		this.setInteractive(new Phaser.Geom.Rectangle(-125, -75, 250, 150), Phaser.Geom.Rectangle.Contains);
 
-		// confirm___End_Turn_Button_1
-		const confirm___End_Turn_Button_1 = scene.add.image(0, 0, "Confirm & End Turn Button");
-		this.add(confirm___End_Turn_Button_1);
+		// confirmButtonImage
+		const confirmButtonImage = scene.add.image(0, 0, "Confirm & End Turn Button");
+		this.add(confirmButtonImage);
 
-		// nextRoom
-		const nextRoom = scene.add.text(0, 0, "", {});
-		nextRoom.setOrigin(0.5, 0.5);
-		nextRoom.text = "Onward!";
-		nextRoom.setStyle({ "align": "center", "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px" });
-		this.add(nextRoom);
+		// glowFx
+		const glowFx = confirmButtonImage.preFX.addGlow(16777215, 10, 0, false);
+
+		// confirmButtonText
+		const confirmButtonText = scene.add.text(0, 0, "", {});
+		confirmButtonText.setOrigin(0.5, 0.5);
+		confirmButtonText.text = "Confirm";
+		confirmButtonText.setStyle({ "align": "center", "color": "#ffffffff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff", "strokeThickness":10});
+		this.add(confirmButtonText);
 
 		// onPointerDownScript
 		const onPointerDownScript = new OnPointerDownScript(this);
@@ -36,8 +39,9 @@ class PrefabNextRoom extends Phaser.GameObjects.Container {
 		// moveInSceneActionScript (prefab fields)
 		moveInSceneActionScript.from = "RIGHT";
 
-		this.confirm___End_Turn_Button_1 = confirm___End_Turn_Button_1;
-		this.nextRoom = nextRoom;
+		this.glowFx = glowFx;
+		this.confirmButtonImage = confirmButtonImage;
+		this.confirmButtonText = confirmButtonText;
 		this.pushActionScript = pushActionScript;
 		this.onPointerDownScript = onPointerDownScript;
 		this.moveInSceneActionScript = moveInSceneActionScript;
@@ -48,10 +52,12 @@ class PrefabNextRoom extends Phaser.GameObjects.Container {
 		/* END-USER-CTR-CODE */
 	}
 
+	/** @type {Phaser.FX.Glow} */
+	glowFx;
 	/** @type {Phaser.GameObjects.Image} */
-	confirm___End_Turn_Button_1;
+	confirmButtonImage;
 	/** @type {Phaser.GameObjects.Text} */
-	nextRoom;
+	confirmButtonText;
 	/** @type {PushActionScript} */
 	pushActionScript;
 	/** @type {OnPointerDownScript} */
