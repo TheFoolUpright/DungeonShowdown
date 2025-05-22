@@ -13,46 +13,54 @@ class PrefabStats extends Phaser.GameObjects.Container {
 
 		// healthBar
 		const healthBar = scene.add.image(0, 0, "MaxHealthBar");
+		healthBar.scaleX = 1.2;
+		healthBar.scaleY = 1.2;
 		this.add(healthBar);
 
 		// healthText
-		const healthText = scene.add.text(12, -3, "", {});
+		const healthText = scene.add.text(12, -4, "", {});
 		healthText.setOrigin(0.5, 0.5);
 		healthText.text = "20/20";
-		healthText.setStyle({ "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
+		healthText.setStyle({ "color": "#ffffffff", "fontFamily": "ROCKEY", "stroke": "#000000ff", "strokeThickness":8});
 		this.add(healthText);
 
 		// energyBar
-		const energyBar = scene.add.image(0, 80, "EnergyBar");
+		const energyBar = scene.add.image(0, 100, "EnergyBar");
+		energyBar.scaleX = 1.2;
+		energyBar.scaleY = 1.2;
 		this.add(energyBar);
 
 		// energyText
-		const energyText = scene.add.text(12, 77, "", {});
+		const energyText = scene.add.text(12, 97, "", {});
 		energyText.setOrigin(0.5, 0.5);
 		energyText.text = "30";
-		energyText.setStyle({ "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
+		energyText.setStyle({ "color": "#ffffffff", "fontFamily": "ROCKEY", "stroke": "#000000ff", "strokeThickness":8});
 		this.add(energyText);
 
 		// insightBar
-		const insightBar = scene.add.image(0, 40, "InsightBar");
+		const insightBar = scene.add.image(0, 50, "InsightBar");
+		insightBar.scaleX = 1.2;
+		insightBar.scaleY = 1.2;
 		this.add(insightBar);
 
 		// insightText
-		const insightText = scene.add.text(12, 37, "", {});
+		const insightText = scene.add.text(12, 47, "", {});
 		insightText.setOrigin(0.5, 0.5);
 		insightText.text = "10/10";
-		insightText.setStyle({ "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
+		insightText.setStyle({ "color": "#ffffffff", "fontFamily": "ROCKEY", "stroke": "#000000ff", "strokeThickness":8});
 		this.add(insightText);
 
 		// mightBar
-		const mightBar = scene.add.image(0, 120, "MightBar");
+		const mightBar = scene.add.image(0, 150, "MightBar");
+		mightBar.scaleX = 1.2;
+		mightBar.scaleY = 1.2;
 		this.add(mightBar);
 
 		// mightText
-		const mightText = scene.add.text(12, 117, "", {});
+		const mightText = scene.add.text(12, 147, "", {});
 		mightText.setOrigin(0.5, 0.5);
 		mightText.text = "30";
-		mightText.setStyle({ "color": "#000000ff", "fontFamily": "ROCKEY", "fontSize": "13px" });
+		mightText.setStyle({ "color": "#ffffffff", "fontFamily": "ROCKEY", "stroke": "#000000ff", "strokeThickness":8});
 		this.add(mightText);
 
 		this.healthBar = healthBar;

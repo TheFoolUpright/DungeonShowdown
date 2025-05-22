@@ -24,7 +24,9 @@
                     "scope": "PUBLIC",
                     "texture": {
                         "key": "MaxHealthBar"
-                    }
+                    },
+                    "scaleX": 1.2,
+                    "scaleY": 1.2
                 },
                 {
                     "type": "Text",
@@ -32,13 +34,14 @@
                     "label": "healthText",
                     "scope": "PUBLIC",
                     "x": 12,
-                    "y": -3,
+                    "y": -4,
                     "originX": 0.5,
                     "originY": 0.5,
                     "text": "20/20",
                     "fontFamily": "ROCKEY",
-                    "fontSize": "13px",
-                    "color": "#000000ff"
+                    "color": "#ffffffff",
+                    "stroke": "#000000ff",
+                    "strokeThickness": 8
                 },
                 {
                     "type": "Image",
@@ -48,7 +51,9 @@
                     "texture": {
                         "key": "EnergyBar"
                     },
-                    "y": 80
+                    "y": 100,
+                    "scaleX": 1.2,
+                    "scaleY": 1.2
                 },
                 {
                     "type": "Text",
@@ -56,13 +61,14 @@
                     "label": "energyText",
                     "scope": "PUBLIC",
                     "x": 12,
-                    "y": 77,
+                    "y": 97,
                     "originX": 0.5,
                     "originY": 0.5,
                     "text": "30",
                     "fontFamily": "ROCKEY",
-                    "fontSize": "13px",
-                    "color": "#000000ff"
+                    "color": "#ffffffff",
+                    "stroke": "#000000ff",
+                    "strokeThickness": 8
                 },
                 {
                     "type": "Image",
@@ -72,7 +78,9 @@
                     "texture": {
                         "key": "InsightBar"
                     },
-                    "y": 40
+                    "y": 50,
+                    "scaleX": 1.2,
+                    "scaleY": 1.2
                 },
                 {
                     "type": "Text",
@@ -80,13 +88,14 @@
                     "label": "insightText",
                     "scope": "PUBLIC",
                     "x": 12,
-                    "y": 37,
+                    "y": 47,
                     "originX": 0.5,
                     "originY": 0.5,
                     "text": "10/10",
                     "fontFamily": "ROCKEY",
-                    "fontSize": "13px",
-                    "color": "#000000ff"
+                    "color": "#ffffffff",
+                    "stroke": "#000000ff",
+                    "strokeThickness": 8
                 },
                 {
                     "type": "Image",
@@ -96,7 +105,9 @@
                     "texture": {
                         "key": "MightBar"
                     },
-                    "y": 120
+                    "y": 150,
+                    "scaleX": 1.2,
+                    "scaleY": 1.2
                 },
                 {
                     "type": "Text",
@@ -104,13 +115,14 @@
                     "label": "mightText",
                     "scope": "PUBLIC",
                     "x": 12,
-                    "y": 117,
+                    "y": 147,
                     "originX": 0.5,
                     "originY": 0.5,
                     "text": "30",
                     "fontFamily": "ROCKEY",
-                    "fontSize": "13px",
-                    "color": "#000000ff"
+                    "color": "#ffffffff",
+                    "stroke": "#000000ff",
+                    "strokeThickness": 8
                 }
             ]
         }

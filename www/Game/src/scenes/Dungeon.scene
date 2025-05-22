@@ -89,18 +89,6 @@
             "y": 800
         },
         {
-            "prefabId": "2f15ddb5-a4d8-4a13-9237-ebf5b4a7f47e",
-            "id": "4f345899-7816-4dce-bdab-20b5ad9de616",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "prefabNextRoom",
-            "scope": "PUBLIC",
-            "x": 1680,
-            "y": 800
-        },
-        {
             "prefabId": "58151c15-b33f-4514-a7c8-de8a701ab360",
             "id": "7dfb4d8a-3183-40aa-90df-bdbb5cf8f403",
             "unlock": [
@@ -111,6 +99,20 @@
             "scope": "PUBLIC",
             "x": 1720,
             "y": 40
+        },
+        {
+            "prefabId": "2f15ddb5-a4d8-4a13-9237-ebf5b4a7f47e",
+            "id": "dca950a5-8b29-4734-bfbd-7ab466ed3f42",
+            "unlock": [
+                "x",
+                "y",
+                "visible"
+            ],
+            "label": "onwardButton",
+            "scope": "PUBLIC",
+            "x": 1680,
+            "y": 800,
+            "visible": true
         }
     ],
     "plainObjects": [],

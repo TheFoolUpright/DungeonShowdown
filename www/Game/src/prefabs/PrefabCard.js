@@ -8,26 +8,29 @@ class PrefabCard extends Phaser.GameObjects.Container {
 	constructor(scene, x, y) {
 		super(scene, x ?? 0, y ?? 0);
 
-		this.setInteractive(new Phaser.Geom.Rectangle(-150, -218, 300, 442.1498283792502), Phaser.Geom.Rectangle.Contains);
+		this.setInteractive(new Phaser.Geom.Rectangle(-150, -218, 300, 436.4214080647836), Phaser.Geom.Rectangle.Contains);
 
 		// cardDescription
 		const cardDescription = scene.add.text(0, -260, "", {});
 		cardDescription.setOrigin(0.5, 1);
 		cardDescription.text = "Take no damage from one of the opponent's attacks and hit them back for half of their _";
-		cardDescription.setStyle({ "align": "center", "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px" });
+		cardDescription.setStyle({ "align": "center", "color": "#ffffffff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff", "strokeThickness":10});
 		cardDescription.setPadding({"left":5,"top":5,"right":5,"bottom":5});
-		cardDescription.setWordWrapWidth(248);
+		cardDescription.setWordWrapWidth(372);
 		this.add(cardDescription);
 
 		// empty_Card
 		const empty_Card = scene.add.image(0, 0, "Empty Card_1");
 		this.add(empty_Card);
 
+		// cardGlow
+		const cardGlow = empty_Card.preFX.addGlow(16777215, 0, 0, false);
+
 		// cardName
-		const cardName = scene.add.text(0, -190, "", {});
-		cardName.setOrigin(0.5, 0);
-		cardName.text = "Normal Attack\n";
-		cardName.setStyle({ "align": "center", "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px" });
+		const cardName = scene.add.text(0, -175, "", {});
+		cardName.setOrigin(0.5, 0.5);
+		cardName.text = "Normal Attack";
+		cardName.setStyle({ "align": "center", "color": "#ffffffff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff", "strokeThickness":10});
 		this.add(cardName);
 
 		// cardBorder
@@ -317,7 +320,7 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		option2_2Container.add(option2_2RewardText1);
 
 		// option2_3Container
-		const option2_3Container = scene.add.container(0, 0);
+		const option2_3Container = scene.add.container(0, 1);
 		option2_3Container.visible = false;
 		this.add(option2_3Container);
 
@@ -387,7 +390,7 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		option2_3Container.add(option2_3CostText2);
 
 		// cardImage
-		const cardImage = scene.add.image(0, 0, "_MISSING");
+		const cardImage = scene.add.image(0, -37, "_MISSING");
 		this.add(cardImage);
 
 		// onPointerDownScript
@@ -406,6 +409,7 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		moveInSceneActionScript.from = "BOTTOM";
 
 		this.cardDescription = cardDescription;
+		this.cardGlow = cardGlow;
 		this.empty_Card = empty_Card;
 		this.cardName = cardName;
 		this.cardBorder = cardBorder;
@@ -479,6 +483,8 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 	/** @type {Phaser.GameObjects.Text} */
 	cardDescription;
+	/** @type {Phaser.FX.Glow} */
+	cardGlow;
 	/** @type {Phaser.GameObjects.Image} */
 	empty_Card;
 	/** @type {Phaser.GameObjects.Text} */

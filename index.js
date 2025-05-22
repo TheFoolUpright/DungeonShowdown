@@ -763,6 +763,7 @@ app.get("/getWaitingOnOpponentDungeon", (req, res) => {
                 else { 
                     res.status(200).json({
                         "message": "Opponent hasn't confirmed their card",
+                        "state": "WAITING_FOR_OPP"
                     });
                      
                 }
@@ -781,12 +782,42 @@ app.get("/getWaitingOnOpponentDungeon", (req, res) => {
                     return;
                 } 
                 
-                res.status(200).json({
-                    "message": " req.session.state changed",
-                });
+                GetOpponentCard()
 
             }
         )
+    }
+
+    function GetOpponentCard() {
+        connection.query("SELECT c.card_id, ct.card_type_id, card_type_name FROM player_card_slot pcs INNER JOIN player_status ps ON pcs.player_status_id = ps.player_status_id INNER JOIN card c ON pcs.card_id = c.card_id INNER JOIN card_type ct ON c.card_type_id = ct.card_type_id WHERE pcs.player_status_id != ? AND match_id = ? AND slot_id = 4 AND room_id = ?", [req.session.playerStatusId, req.session.matchId,  req.session.roomId], 
+            function(err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+                if(rows.length != 0) {
+                    res.status(200).json({
+                        "message": "opponent card received",
+                        "state": "NEXT_ROOM",
+                        "card_id": rows[0].card_id,
+                        "card_type_id": rows[0].card_type_id,
+                        "card_type_name": rows[0].card_type_name
+                    })
+                }
+                else
+                {
+                    res.status(200).json({
+                        "message": "Opponent hasn't confirmed their card",
+                        "state": "WAITING_FOR_OPP"
+                    })
+                }
+                
+            }
+        )
+        
     }
 })
 

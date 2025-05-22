@@ -5,20 +5,35 @@
         "preloadPackFiles": [],
         "createMethodName": "editorCreate",
         "sceneKey": "DungeonWaitingOnOpponent",
-        "borderWidth": 1280,
-        "borderHeight": 720
+        "borderWidth": 1920,
+        "borderHeight": 1080
     },
     "displayList": [
         {
-            "type": "Rectangle",
-            "id": "f8146fa4-970c-4fee-968b-434e1799163d",
-            "label": "rectangle_1",
-            "x": 868,
-            "y": 367,
-            "isFilled": true,
-            "fillColor": "#2a7fb4",
-            "width": 128,
-            "height": 128
+            "type": "Image",
+            "id": "1e0858bb-7a9c-447d-ac96-e115da980fad",
+            "label": "dungeonBackground",
+            "texture": {
+                "key": "DungeonBackground"
+            },
+            "x": 960,
+            "y": 540
+        },
+        {
+            "type": "Text",
+            "id": "ef32a03e-4971-4976-bb7a-34903920d0a3",
+            "label": "waitingForOpponentText",
+            "scope": "PUBLIC",
+            "x": 960,
+            "y": 540,
+            "originX": 0.5,
+            "originY": 0.5,
+            "text": "Your opponent was struck with an indecisiveness spell. \nWait while they recover…",
+            "align": "center",
+            "fontFamily": "Rockey",
+            "fontSize": "64px",
+            "stroke": "#000000ff",
+            "strokeThickness": 25
         }
     ],
     "plainObjects": [],

@@ -35,13 +35,14 @@ class Dungeon extends Phaser.Scene {
 		const slot1Card = new PrefabCard(this, 600, 800);
 		this.add.existing(slot1Card);
 
-		// prefabNextRoom
-		const prefabNextRoom = new PrefabNextRoom(this, 1680, 800);
-		this.add.existing(prefabNextRoom);
-
 		// info
 		const info = new PrefabInfo(this, 1720, 40);
 		this.add.existing(info);
+
+		// onwardButton
+		const onwardButton = new PrefabNextRoom(this, 1680, 800);
+		this.add.existing(onwardButton);
+		onwardButton.visible = true;
 
 		// slot3Card (prefab fields)
 		slot3Card.cardId = 0;
@@ -62,8 +63,8 @@ class Dungeon extends Phaser.Scene {
 		this.slot3Card = slot3Card;
 		this.slot2Card = slot2Card;
 		this.slot1Card = slot1Card;
-		this.prefabNextRoom = prefabNextRoom;
 		this.info = info;
+		this.onwardButton = onwardButton;
 
 		this.events.emit("scene-awake");
 	}
@@ -76,10 +77,10 @@ class Dungeon extends Phaser.Scene {
 	slot2Card;
 	/** @type {PrefabCard} */
 	slot1Card;
-	/** @type {PrefabNextRoom} */
-	prefabNextRoom;
 	/** @type {PrefabInfo} */
 	info;
+	/** @type {PrefabNextRoom} */
+	onwardButton;
 
 	/* START-USER-CODE */
 
@@ -104,7 +105,7 @@ class Dungeon extends Phaser.Scene {
 		var energy = data.energy
 		var insight = data.insight
 		var damage = data.damage
-		
+
 		var previousMaxHealth
 		var previousCurrentHealth
 		var previousEnergy
@@ -185,26 +186,148 @@ class Dungeon extends Phaser.Scene {
 			this.slot3Card.cardImage.setTexture("HiddenDraft.png");
 			this.slot3Card.cardDescription.text = "Not enough insight to see the card"
 		}
-		
+
 		this.slot1Card.on("pointerdown", () => {
 			if (!this.slot1Card.isSelected) {
-				this.slot1Card.setY(600)
 				this.slot1Card.isSelected = true
+				this.slot2Card.isSelected = false
+				this.slot3Card.isSelected = false
+				this.slot1Card.setY(600)
+				this.slot2Card.setY(800)
+				this.slot3Card.setY(800)
 			}
 			else {
 				this.slot1Card.setY(800)
 				this.slot1Card.isSelected = false
 			}
 		})
+
+		this.slot2Card.on("pointerdown", () => {
+			if (!this.slot2Card.isSelected) {
+				this.slot1Card.isSelected = false
+				this.slot2Card.isSelected = true
+				this.slot3Card.isSelected = false
+				this.slot1Card.setY(800)
+				this.slot2Card.setY(600)
+				this.slot3Card.setY(800)
+			}
+			else {
+				this.slot2Card.setY(800)
+				this.slot2Card.isSelected = false
+			}
+		})
+
+		this.slot3Card.on("pointerdown", () => {
+			if (!this.slot3Card.isSelected) {
+				this.slot1Card.isSelected = false
+				this.slot2Card.isSelected = false
+				this.slot3Card.isSelected = true
+				this.slot1Card.setY(800)
+				this.slot2Card.setY(800)
+				this.slot3Card.setY(600)
+			}
+			else {
+				this.slot3Card.setY(800)
+				this.slot3Card.isSelected = false
+			}
+		})
+
+		this.slot1Card.on("pointerover", () => {
+			//this.slot1Card.empty_Card.postFX.addGlow()
+			this.slot1Card.cardDescription.visible = true
+		
+		})
+		this.slot1Card.on("pointerout", () => {
+			this.slot1Card.cardDescription.visible = false
+		})
+
+		this.slot2Card.on("pointerover", () => {
+			//this.slot1Card.empty_Card.postFX.addGlow()
+			this.slot2Card.cardDescription.visible = true
+		
+		})
+		this.slot2Card.on("pointerout", () => {
+			this.slot2Card.cardDescription.visible = false
+		})
+
+		this.slot3Card.on("pointerover", () => {
+			//this.slot1Card.empty_Card.postFX.addGlow()
+			this.slot3Card.cardDescription.visible = true
+		
+		})
+		this.slot3Card.on("pointerout", () => {
+			this.slot3Card.cardDescription.visible = false
+		})
+
+		this.onwardButton.on("pointerdown", () =>{
+			this.ConfirmDungeonChoice()
+		})
+
 	}
 
-	update(data) {
-		// Im crazy and Im making a subscription EVERY FRAME
+	update() {
+
+		//If any card is selected make the button visible
+		if (this.slot1Card.isSelected || this.slot2Card.isSelected || this.slot3Card.isSelected) {
+			this.onwardButton.visible = true
+		}
+		else {
+			this.onwardButton.visible = false
+		}
 	}
 
 	sortCards(cardA, cardB) {
 			return cardA.slot_id - cardB.slot_id
 	};
+
+	ConfirmDungeonChoice() {
+
+		//determine which card is selected
+		if (this.slot1Card.isSelected) {
+			var dataToSend = {  
+			"cardId": this.slot1Card.cardId
+			}
+		}
+		if (this.slot2Card.isSelected) {
+			var dataToSend = {  
+			"cardId": this.slot2Card.cardId
+			}
+		}
+		if (this.slot3Card.isSelected) {
+			var dataToSend = {  
+			"cardId": this.slot3Card.cardId
+			}
+		}
+
+
+		var xhttp = new XMLHttpRequest();
+
+
+		xhttp.onreadystatechange = () => {
+			if (xhttp.readyState == 4) {
+				
+				var data = JSON.parse(xhttp.responseText)
+				console.log(data)
+
+				if (xhttp.status == 200) {
+					if (data.state == "NEXT_ROOM") {
+						this.scene.start("DungeonResult", data)
+					}
+					else if (data.state == "WAITING_FOR_OPP") {
+						this.scene.start("DungeonWaitingOnOpponent")
+					}
+				}
+			}
+		}
+
+		xhttp.open("POST", "/resolveDungeonTurn", true);
+
+		xhttp.setRequestHeader("Content-Type", "application/json");
+
+		xhttp.send(JSON.stringify(dataToSend));
+	}
+
+	
 
 	/* END-USER-CODE */
 }
