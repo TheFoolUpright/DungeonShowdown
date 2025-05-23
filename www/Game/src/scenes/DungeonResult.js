@@ -118,26 +118,25 @@ class DungeonResult extends Phaser.Scene {
 			xhttp.send();
 		}
 		else {
-			console.log("Work on the showdown")
-			// var xhttp = new XMLHttpRequest();
+			var xhttp = new XMLHttpRequest();
 
-			// var data = JSON.parse(xhttp.responseText)
-			// console.log(data)
+			var data = JSON.parse(xhttp.responseText)
+			console.log(data)
 
-			// xhttp.onreadystatechange = () => {
-			// 	if (xhttp.readyState == 4) {
+			xhttp.onreadystatechange = () => {
+				if (xhttp.readyState == 4) {
 
-			// 		if (xhttp.status == 200) {
-			// 			this.scene.start("Showdown", data);
-			// 		}
-			// 	}
-			// }
+					if (xhttp.status == 200) {
+						this.scene.start("Showdown", data);
+					}
+				}
+			}
 
-			// xhttp.open("POST", "/setupShowdown", true);
+			xhttp.open("POST", "/setupShowdown", true);
 
-			// xhttp.setRequestHeader("Content-Type", "application/json");
+			xhttp.setRequestHeader("Content-Type", "application/json");
 
-			// xhttp.send();
+			xhttp.send();
 		}
 	}
 

@@ -25,25 +25,25 @@ class Showdown extends Phaser.Scene {
 		prefabOpponent.scaleX = 1;
 		prefabOpponent.scaleY = 1;
 
-		// empty_Card
-		const empty_Card = new PrefabCard(this, 480, 800);
-		this.add.existing(empty_Card);
-		empty_Card.visible = true;
+		// normalAttackSlot
+		const normalAttackSlot = new PrefabCard(this, 480, 800);
+		this.add.existing(normalAttackSlot);
+		normalAttackSlot.visible = true;
 
-		// empty_Card_1
-		const empty_Card_1 = new PrefabCard(this, 800, 800);
-		this.add.existing(empty_Card_1);
-		empty_Card_1.visible = true;
+		// specialAttackSlot
+		const specialAttackSlot = new PrefabCard(this, 800, 800);
+		this.add.existing(specialAttackSlot);
+		specialAttackSlot.visible = true;
 
-		// empty_Card_2
-		const empty_Card_2 = new PrefabCard(this, 1120, 800);
-		this.add.existing(empty_Card_2);
-		empty_Card_2.visible = true;
+		// defenseSlot
+		const defenseSlot = new PrefabCard(this, 1120, 800);
+		this.add.existing(defenseSlot);
+		defenseSlot.visible = true;
 
-		// empty_Card_3
-		const empty_Card_3 = new PrefabCard(this, 1440, 800);
-		this.add.existing(empty_Card_3);
-		empty_Card_3.visible = true;
+		// skillSlot
+		const skillSlot = new PrefabCard(this, 1440, 800);
+		this.add.existing(skillSlot);
+		skillSlot.visible = true;
 
 		// prefabStats
 		const prefabStats = new PrefabStats(this, 120, 50);
@@ -60,31 +60,31 @@ class Showdown extends Phaser.Scene {
 		this.add.existing(prefabAttacks);
 		prefabAttacks.angle = 0;
 
-		// prefabNextRoom
-		const prefabNextRoom = new PrefabNextRoom(this, 1760, 800);
-		this.add.existing(prefabNextRoom);
+		// confirmButton
+		const confirmButton = new PrefabNextRoom(this, 1760, 800);
+		this.add.existing(confirmButton);
 
-		// empty_Card (prefab fields)
-		empty_Card.cardId = 0;
-		empty_Card.isVisible = true;
+		// normalAttackSlot (prefab fields)
+		normalAttackSlot.cardId = 0;
+		normalAttackSlot.isVisible = true;
 
-		// empty_Card_1 (prefab fields)
-		empty_Card_1.cardId = 0;
-		empty_Card_1.isVisible = true;
+		// specialAttackSlot (prefab fields)
+		specialAttackSlot.cardId = 0;
+		specialAttackSlot.isVisible = true;
 
-		// empty_Card_2 (prefab fields)
-		empty_Card_2.cardId = 0;
-		empty_Card_2.isVisible = true;
+		// defenseSlot (prefab fields)
+		defenseSlot.cardId = 0;
+		defenseSlot.isVisible = true;
 
-		// empty_Card_3 (prefab fields)
-		empty_Card_3.cardId = 0;
-		empty_Card_3.isVisible = true;
+		// skillSlot (prefab fields)
+		skillSlot.cardId = 0;
+		skillSlot.isVisible = true;
 
 		this.prefabOpponent = prefabOpponent;
-		this.empty_Card = empty_Card;
-		this.empty_Card_1 = empty_Card_1;
-		this.empty_Card_2 = empty_Card_2;
-		this.empty_Card_3 = empty_Card_3;
+		this.normalAttackSlot = normalAttackSlot;
+		this.specialAttackSlot = specialAttackSlot;
+		this.defenseSlot = defenseSlot;
+		this.skillSlot = skillSlot;
 		this.prefabAttacks = prefabAttacks;
 
 		this.events.emit("scene-awake");
@@ -93,13 +93,13 @@ class Showdown extends Phaser.Scene {
 	/** @type {PrefabOpponent} */
 	prefabOpponent;
 	/** @type {PrefabCard} */
-	empty_Card;
+	normalAttackSlot;
 	/** @type {PrefabCard} */
-	empty_Card_1;
+	specialAttackSlot;
 	/** @type {PrefabCard} */
-	empty_Card_2;
+	defenseSlot;
 	/** @type {PrefabCard} */
-	empty_Card_3;
+	skillSlot;
 	/** @type {PrefabAttacks} */
 	prefabAttacks;
 

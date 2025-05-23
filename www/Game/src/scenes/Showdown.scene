@@ -45,7 +45,7 @@
                 "isVisible",
                 "visible"
             ],
-            "label": "empty_Card",
+            "label": "normalAttackSlot",
             "scope": "PUBLIC",
             "cardId": 0,
             "isVisible": true,
@@ -63,7 +63,7 @@
                 "isVisible",
                 "visible"
             ],
-            "label": "empty_Card_1",
+            "label": "specialAttackSlot",
             "scope": "PUBLIC",
             "cardId": 0,
             "isVisible": true,
@@ -81,7 +81,7 @@
                 "isVisible",
                 "visible"
             ],
-            "label": "empty_Card_2",
+            "label": "defenseSlot",
             "scope": "PUBLIC",
             "cardId": 0,
             "isVisible": true,
@@ -99,7 +99,7 @@
                 "isVisible",
                 "visible"
             ],
-            "label": "empty_Card_3",
+            "label": "skillSlot",
             "scope": "PUBLIC",
             "cardId": 0,
             "isVisible": true,
@@ -154,7 +154,7 @@
                 "x",
                 "y"
             ],
-            "label": "prefabNextRoom",
+            "label": "confirmButton",
             "x": 1760,
             "y": 800
         }
