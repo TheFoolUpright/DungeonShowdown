@@ -20,22 +20,29 @@ class DungeonResult extends Phaser.Scene {
 		this.add.image(960, 540, "DungeonBackground");
 
 		// opponentCard
-		const opponentCard = new PrefabCard(this, 1680, 540);
+		const opponentCard = new PrefabCard(this, 960, 600);
 		this.add.existing(opponentCard);
 
 		// moveInSceneActionScript
 		const moveInSceneActionScript = new MoveInSceneActionScript(opponentCard.onAwakeScript);
 
+		// confirmButton
+		const confirmButton = new PrefabNextRoom(this, 1680, 800);
+		this.add.existing(confirmButton);
+
 		// moveInSceneActionScript (prefab fields)
 		moveInSceneActionScript.from = "RIGHT";
 
 		this.opponentCard = opponentCard;
+		this.confirmButton = confirmButton;
 
 		this.events.emit("scene-awake");
 	}
 
 	/** @type {PrefabCard} */
 	opponentCard;
+	/** @type {PrefabNextRoom} */
+	confirmButton;
 
 	/* START-USER-CODE */
 
@@ -45,19 +52,40 @@ class DungeonResult extends Phaser.Scene {
 
 		this.editorCreate();
 		this.DisplayCardInformation(data)
+		this.ConfirmButtonGlow()
 
 		//this.SetupNextRoom(data.room_id)
 
 	}
 
+	ConfirmButtonGlow() {
+		this.confirmButton.glowFx.active = false
+
+		this.confirmButton.on("pointerover", () => {
+			this.confirmButton.glowFx.active = true
+
+		})
+
+		this.confirmButton.on("pointerout", () => {
+			this.confirmButton.glowFx.active = false
+		})
+	}
+
 	DisplayCardInformation(data) {
 		const cardColor = data.player_color.replace("#", "0x")
 
-		this.opponentCard.opponentContainer.visible = true
-		this.opponentCard.cardName.text = data.card_type_name
+		this.opponentCard.cardGlow.active = false
+		this.opponentCard.cardDescription.visible = true
+		if (data.card_type_id == 5) {
+			this.opponentCard.cardName.text = data.card_name
+		}
+		else {
+			this.opponentCard.cardName.text = data.card_type_name
+		}
+		this.opponentCard.cardDescription.text = "Your opponent chose a " + data.card_name + " card!"
 		this.opponentCard.cardImage.setTexture(data.card_image_path)
 		this.opponentCard.cardBorder.setTint(cardColor)
-		
+
 	}
 
 	SetupNextRoom(roomId) {
@@ -66,11 +94,11 @@ class DungeonResult extends Phaser.Scene {
 
 			var xhttp = new XMLHttpRequest();
 
-			
-			
+
+
 			xhttp.onreadystatechange = () => {
 				if (xhttp.readyState == 4) {
-		
+
 					var data = JSON.parse(xhttp.responseText)
 					console.log(data)
 
@@ -79,33 +107,33 @@ class DungeonResult extends Phaser.Scene {
 					}
 				}
 			}
-		
+
 			xhttp.open("POST", "/setupNextDungeonRoom", true);
-		
+
 			xhttp.setRequestHeader("Content-Type", "application/json");
-		
+
 			xhttp.send();
 		}
 		else {
 			console.log("Work on the showdown")
 			// var xhttp = new XMLHttpRequest();
-			
+
 			// var data = JSON.parse(xhttp.responseText)
 			// console.log(data)
 
 			// xhttp.onreadystatechange = () => {
 			// 	if (xhttp.readyState == 4) {
-		
+
 			// 		if (xhttp.status == 200) {
 			// 			this.scene.start("Showdown", data);
 			// 		}
 			// 	}
 			// }
-		
+
 			// xhttp.open("POST", "/setupShowdown", true);
-		
+
 			// xhttp.setRequestHeader("Content-Type", "application/json");
-		
+
 			// xhttp.send();
 		}
 	}

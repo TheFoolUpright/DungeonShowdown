@@ -28,8 +28,8 @@
             ],
             "label": "opponentCard",
             "scope": "PUBLIC",
-            "x": 1680,
-            "y": 540,
+            "x": 960,
+            "y": 600,
             "nestedPrefabs": [
                 {
                     "prefabId": "0dc21418-28d1-4973-b2a8-45b31b3aad4b",
@@ -48,6 +48,18 @@
                     ]
                 }
             ]
+        },
+        {
+            "prefabId": "2f15ddb5-a4d8-4a13-9237-ebf5b4a7f47e",
+            "id": "2c5162e2-7da8-44a7-a998-88f3cde61874",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "confirmButton",
+            "scope": "PUBLIC",
+            "x": 1680,
+            "y": 800
         }
     ],
     "plainObjects": [],

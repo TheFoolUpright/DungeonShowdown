@@ -208,6 +208,8 @@ class Dungeon extends Phaser.Scene {
 
 		this.slot1Card.cardBorder.setTint(cardColor)
 
+		this.slot1Card.cardGlow.active = false
+
 		if(this.slot1Card.isVisible) {
 			this.slot1Card.cardName.text = data.card[0].card_name
 			this.slot1Card.cardImage.setTexture(data.card[0].card_image_path);
@@ -224,6 +226,8 @@ class Dungeon extends Phaser.Scene {
 
 		this.slot2Card.cardBorder.setTint(cardColor)
 
+		this.slot2Card.cardGlow.active = false
+
 		if(this.slot2Card.isVisible) {
 			this.slot2Card.cardName.text = data.card[1].card_name
 			this.slot2Card.cardImage.setTexture(data.card[1].card_image_path);
@@ -239,6 +243,8 @@ class Dungeon extends Phaser.Scene {
 		this.slot3Card.isVisible = data.card[2].is_visible
 
 		this.slot3Card.cardBorder.setTint(cardColor)
+
+		this.slot3Card.cardGlow.active = false
 
 		if(this.slot3Card.isVisible) {
 			this.slot3Card.cardName.text = data.card[2].card_name
@@ -308,21 +314,36 @@ class Dungeon extends Phaser.Scene {
 		})
 
 		this.slot2Card.on("pointerover", () => {
-			//this.slot1Card.empty_Card.postFX.addGlow()
+			this.slot2Card.cardGlow.active = true
 			this.slot2Card.cardDescription.visible = true
 
 		})
 		this.slot2Card.on("pointerout", () => {
+			this.slot2Card.cardGlow.active = false
 			this.slot2Card.cardDescription.visible = false
 		})
 
 		this.slot3Card.on("pointerover", () => {
-			//this.slot1Card.empty_Card.postFX.addGlow()
+			this.slot3Card.cardGlow.active = true
 			this.slot3Card.cardDescription.visible = true
 
 		})
 		this.slot3Card.on("pointerout", () => {
+			this.slot3Card.cardGlow.active = false
 			this.slot3Card.cardDescription.visible = false
+		})
+		
+		this.onwardButton.glowFx.active = false
+		
+		this.onwardButton.on("pointerover", () => {
+			console.log(this.onwardButton)
+			this.onwardButton.glowFx.active = true
+
+		})
+		
+
+		this.onwardButton.on("pointerout", () => {
+			this.onwardButton.glowFx.active = false
 		})
 
 		this.onwardButton.on("pointerdown", () =>{

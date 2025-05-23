@@ -132,11 +132,6 @@
                 "key": "PrefabCard"
             },
             {
-                "url": "src/prefabs/PrefabEndTurn.js",
-                "type": "script",
-                "key": "PrefabEndTurn"
-            },
-            {
                 "url": "src/prefabs/PrefabInfo.js",
                 "type": "script",
                 "key": "PrefabInfo"

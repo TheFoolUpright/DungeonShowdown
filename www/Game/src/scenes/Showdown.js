@@ -45,10 +45,6 @@ class Showdown extends Phaser.Scene {
 		this.add.existing(empty_Card_3);
 		empty_Card_3.visible = true;
 
-		// confirm___End_Turn_Button
-		const confirm___End_Turn_Button = new PrefabEndTurn(this, 1760, 800);
-		this.add.existing(confirm___End_Turn_Button);
-
 		// prefabStats
 		const prefabStats = new PrefabStats(this, 120, 50);
 		this.add.existing(prefabStats);
@@ -63,6 +59,10 @@ class Showdown extends Phaser.Scene {
 		const prefabAttacks = new PrefabAttacks(this, 960, 600);
 		this.add.existing(prefabAttacks);
 		prefabAttacks.angle = 0;
+
+		// prefabNextRoom
+		const prefabNextRoom = new PrefabNextRoom(this, 1760, 800);
+		this.add.existing(prefabNextRoom);
 
 		// empty_Card (prefab fields)
 		empty_Card.cardId = 0;

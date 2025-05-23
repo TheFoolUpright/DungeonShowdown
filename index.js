@@ -789,7 +789,7 @@ app.get("/getWaitingOnOpponentDungeon", (req, res) => {
     }
 
     function GetOpponentCard() {
-        connection.query("SELECT c.card_id, card_image_path, ct.card_type_id, card_type_name, p.player_color \
+        connection.query("SELECT c.card_id, card_name, card_image_path, ct.card_type_id, card_type_name, p.player_color \
             FROM player_card_slot pcs \
             INNER JOIN player_status ps ON pcs.player_status_id = ps.player_status_id \
             INNER JOIN player p ON p.player_id = ps.player_id \
@@ -809,6 +809,7 @@ app.get("/getWaitingOnOpponentDungeon", (req, res) => {
                         "message": "Player stats updated and opponent card received",
                         "state": "NEXT_ROOM",
                         "card_id": rows[0].card_id,
+                        "card_name": rows[0].card_name,
                         "room_id": req.session.roomId,
                         "card_image_path": rows[0].card_image_path,
                         "card_type_id": rows[0].card_type_id,
@@ -1097,7 +1098,7 @@ app.post("/resolveDungeonTurn", (req, res) => {
      * @returns {JSON} - returns the opponents card selection or if the player is waiting on the opponent
      */
     function GetOpponentCard() {
-        connection.query("SELECT c.card_id, card_image_path, ct.card_type_id, card_type_name, p.player_color \
+        connection.query("SELECT c.card_id, card_name, card_image_path, ct.card_type_id, card_type_name, p.player_color \
             FROM player_card_slot pcs \
             INNER JOIN player_status ps ON pcs.player_status_id = ps.player_status_id \
             INNER JOIN player p ON p.player_id = ps.player_id \
@@ -1117,6 +1118,7 @@ app.post("/resolveDungeonTurn", (req, res) => {
                         "message": "Player stats updated and opponent card received",
                         "state": "NEXT_ROOM",
                         "card_id": rows[0].card_id,
+                        "card_name": rows[0].card_name,
                         "room_id": req.session.roomId,
                         "card_image_path": rows[0].card_image_path,
                         "card_type_id": rows[0].card_type_id,
