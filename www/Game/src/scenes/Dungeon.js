@@ -157,7 +157,7 @@ class Dungeon extends Phaser.Scene {
 		//Load Info
 		console.log(data.player_color)
 		this.info.phaseName.text = "DUNGEON"
-		this.onwardButton.text = "Onward!"
+		this.onwardButton.confirmButtonText.text = "Onward!"
 		this.info.roomOrTurn.text = "Room " + data.room_id
 		this.info.playerName.text = data.player_username
 		this.info.playerName.setColor(data.player_color)

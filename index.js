@@ -2894,11 +2894,75 @@ app.post("/setupShowdown", (req, res) => {
                     return
                 }
 
-                res.status(200).json({
-                    "message": "Cards inserted and game state changed!"
-                })
+                GetCardsAndStats()
             }
         )
+    }
+
+    function GetCardsAndStats(){
+         connection.query("SELECT player_username, player_color, player_card_slot_id, PCS.player_status_id, \
+                        slot_id, PCS.card_id, room_id, showdown_turn, is_visible, match_id, \
+                        P.player_id, max_health, current_health, energy, insight, damage, \
+                        card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path, state_id \
+                        FROM player_card_slot PCS \
+                        INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id \
+                        INNER JOIN player P ON P.player_id = PS.player_id \
+                        INNER JOIN card C ON PCS.card_id = C.card_id \
+                        WHERE P.player_id = ? AND match_id = ? AND room_id = ? AND showdown_turn = ?;"
+            , [req.session.playerId, req.session.matchId,  req.session.roomId,  req.session.showdownTurn],
+        function (err, rows, fields) {
+            if (err) {
+                console.log("Database Error: " + err);
+                res.status(500).json({
+                    "message": err
+                });
+                return;
+            }
+            if (rows.length != 0) {
+                
+                var card1 = rows[0];
+                var card2 = rows[1];
+                var card3 = rows[2];
+                var card4 = rows[3];
+
+                card2.isEnabled = true
+                card3.isEnabled = true
+                card4.isEnabled = true
+
+                //Special Attack
+                if (card2.card_energy + rows[0].energy < 0) {
+                    card2.isEnabled = false
+                }
+                //Defense
+                if ((card3.card_energy + rows[0].energy < 0) || (card3.card_insight + rows[0].insight < 0)) {
+                    card3.isEnabled = false
+                }
+                //Skill
+                if ((card4.card_energy + rows[0].energy < 0) || (card4.card_current_health + rows[0].current_health < 0)) {
+                    card4.isEnabled = false
+                }
+//look here mary
+
+                res.status(200).json({
+                    "message": "Player stats and cards updated",
+                    "state": rows[0].state_id,
+                    "player_username": rows[0].player_username,
+                    "player_color": rows[0].player_color,
+                    "room_id":  req.session.roomId,
+                    "showdown_turn":  req.session.showdownTurn,
+                    "max_health": rows[0].max_health,
+                    "current_health": rows[0].current_health,
+                    "energy": rows[0].energy,
+                    "insight": rows[0].insight,
+                    "damage": rows[0].damage,
+                    "card" : [
+                        card1, card2, card3, card4
+                    ]
+                })
+                
+            }
+        }
+    )
     }
 });
 
