@@ -939,7 +939,8 @@ app.post("/resolveDungeonTurn", (req, res) => {
     }
 
     function GetSessionPlayerStatusId() {
-        connection.query("SELECT player_status_id FROM player_status WHERE player_id = ? AND match_id = ?", [req.session.playerId, req.session.matchId], 
+        connection.query("SELECT player_status_id \
+            FROM player_status WHERE player_id = ? AND match_id = ?", [req.session.playerId, req.session.matchId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -1011,7 +1012,8 @@ app.post("/resolveDungeonTurn", (req, res) => {
      * @returns none
      */
     function GetPlayerStats() {
-        connection.query("SELECT player_status_id, match_id, player_id, max_health, current_health, energy, insight, damage FROM player_status WHERE player_status_id = ?;", [req.session.playerStatusId], 
+        connection.query("SELECT player_status_id, match_id, player_id, max_health, current_health, energy, insight, damage \
+            FROM player_status WHERE player_status_id = ?;", [req.session.playerStatusId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -1040,7 +1042,8 @@ app.post("/resolveDungeonTurn", (req, res) => {
      * @returns none
      */
     function GetCardStats(PlayerStats) {
-        connection.query("SELECT card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path FROM card WHERE card_id = ?;", [req.body.cardId], 
+        connection.query("SELECT card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path \
+                    FROM card WHERE card_id = ?;", [req.body.cardId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -1076,7 +1079,9 @@ app.post("/resolveDungeonTurn", (req, res) => {
      * @returns none
      */
     function UpdatePlayerStats(updatedMaxHealth, updatedCurrentHealth, updatedEnergy, updatedInsight, updatedDamage) {
-        connection.query("UPDATE player_status SET max_health = ?, current_health = ?, energy = ?, insight = ?, damage = ? WHERE player_status_id = ?;", [updatedMaxHealth, updatedCurrentHealth, updatedEnergy, updatedInsight, updatedDamage, req.session.playerStatusId], 
+        connection.query("UPDATE player_status \
+                        SET max_health = ?, current_health = ?, energy = ?, insight = ?, damage = ? \
+                        WHERE player_status_id = ?;", [updatedMaxHealth, updatedCurrentHealth, updatedEnergy, updatedInsight, updatedDamage, req.session.playerStatusId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -1114,17 +1119,7 @@ app.post("/resolveDungeonTurn", (req, res) => {
                     return
                 }
                 if(rows.length != 0) {
-                    res.status(200).json({
-                        "message": "Player stats updated and opponent card received",
-                        "state": "NEXT_ROOM",
-                        "card_id": rows[0].card_id,
-                        "card_name": rows[0].card_name,
-                        "room_id": req.session.roomId,
-                        "card_image_path": rows[0].card_image_path,
-                        "card_type_id": rows[0].card_type_id,
-                        "card_type_name": rows[0].card_type_name,
-                        "player_color": rows[0].player_color
-                    })
+                    UpdateGameStateToDungeonResult(rows)
                 }
                 else
                 {
@@ -1138,6 +1133,35 @@ app.post("/resolveDungeonTurn", (req, res) => {
         )
         
     }
+
+    function UpdateGameStateToDungeonResult(cardsAndStats){
+        connection.query("UPDATE player_status \
+                        SET state_id = 3 \
+                        WHERE match_id = ? AND player_status_id = ?;", [req.session.matchId, req.session.playerStatusId], 
+            function(err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+                res.status(200).json({
+                        "message": "Player stats updated and opponent card received",
+                        "state": "NEXT_ROOM",
+                        "card_id": cardsAndStats[0].card_id,
+                        "card_name": cardsAndStats[0].card_name,
+                        "room_id": req.session.roomId,
+                        "card_image_path": cardsAndStats[0].card_image_path,
+                        "card_type_id": cardsAndStats[0].card_type_id,
+                        "card_type_name": cardsAndStats[0].card_type_name,
+                        "player_color": cardsAndStats[0].player_color
+                    })
+
+            }
+        )
+    } 
+    
 });
 
 function setupNextDungeonRoom(req, res) {

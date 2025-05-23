@@ -54,7 +54,10 @@ class DungeonResult extends Phaser.Scene {
 		this.DisplayCardInformation(data)
 		this.ConfirmButtonGlow()
 
-		//this.SetupNextRoom(data.room_id)
+		this.confirmButton.on("pointerdown", () =>{
+			this.SetupNextRoom(data.room_id)
+		})
+		
 
 	}
 
