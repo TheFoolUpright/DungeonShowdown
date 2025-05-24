@@ -72,6 +72,17 @@
             "scope": "PUBLIC",
             "x": 1720,
             "y": 40
+        },
+        {
+            "prefabId": "6ead72a9-5342-419b-a399-b6b1ee837549",
+            "id": "081361c7-87af-41a3-bd4d-e8d290dffa74",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "statsContainer",
+            "x": 120,
+            "y": 50
         }
     ],
     "plainObjects": [],

@@ -34,6 +34,10 @@ class DungeonResult extends Phaser.Scene {
 		const info = new PrefabInfo(this, 1720, 40);
 		this.add.existing(info);
 
+		// statsContainer
+		const statsContainer = new PrefabStats(this, 120, 50);
+		this.add.existing(statsContainer);
+
 		// moveInSceneActionScript (prefab fields)
 		moveInSceneActionScript.from = "RIGHT";
 

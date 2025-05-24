@@ -5,20 +5,74 @@
         "preloadPackFiles": [],
         "createMethodName": "editorCreate",
         "sceneKey": "ShowdownResult",
-        "borderWidth": 1280,
-        "borderHeight": 720
+        "borderWidth": 1920,
+        "borderHeight": 1080
     },
     "displayList": [
         {
-            "type": "Rectangle",
-            "id": "1e738d39-20bc-47b6-8818-fa652d556faf",
-            "label": "rectangle_1",
-            "x": 941,
-            "y": 407,
-            "isFilled": true,
-            "fillColor": "#e2c36d",
-            "width": 128,
-            "height": 128
+            "type": "Image",
+            "id": "8d2fc1ca-e007-4f9f-b05a-7bddaf813398",
+            "label": "showdownBackground",
+            "texture": {
+                "key": "ShowdownBackground"
+            },
+            "x": 960,
+            "y": 540
+        },
+        {
+            "prefabId": "6ead72a9-5342-419b-a399-b6b1ee837549",
+            "id": "9ef19297-4a09-4a19-89aa-a7429067a82f",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "statsContainer",
+            "x": 120,
+            "y": 50
+        },
+        {
+            "prefabId": "58151c15-b33f-4514-a7c8-de8a701ab360",
+            "id": "e9719343-fdfd-4cef-a43e-94738da3ecea",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "info",
+            "x": 1720,
+            "y": 40
+        },
+        {
+            "prefabId": "f15fd942-db03-4ecd-b587-9299358545a5",
+            "id": "0d2f86c2-4d0a-42c7-b3fd-4c97c59d82ce",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "opponent",
+            "x": 960,
+            "y": 600
+        },
+        {
+            "prefabId": "9e174a37-c4f5-4ab3-8739-d16babf6c161",
+            "id": "88eef8b0-2ad6-4c29-8e4b-3f9ae46bd9bb",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "opponentAttacks",
+            "x": 986,
+            "y": 769
+        },
+        {
+            "prefabId": "2f15ddb5-a4d8-4a13-9237-ebf5b4a7f47e",
+            "id": "d17fadaf-f568-4827-8f3f-ceb8b54bc6c1",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "ConfirmButton",
+            "x": 1680,
+            "y": 800
         }
     ],
     "plainObjects": [],

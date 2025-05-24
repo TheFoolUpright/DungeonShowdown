@@ -16,10 +16,28 @@ class ShowdownResult extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
-		// rectangle_1
-		const rectangle_1 = this.add.rectangle(941, 407, 128, 128);
-		rectangle_1.isFilled = true;
-		rectangle_1.fillColor = 14861165;
+		// showdownBackground
+		this.add.image(960, 540, "ShowdownBackground");
+
+		// statsContainer
+		const statsContainer = new PrefabStats(this, 120, 50);
+		this.add.existing(statsContainer);
+
+		// info
+		const info = new PrefabInfo(this, 1720, 40);
+		this.add.existing(info);
+
+		// opponent
+		const opponent = new PrefabOpponent(this, 960, 600);
+		this.add.existing(opponent);
+
+		// opponentAttacks
+		const opponentAttacks = new PrefabAttacks(this, 986, 769);
+		this.add.existing(opponentAttacks);
+
+		// ConfirmButton
+		const confirmButton = new PrefabNextRoom(this, 1680, 800);
+		this.add.existing(confirmButton);
 
 		this.events.emit("scene-awake");
 	}

@@ -27,6 +27,7 @@ class PrefabStats extends Phaser.GameObjects.Container {
 		// healthDifferenceText
 		const healthDifferenceText = scene.add.text(50, -4, "", {});
 		healthDifferenceText.setOrigin(0, 0.5);
+		healthDifferenceText.visible = false;
 		healthDifferenceText.text = "- 4";
 		healthDifferenceText.setStyle({ "color": "#ffffffff", "fontFamily": "ROCKEY", "stroke": "#000000ff", "strokeThickness":8});
 		this.add(healthDifferenceText);
@@ -47,6 +48,7 @@ class PrefabStats extends Phaser.GameObjects.Container {
 		// insightDifferenceText
 		const insightDifferenceText = scene.add.text(50, 46, "", {});
 		insightDifferenceText.setOrigin(0, 0.5);
+		insightDifferenceText.visible = false;
 		insightDifferenceText.text = "- 4";
 		insightDifferenceText.setStyle({ "color": "#ffffffff", "fontFamily": "ROCKEY", "stroke": "#000000ff", "strokeThickness":8});
 		this.add(insightDifferenceText);
@@ -67,6 +69,7 @@ class PrefabStats extends Phaser.GameObjects.Container {
 		// energyDifferenceText
 		const energyDifferenceText = scene.add.text(50, 97, "", {});
 		energyDifferenceText.setOrigin(0, 0.5);
+		energyDifferenceText.visible = false;
 		energyDifferenceText.text = "- 4";
 		energyDifferenceText.setStyle({ "color": "#ffffffff", "fontFamily": "ROCKEY", "stroke": "#000000ff", "strokeThickness":8});
 		this.add(energyDifferenceText);
@@ -87,6 +90,7 @@ class PrefabStats extends Phaser.GameObjects.Container {
 		// mightDifferenceText
 		const mightDifferenceText = scene.add.text(50, 147, "", {});
 		mightDifferenceText.setOrigin(0, 0.5);
+		mightDifferenceText.visible = false;
 		mightDifferenceText.text = "- 4";
 		mightDifferenceText.setStyle({ "color": "#ffffffff", "fontFamily": "ROCKEY", "stroke": "#000000ff", "strokeThickness":8});
 		this.add(mightDifferenceText);
