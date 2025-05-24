@@ -19,11 +19,11 @@ class Showdown extends Phaser.Scene {
 		// showdownBackground
 		this.add.image(960, 540, "ShowdownBackground");
 
-		// prefabOpponent
-		const prefabOpponent = new PrefabOpponent(this, 960, 600);
-		this.add.existing(prefabOpponent);
-		prefabOpponent.scaleX = 1;
-		prefabOpponent.scaleY = 1;
+		// opponent
+		const opponent = new PrefabOpponent(this, 960, 600);
+		this.add.existing(opponent);
+		opponent.scaleX = 1;
+		opponent.scaleY = 1;
 
 		// skillSlot
 		const skillSlot = new PrefabCard(this, 1440, 800);
@@ -75,7 +75,7 @@ class Showdown extends Phaser.Scene {
 		normalAttackSlot.cardId = 0;
 		normalAttackSlot.isVisible = true;
 
-		this.prefabOpponent = prefabOpponent;
+		this.opponent = opponent;
 		this.skillSlot = skillSlot;
 		this.defenseSlot = defenseSlot;
 		this.specialAttackSlot = specialAttackSlot;
@@ -88,7 +88,7 @@ class Showdown extends Phaser.Scene {
 	}
 
 	/** @type {PrefabOpponent} */
-	prefabOpponent;
+	opponent;
 	/** @type {PrefabCard} */
 	skillSlot;
 	/** @type {PrefabCard} */
@@ -117,18 +117,25 @@ class Showdown extends Phaser.Scene {
 		this.loadInfoData(data)
 		this.loadStatsData(data)
 		this.loadCardData(data)
+		this.loadOpponentData(data)
 
 		//Create events
+
 		this.normalAttackSlot.on("pointerdown", () => {
 			if (!this.normalAttackSlot.isSelected) {
-				this.normalAttackSlot.isSelected = true
-				this.specialAttackSlot.isSelected = false
-				this.defenseSlot.isSelected = false
-				this.skillSlot.isSelected = false
-				this.normalAttackSlot.setY(600)
-				this.specialAttackSlot.setY(800)
-				this.defenseSlot.setY(800)
-				this.skillSlot.setY(800)
+				if (!this.specialAttackSlot.isSelected) {
+					this.normalAttackSlot.isSelected = true
+					this.specialAttackSlot.isSelected = false
+					this.defenseSlot.isSelected = false
+					this.skillSlot.isSelected = false
+					this.normalAttackSlot.setY(600)
+					this.specialAttackSlot.setY(800)
+					this.defenseSlot.setY(800)
+					this.skillSlot.setY(800)
+				}
+				else {
+					this.normalAttackSlot.isDisabled = true
+				}
 			}
 			else {
 				this.normalAttackSlot.setY(800)
@@ -259,6 +266,14 @@ class Showdown extends Phaser.Scene {
 		this.info.playerName.setColor(data.player_color)
 		return;
 	}
+
+	loadOpponentData(data) {
+		this.opponent.opponentName.text = data.opponent_username
+		this.opponent.opponentName.setColor(data.opponent_color)
+
+		return;
+	}
+
 
 	loadStatsData(data) {
 		//Load Stats

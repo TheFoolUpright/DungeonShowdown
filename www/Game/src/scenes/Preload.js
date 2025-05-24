@@ -232,7 +232,6 @@ class Preload extends Phaser.Scene {
     }
 
 	GetShowdownData() {
-		console.log("")
 		var xhttp = new XMLHttpRequest();
 		
 		xhttp.onreadystatechange = () => {

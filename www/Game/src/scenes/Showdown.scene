@@ -28,7 +28,7 @@
                 "scaleX",
                 "scaleY"
             ],
-            "label": "prefabOpponent",
+            "label": "opponent",
             "scope": "PUBLIC",
             "x": 960,
             "y": 600,
