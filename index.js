@@ -789,7 +789,7 @@ app.get("/getWaitingOnOpponentDungeon", (req, res) => {
     }
 
     function GetOpponentCard() {
-        connection.query("SELECT c.card_id, card_name, card_image_path, ct.card_type_id, card_type_name, p.player_color \
+        connection.query("SELECT c.card_id, card_name, card_image_path, ct.card_type_id, card_type_name, p.player_color, p.player_username \
             FROM player_card_slot pcs \
             INNER JOIN player_status ps ON pcs.player_status_id = ps.player_status_id \
             INNER JOIN player p ON p.player_id = ps.player_id \
@@ -814,7 +814,8 @@ app.get("/getWaitingOnOpponentDungeon", (req, res) => {
                         "card_image_path": rows[0].card_image_path,
                         "card_type_id": rows[0].card_type_id,
                         "card_type_name": rows[0].card_type_name,
-                        "player_color": rows[0].player_color
+                        "player_color": rows[0].player_color,
+                        "player_username": rows[0].player_username
                     })
                 }
                 else
@@ -1103,7 +1104,7 @@ app.post("/resolveDungeonTurn", (req, res) => {
      * @returns {JSON} - returns the opponents card selection or if the player is waiting on the opponent
      */
     function GetOpponentCard() {
-        connection.query("SELECT c.card_id, card_name, card_image_path, ct.card_type_id, card_type_name, p.player_color \
+        connection.query("SELECT c.card_id, card_name, card_image_path, ct.card_type_id, card_type_name, p.player_color, p.player_username \
             FROM player_card_slot pcs \
             INNER JOIN player_status ps ON pcs.player_status_id = ps.player_status_id \
             INNER JOIN player p ON p.player_id = ps.player_id \
@@ -1155,7 +1156,8 @@ app.post("/resolveDungeonTurn", (req, res) => {
                         "card_image_path": cardsAndStats[0].card_image_path,
                         "card_type_id": cardsAndStats[0].card_type_id,
                         "card_type_name": cardsAndStats[0].card_type_name,
-                        "player_color": cardsAndStats[0].player_color
+                        "player_color": cardsAndStats[0].player_color, 
+                        "player_username": cardsAndStats[0].player_username
                     })
 
             }
@@ -1512,7 +1514,15 @@ app.post("/setupNextDungeonRoom", (req, res) => {
  */
 app.get("/getOpponentCard", (req, res) => {
 
-    connection.query("SELECT c.card_id, ct.card_type_id, card_type_name FROM player_card_slot pcs INNER JOIN player_status ps ON pcs.player_status_id = ps.player_status_id INNER JOIN card c ON pcs.card_id = c.card_id INNER JOIN card_type ct ON c.card_type_id = ct.card_type_id WHERE pcs.player_status_id != ? AND match_id = ? AND slot_id = 4 AND room_id = ?", [req.session.playerStatusId, req.session.matchId,  req.session.roomId], 
+    //if room Id isn't set we need to do something
+
+    connection.query("SELECT c.card_id, c.card_name, c.card_image_path, ct.card_type_id, card_type_name, p.player_color, p.player_username \
+        FROM player_card_slot pcs \
+        INNER JOIN player_status ps ON pcs.player_status_id = ps.player_status_id \
+        INNER JOIN player p ON p.player_id = ps.player_id \
+        INNER JOIN card c ON pcs.card_id = c.card_id \
+        INNER JOIN card_type ct ON c.card_type_id = ct.card_type_id \
+        WHERE p.player_id != ? AND match_id = ? AND slot_id = 4 AND room_id = ?", [req.session.playerId, req.session.matchId,  req.session.roomId], 
         function(err, rows, fields) {
             if (err) {
                 console.log("Database Error: " + err)
@@ -1525,9 +1535,14 @@ app.get("/getOpponentCard", (req, res) => {
                 res.status(200).json({
                     "message": "Player stats updated and opponent card received",
                     "state": "NEXT_ROOM",
+                    "room_id": req.session.roomId,
                     "card_id": rows[0].card_id,
+                    "card_name": rows[0].card_name,
+                    "card_image_path": rows[0].card_image_path,
                     "card_type_id": rows[0].card_type_id,
-                    "card_type_name": rows[0].card_type_name
+                    "card_type_name": rows[0].card_type_name,
+                    "player_color": rows[0].player_color,
+                    "player_username": rows[0].player_username
                 })
             }
             else
@@ -2340,6 +2355,7 @@ app.get("/getShowdownResult", (req, res) => {
  * @returns {JSON} - returns a success message
  */
 app.post("/setupShowdown", (req, res) => {
+    console.log("Current Room ID: "+req.session.roomId)
     if (req.session.roomId == 5) {
         req.session.roomId++;
         req.session.showdownTurn = 1;

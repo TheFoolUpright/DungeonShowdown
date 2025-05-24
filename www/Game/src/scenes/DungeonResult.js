@@ -30,11 +30,16 @@ class DungeonResult extends Phaser.Scene {
 		const confirmButton = new PrefabNextRoom(this, 1680, 800);
 		this.add.existing(confirmButton);
 
+		// info
+		const info = new PrefabInfo(this, 1720, 40);
+		this.add.existing(info);
+
 		// moveInSceneActionScript (prefab fields)
 		moveInSceneActionScript.from = "RIGHT";
 
 		this.opponentCard = opponentCard;
 		this.confirmButton = confirmButton;
+		this.info = info;
 
 		this.events.emit("scene-awake");
 	}
@@ -43,6 +48,8 @@ class DungeonResult extends Phaser.Scene {
 	opponentCard;
 	/** @type {PrefabNextRoom} */
 	confirmButton;
+	/** @type {PrefabInfo} */
+	info;
 
 	/* START-USER-CODE */
 
@@ -57,8 +64,13 @@ class DungeonResult extends Phaser.Scene {
 		this.confirmButton.on("pointerdown", () =>{
 			this.SetupNextRoom(data.room_id)
 		})
-		
 
+		//Load Info
+		this.info.phaseName.text = "DUNGEON"
+		this.confirmButton.confirmButtonText.text = "Onward!"
+		this.info.roomOrTurn.text = "Room " + data.room_id
+		this.info.playerName.text = ""//data.player_username
+		this.info.playerName.setColor(data.player_color)
 	}
 
 	ConfirmButtonGlow() {
@@ -118,13 +130,14 @@ class DungeonResult extends Phaser.Scene {
 			xhttp.send();
 		}
 		else {
+			console.log("here: afhsdlbjlafb")
 			var xhttp = new XMLHttpRequest();
-
-			var data = JSON.parse(xhttp.responseText)
-			console.log(data)
 
 			xhttp.onreadystatechange = () => {
 				if (xhttp.readyState == 4) {
+
+					var data = JSON.parse(xhttp.responseText)
+					console.log(data)
 
 					if (xhttp.status == 200) {
 						this.scene.start("Showdown", data);
