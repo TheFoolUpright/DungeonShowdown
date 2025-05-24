@@ -2,9 +2,34 @@
     "section1": {
         "files": [
             {
+                "url": "assets/card/AdrenalineDraft.png",
+                "type": "image",
+                "key": "AdrenalineDraft"
+            },
+            {
+                "url": "assets/card/AngerDraft.png",
+                "type": "image",
+                "key": "AngerDraft"
+            },
+            {
                 "url": "assets/card/BatDraft.png",
                 "type": "image",
                 "key": "BatDraft"
+            },
+            {
+                "url": "assets/card/Block2Draft.png",
+                "type": "image",
+                "key": "Block2Draft"
+            },
+            {
+                "url": "assets/card/Block3Draft.png",
+                "type": "image",
+                "key": "Block3Draft"
+            },
+            {
+                "url": "assets/card/Block4Draft.png",
+                "type": "image",
+                "key": "Block4Draft"
             },
             {
                 "url": "assets/card/CardBorder.png",
@@ -27,6 +52,11 @@
                 "key": "Counter Slash"
             },
             {
+                "url": "assets/card/CounterAttackDraft.png",
+                "type": "image",
+                "key": "CounterAttackDraft"
+            },
+            {
                 "url": "assets/ui/CurrentHealth.png",
                 "type": "image",
                 "key": "CurrentHealth"
@@ -45,6 +75,16 @@
                 "url": "assets/dino.png",
                 "key": "dino",
                 "type": "image"
+            },
+            {
+                "url": "assets/card/DodgeDraft.png",
+                "type": "image",
+                "key": "DodgeDraft"
+            },
+            {
+                "url": "assets/card/DoubleAttackDraft.png",
+                "type": "image",
+                "key": "DoubleAttackDraft"
             },
             {
                 "url": "assets/background/DungeonBackground.png",
@@ -67,9 +107,19 @@
                 "key": "EnergyBar"
             },
             {
+                "url": "assets/card/FocusDraft.png",
+                "type": "image",
+                "key": "FocusDraft"
+            },
+            {
                 "url": "assets/card/GhostDraft.png",
                 "type": "image",
                 "key": "GhostDraft"
+            },
+            {
+                "url": "assets/card/HealDraft.png",
+                "type": "image",
+                "key": "HealDraft"
             },
             {
                 "url": "assets/card/HealingDraft.png",
@@ -80,6 +130,11 @@
                 "url": "assets/opponent/Heavy Slash.png",
                 "type": "image",
                 "key": "Heavy Slash"
+            },
+            {
+                "url": "assets/card/HeavyAttackDraft.png",
+                "type": "image",
+                "key": "HeavyAttackDraft"
             },
             {
                 "url": "assets/card/HiddenDraft.png",
@@ -122,6 +177,16 @@
                 "key": "Normal Slash"
             },
             {
+                "url": "assets/card/NormalAttackDraft.png",
+                "type": "image",
+                "key": "NormalAttackDraft"
+            },
+            {
+                "url": "assets/card/ParryDraft.png",
+                "type": "image",
+                "key": "ParryDraft"
+            },
+            {
                 "url": "src/prefabs/PrefabAttacks.js",
                 "type": "script",
                 "key": "PrefabAttacks"
@@ -152,9 +217,19 @@
                 "key": "PrefabStats"
             },
             {
+                "url": "assets/card/RageDraft.png",
+                "type": "image",
+                "key": "RageDraft"
+            },
+            {
                 "url": "assets/opponent/Recovery Hit.png",
                 "type": "image",
                 "key": "Recovery Hit"
+            },
+            {
+                "url": "assets/card/RecoveryAttackDraft.png",
+                "type": "image",
+                "key": "RecoveryAttackDraft"
             },
             {
                 "url": "assets/card/RestDraft.png",

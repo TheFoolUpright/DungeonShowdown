@@ -13,6 +13,7 @@
             "type": "Image",
             "id": "8d2fc1ca-e007-4f9f-b05a-7bddaf813398",
             "label": "showdownBackground",
+            "scope": "PUBLIC",
             "texture": {
                 "key": "ShowdownBackground"
             },
@@ -27,6 +28,7 @@
                 "y"
             ],
             "label": "statsContainer",
+            "scope": "PUBLIC",
             "x": 120,
             "y": 50
         },
@@ -38,6 +40,7 @@
                 "y"
             ],
             "label": "info",
+            "scope": "PUBLIC",
             "x": 1720,
             "y": 40
         },
@@ -49,6 +52,7 @@
                 "y"
             ],
             "label": "opponent",
+            "scope": "PUBLIC",
             "x": 960,
             "y": 600
         },
@@ -60,6 +64,7 @@
                 "y"
             ],
             "label": "opponentAttacks",
+            "scope": "PUBLIC",
             "x": 986,
             "y": 769
         },
@@ -70,7 +75,8 @@
                 "x",
                 "y"
             ],
-            "label": "ConfirmButton",
+            "label": "confirmButton",
+            "scope": "PUBLIC",
             "x": 1680,
             "y": 800
         }

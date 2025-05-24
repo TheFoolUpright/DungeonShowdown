@@ -17,7 +17,7 @@ class ShowdownResult extends Phaser.Scene {
 	editorCreate() {
 
 		// showdownBackground
-		this.add.image(960, 540, "ShowdownBackground");
+		const showdownBackground = this.add.image(960, 540, "ShowdownBackground");
 
 		// statsContainer
 		const statsContainer = new PrefabStats(this, 120, 50);
@@ -35,12 +35,32 @@ class ShowdownResult extends Phaser.Scene {
 		const opponentAttacks = new PrefabAttacks(this, 986, 769);
 		this.add.existing(opponentAttacks);
 
-		// ConfirmButton
+		// confirmButton
 		const confirmButton = new PrefabNextRoom(this, 1680, 800);
 		this.add.existing(confirmButton);
 
+		this.showdownBackground = showdownBackground;
+		this.statsContainer = statsContainer;
+		this.info = info;
+		this.opponent = opponent;
+		this.opponentAttacks = opponentAttacks;
+		this.confirmButton = confirmButton;
+
 		this.events.emit("scene-awake");
 	}
+
+	/** @type {Phaser.GameObjects.Image} */
+	showdownBackground;
+	/** @type {PrefabStats} */
+	statsContainer;
+	/** @type {PrefabInfo} */
+	info;
+	/** @type {PrefabOpponent} */
+	opponent;
+	/** @type {PrefabAttacks} */
+	opponentAttacks;
+	/** @type {PrefabNextRoom} */
+	confirmButton;
 
 	/* START-USER-CODE */
 

@@ -20,7 +20,7 @@ class Showdown extends Phaser.Scene {
 		this.add.image(960, 540, "ShowdownBackground");
 
 		// opponent
-		const opponent = new PrefabOpponent(this, 960, 600);
+		const opponent = new PrefabOpponent(this, 960, 504);
 		this.add.existing(opponent);
 		opponent.scaleX = 1;
 		opponent.scaleY = 1;
@@ -214,9 +214,10 @@ class Showdown extends Phaser.Scene {
 		})
 
 		this.normalAttackSlot.on("pointerover", () => {
-			console.log(this.normalAttackSlot)
-			this.normalAttackSlot.cardGlow.active = true
-			this.normalAttackSlot.cardDescription.visible = true
+			if (!this.normalAttackSlot.isDisabled) {
+				this.normalAttackSlot.cardGlow.active = true
+				this.normalAttackSlot.cardDescription.visible = true
+			}
 
 		})
 		this.normalAttackSlot.on("pointerout", () => {
@@ -287,8 +288,8 @@ class Showdown extends Phaser.Scene {
 	}
 
 	loadOpponentData(data) {
-		// this.opponent.opponentName.text = data.opponent_username
-		// this.opponent.opponentName.setColor(data.opponent_color)
+		this.opponent.opponentName.text = data.opponent_username
+		this.opponent.opponentName.setColor(data.opponent_color)
 
 		return
 	}
@@ -392,20 +393,48 @@ class Showdown extends Phaser.Scene {
 			this.skillSlot.cardImage.setTexture("HiddenDraft")
 			this.skillSlot.cardDescription.text = "Not enough insight to see the card"
 		}
-
 	}
+
 	update() {
+		//If any card is selected make the button visible
+		if (this.normalAttackSlot.isSelected || this.specialAttackSlot.isSelected || this.defenseSlot.isSelected || this.skillSlot.isSelected) {
+			this.confirmButton.visible = true
+		}
+		else {
+			this.confirmButton.visible = false
+		}
+
 		if (this.normalAttackSlot.isSelected) {
 			this.specialAttackSlot.isDisabled = true
+			if (!this.specialAttackSlot.isTinted) {
+				this.specialAttackSlot.empty_Card.setTint("0xaaaaaa")
+				this.specialAttackSlot.cardImage.setTint("0xaaaaaa")
+				this.specialAttackSlot.isTinted = true
+			}
 		}
 		else {
 			this.specialAttackSlot.isDisabled = false
+			if (this.specialAttackSlot.isTinted) {
+				this.specialAttackSlot.empty_Card.setTint()
+				this.specialAttackSlot.cardImage.setTint()
+				this.specialAttackSlot.isTinted = false
+			}
 		}
 		if (this.specialAttackSlot.isSelected) {
 			this.normalAttackSlot.isDisabled = true
+			if (!this.normalAttackSlot.isTinted) {
+				this.normalAttackSlot.empty_Card.setTint("0xaaaaaa")
+				this.normalAttackSlot.cardImage.setTint("0xaaaaaa")
+				this.normalAttackSlot.isTinted = true
+			}
 		}
 		else {
 			this.normalAttackSlot.isDisabled = false
+			if (this.normalAttackSlot.isTinted) {
+				this.normalAttackSlot.empty_Card.setTint()
+				this.normalAttackSlot.cardImage.setTint()
+				this.normalAttackSlot.isTinted = false
+			}
 		}
 	}
 	/* END-USER-CODE */

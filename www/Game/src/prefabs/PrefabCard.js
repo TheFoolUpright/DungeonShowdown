@@ -15,9 +15,9 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		cardDescription.setOrigin(0.5, 1);
 		cardDescription.visible = false;
 		cardDescription.text = "Take no damage from one of the opponent's attacks and hit them back for half of their _";
-		cardDescription.setStyle({ "align": "center", "color": "#ffffffff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff", "strokeThickness":10});
+		cardDescription.setStyle({ "align": "center", "color": "#ffffffff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff", "strokeThickness":12});
 		cardDescription.setPadding({"left":5,"top":5,"right":5,"bottom":5});
-		cardDescription.setWordWrapWidth(372);
+		cardDescription.setWordWrapWidth(324);
 		this.add(cardDescription);
 
 		// empty_Card
@@ -618,6 +618,8 @@ class PrefabCard extends Phaser.GameObjects.Container {
 	isSelected = 0;
 	/** @type {boolean} */
 	isDisabled = false;
+	/** @type {boolean} */
+	isTinted = false;
 
 	/* START-USER-CODE */
 

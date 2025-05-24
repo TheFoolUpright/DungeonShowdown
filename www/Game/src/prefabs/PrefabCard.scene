@@ -35,11 +35,11 @@
                     "paddingBottom": 5,
                     "align": "center",
                     "fontFamily": "Rockey",
-                    "fontSize": "24px",
+                    "fontSize": "32px",
                     "color": "#ffffffff",
                     "stroke": "#000000ff",
-                    "strokeThickness": 10,
-                    "wordWrapWidth": 372
+                    "strokeThickness": 12,
+                    "wordWrapWidth": 324
                 },
                 {
                     "type": "Image",
@@ -909,6 +909,16 @@
         {
             "name": "isDisabled",
             "label": "IsDisabled",
+            "tooltip": "",
+            "defValue": false,
+            "customDefinition": false,
+            "type": {
+                "id": "boolean"
+            }
+        },
+        {
+            "name": "isTinted",
+            "label": "IsTinted",
             "tooltip": "",
             "defValue": false,
             "customDefinition": false,
