@@ -122,54 +122,65 @@ class Showdown extends Phaser.Scene {
 		//Create events
 
 		this.normalAttackSlot.on("pointerdown", () => {
-			if (!this.normalAttackSlot.isSelected) {
-				if (!this.specialAttackSlot.isSelected) {
-					this.normalAttackSlot.isSelected = true
-					this.specialAttackSlot.isSelected = false
-					this.defenseSlot.isSelected = false
-					this.skillSlot.isSelected = false
-					this.normalAttackSlot.setY(600)
-					this.specialAttackSlot.setY(800)
-					this.defenseSlot.setY(800)
-					this.skillSlot.setY(800)
+			if (!this.normalAttackSlot.isDisabled) {
+				if (!this.normalAttackSlot.isSelected) {
+					if (this.defenseSlot.isSelected && this.skillSlot.isSelected) {
+						this.normalAttackSlot.isSelected = true
+						this.defenseSlot.isSelected = false
+						this.normalAttackSlot.setY(600)
+						this.defenseSlot.setY(800)
+					}
+					else {
+						this.normalAttackSlot.isSelected = true
+						this.normalAttackSlot.setY(600)
+					}
 				}
 				else {
-					this.normalAttackSlot.isDisabled = true
+					this.normalAttackSlot.isSelected = false
+					this.normalAttackSlot.setY(800)
 				}
-			}
-			else {
-				this.normalAttackSlot.setY(800)
-				this.normalAttackSlot.isSelected = false
 			}
 		})
 
 		this.specialAttackSlot.on("pointerdown", () => {
-			if (!this.specialAttackSlot.isSelected) {
-				this.normalAttackSlot.isSelected = false
-				this.specialAttackSlot.isSelected = true
-				this.defenseSlot.isSelected = false
-				this.skillSlot.isSelected = false
-				this.normalAttackSlot.setY(800)
-				this.specialAttackSlot.setY(600)
-				this.defenseSlot.setY(800)
-				this.skillSlot.setY(800)
-			}
-			else {
-				this.specialAttackSlot.setY(800)
-				this.specialAttackSlot.isSelected = false
+			if (!this.specialAttackSlot.isDisabled) {
+				if (!this.specialAttackSlot.isSelected) {
+					if (this.defenseSlot.isSelected && this.skillSlot.isSelected) {
+						this.specialAttackSlot.isSelected = true
+						this.defenseSlot.isSelected = false
+						this.specialAttackSlot.setY(600)
+						this.defenseSlot.setY(800)
+					}
+					else {
+						this.specialAttackSlot.isSelected = true
+						this.specialAttackSlot.setY(600)
+					}
+				}
+				else {
+					this.specialAttackSlot.isSelected = false
+					this.specialAttackSlot.setY(800)
+				}
 			}
 		})
 
 		this.defenseSlot.on("pointerdown", () => {
 			if (!this.defenseSlot.isSelected) {
-				this.normalAttackSlot.isSelected = false
-				this.specialAttackSlot.isSelected = false
-				this.defenseSlot.isSelected = true
-				this.skillSlot.isSelected = false
-				this.normalAttackSlot.setY(800)
-				this.specialAttackSlot.setY(800)
-				this.defenseSlot.setY(600)
-				this.skillSlot.setY(800)
+				if (this.normalAttackSlot.isSelected && this.skillSlot.isSelected) {
+					this.defenseSlot.isSelected = true
+					this.skillSlot.isSelected = false
+					this.defenseSlot.setY(600)
+					this.skillSlot.setY(800)
+				}
+				else if (this.specialAttackSlot.isSelected && this.skillSlot.isSelected) {
+					this.defenseSlot.isSelected = true
+					this.skillSlot.isSelected = false
+					this.defenseSlot.setY(600)
+					this.skillSlot.setY(800)
+				}
+				else {
+					this.defenseSlot.isSelected = true
+					this.defenseSlot.setY(600)
+				}
 			}
 			else {
 				this.defenseSlot.setY(800)
@@ -179,14 +190,22 @@ class Showdown extends Phaser.Scene {
 
 		this.skillSlot.on("pointerdown", () => {
 			if (!this.skillSlot.isSelected) {
-				this.normalAttackSlot.isSelected = false
-				this.specialAttackSlot.isSelected = false
-				this.defenseSlot.isSelected = false
-				this.skillSlot.isSelected = true
-				this.normalAttackSlot.setY(800)
-				this.specialAttackSlot.setY(800)
-				this.defenseSlot.setY(800)
-				this.skillSlot.setY(600)
+				if (this.normalAttackSlot.isSelected && this.defenseSlot.isSelected) {
+					this.defenseSlot.isSelected = false
+					this.skillSlot.isSelected = true
+					this.defenseSlot.setY(800)
+					this.skillSlot.setY(600)
+				}
+				else if (this.specialAttackSlot.isSelected && this.defenseSlot.isSelected) {
+					this.defenseSlot.isSelected = false
+					this.skillSlot.isSelected = true
+					this.defenseSlot.setY(800)
+					this.skillSlot.setY(600)
+				}
+				else {
+					this.skillSlot.isSelected = true
+					this.skillSlot.setY(600)
+				}
 			}
 			else {
 				this.skillSlot.setY(800)
@@ -255,7 +274,7 @@ class Showdown extends Phaser.Scene {
 
 	sortShowdownCards(cardA, cardB) {
 			return cardA.slot_id - cardB.slot_id
-	};
+	}
 
 	loadInfoData(data) {
 		//Load Info
@@ -268,10 +287,10 @@ class Showdown extends Phaser.Scene {
 	}
 
 	loadOpponentData(data) {
-		this.opponent.opponentName.text = data.opponent_username
-		this.opponent.opponentName.setColor(data.opponent_color)
+		// this.opponent.opponentName.text = data.opponent_username
+		// this.opponent.opponentName.setColor(data.opponent_color)
 
-		return;
+		return
 	}
 
 
@@ -300,17 +319,17 @@ class Showdown extends Phaser.Scene {
 				previousDamage = damage
 		}
 
-		this.statsContainer.healthText.text = currentHealth + "/" +  maxHealth;
-		this.statsContainer.insightText.text = insight + "/10";
-		this.statsContainer.energyText.text = energy;
-		this.statsContainer.mightText.text = damage;
+		this.statsContainer.healthText.text = currentHealth + "/" +  maxHealth
+		this.statsContainer.insightText.text = insight + "/10"
+		this.statsContainer.energyText.text = energy
+		this.statsContainer.mightText.text = damage
 
-		return;
+		return
 	}
 
-	loadCardData(data){
+	loadCardData(data) {
 
-		data.card.sort(this.sortShowdownCards);
+		data.card.sort(this.sortShowdownCards)
 
 		const cardColor = data.player_color.replace("#", "0x")
 
@@ -320,7 +339,7 @@ class Showdown extends Phaser.Scene {
 		this.normalAttackSlot.cardGlow.active = false
 
 		this.normalAttackSlot.cardName.text = data.card[0].card_name
-		this.normalAttackSlot.cardImage.setTexture(data.card[0].card_image_path);
+		this.normalAttackSlot.cardImage.setTexture(data.card[0].card_image_path)
 		this.normalAttackSlot.cardDescription.text = ""
 
 		//Special Attack
@@ -331,12 +350,12 @@ class Showdown extends Phaser.Scene {
 
 		if(this.specialAttackSlot.isVisible) {
 			this.specialAttackSlot.cardName.text = data.card[1].card_name
-			this.specialAttackSlot.cardImage.setTexture(data.card[1].card_image_path);
+			this.specialAttackSlot.cardImage.setTexture(data.card[1].card_image_path)
 			this.specialAttackSlot.cardDescription.text
 		}
 		else{
 			this.specialAttackSlot.cardName.text = "? ? ?"
-			this.specialAttackSlot.cardImage.setTexture("HiddenDraft");
+			this.specialAttackSlot.cardImage.setTexture("HiddenDraft")
 			this.specialAttackSlot.cardDescription.text = "Not enough insight to see the card"
 		}
 
@@ -348,12 +367,12 @@ class Showdown extends Phaser.Scene {
 
 		if(this.defenseSlot.isVisible) {
 			this.defenseSlot.cardName.text = data.card[2].card_name
-			this.defenseSlot.cardImage.setTexture(data.card[2].card_image_path);
+			this.defenseSlot.cardImage.setTexture(data.card[2].card_image_path)
 			this.defenseSlot.cardDescription.text
 		}
 		else{
 			this.defenseSlot.cardName.text = "? ? ?"
-			this.defenseSlot.cardImage.setTexture("HiddenDraft");
+			this.defenseSlot.cardImage.setTexture("HiddenDraft")
 			this.defenseSlot.cardDescription.text = "Not enough insight to see the card"
 		}
 
@@ -370,10 +389,24 @@ class Showdown extends Phaser.Scene {
 		}
 		else{
 			this.skillSlot.cardName.text = "? ? ?"
-			this.skillSlot.cardImage.setTexture("HiddenDraft");
+			this.skillSlot.cardImage.setTexture("HiddenDraft")
 			this.skillSlot.cardDescription.text = "Not enough insight to see the card"
 		}
 
+	}
+	update() {
+		if (this.normalAttackSlot.isSelected) {
+			this.specialAttackSlot.isDisabled = true
+		}
+		else {
+			this.specialAttackSlot.isDisabled = false
+		}
+		if (this.specialAttackSlot.isSelected) {
+			this.normalAttackSlot.isDisabled = true
+		}
+		else {
+			this.normalAttackSlot.isDisabled = false
+		}
 	}
 	/* END-USER-CODE */
 }
