@@ -226,8 +226,10 @@ class Showdown extends Phaser.Scene {
 		})
 
 		this.specialAttackSlot.on("pointerover", () => {
-			this.specialAttackSlot.cardGlow.active = true
-			this.specialAttackSlot.cardDescription.visible = true
+			if (!this.specialAttackSlot.isDisabled) {
+				this.specialAttackSlot.cardGlow.active = true
+				this.specialAttackSlot.cardDescription.visible = true
+			}
 
 		})
 		this.specialAttackSlot.on("pointerout", () => {
