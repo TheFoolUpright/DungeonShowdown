@@ -118,13 +118,29 @@ console.log('Clicked');
 
 	create(data) {
 
-		console.log(data.bla);
 		this.editorCreate();
+
+		//load Data
+		this.loadInfoData(data)
 	}
 
-	update() {
+	loadInfoData(data){
+		//Load Info
+		
+		this.info.phaseName.text = "SHOWDOWN"
+		this.info.roomOrTurn.text = "Turn " + data.showdown_turn
+		this.info.playerName.text = data.player_username
+		this.info.playerName.setColor(data.player_color)
+		return;
 	}
 
+	loadStats(){
+
+	}
+
+	loadCards(){
+
+	}
 	/* END-USER-CODE */
 }
 

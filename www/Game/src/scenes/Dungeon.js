@@ -1,6 +1,12 @@
 
 // You can write more code here
 
+var previousMaxHealth
+var previousCurrentHealth
+var previousEnergy
+var previousInsight
+var previousDamage
+
 /* START OF COMPILED CODE */
 
 class Dungeon extends Phaser.Scene {
@@ -153,110 +159,13 @@ class Dungeon extends Phaser.Scene {
 
 		this.editorCreate();
 
-
-		//Load Info
-		
-		this.info.phaseName.text = "DUNGEON"
-		this.onwardButton.confirmButtonText.text = "Onward!"
-		this.info.roomOrTurn.text = "Room " + data.room_id
-		this.info.playerName.text = data.player_username
-		this.info.playerName.setColor(data.player_color)
-
-		//Load Stats
-
-		var maxHealth = data.max_health
-		var currentHealth = data.current_health
-		var energy = data.energy
-		var insight = data.insight
-		var damage = data.damage
-
-		var previousMaxHealth
-		var previousCurrentHealth
-		var previousEnergy
-		var previousInsight
-		var previousDamage
-
-		if(isNaN(previousMaxHealth)) {
-				previousMaxHealth = maxHealth
-			}
-			if(isNaN(previousCurrentHealth)) {
-				previousCurrentHealth = currentHealth
-			}
-			if(isNaN(previousEnergy)) {
-				previousEnergy = energy
-			}
-			if(isNaN(previousInsight)) {
-				previousInsight = insight
-			}
-			if(isNaN(previousDamage)) {
-				previousDamage = damage
-		}
-
-		this.statsContainer.healthText.text = currentHealth + "/" +  maxHealth;
-		this.statsContainer.insightText.text = insight + "/10";
-		this.statsContainer.energyText.text = energy;
-		this.statsContainer.mightText.text = damage;
+		//Load Data
+		this.loadInfoData(data)
+		this.loadStatsData(data)
+		this.loadCardData(data)
 
 
-		//Load Cards
-		data.card.sort(this.sortCards);
-
-		this.slot1Card.cardId = data.card[0].card_id
-		this.slot1Card.isVisible = data.card[0].is_visible
-
-		const cardColor = data.player_color.replace("#", "0x")
-
-		this.slot1Card.cardBorder.setTint(cardColor)
-
-		this.slot1Card.cardGlow.active = false
-
-		if(this.slot1Card.isVisible) {
-			this.slot1Card.cardName.text = data.card[0].card_name
-			this.slot1Card.cardImage.setTexture(data.card[0].card_image_path);
-			this.slot1Card.cardDescription.text
-		}
-		else{
-			this.slot1Card.cardName.text = "? ? ?"
-			this.slot1Card.cardImage.setTexture("HiddenDraft");
-			this.slot1Card.cardDescription.text = "Not enough insight to see the card"
-		}
-
-		this.slot2Card.cardId = data.card[1].card_id
-		this.slot2Card.isVisible = data.card[1].is_visible
-
-		this.slot2Card.cardBorder.setTint(cardColor)
-
-		this.slot2Card.cardGlow.active = false
-
-		if(this.slot2Card.isVisible) {
-			this.slot2Card.cardName.text = data.card[1].card_name
-			this.slot2Card.cardImage.setTexture(data.card[1].card_image_path);
-			this.slot2Card.cardDescription.text
-		}
-		else{
-			this.slot2Card.cardName.text = "? ? ?"
-			this.slot2Card.cardImage.setTexture("HiddenDraft");
-			this.slot2Card.cardDescription.text = "Not enough insight to see the card"
-		}
-
-		this.slot3Card.cardId = data.card[2].card_id
-		this.slot3Card.isVisible = data.card[2].is_visible
-
-		this.slot3Card.cardBorder.setTint(cardColor)
-
-		this.slot3Card.cardGlow.active = false
-
-		if(this.slot3Card.isVisible) {
-			this.slot3Card.cardName.text = data.card[2].card_name
-			this.slot3Card.cardImage.setTexture(data.card[2].card_image_path); 
-			this.slot3Card.cardDescription.text
-		}
-		else{
-			this.slot3Card.cardName.text = "? ? ?"
-			this.slot3Card.cardImage.setTexture("HiddenDraft");
-			this.slot3Card.cardDescription.text = "Not enough insight to see the card"
-		}
-
+		//Create events
 		this.slot1Card.on("pointerdown", () => {
 			if (!this.slot1Card.isSelected) {
 				this.slot1Card.isSelected = true
@@ -414,6 +323,111 @@ class Dungeon extends Phaser.Scene {
 		xhttp.send(JSON.stringify(dataToSend));
 	}
 
+	loadInfoData(data){
+		//Load Info
+		
+		this.info.phaseName.text = "DUNGEON"
+		this.onwardButton.confirmButtonText.text = "Onward!"
+		this.info.roomOrTurn.text = "Room " + data.room_id
+		this.info.playerName.text = data.player_username
+		this.info.playerName.setColor(data.player_color)
+		return;
+	}
+
+	loadStatsData(data){
+		//Load Stats
+
+		var maxHealth = data.max_health
+		var currentHealth = data.current_health
+		var energy = data.energy
+		var insight = data.insight
+		var damage = data.damage
+
+		if(isNaN(previousMaxHealth)) {
+				previousMaxHealth = maxHealth
+			}
+			if(isNaN(previousCurrentHealth)) {
+				previousCurrentHealth = currentHealth
+			}
+			if(isNaN(previousEnergy)) {
+				previousEnergy = energy
+			}
+			if(isNaN(previousInsight)) {
+				previousInsight = insight
+			}
+			if(isNaN(previousDamage)) {
+				previousDamage = damage
+		}
+
+		this.statsContainer.healthText.text = currentHealth + "/" +  maxHealth;
+		this.statsContainer.insightText.text = insight + "/10";
+		this.statsContainer.energyText.text = energy;
+		this.statsContainer.mightText.text = damage;
+		
+		return;
+	}
+	
+	loadCardData(data){
+		//Load Cards
+		data.card.sort(this.sortCards);
+
+		this.slot1Card.cardId = data.card[0].card_id
+		this.slot1Card.isVisible = data.card[0].is_visible
+
+		const cardColor = data.player_color.replace("#", "0x")
+
+		this.slot1Card.cardBorder.setTint(cardColor)
+
+		this.slot1Card.cardGlow.active = false
+
+		if(this.slot1Card.isVisible) {
+			this.slot1Card.cardName.text = data.card[0].card_name
+			this.slot1Card.cardImage.setTexture(data.card[0].card_image_path);
+			this.slot1Card.cardDescription.text
+		}
+		else{
+			this.slot1Card.cardName.text = "? ? ?"
+			this.slot1Card.cardImage.setTexture("HiddenDraft");
+			this.slot1Card.cardDescription.text = "Not enough insight to see the card"
+		}
+
+		this.slot2Card.cardId = data.card[1].card_id
+		this.slot2Card.isVisible = data.card[1].is_visible
+
+		this.slot2Card.cardBorder.setTint(cardColor)
+
+		this.slot2Card.cardGlow.active = false
+
+		if(this.slot2Card.isVisible) {
+			this.slot2Card.cardName.text = data.card[1].card_name
+			this.slot2Card.cardImage.setTexture(data.card[1].card_image_path);
+			this.slot2Card.cardDescription.text
+		}
+		else{
+			this.slot2Card.cardName.text = "? ? ?"
+			this.slot2Card.cardImage.setTexture("HiddenDraft");
+			this.slot2Card.cardDescription.text = "Not enough insight to see the card"
+		}
+
+		this.slot3Card.cardId = data.card[2].card_id
+		this.slot3Card.isVisible = data.card[2].is_visible
+
+		this.slot3Card.cardBorder.setTint(cardColor)
+
+		this.slot3Card.cardGlow.active = false
+
+		if(this.slot3Card.isVisible) {
+			this.slot3Card.cardName.text = data.card[2].card_name
+			this.slot3Card.cardImage.setTexture(data.card[2].card_image_path); 
+			this.slot3Card.cardDescription.text
+		}
+		else{
+			this.slot3Card.cardName.text = "? ? ?"
+			this.slot3Card.cardImage.setTexture("HiddenDraft");
+			this.slot3Card.cardDescription.text = "Not enough insight to see the card"
+		}
+		return;
+	}
 
 
 	/* END-USER-CODE */
