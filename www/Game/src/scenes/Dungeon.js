@@ -272,7 +272,7 @@ class Dungeon extends Phaser.Scene {
 		}
 	}
 
-	sortCards(cardA, cardB) {
+	sortDungeonCards(cardA, cardB) {
 			return cardA.slot_id - cardB.slot_id
 	};
 
@@ -369,7 +369,7 @@ class Dungeon extends Phaser.Scene {
 	
 	loadCardData(data){
 		//Load Cards
-		data.card.sort(this.sortCards);
+		data.card.sort(this.sortDungeonCards);
 
 		this.slot1Card.cardId = data.card[0].card_id
 		this.slot1Card.isVisible = data.card[0].is_visible

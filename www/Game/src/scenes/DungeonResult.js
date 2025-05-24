@@ -69,7 +69,7 @@ class DungeonResult extends Phaser.Scene {
 		this.info.phaseName.text = "DUNGEON"
 		this.confirmButton.confirmButtonText.text = "Onward!"
 		this.info.roomOrTurn.text = "Room " + data.room_id
-		this.info.playerName.text = ""//data.player_username
+		this.info.playerName.text = data.player_username
 		this.info.playerName.setColor(data.player_color)
 	}
 
@@ -87,7 +87,7 @@ class DungeonResult extends Phaser.Scene {
 	}
 
 	DisplayCardInformation(data) {
-		const cardColor = data.player_color.replace("#", "0x")
+		const cardColor = data.opponent_color.replace("#", "0x")
 
 		this.opponentCard.cardGlow.active = false
 		this.opponentCard.cardDescription.visible = true

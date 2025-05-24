@@ -37,7 +37,7 @@
         },
         {
             "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
-            "id": "ac9a7ecc-c5c6-45da-a3e0-1881553cff5b",
+            "id": "c11849c7-0c24-4670-a9b8-46df41b0cefc",
             "unlock": [
                 "x",
                 "y",
@@ -45,29 +45,11 @@
                 "isVisible",
                 "visible"
             ],
-            "label": "normalAttackSlot",
+            "label": "skillSlot",
             "scope": "PUBLIC",
             "cardId": 0,
             "isVisible": true,
-            "x": 480,
-            "y": 800,
-            "visible": true
-        },
-        {
-            "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
-            "id": "0302022f-3b56-4d5c-81e5-c8fa925b6f63",
-            "unlock": [
-                "x",
-                "y",
-                "cardId",
-                "isVisible",
-                "visible"
-            ],
-            "label": "specialAttackSlot",
-            "scope": "PUBLIC",
-            "cardId": 0,
-            "isVisible": true,
-            "x": 800,
+            "x": 1440,
             "y": 800,
             "visible": true
         },
@@ -91,7 +73,7 @@
         },
         {
             "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
-            "id": "c11849c7-0c24-4670-a9b8-46df41b0cefc",
+            "id": "0302022f-3b56-4d5c-81e5-c8fa925b6f63",
             "unlock": [
                 "x",
                 "y",
@@ -99,11 +81,29 @@
                 "isVisible",
                 "visible"
             ],
-            "label": "skillSlot",
+            "label": "specialAttackSlot",
             "scope": "PUBLIC",
             "cardId": 0,
             "isVisible": true,
-            "x": 1440,
+            "x": 800,
+            "y": 800,
+            "visible": true
+        },
+        {
+            "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
+            "id": "ac9a7ecc-c5c6-45da-a3e0-1881553cff5b",
+            "unlock": [
+                "x",
+                "y",
+                "cardId",
+                "isVisible",
+                "visible"
+            ],
+            "label": "normalAttackSlot",
+            "scope": "PUBLIC",
+            "cardId": 0,
+            "isVisible": true,
+            "x": 480,
             "y": 800,
             "visible": true
         },
@@ -116,7 +116,8 @@
                 "scaleX",
                 "scaleY"
             ],
-            "label": "prefabStats",
+            "label": "statsContainer",
+            "scope": "PUBLIC",
             "x": 120,
             "y": 50,
             "scaleX": 2,
@@ -135,20 +136,6 @@
             "y": 40
         },
         {
-            "prefabId": "9e174a37-c4f5-4ab3-8739-d16babf6c161",
-            "id": "1ef9ba08-02a7-4c2e-a7ed-204ba3bacdd5",
-            "unlock": [
-                "x",
-                "y",
-                "angle"
-            ],
-            "label": "prefabAttacks",
-            "scope": "PUBLIC",
-            "x": 960,
-            "y": 600,
-            "angle": 0
-        },
-        {
             "prefabId": "2f15ddb5-a4d8-4a13-9237-ebf5b4a7f47e",
             "id": "6099d7de-5a5b-4e14-b8e1-64828eb0f215",
             "unlock": [
@@ -156,6 +143,7 @@
                 "y"
             ],
             "label": "confirmButton",
+            "scope": "PUBLIC",
             "x": 1760,
             "y": 800
         }

@@ -166,13 +166,16 @@ class Preload extends Phaser.Scene {
 						 this.GetDungeonResultData();
 					}
 					else if(data.state_id == states.ShowdownCardSelection){
-						 this.scene.start("Showdown");
+						 this.GetShowdownData();
 					}
 					else if(data.state_id == states.ShowdownWaitingOnOpponent){
 						 this.scene.start("ShowdownWaitingOnOpponent");
 					}
 					else if(data.state_id == states.ShowdownResult){
 						 this.scene.start("ShowdownResult");
+					}
+					else if(data.state_id == states.EndingCheck){
+						 this.GetShowdownData();
 					}
 				
 				}
@@ -228,6 +231,27 @@ class Preload extends Phaser.Scene {
 		xhttp.send();
     }
 
+	GetShowdownData() {
+		console.log("")
+		var xhttp = new XMLHttpRequest();
+		
+		xhttp.onreadystatechange = () => {
+			if (xhttp.readyState == 4) {
+				var data = JSON.parse(xhttp.responseText)
+				console.log(data)
+
+				if (xhttp.status == 200){
+				    this.scene.start("Showdown", data);
+				}
+			}
+		}
+
+		xhttp.open("GET", "/getShowdownCardSelection", true);
+
+		xhttp.setRequestHeader("Content-Type", "application/json");
+
+		xhttp.send();
+	}
 	
 
 
