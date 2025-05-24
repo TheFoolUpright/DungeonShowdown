@@ -85,6 +85,7 @@ class Showdown extends Phaser.Scene {
 		this.specialAttackSlot = specialAttackSlot;
 		this.defenseSlot = defenseSlot;
 		this.skillSlot = skillSlot;
+		this.info = info;
 		this.prefabAttacks = prefabAttacks;
 
 		this.events.emit("scene-awake");
@@ -100,6 +101,8 @@ class Showdown extends Phaser.Scene {
 	defenseSlot;
 	/** @type {PrefabCard} */
 	skillSlot;
+	/** @type {PrefabInfo} */
+	info;
 	/** @type {PrefabAttacks} */
 	prefabAttacks;
 
