@@ -12,6 +12,11 @@
                 "key": "AngerDraft"
             },
             {
+                "url": "assets/card/Bat.png",
+                "type": "image",
+                "key": "Bat"
+            },
+            {
                 "url": "assets/card/BatDraft.png",
                 "type": "image",
                 "key": "BatDraft"
@@ -110,6 +115,11 @@
                 "url": "assets/card/FocusDraft.png",
                 "type": "image",
                 "key": "FocusDraft"
+            },
+            {
+                "url": "assets/card/Ghost.png",
+                "type": "image",
+                "key": "Ghost"
             },
             {
                 "url": "assets/card/GhostDraft.png",
@@ -232,9 +242,19 @@
                 "key": "RecoveryAttackDraft"
             },
             {
+                "url": "assets/card/RejuvenatingCloth.png",
+                "type": "image",
+                "key": "RejuvenatingCloth"
+            },
+            {
                 "url": "assets/card/RestDraft.png",
                 "type": "image",
                 "key": "RestDraft"
+            },
+            {
+                "url": "assets/card/RestfulDwelling.png",
+                "type": "image",
+                "key": "RestfulDwelling"
             },
             {
                 "url": "assets/background/ShowdownBackground.png",
@@ -242,9 +262,24 @@
                 "key": "ShowdownBackground"
             },
             {
+                "url": "assets/card/Slime.png",
+                "type": "image",
+                "key": "Slime"
+            },
+            {
                 "url": "assets/card/SlimeDraft.png",
                 "type": "image",
                 "key": "SlimeDraft"
+            },
+            {
+                "url": "assets/card/StoneOfPower.png",
+                "type": "image",
+                "key": "StoneOfPower"
+            },
+            {
+                "url": "assets/card/VitalityBrew.png",
+                "type": "image",
+                "key": "VitalityBrew"
             }
         ]
     },
