@@ -44,6 +44,7 @@ class DungeonResult extends Phaser.Scene {
 		this.opponentCard = opponentCard;
 		this.confirmButton = confirmButton;
 		this.info = info;
+		this.statsContainer = statsContainer;
 
 		this.events.emit("scene-awake");
 	}
@@ -54,6 +55,8 @@ class DungeonResult extends Phaser.Scene {
 	confirmButton;
 	/** @type {PrefabInfo} */
 	info;
+	/** @type {PrefabStats} */
+	statsContainer;
 
 	/* START-USER-CODE */
 
@@ -61,12 +64,13 @@ class DungeonResult extends Phaser.Scene {
 
 	create(data) {
 
-		this.editorCreate();
-		this.DisplayCardInformation(data)
-		this.ConfirmButtonGlow()
+		this.editorCreate()
+		this.loadStatsData(data)
+		this.displayCardInformation(data)
+		this.confirmButtonGlow()
 
 		this.confirmButton.on("pointerdown", () =>{
-			this.SetupNextRoom(data.room_id)
+			this.setupNextRoom(data.room_id)
 		})
 
 		//Load Info
@@ -77,7 +81,24 @@ class DungeonResult extends Phaser.Scene {
 		this.info.playerName.setColor(data.player_color)
 	}
 
-	ConfirmButtonGlow() {
+	loadStatsData(data) {
+		//Load Stats
+
+		var maxHealth = data.max_health
+		var currentHealth = data.current_health
+		var energy = data.energy
+		var insight = data.insight
+		var damage = data.damage
+
+		this.statsContainer.healthText.text = currentHealth + "/" +  maxHealth
+		this.statsContainer.insightText.text = insight + "/10"
+		this.statsContainer.energyText.text = energy
+		this.statsContainer.mightText.text = damage
+
+		return
+	}
+
+	confirmButtonGlow() {
 		this.confirmButton.glowFx.active = false
 
 		this.confirmButton.on("pointerover", () => {
@@ -90,7 +111,7 @@ class DungeonResult extends Phaser.Scene {
 		})
 	}
 
-	DisplayCardInformation(data) {
+	displayCardInformation(data) {
 		const cardColor = data.opponent_color.replace("#", "0x")
 
 		this.opponentCard.cardGlow.active = false
@@ -104,16 +125,13 @@ class DungeonResult extends Phaser.Scene {
 		this.opponentCard.cardDescription.text = "Your opponent chose a " + data.card_name + " card!"
 		this.opponentCard.cardImage.setTexture(data.card_image_path)
 		this.opponentCard.cardBorder.setTint(cardColor)
-
 	}
 
-	SetupNextRoom(roomId) {
+	setupNextRoom(roomId) {
 
 		if(roomId <= 4) {
 
-			var xhttp = new XMLHttpRequest();
-
-
+			var xhttp = new XMLHttpRequest()
 
 			xhttp.onreadystatechange = () => {
 				if (xhttp.readyState == 4) {
@@ -127,15 +145,14 @@ class DungeonResult extends Phaser.Scene {
 				}
 			}
 
-			xhttp.open("POST", "/setupNextDungeonRoom", true);
+			xhttp.open("POST", "/setupNextDungeonRoom", true)
 
-			xhttp.setRequestHeader("Content-Type", "application/json");
+			xhttp.setRequestHeader("Content-Type", "application/json")
 
 			xhttp.send();
 		}
 		else {
-			console.log("here: afhsdlbjlafb")
-			var xhttp = new XMLHttpRequest();
+			var xhttp = new XMLHttpRequest()
 
 			xhttp.onreadystatechange = () => {
 				if (xhttp.readyState == 4) {

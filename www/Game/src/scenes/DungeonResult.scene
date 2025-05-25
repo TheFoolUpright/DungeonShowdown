@@ -81,6 +81,7 @@
                 "y"
             ],
             "label": "statsContainer",
+            "scope": "PUBLIC",
             "x": 120,
             "y": 50
         }

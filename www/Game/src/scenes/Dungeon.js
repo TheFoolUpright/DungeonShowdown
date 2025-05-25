@@ -274,7 +274,7 @@ class Dungeon extends Phaser.Scene {
 
 	sortDungeonCards(cardA, cardB) {
 			return cardA.slot_id - cardB.slot_id
-	};
+	}
 
 	ConfirmDungeonChoice() {
 
@@ -296,7 +296,7 @@ class Dungeon extends Phaser.Scene {
 		}
 
 
-		var xhttp = new XMLHttpRequest();
+		var xhttp = new XMLHttpRequest()
 
 
 		xhttp.onreadystatechange = () => {
@@ -316,14 +316,14 @@ class Dungeon extends Phaser.Scene {
 			}
 		}
 
-		xhttp.open("POST", "/resolveDungeonTurn", true);
+		xhttp.open("POST", "/resolveDungeonTurn", true)
 
-		xhttp.setRequestHeader("Content-Type", "application/json");
+		xhttp.setRequestHeader("Content-Type", "application/json")
 
-		xhttp.send(JSON.stringify(dataToSend));
+		xhttp.send(JSON.stringify(dataToSend))
 	}
 
-	loadInfoData(data){
+	loadInfoData(data) {
 		//Load Info
 		
 		this.info.phaseName.text = "DUNGEON"
@@ -331,10 +331,10 @@ class Dungeon extends Phaser.Scene {
 		this.info.roomOrTurn.text = "Room " + data.room_id
 		this.info.playerName.text = data.player_username
 		this.info.playerName.setColor(data.player_color)
-		return;
+		return
 	}
 
-	loadStatsData(data){
+	loadStatsData(data) {
 		//Load Stats
 
 		var maxHealth = data.max_health
@@ -359,17 +359,17 @@ class Dungeon extends Phaser.Scene {
 				previousDamage = damage
 		}
 
-		this.statsContainer.healthText.text = currentHealth + "/" +  maxHealth;
-		this.statsContainer.insightText.text = insight + "/10";
-		this.statsContainer.energyText.text = energy;
-		this.statsContainer.mightText.text = damage;
+		this.statsContainer.healthText.text = currentHealth + "/" +  maxHealth
+		this.statsContainer.insightText.text = insight + "/10"
+		this.statsContainer.energyText.text = energy
+		this.statsContainer.mightText.text = damage
 		
-		return;
+		return
 	}
 	
-	loadCardData(data){
+	loadCardData(data) {
 		//Load Cards
-		data.card.sort(this.sortDungeonCards);
+		data.card.sort(this.sortDungeonCards)
 
 		this.slot1Card.cardId = data.card[0].card_id
 		this.slot1Card.isVisible = data.card[0].is_visible
@@ -380,14 +380,14 @@ class Dungeon extends Phaser.Scene {
 
 		this.slot1Card.cardGlow.active = false
 
-		if(this.slot1Card.isVisible) {
+		if (this.slot1Card.isVisible) {
 			this.slot1Card.cardName.text = data.card[0].card_name
-			this.slot1Card.cardImage.setTexture(data.card[0].card_image_path);
+			this.slot1Card.cardImage.setTexture(data.card[0].card_image_path)
 			this.slot1Card.cardDescription.text
 		}
-		else{
+		else {
 			this.slot1Card.cardName.text = "? ? ?"
-			this.slot1Card.cardImage.setTexture("HiddenDraft");
+			this.slot1Card.cardImage.setTexture("HiddenDraft")
 			this.slot1Card.cardDescription.text = "Not enough insight to see the card"
 		}
 
@@ -398,12 +398,12 @@ class Dungeon extends Phaser.Scene {
 
 		this.slot2Card.cardGlow.active = false
 
-		if(this.slot2Card.isVisible) {
+		if (this.slot2Card.isVisible) {
 			this.slot2Card.cardName.text = data.card[1].card_name
-			this.slot2Card.cardImage.setTexture(data.card[1].card_image_path);
+			this.slot2Card.cardImage.setTexture(data.card[1].card_image_path)
 			this.slot2Card.cardDescription.text
 		}
-		else{
+		else {
 			this.slot2Card.cardName.text = "? ? ?"
 			this.slot2Card.cardImage.setTexture("HiddenDraft");
 			this.slot2Card.cardDescription.text = "Not enough insight to see the card"
@@ -416,20 +416,18 @@ class Dungeon extends Phaser.Scene {
 
 		this.slot3Card.cardGlow.active = false
 
-		if(this.slot3Card.isVisible) {
+		if (this.slot3Card.isVisible) {
 			this.slot3Card.cardName.text = data.card[2].card_name
-			this.slot3Card.cardImage.setTexture(data.card[2].card_image_path); 
+			this.slot3Card.cardImage.setTexture(data.card[2].card_image_path)
 			this.slot3Card.cardDescription.text
 		}
-		else{
+		else {
 			this.slot3Card.cardName.text = "? ? ?"
-			this.slot3Card.cardImage.setTexture("HiddenDraft");
+			this.slot3Card.cardImage.setTexture("HiddenDraft")
 			this.slot3Card.cardDescription.text = "Not enough insight to see the card"
 		}
-		return;
+		return
 	}
-
-
 	/* END-USER-CODE */
 }
 
