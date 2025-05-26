@@ -1,6 +1,8 @@
 
 // You can write more code here
 
+	var nextSceneDataLoaded = false
+
 /* START OF COMPILED CODE */
 
 class DungeonWaitingOnOpponent extends Phaser.Scene {
@@ -42,14 +44,15 @@ class DungeonWaitingOnOpponent extends Phaser.Scene {
 	create() {
 
 		this.editorCreate();
+		nextSceneDataLoaded = false
 
 	}
 
 	update() {
-		this.CheckOpponentSelectionState()
+		this.CheckDungeonOpponentSelectionState()
 	}
 
-	CheckOpponentSelectionState() {
+	CheckDungeonOpponentSelectionState() {
 		var xhttp = new XMLHttpRequest();
 
 		xhttp.onreadystatechange = () => {
@@ -60,7 +63,8 @@ class DungeonWaitingOnOpponent extends Phaser.Scene {
 
 				if (xhttp.status == 200) {
 
-					if (data.state == "NEXT_ROOM") {
+					if (data.state == "NEXT_ROOM" && !nextSceneDataLoaded) {
+						nextSceneDataLoaded = true
 						this.scene.start("DungeonResult", data)
 					}
 					else if (data.state == "WAITING_FOR_OPP") {

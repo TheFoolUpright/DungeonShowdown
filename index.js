@@ -1656,12 +1656,12 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
                     return
                 }
                 if (rows.length != 0) {
-                    UpdateGameStateToShowdownResult()
-                    GetPlayerShowdownCardStats(rows)
+                    UpdateGameStateToShowdownResult(rows)
                 }
                 else {
                     res.status(200).json({
-                        "message": "Opponent hasn't confirmed their card(s)"
+                        "message": "Opponent hasn't confirmed their card(s)",
+                        "state": "WAITING_FOR_OPP"
                     })
                 }
                 
@@ -1670,7 +1670,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
         
     }
 
-    function UpdateGameStateToShowdownResult() {
+    function UpdateGameStateToShowdownResult(opponentCards) {
         connection.query("UPDATE player_status SET state_id = 6 WHERE player_status_id = ?", [req.session.playerStatusId], 
             function (err, rows, fields) {
                 if (err) {
@@ -1680,6 +1680,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
                     })
                     return
                 }
+                GetPlayerShowdownCardStats(opponentCards)
             }
         )
     }
@@ -1704,215 +1705,20 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
                         })
                         return
                     }
-    
                     if (rows.length != 0) {
-                        DisplayPlayerAndOpponentActions(opponentCards, rows)
+
+                        res.status(200).json({
+                        "message": "Opponent hasn't confirmed their card(s)",
+                        "state": "SHOW_RESULT",
+                        "opponent_cards": opponentCards,
+                        "player_cards": rows
+                    })
                     }
                 }
             )
         }
 
-        /**
-         * Creates the strings that show the opponent and player actions in the showdown.
-         * Called by UpdateShowdownPlayerStats.
-         * @param {object} opponentCards - An array of the opponent's selected cards.
-         * @param {object} playerCards - An array of the player's selected cards.
-         * @returns none
-         */
-        //getWaitingOnOpponentShowdown
-        function DisplayPlayerAndOpponentActions(opponentCards, playerCards) {
-            var opponentActions = ""
-            var playerActions = ""
     
-            // 6	Attack
-            // 7	Defense
-            // 8	Skill
-    
-            if (playerCards.length == 2 && opponentCards.length == 2) {
-                //Opponent Actions
-                if (opponentCards[0].card_type_id == 8 ) {
-                    opponentActions = "Your opponent used " + opponentCards[0].card_name + " "
-                    if (opponentCards[1].card_type_id == 6) {
-                        opponentActions = opponentActions + "and used a " + opponentCards[1].card_name + ". "
-                
-                    }
-                }
-                else if (opponentCards[1].card_type_id == 8) {
-                    opponentActions = "Your opponent used " + opponentCards[1].card_name + " "
-                    if (opponentCards[0].card_type_id == 6) {
-                        opponentActions = opponentActions + "and used a " + opponentCards[0].card_name + ". "
-                
-                    }
-                }
-                else{
-                    
-                    if (opponentCards[0].card_type_id == 6) {
-                        opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
-                    }
-                    else if (opponentCards[1].card_type_id == 6) {
-                        opponentActions = opponentActions + "Your opponent used a " + opponentCards[1].card_name + ". "
-                    }
-                }
-                
-    
-                if (playerCards[0].card_type_id == 7) {
-                    opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
-                }
-                else if (playerCards[1].card_type_id == 7) {
-                    opponentActions = opponentActions + "You used a " + playerCards[1].card_name + "."
-                }
-    
-                //Player Actions
-                if (playerCards[0].card_type_id == 8 ) {
-                    playerActions = "You used " + playerCards[0].card_name + " "
-                    if (playerCards[1].card_type_id == 6) {
-                        playerActions = playerActions + "and used a " + playerCards[1].card_name + "."
-                
-                    }
-                }
-                else if (playerCards[1].card_type_id == 8) {
-                    playerActions = "You used " + playerCards[1].card_name + " "
-                    if (playerCards[0].card_type_id == 6) {
-                        playerActions = playerActions + "and used a " + playerCards[0].card_name + "."
-                
-                    }
-                }
-                else{
-                    if (playerCards[0].card_type_id == 6) {
-                        playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
-                    }
-                    else if (playerCards[1].card_type_id == 6) {
-                        playerActions = playerActions + " You used a " + playerCards[1].card_name + ". "
-                    }
-                }
-                if (opponentCards[0].card_type_id == 7) {
-                    playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
-                }
-                else if (opponentCards[1].card_type_id == 7) {
-                    playerActions = playerActions + "Your opponent used a " + opponentCards[1].card_name + "."
-                }
-            }
-            else if (playerCards.length == 1 && opponentCards.length == 2) {
-                //Opponent Actions
-                if (opponentCards[0].card_type_id == 8 ) {
-                    opponentActions = "Your opponent used " + opponentCards[0].card_name
-                    if (opponentCards[1].card_type_id == 6) {
-                        opponentActions = opponentActions + " and used a " + opponentCards[1].card_name + ". "
-                
-                    }
-                }
-                else if (opponentCards[1].card_type_id == 8) {
-                    opponentActions = "Your opponent used " + opponentCards[1].card_name
-                    if (opponentCards[0].card_type_id == 6) {
-                        opponentActions = opponentActions + " and used a " + opponentCards[0].card_name + ". "
-                
-                    }
-                }
-                else{
-                    if (opponentCards[0].card_type_id == 6) {
-                        opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
-                    }
-                    else if (opponentCards[1].card_type_id == 6) {
-                        opponentActions = opponentActions + "Your opponent used a " + opponentCards[1].card_name + ". "
-                    }
-                }
-                
-    
-                if (playerCards[0].card_type_id == 7) {
-                    opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
-                }
-    
-                //Player Actions
-                if (playerCards[0].card_type_id == 8 ) {
-                    playerActions = "You used " + playerCards[0].card_name
-                }
-                else if (playerCards[0].card_type_id == 6) {
-                    playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
-                }
-                if (opponentCards[0].card_type_id == 7) {
-                    playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
-                }
-                else if (opponentCards[1].card_type_id == 7) {
-                    playerActions = playerActions + "Your opponent used a " + opponentCards[1].card_name + "."
-                }
-    
-            }
-            else if (playerCards.length == 2 && opponentCards.length == 1) {
-                //Opponent Actions
-                if (opponentCards[0].card_type_id == 8 ) {
-                    opponentActions = "Your opponent used " + opponentCards[0].card_name
-                }
-                else if (opponentCards[0].card_type_id == 6) {
-                    opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
-                }
-                    
-                if (playerCards[0].card_type_id == 7) {
-                    opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
-                }
-                else if (playerCards[1].card_type_id == 7) {
-                    opponentActions = opponentActions + "You used a " + playerCards[1].card_name + "."
-                }
-    
-                //Player Actions
-                if (playerCards[0].card_type_id == 8 ) {
-                    playerActions = "You used " + playerCards[0].card_name
-                    if (playerCards[1].card_type_id == 6) {
-                        playerActions = playerActions + " and used a " + playerCards[1].card_name + "."
-                
-                    }
-                }
-                else if (playerCards[1].card_type_id == 8) {
-                    playerActions = "You used " + playerCards[1].card_name
-                    if (playerCards[0].card_type_id == 6) {
-                        playerActions = playerActions + " and used a " + playerCards[0].card_name + "."
-                
-                    }
-                }
-                else{
-                    if (playerCards[0].card_type_id == 6) {
-                        playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
-                    }
-                    else if (playerCards[1].card_type_id == 6) {
-                        playerActions = playerActions + " You used a " + playerCards[1].card_name + ". "
-                    }
-                }
-                if (opponentCards[0].card_type_id == 7) {
-                    playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
-                }
-            }
-            else if (playerCards.length == 1 && opponentCards.length == 1) {
-                //Opponent Actions
-                if (opponentCards[0].card_type_id == 8 ) {
-                    opponentActions = "Your opponent used " + opponentCards[0].card_name
-                }
-                else{
-                    if (opponentCards[0].card_type_id == 6) {
-                        opponentActions = opponentActions + "Your opponent used a " + opponentCards[0].card_name + ". "
-                    }
-                }
-                
-                if (playerCards[0].card_type_id == 7) {
-                    opponentActions = opponentActions + "You used a " + playerCards[0].card_name + "."
-                }
-    
-                //Player Actions
-                if (playerCards[0].card_type_id == 8 ) {
-                    playerActions = "You used " + playerCards[0].card_name
-                }
-                else{
-                    if (playerCards[0].card_type_id == 6) {
-                        playerActions = playerActions + " You used a " + playerCards[0].card_name + ". "
-                    }
-                }
-                if (opponentCards[0].card_type_id == 7) {
-                    playerActions = playerActions + "Your opponent used a " + opponentCards[0].card_name + "."
-                }
-            }
-            res.status(200).json({
-                    "playerActions": playerActions,
-                    "opponentActions": opponentActions
-            })
-        }
 })
 
 /**
@@ -3173,13 +2979,93 @@ app.post("/resolveShowdownTurn", (req, res) => {
                     })
                     return
                 }
-                res.status(200).json({
-                    "message": "Updated database with player selection"
-                })
+                GetOpponentShowdownCardStats()
             }
         )
     } 
+
+    function GetOpponentShowdownCardStats() {
+        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path \
+            FROM card C \
+            INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id \
+            INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id \
+            WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (9,10) AND match_id = ?"
+            , [req.session.playerStatusId,  req.session.showdownTurn, req.session.matchId], 
+            function(err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+                if (rows.length != 0) {
+                    UpdateGameStateToShowdownResult(rows)
+                }
+                else {
+                    res.status(200).json({
+                        "message": "Opponent hasn't confirmed their card(s)",
+                        "state": "WAITING_FOR_OPP"
+                    })
+                }
+                
+            }
+        )
+        
+    }
+
+    function UpdateGameStateToShowdownResult(opponentCards) {
+        connection.query("UPDATE player_status SET state_id = 6 WHERE player_status_id = ?", [req.session.playerStatusId], 
+            function (err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+                GetPlayerShowdownCardStats(opponentCards)
+            }
+        )
+    }
+
+        /**
+         * Get all the information from the player's selected cards to use in the next function.
+         * Called by GetOpponentShowdownCardStats.
+         * @param {object} opponentCards - An array of the opponent's selected cards.
+         * @returns none
+         */
+        function GetPlayerShowdownCardStats(opponentCards) {
+            connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path \
+                FROM card C \
+                INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id \
+                WHERE player_status_id = ? AND showdown_turn = ? AND slot_id IN (9,10)"
+                , [req.session.playerStatusId,  req.session.showdownTurn], 
+                function(err, rows, fields) {
+                    if (err) {
+                        console.log("Database Error: " + err)
+                        res.status(500).json({
+                            "message": err
+                        })
+                        return
+                    }
+                    if (rows.length != 0) {
+
+                        res.status(200).json({
+                        "message": "Opponent hasn't confirmed their card(s)",
+                        "state": "SHOW_RESULT",
+                        "opponent_cards": opponentCards,
+                        "player_cards": rows
+                    })
+                    }
+                }
+            )
+        }
 })
+
+function GetDataForShowdownResult(req, res) {
+
+}
 
 //#endregion
 

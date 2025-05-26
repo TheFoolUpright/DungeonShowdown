@@ -1,6 +1,8 @@
 
 // You can write more code here
 
+	var nextSceneDataLoaded = false
+
 /* START OF COMPILED CODE */
 
 class ShowdownWaitingOnOpponent extends Phaser.Scene {
@@ -40,6 +42,41 @@ class ShowdownWaitingOnOpponent extends Phaser.Scene {
 	create() {
 
 		this.editorCreate();
+		nextSceneDataLoaded = false
+	}
+
+	update() {
+		this.CheckShowdownOpponentSelectionState()
+	}
+
+	CheckShowdownOpponentSelectionState() {
+		var xhttp = new XMLHttpRequest();
+
+		xhttp.onreadystatechange = () => {
+			if (xhttp.readyState == 4) {
+
+				var data = JSON.parse(xhttp.responseText)
+				console.log(data)
+
+				if (xhttp.status == 200) {
+
+					if (data.state == "SHOW_RESULT"  && !nextSceneDataLoaded) {
+						nextSceneDataLoaded = true
+						this.scene.start("ShowdownResult", data)
+					}
+					else if (data.state == "WAITING_FOR_OPP") {
+						return;
+					}
+				}
+			}
+		}
+
+		xhttp.open("GET", "/getWaitingOnOpponentShowdown", true);
+
+		xhttp.setRequestHeader("Content-Type", "application/json");
+
+		xhttp.send();
+
 	}
 
 	/* END-USER-CODE */
