@@ -49,7 +49,8 @@
                         "key": "Normal Slash"
                     },
                     "originX": 0.56,
-                    "originY": 1.1
+                    "originY": 1.1,
+                    "visible": false
                 },
                 {
                     "type": "Image",

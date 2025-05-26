@@ -26,6 +26,7 @@ class PrefabAttacks extends Phaser.GameObjects.Container {
 		// normal_Slash
 		const normal_Slash = scene.add.image(0, 0, "Normal Slash");
 		normal_Slash.setOrigin(0.56, 1.1);
+		normal_Slash.visible = false;
 		this.add(normal_Slash);
 
 		// recovery_Hit

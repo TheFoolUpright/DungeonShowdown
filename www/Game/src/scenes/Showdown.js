@@ -432,7 +432,12 @@ class Showdown extends Phaser.Scene {
 				console.log(data)
 
 				if (xhttp.status == 200) {
-					
+					if (data.state == "WAITING_FOR_OPP") {
+						this.scene.start("ShowdownWaitingOnOpponent")
+					}
+					else if(data.state == "SHOW_RESULT"){
+						this.scene.start("ShowdownResult", data)
+					}
 				}
 			}
 		}

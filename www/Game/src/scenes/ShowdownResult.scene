@@ -61,12 +61,14 @@
             "id": "88eef8b0-2ad6-4c29-8e4b-3f9ae46bd9bb",
             "unlock": [
                 "x",
-                "y"
+                "y",
+                "visible"
             ],
             "label": "opponentAttacks",
             "scope": "PUBLIC",
             "x": 986,
-            "y": 769
+            "y": 769,
+            "visible": true
         },
         {
             "prefabId": "2f15ddb5-a4d8-4a13-9237-ebf5b4a7f47e",
