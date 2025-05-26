@@ -284,12 +284,12 @@ class Dungeon extends Phaser.Scene {
 			"cardId": this.slot1Card.cardId
 			}
 		}
-		if (this.slot2Card.isSelected) {
+		else if (this.slot2Card.isSelected) {
 			var dataToSend = {  
 			"cardId": this.slot2Card.cardId
 			}
 		}
-		if (this.slot3Card.isSelected) {
+		else if (this.slot3Card.isSelected) {
 			var dataToSend = {  
 			"cardId": this.slot3Card.cardId
 			}

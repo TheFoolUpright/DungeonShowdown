@@ -271,7 +271,7 @@ class Showdown extends Phaser.Scene {
 		})
 
 		this.confirmButton.on("pointerdown", () =>{
-			//
+			this.ConfirmShowdownChoice()
 		})
 	}
 
@@ -395,6 +395,53 @@ class Showdown extends Phaser.Scene {
 			this.skillSlot.cardImage.setTexture("HiddenDraft")
 			this.skillSlot.cardDescription.text = "Not enough insight to see the card"
 		}
+	}
+
+	ConfirmShowdownChoice() {
+
+		var cardIterator = 0
+		var card = {}
+		//determine which card(s) is selected
+		if (this.normalAttackSlot.isSelected) {
+			card[cardIterator] = this.normalAttackSlot.cardId
+			cardIterator++
+		}
+		if (this.specialAttackSlot.isSelected) {
+			card[cardIterator] = this.specialAttackSlot.cardId
+			cardIterator++
+		}
+		if (this.defenseSlot.isSelected){
+			card[cardIterator] = this.defenseSlot.cardId
+			cardIterator++
+		}
+		if (this.skillSlot.isSelected){
+			card[cardIterator] = this.skillSlot.cardId
+			cardIterator++
+		}
+
+		var dataToSend = {  
+			"card": card
+			}
+
+		var xhttp = new XMLHttpRequest()
+
+		xhttp.onreadystatechange = () => {
+			if (xhttp.readyState == 4) {
+
+				var data = JSON.parse(xhttp.responseText)
+				console.log(data)
+
+				if (xhttp.status == 200) {
+					
+				}
+			}
+		}
+
+		xhttp.open("POST", "/resolveShowdownTurn", true)
+
+		xhttp.setRequestHeader("Content-Type", "application/json")
+
+		xhttp.send(JSON.stringify(dataToSend))
 	}
 
 	update() {

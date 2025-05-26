@@ -3087,6 +3087,8 @@ app.post("/setupShowdown", (req, res) => {
  */
 app.post("/resolveShowdownTurn", (req, res) => {
 
+    console.log(req.body.card)
+
     if (!req.session.playerStatusId) {
         GetSessionPlayerStatusId()
     }
@@ -3122,7 +3124,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
     function UpdateSelectedCardSlot1() {
         connection.query("UPDATE player_card_slot SET slot_id = 9 \
             WHERE card_id = ? AND player_status_id = ? AND showdown_turn = ?"
-            , [req.body.cardId1, req.session.playerStatusId,  req.session.showdownTurn], 
+            , [req.body.card[0], req.session.playerStatusId,  req.session.showdownTurn], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -3145,7 +3147,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
     function UpdateSelectedCardSlot2() {
         connection.query("UPDATE player_card_slot SET slot_id = 10 \
             WHERE card_id = ? AND player_status_id = ? AND showdown_turn = ?"
-            , [req.body.cardId2, req.session.playerStatusId,  req.session.showdownTurn], 
+            , [req.body.card[1], req.session.playerStatusId,  req.session.showdownTurn], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
