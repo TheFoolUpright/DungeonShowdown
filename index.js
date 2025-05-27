@@ -1635,10 +1635,12 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
      * @returns none
      */
      function GetOpponentShowdownCardStats() {
-        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path \
+        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path, \
+            player_username, player_color \
             FROM card C \
             INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id \
             INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id \
+            INNER JOIN player P ON P.player_id = PS.player_id \
             WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (9,10) AND match_id = ?"
             , [req.session.playerStatusId,  req.session.showdownTurn, req.session.matchId], 
             function(err, rows, fields) {
@@ -1700,19 +1702,45 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
                         return
                     }
                     if (rows.length != 0) {
-
-                        res.status(200).json({
-                        "message": "Opponent hasn't confirmed their card(s)",
-                        "state": "SHOW_RESULT",
-                        "opponent_cards": opponentCards,
-                        "player_cards": rows
-                    })
+                        GetPlayerShowdownPlayerState(opponentCards, rows)
                     }
                 }
             )
         }
-
-    
+        function GetPlayerShowdownPlayerState(opponentCards, playerCards) {
+            connection.query("SELECT showdown_turn, max_health, current_health, energy, insight, damage, player_username, player_color \
+                FROM player_card_slot PCS \
+                INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id \
+                INNER JOIN player P ON PS.player_id = P.player_id \
+                WHERE P.player_id = ? AND match_id = ? AND showdown_turn = ?"
+                , [req.session.playerId, req.session.matchId, req.session.showdownTurn],
+                function(err, rows, fields) {
+                    if (err) {
+                        console.log("Database Error: " + err)
+                        res.status(500).json({
+                            "message": err
+                        })
+                        return
+                    }
+                    if (rows.length != 0) {
+                            res.status(200).json({
+                            "message": "Opponent hasn't confirmed their card(s)",
+                            "state": "SHOW_RESULT",
+                            "opponent_cards": opponentCards,
+                            "player_cards": playerCards,
+                            "player_color": rows[0].player_color,
+                            "player_username": rows[0].player_username,
+                            "max_health": rows[0].max_health,
+                            "current_health": rows[0].current_health,
+                            "energy": rows[0].energy,
+                            "insight": rows[0].insight,
+                            "damage": rows[0].damage,
+                            "showdown_turn": rows[0].showdown_turn
+                        })
+                    }
+                }
+            )
+        }
 })
 
 /**
@@ -1991,10 +2019,12 @@ app.get("/getShowdownResult", (req, res) => {
      * @returns none
      */
     function GetOpponentShowdownCardStats() {
-        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path \
+        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path, \
+            player_username, player_color \
             FROM card C \
             INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id \
             INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id \
+            INNER JOIN player P ON P.player_id = PS.player_id \
             WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (9,10) AND match_id = ?"
             , [req.session.playerStatusId,  req.session.showdownTurn, req.session.matchId], 
             function(err, rows, fields) {
@@ -2283,12 +2313,14 @@ app.post("/setupShowdown", (req, res) => {
      * @returns none
      */
     function GetOpponentShowdownCardStats() {
-        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path \
+        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path, \
+            player_username, player_color \
             FROM card C \
             INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id \
             INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id \
+            INNER JOIN player P ON P.player_id = PS.player_id \
             WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (9,10) AND match_id = ?"
-            , [req.session.playerStatusId,  req.session.showdownTurn - 1, req.session.matchId], 
+            , [req.session.playerStatusId,  req.session.showdownTurn, req.session.matchId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -2979,10 +3011,12 @@ app.post("/resolveShowdownTurn", (req, res) => {
     } 
 
     function GetOpponentShowdownCardStats() {
-        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path \
+        connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path, \
+            player_username, player_color \
             FROM card C \
             INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id \
             INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id \
+            INNER JOIN player P ON P.player_id = PS.player_id \
             WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (9,10) AND match_id = ?"
             , [req.session.playerStatusId,  req.session.showdownTurn, req.session.matchId], 
             function(err, rows, fields) {
@@ -3044,13 +3078,41 @@ app.post("/resolveShowdownTurn", (req, res) => {
                         return
                     }
                     if (rows.length != 0) {
-
-                        res.status(200).json({
-                        "message": "Opponent hasn't confirmed their card(s)",
-                        "state": "SHOW_RESULT",
-                        "opponent_cards": opponentCards,
-                        "player_cards": rows
-                    })
+                        GetPlayerShowdownPlayerState(opponentCards, rows)
+                    }
+                }
+            )
+        }
+        function GetPlayerShowdownPlayerState(opponentCards, playerCards) {
+            connection.query("SELECT showdown_turn, max_health, current_health, energy, insight, damage, player_username, player_color \
+                FROM player_card_slot PCS \
+                INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id \
+                INNER JOIN player P ON PS.player_id = P.player_id \
+                WHERE P.player_id = ? AND match_id = ? AND showdown_turn = ?"
+                , [req.session.playerId, req.session.matchId, req.session.showdownTurn], 
+                function(err, rows, fields) {
+                    if (err) {
+                        console.log("Database Error: " + err)
+                        res.status(500).json({
+                            "message": err
+                        })
+                        return
+                    }
+                    if (rows.length != 0) {
+                            res.status(200).json({
+                            "message": "Opponent hasn't confirmed their card(s)",
+                            "state": "SHOW_RESULT",
+                            "opponent_cards": opponentCards,
+                            "player_cards": playerCards,
+                            "player_color": rows[0].player_color,
+                            "player_username": rows[0].player_username,
+                            "max_health": rows[0].max_health,
+                            "current_health": rows[0].current_health,
+                            "energy": rows[0].energy,
+                            "insight": rows[0].insight,
+                            "damage": rows[0].damage,
+                            "showdown_turn": rows[0].showdown_turn
+                        })
                     }
                 }
             )
