@@ -2,26 +2,24 @@
 // You can write more code here
 
 var ShowdownAnimations = {
-    "NormalAttack": {id: 1, visible: false},
-	"HeavyAttack": 	2,
-	"DoubleAttack": 	3,
-	"RecoveryAttack": 	4,
-	"CounterAttack": 	5,
-	"ClumsyBlock": 	6,
-	"SolidBlock": 		7,
-	"ImpressiveBlock": 8,
-	"Dodge": 			9,
-	"Parry": 			10,
-	"Anger": 			11,
-	"Rage": 			12,
-	"Focus": 			13,
-	"Adrenaline": 		14,
-	"Healing": 			15
+    "NormalAttack":    {id: 1, visible: false},
+	"HeavyAttack": 	   {id: 2, visible: false},
+	"DoubleAttack":    {id: 3, visible: false},
+	"RecoveryAttack":  {id: 4, visible: false},
+	"CounterAttack":   {id: 5, visible: false},
+	"ClumsyBlock": 	   {id: 6, visible: false},
+	"SolidBlock": 	   {id: 7, visible: false},
+	"ImpressiveBlock": {id: 8, visible: false},
+	"Dodge": 		   {id: 9, visible: false},
+	"Parry": 		   {id: 10, visible: false},
+	"Anger": 		   {id: 11, visible: false},
+	"Rage": 		   {id: 12, visible: false},
+	"Focus":		   {id: 13, visible: false},
+	"Adrenaline": 	   {id: 14, visible: false},
+	"Healing": 		   {id: 15, visible: false},
 	}
 
-var doubleAttack = false
-
-var firstSwing = false
+var secondSwing = false
 
 var timer = 0
 
@@ -58,6 +56,7 @@ class ShowdownResult extends Phaser.Scene {
 		// opponentAttacks
 		const opponentAttacks = new PrefabAttacks(this, 986, 769);
 		this.add.existing(opponentAttacks);
+		opponentAttacks.angle = 0;
 		opponentAttacks.visible = true;
 
 		// confirmButton
@@ -94,67 +93,73 @@ class ShowdownResult extends Phaser.Scene {
 	create(data) {
 
 		this.editorCreate();
-		console.log(data.opponent_cards)
-		data.opponent_cards[0].card_id
 
-		doubleAttack = false
-		
-		firstSwing = false
-		
+		secondSwing = false
+
 		this.opponentAttacks.angle = 30
-		
+
 		timer = 0
-		
 
 		if (data.opponent_cards[0].card_id == ShowdownAnimations.NormalAttack.id) {
 			ShowdownAnimations.NormalAttack.visible = true
-			//this.opponentAttacks.normal_Slash.visible = true
-			doubleAttack = false
 		}
-		else if (data.opponent_cards[0].card_id == ShowdownAnimations.HeavyAttack) {
-			this.opponentAttacks.heavy_Slash.visible = true
+		else if (data.opponent_cards[0].card_id == ShowdownAnimations.HeavyAttack.id) {
+			ShowdownAnimations.HeavyAttack.visible = true
 		}
-		else if (data.opponent_cards[0].card_id == ShowdownAnimations.DoubleAttack) {
-			this.opponentAttacks.normal_Slash.visible = true
-			doubleAttack = true
+		else if (data.opponent_cards[0].card_id == ShowdownAnimations.DoubleAttack.id) {
+			ShowdownAnimations.DoubleAttack.visible = true
 		}
-		else if (data.opponent_cards[0].card_id == ShowdownAnimations.RecoveryAttack) {
-			this.opponentAttacks.recovery_Hit.visible = true
+		else if (data.opponent_cards[0].card_id == ShowdownAnimations.RecoveryAttack.id) {
+			ShowdownAnimations.RecoveryAttack.visible = true
 		}
-		else if (data.opponent_cards[0].card_id == ShowdownAnimations.CounterAttack) {
-			this.opponentAttacks.counter_Slash.visible = true
+		else if (data.opponent_cards[0].card_id == ShowdownAnimations.CounterAttack.id) {
+			ShowdownAnimations.CounterAttack.visible = true
 		}
 	}
 
 	update(time, dt) {
 		timer += dt
-		console.log("timer: "+timer)
-		if (timer > 1500) {
-			if (ShowdownAnimations.NormalAttack.visible 
-				&& !doubleAttack && 
-				(this.opponentAttacks.angle <= 180 && this.opponentAttacks.angle >= 30) || 
-				(this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -30)) {
-				this.opponentAttacks.normal_Slash.visible = true
-				this.opponentAttacks.angle += dt / 2
+		if (timer > 1200) {
+			if (((this.opponentAttacks.angle <= 180 && this.opponentAttacks.angle >= 30) || (this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -30)) && !secondSwing) {
+				if (ShowdownAnimations.NormalAttack.visible || ShowdownAnimations.DoubleAttack.visible) {
+					this.opponentAttacks.normal_Slash.visible = true
+					this.opponentAttacks.angle += dt / 2
+				}
+				else if (ShowdownAnimations.HeavyAttack.visible) {
+					this.opponentAttacks.heavy_Slash.visible = true
+					this.opponentAttacks.angle += dt / 2
+				}
+				else if (ShowdownAnimations.RecoveryAttack.visible) {
+					this.opponentAttacks.recovery_Hit.visible = true
+					this.opponentAttacks.angle += dt / 2
+				}
+				else if (ShowdownAnimations.CounterAttack.visible) {
+					this.opponentAttacks.counter_Slash.visible = true
+					this.opponentAttacks.angle += dt / 2
+				}
 			}
-			else if (this.opponentAttacks.normal_Slash.visible 
-				&& !doubleAttack) {
+			else if (ShowdownAnimations.DoubleAttack.visible) {
+				secondSwing = true
+				if (secondSwing && this.opponentAttacks.normal_Slash.scaleX == 1) {
+					this.opponentAttacks.normal_Slash.flipX = true
+				}
+				if (secondSwing &&
+					((this.opponentAttacks.angle <= 180 && this.opponentAttacks.angle >= 40) || 
+					(this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -20))) {
+					this.opponentAttacks.angle -= dt / 2
+				}
+				else {
+					this.opponentAttacks.normal_Slash.visible = false
+					this.opponentAttacks.heavy_Slash.visible = false
+					this.opponentAttacks.recovery_Hit.visible = false
+					this.opponentAttacks.counter_Slash.visible = false
+				}
+			}
+			else {
 				this.opponentAttacks.normal_Slash.visible = false
-			}
-			//else if ()
-
-			if (doubleAttack && !firstSwing &&
-				(this.opponentAttacks.angle <= 180 && this.opponentAttacks.angle >= 30) || 
-				(this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -30)) {
-				this.opponentAttacks.angle += dt / 2
-			}
-			else if (doubleAttack && firstSwing &&
-				(this.opponentAttacks.angle <= 180 && this.opponentAttacks.angle >= 40) || 
-				(this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -20)) {
-				this.opponentAttacks.angle -= dt / 2
-			}
-			else if (doubleAttack) {
-				this.opponentAttacks.normal_Slash.visible = false
+				this.opponentAttacks.heavy_Slash.visible = false
+				this.opponentAttacks.recovery_Hit.visible = false
+				this.opponentAttacks.counter_Slash.visible = false
 			}
 		}
 	}

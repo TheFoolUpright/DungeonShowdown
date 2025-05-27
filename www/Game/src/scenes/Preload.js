@@ -146,7 +146,7 @@ class Preload extends Phaser.Scene {
 		xhttp.send();
 	}
 
-	GetGameState(){
+	GetGameState() {
 		var xhttp = new XMLHttpRequest();
 		
 		xhttp.onreadystatechange = () => {
@@ -156,28 +156,27 @@ class Preload extends Phaser.Scene {
 
 
 				if (xhttp.status == 200){
-					if(data.state_id == states.DungeonCardSelection){
+					if(data.state_id == states.DungeonCardSelection) {
 						this.GetDungeonData();
 					}
-					else if(data.state_id == states.DungeonWaitingOnOpponent){
-						 this.scene.start("DungeonWaitingOnOpponent");
+					else if(data.state_id == states.DungeonWaitingOnOpponent) {
+						 this.scene.start("DungeonWaitingOnOpponent")
 					}
-					else if(data.state_id == states.DungeonResult){
-						 this.GetDungeonResultData();
+					else if(data.state_id == states.DungeonResult) {
+						 this.GetDungeonResultData()
 					}
-					else if(data.state_id == states.ShowdownCardSelection){
-						 this.GetShowdownData();
+					else if(data.state_id == states.ShowdownCardSelection) {
+						 this.GetShowdownData()
 					}
-					else if(data.state_id == states.ShowdownWaitingOnOpponent){
-						 this.scene.start("ShowdownWaitingOnOpponent");
+					else if(data.state_id == states.ShowdownWaitingOnOpponent) {
+						 this.scene.start("ShowdownWaitingOnOpponent")
 					}
-					else if(data.state_id == states.ShowdownResult){
-						 this.scene.start("ShowdownResult");
+					else if(data.state_id == states.ShowdownResult) {
+						 this.scene.start("ShowdownResult")
 					}
-					else if(data.state_id == states.EndingCheck){
-						 this.GetShowdownData();
+					else if(data.state_id == states.EndingCheck) {
+						 this.GetShowdownData()
 					}
-				
 				}
 			}
 		}
