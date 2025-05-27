@@ -343,21 +343,11 @@ class Dungeon extends Phaser.Scene {
 		var insight = data.insight
 		var damage = data.damage
 
-		if(isNaN(previousMaxHealth)) {
-				previousMaxHealth = maxHealth
-			}
-			if(isNaN(previousCurrentHealth)) {
-				previousCurrentHealth = currentHealth
-			}
-			if(isNaN(previousEnergy)) {
-				previousEnergy = energy
-			}
-			if(isNaN(previousInsight)) {
-				previousInsight = insight
-			}
-			if(isNaN(previousDamage)) {
-				previousDamage = damage
-		}
+		previousMaxHealth = maxHealth
+		previousCurrentHealth = currentHealth
+		previousEnergy = energy
+		previousInsight = insight
+		previousDamage = damage
 
 		this.statsContainer.healthText.text = currentHealth + "/" +  maxHealth
 		this.statsContainer.insightText.text = insight + "/10"

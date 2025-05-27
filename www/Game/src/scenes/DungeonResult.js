@@ -95,6 +95,74 @@ class DungeonResult extends Phaser.Scene {
 		this.statsContainer.energyText.text = energy
 		this.statsContainer.mightText.text = damage
 
+		if(previousMaxHealth != maxHealth && previousCurrentHealth != currentHealth){
+			var maxHealthDiff = maxHealth - previousMaxHealth
+			var currentHealthDiff = currentHealth - previousCurrentHealth
+
+			if(maxHealthDiff > 0 && currentHealthDiff > 0){
+				this.statsContainer.healthDifferenceText.text =  "+" + currentHealthDiff + "/+" + maxHealthDiff
+			}
+			else if (maxHealthDiff < 0 && currentHealthDiff < 0){
+				this.statsContainer.healthDifferenceText.text =   currentHealthDiff + "/" + maxHealthDiff
+			}
+			else if (maxHealthDiff > 0 && currentHealthDiff < 0){
+				this.statsContainer.healthDifferenceText.text =   currentHealthDiff + "/+" + maxHealthDiff
+			}
+			else if (maxHealthDiff < 0 && currentHealthDiff > 0){
+				this.statsContainer.healthDifferenceText.text =   "+" + currentHealthDiff + "/" + maxHealthDiff
+			}
+			else{
+				this.statsContainer.healthDifferenceText.text =  currentHealthDiff + "/" + maxHealthDiff
+			}
+			this.statsContainer.healthDifferenceText.visible = true
+		}
+		else if(previousMaxHealth != maxHealth){
+			if(maxHealth - previousMaxHealth > 0){
+				this.statsContainer.healthDifferenceText.text =  "+" + (maxHealth - previousMaxHealth) + "/+" + (maxHealth - previousMaxHealth) 
+			}
+			else{
+				this.statsContainer.healthDifferenceText.text =  (maxHealth - previousMaxHealth) + "/" + (maxHealth - previousMaxHealth)
+			}
+			this.statsContainer.healthDifferenceText.visible = true
+		}
+		else if(previousCurrentHealth != currentHealth){
+			if(currentHealth - previousCurrentHealth > 0){
+				this.statsContainer.healthDifferenceText.text =  "+" + (currentHealth - previousCurrentHealth) + "/0"
+			}
+			else{
+				this.statsContainer.healthDifferenceText.text = (currentHealth - previousCurrentHealth) + "/0"
+			}
+			this.statsContainer.healthDifferenceText.visible = true
+		}
+
+		if(previousEnergy != energy){
+			if(energy - previousEnergy > 0){
+				this.statsContainer.energyDifferenceText.text =  "+" + (energy - previousEnergy)
+			}
+			else{
+				this.statsContainer.energyDifferenceText.text = (energy - previousEnergy)
+			}
+			this.statsContainer.energyDifferenceText.visible = true
+		}
+		if(previousInsight != insight){
+			if(insight - previousInsight > 0){
+				this.statsContainer.insightDifferenceText.text =  "+" + (insight - previousInsight)
+			}
+			else{
+				this.statsContainer.insightDifferenceText.text =  (insight - previousInsight)
+			}
+			this.statsContainer.insightDifferenceText.visible = true
+		}
+		if(previousDamage != damage){
+			if(damage - previousDamage > 0){
+				this.statsContainer.mightDifferenceText.text =  "+" + (damage - previousDamage)
+			}
+			else{
+				this.statsContainer.mightDifferenceText.text = (damage - previousDamage)
+			}
+			this.statsContainer.mightDifferenceText.visible = true
+		}
+
 		return
 	}
 

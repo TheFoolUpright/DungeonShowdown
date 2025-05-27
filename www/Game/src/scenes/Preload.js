@@ -252,6 +252,26 @@ class Preload extends Phaser.Scene {
 		xhttp.send();
 	}
 	
+	GetShowdownResultData(){
+		var xhttp = new XMLHttpRequest();
+		
+		xhttp.onreadystatechange = () => {
+			if (xhttp.readyState == 4) {
+				var data = JSON.parse(xhttp.responseText)
+				console.log(data)
+
+				if (xhttp.status == 200){
+				    this.scene.start("ShowdownResult", data);
+				}
+			}
+		}
+
+		xhttp.open("GET", "/getWaitingOnOpponentShowdown", true);
+
+		xhttp.setRequestHeader("Content-Type", "application/json");
+
+		xhttp.send();
+	}
 
 
 	/* END-USER-CODE */
