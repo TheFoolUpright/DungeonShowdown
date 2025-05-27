@@ -56,8 +56,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		// option1RewardIcon1
 		const option1RewardIcon1 = scene.add.image(-15, 130, "HiddenDraft");
-		option1RewardIcon1.scaleX = 0.2;
-		option1RewardIcon1.scaleY = 0.2;
 		option1Container.add(option1RewardIcon1);
 
 		// option1RewardText1
@@ -74,8 +72,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		// option2RewardIcon1
 		const option2RewardIcon1 = scene.add.image(-50, 130, "HiddenDraft");
-		option2RewardIcon1.scaleX = 0.2;
-		option2RewardIcon1.scaleY = 0.2;
 		option2Container.add(option2RewardIcon1);
 
 		// option2RewardText2
@@ -87,8 +83,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		// option2RewardIcon2
 		const option2RewardIcon2 = scene.add.image(30, 130, "HiddenDraft");
-		option2RewardIcon2.scaleX = 0.2;
-		option2RewardIcon2.scaleY = 0.2;
 		option2Container.add(option2RewardIcon2);
 
 		// option2RewardText1
@@ -112,14 +106,10 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		// option1_1CostIcon1
 		const option1_1CostIcon1 = scene.add.image(-15, 100, "HiddenDraft");
-		option1_1CostIcon1.scaleX = 0.2;
-		option1_1CostIcon1.scaleY = 0.2;
 		option1_1Container.add(option1_1CostIcon1);
 
 		// option1_1RewardIcon1
 		const option1_1RewardIcon1 = scene.add.image(-15, 160, "HiddenDraft");
-		option1_1RewardIcon1.scaleX = 0.2;
-		option1_1RewardIcon1.scaleY = 0.2;
 		option1_1Container.add(option1_1RewardIcon1);
 
 		// option1_1RewardText1
@@ -143,14 +133,10 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		// option1_2CostIcon1
 		const option1_2CostIcon1 = scene.add.image(-15, 100, "HiddenDraft");
-		option1_2CostIcon1.scaleX = 0.2;
-		option1_2CostIcon1.scaleY = 0.2;
 		option1_2Container.add(option1_2CostIcon1);
 
 		// option1_2RewardIcon1
 		const option1_2RewardIcon1 = scene.add.image(-50, 160, "HiddenDraft");
-		option1_2RewardIcon1.scaleX = 0.2;
-		option1_2RewardIcon1.scaleY = 0.2;
 		option1_2Container.add(option1_2RewardIcon1);
 
 		// option1_2RewardText1
@@ -162,8 +148,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		// option1_2RewardIcon2
 		const option1_2RewardIcon2 = scene.add.image(30, 160, "HiddenDraft");
-		option1_2RewardIcon2.scaleX = 0.2;
-		option1_2RewardIcon2.scaleY = 0.2;
 		option1_2Container.add(option1_2RewardIcon2);
 
 		// option1_2RewardText2
@@ -187,14 +171,10 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		// option2_1RewardIcon1
 		const option2_1RewardIcon1 = scene.add.image(-15, 160, "HiddenDraft");
-		option2_1RewardIcon1.scaleX = 0.2;
-		option2_1RewardIcon1.scaleY = 0.2;
 		option2_1Container.add(option2_1RewardIcon1);
 
 		// option2_1CostIcon1
 		const option2_1CostIcon1 = scene.add.image(-50, 100, "HiddenDraft");
-		option2_1CostIcon1.scaleX = 0.2;
-		option2_1CostIcon1.scaleY = 0.2;
 		option2_1Container.add(option2_1CostIcon1);
 
 		// option2_1CostText1
@@ -206,8 +186,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		// option2_1CostIcon2
 		const option2_1CostIcon2 = scene.add.image(30, 100, "HiddenDraft");
-		option2_1CostIcon2.scaleX = 0.2;
-		option2_1CostIcon2.scaleY = 0.2;
 		option2_1Container.add(option2_1CostIcon2);
 
 		// option2_1CostText2
@@ -224,8 +202,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		// option1_3RewardIcon1
 		const option1_3RewardIcon1 = scene.add.image(-95, 160, "HiddenDraft");
-		option1_3RewardIcon1.scaleX = 0.2;
-		option1_3RewardIcon1.scaleY = 0.2;
 		option1_3Container.add(option1_3RewardIcon1);
 
 		// option1_3RewardText1
@@ -244,14 +220,10 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		// option1_3RewardIcon2
 		const option1_3RewardIcon2 = scene.add.image(-15, 160, "HiddenDraft");
-		option1_3RewardIcon2.scaleX = 0.2;
-		option1_3RewardIcon2.scaleY = 0.2;
 		option1_3Container.add(option1_3RewardIcon2);
 
 		// option1_3RewardIcon3
 		const option1_3RewardIcon3 = scene.add.image(65, 160, "HiddenDraft");
-		option1_3RewardIcon3.scaleX = 0.2;
-		option1_3RewardIcon3.scaleY = 0.2;
 		option1_3Container.add(option1_3RewardIcon3);
 
 		// option1_3RewardText3
@@ -263,8 +235,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		// option1_3CostIcon1
 		const option1_3CostIcon1 = scene.add.image(-15, 100, "HiddenDraft");
-		option1_3CostIcon1.scaleX = 0.2;
-		option1_3CostIcon1.scaleY = 0.2;
 		option1_3Container.add(option1_3CostIcon1);
 
 		// option1_3CostText1
@@ -281,8 +251,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		// option2_2CostIcon1
 		const option2_2CostIcon1 = scene.add.image(-50, 100, "HiddenDraft");
-		option2_2CostIcon1.scaleX = 0.2;
-		option2_2CostIcon1.scaleY = 0.2;
 		option2_2Container.add(option2_2CostIcon1);
 
 		// option2_2CostText1
@@ -294,8 +262,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		// option2_2CostIcon2
 		const option2_2CostIcon2 = scene.add.image(30, 100, "HiddenDraft");
-		option2_2CostIcon2.scaleX = 0.2;
-		option2_2CostIcon2.scaleY = 0.2;
 		option2_2Container.add(option2_2CostIcon2);
 
 		// option2_2CostText2
@@ -307,8 +273,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		// option2_2RewardIcon1
 		const option2_2RewardIcon1 = scene.add.image(-50, 160, "HiddenDraft");
-		option2_2RewardIcon1.scaleX = 0.2;
-		option2_2RewardIcon1.scaleY = 0.2;
 		option2_2Container.add(option2_2RewardIcon1);
 
 		// option2_2RewardText2
@@ -320,8 +284,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		// option2_2RewardIcon2
 		const option2_2RewardIcon2 = scene.add.image(30, 160, "HiddenDraft");
-		option2_2RewardIcon2.scaleX = 0.2;
-		option2_2RewardIcon2.scaleY = 0.2;
 		option2_2Container.add(option2_2RewardIcon2);
 
 		// option2_2RewardText1
@@ -338,8 +300,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		// option2_3RewardIcon1
 		const option2_3RewardIcon1 = scene.add.image(-95, 160, "HiddenDraft");
-		option2_3RewardIcon1.scaleX = 0.2;
-		option2_3RewardIcon1.scaleY = 0.2;
 		option2_3Container.add(option2_3RewardIcon1);
 
 		// option2_3RewardText1
@@ -358,14 +318,10 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		// option2_3RewardIcon2
 		const option2_3RewardIcon2 = scene.add.image(-15, 160, "HiddenDraft");
-		option2_3RewardIcon2.scaleX = 0.2;
-		option2_3RewardIcon2.scaleY = 0.2;
 		option2_3Container.add(option2_3RewardIcon2);
 
 		// option2_3RewardIcon3
 		const option2_3RewardIcon3 = scene.add.image(65, 160, "HiddenDraft");
-		option2_3RewardIcon3.scaleX = 0.2;
-		option2_3RewardIcon3.scaleY = 0.2;
 		option2_3Container.add(option2_3RewardIcon3);
 
 		// option2_3RewardText3
@@ -377,8 +333,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		// option2_3CostIcon1
 		const option2_3CostIcon1 = scene.add.image(-50, 100, "HiddenDraft");
-		option2_3CostIcon1.scaleX = 0.2;
-		option2_3CostIcon1.scaleY = 0.2;
 		option2_3Container.add(option2_3CostIcon1);
 
 		// option2_3CostText1
@@ -390,8 +344,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		// option2_3CostIcon2
 		const option2_3CostIcon2 = scene.add.image(30, 100, "HiddenDraft");
-		option2_3CostIcon2.scaleX = 0.2;
-		option2_3CostIcon2.scaleY = 0.2;
 		option2_3Container.add(option2_3CostIcon2);
 
 		// option2_3CostText2

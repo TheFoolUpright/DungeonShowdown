@@ -374,6 +374,7 @@ class Dungeon extends Phaser.Scene {
 			this.slot1Card.cardName.text = data.card[0].card_name
 			this.slot1Card.cardImage.setTexture(data.card[0].card_image_path)
 			this.slot1Card.cardDescription.text
+			this.MakeCardIconsVisable(this.slot1Card, data.card[0])
 		}
 		else {
 			this.slot1Card.cardName.text = "? ? ?"
@@ -392,6 +393,7 @@ class Dungeon extends Phaser.Scene {
 			this.slot2Card.cardName.text = data.card[1].card_name
 			this.slot2Card.cardImage.setTexture(data.card[1].card_image_path)
 			this.slot2Card.cardDescription.text
+			this.MakeCardIconsVisable(this.slot2Card, data.card[1])
 		}
 		else {
 			this.slot2Card.cardName.text = "? ? ?"
@@ -410,6 +412,7 @@ class Dungeon extends Phaser.Scene {
 			this.slot3Card.cardName.text = data.card[2].card_name
 			this.slot3Card.cardImage.setTexture(data.card[2].card_image_path)
 			this.slot3Card.cardDescription.text
+			this.MakeCardIconsVisable(this.slot3Card, data.card[2])
 		}
 		else {
 			this.slot3Card.cardName.text = "? ? ?"
@@ -417,6 +420,214 @@ class Dungeon extends Phaser.Scene {
 			this.slot3Card.cardDescription.text = "Not enough insight to see the card"
 		}
 		return
+	}
+
+	MakeCardIconsVisable(card, cardData){
+		var iterator = 0
+		var displayInfo = {}
+
+		if(cardData.card_type_id == 1){
+			displayInfo[iterator] = {
+				image: "Max Health",
+				value: cardData.card_max_health
+			}
+			iterator++
+		}
+		else if (cardData.card_type_id == 2){
+			displayInfo[iterator] = {
+				image: "CurrentHealth",
+				value: cardData.card_current_health
+			}
+			iterator++
+		}
+		else if (cardData.card_type_id == 3){
+			displayInfo[iterator] = {
+				image: "Damage",
+				value: cardData.card_damage
+			}
+			iterator++
+		}
+		else if (cardData.card_type_id == 4){
+			if (cardData.card_energy > 0)
+			{
+				displayInfo[iterator] = {
+					image: "Energy",
+					value: cardData.card_energy
+				}
+				iterator++
+			}
+			if (cardData.card_insight > 0)
+			{
+				displayInfo[iterator] = {
+					image: "Insight",
+					value: cardData.card_insight
+				}
+				iterator++
+			}
+		}
+		else if (cardData.card_type_id == 5){
+
+			//Costs first
+			if (cardData.card_current_health < 0)
+			{
+				displayInfo[iterator] = {
+					image: "CurrentHealth",
+					value: cardData.card_current_health
+				}
+				iterator++
+			}
+			if (cardData.card_energy < 0)
+			{
+				displayInfo[iterator] = {
+					image: "Energy",
+					value: cardData.card_energy
+				}
+				iterator++
+			}
+			if (cardData.card_insight < 0)
+			{
+				displayInfo[iterator] = {
+					image: "Insight",
+					value: cardData.card_insight
+				}
+				iterator++
+			}
+
+			//Rewards
+			if (cardData.card_max_health > 0)
+				{
+					displayInfo[iterator] = {
+					image: "Max Health",
+					value: cardData.card_max_health
+				}
+				iterator++
+				}
+			if (cardData.card_energy > 0)
+			{
+				displayInfo[iterator] = {
+					image: "Energy",
+					value: cardData.card_energy
+				}
+				iterator++
+			}
+			if (cardData.card_insight > 0)
+			{
+				displayInfo[iterator] = {
+					image: "Insight",
+					value: cardData.card_insight
+				}
+				iterator++
+			}
+			if (cardData.card_damage > 0)
+			{
+				displayInfo[iterator] = {
+					image: "Damage",
+					value: cardData.card_damage
+				}
+				iterator++
+			}
+       
+		}
+		console.log(displayInfo)
+		console.log(card)
+		switch(cardData.card_display_option) {
+			case "1":
+				card.option1RewardIcon1.setTexture(displayInfo[0].image)
+				card.option1RewardText1.text = "+" + displayInfo[0].value
+
+				card.option1Container.visible = true
+				break;
+			case "2":
+				card.option2RewardIcon1.setTexture(displayInfo[0].image)
+				card.option2RewardText1.text = "+" + displayInfo[0].value
+
+				card.option2RewardIcon2.setTexture(displayInfo[1].image)
+				card.option2RewardText2.text = "+" + displayInfo[1].value
+
+				card.option2Container.visible = true
+				break;
+			case "1_1":
+				card.option1_1CostIcon1.setTexture(displayInfo[0].image)
+				card.option1_1CostText1.text = displayInfo[0].value	
+			
+				card.option1_1RewardIcon1.setTexture(displayInfo[1].image)
+				card.option1_1RewardText1.text = "+" + displayInfo[1].value
+
+				card.option1_1Container.visible = true
+				break;
+			case "1_2":
+				card.option1_2CostIcon1.setTexture(displayInfo[0].image)
+				card.option1_2CostText1.text = displayInfo[0].value
+				
+				card.option1_2RewardIcon1.setTexture(displayInfo[1].image)
+				card.option1_2RewardText1.text = "+" + displayInfo[1].value
+
+				card.option1_2RewardIcon2.setTexture(displayInfo[2].image)
+				card.option1_2RewardText2.text = "+" + displayInfo[2].value
+
+				card.option1_2Container.visible = true
+				break;
+			case "1_3":
+				card.option1_3CostIcon1.setTexture(displayInfo[0].image)
+				card.option1_3CostText1.text = displayInfo[0].value
+				
+				card.option1_3RewardIcon1.setTexture(displayInfo[1].image)
+				card.option1_3RewardText1.text = "+" + displayInfo[1].value
+
+				card.option1_3RewardIcon2.setTexture(displayInfo[2].image)
+				card.option1_3RewardText2.text = "+" + displayInfo[2].value
+
+				card.option1_3RewardIcon3.setTexture(displayInfo[3].image)
+				card.option1_3RewardText3.text = "+" + displayInfo[3].value
+
+				card.option1_3Container.visible = true
+				break;
+			case "2_1":
+				card.option2_1CostIcon1.setTexture(displayInfo[0].image)
+				card.option2_1CostText1.text = displayInfo[0].value	
+			
+				card.option2_1CostIcon2.setTexture(displayInfo[1].image)
+				card.option2_1CostText3.text = displayInfo[1].value	
+
+				card.option2_1RewardIcon1.setTexture(displayInfo[2].image)
+				card.option2_1RewardText1.text = "+" + displayInfo[2].value
+
+				card.option2_1Container.visible = true
+				break;
+			case "2_2":
+				card.option2_2CostIcon1.setTexture(displayInfo[0].image)
+				card.option2_2CostText1.text = displayInfo[0].value	
+			
+				card.option2_2CostIcon2.setTexture(displayInfo[1].image)
+				card.option2_2CostText3.text = displayInfo[1].value	
+
+				card.option2_2RewardIcon1.setTexture(displayInfo[2].image)
+				card.option2_2RewardText1.text = "+" + displayInfo[2].value
+
+				card.option2_2RewardIcon2.setTexture(displayInfo[3].image)
+				card.option2_2RewardText2.text = "+" + displayInfo[3].value
+
+				card.option2_2Container.visible = true
+				break;
+			case "2_3":
+				card.option2_3CostIcon1.setTexture(displayInfo[0].image)
+				card.option2_3CostText1.text = displayInfo[0].value	
+			
+				card.option2_3CostIcon2.setTexture(displayInfo[1].image)
+				card.option2_3CostText2.text = displayInfo[1].value	
+
+				card.option2_3RewardIcon1.setTexture(displayInfo[2].image)
+				card.option2_3RewardText1.text = "+" + displayInfo[2].value
+
+				card.option2_3RewardIcon2.setTexture(displayInfo[3].image)
+				card.option2_3RewardText2.text = "+" + displayInfo[3].value
+
+				card.option2_3RewardIcon3.setTexture(displayInfo[4].image)
+				card.option2_3RewardText3.text = "+" + displayInfo[4].value
+
+				card.option2_3Container.visible = true
+				break;
+			}
 	}
 	/* END-USER-CODE */
 }
