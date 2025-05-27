@@ -373,13 +373,17 @@ class Dungeon extends Phaser.Scene {
 		if (this.slot1Card.isVisible) {
 			this.slot1Card.cardName.text = data.card[0].card_name
 			this.slot1Card.cardImage.setTexture(data.card[0].card_image_path)
-			this.slot1Card.cardDescription.text
+			this.slot1Card.cardDescription.text = data.card[0].card_description
 			this.MakeCardIconsVisable(this.slot1Card, data.card[0])
 		}
 		else {
 			this.slot1Card.cardName.text = "? ? ?"
 			this.slot1Card.cardImage.setTexture("HiddenDraft")
 			this.slot1Card.cardDescription.text = "Not enough insight to see the card"
+
+			this.slot1Card.option1RewardIcon1.setTexture("HiddenDraft")
+			this.slot1Card.option1RewardText1.text = ""
+			this.slot1Card.option1Container.visible = true
 		}
 
 		this.slot2Card.cardId = data.card[1].card_id
@@ -392,13 +396,17 @@ class Dungeon extends Phaser.Scene {
 		if (this.slot2Card.isVisible) {
 			this.slot2Card.cardName.text = data.card[1].card_name
 			this.slot2Card.cardImage.setTexture(data.card[1].card_image_path)
-			this.slot2Card.cardDescription.text
+			this.slot2Card.cardDescription.text = data.card[1].card_description
 			this.MakeCardIconsVisable(this.slot2Card, data.card[1])
 		}
 		else {
 			this.slot2Card.cardName.text = "? ? ?"
 			this.slot2Card.cardImage.setTexture("HiddenDraft");
 			this.slot2Card.cardDescription.text = "Not enough insight to see the card"
+
+			this.slot2Card.option1RewardIcon1.setTexture("HiddenDraft")
+			this.slot2Card.option1RewardText1.text = ""
+			this.slot2Card.option1Container.visible = true
 		}
 
 		this.slot3Card.cardId = data.card[2].card_id
@@ -411,13 +419,17 @@ class Dungeon extends Phaser.Scene {
 		if (this.slot3Card.isVisible) {
 			this.slot3Card.cardName.text = data.card[2].card_name
 			this.slot3Card.cardImage.setTexture(data.card[2].card_image_path)
-			this.slot3Card.cardDescription.text
+			this.slot3Card.cardDescription.text = data.card[2].card_description
 			this.MakeCardIconsVisable(this.slot3Card, data.card[2])
 		}
 		else {
 			this.slot3Card.cardName.text = "? ? ?"
 			this.slot3Card.cardImage.setTexture("HiddenDraft")
 			this.slot3Card.cardDescription.text = "Not enough insight to see the card"
+
+			this.slot3Card.option1RewardIcon1.setTexture("HiddenDraft")
+			this.slot3Card.option1RewardText1.text = ""
+			this.slot3Card.option1Container.visible = true
 		}
 		return
 	}
@@ -599,7 +611,7 @@ class Dungeon extends Phaser.Scene {
 				card.option2_2CostText1.text = displayInfo[0].value	
 			
 				card.option2_2CostIcon2.setTexture(displayInfo[1].image)
-				card.option2_2CostText3.text = displayInfo[1].value	
+				card.option2_2CostText2.text = displayInfo[1].value	
 
 				card.option2_2RewardIcon1.setTexture(displayInfo[2].image)
 				card.option2_2RewardText1.text = "+" + displayInfo[2].value
