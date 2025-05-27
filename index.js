@@ -102,12 +102,6 @@ app.get("/idLoggedIn", (req, res) => {
 
 //#region Register
 
-
-//Get Endpoint for Register
-app.get("/register", (req, res) => {
-
-})
-
 //Post Endpoint for Register
 app.post("/register", (req, res) => {
     //Check if the username and password are sent. If not, return an error.
