@@ -241,15 +241,15 @@ class Dungeon extends Phaser.Scene {
 			this.slot3Card.cardGlow.active = false
 			this.slot3Card.cardDescription.visible = false
 		})
-		
+
 		this.onwardButton.glowFx.active = false
-		
+
 		this.onwardButton.on("pointerover", () => {
 			console.log(this.onwardButton)
 			this.onwardButton.glowFx.active = true
 
 		})
-		
+
 
 		this.onwardButton.on("pointerout", () => {
 			this.onwardButton.glowFx.active = false
@@ -325,7 +325,7 @@ class Dungeon extends Phaser.Scene {
 
 	loadInfoData(data) {
 		//Load Info
-		
+
 		this.info.phaseName.text = "DUNGEON"
 		this.onwardButton.confirmButtonText.text = "Onward!"
 		this.info.roomOrTurn.text = "Room " + data.room_id
@@ -353,10 +353,10 @@ class Dungeon extends Phaser.Scene {
 		this.statsContainer.insightText.text = insight + "/10"
 		this.statsContainer.energyText.text = energy
 		this.statsContainer.mightText.text = damage
-		
+
 		return
 	}
-	
+
 	loadCardData(data) {
 		//Load Cards
 		data.card.sort(this.sortDungeonCards)
