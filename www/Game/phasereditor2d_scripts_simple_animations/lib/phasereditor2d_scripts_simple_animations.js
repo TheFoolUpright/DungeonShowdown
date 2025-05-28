@@ -124,6 +124,7 @@ class FadeActionScript extends ScriptNode {
 // You can write more code here
 /* START OF COMPILED CODE */
 /* START-USER-IMPORTS */
+
 /* END-USER-IMPORTS */
 class MoveInSceneActionScript extends ScriptNode {
     constructor(parent) {

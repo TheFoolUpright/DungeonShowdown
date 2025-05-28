@@ -6,6 +6,9 @@ var previousCurrentHealth
 var previousEnergy
 var previousInsight
 var previousDamage
+var backgroundMusic 
+
+
 
 /* START OF COMPILED CODE */
 
@@ -158,6 +161,42 @@ class Dungeon extends Phaser.Scene {
 	create(data) {
 
 		this.editorCreate();
+		backgroundMusic = this.sound.add("dark-ambient-horror-cinematic-halloween-atmosphere-scary-118585",
+		{
+		mute: false,
+		volume: 1,
+		rate: 1,
+		detune: 0,
+		seek: 0,
+		loop: true,
+		delay: 0,
+
+		// source of the spatial sound
+		source: {
+			x: 0,
+			y: 0,
+			z: 0,
+			panningModel: 'equalpower',
+			distanceModel: 'inverse',
+			orientationX: 0,
+			orientationY: 0,
+			orientationZ: -1,
+			refDistance: 1,
+			maxDistance: 10000,
+			rolloffFactor: 1,
+			coneInnerAngle: 360,
+			coneOuterAngle: 0,
+			coneOuterGain: 0,
+			follow: undefined
+		}
+	}
+
+	)
+		if(!backgroundMusic.isPlaying){
+			backgroundMusic.play()
+		}
+		const cardSound = this.sound.add("card-sounds-35956")
+		cardSound.play()
 
 		//Load Data
 		this.loadInfoData(data)
@@ -167,6 +206,7 @@ class Dungeon extends Phaser.Scene {
 
 		//Create events
 		this.slot1Card.on("pointerdown", () => {
+			cardSound.play()
 			if (!this.slot1Card.isSelected) {
 				this.slot1Card.isSelected = true
 				this.slot2Card.isSelected = false
@@ -182,6 +222,7 @@ class Dungeon extends Phaser.Scene {
 		})
 
 		this.slot2Card.on("pointerdown", () => {
+			cardSound.play()
 			if (!this.slot2Card.isSelected) {
 				this.slot1Card.isSelected = false
 				this.slot2Card.isSelected = true
@@ -197,6 +238,7 @@ class Dungeon extends Phaser.Scene {
 		})
 
 		this.slot3Card.on("pointerdown", () => {
+			cardSound.play()
 			if (!this.slot3Card.isSelected) {
 				this.slot1Card.isSelected = false
 				this.slot2Card.isSelected = false
@@ -599,7 +641,7 @@ class Dungeon extends Phaser.Scene {
 				card.option2_1CostText1.text = displayInfo[0].value	
 			
 				card.option2_1CostIcon2.setTexture(displayInfo[1].image)
-				card.option2_1CostText3.text = displayInfo[1].value	
+				card.option2_1CostText2.text = displayInfo[1].value	
 
 				card.option2_1RewardIcon1.setTexture(displayInfo[2].image)
 				card.option2_1RewardText1.text = "+" + displayInfo[2].value

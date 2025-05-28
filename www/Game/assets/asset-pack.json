@@ -22,6 +22,13 @@
                 "key": "BatDraft"
             },
             {
+                "url": [
+                    "assets/audio/birds-chirping-75156.mp3"
+                ],
+                "type": "audio",
+                "key": "birds-chirping-75156"
+            },
+            {
                 "url": "assets/card/Block2Draft.png",
                 "type": "image",
                 "key": "Block2Draft"
@@ -35,6 +42,34 @@
                 "url": "assets/card/Block4Draft.png",
                 "type": "image",
                 "key": "Block4Draft"
+            },
+            {
+                "url": [
+                    "assets/audio/breathing-6811.mp3"
+                ],
+                "type": "audio",
+                "key": "breathing-6811"
+            },
+            {
+                "url": [
+                    "assets/audio/card-mixing-48088.mp3"
+                ],
+                "type": "audio",
+                "key": "card-mixing-48088"
+            },
+            {
+                "url": [
+                    "assets/audio/card-sounds-35956.mp3"
+                ],
+                "type": "audio",
+                "key": "card-sounds-35956"
+            },
+            {
+                "url": [
+                    "assets/audio/cardboard-box-73023.mp3"
+                ],
+                "type": "audio",
+                "key": "cardboard-box-73023"
             },
             {
                 "url": "assets/card/CardBorder.png",
@@ -77,6 +112,20 @@
                 "key": "DamageDraft"
             },
             {
+                "url": [
+                    "assets/audio/dark-ambient-horror-cinematic-halloween-atmosphere-scary-118585.mp3"
+                ],
+                "type": "audio",
+                "key": "dark-ambient-horror-cinematic-halloween-atmosphere-scary-118585"
+            },
+            {
+                "url": [
+                    "assets/audio/dark-dungeon-game-hiphop-20241015-252251.mp3"
+                ],
+                "type": "audio",
+                "key": "dark-dungeon-game-hiphop-20241015-252251"
+            },
+            {
                 "url": "assets/dino.png",
                 "key": "dino",
                 "type": "image"
@@ -90,6 +139,20 @@
                 "url": "assets/card/DoubleAttackDraft.png",
                 "type": "image",
                 "key": "DoubleAttackDraft"
+            },
+            {
+                "url": [
+                    "assets/audio/droplets-in-a-cave-6785.mp3"
+                ],
+                "type": "audio",
+                "key": "droplets-in-a-cave-6785"
+            },
+            {
+                "url": [
+                    "assets/audio/dungeon-air-6983.mp3"
+                ],
+                "type": "audio",
+                "key": "dungeon-air-6983"
             },
             {
                 "url": "assets/background/DungeonBackground.png",
@@ -112,6 +175,13 @@
                 "key": "EnergyBar"
             },
             {
+                "url": [
+                    "assets/audio/flipcard-91468.mp3"
+                ],
+                "type": "audio",
+                "key": "flipcard-91468"
+            },
+            {
                 "url": "assets/card/FocusDraft.png",
                 "type": "image",
                 "key": "FocusDraft"
@@ -125,6 +195,13 @@
                 "url": "assets/card/GhostDraft.png",
                 "type": "image",
                 "key": "GhostDraft"
+            },
+            {
+                "url": [
+                    "assets/audio/gong-79191.mp3"
+                ],
+                "type": "audio",
+                "key": "gong-79191"
             },
             {
                 "url": "assets/card/HealDraft.png",
@@ -180,6 +257,20 @@
                 "url": "assets/ui/MightBar.png",
                 "type": "image",
                 "key": "MightBar"
+            },
+            {
+                "url": [
+                    "assets/audio/multiple-swish-101325.mp3"
+                ],
+                "type": "audio",
+                "key": "multiple-swish-101325"
+            },
+            {
+                "url": [
+                    "assets/audio/mysterious-forest-creepy-lofi-halloween-lofi-halloween-music-168238.mp3"
+                ],
+                "type": "audio",
+                "key": "mysterious-forest-creepy-lofi-halloween-lofi-halloween-music-168238"
             },
             {
                 "url": "assets/opponent/Normal Slash.png",
@@ -257,6 +348,13 @@
                 "key": "RestfulDwelling"
             },
             {
+                "url": [
+                    "assets/audio/scary-pumpkin-spooky-halloween-trap-beat-242102.mp3"
+                ],
+                "type": "audio",
+                "key": "scary-pumpkin-spooky-halloween-trap-beat-242102"
+            },
+            {
                 "url": "assets/background/ShowdownBackground.png",
                 "type": "image",
                 "key": "ShowdownBackground"
@@ -277,9 +375,30 @@
                 "key": "StoneOfPower"
             },
             {
+                "url": [
+                    "assets/audio/success-fanfare-trumpets-6185.mp3"
+                ],
+                "type": "audio",
+                "key": "success-fanfare-trumpets-6185"
+            },
+            {
+                "url": [
+                    "assets/audio/thump_thud_slam_fist_heavy-39349.mp3"
+                ],
+                "type": "audio",
+                "key": "thump_thud_slam_fist_heavy-39349"
+            },
+            {
                 "url": "assets/card/VitalityBrew.png",
                 "type": "image",
                 "key": "VitalityBrew"
+            },
+            {
+                "url": [
+                    "assets/audio/wrong-answer-21-199825.mp3"
+                ],
+                "type": "audio",
+                "key": "wrong-answer-21-199825"
             }
         ]
     },
