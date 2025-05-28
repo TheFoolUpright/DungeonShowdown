@@ -65,12 +65,19 @@ class ShowdownResult extends Phaser.Scene {
 		const confirmButton = new PrefabNextRoom(this, 1680, 800);
 		this.add.existing(confirmButton);
 
+		// prefabPlayerAttacks
+		const prefabPlayerAttacks = new PrefabPlayerAttacks(this, 960, 1132);
+		this.add.existing(prefabPlayerAttacks);
+		prefabPlayerAttacks.angle = 0;
+		prefabPlayerAttacks.visible = false;
+
 		this.showdownBackground = showdownBackground;
 		this.statsContainer = statsContainer;
 		this.info = info;
 		this.opponent = opponent;
 		this.opponentAttacks = opponentAttacks;
 		this.confirmButton = confirmButton;
+		this.prefabPlayerAttacks = prefabPlayerAttacks;
 
 		this.events.emit("scene-awake");
 	}
@@ -87,6 +94,8 @@ class ShowdownResult extends Phaser.Scene {
 	opponentAttacks;
 	/** @type {PrefabNextRoom} */
 	confirmButton;
+	/** @type {PrefabPlayerAttacks} */
+	prefabPlayerAttacks;
 
 	/* START-USER-CODE */
 
@@ -96,8 +105,25 @@ class ShowdownResult extends Phaser.Scene {
 
 		this.editorCreate();
 
+		ShowdownAnimations.NormalAttack.visible = false
+		ShowdownAnimations.HeavyAttack.visible = false
+		ShowdownAnimations.DoubleAttack.visible = false
+		ShowdownAnimations.RecoveryAttack.visible = false
+		ShowdownAnimations.CounterAttack.visible = false
+		ShowdownAnimations.ClumsyBlock.visible = false
+		ShowdownAnimations.SolidBlock.visible = false
+		ShowdownAnimations.ImpressiveBlock.visible = false
+		ShowdownAnimations.Dodge.visible = false
+		ShowdownAnimations.Parry.visible = false
+		ShowdownAnimations.Anger.visible = false
+		ShowdownAnimations.Rage.visible = false
+		ShowdownAnimations.Focus.visible = false
+		ShowdownAnimations.Adrenaline.visible = false
+		ShowdownAnimations.Healing.visible = false
+		ShowdownAnimations.NormalAttack.visible = false
+
 		secondSwing = false
-		
+
 		timer = 0
 
 		animationFinished = false
@@ -105,7 +131,7 @@ class ShowdownResult extends Phaser.Scene {
 		this.opponentAttacks.angle = 30
 
 		this.confirmButton.visible = false
-		
+
 		this.loadStatsData(data)
 		this.loadInfoData(data)
 		this.loadOpponentData(data)
@@ -134,7 +160,7 @@ class ShowdownResult extends Phaser.Scene {
 
 	loadInfoData(data) {
 		//Load Info
-		
+
 		this.info.phaseName.text = "SHOWDOWN"
 		this.confirmButton.confirmButtonText.text = "Perservere!"
 		this.info.roomOrTurn.text = "Turn " + data.showdown_turn
@@ -227,14 +253,14 @@ class ShowdownResult extends Phaser.Scene {
 
 		return
 	}
-	
+
 	loadOpponentData(data) {
 		this.opponent.opponentName.text = data.opponent_cards[0].player_username
 		this.opponent.opponentName.setColor(data.opponent_cards[0].player_color)	
 
 		return
 	}
-	
+
 	confirmButtonGlow() {
 		this.confirmButton.glowFx.active = false
 
@@ -247,7 +273,7 @@ class ShowdownResult extends Phaser.Scene {
 			this.confirmButton.glowFx.active = false
 		})
 	}
-	
+
 	setupNextTurn() {
 		var xhttp = new XMLHttpRequest()
 
@@ -269,7 +295,7 @@ class ShowdownResult extends Phaser.Scene {
 
 		xhttp.send();
 	}
-	
+
 	update(time, dt) {
 		timer += dt
 		if (timer > 1200) {
