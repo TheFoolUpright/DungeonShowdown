@@ -260,9 +260,7 @@ class Showdown extends Phaser.Scene {
 		this.confirmButton.glowFx.active = false
 
 		this.confirmButton.on("pointerover", () => {
-			console.log(this.confirmButton)
 			this.confirmButton.glowFx.active = true
-
 		})
 
 
@@ -273,6 +271,7 @@ class Showdown extends Phaser.Scene {
 		this.confirmButton.on("pointerdown", () =>{
 			this.ConfirmShowdownChoice()
 		})
+		console.log("prev Health: " + previousCurrentHealth)
 	}
 
 	sortShowdownCards(cardA, cardB) {
@@ -306,21 +305,11 @@ class Showdown extends Phaser.Scene {
 		var insight = data.insight
 		var damage = data.damage
 
-		if(isNaN(previousMaxHealth)) {
-				previousMaxHealth = maxHealth
-			}
-			if(isNaN(previousCurrentHealth)) {
-				previousCurrentHealth = currentHealth
-			}
-			if(isNaN(previousEnergy)) {
-				previousEnergy = energy
-			}
-			if(isNaN(previousInsight)) {
-				previousInsight = insight
-			}
-			if(isNaN(previousDamage)) {
-				previousDamage = damage
-		}
+		previousMaxHealth = maxHealth
+		previousCurrentHealth = currentHealth
+		previousEnergy = energy
+		previousInsight = insight
+		previousDamage = damage
 
 		this.statsContainer.healthText.text = currentHealth + "/" +  maxHealth
 		this.statsContainer.insightText.text = insight + "/10"

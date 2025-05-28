@@ -192,7 +192,10 @@ class Dungeon extends Phaser.Scene {
 	}
 
 	)
+		console.log(backgroundMusic)
+		console.log("Is it playing: " + Boolean(backgroundMusic.isPlaying))
 		if(!backgroundMusic.isPlaying){
+			console.log("StartedPlaying")
 			backgroundMusic.play()
 		}
 		const cardSound = this.sound.add("card-sounds-35956")

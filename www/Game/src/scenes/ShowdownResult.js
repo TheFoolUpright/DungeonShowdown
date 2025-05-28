@@ -111,6 +111,10 @@ class ShowdownResult extends Phaser.Scene {
 		this.loadOpponentData(data)
 		this.confirmButtonGlow()
 
+		this.confirmButton.on("pointerdown", () => {
+			this.setupNextTurn()
+		})
+
 		if (data.opponent_cards[0].card_id == ShowdownAnimations.NormalAttack.id) {
 			ShowdownAnimations.NormalAttack.visible = true
 		}
@@ -174,7 +178,7 @@ class ShowdownResult extends Phaser.Scene {
 			}
 			this.statsContainer.healthDifferenceText.visible = true
 		}
-		else if(previousMaxHealth != maxHealth){
+		else if(previousMaxHealth != maxHealth) {
 			if(maxHealth - previousMaxHealth > 0){
 				this.statsContainer.healthDifferenceText.text =  "+" + (maxHealth - previousMaxHealth) + "/+" + (maxHealth - previousMaxHealth) 
 			}
@@ -183,8 +187,8 @@ class ShowdownResult extends Phaser.Scene {
 			}
 			this.statsContainer.healthDifferenceText.visible = true
 		}
-		else if(previousCurrentHealth != currentHealth){
-			if(currentHealth - previousCurrentHealth > 0){
+		else if(previousCurrentHealth != currentHealth) {
+			if(currentHealth - previousCurrentHealth > 0) {
 				this.statsContainer.healthDifferenceText.text =  "+" + (currentHealth - previousCurrentHealth) + "/0"
 			}
 			else{
@@ -193,8 +197,8 @@ class ShowdownResult extends Phaser.Scene {
 			this.statsContainer.healthDifferenceText.visible = true
 		}
 
-		if(previousEnergy != energy){
-			if(energy - previousEnergy > 0){
+		if(previousEnergy != energy) {
+			if(energy - previousEnergy > 0) {
 				this.statsContainer.energyDifferenceText.text =  "+" + (energy - previousEnergy)
 			}
 			else{
@@ -202,8 +206,8 @@ class ShowdownResult extends Phaser.Scene {
 			}
 			this.statsContainer.energyDifferenceText.visible = true
 		}
-		if(previousInsight != insight){
-			if(insight - previousInsight > 0){
+		if(previousInsight != insight) {
+			if(insight - previousInsight > 0) {
 				this.statsContainer.insightDifferenceText.text =  "+" + (insight - previousInsight)
 			}
 			else{
@@ -211,8 +215,8 @@ class ShowdownResult extends Phaser.Scene {
 			}
 			this.statsContainer.insightDifferenceText.visible = true
 		}
-		if(previousDamage != damage){
-			if(damage - previousDamage > 0){
+		if(previousDamage != damage) {
+			if(damage - previousDamage > 0) {
 				this.statsContainer.mightDifferenceText.text =  "+" + (damage - previousDamage)
 			}
 			else{
@@ -242,6 +246,28 @@ class ShowdownResult extends Phaser.Scene {
 		this.confirmButton.on("pointerout", () => {
 			this.confirmButton.glowFx.active = false
 		})
+	}
+	
+	setupNextTurn() {
+		var xhttp = new XMLHttpRequest()
+
+		xhttp.onreadystatechange = () => {
+			if (xhttp.readyState == 4) {
+
+				var data = JSON.parse(xhttp.responseText)
+				console.log(data)
+
+				if (xhttp.status == 200) {
+					this.scene.start("Showdown", data);
+				}
+			}
+		}
+
+		xhttp.open("POST", "/setupShowdown", true);
+
+		xhttp.setRequestHeader("Content-Type", "application/json");
+
+		xhttp.send();
 	}
 	
 	update(time, dt) {

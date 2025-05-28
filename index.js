@@ -2320,7 +2320,7 @@ app.post("/setupShowdown", (req, res) => {
             INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id \
             INNER JOIN player P ON P.player_id = PS.player_id \
             WHERE PCS.player_status_id != ? AND showdown_turn = ? AND slot_id IN (9,10) AND match_id = ?"
-            , [req.session.playerStatusId,  req.session.showdownTurn, req.session.matchId], 
+            , [req.session.playerStatusId,  req.session.showdownTurn - 1, req.session.matchId], 
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
