@@ -16,13 +16,17 @@ class JoinMatch extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
-		// rectangle_1
-		const rectangle_1 = this.add.rectangle(868, 367, 128, 128);
-		rectangle_1.isFilled = true;
-		rectangle_1.fillColor = 9554825;
+		// joinMatch
+		const joinMatch = new PrefabNextRoom(this, 1680, 800);
+		this.add.existing(joinMatch);
+
+		this.joinMatch = joinMatch;
 
 		this.events.emit("scene-awake");
 	}
+
+	/** @type {PrefabNextRoom} */
+	joinMatch;
 
 	/* START-USER-CODE */
 

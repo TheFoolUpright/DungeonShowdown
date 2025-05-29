@@ -25,10 +25,6 @@ class Ending extends Phaser.Scene {
 		endingText.text = "IT'S A TIE...";
 		endingText.setStyle({ "align": "center", "fontFamily": "Rockey", "fontSize": "128px", "stroke": "#000000ff", "strokeThickness":20});
 
-		// confirmButton
-		const confirmButton = new PrefabNextRoom(this, 1680, 800);
-		this.add.existing(confirmButton);
-
 		// girlWins
 		const girlWins = this.add.image(960, 541, "GirlWins");
 		girlWins.visible = false;
@@ -38,8 +34,7 @@ class Ending extends Phaser.Scene {
 		boyWins.visible = false;
 
 		// draw
-		const draw = this.add.image(960, 539, "Draw");
-		draw.visible = false;
+		this.add.image(960, 539, "Draw");
 
 		// dungeonShowdown
 		const dungeonShowdown = this.add.text(1132, 820, "", {});
@@ -47,11 +42,12 @@ class Ending extends Phaser.Scene {
 		dungeonShowdown.text = "DUNGEON\nSHOWDOWN";
 		dungeonShowdown.setStyle({ "align": "center", "fontFamily": "Rockey", "fontSize": "28px", "stroke": "#000000ff", "strokeThickness":10});
 
+		// confirmButton
+		const confirmButton = new PrefabNextRoom(this, 1680, 800);
+		this.add.existing(confirmButton);
+
 		this.endingText = endingText;
 		this.confirmButton = confirmButton;
-		this.girlWins = girlWins;
-		this.boyWins = boyWins;
-		this.draw = draw;
 
 		this.events.emit("scene-awake");
 	}
@@ -60,12 +56,6 @@ class Ending extends Phaser.Scene {
 	endingText;
 	/** @type {PrefabNextRoom} */
 	confirmButton;
-	/** @type {Phaser.GameObjects.Image} */
-	girlWins;
-	/** @type {Phaser.GameObjects.Image} */
-	boyWins;
-	/** @type {Phaser.GameObjects.Image} */
-	draw;
 
 	/* START-USER-CODE */
 

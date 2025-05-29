@@ -5,20 +5,21 @@
         "preloadPackFiles": [],
         "createMethodName": "editorCreate",
         "sceneKey": "JoinMatch",
-        "borderWidth": 1280,
-        "borderHeight": 720
+        "borderWidth": 1920,
+        "borderHeight": 1080
     },
     "displayList": [
         {
-            "type": "Rectangle",
-            "id": "2b5be22d-c172-46c9-94cd-9eaf09d4806c",
-            "label": "rectangle_1",
-            "x": 868,
-            "y": 367,
-            "isFilled": true,
-            "fillColor": "#91cb89",
-            "width": 128,
-            "height": 128
+            "prefabId": "2f15ddb5-a4d8-4a13-9237-ebf5b4a7f47e",
+            "id": "e364854c-3bc0-4dc1-809f-0c61ef63ba43",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "joinMatch",
+            "scope": "PUBLIC",
+            "x": 1680,
+            "y": 800
         }
     ],
     "plainObjects": [],

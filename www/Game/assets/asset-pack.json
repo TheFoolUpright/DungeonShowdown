@@ -318,6 +318,11 @@
                 "key": "PrefabCard"
             },
             {
+                "url": "src/prefabs/PrefabColor.js",
+                "type": "script",
+                "key": "PrefabColor"
+            },
+            {
                 "url": "src/prefabs/PrefabInfo.js",
                 "type": "script",
                 "key": "PrefabInfo"
