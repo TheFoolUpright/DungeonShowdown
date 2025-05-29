@@ -13,6 +13,7 @@
             "type": "Image",
             "id": "7efba4bb-a028-47b1-ae61-220d45fbde2a",
             "label": "endingBackground",
+            "scope": "PUBLIC",
             "texture": {
                 "key": "EndingBackground"
             },
@@ -33,12 +34,14 @@
             "fontFamily": "Rockey",
             "fontSize": "128px",
             "stroke": "#000000ff",
-            "strokeThickness": 20
+            "strokeThickness": 20,
+            "wordWrapWidth": 290
         },
         {
             "type": "Image",
             "id": "e9fc686e-77e1-427d-9540-b191359faf82",
             "label": "girlWins",
+            "scope": "PUBLIC",
             "texture": {
                 "key": "GirlWins"
             },
@@ -50,6 +53,7 @@
             "type": "Image",
             "id": "4722f518-2d7b-42f2-9b97-4abcfd5ab643",
             "label": "boyWins",
+            "scope": "PUBLIC",
             "texture": {
                 "key": "BoyWins"
             },
@@ -61,16 +65,19 @@
             "type": "Image",
             "id": "dba4edb3-462d-4aa6-af7c-178909e9da12",
             "label": "draw",
+            "scope": "PUBLIC",
             "texture": {
                 "key": "Draw"
             },
             "x": 960,
-            "y": 539
+            "y": 539,
+            "visible": false
         },
         {
             "type": "Text",
             "id": "c4c0b6a2-4998-47b9-89f5-d8691bc84d07",
             "label": "dungeonShowdown",
+            "scope": "PUBLIC",
             "x": 1132,
             "y": 820,
             "originX": 0.5,
@@ -80,7 +87,8 @@
             "fontFamily": "Rockey",
             "fontSize": "28px",
             "stroke": "#000000ff",
-            "strokeThickness": 10
+            "strokeThickness": 10,
+            "wordWrapWidth": 290
         },
         {
             "prefabId": "2f15ddb5-a4d8-4a13-9237-ebf5b4a7f47e",

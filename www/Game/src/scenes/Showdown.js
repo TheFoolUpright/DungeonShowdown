@@ -184,52 +184,56 @@ class Showdown extends Phaser.Scene {
 		})
 
 		this.defenseSlot.on("pointerdown", () => {
-			if (!this.defenseSlot.isSelected) {
-				if (this.normalAttackSlot.isSelected && this.skillSlot.isSelected) {
-					this.defenseSlot.isSelected = true
-					this.skillSlot.isSelected = false
-					this.defenseSlot.setY(600)
-					this.skillSlot.setY(800)
-				}
-				else if (this.specialAttackSlot.isSelected && this.skillSlot.isSelected) {
-					this.defenseSlot.isSelected = true
-					this.skillSlot.isSelected = false
-					this.defenseSlot.setY(600)
-					this.skillSlot.setY(800)
+			if (!this.defenseSlot.isDisabled) {
+				if (!this.defenseSlot.isSelected) {
+					if (this.normalAttackSlot.isSelected && this.skillSlot.isSelected) {
+						this.defenseSlot.isSelected = true
+						this.skillSlot.isSelected = false
+						this.defenseSlot.setY(600)
+						this.skillSlot.setY(800)
+					}
+					else if (this.specialAttackSlot.isSelected && this.skillSlot.isSelected) {
+						this.defenseSlot.isSelected = true
+						this.skillSlot.isSelected = false
+						this.defenseSlot.setY(600)
+						this.skillSlot.setY(800)
+					}
+					else {
+						this.defenseSlot.isSelected = true
+						this.defenseSlot.setY(600)
+					}
 				}
 				else {
-					this.defenseSlot.isSelected = true
-					this.defenseSlot.setY(600)
+					this.defenseSlot.setY(800)
+					this.defenseSlot.isSelected = false
 				}
-			}
-			else {
-				this.defenseSlot.setY(800)
-				this.defenseSlot.isSelected = false
 			}
 		})
 
 		this.skillSlot.on("pointerdown", () => {
-			if (!this.skillSlot.isSelected) {
-				if (this.normalAttackSlot.isSelected && this.defenseSlot.isSelected) {
-					this.defenseSlot.isSelected = false
-					this.skillSlot.isSelected = true
-					this.defenseSlot.setY(800)
-					this.skillSlot.setY(600)
-				}
-				else if (this.specialAttackSlot.isSelected && this.defenseSlot.isSelected) {
-					this.defenseSlot.isSelected = false
-					this.skillSlot.isSelected = true
-					this.defenseSlot.setY(800)
-					this.skillSlot.setY(600)
+			if (!this.skillSlot.isDisabled) {
+				if (!this.skillSlot.isSelected) {
+					if (this.normalAttackSlot.isSelected && this.defenseSlot.isSelected) {
+						this.defenseSlot.isSelected = false
+						this.skillSlot.isSelected = true
+						this.defenseSlot.setY(800)
+						this.skillSlot.setY(600)
+					}
+					else if (this.specialAttackSlot.isSelected && this.defenseSlot.isSelected) {
+						this.defenseSlot.isSelected = false
+						this.skillSlot.isSelected = true
+						this.defenseSlot.setY(800)
+						this.skillSlot.setY(600)
+					}
+					else {
+						this.skillSlot.isSelected = true
+						this.skillSlot.setY(600)
+					}
 				}
 				else {
-					this.skillSlot.isSelected = true
-					this.skillSlot.setY(600)
+					this.skillSlot.setY(800)
+					this.skillSlot.isSelected = false
 				}
-			}
-			else {
-				this.skillSlot.setY(800)
-				this.skillSlot.isSelected = false
 			}
 		})
 	}
@@ -354,7 +358,7 @@ class Showdown extends Phaser.Scene {
 
 		this.normalAttackSlot.cardName.text = data.card[0].card_name
 		this.normalAttackSlot.cardImage.setTexture(data.card[0].card_image_path)
-		this.normalAttackSlot.cardDescription.text = ""
+		this.normalAttackSlot.cardDescription.text
 
 		//Special Attack
 		specialAttackCard = data.card[1]
@@ -368,10 +372,14 @@ class Showdown extends Phaser.Scene {
 			this.specialAttackSlot.cardImage.setTexture(data.card[1].card_image_path)
 			this.specialAttackSlot.cardDescription.text
 		}
-		else{
+		else {
 			this.specialAttackSlot.cardName.text = "? ? ?"
 			this.specialAttackSlot.cardImage.setTexture("HiddenDraft")
 			this.specialAttackSlot.cardDescription.text = "Not enough insight to see the card"
+
+			this.specialAttackSlot.option1RewardIcon1.setTexture("HiddenDraft")
+			this.specialAttackSlot.option1RewardText1.text = ""
+			this.specialAttackSlot.option1Container.visible = true
 		}
 
 		//Defense Attack
@@ -386,7 +394,7 @@ class Showdown extends Phaser.Scene {
 			this.defenseSlot.cardImage.setTexture(data.card[2].card_image_path)
 			this.defenseSlot.cardDescription.text
 		}
-		else{
+		else {
 			this.defenseSlot.cardName.text = "? ? ?"
 			this.defenseSlot.cardImage.setTexture("HiddenDraft")
 			this.defenseSlot.cardDescription.text = "Not enough insight to see the card"
@@ -404,7 +412,7 @@ class Showdown extends Phaser.Scene {
 			this.skillSlot.cardImage.setTexture(data.card[3].card_image_path);
 			this.skillSlot.cardDescription.text
 		}
-		else{
+		else {
 			this.skillSlot.cardName.text = "? ? ?"
 			this.skillSlot.cardImage.setTexture("HiddenDraft")
 			this.skillSlot.cardDescription.text = "Not enough insight to see the card"
@@ -472,80 +480,8 @@ class Showdown extends Phaser.Scene {
 			this.confirmButton.visible = false
 		}
 
-		//Special Attack
-		if(this.specialAttackSlot.isSelected){
-			
-		}
-	// 	//Evaulate if others should be disabled
-    //     if((showdownCard4.card_energy + showdownCard2.card_energy + energy < 0) || 
-    //        (showdownCard4.card_insight + showdownCard2.card_insight + insight < 0)) {
-    //         document.getElementById("showdownCard2Selection").disabled = true
-    //         document.getElementById("showdownCard2Selection").checked = false
-            
-    //     }
-    //     else {
-    //         console.log("here 6")
-    //         document.getElementById("showdownCard2Selection").disabled = false
-    //     }
-    //     if ((showdownCard4.card_energy + showdownCard3.card_energy + energy < 0) || 
-    //         (showdownCard4.card_insight + showdownCard3.card_insight + insight < 0)) {
-    //         document.getElementById("showdownCard3Selection").disabled = true
-    //         document.getElementById("showdownCard3Selection").checked = false
-            
-    //     }
-    //     else {
-    //         document.getElementById("showdownCard3Selection").disabled = false
-    //     }
-    // }
-    // else {
-    //     if(showdownSelectedCard1Id == showdownCard4Id) {
-    //         showdownSelectedCard1Id = null;
-    //         document.getElementById("selectedCardName1").innerHTML = "Selected Card Name";
-    //         document.getElementById("selectedCardImage1").src = "../Assets/Art/Cards/1x/HiddenDraft.png";
-    //         document.getElementById("selectedCardStats1").innerHTML = "Selected Card Stats";
-            
-
-    //     }
-    //     if(showdownSelectedCard2Id == showdownCard4Id) {
-    //         showdownSelectedCard2Id = null;
-    //         document.getElementById("selectedCardName2").innerHTML = "Selected Card Name";
-    //         document.getElementById("selectedCardImage2").src = "../Assets/Art/Cards/1x/HiddenDraft.png";
-    //         document.getElementById("selectedCardStats2").innerHTML = "Selected Card Stats";
-    //     }
-
-    //     //Evaulate if others should be disabled
-    //     if(((showdownCard4.card_energy + showdownCard2.card_energy + energy < 0) || 
-    //        (showdownCard4.card_insight + showdownCard2.card_insight + insight < 0)) &&
-    //        !document.getElementById("showdownCard3Selection").checked) {
-    //         console.log("here 5")
-    //         document.getElementById("showdownCard2Selection").disabled = false            
-    //     }
-
-    //     if (((showdownCard4.card_energy + showdownCard3.card_energy + energy < 0) || 
-    //         (showdownCard4.card_insight + showdownCard3.card_insight + insight < 0)) &&
-    //         !document.getElementById("showdownCard2Selection").checked) {
-    //         document.getElementById("showdownCard3Selection").disabled = false            
-    //     }
-
-    // }
-
-		//
-		if (this.normalAttackSlot.isSelected) {
-			this.specialAttackSlot.isDisabled = true
-			if (!this.specialAttackSlot.isTinted) {
-				this.specialAttackSlot.empty_Card.setTint("0xaaaaaa")
-				this.specialAttackSlot.cardImage.setTint("0xaaaaaa")
-				this.specialAttackSlot.isTinted = true
-			}
-		}
-		else {
-			this.specialAttackSlot.isDisabled = false
-			if (this.specialAttackSlot.isTinted) {
-				this.specialAttackSlot.empty_Card.setTint()
-				this.specialAttackSlot.cardImage.setTint()
-				this.specialAttackSlot.isTinted = false
-			}
-		}
+		//Normal Attack
+		//special attack relationship
 		if (this.specialAttackSlot.isSelected) {
 			this.normalAttackSlot.isDisabled = true
 			if (!this.normalAttackSlot.isTinted) {
@@ -563,9 +499,210 @@ class Showdown extends Phaser.Scene {
 			}
 		}
 
+		//Special Attack
+		//not enough stats limitation
+		
+		if (this.normalAttackSlot.isSelected) {
+			this.specialAttackSlot.isDisabled = true
+			if (!this.specialAttackSlot.isTinted) {
+				this.specialAttackSlot.empty_Card.setTint("0xaaaaaa")
+				this.specialAttackSlot.cardImage.setTint("0xaaaaaa")
+				this.specialAttackSlot.isTinted = true
+			}
+		}
+		else {
+			if (!this.defenseSlot.isSelected && !this.skillSlot.isSelected) {
+				if ((specialAttackCard.energy + specialAttackCard.card_energy) < 0) {
+					this.specialAttackSlot.isDisabled = true
+					if (!this.specialAttackSlot.isTinted) {
+						this.specialAttackSlot.empty_Card.setTint("0xaaaaaa")
+						this.specialAttackSlot.cardImage.setTint("0xaaaaaa")
+						this.specialAttackSlot.isTinted = true
+					}
+				}
+				else {
+					this.specialAttackSlot.isDisabled = false
+					if (this.specialAttackSlot.isTinted) {
+						this.specialAttackSlot.empty_Card.setTint()
+						this.specialAttackSlot.cardImage.setTint()
+						this.specialAttackSlot.isTinted = false
+					}
+				}
+			}
+			else {
+				if (this.defenseSlot.isSelected) {
+					if ((specialAttackCard.energy + specialAttackCard.card_energy + defenseCard.card_energy) < 0) {
+						this.specialAttackSlot.isDisabled = true
+						if (!this.specialAttackSlot.isTinted) {
+							this.specialAttackSlot.empty_Card.setTint("0xaaaaaa")
+							this.specialAttackSlot.cardImage.setTint("0xaaaaaa")
+							this.specialAttackSlot.isTinted = true
+						}
+					}
+					else {
+						this.specialAttackSlot.isDisabled = false
+						if (this.specialAttackSlot.isTinted) {
+							this.specialAttackSlot.empty_Card.setTint()
+							this.specialAttackSlot.cardImage.setTint()
+							this.specialAttackSlot.isTinted = false
+						}
+					}
+				}
+				if (this.skillSlot.isSelected) {
+					if ((specialAttackCard.energy + specialAttackCard.card_energy + skillCard.card_energy) < 0) {
+						this.specialAttackSlot.isDisabled = true
+						if (!this.specialAttackSlot.isTinted) {
+							this.specialAttackSlot.empty_Card.setTint("0xaaaaaa")
+							this.specialAttackSlot.cardImage.setTint("0xaaaaaa")
+							this.specialAttackSlot.isTinted = true
+						}
+					}
+					else {
+						this.specialAttackSlot.isDisabled = false
+						if (this.specialAttackSlot.isTinted) {
+							this.specialAttackSlot.empty_Card.setTint()
+							this.specialAttackSlot.cardImage.setTint()
+							this.specialAttackSlot.isTinted = false
+						}
+					}
+				}
+			}
+		}
 
+		//deselecting card if not enough stats
+		if (this.specialAttackSlot.isDisabled) {
+			this.specialAttackSlot.isSelected = false
+			this.specialAttackSlot.setY(800)
+		}
+		
+		//Defense
+		//not enough stats limitation
+		if (!this.specialAttackSlot.isSelected && !this.skillSlot.isSelected) {
+			if ((defenseCard.energy + defenseCard.card_energy) < 0) {
+				this.defenseSlot.isDisabled = true
+				if (!this.defenseSlot.isTinted) {
+					this.defenseSlot.empty_Card.setTint("0xaaaaaa")
+					this.defenseSlot.cardImage.setTint("0xaaaaaa")
+					this.defenseSlot.isTinted = true
+				}
+			}
+			else {
+				this.defenseSlot.isDisabled = false
+				if (this.defenseSlot.isTinted) {
+					this.defenseSlot.empty_Card.setTint()
+					this.defenseSlot.cardImage.setTint()
+					this.defenseSlot.isTinted = false
+				}
+			}
+		}
+		else {
+			if (this.specialAttackSlot.isSelected) {
+				if ((defenseCard.energy + defenseCard.card_energy + specialAttackCard.card_energy) < 0) {
+					this.defenseSlot.isDisabled = true
+					if (!this.defenseSlot.isTinted) {
+						this.defenseSlot.empty_Card.setTint("0xaaaaaa")
+						this.defenseSlot.cardImage.setTint("0xaaaaaa")
+						this.defenseSlot.isTinted = true
+					}
+				}
+				else {
+					this.defenseSlot.isDisabled = false
+					if (this.defenseSlot.isTinted) {
+						this.defenseSlot.empty_Card.setTint()
+						this.defenseSlot.cardImage.setTint()
+						this.defenseSlot.isTinted = false
+					}
+				}
+			}
+			if (this.skillSlot.isSelected) {
+				if ((defenseCard.energy + defenseCard.card_energy + skillCard.card_energy) < 0) {
+					this.defenseSlot.isDisabled = true
+					if (!this.defenseSlot.isTinted) {
+						this.defenseSlot.empty_Card.setTint("0xaaaaaa")
+						this.defenseSlot.cardImage.setTint("0xaaaaaa")
+						this.defenseSlot.isTinted = true
+					}
+				}
+				else {
+					this.defenseSlot.isDisabled = false
+					if (this.defenseSlot.isTinted) {
+						this.defenseSlot.empty_Card.setTint()
+						this.defenseSlot.cardImage.setTint()
+						this.defenseSlot.isTinted = false
+					}
+				}
+			}
+		}
+		//deselecting card if not enough stats
+		if (this.defenseSlot.isDisabled) {
+			this.defenseSlot.isSelected = false
+			this.defenseSlot.setY(800)
+		}
+		
+		//Skill
+		//not enough stats limitation
+		if (!this.specialAttackSlot.isSelected && !this.defenseSlot.isSelected) {
+			if ((skillCard.energy + skillCard.card_energy) < 0) {
+				this.skillSlot.isDisabled = true
+				if (!this.skillSlot.isTinted) {
+					this.skillSlot.empty_Card.setTint("0xaaaaaa")
+					this.skillSlot.cardImage.setTint("0xaaaaaa")
+					this.skillSlot.isTinted = true
+				}
+			}
+			else {
+				this.skillSlot.isDisabled = false
+				if (this.skillSlot.isTinted) {
+					this.skillSlot.empty_Card.setTint()
+					this.skillSlot.cardImage.setTint()
+					this.skillSlot.isTinted = false
+				}
+			}
+		}
+		else {
+			if (this.specialAttackSlot.isSelected) {
+				if ((skillCard.energy + skillCard.card_energy + specialAttackCard.card_energy) < 0) {
+					this.skillSlot.isDisabled = true
+					if (!this.skillSlot.isTinted) {
+						this.skillSlot.empty_Card.setTint("0xaaaaaa")
+						this.skillSlot.cardImage.setTint("0xaaaaaa")
+						this.skillSlot.isTinted = true
+					}
+				}
+				else {
+					this.skillSlot.isDisabled = false
+					if (this.skillSlot.isTinted) {
+						this.skillSlot.empty_Card.setTint()
+						this.skillSlot.cardImage.setTint()
+						this.skillSlot.isTinted = false
+					}
+				}
+			}
+			if (this.defenseSlot.isSelected) {
+				if ((skillCard.energy + skillCard.card_energy + defenseCard.card_energy) < 0) {
+					this.skillSlot.isDisabled = true
+					if (!this.skillSlot.isTinted) {
+						this.skillSlot.empty_Card.setTint("0xaaaaaa")
+						this.skillSlot.cardImage.setTint("0xaaaaaa")
+						this.skillSlot.isTinted = true
+					}
+				}
+				else {
+					this.skillSlot.isDisabled = false
+					if (this.skillSlot.isTinted) {
+						this.skillSlot.empty_Card.setTint()
+						this.skillSlot.cardImage.setTint()
+						this.skillSlot.isTinted = false
+					}
+				}
+			}
+		}
 
-
+		//deselecting card if not enough stats
+		if (this.skillSlot.isDisabled) {
+			this.skillSlot.isSelected = false
+			this.skillSlot.setY(800)
+		}
 	}
 	/* END-USER-CODE */
 }

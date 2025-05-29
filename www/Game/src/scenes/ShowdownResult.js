@@ -417,7 +417,7 @@ class ShowdownResult extends Phaser.Scene {
 						this.playerAttacks.recovery_Hit.visible = false
 						this.playerAttacks.counter_Slash.visible = false
 						playerAttackAnimationFinished = true
-						timer = 0
+						timer = 40
 					}
 				}
 				else {
@@ -426,7 +426,7 @@ class ShowdownResult extends Phaser.Scene {
 					this.playerAttacks.recovery_Hit.visible = false
 					this.playerAttacks.counter_Slash.visible = false
 					playerAttackAnimationFinished = true
-					timer = 0
+					timer = 40
 				}
 			}
 			else if (opponentAttack && !opponentAttackAnimationFinished) {
@@ -477,7 +477,7 @@ class ShowdownResult extends Phaser.Scene {
 			}
 		}
 
-		if (opponentAttackAnimationFinished && playerAttackAnimationFinished) {
+		if ((!playerAttack || (playerAttack && playerAttackAnimationFinished)) && (!opponentAttack || (opponentAttack && opponentAttackAnimationFinished))) {
 			this.confirmButton.visible = true
 		}
 		else {

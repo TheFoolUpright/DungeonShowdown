@@ -249,6 +249,11 @@
                 "key": "HiddenDraft"
             },
             {
+                "url": "assets/card/HiddenIconSmall.png",
+                "type": "image",
+                "key": "HiddenIconSmall"
+            },
+            {
                 "url": "assets/ui/Insight.png",
                 "type": "image",
                 "key": "Insight"
@@ -316,11 +321,6 @@
                 "url": "src/prefabs/PrefabCard.js",
                 "type": "script",
                 "key": "PrefabCard"
-            },
-            {
-                "url": "src/prefabs/PrefabColor.js",
-                "type": "script",
-                "key": "PrefabColor"
             },
             {
                 "url": "src/prefabs/PrefabInfo.js",

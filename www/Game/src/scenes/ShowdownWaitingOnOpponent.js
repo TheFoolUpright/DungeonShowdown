@@ -62,8 +62,8 @@ class ShowdownWaitingOnOpponent extends Phaser.Scene {
 				if (xhttp.status == 200) {
 
 					if (data.state == "SHOW_RESULT"  && !nextSceneDataLoaded) {
-						nextSceneDataLoaded = true
 						this.scene.start("ShowdownResult", data)
+						nextSceneDataLoaded = true
 					}
 					else if (data.state == "WAITING_FOR_OPP") {
 						return
