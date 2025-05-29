@@ -16,6 +16,7 @@ class PrefabPlayerAttacks extends Phaser.GameObjects.Container {
 		counter_Slash.scaleX = 1.2;
 		counter_Slash.scaleY = 1.2;
 		counter_Slash.setOrigin(0.56, 1.13);
+		counter_Slash.visible = false;
 		this.add(counter_Slash);
 
 		// heavy_Slash
@@ -23,6 +24,7 @@ class PrefabPlayerAttacks extends Phaser.GameObjects.Container {
 		heavy_Slash.scaleX = 1.2;
 		heavy_Slash.scaleY = 1.2;
 		heavy_Slash.setOrigin(0.51, 1.13);
+		heavy_Slash.visible = false;
 		this.add(heavy_Slash);
 
 		// normal_Slash
@@ -30,6 +32,7 @@ class PrefabPlayerAttacks extends Phaser.GameObjects.Container {
 		normal_Slash.scaleX = 1.2;
 		normal_Slash.scaleY = 1.2;
 		normal_Slash.setOrigin(0.56, 1.13);
+		normal_Slash.visible = false;
 		this.add(normal_Slash);
 
 		// recovery_Hit
@@ -37,6 +40,7 @@ class PrefabPlayerAttacks extends Phaser.GameObjects.Container {
 		recovery_Hit.scaleX = 1.2;
 		recovery_Hit.scaleY = 1.2;
 		recovery_Hit.setOrigin(0.63, 1.13);
+		recovery_Hit.visible = false;
 		this.add(recovery_Hit);
 
 		this.counter_Slash = counter_Slash;

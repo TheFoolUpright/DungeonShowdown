@@ -27,7 +27,8 @@
                     "scaleX": 1.2,
                     "scaleY": 1.2,
                     "originX": 0.56,
-                    "originY": 1.13
+                    "originY": 1.13,
+                    "visible": false
                 },
                 {
                     "type": "Image",
@@ -40,7 +41,8 @@
                     "scaleX": 1.2,
                     "scaleY": 1.2,
                     "originX": 0.51,
-                    "originY": 1.13
+                    "originY": 1.13,
+                    "visible": false
                 },
                 {
                     "type": "Image",
@@ -53,7 +55,8 @@
                     "scaleX": 1.2,
                     "scaleY": 1.2,
                     "originX": 0.56,
-                    "originY": 1.13
+                    "originY": 1.13,
+                    "visible": false
                 },
                 {
                     "type": "Image",
@@ -66,7 +69,8 @@
                     "scaleX": 1.2,
                     "scaleY": 1.2,
                     "originX": 0.63,
-                    "originY": 1.13
+                    "originY": 1.13,
+                    "visible": false
                 }
             ]
         }

@@ -25,7 +25,8 @@
                         "key": "Counter Slash"
                     },
                     "originX": 0.56,
-                    "originY": 1.1
+                    "originY": 1.1,
+                    "visible": false
                 },
                 {
                     "type": "Image",
@@ -36,7 +37,8 @@
                         "key": "Heavy Slash"
                     },
                     "originX": 0.51,
-                    "originY": 1.1
+                    "originY": 1.1,
+                    "visible": false
                 },
                 {
                     "type": "Image",
@@ -47,7 +49,8 @@
                         "key": "Normal Slash"
                     },
                     "originX": 0.56,
-                    "originY": 1.1
+                    "originY": 1.1,
+                    "visible": false
                 },
                 {
                     "type": "Image",
@@ -58,7 +61,8 @@
                         "key": "Recovery Hit"
                     },
                     "originX": 0.63,
-                    "originY": 1.1
+                    "originY": 1.1,
+                    "visible": false
                 }
             ]
         }

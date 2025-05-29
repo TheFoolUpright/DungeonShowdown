@@ -3091,15 +3091,15 @@ app.post("/setupShowdown", (req, res) => {
                 if (rows.length != 0) {
                     //
                     var state
-                    if (opponentNameAndColor[0].current_health > 0 && rows[0].current_health <= 0) {
+                    if (rows[0].current_health > 0 && opponentNameAndColor[0].current_health <= 0) {
                         state = 8
                         UpdatePlayerStateToEnding(state)
                     }
-                    else if (opponentNameAndColor[0].current_health <= 0 && rows[0].current_health > 0) {
+                    else if (rows[0].current_health <= 0 && opponentNameAndColor[0].current_health > 0) {
                         state = 9
                         UpdatePlayerStateToEnding(state)
                     }
-                    else if (opponentNameAndColor[0].current_health <= 0 && rows[0].current_health <= 0) {
+                    else if (rows[0].current_health <= 0 && opponentNameAndColor[0].current_health <= 0) {
                         state = 10
                         UpdatePlayerStateToEnding(state)
                     }
