@@ -1,5 +1,10 @@
 
 // You can write more code here
+var normalAttackCard
+var specialAttackCard
+var defenseCard
+var skillCard
+
 
 /* START OF COMPILED CODE */
 
@@ -125,108 +130,108 @@ class Showdown extends Phaser.Scene {
 			this.loadOpponentData(data)
 
 			//Create events
-
-			this.normalAttackSlot.on("pointerdown", () => {
-				if (!this.normalAttackSlot.isDisabled) {
-					if (!this.normalAttackSlot.isSelected) {
-						if (this.defenseSlot.isSelected && this.skillSlot.isSelected) {
-							this.normalAttackSlot.isSelected = true
-							this.defenseSlot.isSelected = false
-							this.normalAttackSlot.setY(600)
-							this.defenseSlot.setY(800)
-						}
-						else {
-							this.normalAttackSlot.isSelected = true
-							this.normalAttackSlot.setY(600)
-						}
-					}
-					else {
-						this.normalAttackSlot.isSelected = false
-						this.normalAttackSlot.setY(800)
-					}
-				}
-			})
-
-			this.specialAttackSlot.on("pointerdown", () => {
-				if (!this.specialAttackSlot.isDisabled) {
-					if (!this.specialAttackSlot.isSelected) {
-						if (this.defenseSlot.isSelected && this.skillSlot.isSelected) {
-							this.specialAttackSlot.isSelected = true
-							this.defenseSlot.isSelected = false
-							this.specialAttackSlot.setY(600)
-							this.defenseSlot.setY(800)
-						}
-						else {
-							this.specialAttackSlot.isSelected = true
-							this.specialAttackSlot.setY(600)
-						}
-					}
-					else {
-						this.specialAttackSlot.isSelected = false
-						this.specialAttackSlot.setY(800)
-					}
-				}
-			})
-
-			this.defenseSlot.on("pointerdown", () => {
-				if (!this.defenseSlot.isSelected) {
-					if (this.normalAttackSlot.isSelected && this.skillSlot.isSelected) {
-						this.defenseSlot.isSelected = true
-						this.skillSlot.isSelected = false
-						this.defenseSlot.setY(600)
-						this.skillSlot.setY(800)
-					}
-					else if (this.specialAttackSlot.isSelected && this.skillSlot.isSelected) {
-						this.defenseSlot.isSelected = true
-						this.skillSlot.isSelected = false
-						this.defenseSlot.setY(600)
-						this.skillSlot.setY(800)
-					}
-					else {
-						this.defenseSlot.isSelected = true
-						this.defenseSlot.setY(600)
-					}
-				}
-				else {
-					this.defenseSlot.setY(800)
-					this.defenseSlot.isSelected = false
-				}
-			})
-
-			this.skillSlot.on("pointerdown", () => {
-				if (!this.skillSlot.isSelected) {
-					if (this.normalAttackSlot.isSelected && this.defenseSlot.isSelected) {
-						this.defenseSlot.isSelected = false
-						this.skillSlot.isSelected = true
-						this.defenseSlot.setY(800)
-						this.skillSlot.setY(600)
-					}
-					else if (this.specialAttackSlot.isSelected && this.defenseSlot.isSelected) {
-						this.defenseSlot.isSelected = false
-						this.skillSlot.isSelected = true
-						this.defenseSlot.setY(800)
-						this.skillSlot.setY(600)
-					}
-					else {
-						this.skillSlot.isSelected = true
-						this.skillSlot.setY(600)
-					}
-				}
-				else {
-					this.skillSlot.setY(800)
-					this.skillSlot.isSelected = false
-				}
-			})
-
+			this.loadCardClickEvents()
 			this.loadCardHoverEvents()
 			this.loadButtonHoverEvents()
 
 			this.confirmButton.on("pointerdown", () => {
 				this.ConfirmShowdownChoice()
 			})
-			
-			console.log("prev Health: " + previousCurrentHealth)
 		}
+	}
+
+	loadCardClickEvents(){
+		this.normalAttackSlot.on("pointerdown", () => {
+			if (!this.normalAttackSlot.isDisabled) {
+				if (!this.normalAttackSlot.isSelected) {
+					if (this.defenseSlot.isSelected && this.skillSlot.isSelected) {
+						this.normalAttackSlot.isSelected = true
+						this.defenseSlot.isSelected = false
+						this.normalAttackSlot.setY(600)
+						this.defenseSlot.setY(800)
+					}
+					else {
+						this.normalAttackSlot.isSelected = true
+						this.normalAttackSlot.setY(600)
+					}
+				}
+				else {
+					this.normalAttackSlot.isSelected = false
+					this.normalAttackSlot.setY(800)
+				}
+			}
+		})
+
+		this.specialAttackSlot.on("pointerdown", () => {
+			if (!this.specialAttackSlot.isDisabled) {
+				if (!this.specialAttackSlot.isSelected) {
+					if (this.defenseSlot.isSelected && this.skillSlot.isSelected) {
+						this.specialAttackSlot.isSelected = true
+						this.defenseSlot.isSelected = false
+						this.specialAttackSlot.setY(600)
+						this.defenseSlot.setY(800)
+					}
+					else {
+						this.specialAttackSlot.isSelected = true
+						this.specialAttackSlot.setY(600)
+					}
+				}
+				else {
+					this.specialAttackSlot.isSelected = false
+					this.specialAttackSlot.setY(800)
+				}
+			}
+		})
+
+		this.defenseSlot.on("pointerdown", () => {
+			if (!this.defenseSlot.isSelected) {
+				if (this.normalAttackSlot.isSelected && this.skillSlot.isSelected) {
+					this.defenseSlot.isSelected = true
+					this.skillSlot.isSelected = false
+					this.defenseSlot.setY(600)
+					this.skillSlot.setY(800)
+				}
+				else if (this.specialAttackSlot.isSelected && this.skillSlot.isSelected) {
+					this.defenseSlot.isSelected = true
+					this.skillSlot.isSelected = false
+					this.defenseSlot.setY(600)
+					this.skillSlot.setY(800)
+				}
+				else {
+					this.defenseSlot.isSelected = true
+					this.defenseSlot.setY(600)
+				}
+			}
+			else {
+				this.defenseSlot.setY(800)
+				this.defenseSlot.isSelected = false
+			}
+		})
+
+		this.skillSlot.on("pointerdown", () => {
+			if (!this.skillSlot.isSelected) {
+				if (this.normalAttackSlot.isSelected && this.defenseSlot.isSelected) {
+					this.defenseSlot.isSelected = false
+					this.skillSlot.isSelected = true
+					this.defenseSlot.setY(800)
+					this.skillSlot.setY(600)
+				}
+				else if (this.specialAttackSlot.isSelected && this.defenseSlot.isSelected) {
+					this.defenseSlot.isSelected = false
+					this.skillSlot.isSelected = true
+					this.defenseSlot.setY(800)
+					this.skillSlot.setY(600)
+				}
+				else {
+					this.skillSlot.isSelected = true
+					this.skillSlot.setY(600)
+				}
+			}
+			else {
+				this.skillSlot.setY(800)
+				this.skillSlot.isSelected = false
+			}
+		})
 	}
 
 	loadCardHoverEvents(){
@@ -342,6 +347,7 @@ class Showdown extends Phaser.Scene {
 		const cardColor = data.player_color.replace("#", "0x")
 
 		//Normal Attack
+		normalAttackCard = data.card[0]
 		this.normalAttackSlot.cardId = data.card[0].card_id
 		this.normalAttackSlot.cardBorder.setTint(cardColor)
 		this.normalAttackSlot.cardGlow.active = false
@@ -351,6 +357,7 @@ class Showdown extends Phaser.Scene {
 		this.normalAttackSlot.cardDescription.text = ""
 
 		//Special Attack
+		specialAttackCard = data.card[1]
 		this.specialAttackSlot.cardId = data.card[1].card_id
 		this.specialAttackSlot.isVisible = data.card[1].is_visible
 		this.specialAttackSlot.cardBorder.setTint(cardColor)
@@ -368,6 +375,7 @@ class Showdown extends Phaser.Scene {
 		}
 
 		//Defense Attack
+		defenseCard = data.card[2]
 		this.defenseSlot.cardId = data.card[2].card_id
 		this.defenseSlot.isVisible = data.card[2].is_visible
 		this.defenseSlot.cardBorder.setTint(cardColor)
@@ -385,6 +393,7 @@ class Showdown extends Phaser.Scene {
 		}
 
 		//Skill Attack
+		skillCard = data.card[3]
 		this.skillSlot.cardId = data.card[3].card_id
 		this.skillSlot.isVisible = data.card[3].is_visible
 		this.skillSlot.cardBorder.setTint(cardColor)
@@ -463,6 +472,64 @@ class Showdown extends Phaser.Scene {
 			this.confirmButton.visible = false
 		}
 
+		//Special Attack
+		if(this.specialAttackSlot.isSelected){
+			
+		}
+	// 	//Evaulate if others should be disabled
+    //     if((showdownCard4.card_energy + showdownCard2.card_energy + energy < 0) || 
+    //        (showdownCard4.card_insight + showdownCard2.card_insight + insight < 0)) {
+    //         document.getElementById("showdownCard2Selection").disabled = true
+    //         document.getElementById("showdownCard2Selection").checked = false
+            
+    //     }
+    //     else {
+    //         console.log("here 6")
+    //         document.getElementById("showdownCard2Selection").disabled = false
+    //     }
+    //     if ((showdownCard4.card_energy + showdownCard3.card_energy + energy < 0) || 
+    //         (showdownCard4.card_insight + showdownCard3.card_insight + insight < 0)) {
+    //         document.getElementById("showdownCard3Selection").disabled = true
+    //         document.getElementById("showdownCard3Selection").checked = false
+            
+    //     }
+    //     else {
+    //         document.getElementById("showdownCard3Selection").disabled = false
+    //     }
+    // }
+    // else {
+    //     if(showdownSelectedCard1Id == showdownCard4Id) {
+    //         showdownSelectedCard1Id = null;
+    //         document.getElementById("selectedCardName1").innerHTML = "Selected Card Name";
+    //         document.getElementById("selectedCardImage1").src = "../Assets/Art/Cards/1x/HiddenDraft.png";
+    //         document.getElementById("selectedCardStats1").innerHTML = "Selected Card Stats";
+            
+
+    //     }
+    //     if(showdownSelectedCard2Id == showdownCard4Id) {
+    //         showdownSelectedCard2Id = null;
+    //         document.getElementById("selectedCardName2").innerHTML = "Selected Card Name";
+    //         document.getElementById("selectedCardImage2").src = "../Assets/Art/Cards/1x/HiddenDraft.png";
+    //         document.getElementById("selectedCardStats2").innerHTML = "Selected Card Stats";
+    //     }
+
+    //     //Evaulate if others should be disabled
+    //     if(((showdownCard4.card_energy + showdownCard2.card_energy + energy < 0) || 
+    //        (showdownCard4.card_insight + showdownCard2.card_insight + insight < 0)) &&
+    //        !document.getElementById("showdownCard3Selection").checked) {
+    //         console.log("here 5")
+    //         document.getElementById("showdownCard2Selection").disabled = false            
+    //     }
+
+    //     if (((showdownCard4.card_energy + showdownCard3.card_energy + energy < 0) || 
+    //         (showdownCard4.card_insight + showdownCard3.card_insight + insight < 0)) &&
+    //         !document.getElementById("showdownCard2Selection").checked) {
+    //         document.getElementById("showdownCard3Selection").disabled = false            
+    //     }
+
+    // }
+
+		//
 		if (this.normalAttackSlot.isSelected) {
 			this.specialAttackSlot.isDisabled = true
 			if (!this.specialAttackSlot.isTinted) {
@@ -495,6 +562,10 @@ class Showdown extends Phaser.Scene {
 				this.normalAttackSlot.isTinted = false
 			}
 		}
+
+
+
+
 	}
 	/* END-USER-CODE */
 }

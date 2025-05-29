@@ -161,6 +161,7 @@ class Dungeon extends Phaser.Scene {
 	create(data) {
 
 		this.editorCreate();
+		if (!backgroundMusic){
 		backgroundMusic = this.sound.add("dark-ambient-horror-cinematic-halloween-atmosphere-scary-118585",
 		{
 		mute: false,
@@ -192,6 +193,7 @@ class Dungeon extends Phaser.Scene {
 	}
 
 	)
+}
 		console.log(backgroundMusic)
 		console.log("Is it playing: " + Boolean(backgroundMusic.isPlaying))
 		if(!backgroundMusic.isPlaying){

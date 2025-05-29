@@ -27,19 +27,17 @@
                     "y": -260,
                     "originX": 0.5,
                     "originY": 1,
-                    "visible": false,
                     "text": "Take no damage from one of the opponent's attacks and hit them back for half of their _",
                     "paddingLeft": 5,
                     "paddingTop": 5,
                     "paddingRight": 5,
                     "paddingBottom": 5,
-                    "align": "center",
                     "fontFamily": "Rockey",
-                    "fontSize": "32px",
+                    "fontSize": "24px",
                     "color": "#ffffffff",
                     "stroke": "#000000ff",
-                    "strokeThickness": 12,
-                    "wordWrapWidth": 324
+                    "strokeThickness": 8,
+                    "wordWrapWidth": 290
                 },
                 {
                     "type": "Image",
@@ -695,7 +693,8 @@
                             "fontFamily": "Rockey",
                             "fontSize": "24px",
                             "color": "#000000ff",
-                            "stroke": "#000000ff"
+                            "stroke": "#000000ff",
+                            "wordWrapWidth": 292
                         },
                         {
                             "type": "Text",
@@ -710,7 +709,8 @@
                             "fontFamily": "Rockey",
                             "fontSize": "24px",
                             "color": "#000000ff",
-                            "stroke": "#000000ff"
+                            "stroke": "#000000ff",
+                            "wordWrapWidth": 292
                         },
                         {
                             "type": "Image",
@@ -747,7 +747,8 @@
                             "fontFamily": "Rockey",
                             "fontSize": "24px",
                             "color": "#000000ff",
-                            "stroke": "#000000ff"
+                            "stroke": "#000000ff",
+                            "wordWrapWidth": 292
                         },
                         {
                             "type": "Image",
@@ -773,7 +774,8 @@
                             "fontFamily": "Rockey",
                             "fontSize": "24px",
                             "color": "#000000ff",
-                            "stroke": "#000000ff"
+                            "stroke": "#000000ff",
+                            "wordWrapWidth": 292
                         },
                         {
                             "type": "Image",
@@ -797,9 +799,10 @@
                             "originY": 0.5,
                             "text": "- 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "24",
                             "color": "#000000ff",
-                            "stroke": "#000000ff"
+                            "stroke": "#000000ff",
+                            "wordWrapWidth": 292
                         }
                     ]
                 },

@@ -13,11 +13,10 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		// cardDescription
 		const cardDescription = scene.add.text(0, -260, "", {});
 		cardDescription.setOrigin(0.5, 1);
-		cardDescription.visible = false;
 		cardDescription.text = "Take no damage from one of the opponent's attacks and hit them back for half of their _";
-		cardDescription.setStyle({ "align": "center", "color": "#ffffffff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff", "strokeThickness":12});
+		cardDescription.setStyle({ "color": "#ffffffff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff", "strokeThickness":8});
 		cardDescription.setPadding({"left":5,"top":5,"right":5,"bottom":5});
-		cardDescription.setWordWrapWidth(324);
+		cardDescription.setWordWrapWidth(290);
 		this.add(cardDescription);
 
 		// empty_Card
@@ -307,6 +306,7 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		option2_3RewardText1.setOrigin(0.5, 0.5);
 		option2_3RewardText1.text = "+ 5";
 		option2_3RewardText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option2_3RewardText1.setWordWrapWidth(292);
 		option2_3Container.add(option2_3RewardText1);
 
 		// option2_3RewardText2
@@ -314,6 +314,7 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		option2_3RewardText2.setOrigin(0.5, 0.5);
 		option2_3RewardText2.text = "+ 5";
 		option2_3RewardText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option2_3RewardText2.setWordWrapWidth(292);
 		option2_3Container.add(option2_3RewardText2);
 
 		// option2_3RewardIcon2
@@ -329,6 +330,7 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		option2_3RewardText3.setOrigin(0.5, 0.5);
 		option2_3RewardText3.text = "+ 5";
 		option2_3RewardText3.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option2_3RewardText3.setWordWrapWidth(292);
 		option2_3Container.add(option2_3RewardText3);
 
 		// option2_3CostIcon1
@@ -340,6 +342,7 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		option2_3CostText1.setOrigin(0.5, 0.5);
 		option2_3CostText1.text = "- 5";
 		option2_3CostText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option2_3CostText1.setWordWrapWidth(292);
 		option2_3Container.add(option2_3CostText1);
 
 		// option2_3CostIcon2
@@ -350,7 +353,8 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		const option2_3CostText2 = scene.add.text(60, 100, "", {});
 		option2_3CostText2.setOrigin(0.5, 0.5);
 		option2_3CostText2.text = "- 5";
-		option2_3CostText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option2_3CostText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24", "stroke": "#000000ff" });
+		option2_3CostText2.setWordWrapWidth(292);
 		option2_3Container.add(option2_3CostText2);
 
 		// cardImage

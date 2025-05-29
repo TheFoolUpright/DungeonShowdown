@@ -37,6 +37,10 @@ var opponentShowdownAnimations = {
 	"Healing": 		   {id: 15, visible: false},
 	}
 
+var	playerAttack = false
+
+var	opponentAttack = false
+
 var playerSecondSwing = false
 
 var opponentSecondSwing = false
@@ -91,7 +95,7 @@ class ShowdownResult extends Phaser.Scene {
 		// playerAttacks
 		const playerAttacks = new PrefabPlayerAttacks(this, 960, 1132);
 		this.add.existing(playerAttacks);
-		playerAttacks.angle = -107;
+		playerAttacks.angle = 0;
 		playerAttacks.visible = true;
 
 		this.showdownBackground = showdownBackground;
@@ -162,10 +166,14 @@ class ShowdownResult extends Phaser.Scene {
 		opponentShowdownAnimations.Healing.visible = false
 		opponentShowdownAnimations.NormalAttack.visible = false
 
+		playerAttack = false
+		
+		opponentAttack = false
+
 		playerSecondSwing = false
 
 		opponentSecondSwing = false
-
+		
 		playerAttackAnimationFinished = false
 
 		opponentAttackAnimationFinished = false
@@ -186,35 +194,45 @@ class ShowdownResult extends Phaser.Scene {
 		// Loading Player Attacks
 		if (data.player_cards[0].card_id == playerShowdownAnimations.NormalAttack.id) {
 			playerShowdownAnimations.NormalAttack.visible = true
+			playerAttack = true
 		}
 		else if (data.player_cards[0].card_id == playerShowdownAnimations.HeavyAttack.id) {
 			playerShowdownAnimations.HeavyAttack.visible = true
+			playerAttack = true
 		}
 		else if (data.player_cards[0].card_id == playerShowdownAnimations.DoubleAttack.id) {
 			playerShowdownAnimations.DoubleAttack.visible = true
+			playerAttack = true
 		}
 		else if (data.player_cards[0].card_id == playerShowdownAnimations.RecoveryAttack.id) {
 			playerShowdownAnimations.RecoveryAttack.visible = true
+			playerAttack = true
 		}
 		else if (data.player_cards[0].card_id == playerShowdownAnimations.CounterAttack.id) {
 			playerShowdownAnimations.CounterAttack.visible = true
+			playerAttack = true
 		}
 
 		// Loading Opponent Attacks
 		if (data.opponent_cards[0].card_id == opponentShowdownAnimations.NormalAttack.id) {
 			opponentShowdownAnimations.NormalAttack.visible = true
+			opponentAttack = true
 		}
 		else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.HeavyAttack.id) {
 			opponentShowdownAnimations.HeavyAttack.visible = true
+			opponentAttack = true
 		}
 		else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.DoubleAttack.id) {
 			opponentShowdownAnimations.DoubleAttack.visible = true
+			opponentAttack = true
 		}
 		else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.RecoveryAttack.id) {
 			opponentShowdownAnimations.RecoveryAttack.visible = true
+			opponentAttack = true
 		}
 		else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.CounterAttack.id) {
 			opponentShowdownAnimations.CounterAttack.visible = true
+			opponentAttack = true
 		}
 
 		this.confirmButton.on("pointerdown", () => {
@@ -251,7 +269,7 @@ class ShowdownResult extends Phaser.Scene {
 			var maxHealthDiff = maxHealth - previousMaxHealth
 			var currentHealthDiff = currentHealth - previousCurrentHealth
 
-			if(maxHealthDiff > 0 && currentHealthDiff > 0){
+			if(maxHealthDiff > 0 && currentHealthDiff > 0) {
 				this.statsContainer.healthDifferenceText.text =  "+" + currentHealthDiff + "/+" + maxHealthDiff
 			}
 			else if (maxHealthDiff < 0 && currentHealthDiff < 0){
@@ -364,33 +382,43 @@ class ShowdownResult extends Phaser.Scene {
 		timer += dt
 		if (timer > 1200) {
 			// Play Player Attacks
-			if (((this.playerAttacks.angle <= 180 && this.playerAttacks.angle >= 130) || (this.playerAttacks.angle >= -180 && this.playerAttacks.angle <= -110)) && !playerSecondSwing) {
-				if (playerShowdownAnimations.NormalAttack.visible || playerShowdownAnimations.DoubleAttack.visible) {
-					this.playerAttacks.normal_Slash.visible = true
-					this.playerAttacks.angle += dt / 2
+			if (playerAttack && !playerAttackAnimationFinished) {
+				if (((this.playerAttacks.angle <= 130 && this.playerAttacks.angle >= 0) || (this.playerAttacks.angle >= -110 && this.playerAttacks.angle <= 0)) && !playerSecondSwing) {
+					if (playerShowdownAnimations.NormalAttack.visible || playerShowdownAnimations.DoubleAttack.visible) {
+						this.playerAttacks.normal_Slash.visible = true
+						this.playerAttacks.angle += dt / 2
+					}
+					else if (playerShowdownAnimations.HeavyAttack.visible) {
+						this.playerAttacks.heavy_Slash.visible = true
+						this.playerAttacks.angle += dt / 2
+					}
+					else if (playerShowdownAnimations.RecoveryAttack.visible) {
+						this.playerAttacks.recovery_Hit.visible = true
+						this.playerAttacks.angle += dt / 2
+					}
+					else if (playerShowdownAnimations.CounterAttack.visible) {
+						this.playerAttacks.counter_Slash.visible = true
+						this.playerAttacks.angle += dt / 2
+					}
 				}
-				else if (playerShowdownAnimations.HeavyAttack.visible) {
-					this.playerAttacks.heavy_Slash.visible = true
-					this.playerAttacks.angle += dt / 2
-				}
-				else if (playerShowdownAnimations.RecoveryAttack.visible) {
-					this.playerAttacks.recovery_Hit.visible = true
-					this.playerAttacks.angle += dt / 2
-				}
-				else if (playerShowdownAnimations.CounterAttack.visible) {
-					this.playerAttacks.counter_Slash.visible = true
-					this.playerAttacks.angle += dt / 2
-				}
-			}
-			else if (playerShowdownAnimations.DoubleAttack.visible) {
-				playerSecondSwing = true
-				if (playerSecondSwing && this.playerAttacks.normal_Slash.scaleX == 1) {
-					this.playerAttacks.normal_Slash.flipX = true
-				}
-				if (playerSecondSwing &&
-					((this.playerAttacks.angle <= 180 && this.playerAttacks.angle >= 140) || 
-					(this.playerAttacks.angle >= -180 && this.playerAttacks.angle <= -20))) {
-					this.playerAttacks.angle -= dt / 2
+				else if (playerShowdownAnimations.DoubleAttack.visible) {
+					playerSecondSwing = true
+					if (playerSecondSwing && this.playerAttacks.normal_Slash.scaleX == 1) {
+						this.playerAttacks.normal_Slash.flipX = true
+					}
+					if (playerSecondSwing &&
+						((this.playerAttacks.angle <= 140 && this.playerAttacks.angle >= 0) || 
+						(this.playerAttacks.angle >= -120 && this.playerAttacks.angle <= 0))) {
+						this.playerAttacks.angle -= dt / 2
+					}
+					else {
+						this.playerAttacks.normal_Slash.visible = false
+						this.playerAttacks.heavy_Slash.visible = false
+						this.playerAttacks.recovery_Hit.visible = false
+						this.playerAttacks.counter_Slash.visible = false
+						playerAttackAnimationFinished = true
+						timer = 0
+					}
 				}
 				else {
 					this.playerAttacks.normal_Slash.visible = false
@@ -398,43 +426,46 @@ class ShowdownResult extends Phaser.Scene {
 					this.playerAttacks.recovery_Hit.visible = false
 					this.playerAttacks.counter_Slash.visible = false
 					playerAttackAnimationFinished = true
+					timer = 0
 				}
 			}
-			else {
-				this.playerAttacks.normal_Slash.visible = false
-				this.playerAttacks.heavy_Slash.visible = false
-				this.playerAttacks.recovery_Hit.visible = false
-				this.playerAttacks.counter_Slash.visible = false
-				playerAttackAnimationFinished = true
-			}
-			// Play Opponent Attacks
-			if (((this.opponentAttacks.angle <= 180 && this.opponentAttacks.angle >= 30) || (this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -30)) && !opponentSecondSwing) {
-				if (opponentShowdownAnimations.NormalAttack.visible || opponentShowdownAnimations.DoubleAttack.visible) {
-					this.opponentAttacks.normal_Slash.visible = true
-					this.opponentAttacks.angle += dt / 2
+			else if (opponentAttack && !opponentAttackAnimationFinished) {
+				// Play Opponent Attacks
+				if (((this.opponentAttacks.angle <= 180 && this.opponentAttacks.angle >= 30) || (this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -30)) && !opponentSecondSwing) {
+					if (opponentShowdownAnimations.NormalAttack.visible || opponentShowdownAnimations.DoubleAttack.visible) {
+						this.opponentAttacks.normal_Slash.visible = true
+						this.opponentAttacks.angle += dt / 2
+					}
+					else if (opponentShowdownAnimations.HeavyAttack.visible) {
+						this.opponentAttacks.heavy_Slash.visible = true
+						this.opponentAttacks.angle += dt / 2
+					}
+					else if (opponentShowdownAnimations.RecoveryAttack.visible) {
+						this.opponentAttacks.recovery_Hit.visible = true
+						this.opponentAttacks.angle += dt / 2
+					}
+					else if (opponentShowdownAnimations.CounterAttack.visible) {
+						this.opponentAttacks.counter_Slash.visible = true
+						this.opponentAttacks.angle += dt / 2
+					}
 				}
-				else if (opponentShowdownAnimations.HeavyAttack.visible) {
-					this.opponentAttacks.heavy_Slash.visible = true
-					this.opponentAttacks.angle += dt / 2
-				}
-				else if (opponentShowdownAnimations.RecoveryAttack.visible) {
-					this.opponentAttacks.recovery_Hit.visible = true
-					this.opponentAttacks.angle += dt / 2
-				}
-				else if (opponentShowdownAnimations.CounterAttack.visible) {
-					this.opponentAttacks.counter_Slash.visible = true
-					this.opponentAttacks.angle += dt / 2
-				}
-			}
-			else if (opponentShowdownAnimations.DoubleAttack.visible) {
-				opponentSecondSwing = true
-				if (opponentSecondSwing && this.opponentAttacks.normal_Slash.scaleX == 1) {
-					this.opponentAttacks.normal_Slash.flipX = true
-				}
-				if (opponentSecondSwing &&
-					((this.opponentAttacks.angle <= 180 && this.opponentAttacks.angle >= 40) || 
-					(this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -20))) {
-					this.opponentAttacks.angle -= dt / 2
+				else if (opponentShowdownAnimations.DoubleAttack.visible) {
+					opponentSecondSwing = true
+					if (opponentSecondSwing && this.opponentAttacks.normal_Slash.scaleX == 1) {
+						this.opponentAttacks.normal_Slash.flipX = true
+					}
+					if (opponentSecondSwing &&
+						((this.opponentAttacks.angle <= 180 && this.opponentAttacks.angle >= 40) || 
+						(this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -20))) {
+						this.opponentAttacks.angle -= dt / 2
+					}
+					else {
+						this.opponentAttacks.normal_Slash.visible = false
+						this.opponentAttacks.heavy_Slash.visible = false
+						this.opponentAttacks.recovery_Hit.visible = false
+						this.opponentAttacks.counter_Slash.visible = false
+						opponentAttackAnimationFinished = true
+					}
 				}
 				else {
 					this.opponentAttacks.normal_Slash.visible = false
@@ -443,13 +474,6 @@ class ShowdownResult extends Phaser.Scene {
 					this.opponentAttacks.counter_Slash.visible = false
 					opponentAttackAnimationFinished = true
 				}
-			}
-			else {
-				this.opponentAttacks.normal_Slash.visible = false
-				this.opponentAttacks.heavy_Slash.visible = false
-				this.opponentAttacks.recovery_Hit.visible = false
-				this.opponentAttacks.counter_Slash.visible = false
-				opponentAttackAnimationFinished = true
 			}
 		}
 
