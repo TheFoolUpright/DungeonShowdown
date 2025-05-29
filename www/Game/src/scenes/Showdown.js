@@ -113,165 +113,172 @@ class Showdown extends Phaser.Scene {
 
 		this.editorCreate();
 
-		//load Data
-		this.loadInfoData(data)
-		this.loadStatsData(data)
-		this.loadCardData(data)
-		this.loadOpponentData(data)
+		//Check if Ending
+		if(data.state == 8 || data.state == 9 || data.state == 10){
+			this.scene.start("Ending", data);
+		}
+		else{
+			//load Data
+			this.loadInfoData(data)
+			this.loadStatsData(data)
+			this.loadCardData(data)
+			this.loadOpponentData(data)
 
-		//Create events
+			//Create events
 
-		this.normalAttackSlot.on("pointerdown", () => {
-			if (!this.normalAttackSlot.isDisabled) {
-				if (!this.normalAttackSlot.isSelected) {
-					if (this.defenseSlot.isSelected && this.skillSlot.isSelected) {
-						this.normalAttackSlot.isSelected = true
-						this.defenseSlot.isSelected = false
-						this.normalAttackSlot.setY(600)
-						this.defenseSlot.setY(800)
+			this.normalAttackSlot.on("pointerdown", () => {
+				if (!this.normalAttackSlot.isDisabled) {
+					if (!this.normalAttackSlot.isSelected) {
+						if (this.defenseSlot.isSelected && this.skillSlot.isSelected) {
+							this.normalAttackSlot.isSelected = true
+							this.defenseSlot.isSelected = false
+							this.normalAttackSlot.setY(600)
+							this.defenseSlot.setY(800)
+						}
+						else {
+							this.normalAttackSlot.isSelected = true
+							this.normalAttackSlot.setY(600)
+						}
 					}
 					else {
-						this.normalAttackSlot.isSelected = true
-						this.normalAttackSlot.setY(600)
+						this.normalAttackSlot.isSelected = false
+						this.normalAttackSlot.setY(800)
 					}
 				}
-				else {
-					this.normalAttackSlot.isSelected = false
-					this.normalAttackSlot.setY(800)
-				}
-			}
-		})
+			})
 
-		this.specialAttackSlot.on("pointerdown", () => {
-			if (!this.specialAttackSlot.isDisabled) {
-				if (!this.specialAttackSlot.isSelected) {
-					if (this.defenseSlot.isSelected && this.skillSlot.isSelected) {
-						this.specialAttackSlot.isSelected = true
-						this.defenseSlot.isSelected = false
-						this.specialAttackSlot.setY(600)
-						this.defenseSlot.setY(800)
+			this.specialAttackSlot.on("pointerdown", () => {
+				if (!this.specialAttackSlot.isDisabled) {
+					if (!this.specialAttackSlot.isSelected) {
+						if (this.defenseSlot.isSelected && this.skillSlot.isSelected) {
+							this.specialAttackSlot.isSelected = true
+							this.defenseSlot.isSelected = false
+							this.specialAttackSlot.setY(600)
+							this.defenseSlot.setY(800)
+						}
+						else {
+							this.specialAttackSlot.isSelected = true
+							this.specialAttackSlot.setY(600)
+						}
 					}
 					else {
-						this.specialAttackSlot.isSelected = true
-						this.specialAttackSlot.setY(600)
+						this.specialAttackSlot.isSelected = false
+						this.specialAttackSlot.setY(800)
+					}
+				}
+			})
+
+			this.defenseSlot.on("pointerdown", () => {
+				if (!this.defenseSlot.isSelected) {
+					if (this.normalAttackSlot.isSelected && this.skillSlot.isSelected) {
+						this.defenseSlot.isSelected = true
+						this.skillSlot.isSelected = false
+						this.defenseSlot.setY(600)
+						this.skillSlot.setY(800)
+					}
+					else if (this.specialAttackSlot.isSelected && this.skillSlot.isSelected) {
+						this.defenseSlot.isSelected = true
+						this.skillSlot.isSelected = false
+						this.defenseSlot.setY(600)
+						this.skillSlot.setY(800)
+					}
+					else {
+						this.defenseSlot.isSelected = true
+						this.defenseSlot.setY(600)
 					}
 				}
 				else {
-					this.specialAttackSlot.isSelected = false
-					this.specialAttackSlot.setY(800)
+					this.defenseSlot.setY(800)
+					this.defenseSlot.isSelected = false
 				}
-			}
-		})
+			})
 
-		this.defenseSlot.on("pointerdown", () => {
-			if (!this.defenseSlot.isSelected) {
-				if (this.normalAttackSlot.isSelected && this.skillSlot.isSelected) {
-					this.defenseSlot.isSelected = true
-					this.skillSlot.isSelected = false
-					this.defenseSlot.setY(600)
-					this.skillSlot.setY(800)
-				}
-				else if (this.specialAttackSlot.isSelected && this.skillSlot.isSelected) {
-					this.defenseSlot.isSelected = true
-					this.skillSlot.isSelected = false
-					this.defenseSlot.setY(600)
-					this.skillSlot.setY(800)
+			this.skillSlot.on("pointerdown", () => {
+				if (!this.skillSlot.isSelected) {
+					if (this.normalAttackSlot.isSelected && this.defenseSlot.isSelected) {
+						this.defenseSlot.isSelected = false
+						this.skillSlot.isSelected = true
+						this.defenseSlot.setY(800)
+						this.skillSlot.setY(600)
+					}
+					else if (this.specialAttackSlot.isSelected && this.defenseSlot.isSelected) {
+						this.defenseSlot.isSelected = false
+						this.skillSlot.isSelected = true
+						this.defenseSlot.setY(800)
+						this.skillSlot.setY(600)
+					}
+					else {
+						this.skillSlot.isSelected = true
+						this.skillSlot.setY(600)
+					}
 				}
 				else {
-					this.defenseSlot.isSelected = true
-					this.defenseSlot.setY(600)
+					this.skillSlot.setY(800)
+					this.skillSlot.isSelected = false
 				}
-			}
-			else {
-				this.defenseSlot.setY(800)
-				this.defenseSlot.isSelected = false
-			}
-		})
+			})
 
-		this.skillSlot.on("pointerdown", () => {
-			if (!this.skillSlot.isSelected) {
-				if (this.normalAttackSlot.isSelected && this.defenseSlot.isSelected) {
-					this.defenseSlot.isSelected = false
-					this.skillSlot.isSelected = true
-					this.defenseSlot.setY(800)
-					this.skillSlot.setY(600)
+			this.normalAttackSlot.on("pointerover", () => {
+				if (!this.normalAttackSlot.isDisabled) {
+					this.normalAttackSlot.cardGlow.active = true
+					this.normalAttackSlot.cardDescription.visible = true
 				}
-				else if (this.specialAttackSlot.isSelected && this.defenseSlot.isSelected) {
-					this.defenseSlot.isSelected = false
-					this.skillSlot.isSelected = true
-					this.defenseSlot.setY(800)
-					this.skillSlot.setY(600)
+
+			})
+			this.normalAttackSlot.on("pointerout", () => {
+				this.normalAttackSlot.cardGlow.active = false
+				this.normalAttackSlot.cardDescription.visible = false
+			})
+
+			this.specialAttackSlot.on("pointerover", () => {
+				if (!this.specialAttackSlot.isDisabled) {
+					this.specialAttackSlot.cardGlow.active = true
+					this.specialAttackSlot.cardDescription.visible = true
 				}
-				else {
-					this.skillSlot.isSelected = true
-					this.skillSlot.setY(600)
-				}
-			}
-			else {
-				this.skillSlot.setY(800)
-				this.skillSlot.isSelected = false
-			}
-		})
 
-		this.normalAttackSlot.on("pointerover", () => {
-			if (!this.normalAttackSlot.isDisabled) {
-				this.normalAttackSlot.cardGlow.active = true
-				this.normalAttackSlot.cardDescription.visible = true
-			}
+			})
+			this.specialAttackSlot.on("pointerout", () => {
+				this.specialAttackSlot.cardGlow.active = false
+				this.specialAttackSlot.cardDescription.visible = false
+			})
 
-		})
-		this.normalAttackSlot.on("pointerout", () => {
-			this.normalAttackSlot.cardGlow.active = false
-			this.normalAttackSlot.cardDescription.visible = false
-		})
+			this.defenseSlot.on("pointerover", () => {
+				this.defenseSlot.cardGlow.active = true
+				this.defenseSlot.cardDescription.visible = true
 
-		this.specialAttackSlot.on("pointerover", () => {
-			if (!this.specialAttackSlot.isDisabled) {
-				this.specialAttackSlot.cardGlow.active = true
-				this.specialAttackSlot.cardDescription.visible = true
-			}
+			})
+			this.defenseSlot.on("pointerout", () => {
+				this.defenseSlot.cardGlow.active = false
+				this.defenseSlot.cardDescription.visible = false
+			})
 
-		})
-		this.specialAttackSlot.on("pointerout", () => {
-			this.specialAttackSlot.cardGlow.active = false
-			this.specialAttackSlot.cardDescription.visible = false
-		})
+			this.skillSlot.on("pointerover", () => {
+				this.skillSlot.cardGlow.active = true
+				this.skillSlot.cardDescription.visible = true
 
-		this.defenseSlot.on("pointerover", () => {
-			this.defenseSlot.cardGlow.active = true
-			this.defenseSlot.cardDescription.visible = true
+			})
+			this.skillSlot.on("pointerout", () => {
+				this.skillSlot.cardGlow.active = false
+				this.skillSlot.cardDescription.visible = false
+			})
 
-		})
-		this.defenseSlot.on("pointerout", () => {
-			this.defenseSlot.cardGlow.active = false
-			this.defenseSlot.cardDescription.visible = false
-		})
-
-		this.skillSlot.on("pointerover", () => {
-			this.skillSlot.cardGlow.active = true
-			this.skillSlot.cardDescription.visible = true
-
-		})
-		this.skillSlot.on("pointerout", () => {
-			this.skillSlot.cardGlow.active = false
-			this.skillSlot.cardDescription.visible = false
-		})
-
-		this.confirmButton.glowFx.active = false
-
-		this.confirmButton.on("pointerover", () => {
-			this.confirmButton.glowFx.active = true
-		})
-
-
-		this.confirmButton.on("pointerout", () => {
 			this.confirmButton.glowFx.active = false
-		})
 
-		this.confirmButton.on("pointerdown", () =>{
-			this.ConfirmShowdownChoice()
-		})
-		console.log("prev Health: " + previousCurrentHealth)
+			this.confirmButton.on("pointerover", () => {
+				this.confirmButton.glowFx.active = true
+			})
+
+
+			this.confirmButton.on("pointerout", () => {
+				this.confirmButton.glowFx.active = false
+			})
+
+			this.confirmButton.on("pointerdown", () => {
+				this.ConfirmShowdownChoice()
+			})
+			
+			console.log("prev Health: " + previousCurrentHealth)
+		}
 	}
 
 	sortShowdownCards(cardA, cardB) {
@@ -424,7 +431,7 @@ class Showdown extends Phaser.Scene {
 					if (data.state == "WAITING_FOR_OPP") {
 						this.scene.start("ShowdownWaitingOnOpponent")
 					}
-					else if(data.state == "SHOW_RESULT"){
+					else if(data.state == "SHOW_RESULT") {
 						this.scene.start("ShowdownResult", data)
 					}
 				}

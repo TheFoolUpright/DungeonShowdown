@@ -333,6 +333,11 @@
                 "key": "PrefabOpponent"
             },
             {
+                "url": "src/prefabs/PrefabPlayerAttacks.js",
+                "type": "script",
+                "key": "PrefabPlayerAttacks"
+            },
+            {
                 "url": "src/prefabs/PrefabStats.js",
                 "type": "script",
                 "key": "PrefabStats"

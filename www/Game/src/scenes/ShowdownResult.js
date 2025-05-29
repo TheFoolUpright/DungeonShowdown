@@ -1,7 +1,7 @@
 
 // You can write more code here
 
-var ShowdownAnimations = {
+var playerShowdownAnimations = {
     "NormalAttack":    {id: 1, visible: false},
 	"HeavyAttack": 	   {id: 2, visible: false},
 	"DoubleAttack":    {id: 3, visible: false},
@@ -19,11 +19,34 @@ var ShowdownAnimations = {
 	"Healing": 		   {id: 15, visible: false},
 	}
 
-var secondSwing = false
+var opponentShowdownAnimations = {
+    "NormalAttack":    {id: 1, visible: false},
+	"HeavyAttack": 	   {id: 2, visible: false},
+	"DoubleAttack":    {id: 3, visible: false},
+	"RecoveryAttack":  {id: 4, visible: false},
+	"CounterAttack":   {id: 5, visible: false},
+	"ClumsyBlock": 	   {id: 6, visible: false},
+	"SolidBlock": 	   {id: 7, visible: false},
+	"ImpressiveBlock": {id: 8, visible: false},
+	"Dodge": 		   {id: 9, visible: false},
+	"Parry": 		   {id: 10, visible: false},
+	"Anger": 		   {id: 11, visible: false},
+	"Rage": 		   {id: 12, visible: false},
+	"Focus":		   {id: 13, visible: false},
+	"Adrenaline": 	   {id: 14, visible: false},
+	"Healing": 		   {id: 15, visible: false},
+	}
+
+var playerSecondSwing = false
+
+var opponentSecondSwing = false
+
+var playerAttackAnimationFinished = false
+
+var opponentAttackAnimationFinished = false
 
 var timer = 0
 
-var animationFinished = false
 
 /* START OF COMPILED CODE */
 
@@ -65,11 +88,11 @@ class ShowdownResult extends Phaser.Scene {
 		const confirmButton = new PrefabNextRoom(this, 1680, 800);
 		this.add.existing(confirmButton);
 
-		// prefabPlayerAttacks
-		const prefabPlayerAttacks = new PrefabPlayerAttacks(this, 960, 1132);
-		this.add.existing(prefabPlayerAttacks);
-		prefabPlayerAttacks.angle = 0;
-		prefabPlayerAttacks.visible = false;
+		// playerAttacks
+		const playerAttacks = new PrefabPlayerAttacks(this, 960, 1132);
+		this.add.existing(playerAttacks);
+		playerAttacks.angle = -110;
+		playerAttacks.visible = true;
 
 		this.showdownBackground = showdownBackground;
 		this.statsContainer = statsContainer;
@@ -77,7 +100,7 @@ class ShowdownResult extends Phaser.Scene {
 		this.opponent = opponent;
 		this.opponentAttacks = opponentAttacks;
 		this.confirmButton = confirmButton;
-		this.prefabPlayerAttacks = prefabPlayerAttacks;
+		this.playerAttacks = playerAttacks;
 
 		this.events.emit("scene-awake");
 	}
@@ -95,7 +118,7 @@ class ShowdownResult extends Phaser.Scene {
 	/** @type {PrefabNextRoom} */
 	confirmButton;
 	/** @type {PrefabPlayerAttacks} */
-	prefabPlayerAttacks;
+	playerAttacks;
 
 	/* START-USER-CODE */
 
@@ -105,28 +128,51 @@ class ShowdownResult extends Phaser.Scene {
 
 		this.editorCreate();
 
-		ShowdownAnimations.NormalAttack.visible = false
-		ShowdownAnimations.HeavyAttack.visible = false
-		ShowdownAnimations.DoubleAttack.visible = false
-		ShowdownAnimations.RecoveryAttack.visible = false
-		ShowdownAnimations.CounterAttack.visible = false
-		ShowdownAnimations.ClumsyBlock.visible = false
-		ShowdownAnimations.SolidBlock.visible = false
-		ShowdownAnimations.ImpressiveBlock.visible = false
-		ShowdownAnimations.Dodge.visible = false
-		ShowdownAnimations.Parry.visible = false
-		ShowdownAnimations.Anger.visible = false
-		ShowdownAnimations.Rage.visible = false
-		ShowdownAnimations.Focus.visible = false
-		ShowdownAnimations.Adrenaline.visible = false
-		ShowdownAnimations.Healing.visible = false
-		ShowdownAnimations.NormalAttack.visible = false
+		playerShowdownAnimations.NormalAttack.visible = false
+		playerShowdownAnimations.HeavyAttack.visible = false
+		playerShowdownAnimations.DoubleAttack.visible = false
+		playerShowdownAnimations.RecoveryAttack.visible = false
+		playerShowdownAnimations.CounterAttack.visible = false
+		playerShowdownAnimations.ClumsyBlock.visible = false
+		playerShowdownAnimations.SolidBlock.visible = false
+		playerShowdownAnimations.ImpressiveBlock.visible = false
+		playerShowdownAnimations.Dodge.visible = false
+		playerShowdownAnimations.Parry.visible = false
+		playerShowdownAnimations.Anger.visible = false
+		playerShowdownAnimations.Rage.visible = false
+		playerShowdownAnimations.Focus.visible = false
+		playerShowdownAnimations.Adrenaline.visible = false
+		playerShowdownAnimations.Healing.visible = false
+		playerShowdownAnimations.NormalAttack.visible = false
 
-		secondSwing = false
+		opponentShowdownAnimations.NormalAttack.visible = false
+		opponentShowdownAnimations.HeavyAttack.visible = false
+		opponentShowdownAnimations.DoubleAttack.visible = false
+		opponentShowdownAnimations.RecoveryAttack.visible = false
+		opponentShowdownAnimations.CounterAttack.visible = false
+		opponentShowdownAnimations.ClumsyBlock.visible = false
+		opponentShowdownAnimations.SolidBlock.visible = false
+		opponentShowdownAnimations.ImpressiveBlock.visible = false
+		opponentShowdownAnimations.Dodge.visible = false
+		opponentShowdownAnimations.Parry.visible = false
+		opponentShowdownAnimations.Anger.visible = false
+		opponentShowdownAnimations.Rage.visible = false
+		opponentShowdownAnimations.Focus.visible = false
+		opponentShowdownAnimations.Adrenaline.visible = false
+		opponentShowdownAnimations.Healing.visible = false
+		opponentShowdownAnimations.NormalAttack.visible = false
+
+		playerSecondSwing = false
+
+		opponentSecondSwing = false
+
+		playerAttackAnimationFinished = false
+
+		opponentAttackAnimationFinished = false
 
 		timer = 0
 
-		animationFinished = false
+		this.playerAttacks.angle = -110
 
 		this.opponentAttacks.angle = 30
 
@@ -137,25 +183,41 @@ class ShowdownResult extends Phaser.Scene {
 		this.loadOpponentData(data)
 		this.confirmButtonGlow()
 
+		// if (data.player_cards[0].card_id == opponentShowdownAnimations.NormalAttack.id) {
+		// 	opponentShowdownAnimations.NormalAttack.visible = true
+		// }
+		// else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.HeavyAttack.id) {
+		// 	opponentShowdownAnimations.HeavyAttack.visible = true
+		// }
+		// else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.DoubleAttack.id) {
+		// 	opponentShowdownAnimations.DoubleAttack.visible = true
+		// }
+		// else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.RecoveryAttack.id) {
+		// 	opponentShowdownAnimations.RecoveryAttack.visible = true
+		// }
+		// else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.CounterAttack.id) {
+		// 	opponentShowdownAnimations.CounterAttack.visible = true
+		// }
+
+		if (data.opponent_cards[0].card_id == opponentShowdownAnimations.NormalAttack.id) {
+			opponentShowdownAnimations.NormalAttack.visible = true
+		}
+		else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.HeavyAttack.id) {
+			opponentShowdownAnimations.HeavyAttack.visible = true
+		}
+		else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.DoubleAttack.id) {
+			opponentShowdownAnimations.DoubleAttack.visible = true
+		}
+		else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.RecoveryAttack.id) {
+			opponentShowdownAnimations.RecoveryAttack.visible = true
+		}
+		else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.CounterAttack.id) {
+			opponentShowdownAnimations.CounterAttack.visible = true
+		}
+
 		this.confirmButton.on("pointerdown", () => {
 			this.setupNextTurn()
 		})
-
-		if (data.opponent_cards[0].card_id == ShowdownAnimations.NormalAttack.id) {
-			ShowdownAnimations.NormalAttack.visible = true
-		}
-		else if (data.opponent_cards[0].card_id == ShowdownAnimations.HeavyAttack.id) {
-			ShowdownAnimations.HeavyAttack.visible = true
-		}
-		else if (data.opponent_cards[0].card_id == ShowdownAnimations.DoubleAttack.id) {
-			ShowdownAnimations.DoubleAttack.visible = true
-		}
-		else if (data.opponent_cards[0].card_id == ShowdownAnimations.RecoveryAttack.id) {
-			ShowdownAnimations.RecoveryAttack.visible = true
-		}
-		else if (data.opponent_cards[0].card_id == ShowdownAnimations.CounterAttack.id) {
-			ShowdownAnimations.CounterAttack.visible = true
-		}
 	}
 
 	loadInfoData(data) {
@@ -299,30 +361,30 @@ class ShowdownResult extends Phaser.Scene {
 	update(time, dt) {
 		timer += dt
 		if (timer > 1200) {
-			if (((this.opponentAttacks.angle <= 180 && this.opponentAttacks.angle >= 30) || (this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -30)) && !secondSwing) {
-				if (ShowdownAnimations.NormalAttack.visible || ShowdownAnimations.DoubleAttack.visible) {
+			if (((this.opponentAttacks.angle <= 180 && this.opponentAttacks.angle >= 30) || (this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -30)) && !opponentSecondSwing) {
+				if (opponentShowdownAnimations.NormalAttack.visible || opponentShowdownAnimations.DoubleAttack.visible) {
 					this.opponentAttacks.normal_Slash.visible = true
 					this.opponentAttacks.angle += dt / 2
 				}
-				else if (ShowdownAnimations.HeavyAttack.visible) {
+				else if (opponentShowdownAnimations.HeavyAttack.visible) {
 					this.opponentAttacks.heavy_Slash.visible = true
 					this.opponentAttacks.angle += dt / 2
 				}
-				else if (ShowdownAnimations.RecoveryAttack.visible) {
+				else if (opponentShowdownAnimations.RecoveryAttack.visible) {
 					this.opponentAttacks.recovery_Hit.visible = true
 					this.opponentAttacks.angle += dt / 2
 				}
-				else if (ShowdownAnimations.CounterAttack.visible) {
+				else if (opponentShowdownAnimations.CounterAttack.visible) {
 					this.opponentAttacks.counter_Slash.visible = true
 					this.opponentAttacks.angle += dt / 2
 				}
 			}
-			else if (ShowdownAnimations.DoubleAttack.visible) {
-				secondSwing = true
-				if (secondSwing && this.opponentAttacks.normal_Slash.scaleX == 1) {
+			else if (opponentShowdownAnimations.DoubleAttack.visible) {
+				opponentSecondSwing = true
+				if (opponentSecondSwing && this.opponentAttacks.normal_Slash.scaleX == 1) {
 					this.opponentAttacks.normal_Slash.flipX = true
 				}
-				if (secondSwing &&
+				if (opponentSecondSwing &&
 					((this.opponentAttacks.angle <= 180 && this.opponentAttacks.angle >= 40) || 
 					(this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -20))) {
 					this.opponentAttacks.angle -= dt / 2
@@ -332,7 +394,7 @@ class ShowdownResult extends Phaser.Scene {
 					this.opponentAttacks.heavy_Slash.visible = false
 					this.opponentAttacks.recovery_Hit.visible = false
 					this.opponentAttacks.counter_Slash.visible = false
-					animationFinished = true
+					opponentAttackAnimationFinished = true
 				}
 			}
 			else {
@@ -340,11 +402,11 @@ class ShowdownResult extends Phaser.Scene {
 				this.opponentAttacks.heavy_Slash.visible = false
 				this.opponentAttacks.recovery_Hit.visible = false
 				this.opponentAttacks.counter_Slash.visible = false
-				animationFinished = true
+				opponentAttackAnimationFinished = true
 			}
 		}
 
-		if (!animationFinished) {
+		if (!opponentAttackAnimationFinished) {
 			this.confirmButton.visible = false
 		}
 		else {

@@ -40,6 +40,12 @@ class Ending extends Phaser.Scene {
 		// draw
 		this.add.image(960, 539, "Draw");
 
+		// dungeonShowdown
+		const dungeonShowdown = this.add.text(1132, 820, "", {});
+		dungeonShowdown.setOrigin(0.5, 0.5);
+		dungeonShowdown.text = "DUNGEON\nSHOWDOWN";
+		dungeonShowdown.setStyle({ "align": "center", "fontFamily": "Rockey", "fontSize": "28px", "stroke": "#000000ff", "strokeThickness":10});
+
 		this.endingText = endingText;
 		this.confirmButton = confirmButton;
 

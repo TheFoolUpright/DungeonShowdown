@@ -78,6 +78,21 @@
             },
             "x": 960,
             "y": 539
+        },
+        {
+            "type": "Text",
+            "id": "c4c0b6a2-4998-47b9-89f5-d8691bc84d07",
+            "label": "dungeonShowdown",
+            "x": 1132,
+            "y": 820,
+            "originX": 0.5,
+            "originY": 0.5,
+            "text": "DUNGEON\nSHOWDOWN",
+            "align": "center",
+            "fontFamily": "Rockey",
+            "fontSize": "28px",
+            "stroke": "#000000ff",
+            "strokeThickness": 10
         }
     ],
     "plainObjects": [],

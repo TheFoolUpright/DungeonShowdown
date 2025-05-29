@@ -42,6 +42,7 @@ class ShowdownWaitingOnOpponent extends Phaser.Scene {
 	create() {
 
 		this.editorCreate();
+		
 		nextSceneDataLoaded = false
 	}
 
@@ -50,7 +51,7 @@ class ShowdownWaitingOnOpponent extends Phaser.Scene {
 	}
 
 	CheckShowdownOpponentSelectionState() {
-		var xhttp = new XMLHttpRequest();
+		var xhttp = new XMLHttpRequest()
 
 		xhttp.onreadystatechange = () => {
 			if (xhttp.readyState == 4) {
@@ -65,7 +66,7 @@ class ShowdownWaitingOnOpponent extends Phaser.Scene {
 						this.scene.start("ShowdownResult", data)
 					}
 					else if (data.state == "WAITING_FOR_OPP") {
-						return;
+						return
 					}
 				}
 			}
