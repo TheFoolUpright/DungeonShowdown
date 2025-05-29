@@ -51,6 +51,7 @@
             "type": "Image",
             "id": "e9fc686e-77e1-427d-9540-b191359faf82",
             "label": "girlWins",
+            "scope": "PUBLIC",
             "texture": {
                 "key": "GirlWins"
             },
@@ -62,6 +63,7 @@
             "type": "Image",
             "id": "4722f518-2d7b-42f2-9b97-4abcfd5ab643",
             "label": "boyWins",
+            "scope": "PUBLIC",
             "texture": {
                 "key": "BoyWins"
             },
@@ -73,11 +75,13 @@
             "type": "Image",
             "id": "dba4edb3-462d-4aa6-af7c-178909e9da12",
             "label": "draw",
+            "scope": "PUBLIC",
             "texture": {
                 "key": "Draw"
             },
             "x": 960,
-            "y": 539
+            "y": 539,
+            "visible": false
         },
         {
             "type": "Text",

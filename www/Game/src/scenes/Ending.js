@@ -38,7 +38,8 @@ class Ending extends Phaser.Scene {
 		boyWins.visible = false;
 
 		// draw
-		this.add.image(960, 539, "Draw");
+		const draw = this.add.image(960, 539, "Draw");
+		draw.visible = false;
 
 		// dungeonShowdown
 		const dungeonShowdown = this.add.text(1132, 820, "", {});
@@ -48,6 +49,9 @@ class Ending extends Phaser.Scene {
 
 		this.endingText = endingText;
 		this.confirmButton = confirmButton;
+		this.girlWins = girlWins;
+		this.boyWins = boyWins;
+		this.draw = draw;
 
 		this.events.emit("scene-awake");
 	}
@@ -56,14 +60,33 @@ class Ending extends Phaser.Scene {
 	endingText;
 	/** @type {PrefabNextRoom} */
 	confirmButton;
+	/** @type {Phaser.GameObjects.Image} */
+	girlWins;
+	/** @type {Phaser.GameObjects.Image} */
+	boyWins;
+	/** @type {Phaser.GameObjects.Image} */
+	draw;
 
 	/* START-USER-CODE */
 
 	// Write your code here
 
-	create() {
+	create(data) {
 
 		this.editorCreate();
+
+		if(data.state == 8){
+			this.endingText.text = "Victory!"
+			this.girlWins.visible = true
+		}
+		else if (data.state == 9){
+			this.endingText.text = "Defeat..."
+			this.boyWins.visible = true
+		}
+		else if (data.state == 10){
+			this.endingText.text = "It's a Tie..."
+			this.draw.visible = true
+		}
 	}
 
 	/* END-USER-CODE */

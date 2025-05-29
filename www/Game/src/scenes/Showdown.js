@@ -218,60 +218,8 @@ class Showdown extends Phaser.Scene {
 				}
 			})
 
-			this.normalAttackSlot.on("pointerover", () => {
-				if (!this.normalAttackSlot.isDisabled) {
-					this.normalAttackSlot.cardGlow.active = true
-					this.normalAttackSlot.cardDescription.visible = true
-				}
-
-			})
-			this.normalAttackSlot.on("pointerout", () => {
-				this.normalAttackSlot.cardGlow.active = false
-				this.normalAttackSlot.cardDescription.visible = false
-			})
-
-			this.specialAttackSlot.on("pointerover", () => {
-				if (!this.specialAttackSlot.isDisabled) {
-					this.specialAttackSlot.cardGlow.active = true
-					this.specialAttackSlot.cardDescription.visible = true
-				}
-
-			})
-			this.specialAttackSlot.on("pointerout", () => {
-				this.specialAttackSlot.cardGlow.active = false
-				this.specialAttackSlot.cardDescription.visible = false
-			})
-
-			this.defenseSlot.on("pointerover", () => {
-				this.defenseSlot.cardGlow.active = true
-				this.defenseSlot.cardDescription.visible = true
-
-			})
-			this.defenseSlot.on("pointerout", () => {
-				this.defenseSlot.cardGlow.active = false
-				this.defenseSlot.cardDescription.visible = false
-			})
-
-			this.skillSlot.on("pointerover", () => {
-				this.skillSlot.cardGlow.active = true
-				this.skillSlot.cardDescription.visible = true
-
-			})
-			this.skillSlot.on("pointerout", () => {
-				this.skillSlot.cardGlow.active = false
-				this.skillSlot.cardDescription.visible = false
-			})
-
-			this.confirmButton.glowFx.active = false
-
-			this.confirmButton.on("pointerover", () => {
-				this.confirmButton.glowFx.active = true
-			})
-
-
-			this.confirmButton.on("pointerout", () => {
-				this.confirmButton.glowFx.active = false
-			})
+			this.loadCardHoverEvents()
+			this.loadButtonHoverEvents()
 
 			this.confirmButton.on("pointerdown", () => {
 				this.ConfirmShowdownChoice()
@@ -279,6 +227,67 @@ class Showdown extends Phaser.Scene {
 			
 			console.log("prev Health: " + previousCurrentHealth)
 		}
+	}
+
+	loadCardHoverEvents(){
+		this.normalAttackSlot.on("pointerover", () => {
+			if (!this.normalAttackSlot.isDisabled) {
+				this.normalAttackSlot.cardGlow.active = true
+				this.normalAttackSlot.cardDescription.visible = true
+			}
+
+		})
+		this.normalAttackSlot.on("pointerout", () => {
+			this.normalAttackSlot.cardGlow.active = false
+			this.normalAttackSlot.cardDescription.visible = false
+		})
+
+		this.specialAttackSlot.on("pointerover", () => {
+			if (!this.specialAttackSlot.isDisabled) {
+				this.specialAttackSlot.cardGlow.active = true
+				this.specialAttackSlot.cardDescription.visible = true
+			}
+
+		})
+		this.specialAttackSlot.on("pointerout", () => {
+			this.specialAttackSlot.cardGlow.active = false
+			this.specialAttackSlot.cardDescription.visible = false
+		})
+
+		this.defenseSlot.on("pointerover", () => {
+			if (!this.defenseSlot.isDisabled) {
+				this.defenseSlot.cardGlow.active = true
+				this.defenseSlot.cardDescription.visible = true
+			}
+		})
+		this.defenseSlot.on("pointerout", () => {
+			this.defenseSlot.cardGlow.active = false
+			this.defenseSlot.cardDescription.visible = false
+		})
+
+		this.skillSlot.on("pointerover", () => {
+			if (!this.skillSlot.isDisabled) {
+				this.skillSlot.cardGlow.active = true
+				this.skillSlot.cardDescription.visible = true
+			}
+		})
+		this.skillSlot.on("pointerout", () => {
+			this.skillSlot.cardGlow.active = false
+			this.skillSlot.cardDescription.visible = false
+		})
+	}
+
+	loadButtonHoverEvents(){
+		this.confirmButton.glowFx.active = false
+
+		this.confirmButton.on("pointerover", () => {
+			this.confirmButton.glowFx.active = true
+		})
+
+		this.confirmButton.on("pointerout", () => {
+			this.confirmButton.glowFx.active = false
+		})
+
 	}
 
 	sortShowdownCards(cardA, cardB) {
