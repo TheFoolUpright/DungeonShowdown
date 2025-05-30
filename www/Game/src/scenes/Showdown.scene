@@ -112,16 +112,12 @@
             "id": "e92c9d6c-6394-4ce3-9e7a-3e5792c7962e",
             "unlock": [
                 "x",
-                "y",
-                "scaleX",
-                "scaleY"
+                "y"
             ],
             "label": "statsContainer",
             "scope": "PUBLIC",
             "x": 120,
-            "y": 50,
-            "scaleX": 2,
-            "scaleY": 2
+            "y": 50
         },
         {
             "prefabId": "58151c15-b33f-4514-a7c8-de8a701ab360",

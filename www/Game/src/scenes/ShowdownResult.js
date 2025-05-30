@@ -167,13 +167,13 @@ class ShowdownResult extends Phaser.Scene {
 		opponentShowdownAnimations.NormalAttack.visible = false
 
 		playerAttack = false
-		
+
 		opponentAttack = false
 
 		playerSecondSwing = false
 
 		opponentSecondSwing = false
-		
+
 		playerAttackAnimationFinished = false
 
 		opponentAttackAnimationFinished = false

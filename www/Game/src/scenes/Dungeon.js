@@ -585,7 +585,7 @@ class Dungeon extends Phaser.Scene {
 				}
 				iterator++
 			}
-       
+
 		}
 		console.log(displayInfo)
 		console.log(card)
@@ -608,7 +608,7 @@ class Dungeon extends Phaser.Scene {
 			case "1_1":
 				card.option1_1CostIcon1.setTexture(displayInfo[0].image)
 				card.option1_1CostText1.text = displayInfo[0].value	
-			
+
 				card.option1_1RewardIcon1.setTexture(displayInfo[1].image)
 				card.option1_1RewardText1.text = "+" + displayInfo[1].value
 
@@ -617,7 +617,7 @@ class Dungeon extends Phaser.Scene {
 			case "1_2":
 				card.option1_2CostIcon1.setTexture(displayInfo[0].image)
 				card.option1_2CostText1.text = displayInfo[0].value
-				
+
 				card.option1_2RewardIcon1.setTexture(displayInfo[1].image)
 				card.option1_2RewardText1.text = "+" + displayInfo[1].value
 
@@ -629,7 +629,7 @@ class Dungeon extends Phaser.Scene {
 			case "1_3":
 				card.option1_3CostIcon1.setTexture(displayInfo[0].image)
 				card.option1_3CostText1.text = displayInfo[0].value
-				
+
 				card.option1_3RewardIcon1.setTexture(displayInfo[1].image)
 				card.option1_3RewardText1.text = "+" + displayInfo[1].value
 
@@ -644,7 +644,7 @@ class Dungeon extends Phaser.Scene {
 			case "2_1":
 				card.option2_1CostIcon1.setTexture(displayInfo[0].image)
 				card.option2_1CostText1.text = displayInfo[0].value	
-			
+
 				card.option2_1CostIcon2.setTexture(displayInfo[1].image)
 				card.option2_1CostText2.text = displayInfo[1].value	
 
@@ -656,7 +656,7 @@ class Dungeon extends Phaser.Scene {
 			case "2_2":
 				card.option2_2CostIcon1.setTexture(displayInfo[0].image)
 				card.option2_2CostText1.text = displayInfo[0].value	
-			
+
 				card.option2_2CostIcon2.setTexture(displayInfo[1].image)
 				card.option2_2CostText2.text = displayInfo[1].value	
 
@@ -671,7 +671,7 @@ class Dungeon extends Phaser.Scene {
 			case "2_3":
 				card.option2_3CostIcon1.setTexture(displayInfo[0].image)
 				card.option2_3CostText1.text = displayInfo[0].value	
-			
+
 				card.option2_3CostIcon2.setTexture(displayInfo[1].image)
 				card.option2_3CostText2.text = displayInfo[1].value	
 

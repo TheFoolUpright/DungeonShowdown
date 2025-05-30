@@ -53,8 +53,6 @@ class Showdown extends Phaser.Scene {
 		// statsContainer
 		const statsContainer = new PrefabStats(this, 120, 50);
 		this.add.existing(statsContainer);
-		statsContainer.scaleX = 2;
-		statsContainer.scaleY = 2;
 
 		// info
 		const info = new PrefabInfo(this, 1720, 40);
@@ -501,7 +499,7 @@ class Showdown extends Phaser.Scene {
 
 		//Special Attack
 		//not enough stats limitation
-		
+
 		if (this.normalAttackSlot.isSelected) {
 			this.specialAttackSlot.isDisabled = true
 			if (!this.specialAttackSlot.isTinted) {
@@ -574,7 +572,7 @@ class Showdown extends Phaser.Scene {
 			this.specialAttackSlot.isSelected = false
 			this.specialAttackSlot.setY(800)
 		}
-		
+
 		//Defense
 		//not enough stats limitation
 		if (!this.specialAttackSlot.isSelected && !this.skillSlot.isSelected) {
@@ -638,7 +636,7 @@ class Showdown extends Phaser.Scene {
 			this.defenseSlot.isSelected = false
 			this.defenseSlot.setY(800)
 		}
-		
+
 		//Skill
 		//not enough stats limitation
 		if (!this.specialAttackSlot.isSelected && !this.defenseSlot.isSelected) {
