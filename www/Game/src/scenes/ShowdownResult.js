@@ -1,7 +1,7 @@
 
 // You can write more code here
 
-var ShowdownAnimations = {
+var playerShowdownAnimations = {
     "NormalAttack":    {id: 1, visible: false},
 	"HeavyAttack": 	   {id: 2, visible: false},
 	"DoubleAttack":    {id: 3, visible: false},
@@ -19,11 +19,38 @@ var ShowdownAnimations = {
 	"Healing": 		   {id: 15, visible: false},
 	}
 
-var secondSwing = false
+var opponentShowdownAnimations = {
+    "NormalAttack":    {id: 1, visible: false},
+	"HeavyAttack": 	   {id: 2, visible: false},
+	"DoubleAttack":    {id: 3, visible: false},
+	"RecoveryAttack":  {id: 4, visible: false},
+	"CounterAttack":   {id: 5, visible: false},
+	"ClumsyBlock": 	   {id: 6, visible: false},
+	"SolidBlock": 	   {id: 7, visible: false},
+	"ImpressiveBlock": {id: 8, visible: false},
+	"Dodge": 		   {id: 9, visible: false},
+	"Parry": 		   {id: 10, visible: false},
+	"Anger": 		   {id: 11, visible: false},
+	"Rage": 		   {id: 12, visible: false},
+	"Focus":		   {id: 13, visible: false},
+	"Adrenaline": 	   {id: 14, visible: false},
+	"Healing": 		   {id: 15, visible: false},
+	}
+
+var	playerAttack = false
+
+var	opponentAttack = false
+
+var playerSecondSwing = false
+
+var opponentSecondSwing = false
+
+var playerAttackAnimationFinished = false
+
+var opponentAttackAnimationFinished = false
 
 var timer = 0
 
-var animationFinished = false
 
 /* START OF COMPILED CODE */
 
@@ -65,12 +92,19 @@ class ShowdownResult extends Phaser.Scene {
 		const confirmButton = new PrefabNextRoom(this, 1680, 800);
 		this.add.existing(confirmButton);
 
+		// playerAttacks
+		const playerAttacks = new PrefabPlayerAttacks(this, 960, 1132);
+		this.add.existing(playerAttacks);
+		playerAttacks.angle = 0;
+		playerAttacks.visible = true;
+
 		this.showdownBackground = showdownBackground;
 		this.statsContainer = statsContainer;
 		this.info = info;
 		this.opponent = opponent;
 		this.opponentAttacks = opponentAttacks;
 		this.confirmButton = confirmButton;
+		this.playerAttacks = playerAttacks;
 
 		this.events.emit("scene-awake");
 	}
@@ -87,6 +121,8 @@ class ShowdownResult extends Phaser.Scene {
 	opponentAttacks;
 	/** @type {PrefabNextRoom} */
 	confirmButton;
+	/** @type {PrefabPlayerAttacks} */
+	playerAttacks;
 
 	/* START-USER-CODE */
 
@@ -96,45 +132,117 @@ class ShowdownResult extends Phaser.Scene {
 
 		this.editorCreate();
 
-		secondSwing = false
+		playerShowdownAnimations.NormalAttack.visible = false
+		playerShowdownAnimations.HeavyAttack.visible = false
+		playerShowdownAnimations.DoubleAttack.visible = false
+		playerShowdownAnimations.RecoveryAttack.visible = false
+		playerShowdownAnimations.CounterAttack.visible = false
+		playerShowdownAnimations.ClumsyBlock.visible = false
+		playerShowdownAnimations.SolidBlock.visible = false
+		playerShowdownAnimations.ImpressiveBlock.visible = false
+		playerShowdownAnimations.Dodge.visible = false
+		playerShowdownAnimations.Parry.visible = false
+		playerShowdownAnimations.Anger.visible = false
+		playerShowdownAnimations.Rage.visible = false
+		playerShowdownAnimations.Focus.visible = false
+		playerShowdownAnimations.Adrenaline.visible = false
+		playerShowdownAnimations.Healing.visible = false
+		playerShowdownAnimations.NormalAttack.visible = false
+
+		opponentShowdownAnimations.NormalAttack.visible = false
+		opponentShowdownAnimations.HeavyAttack.visible = false
+		opponentShowdownAnimations.DoubleAttack.visible = false
+		opponentShowdownAnimations.RecoveryAttack.visible = false
+		opponentShowdownAnimations.CounterAttack.visible = false
+		opponentShowdownAnimations.ClumsyBlock.visible = false
+		opponentShowdownAnimations.SolidBlock.visible = false
+		opponentShowdownAnimations.ImpressiveBlock.visible = false
+		opponentShowdownAnimations.Dodge.visible = false
+		opponentShowdownAnimations.Parry.visible = false
+		opponentShowdownAnimations.Anger.visible = false
+		opponentShowdownAnimations.Rage.visible = false
+		opponentShowdownAnimations.Focus.visible = false
+		opponentShowdownAnimations.Adrenaline.visible = false
+		opponentShowdownAnimations.Healing.visible = false
+		opponentShowdownAnimations.NormalAttack.visible = false
+
+		playerAttack = false
 		
+		opponentAttack = false
+
+		playerSecondSwing = false
+
+		opponentSecondSwing = false
+		
+		playerAttackAnimationFinished = false
+
+		opponentAttackAnimationFinished = false
+
 		timer = 0
 
-		animationFinished = false
+		this.playerAttacks.angle = -110
 
 		this.opponentAttacks.angle = 30
 
 		this.confirmButton.visible = false
-		
+
 		this.loadStatsData(data)
 		this.loadInfoData(data)
 		this.loadOpponentData(data)
 		this.confirmButtonGlow()
 
+		// Loading Player Attacks
+		if (data.player_cards[0].card_id == playerShowdownAnimations.NormalAttack.id) {
+			playerShowdownAnimations.NormalAttack.visible = true
+			playerAttack = true
+		}
+		else if (data.player_cards[0].card_id == playerShowdownAnimations.HeavyAttack.id) {
+			playerShowdownAnimations.HeavyAttack.visible = true
+			playerAttack = true
+		}
+		else if (data.player_cards[0].card_id == playerShowdownAnimations.DoubleAttack.id) {
+			playerShowdownAnimations.DoubleAttack.visible = true
+			playerAttack = true
+		}
+		else if (data.player_cards[0].card_id == playerShowdownAnimations.RecoveryAttack.id) {
+			playerShowdownAnimations.RecoveryAttack.visible = true
+			playerAttack = true
+		}
+		else if (data.player_cards[0].card_id == playerShowdownAnimations.CounterAttack.id) {
+			playerShowdownAnimations.CounterAttack.visible = true
+			playerAttack = true
+		}
+
+		// Loading Opponent Attacks
+		if (data.opponent_cards[0].card_id == opponentShowdownAnimations.NormalAttack.id) {
+			opponentShowdownAnimations.NormalAttack.visible = true
+			opponentAttack = true
+		}
+		else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.HeavyAttack.id) {
+			opponentShowdownAnimations.HeavyAttack.visible = true
+			opponentAttack = true
+		}
+		else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.DoubleAttack.id) {
+			opponentShowdownAnimations.DoubleAttack.visible = true
+			opponentAttack = true
+		}
+		else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.RecoveryAttack.id) {
+			opponentShowdownAnimations.RecoveryAttack.visible = true
+			opponentAttack = true
+		}
+		else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.CounterAttack.id) {
+			opponentShowdownAnimations.CounterAttack.visible = true
+			opponentAttack = true
+		}
+
 		this.confirmButton.on("pointerdown", () => {
 			this.setupNextTurn()
 		})
-
-		if (data.opponent_cards[0].card_id == ShowdownAnimations.NormalAttack.id) {
-			ShowdownAnimations.NormalAttack.visible = true
-		}
-		else if (data.opponent_cards[0].card_id == ShowdownAnimations.HeavyAttack.id) {
-			ShowdownAnimations.HeavyAttack.visible = true
-		}
-		else if (data.opponent_cards[0].card_id == ShowdownAnimations.DoubleAttack.id) {
-			ShowdownAnimations.DoubleAttack.visible = true
-		}
-		else if (data.opponent_cards[0].card_id == ShowdownAnimations.RecoveryAttack.id) {
-			ShowdownAnimations.RecoveryAttack.visible = true
-		}
-		else if (data.opponent_cards[0].card_id == ShowdownAnimations.CounterAttack.id) {
-			ShowdownAnimations.CounterAttack.visible = true
-		}
 	}
 
 	loadInfoData(data) {
 		//Load Info
-		
+
 		this.info.phaseName.text = "SHOWDOWN"
 		this.confirmButton.confirmButtonText.text = "Perservere!"
 		this.info.roomOrTurn.text = "Turn " + data.showdown_turn
@@ -161,7 +269,7 @@ class ShowdownResult extends Phaser.Scene {
 			var maxHealthDiff = maxHealth - previousMaxHealth
 			var currentHealthDiff = currentHealth - previousCurrentHealth
 
-			if(maxHealthDiff > 0 && currentHealthDiff > 0){
+			if(maxHealthDiff > 0 && currentHealthDiff > 0) {
 				this.statsContainer.healthDifferenceText.text =  "+" + currentHealthDiff + "/+" + maxHealthDiff
 			}
 			else if (maxHealthDiff < 0 && currentHealthDiff < 0){
@@ -227,14 +335,14 @@ class ShowdownResult extends Phaser.Scene {
 
 		return
 	}
-	
+
 	loadOpponentData(data) {
 		this.opponent.opponentName.text = data.opponent_cards[0].player_username
 		this.opponent.opponentName.setColor(data.opponent_cards[0].player_color)	
 
 		return
 	}
-	
+
 	confirmButtonGlow() {
 		this.confirmButton.glowFx.active = false
 
@@ -247,7 +355,7 @@ class ShowdownResult extends Phaser.Scene {
 			this.confirmButton.glowFx.active = false
 		})
 	}
-	
+
 	setupNextTurn() {
 		var xhttp = new XMLHttpRequest()
 
@@ -269,60 +377,111 @@ class ShowdownResult extends Phaser.Scene {
 
 		xhttp.send();
 	}
-	
+
 	update(time, dt) {
 		timer += dt
 		if (timer > 1200) {
-			if (((this.opponentAttacks.angle <= 180 && this.opponentAttacks.angle >= 30) || (this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -30)) && !secondSwing) {
-				if (ShowdownAnimations.NormalAttack.visible || ShowdownAnimations.DoubleAttack.visible) {
-					this.opponentAttacks.normal_Slash.visible = true
-					this.opponentAttacks.angle += dt / 2
+			// Play Player Attacks
+			if (playerAttack && !playerAttackAnimationFinished) {
+				if (((this.playerAttacks.angle <= 130 && this.playerAttacks.angle >= 0) || (this.playerAttacks.angle >= -110 && this.playerAttacks.angle <= 0)) && !playerSecondSwing) {
+					if (playerShowdownAnimations.NormalAttack.visible || playerShowdownAnimations.DoubleAttack.visible) {
+						this.playerAttacks.normal_Slash.visible = true
+						this.playerAttacks.angle += dt / 2
+					}
+					else if (playerShowdownAnimations.HeavyAttack.visible) {
+						this.playerAttacks.heavy_Slash.visible = true
+						this.playerAttacks.angle += dt / 2
+					}
+					else if (playerShowdownAnimations.RecoveryAttack.visible) {
+						this.playerAttacks.recovery_Hit.visible = true
+						this.playerAttacks.angle += dt / 2
+					}
+					else if (playerShowdownAnimations.CounterAttack.visible) {
+						this.playerAttacks.counter_Slash.visible = true
+						this.playerAttacks.angle += dt / 2
+					}
 				}
-				else if (ShowdownAnimations.HeavyAttack.visible) {
-					this.opponentAttacks.heavy_Slash.visible = true
-					this.opponentAttacks.angle += dt / 2
+				else if (playerShowdownAnimations.DoubleAttack.visible) {
+					playerSecondSwing = true
+					if (playerSecondSwing && this.playerAttacks.normal_Slash.scaleX == 1) {
+						this.playerAttacks.normal_Slash.flipX = true
+					}
+					if (playerSecondSwing &&
+						((this.playerAttacks.angle <= 140 && this.playerAttacks.angle >= 0) || 
+						(this.playerAttacks.angle >= -120 && this.playerAttacks.angle <= 0))) {
+						this.playerAttacks.angle -= dt / 2
+					}
+					else {
+						this.playerAttacks.normal_Slash.visible = false
+						this.playerAttacks.heavy_Slash.visible = false
+						this.playerAttacks.recovery_Hit.visible = false
+						this.playerAttacks.counter_Slash.visible = false
+						playerAttackAnimationFinished = true
+						timer = 40
+					}
 				}
-				else if (ShowdownAnimations.RecoveryAttack.visible) {
-					this.opponentAttacks.recovery_Hit.visible = true
-					this.opponentAttacks.angle += dt / 2
-				}
-				else if (ShowdownAnimations.CounterAttack.visible) {
-					this.opponentAttacks.counter_Slash.visible = true
-					this.opponentAttacks.angle += dt / 2
+				else {
+					this.playerAttacks.normal_Slash.visible = false
+					this.playerAttacks.heavy_Slash.visible = false
+					this.playerAttacks.recovery_Hit.visible = false
+					this.playerAttacks.counter_Slash.visible = false
+					playerAttackAnimationFinished = true
+					timer = 40
 				}
 			}
-			else if (ShowdownAnimations.DoubleAttack.visible) {
-				secondSwing = true
-				if (secondSwing && this.opponentAttacks.normal_Slash.scaleX == 1) {
-					this.opponentAttacks.normal_Slash.flipX = true
+			else if (opponentAttack && !opponentAttackAnimationFinished) {
+				// Play Opponent Attacks
+				if (((this.opponentAttacks.angle <= 180 && this.opponentAttacks.angle >= 30) || (this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -30)) && !opponentSecondSwing) {
+					if (opponentShowdownAnimations.NormalAttack.visible || opponentShowdownAnimations.DoubleAttack.visible) {
+						this.opponentAttacks.normal_Slash.visible = true
+						this.opponentAttacks.angle += dt / 2
+					}
+					else if (opponentShowdownAnimations.HeavyAttack.visible) {
+						this.opponentAttacks.heavy_Slash.visible = true
+						this.opponentAttacks.angle += dt / 2
+					}
+					else if (opponentShowdownAnimations.RecoveryAttack.visible) {
+						this.opponentAttacks.recovery_Hit.visible = true
+						this.opponentAttacks.angle += dt / 2
+					}
+					else if (opponentShowdownAnimations.CounterAttack.visible) {
+						this.opponentAttacks.counter_Slash.visible = true
+						this.opponentAttacks.angle += dt / 2
+					}
 				}
-				if (secondSwing &&
-					((this.opponentAttacks.angle <= 180 && this.opponentAttacks.angle >= 40) || 
-					(this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -20))) {
-					this.opponentAttacks.angle -= dt / 2
+				else if (opponentShowdownAnimations.DoubleAttack.visible) {
+					opponentSecondSwing = true
+					if (opponentSecondSwing && this.opponentAttacks.normal_Slash.scaleX == 1) {
+						this.opponentAttacks.normal_Slash.flipX = true
+					}
+					if (opponentSecondSwing &&
+						((this.opponentAttacks.angle <= 180 && this.opponentAttacks.angle >= 40) || 
+						(this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -20))) {
+						this.opponentAttacks.angle -= dt / 2
+					}
+					else {
+						this.opponentAttacks.normal_Slash.visible = false
+						this.opponentAttacks.heavy_Slash.visible = false
+						this.opponentAttacks.recovery_Hit.visible = false
+						this.opponentAttacks.counter_Slash.visible = false
+						opponentAttackAnimationFinished = true
+					}
 				}
 				else {
 					this.opponentAttacks.normal_Slash.visible = false
 					this.opponentAttacks.heavy_Slash.visible = false
 					this.opponentAttacks.recovery_Hit.visible = false
 					this.opponentAttacks.counter_Slash.visible = false
-					animationFinished = true
+					opponentAttackAnimationFinished = true
 				}
-			}
-			else {
-				this.opponentAttacks.normal_Slash.visible = false
-				this.opponentAttacks.heavy_Slash.visible = false
-				this.opponentAttacks.recovery_Hit.visible = false
-				this.opponentAttacks.counter_Slash.visible = false
-				animationFinished = true
 			}
 		}
 
-		if (!animationFinished) {
-			this.confirmButton.visible = false
+		if ((!playerAttack || (playerAttack && playerAttackAnimationFinished)) && (!opponentAttack || (opponentAttack && opponentAttackAnimationFinished))) {
+			this.confirmButton.visible = true
 		}
 		else {
-			this.confirmButton.visible = true
+			this.confirmButton.visible = false
 		}
 	}
 

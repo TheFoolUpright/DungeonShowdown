@@ -22,6 +22,7 @@ window.addEventListener('load', function () {
 	game.scene.add("Showdown", Showdown);
 	game.scene.add("ShowdownWaitingOnOpponent", ShowdownWaitingOnOpponent);
 	game.scene.add("ShowdownResult", ShowdownResult);
+	game.scene.add("Ending", Ending);
 
 	game.scene.add("Boot", Boot, true);
 });

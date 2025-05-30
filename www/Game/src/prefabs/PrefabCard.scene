@@ -33,13 +33,13 @@
                     "paddingTop": 5,
                     "paddingRight": 5,
                     "paddingBottom": 5,
-                    "align": "center",
+                    "align": "justify",
                     "fontFamily": "Rockey",
-                    "fontSize": "32px",
+                    "fontSize": "24px",
                     "color": "#ffffffff",
                     "stroke": "#000000ff",
-                    "strokeThickness": 12,
-                    "wordWrapWidth": 324
+                    "strokeThickness": 8,
+                    "wordWrapWidth": 280
                 },
                 {
                     "type": "Image",
@@ -111,6 +111,7 @@
                     "id": "2b0081f4-d02f-4a39-aed4-37e8c04f1236",
                     "label": "option1Container",
                     "scope": "PUBLIC",
+                    "y": -1,
                     "visible": false,
                     "list": [
                         {
@@ -119,7 +120,7 @@
                             "label": "option1RewardIcon1",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": -15,
                             "y": 130
@@ -146,6 +147,7 @@
                     "id": "6f8a6f87-0eb8-4c18-9564-d2e68a676c37",
                     "label": "option2Container",
                     "scope": "PUBLIC",
+                    "y": -1,
                     "visible": false,
                     "list": [
                         {
@@ -154,7 +156,7 @@
                             "label": "option2RewardIcon1",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": -50,
                             "y": 130
@@ -180,7 +182,7 @@
                             "label": "option2RewardIcon2",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": 30,
                             "y": 130
@@ -207,6 +209,7 @@
                     "id": "e9212c6e-605e-4041-ad53-74b968db3e3b",
                     "label": "option1_1Container",
                     "scope": "PUBLIC",
+                    "y": -1,
                     "visible": false,
                     "list": [
                         {
@@ -230,7 +233,7 @@
                             "label": "option1_1CostIcon1",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": -15,
                             "y": 100
@@ -241,7 +244,7 @@
                             "label": "option1_1RewardIcon1",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": -15,
                             "y": 160
@@ -268,6 +271,7 @@
                     "id": "fbca86d7-bfd9-443a-a9ce-26e8894f4713",
                     "label": "option1_2Container",
                     "scope": "PUBLIC",
+                    "y": -1,
                     "visible": false,
                     "list": [
                         {
@@ -291,7 +295,7 @@
                             "label": "option1_2CostIcon1",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": -15,
                             "y": 100
@@ -302,7 +306,7 @@
                             "label": "option1_2RewardIcon1",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": -50,
                             "y": 160
@@ -328,7 +332,7 @@
                             "label": "option1_2RewardIcon2",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": 30,
                             "y": 160
@@ -355,6 +359,7 @@
                     "id": "a39109a7-8c21-4a0e-bc5b-e2ea372c2273",
                     "label": "option2_1Container",
                     "scope": "PUBLIC",
+                    "y": -1,
                     "visible": false,
                     "list": [
                         {
@@ -378,7 +383,7 @@
                             "label": "option2_1RewardIcon1",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": -15,
                             "y": 160
@@ -389,7 +394,7 @@
                             "label": "option2_1CostIcon1",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": -50,
                             "y": 100
@@ -415,7 +420,7 @@
                             "label": "option2_1CostIcon2",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": 30,
                             "y": 100
@@ -442,6 +447,7 @@
                     "id": "4ad5cc8c-bf0c-49e9-a10b-af28046fc84a",
                     "label": "option1_3Container",
                     "scope": "PUBLIC",
+                    "y": -1,
                     "visible": false,
                     "list": [
                         {
@@ -450,7 +456,7 @@
                             "label": "option1_3RewardIcon1",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": -95,
                             "y": 160
@@ -491,7 +497,7 @@
                             "label": "option1_3RewardIcon2",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": -15,
                             "y": 160
@@ -502,7 +508,7 @@
                             "label": "option1_3RewardIcon3",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": 65,
                             "y": 160
@@ -528,7 +534,7 @@
                             "label": "option1_3CostIcon1",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": -15,
                             "y": 100
@@ -555,6 +561,7 @@
                     "id": "26366ac3-4394-4566-828e-54c8937a2bbe",
                     "label": "option2_2Container",
                     "scope": "PUBLIC",
+                    "y": -1,
                     "visible": false,
                     "list": [
                         {
@@ -563,7 +570,7 @@
                             "label": "option2_2CostIcon1",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": -50,
                             "y": 100
@@ -589,7 +596,7 @@
                             "label": "option2_2CostIcon2",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": 30,
                             "y": 100
@@ -615,7 +622,7 @@
                             "label": "option2_2RewardIcon1",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": -50,
                             "y": 160
@@ -641,7 +648,7 @@
                             "label": "option2_2RewardIcon2",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": 30,
                             "y": 160
@@ -677,7 +684,7 @@
                             "label": "option2_3RewardIcon1",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": -95,
                             "y": 160
@@ -695,7 +702,8 @@
                             "fontFamily": "Rockey",
                             "fontSize": "24px",
                             "color": "#000000ff",
-                            "stroke": "#000000ff"
+                            "stroke": "#000000ff",
+                            "wordWrapWidth": 292
                         },
                         {
                             "type": "Text",
@@ -710,7 +718,8 @@
                             "fontFamily": "Rockey",
                             "fontSize": "24px",
                             "color": "#000000ff",
-                            "stroke": "#000000ff"
+                            "stroke": "#000000ff",
+                            "wordWrapWidth": 292
                         },
                         {
                             "type": "Image",
@@ -718,7 +727,7 @@
                             "label": "option2_3RewardIcon2",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": -15,
                             "y": 160
@@ -729,7 +738,7 @@
                             "label": "option2_3RewardIcon3",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": 65,
                             "y": 160
@@ -747,7 +756,8 @@
                             "fontFamily": "Rockey",
                             "fontSize": "24px",
                             "color": "#000000ff",
-                            "stroke": "#000000ff"
+                            "stroke": "#000000ff",
+                            "wordWrapWidth": 292
                         },
                         {
                             "type": "Image",
@@ -755,7 +765,7 @@
                             "label": "option2_3CostIcon1",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": -50,
                             "y": 100
@@ -773,7 +783,8 @@
                             "fontFamily": "Rockey",
                             "fontSize": "24px",
                             "color": "#000000ff",
-                            "stroke": "#000000ff"
+                            "stroke": "#000000ff",
+                            "wordWrapWidth": 292
                         },
                         {
                             "type": "Image",
@@ -781,7 +792,7 @@
                             "label": "option2_3CostIcon2",
                             "scope": "PUBLIC",
                             "texture": {
-                                "key": "HiddenDraft"
+                                "key": "HiddenIconSmall"
                             },
                             "x": 30,
                             "y": 100
@@ -799,7 +810,8 @@
                             "fontFamily": "Rockey",
                             "fontSize": "24px",
                             "color": "#000000ff",
-                            "stroke": "#000000ff"
+                            "stroke": "#000000ff",
+                            "wordWrapWidth": 292
                         }
                     ]
                 },

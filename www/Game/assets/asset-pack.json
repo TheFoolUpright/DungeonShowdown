@@ -44,6 +44,11 @@
                 "key": "Block4Draft"
             },
             {
+                "url": "assets/background/BoyWins.png",
+                "type": "image",
+                "key": "BoyWins"
+            },
+            {
                 "url": [
                     "assets/audio/breathing-6811.mp3"
                 ],
@@ -141,6 +146,11 @@
                 "key": "DoubleAttackDraft"
             },
             {
+                "url": "assets/background/Draw.png",
+                "type": "image",
+                "key": "Draw"
+            },
+            {
                 "url": [
                     "assets/audio/droplets-in-a-cave-6785.mp3"
                 ],
@@ -163,6 +173,11 @@
                 "url": "assets/card/Empty Card.png",
                 "type": "image",
                 "key": "Empty Card_1"
+            },
+            {
+                "url": "assets/background/EndingBackground.png",
+                "type": "image",
+                "key": "EndingBackground"
             },
             {
                 "url": "assets/ui/Energy.png",
@@ -195,6 +210,11 @@
                 "url": "assets/card/GhostDraft.png",
                 "type": "image",
                 "key": "GhostDraft"
+            },
+            {
+                "url": "assets/background/GirlWins.png",
+                "type": "image",
+                "key": "GirlWins"
             },
             {
                 "url": [
@@ -232,6 +252,11 @@
                 "url": "assets/card/HiddenDraft.png",
                 "type": "image",
                 "key": "HiddenDraft"
+            },
+            {
+                "url": "assets/card/HiddenIconSmall.png",
+                "type": "image",
+                "key": "HiddenIconSmall"
             },
             {
                 "url": "assets/ui/Insight.png",
@@ -316,6 +341,11 @@
                 "url": "src/prefabs/PrefabOpponent.js",
                 "type": "script",
                 "key": "PrefabOpponent"
+            },
+            {
+                "url": "src/prefabs/PrefabPlayerAttacks.js",
+                "type": "script",
+                "key": "PrefabPlayerAttacks"
             },
             {
                 "url": "src/prefabs/PrefabStats.js",

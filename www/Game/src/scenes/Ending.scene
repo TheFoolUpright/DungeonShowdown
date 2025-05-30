@@ -1,0 +1,113 @@
+{
+    "id": "eecd231c-2699-4201-ac45-50b5891d083f",
+    "sceneType": "SCENE",
+    "settings": {
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "Ending",
+        "borderWidth": 1920,
+        "borderHeight": 1080
+    },
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "7efba4bb-a028-47b1-ae61-220d45fbde2a",
+            "label": "endingBackground",
+            "scope": "PUBLIC",
+            "texture": {
+                "key": "EndingBackground"
+            },
+            "x": 960,
+            "y": 540
+        },
+        {
+            "type": "Text",
+            "id": "37a72a13-e3cd-402a-9357-6ff064c3ef88",
+            "label": "endingText",
+            "scope": "PUBLIC",
+            "x": 1200,
+            "y": 400,
+            "originX": 0.5,
+            "originY": 0.5,
+            "text": "IT'S A TIE...",
+            "align": "center",
+            "fontFamily": "Rockey",
+            "fontSize": "128px",
+            "stroke": "#000000ff",
+            "strokeThickness": 20,
+            "wordWrapWidth": 290
+        },
+        {
+            "type": "Image",
+            "id": "e9fc686e-77e1-427d-9540-b191359faf82",
+            "label": "girlWins",
+            "scope": "PUBLIC",
+            "texture": {
+                "key": "GirlWins"
+            },
+            "x": 960,
+            "y": 541,
+            "visible": false
+        },
+        {
+            "type": "Image",
+            "id": "4722f518-2d7b-42f2-9b97-4abcfd5ab643",
+            "label": "boyWins",
+            "scope": "PUBLIC",
+            "texture": {
+                "key": "BoyWins"
+            },
+            "x": 960,
+            "y": 540,
+            "visible": false
+        },
+        {
+            "type": "Image",
+            "id": "dba4edb3-462d-4aa6-af7c-178909e9da12",
+            "label": "draw",
+            "scope": "PUBLIC",
+            "texture": {
+                "key": "Draw"
+            },
+            "x": 960,
+            "y": 539,
+            "visible": false
+        },
+        {
+            "type": "Text",
+            "id": "c4c0b6a2-4998-47b9-89f5-d8691bc84d07",
+            "label": "dungeonShowdown",
+            "scope": "PUBLIC",
+            "x": 1132,
+            "y": 820,
+            "originX": 0.5,
+            "originY": 0.5,
+            "text": "DUNGEON\nSHOWDOWN",
+            "align": "center",
+            "fontFamily": "Rockey",
+            "fontSize": "28px",
+            "stroke": "#000000ff",
+            "strokeThickness": 10,
+            "wordWrapWidth": 290
+        },
+        {
+            "prefabId": "2f15ddb5-a4d8-4a13-9237-ebf5b4a7f47e",
+            "id": "d3a9f427-b841-4012-ac7e-722b6d6b8958",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "confirmButton",
+            "scope": "PUBLIC",
+            "x": 1680,
+            "y": 800
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

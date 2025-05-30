@@ -83,6 +83,22 @@
             "scope": "PUBLIC",
             "x": 1680,
             "y": 800
+        },
+        {
+            "prefabId": "ebd6e99a-0bb9-4fbc-8a4c-9ce21b62b9b0",
+            "id": "e5b1c421-81a3-45cd-bdb9-a0b8798b3e19",
+            "unlock": [
+                "x",
+                "y",
+                "angle",
+                "visible"
+            ],
+            "label": "playerAttacks",
+            "scope": "PUBLIC",
+            "x": 960,
+            "y": 1132,
+            "angle": 0,
+            "visible": true
         }
     ],
     "plainObjects": [],
