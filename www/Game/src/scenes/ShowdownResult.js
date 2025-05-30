@@ -79,7 +79,7 @@ class ShowdownResult extends Phaser.Scene {
 		this.add.existing(info);
 
 		// opponent
-		const opponent = new PrefabOpponent(this, 960, 600);
+		const opponent = new PrefabOpponent(this, 960, 500);
 		this.add.existing(opponent);
 
 		// opponentAttacks
@@ -167,13 +167,13 @@ class ShowdownResult extends Phaser.Scene {
 		opponentShowdownAnimations.NormalAttack.visible = false
 
 		playerAttack = false
-		
+
 		opponentAttack = false
 
 		playerSecondSwing = false
 
 		opponentSecondSwing = false
-		
+
 		playerAttackAnimationFinished = false
 
 		opponentAttackAnimationFinished = false

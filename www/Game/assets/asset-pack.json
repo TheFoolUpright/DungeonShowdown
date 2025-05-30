@@ -87,6 +87,21 @@
                 "key": "Character"
             },
             {
+                "url": "assets/opponent/CharacterColor.png",
+                "type": "image",
+                "key": "CharacterColor"
+            },
+            {
+                "url": "assets/ui/ColorFill.png",
+                "type": "image",
+                "key": "ColorFill"
+            },
+            {
+                "url": "assets/ui/ColorOutline.png",
+                "type": "image",
+                "key": "ColorOutline"
+            },
+            {
                 "url": "assets/ui/Confirm & End Turn Button.png",
                 "type": "image",
                 "key": "Confirm & End Turn Button"

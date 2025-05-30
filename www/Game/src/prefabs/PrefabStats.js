@@ -8,9 +8,6 @@ class PrefabStats extends Phaser.GameObjects.Container {
 	constructor(scene, x, y) {
 		super(scene, x ?? 0, y ?? 0);
 
-		this.scaleX = 2;
-		this.scaleY = 2;
-
 		// healthDifferenceText
 		const healthDifferenceText = scene.add.text(50, -4, "", {});
 		healthDifferenceText.setOrigin(0, 0.5);

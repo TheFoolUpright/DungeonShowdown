@@ -54,7 +54,7 @@
             "label": "opponent",
             "scope": "PUBLIC",
             "x": 960,
-            "y": 600
+            "y": 500
         },
         {
             "prefabId": "9e174a37-c4f5-4ab3-8739-d16babf6c161",

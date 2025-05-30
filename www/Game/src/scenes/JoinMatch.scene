@@ -20,6 +20,150 @@
             "scope": "PUBLIC",
             "x": 1680,
             "y": 800
+        },
+        {
+            "prefabId": "816704b5-6f20-4c33-b324-1f6eae61d206",
+            "id": "c1f86398-cca0-44d2-b82a-746b68850427",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "purpleButton",
+            "scope": "PUBLIC",
+            "x": 250,
+            "y": 900
+        },
+        {
+            "prefabId": "816704b5-6f20-4c33-b324-1f6eae61d206",
+            "id": "7ef87bd9-189b-4a8d-87ce-860700df74e9",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "blueButton",
+            "scope": "PUBLIC",
+            "x": 150,
+            "y": 900
+        },
+        {
+            "prefabId": "816704b5-6f20-4c33-b324-1f6eae61d206",
+            "id": "203e1ddd-de38-40a9-b443-7184e8d26262",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "greenBlueButton",
+            "scope": "PUBLIC",
+            "x": 250,
+            "y": 800
+        },
+        {
+            "prefabId": "816704b5-6f20-4c33-b324-1f6eae61d206",
+            "id": "06df42b7-5c3a-424d-93e3-0f37843bac58",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "greenButton",
+            "scope": "PUBLIC",
+            "x": 150,
+            "y": 800
+        },
+        {
+            "prefabId": "816704b5-6f20-4c33-b324-1f6eae61d206",
+            "id": "ae79da85-bf42-461a-ad92-408f0e9db5fd",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "yellowGreenButton",
+            "scope": "PUBLIC",
+            "x": 250,
+            "y": 700
+        },
+        {
+            "prefabId": "816704b5-6f20-4c33-b324-1f6eae61d206",
+            "id": "301f461f-fddb-48b1-8304-7d923fe2e8e7",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "yellowButton",
+            "scope": "PUBLIC",
+            "x": 150,
+            "y": 700
+        },
+        {
+            "prefabId": "816704b5-6f20-4c33-b324-1f6eae61d206",
+            "id": "6a059d21-4fbb-46b7-b75b-7f9b0baad542",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "orangeButton",
+            "scope": "PUBLIC",
+            "x": 250,
+            "y": 600
+        },
+        {
+            "prefabId": "816704b5-6f20-4c33-b324-1f6eae61d206",
+            "id": "0dd1a359-d4ed-498f-82df-10f118aa2cab",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "orangeRedButton",
+            "scope": "PUBLIC",
+            "x": 150,
+            "y": 600
+        },
+        {
+            "prefabId": "816704b5-6f20-4c33-b324-1f6eae61d206",
+            "id": "a5821d5a-d22c-4824-bf50-6b56f421e1c2",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "redButton",
+            "scope": "PUBLIC",
+            "x": 250,
+            "y": 500
+        },
+        {
+            "prefabId": "816704b5-6f20-4c33-b324-1f6eae61d206",
+            "id": "088191e5-0706-4c23-bb2d-3443102ec546",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "pinkButton",
+            "scope": "PUBLIC",
+            "x": 150,
+            "y": 500
+        },
+        {
+            "prefabId": "f15fd942-db03-4ecd-b587-9299358545a5",
+            "id": "23bd6839-d975-475d-956f-7b97b0a85921",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "playerCharater",
+            "x": 958,
+            "y": 655
+        },
+        {
+            "type": "Text",
+            "id": "122217b5-a0d6-4680-86be-e9a4f1f536ef",
+            "label": "titleText",
+            "scope": "PUBLIC",
+            "x": 68,
+            "y": 69,
+            "text": "DUNGEON \nSHOWDOWN",
+            "fontFamily": "ROCKEY",
+            "fontSize": "100px",
+            "stroke": "#000000ff",
+            "strokeThickness": 15
         }
     ],
     "plainObjects": [],

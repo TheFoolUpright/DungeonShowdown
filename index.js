@@ -233,7 +233,9 @@ app.get("/getMatchState", (req, res) => {
     }
 
     function WaitingForMatchCheck() {
-        connection.query("SELECT player_id, is_waiting_for_match FROM player WHERE player_id = ?", [req.session.playerId],
+        console.log("Player: "+[req.session.playerId])
+        connection.query("SELECT player_id, player_username, player_color, is_waiting_for_match \
+            FROM player WHERE player_id = ?", [req.session.playerId],
         function (err, rows, fields) {
             if (err) {
                 console.log("Database Error: " + err)
@@ -242,7 +244,7 @@ app.get("/getMatchState", (req, res) => {
                 })
                 return
             }
-            if (rows.length == 0) {
+            if (rows.length != 0) {
                 if(rows[0].is_waiting_for_match == 1){
                     res.status(200).json({
                     "message": "Player already in a match",
@@ -253,13 +255,15 @@ app.get("/getMatchState", (req, res) => {
                 else{
                     res.status(200).json({
                     "message": "Player already in a match",
-                    "state": "NOT_IN_MATCH"
+                    "state": "NOT_IN_MATCH",
+                    "player_username": rows[0].player_username,
+                    "player_color": rows[0].player_color
                     })
                     return 
                 }
             }
             else {
-                res.status(500).json({
+                res.status(200).json({
                     "message": "Player Not Found"
                 })
                 return   

@@ -14,8 +14,6 @@
             "id": "9231f8d1-9a14-44fd-96ad-c7051822b95f",
             "label": "StatsContainer",
             "scope": "PUBLIC",
-            "scaleX": 2,
-            "scaleY": 2,
             "list": [
                 {
                     "type": "Text",
