@@ -296,7 +296,7 @@ app.put("/joinMatch", (req, res) => {
      UpdateWaitingForMatchSearch()
 
     function UpdateWaitingForMatchSearch() {
-        connection.query("UPDATE player SET is_waiting_for_match = 1 WHERE player_id = ?", [req.session.playerId], 
+        connection.query("UPDATE player SET is_waiting_for_match = 1, player_color = ? WHERE player_id = ?", [req.body.player_color, req.session.playerId], 
             function (err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -679,6 +679,7 @@ app.put("/joinMatch", (req, res) => {
         })
     }
 
+    //mary look here 
     function UpdateWaitingForMatchFound() {
         connection.query("UPDATE player p INNER JOIN game_match m ON m.player_1_id = p.player_id or m.player_2_id = p.player_id SET p.is_waiting_for_match = 0 WHERE m.match_id = ?", [req.session.matchId], 
             function (err, rows, fields) {
@@ -689,13 +690,56 @@ app.put("/joinMatch", (req, res) => {
                     })
                     return
                 }
-
-                res.status(200).json({
-                    "message": "Match Found!",
-                    "state": "MATCH_FOUND"
-                })
+                GetDungeonDataForScene()
             }
         )
+    }
+
+    function GetDungeonDataForScene(){
+        connection.query("SELECT player_username, player_color, \
+        player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, showdown_turn, is_visible, \
+        match_id, PS.player_id, max_health, current_health, energy, insight, damage, \
+        card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path, card_description, card_display_option \
+        FROM player_card_slot PCS \
+        INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id \
+        INNER JOIN player P ON P.player_id = PS.player_id \
+        INNER JOIN card C ON PCS.card_id = C.card_id \
+        WHERE PS.player_id = ? AND match_id = ? AND room_id = ?"
+        , [req.session.playerId, req.session.matchId,  req.session.roomId],
+            function (err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+                if (rows.length != 0) {
+                    
+                    var card1 = rows[0]
+                    var card2 = rows[1]
+                    var card3 = rows[2]
+                    
+            
+                    res.status(200).json({
+                        "message": "Match Found!",
+                        "state": "MATCH_FOUND",
+                        "player_username": rows[0].player_username,
+                        "player_color": rows[0].player_color,
+                        "room_id":  req.session.roomId,
+                        "showdown_turn":  req.session.showdownTurn,
+                        "max_health": rows[0].max_health,
+                        "current_health": rows[0].current_health,
+                        "energy": rows[0].energy,
+                        "insight": rows[0].insight,
+                        "damage": rows[0].damage,
+                        "card" : [
+                            card1, card2, card3
+                        ]
+                    })
+                
+                }
+            })
     }
 })
 

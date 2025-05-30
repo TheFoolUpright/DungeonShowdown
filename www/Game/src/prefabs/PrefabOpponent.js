@@ -26,6 +26,7 @@ class PrefabOpponent extends Phaser.GameObjects.Container {
 		this.add(opponentName);
 
 		this.character = character;
+		this.characterColor = characterColor;
 		this.opponentName = opponentName;
 
 		/* START-USER-CTR-CODE */
@@ -35,6 +36,8 @@ class PrefabOpponent extends Phaser.GameObjects.Container {
 
 	/** @type {Phaser.GameObjects.Image} */
 	character;
+	/** @type {Phaser.GameObjects.Image} */
+	characterColor;
 	/** @type {Phaser.GameObjects.Text} */
 	opponentName;
 	/** @type {boolean} */

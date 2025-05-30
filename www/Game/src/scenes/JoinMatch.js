@@ -1,6 +1,7 @@
 
 // You can write more code here
 var playerColor
+var playerColorText
 
 /* START OF COMPILED CODE */
 
@@ -81,6 +82,7 @@ class JoinMatch extends Phaser.Scene {
 		this.orangeRedButton = orangeRedButton;
 		this.redButton = redButton;
 		this.pinkButton = pinkButton;
+		this.playerCharater = playerCharater;
 		this.titleText = titleText;
 
 		this.events.emit("scene-awake");
@@ -108,6 +110,8 @@ class JoinMatch extends Phaser.Scene {
 	redButton;
 	/** @type {ColorPrefab} */
 	pinkButton;
+	/** @type {PrefabOpponent} */
+	playerCharater;
 	/** @type {Phaser.GameObjects.Text} */
 	titleText;
 
@@ -118,9 +122,59 @@ class JoinMatch extends Phaser.Scene {
 	create(data) {
 
 		this.editorCreate();
-		playerColor = data.player_color.replace("#", "0x")
+		
+		this.loadPresets(data)
+		this.ButtonGlowEvents()
+		this.ButtonEvents()
 
+		
+	}
+
+	update(){
+		this.playerCharater.characterColor.setTint(playerColor)
+		playerColorText = playerColor.replace("0x", "#")
+		this.playerCharater.opponentName.setColor(playerColorText)
+
+		// switch (playerColor) {
+		// 	case "0xc23670":
+		// 		this.pinkButton.glowFx.active = true
+		// 		break;
+		// 	case "0xc23847":
+		// 		this.redButton.glowFx.active = true
+		// 		break;
+		// 	case "0xd9623e":
+		// 		this.orangeRedButton.glowFx.active = true
+		// 		break;
+		// 	case "0xdb8b3e":
+		// 		this.orangeButton.glowFx.active = true
+		// 		break;
+		// 	case "0xe2c36d":
+		// 		this.yellowButton.glowFx.active = true
+		// 		break;
+		// 	case "0xc7d581":
+		// 		this.yellowGreenButton.glowFx.active = true
+		// 		break;
+		// 	case "0x91cb89":
+		// 		this.greenButton.glowFx.active = true
+		// 		break;
+		// 	case "0x64b89d":
+		// 		this.greenBlueButton.glowFx.active = true
+		// 		break;
+		// 	case "0x2a7fb4":
+		// 		this.blueButton.glowFx.active = true
+		// 		break;
+		// 	case "0x5b4e99":
+		// 		this.purpleButton.glowFx.active = true
+		// 		break;
+		// }
+	}
+
+	loadPresets(data){
+		playerColor = data.player_color.replace("#", "0x")
+		playerColorText = data.player_color
 		this.joinMatch.confirmButtonText.text = "Join"
+		this.playerCharater.opponentName.text = data.player_username
+
 		this.pinkButton.colorFill.setTint("0xc23670")
 		this.redButton.colorFill.setTint("0xc23847")
 		this.orangeRedButton.colorFill.setTint("0xd9623e")
@@ -132,17 +186,166 @@ class JoinMatch extends Phaser.Scene {
 		this.blueButton.colorFill.setTint("0x2a7fb4")
 		this.purpleButton.colorFill.setTint("0x5b4e99")
 
+		this.joinMatch.glowFx.active = false
+		this.pinkButton.glowFx.active = false
+		this.redButton.glowFx.active = false
+		this.orangeRedButton.glowFx.active = false
+		this.orangeButton.glowFx.active = false
+		this.yellowButton.glowFx.active = false
+		this.yellowGreenButton.glowFx.active = false
+		this.greenButton.glowFx.active = false
+		this.greenBlueButton.glowFx.active = false
+		this.blueButton.glowFx.active = false
+		this.purpleButton.glowFx.active = false
 
 	}
 
-	update(){
+	ButtonGlowEvents(){
+		this.joinMatch.on("pointerover", () => {
+			this.joinMatch.glowFx.active = true
+		})
+		this.joinMatch.on("pointerout", () => {
+			this.joinMatch.glowFx.active = false
+		})
+
+		this.pinkButton.on("pointerover", () => {
+			this.pinkButton.glowFx.active = true
+		})
+		this.pinkButton.on("pointerout", () => {
+			this.pinkButton.glowFx.active = false
+		})
+
+		this.redButton.on("pointerover", () => {
+			this.redButton.glowFx.active = true
+		})
+		this.redButton.on("pointerout", () => {
+			this.redButton.glowFx.active = false
+		})
+
+		this.orangeRedButton.on("pointerover", () => {
+			this.orangeRedButton.glowFx.active = true
+		})
+		this.orangeRedButton.on("pointerout", () => {
+			this.orangeRedButton.glowFx.active = false
+		})
+
+		this.orangeButton.on("pointerover", () => {
+			this.orangeButton.glowFx.active = true
+		})
+		this.orangeButton.on("pointerout", () => {
+			this.orangeButton.glowFx.active = false
+		})
+
+		this.yellowButton.on("pointerover", () => {
+			this.yellowButton.glowFx.active = true
+		})
+		this.yellowButton.on("pointerout", () => {
+			this.yellowButton.glowFx.active = false
+		})
+
+		this.yellowGreenButton.on("pointerover", () => {
+			this.yellowGreenButton.glowFx.active = true
+		})
+		this.yellowGreenButton.on("pointerout", () => {
+			this.yellowGreenButton.glowFx.active = false
+		})
+
+		this.greenButton.on("pointerover", () => {
+			this.greenButton.glowFx.active = true
+		})
+		this.greenButton.on("pointerout", () => {
+			this.greenButton.glowFx.active = false
+		})
+
+		this.greenBlueButton.on("pointerover", () => {
+			this.greenBlueButton.glowFx.active = true
+		})
+		this.greenBlueButton.on("pointerout", () => {
+			this.greenBlueButton.glowFx.active = false
+		})
+
+		this.blueButton.on("pointerover", () => {
+			this.blueButton.glowFx.active = true
+		})
+		this.blueButton.on("pointerout", () => {
+			this.blueButton.glowFx.active = false
+		})
+
+		this.purpleButton.on("pointerover", () => {
+			this.purpleButton.glowFx.active = true
+		})
+		this.purpleButton.on("pointerout", () => {
+			this.purpleButton.glowFx.active = false
+		})
 
 	}
 
-	colorButtonEvents(){
+	ButtonEvents(){
+		this.joinMatch.on("pointerdown", () =>{
+			this.confirmJoinMatch()
+		})
+
 		this.pinkButton.on("pointerdown", () =>{
 			playerColor = this.pinkButton.colorFill.tint
 		})
+		this.redButton.on("pointerdown", () =>{
+			playerColor = this.redButton.colorFill.tint
+		})
+		this.orangeRedButton.on("pointerdown", () =>{
+			playerColor = this.orangeRedButton.colorFill.tint
+		})
+		this.orangeButton.on("pointerdown", () =>{
+			playerColor = this.orangeButton.colorFill.tint
+		})
+		this.yellowButton.on("pointerdown", () =>{
+			playerColor = this.yellowButton.colorFill.tint
+		})
+		this.yellowGreenButton.on("pointerdown", () =>{
+			playerColor = this.yellowGreenButton.colorFill.tint
+		})
+		this.greenButton.on("pointerdown", () =>{
+			playerColor = this.greenButton.colorFill.tint
+		})
+		this.greenBlueButton.on("pointerdown", () =>{
+			playerColor = this.greenBlueButton.colorFill.tint
+		})
+		this.blueButton.on("pointerdown", () =>{
+			playerColor = this.blueButton.colorFill.tint
+		})
+		this.purpleButton.on("pointerdown", () =>{
+			playerColor = this.purpleButton.colorFill.tint
+		})
+	}
+
+	confirmJoinMatch(){
+		var dataToSend = {  
+			"player_color": playerColorText
+			}
+
+		var xhttp = new XMLHttpRequest()
+
+		xhttp.onreadystatechange = () => {
+			if (xhttp.readyState == 4) {
+
+				var data = JSON.parse(xhttp.responseText)
+				console.log(data)
+
+				if (xhttp.status == 200) {
+					if (data.state == "WAITING_FOR_MATCH") {
+						this.scene.start("WaitingForMatch")
+					}
+					else if (data.state == "MATCH_FOUND") {
+						this.scene.start("Dungeon", data);
+					}
+				}
+			}
+		}
+
+		xhttp.open("PUT", "/joinMatch", true)
+
+		xhttp.setRequestHeader("Content-Type", "application/json")
+
+		xhttp.send(JSON.stringify(dataToSend))
 	}
 	/* END-USER-CODE */
 }
