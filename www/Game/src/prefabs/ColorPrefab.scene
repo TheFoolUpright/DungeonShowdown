@@ -13,6 +13,11 @@
             "type": "Container",
             "id": "47538380-32e3-4e97-b70a-98988187ba36",
             "label": "container_1",
+            "hitArea.shape": "RECTANGLE",
+            "hitArea.x": -30,
+            "hitArea.y": -30,
+            "hitArea.width": 60,
+            "hitArea.height": 60,
             "x": 129,
             "y": 97,
             "list": [
@@ -23,7 +28,17 @@
                     "scope": "PUBLIC",
                     "texture": {
                         "key": "ColorFill"
-                    }
+                    },
+                    "tintTopLeft": "#bf2929",
+                    "list": [
+                        {
+                            "type": "Glow",
+                            "id": "f778e8f9-af74-41e9-aac4-2b4bcacbce18",
+                            "label": "glowFx",
+                            "scope": "PUBLIC",
+                            "preFX": true
+                        }
+                    ]
                 },
                 {
                     "type": "Image",
@@ -32,14 +47,37 @@
                     "scope": "PUBLIC",
                     "texture": {
                         "key": "ColorOutline"
-                    },
+                    }
+                },
+                {
+                    "prefabId": "a06ed60b-79f1-4444-bf35-89046f71f954",
+                    "id": "e5e9bcda-e314-45c0-8edc-a242a6084c3a",
+                    "label": "onPointerDownScript",
+                    "scope": "NESTED_PREFAB",
                     "list": [
                         {
-                            "type": "Glow",
-                            "id": "a28ae229-d728-4d59-af90-ca16aa8bf6d3",
-                            "label": "glowFx",
-                            "outerStrength": 10,
-                            "preFX": true
+                            "prefabId": "0e39177a-6e19-4b56-a7c2-2360a2e41505",
+                            "id": "54522857-1729-46db-928a-bdc9b31ae5dc",
+                            "label": "pushActionScript",
+                            "scope": "NESTED_PREFAB"
+                        }
+                    ]
+                },
+                {
+                    "prefabId": "7028a0e2-cd14-44b7-b2a4-68dac16ece00",
+                    "id": "2bad3baa-f359-4f0d-8b3b-b4a10ef81f64",
+                    "label": "onAwakeScript",
+                    "scope": "NESTED_PREFAB",
+                    "list": [
+                        {
+                            "prefabId": "3d337935-cdca-4937-9126-9f75bc2486de",
+                            "id": "af22dd54-49d8-48a3-8ee2-d227c9b88094",
+                            "unlock": [
+                                "from"
+                            ],
+                            "label": "moveInSceneActionScript",
+                            "scope": "NESTED_PREFAB",
+                            "from": "RIGHT"
                         }
                     ]
                 }

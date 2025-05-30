@@ -149,6 +149,7 @@
                 "y"
             ],
             "label": "playerCharater",
+            "scope": "PUBLIC",
             "x": 958,
             "y": 655
         },

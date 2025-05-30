@@ -28,6 +28,7 @@
                     "type": "Image",
                     "id": "22957763-7cac-4170-a5ad-11f88732a7ec",
                     "label": "characterColor",
+                    "scope": "PUBLIC",
                     "texture": {
                         "key": "CharacterColor"
                     },
