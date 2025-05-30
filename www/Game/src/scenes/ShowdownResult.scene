@@ -54,7 +54,7 @@
             "label": "opponent",
             "scope": "PUBLIC",
             "x": 960,
-            "y": 600
+            "y": 500
         },
         {
             "prefabId": "9e174a37-c4f5-4ab3-8739-d16babf6c161",
@@ -99,6 +99,18 @@
             "y": 1132,
             "angle": 0,
             "visible": true
+        },
+        {
+            "prefabId": "11beb686-a41c-4372-bd71-ab669edf047c",
+            "id": "b8edc14e-45ba-47bf-9fdb-877ca80b451a",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "playerBlock",
+            "scope": "PUBLIC",
+            "x": 960,
+            "y": 1080
         }
     ],
     "plainObjects": [],

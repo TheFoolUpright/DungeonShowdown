@@ -16,6 +16,7 @@ class PrefabOpponent extends Phaser.GameObjects.Container {
 		const character = scene.add.image(0, 30, "Character");
 		character.scaleX = 0.6;
 		character.scaleY = 0.6;
+		character.setOrigin(0.56, 0.5);
 		container_1.add(character);
 
 		// opponentName

@@ -37,6 +37,7 @@ var opponentShowdownAnimations = {
 	"Healing": 		   {id: 15, visible: false},
 	}
 
+// Attck animation variables	
 var	playerAttack = false
 
 var	opponentAttack = false
@@ -48,6 +49,28 @@ var opponentSecondSwing = false
 var playerAttackAnimationFinished = false
 
 var opponentAttackAnimationFinished = false
+
+// Defence animation variables	
+var	playerDefense = false
+
+var	opponentDefense = false
+
+var playerDefenseAnimationFinished = false
+
+var opponentDefenseAnimationFinished = false
+
+// Skill animation variables	
+// var	playerAttack = false
+
+// var	opponentAttack = false
+
+// var playerSecondSwing = false
+
+// var opponentSecondSwing = false
+
+// var playerAttackAnimationFinished = false
+
+// var opponentAttackAnimationFinished = false
 
 var timer = 0
 
@@ -79,7 +102,7 @@ class ShowdownResult extends Phaser.Scene {
 		this.add.existing(info);
 
 		// opponent
-		const opponent = new PrefabOpponent(this, 960, 600);
+		const opponent = new PrefabOpponent(this, 960, 500);
 		this.add.existing(opponent);
 
 		// opponentAttacks
@@ -98,6 +121,10 @@ class ShowdownResult extends Phaser.Scene {
 		playerAttacks.angle = 0;
 		playerAttacks.visible = true;
 
+		// playerBlock
+		const playerBlock = new PrefabPlayerDefense(this, 960, 1080);
+		this.add.existing(playerBlock);
+
 		this.showdownBackground = showdownBackground;
 		this.statsContainer = statsContainer;
 		this.info = info;
@@ -105,6 +132,7 @@ class ShowdownResult extends Phaser.Scene {
 		this.opponentAttacks = opponentAttacks;
 		this.confirmButton = confirmButton;
 		this.playerAttacks = playerAttacks;
+		this.playerBlock = playerBlock;
 
 		this.events.emit("scene-awake");
 	}
@@ -123,6 +151,8 @@ class ShowdownResult extends Phaser.Scene {
 	confirmButton;
 	/** @type {PrefabPlayerAttacks} */
 	playerAttacks;
+	/** @type {PrefabPlayerDefense} */
+	playerBlock;
 
 	/* START-USER-CODE */
 

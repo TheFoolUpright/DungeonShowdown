@@ -29,7 +29,8 @@
                             },
                             "y": 30,
                             "scaleX": 0.6,
-                            "scaleY": 0.6
+                            "scaleY": 0.6,
+                            "originX": 0.56
                         },
                         {
                             "type": "Text",

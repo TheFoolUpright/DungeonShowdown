@@ -87,6 +87,11 @@
                 "key": "Character"
             },
             {
+                "url": "assets/opponent/ClumsyBlock.png",
+                "type": "image",
+                "key": "ClumsyBlock"
+            },
+            {
                 "url": "assets/ui/Confirm & End Turn Button.png",
                 "type": "image",
                 "key": "Confirm & End Turn Button"
@@ -259,6 +264,11 @@
                 "key": "HiddenIconSmall"
             },
             {
+                "url": "assets/opponent/ImpressiveBlock.png",
+                "type": "image",
+                "key": "ImpressiveBlock"
+            },
+            {
                 "url": "assets/ui/Insight.png",
                 "type": "image",
                 "key": "Insight"
@@ -398,6 +408,11 @@
                 "url": "assets/card/SlimeDraft.png",
                 "type": "image",
                 "key": "SlimeDraft"
+            },
+            {
+                "url": "assets/opponent/SolidBlock.png",
+                "type": "image",
+                "key": "SolidBlock"
             },
             {
                 "url": "assets/card/StoneOfPower.png",
