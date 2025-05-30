@@ -274,11 +274,6 @@
                 "key": "Max Health"
             },
             {
-                "url": "assets/ui/MaxHealthBar.png",
-                "type": "image",
-                "key": "MaxHealthBar"
-            },
-            {
                 "url": "assets/card/MaxHealthDraft.png",
                 "type": "image",
                 "key": "MaxHealthDraft"
