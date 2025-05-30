@@ -53,8 +53,6 @@ class Showdown extends Phaser.Scene {
 		// statsContainer
 		const statsContainer = new PrefabStats(this, 120, 50);
 		this.add.existing(statsContainer);
-		statsContainer.scaleX = 2;
-		statsContainer.scaleY = 2;
 
 		// info
 		const info = new PrefabInfo(this, 1720, 40);
