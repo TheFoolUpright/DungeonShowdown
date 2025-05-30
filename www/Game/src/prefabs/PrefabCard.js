@@ -28,10 +28,10 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		const cardGlow = empty_Card.preFX.addGlow(16777215, 10, 0, false);
 
 		// cardName
-		const cardName = scene.add.text(0, -175, "", {});
+		const cardName = scene.add.text(1, -178, "", {});
 		cardName.setOrigin(0.5, 0.5);
 		cardName.text = "Normal Attack";
-		cardName.setStyle({ "align": "center", "color": "#ffffffff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff", "strokeThickness":10});
+		cardName.setStyle({ "align": "center", "color": "#ffffffff", "fontFamily": "Rockey", "fontSize": "28px", "stroke": "#000000ff", "strokeThickness":10});
 		this.add(cardName);
 
 		// cardBorder
