@@ -15,37 +15,37 @@
             "label": "container_2",
             "list": [
                 {
-                    "type": "Container",
-                    "id": "96781faf-df90-4253-9223-0c7ec877423f",
-                    "label": "container_1",
-                    "list": [
-                        {
-                            "type": "Image",
-                            "id": "30a7409f-5f03-410d-9665-093fe57f6eb1",
-                            "label": "character",
-                            "scope": "PUBLIC",
-                            "texture": {
-                                "key": "Character"
-                            },
-                            "y": 30,
-                            "scaleX": 0.6,
-                            "scaleY": 0.6,
-                            "originX": 0.56
-                        },
-                        {
-                            "type": "Text",
-                            "id": "1a559f85-5d14-4339-90f7-06cbfffef30a",
-                            "label": "opponentName",
-                            "scope": "PUBLIC",
-                            "y": -450,
-                            "originX": 0.5,
-                            "text": "Username",
-                            "fontFamily": "Rockey",
-                            "fontSize": "48px",
-                            "stroke": "#000000ff",
-                            "strokeThickness": 10
-                        }
-                    ]
+                    "type": "Image",
+                    "id": "30a7409f-5f03-410d-9665-093fe57f6eb1",
+                    "label": "character",
+                    "scope": "PUBLIC",
+                    "texture": {
+                        "key": "Character"
+                    },
+                    "y": 30
+                },
+                {
+                    "type": "Image",
+                    "id": "22957763-7cac-4170-a5ad-11f88732a7ec",
+                    "label": "characterColor",
+                    "texture": {
+                        "key": "CharacterColor"
+                    },
+                    "y": 30
+                },
+                {
+                    "type": "Text",
+                    "id": "1a559f85-5d14-4339-90f7-06cbfffef30a",
+                    "label": "opponentName",
+                    "scope": "PUBLIC",
+                    "x": 30,
+                    "y": -450,
+                    "originX": 0.5,
+                    "text": "Username",
+                    "fontFamily": "Rockey",
+                    "fontSize": "48px",
+                    "stroke": "#000000ff",
+                    "strokeThickness": 10
                 }
             ]
         }

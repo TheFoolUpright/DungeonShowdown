@@ -25,7 +25,7 @@ class Showdown extends Phaser.Scene {
 		this.add.image(960, 540, "ShowdownBackground");
 
 		// opponent
-		const opponent = new PrefabOpponent(this, 960, 504);
+		const opponent = new PrefabOpponent(this, 960, 500);
 		this.add.existing(opponent);
 		opponent.scaleX = 1;
 		opponent.scaleY = 1;

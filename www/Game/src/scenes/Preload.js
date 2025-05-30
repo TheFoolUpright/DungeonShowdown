@@ -127,7 +127,7 @@ class Preload extends Phaser.Scene {
 					}
 					else if (data.state == "NOT_IN_MATCH") {
 						//Go to Main Menu 
-						 this.scene.start("JoinMatch");
+						 this.scene.start("JoinMatch", data);
 
 					}
 					else if (data.state == "WAITING_FOR_MATCH") {
