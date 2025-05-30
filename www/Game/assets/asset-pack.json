@@ -214,6 +214,11 @@
                 "key": "HealingDraft"
             },
             {
+                "url": "assets/ui/HealthBar.png",
+                "type": "image",
+                "key": "HealthBar"
+            },
+            {
                 "url": "assets/opponent/Heavy Slash.png",
                 "type": "image",
                 "key": "Heavy Slash"
