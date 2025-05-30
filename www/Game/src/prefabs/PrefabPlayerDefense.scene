@@ -22,7 +22,8 @@
                     "texture": {
                         "key": "ImpressiveBlock"
                     },
-                    "originY": 0
+                    "originY": 0,
+                    "visible": false
                 },
                 {
                     "type": "Image",
@@ -32,7 +33,8 @@
                     "texture": {
                         "key": "SolidBlock"
                     },
-                    "originY": 0
+                    "originY": 0,
+                    "visible": false
                 },
                 {
                     "type": "Image",
@@ -42,7 +44,8 @@
                     "texture": {
                         "key": "ClumsyBlock"
                     },
-                    "originY": 0
+                    "originY": 0,
+                    "visible": false
                 }
             ]
         }

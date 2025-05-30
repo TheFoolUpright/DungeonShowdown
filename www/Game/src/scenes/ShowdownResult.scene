@@ -57,22 +57,6 @@
             "y": 500
         },
         {
-            "prefabId": "9e174a37-c4f5-4ab3-8739-d16babf6c161",
-            "id": "88eef8b0-2ad6-4c29-8e4b-3f9ae46bd9bb",
-            "unlock": [
-                "x",
-                "y",
-                "visible",
-                "angle"
-            ],
-            "label": "opponentAttacks",
-            "scope": "PUBLIC",
-            "x": 986,
-            "y": 769,
-            "angle": 0,
-            "visible": true
-        },
-        {
             "prefabId": "2f15ddb5-a4d8-4a13-9237-ebf5b4a7f47e",
             "id": "d17fadaf-f568-4827-8f3f-ceb8b54bc6c1",
             "unlock": [
@@ -101,6 +85,22 @@
             "visible": true
         },
         {
+            "prefabId": "9e174a37-c4f5-4ab3-8739-d16babf6c161",
+            "id": "88eef8b0-2ad6-4c29-8e4b-3f9ae46bd9bb",
+            "unlock": [
+                "x",
+                "y",
+                "visible",
+                "angle"
+            ],
+            "label": "opponentAttacks",
+            "scope": "PUBLIC",
+            "x": 986,
+            "y": 769,
+            "angle": 0,
+            "visible": true
+        },
+        {
             "prefabId": "11beb686-a41c-4372-bd71-ab669edf047c",
             "id": "b8edc14e-45ba-47bf-9fdb-877ca80b451a",
             "unlock": [
@@ -111,6 +111,24 @@
             "scope": "PUBLIC",
             "x": 960,
             "y": 1080
+        },
+        {
+            "prefabId": "a01c61c9-a8af-4e08-9bce-826ac7d85763",
+            "id": "a1e5227e-7582-4619-89ab-956f00b051b4",
+            "unlock": [
+                "x",
+                "y",
+                "visible",
+                "scaleX",
+                "scaleY"
+            ],
+            "label": "opponentBlock",
+            "scope": "PUBLIC",
+            "x": 1165,
+            "y": 540,
+            "scaleX": 1,
+            "scaleY": 1,
+            "visible": true
         }
     ],
     "plainObjects": [],

@@ -22,7 +22,8 @@
                     "texture": {
                         "key": "Character"
                     },
-                    "y": 30
+                    "y": 30,
+                    "originX": 0.56
                 },
                 {
                     "type": "Image",
@@ -31,14 +32,14 @@
                     "texture": {
                         "key": "CharacterColor"
                     },
-                    "y": 30
+                    "y": 30,
+                    "originX": 0.56
                 },
                 {
                     "type": "Text",
                     "id": "1a559f85-5d14-4339-90f7-06cbfffef30a",
                     "label": "opponentName",
                     "scope": "PUBLIC",
-                    "x": 30,
                     "y": -450,
                     "originX": 0.5,
                     "text": "Username",

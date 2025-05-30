@@ -11,16 +11,19 @@ class PrefabPlayerDefense extends Phaser.GameObjects.Container {
 		// impressiveBlock
 		const impressiveBlock = scene.add.image(0, 0, "ImpressiveBlock");
 		impressiveBlock.setOrigin(0.5, 0);
+		impressiveBlock.visible = false;
 		this.add(impressiveBlock);
 
 		// solidBlock
 		const solidBlock = scene.add.image(0, 0, "SolidBlock");
 		solidBlock.setOrigin(0.5, 0);
+		solidBlock.visible = false;
 		this.add(solidBlock);
 
 		// clumsyBlock
 		const clumsyBlock = scene.add.image(0, 0, "ClumsyBlock");
 		clumsyBlock.setOrigin(0.5, 0);
+		clumsyBlock.visible = false;
 		this.add(clumsyBlock);
 
 		this.impressiveBlock = impressiveBlock;

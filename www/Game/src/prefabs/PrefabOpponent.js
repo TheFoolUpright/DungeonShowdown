@@ -10,14 +10,16 @@ class PrefabOpponent extends Phaser.GameObjects.Container {
 
 		// character
 		const character = scene.add.image(0, 30, "Character");
+		character.setOrigin(0.56, 0.5);
 		this.add(character);
 
 		// characterColor
 		const characterColor = scene.add.image(0, 30, "CharacterColor");
+		characterColor.setOrigin(0.56, 0.5);
 		this.add(characterColor);
 
 		// opponentName
-		const opponentName = scene.add.text(30, -450, "", {});
+		const opponentName = scene.add.text(0, -450, "", {});
 		opponentName.setOrigin(0.5, 0);
 		opponentName.text = "Username";
 		opponentName.setStyle({ "fontFamily": "Rockey", "fontSize": "48px", "stroke": "#000000ff", "strokeThickness":10});

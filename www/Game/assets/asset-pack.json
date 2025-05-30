@@ -87,14 +87,14 @@
                 "key": "Character"
             },
             {
-                "url": "assets/opponent/ClumsyBlock.png",
-                "type": "image",
-                "key": "ClumsyBlock"
-            },
-            {
                 "url": "assets/opponent/CharacterColor.png",
                 "type": "image",
                 "key": "CharacterColor"
+            },
+            {
+                "url": "assets/opponent/ClumsyBlock.png",
+                "type": "image",
+                "key": "ClumsyBlock"
             },
             {
                 "url": "assets/ui/ColorFill.png",
@@ -338,6 +338,21 @@
                 "key": "NormalAttackDraft"
             },
             {
+                "url": "assets/opponent/OpponentClumsyBlock.png",
+                "type": "image",
+                "key": "OpponentClumsyBlock"
+            },
+            {
+                "url": "assets/opponent/OpponentImpressiveBlock.png",
+                "type": "image",
+                "key": "OpponentImpressiveBlock"
+            },
+            {
+                "url": "assets/opponent/OpponentSolidBlock.png",
+                "type": "image",
+                "key": "OpponentSolidBlock"
+            },
+            {
                 "url": "assets/card/ParryDraft.png",
                 "type": "image",
                 "key": "ParryDraft"
@@ -368,9 +383,19 @@
                 "key": "PrefabOpponent"
             },
             {
+                "url": "src/prefabs/PrefabOpponentBlock.js",
+                "type": "script",
+                "key": "PrefabOpponentBlock"
+            },
+            {
                 "url": "src/prefabs/PrefabPlayerAttacks.js",
                 "type": "script",
                 "key": "PrefabPlayerAttacks"
+            },
+            {
+                "url": "src/prefabs/PrefabPlayerDefense.js",
+                "type": "script",
+                "key": "PrefabPlayerDefense"
             },
             {
                 "url": "src/prefabs/PrefabStats.js",
