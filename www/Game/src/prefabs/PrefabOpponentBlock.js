@@ -8,6 +8,14 @@ class PrefabOpponentBlock extends Phaser.GameObjects.Container {
 	constructor(scene, x, y) {
 		super(scene, x ?? 0, y ?? 0);
 
+		// parry
+		const parry = scene.add.image(0, 16, "OpponentParry");
+		parry.scaleX = 0.5;
+		parry.scaleY = 0.5;
+		parry.setOrigin(1, 0.5);
+		parry.visible = false;
+		this.add(parry);
+
 		// impressiveBlock
 		const impressiveBlock = scene.add.image(0, 0, "OpponentImpressiveBlock");
 		impressiveBlock.scaleX = 0.5;
@@ -32,6 +40,7 @@ class PrefabOpponentBlock extends Phaser.GameObjects.Container {
 		clumsyBlock.visible = false;
 		this.add(clumsyBlock);
 
+		this.parry = parry;
 		this.impressiveBlock = impressiveBlock;
 		this.solidBlock = solidBlock;
 		this.clumsyBlock = clumsyBlock;
@@ -41,6 +50,8 @@ class PrefabOpponentBlock extends Phaser.GameObjects.Container {
 		/* END-USER-CTR-CODE */
 	}
 
+	/** @type {Phaser.GameObjects.Image} */
+	parry;
 	/** @type {Phaser.GameObjects.Image} */
 	impressiveBlock;
 	/** @type {Phaser.GameObjects.Image} */

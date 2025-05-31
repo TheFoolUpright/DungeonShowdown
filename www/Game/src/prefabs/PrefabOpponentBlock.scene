@@ -16,6 +16,20 @@
             "list": [
                 {
                     "type": "Image",
+                    "id": "9f66c93d-4d6a-4114-8b8b-b900d7536502",
+                    "label": "parry",
+                    "scope": "PUBLIC",
+                    "texture": {
+                        "key": "OpponentParry"
+                    },
+                    "y": 16,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "originX": 1,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
                     "id": "362c1378-3041-4435-85fa-daade49992a7",
                     "label": "impressiveBlock",
                     "scope": "PUBLIC",

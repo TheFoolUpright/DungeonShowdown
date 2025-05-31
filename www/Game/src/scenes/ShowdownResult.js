@@ -55,6 +55,10 @@ var	playerDefense = false
 
 var	opponentDefense = false
 
+var playerParrySwing = false
+
+var opponentParrySwing = false
+
 var playerDefenseAnimationFinished = false
 
 var opponentDefenseAnimationFinished = false
@@ -109,12 +113,6 @@ class ShowdownResult extends Phaser.Scene {
 		const confirmButton = new PrefabNextRoom(this, 1680, 800);
 		this.add.existing(confirmButton);
 
-		// playerAttacks
-		const playerAttacks = new PrefabPlayerAttacks(this, 960, 1132);
-		this.add.existing(playerAttacks);
-		playerAttacks.angle = 0;
-		playerAttacks.visible = true;
-
 		// opponentAttacks
 		const opponentAttacks = new PrefabAttacks(this, 986, 769);
 		this.add.existing(opponentAttacks);
@@ -131,6 +129,12 @@ class ShowdownResult extends Phaser.Scene {
 		opponentBlock.scaleX = 1;
 		opponentBlock.scaleY = 1;
 		opponentBlock.visible = true;
+
+		// playerAttacks
+		const playerAttacks = new PrefabPlayerAttacks(this, 960, 1132);
+		this.add.existing(playerAttacks);
+		playerAttacks.angle = 0;
+		playerAttacks.visible = true;
 
 		// opponenetMissText
 		const opponenetMissText = this.add.text(1250, 400, "", {});
@@ -152,10 +156,10 @@ class ShowdownResult extends Phaser.Scene {
 		this.info = info;
 		this.opponent = opponent;
 		this.confirmButton = confirmButton;
-		this.playerAttacks = playerAttacks;
 		this.opponentAttacks = opponentAttacks;
 		this.playerBlock = playerBlock;
 		this.opponentBlock = opponentBlock;
+		this.playerAttacks = playerAttacks;
 		this.opponenetMissText = opponenetMissText;
 		this.playerMissText = playerMissText;
 
@@ -172,14 +176,14 @@ class ShowdownResult extends Phaser.Scene {
 	opponent;
 	/** @type {PrefabNextRoom} */
 	confirmButton;
-	/** @type {PrefabPlayerAttacks} */
-	playerAttacks;
 	/** @type {PrefabAttacks} */
 	opponentAttacks;
 	/** @type {PrefabPlayerDefense} */
 	playerBlock;
 	/** @type {PrefabOpponentBlock} */
 	opponentBlock;
+	/** @type {PrefabPlayerAttacks} */
+	playerAttacks;
 	/** @type {Phaser.GameObjects.Text} */
 	opponenetMissText;
 	/** @type {Phaser.GameObjects.Text} */
@@ -242,6 +246,10 @@ class ShowdownResult extends Phaser.Scene {
 		playerDefense = false
 
 		opponentDefense = false
+		
+		playerParrySwing = false
+
+		opponentParrySwing = false
 
 		playerDefenseAnimationFinished = false
 
@@ -343,10 +351,10 @@ class ShowdownResult extends Phaser.Scene {
 			opponentShowdownAnimations.Dodge.visible = true
 			opponentDefense = true
 		}
-		// else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.Parry.id || (data.opponent_cards[1] && data.opponent_cards[1].card_id == opponentShowdownAnimations.Parry.id)) {
-		// 	opponentShowdownAnimations.Parry.visible = true
-		// 	opponentDefense = true
-		// }
+		else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.Parry.id || (data.opponent_cards[1] && data.opponent_cards[1].card_id == opponentShowdownAnimations.Parry.id)) {
+			opponentShowdownAnimations.Parry.visible = true
+			opponentDefense = true
+		}
 
 		this.confirmButton.on("pointerdown", () => {
 			this.setupNextTurn()
@@ -496,10 +504,29 @@ class ShowdownResult extends Phaser.Scene {
 		if (timer > 1200) {
 			if (playerAttack && !playerAttackAnimationFinished) {
 				this.loadPlayerAttackAnimations()
-				if (((this.playerAttacks.angle <= 130 && this.playerAttacks.angle >= 0) || (this.playerAttacks.angle >= -120 && this.playerAttacks.angle <= 0)) && !playerSecondSwing) {
+				if (opponentShowdownAnimations.Parry.visible) {
+					this.opponentBlock.parry.visible = true
+				}
+				if (((this.playerAttacks.angle <= 130 && this.playerAttacks.angle >= 0) || 
+				(this.playerAttacks.angle >= -120 && this.playerAttacks.angle <= 0)) && 
+				!playerSecondSwing &&
+				!this.opponentBlock.parry.visible) {
 					this.playerAttacks.angle += dt / 3
 					if (opponentDefense && !opponentDefenseAnimationFinished) {
 						this.playOpponentDefenseAnimations(dt)
+					}
+				}
+				else if ((this.playerAttacks.angle >= -120 && this.playerAttacks.angle <= 20) && 
+				this.opponentBlock.parry.visible) {
+					if (opponentDefense && !opponentDefenseAnimationFinished) {
+						this.playOpponentParryAnimation(dt)
+						if (!playerParrySwing) {
+							this.playerAttacks.angle += dt / 3
+						}
+						else {
+							this.playerAttacks.scaleX = -1
+							this.playerAttacks.angle -= dt / 3
+						}
 					}
 				}
 				else if (playerShowdownAnimations.DoubleAttack.visible) {
@@ -512,7 +539,9 @@ class ShowdownResult extends Phaser.Scene {
 
 			else if (opponentAttack && !opponentAttackAnimationFinished) {
 				this.loadOpponentAttackAnimations()
-				if (((this.opponentAttacks.angle <= 180 && this.opponentAttacks.angle >= 40) || (this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -40)) && !opponentSecondSwing) {
+				if (((this.opponentAttacks.angle <= 180 && this.opponentAttacks.angle >= 40) || 
+				(this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -40)) && 
+				!opponentSecondSwing) {
 					this.opponentAttacks.angle += dt / 3
 					if (playerDefense && !playerDefenseAnimationFinished) {
 						this.playPlayerDefenseAnimations(dt)
@@ -586,9 +615,6 @@ class ShowdownResult extends Phaser.Scene {
 		else if (opponentShowdownAnimations.ImpressiveBlock.visible) {
 			this.opponentBlock.impressiveBlock.visible = true
 		}
-		// else if (opponentShowdownAnimations.Parry.visible) {
-		// 	this.visible = true
-		// }
 		if (this.playerAttacks.angle <= 0) {
 			if (this.opponentBlock.scale < 2.5) {
 				this.opponentBlock.scale += dt / 256
@@ -618,6 +644,29 @@ class ShowdownResult extends Phaser.Scene {
 		if (this.opponent.character.scaleX > 1) {
 			this.opponent.character.scaleX = 1
 			this.opponent.characterColor.scaleX = 1
+		}
+	}
+
+	playOpponentParryAnimation(dt) {
+		if (opponentShowdownAnimations.Parry.visible) {
+			this.opponentBlock.parry.visible = true
+		}
+
+		if (this.playerAttacks.angle <= 0 && !playerParrySwing) {
+			if (this.opponentBlock.scale < 2.5) {
+				this.opponentBlock.scale += dt / 256
+			}
+		}
+		else if (!playerParrySwing) {
+			playerParrySwing = true
+		}
+		else {
+			if (this.opponentBlock.scale > 1) {
+				this.opponentBlock.scale -= dt / 256
+			}
+		}
+		if (this.opponentBlock.scale < 1) {
+			this.opponentBlock.scale = 1
 		}
 	}
 
@@ -668,6 +717,7 @@ class ShowdownResult extends Phaser.Scene {
 
 	playPlayerSecondSwing(dt) {
 		playerSecondSwing = true
+		this.opponenetMissText.visible = false
 		if (playerSecondSwing && this.playerAttacks.normal_Slash.scaleX > 0) {
 			this.playerAttacks.normal_Slash.flipX = true
 		}
@@ -717,6 +767,7 @@ class ShowdownResult extends Phaser.Scene {
 		this.opponentBlock.clumsyBlock.visible = false
 		this.opponentBlock.solidBlock.visible = false
 		this.opponentBlock.impressiveBlock.visible = false
+		this.opponentBlock.parry.visible = false
 		this.opponenetMissText.visible = false
 		opponentDefenseAnimationFinished = true
 	}

@@ -69,22 +69,6 @@
             "y": 800
         },
         {
-            "prefabId": "ebd6e99a-0bb9-4fbc-8a4c-9ce21b62b9b0",
-            "id": "e5b1c421-81a3-45cd-bdb9-a0b8798b3e19",
-            "unlock": [
-                "x",
-                "y",
-                "angle",
-                "visible"
-            ],
-            "label": "playerAttacks",
-            "scope": "PUBLIC",
-            "x": 960,
-            "y": 1132,
-            "angle": 0,
-            "visible": true
-        },
-        {
             "prefabId": "9e174a37-c4f5-4ab3-8739-d16babf6c161",
             "id": "88eef8b0-2ad6-4c29-8e4b-3f9ae46bd9bb",
             "unlock": [
@@ -128,6 +112,22 @@
             "y": 535,
             "scaleX": 1,
             "scaleY": 1,
+            "visible": true
+        },
+        {
+            "prefabId": "ebd6e99a-0bb9-4fbc-8a4c-9ce21b62b9b0",
+            "id": "e5b1c421-81a3-45cd-bdb9-a0b8798b3e19",
+            "unlock": [
+                "x",
+                "y",
+                "angle",
+                "visible"
+            ],
+            "label": "playerAttacks",
+            "scope": "PUBLIC",
+            "x": 960,
+            "y": 1132,
+            "angle": 0,
             "visible": true
         },
         {
