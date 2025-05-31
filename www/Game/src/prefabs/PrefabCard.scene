@@ -27,7 +27,6 @@
                     "y": -260,
                     "originX": 0.5,
                     "originY": 1,
-                    "visible": false,
                     "text": "Take no damage from one of the opponent's attacks and hit them back for half of their _",
                     "paddingLeft": 5,
                     "paddingTop": 5,
@@ -35,7 +34,7 @@
                     "paddingBottom": 5,
                     "align": "justify",
                     "fontFamily": "Rockey",
-                    "fontSize": "24px",
+                    "fontSize": "32px",
                     "color": "#ffffffff",
                     "stroke": "#000000ff",
                     "strokeThickness": 8,
@@ -123,7 +122,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": -15,
+                            "x": -20,
                             "y": 130
                         },
                         {
@@ -137,7 +136,7 @@
                             "originY": 0.5,
                             "text": "+ 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff"
                         }
@@ -159,7 +158,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": -50,
+                            "x": -55,
                             "y": 130
                         },
                         {
@@ -173,7 +172,7 @@
                             "originY": 0.5,
                             "text": "+ 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff"
                         },
@@ -185,7 +184,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": 30,
+                            "x": 25,
                             "y": 130
                         },
                         {
@@ -199,7 +198,7 @@
                             "originY": 0.5,
                             "text": "+ 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff"
                         }
@@ -224,7 +223,7 @@
                             "originY": 0.5,
                             "text": "- 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff"
                         },
@@ -236,7 +235,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": -15,
+                            "x": -20,
                             "y": 100
                         },
                         {
@@ -247,7 +246,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": -15,
+                            "x": -20,
                             "y": 160
                         },
                         {
@@ -261,7 +260,7 @@
                             "originY": 0.5,
                             "text": "+ 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff"
                         }
@@ -286,7 +285,7 @@
                             "originY": 0.5,
                             "text": "- 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff"
                         },
@@ -298,7 +297,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": -15,
+                            "x": -20,
                             "y": 100
                         },
                         {
@@ -309,7 +308,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": -50,
+                            "x": -55,
                             "y": 160
                         },
                         {
@@ -323,7 +322,7 @@
                             "originY": 0.5,
                             "text": "+ 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff"
                         },
@@ -335,7 +334,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": 30,
+                            "x": 25,
                             "y": 160
                         },
                         {
@@ -349,7 +348,7 @@
                             "originY": 0.5,
                             "text": "+ 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff"
                         }
@@ -374,7 +373,7 @@
                             "originY": 0.5,
                             "text": "+ 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff"
                         },
@@ -386,7 +385,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": -15,
+                            "x": -20,
                             "y": 160
                         },
                         {
@@ -397,7 +396,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": -50,
+                            "x": -55,
                             "y": 100
                         },
                         {
@@ -411,7 +410,7 @@
                             "originY": 0.5,
                             "text": "- 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff"
                         },
@@ -423,7 +422,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": 30,
+                            "x": 25,
                             "y": 100
                         },
                         {
@@ -437,7 +436,7 @@
                             "originY": 0.5,
                             "text": "- 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff"
                         }
@@ -459,7 +458,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": -95,
+                            "x": -100,
                             "y": 160
                         },
                         {
@@ -473,7 +472,7 @@
                             "originY": 0.5,
                             "text": "+ 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff"
                         },
@@ -488,7 +487,7 @@
                             "originY": 0.5,
                             "text": "+ 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff"
                         },
@@ -500,7 +499,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": -15,
+                            "x": -20,
                             "y": 160
                         },
                         {
@@ -511,7 +510,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": 65,
+                            "x": 60,
                             "y": 160
                         },
                         {
@@ -525,7 +524,7 @@
                             "originY": 0.5,
                             "text": "+ 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff"
                         },
@@ -537,7 +536,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": -15,
+                            "x": -20,
                             "y": 100
                         },
                         {
@@ -551,7 +550,7 @@
                             "originY": 0.5,
                             "text": "- 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff"
                         }
@@ -573,7 +572,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": -50,
+                            "x": -55,
                             "y": 100
                         },
                         {
@@ -587,7 +586,7 @@
                             "originY": 0.5,
                             "text": "- 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff"
                         },
@@ -599,7 +598,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": 30,
+                            "x": 25,
                             "y": 100
                         },
                         {
@@ -613,7 +612,7 @@
                             "originY": 0.5,
                             "text": "- 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff"
                         },
@@ -625,7 +624,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": -50,
+                            "x": -55,
                             "y": 160
                         },
                         {
@@ -639,7 +638,7 @@
                             "originY": 0.5,
                             "text": "+ 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff"
                         },
@@ -651,7 +650,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": 30,
+                            "x": 25,
                             "y": 160
                         },
                         {
@@ -665,7 +664,7 @@
                             "originY": 0.5,
                             "text": "+ 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff"
                         }
@@ -687,7 +686,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": -95,
+                            "x": -100,
                             "y": 160
                         },
                         {
@@ -701,7 +700,7 @@
                             "originY": 0.5,
                             "text": "+ 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff",
                             "wordWrapWidth": 292
@@ -717,7 +716,7 @@
                             "originY": 0.5,
                             "text": "+ 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff",
                             "wordWrapWidth": 292
@@ -730,7 +729,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": -15,
+                            "x": -20,
                             "y": 160
                         },
                         {
@@ -741,7 +740,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": 65,
+                            "x": 60,
                             "y": 160
                         },
                         {
@@ -755,7 +754,7 @@
                             "originY": 0.5,
                             "text": "+ 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff",
                             "wordWrapWidth": 292
@@ -768,7 +767,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": -50,
+                            "x": -55,
                             "y": 100
                         },
                         {
@@ -782,7 +781,7 @@
                             "originY": 0.5,
                             "text": "- 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff",
                             "wordWrapWidth": 292
@@ -795,7 +794,7 @@
                             "texture": {
                                 "key": "HiddenIconSmall"
                             },
-                            "x": 30,
+                            "x": 25,
                             "y": 100
                         },
                         {
@@ -809,7 +808,7 @@
                             "originY": 0.5,
                             "text": "- 5",
                             "fontFamily": "Rockey",
-                            "fontSize": "24px",
+                            "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff",
                             "wordWrapWidth": 292

@@ -75,11 +75,11 @@ class ShowdownWaitingOnOpponent extends Phaser.Scene {
 			}
 		}
 
-		xhttp.open("GET", "/getWaitingOnOpponentShowdown", true);
+		xhttp.open("GET", "/getWaitingOnOpponentShowdown", true)
 
-		xhttp.setRequestHeader("Content-Type", "application/json");
+		xhttp.setRequestHeader("Content-Type", "application/json")
 
-		xhttp.send();
+		xhttp.send()
 
 	}
 

@@ -132,9 +132,19 @@
                 "key": "CurrentHealth"
             },
             {
+                "url": "assets/ui/CurrentHealthBig.png",
+                "type": "image",
+                "key": "CurrentHealthBig"
+            },
+            {
                 "url": "assets/ui/Damage.png",
                 "type": "image",
                 "key": "Damage"
+            },
+            {
+                "url": "assets/ui/DamageBig.png",
+                "type": "image",
+                "key": "DamageBig"
             },
             {
                 "url": "assets/card/DamageDraft.png",
@@ -213,6 +223,11 @@
                 "url": "assets/ui/EnergyBar.png",
                 "type": "image",
                 "key": "EnergyBar"
+            },
+            {
+                "url": "assets/ui/EnergyBig.png",
+                "type": "image",
+                "key": "EnergyBig"
             },
             {
                 "url": [
@@ -297,6 +312,11 @@
                 "url": "assets/ui/InsightBar.png",
                 "type": "image",
                 "key": "InsightBar"
+            },
+            {
+                "url": "assets/ui/InsightBig.png",
+                "type": "image",
+                "key": "InsightBig"
             },
             {
                 "url": "assets/ui/Max Health.png",
