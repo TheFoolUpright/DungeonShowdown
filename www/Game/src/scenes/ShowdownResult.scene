@@ -124,8 +124,8 @@
             ],
             "label": "opponentBlock",
             "scope": "PUBLIC",
-            "x": 1165,
-            "y": 540,
+            "x": 1171,
+            "y": 535,
             "scaleX": 1,
             "scaleY": 1,
             "visible": true
