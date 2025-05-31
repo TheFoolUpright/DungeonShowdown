@@ -205,6 +205,11 @@
                 "key": "DungeonBackground"
             },
             {
+                "url": "assets/background/DungeonBackgroundBlur.png",
+                "type": "image",
+                "key": "DungeonBackgroundBlur"
+            },
+            {
                 "url": "assets/card/Empty Card.png",
                 "type": "image",
                 "key": "Empty Card_1"
@@ -463,6 +468,11 @@
                 "url": "assets/background/ShowdownBackground.png",
                 "type": "image",
                 "key": "ShowdownBackground"
+            },
+            {
+                "url": "assets/background/ShowdownBackgroundBlur.png",
+                "type": "image",
+                "key": "ShowdownBackgroundBlur"
             },
             {
                 "url": "assets/card/Slime.png",

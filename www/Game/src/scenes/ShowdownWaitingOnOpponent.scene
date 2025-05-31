@@ -13,6 +13,7 @@
             "type": "Image",
             "id": "62faef42-0dd5-4a00-96cc-402b2dca0c87",
             "label": "showdownBackground",
+            "scope": "PUBLIC",
             "texture": {
                 "key": "ShowdownBackground"
             },

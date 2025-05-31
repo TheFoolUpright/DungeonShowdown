@@ -19,7 +19,7 @@ class ShowdownWaitingOnOpponent extends Phaser.Scene {
 	editorCreate() {
 
 		// showdownBackground
-		this.add.image(960, 538, "ShowdownBackground");
+		const showdownBackground = this.add.image(960, 538, "ShowdownBackground");
 
 		// waitingForOpponentText
 		const waitingForOpponentText = this.add.text(960, 540, "", {});
@@ -27,11 +27,14 @@ class ShowdownWaitingOnOpponent extends Phaser.Scene {
 		waitingForOpponentText.text = "Your opponent was struck with an indecisiveness spell. \nWait while they recover…";
 		waitingForOpponentText.setStyle({ "align": "center", "fontFamily": "Rockey", "fontSize": "64px", "stroke": "#000000ff", "strokeThickness":25});
 
+		this.showdownBackground = showdownBackground;
 		this.waitingForOpponentText = waitingForOpponentText;
 
 		this.events.emit("scene-awake");
 	}
 
+	/** @type {Phaser.GameObjects.Image} */
+	showdownBackground;
 	/** @type {Phaser.GameObjects.Text} */
 	waitingForOpponentText;
 
@@ -42,7 +45,7 @@ class ShowdownWaitingOnOpponent extends Phaser.Scene {
 	create() {
 
 		this.editorCreate();
-		
+		this.showdownBackground.setTexture("ShowdownBackgroundBlur")
 		nextSceneDataLoaded = false
 		showdownWaitingOnOpponentInterval = setInterval(this.CheckShowdownOpponentSelectionState, 2000, this);
 

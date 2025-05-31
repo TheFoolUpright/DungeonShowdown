@@ -10,6 +10,8 @@ class DungeonWaitingOnOpponent extends Phaser.Scene {
 	constructor() {
 		super("DungeonWaitingOnOpponent");
 
+		/** @type {Phaser.GameObjects.Image} */
+		this.dungeonBackground;
 		/** @type {Phaser.GameObjects.Text} */
 		this.waitingForOpponentText;
 
@@ -23,7 +25,7 @@ class DungeonWaitingOnOpponent extends Phaser.Scene {
 	editorCreate() {
 
 		// dungeonBackground
-		this.add.image(960, 540, "DungeonBackground");
+		const dungeonBackground = this.add.image(960, 540, "DungeonBackground");
 
 		// waitingForOpponentText
 		const waitingForOpponentText = this.add.text(960, 540, "", {});
@@ -31,6 +33,7 @@ class DungeonWaitingOnOpponent extends Phaser.Scene {
 		waitingForOpponentText.text = "Your opponent was struck with an indecisiveness spell. \nWait while they recover…";
 		waitingForOpponentText.setStyle({ "align": "center", "fontFamily": "Rockey", "fontSize": "64px", "stroke": "#000000ff", "strokeThickness":25});
 
+		this.dungeonBackground = dungeonBackground;
 		this.waitingForOpponentText = waitingForOpponentText;
 
 		this.events.emit("scene-awake");
@@ -44,6 +47,8 @@ class DungeonWaitingOnOpponent extends Phaser.Scene {
 	create() {
 
 		this.editorCreate();
+
+		this.dungeonBackground.setTexture("DungeonBackgroundBlur")
 		nextSceneDataLoaded = false
 		dungeonWaitingOnOpponentInterval = setInterval(this.CheckDungeonOpponentSelectionState, 2000, this);
 	}

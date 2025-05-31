@@ -13,6 +13,7 @@
             "type": "Image",
             "id": "f7d2b86c-ebc4-4009-ba4c-3c9d83ad9e04",
             "label": "dungeonBackground",
+            "scope": "PUBLIC",
             "texture": {
                 "key": "DungeonBackground"
             },
@@ -84,6 +85,21 @@
             "scope": "PUBLIC",
             "x": 120,
             "y": 50
+        },
+        {
+            "type": "Text",
+            "id": "f19aa3e5-1537-454d-bd1b-c07ab4b90fd0",
+            "label": "descriptionText",
+            "scope": "PUBLIC",
+            "x": 968,
+            "y": 287,
+            "originX": 0.5,
+            "originY": 0.5,
+            "text": "Thuds, crashes, and shrieks echo from afar... \nYour opponent just made a monstrous new friend!",
+            "fontFamily": "Rockey",
+            "fontSize": "40px",
+            "stroke": "#000000ff",
+            "strokeThickness": 11
         }
     ],
     "plainObjects": [],

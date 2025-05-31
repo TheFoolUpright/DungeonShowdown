@@ -17,7 +17,7 @@ class DungeonResult extends Phaser.Scene {
 	editorCreate() {
 
 		// dungeonBackground
-		this.add.image(960, 540, "DungeonBackground");
+		const dungeonBackground = this.add.image(960, 540, "DungeonBackground");
 
 		// opponentCard
 		const opponentCard = new PrefabCard(this, 960, 600);
@@ -38,17 +38,27 @@ class DungeonResult extends Phaser.Scene {
 		const statsContainer = new PrefabStats(this, 120, 50);
 		this.add.existing(statsContainer);
 
+		// descriptionText
+		const descriptionText = this.add.text(968, 287, "", {});
+		descriptionText.setOrigin(0.5, 0.5);
+		descriptionText.text = "Thuds, crashes, and shrieks echo from afar... \nYour opponent just made a monstrous new friend!";
+		descriptionText.setStyle({ "fontFamily": "Rockey", "fontSize": "40px", "stroke": "#000000ff", "strokeThickness":11});
+
 		// moveInSceneActionScript (prefab fields)
 		moveInSceneActionScript.from = "RIGHT";
 
+		this.dungeonBackground = dungeonBackground;
 		this.opponentCard = opponentCard;
 		this.confirmButton = confirmButton;
 		this.info = info;
 		this.statsContainer = statsContainer;
+		this.descriptionText = descriptionText;
 
 		this.events.emit("scene-awake");
 	}
 
+	/** @type {Phaser.GameObjects.Image} */
+	dungeonBackground;
 	/** @type {PrefabCard} */
 	opponentCard;
 	/** @type {PrefabNextRoom} */
@@ -57,6 +67,8 @@ class DungeonResult extends Phaser.Scene {
 	info;
 	/** @type {PrefabStats} */
 	statsContainer;
+	/** @type {Phaser.GameObjects.Text} */
+	descriptionText;
 
 	/* START-USER-CODE */
 
@@ -90,10 +102,10 @@ class DungeonResult extends Phaser.Scene {
 		var insight = data.insight
 		var damage = data.damage
 
-		this.statsContainer.healthText.text = currentHealth + "/" +  maxHealth
-		this.statsContainer.insightText.text = insight + "/10"
-		this.statsContainer.energyText.text = energy
-		this.statsContainer.mightText.text = damage
+		this.statsContainer.healthText.text = previousCurrentHealth + "/" +  previousMaxHealth
+		this.statsContainer.insightText.text = previousInsight + "/10"
+		this.statsContainer.energyText.text = previousEnergy
+		this.statsContainer.mightText.text = previousDamage
 
 		if(previousMaxHealth != maxHealth && previousCurrentHealth != currentHealth){
 			var maxHealthDiff = maxHealth - previousMaxHealth
@@ -183,16 +195,35 @@ class DungeonResult extends Phaser.Scene {
 		const cardColor = data.opponent_color.replace("#", "0x")
 
 		this.opponentCard.cardGlow.active = false
-		this.opponentCard.cardDescription.visible = true
+		this.opponentCard.cardDescription.visible = false
 		if (data.card_type_id == 5) {
 			this.opponentCard.cardName.text = data.card_name
 		}
 		else {
 			this.opponentCard.cardName.text = data.card_type_name
 		}
-		this.opponentCard.cardDescription.text = "Your opponent chose a " + data.card_name + " card!"
+		if(data.card_type_id == 1){
+			this.descriptionText.text = "A strange bubbling echoes from afar. \nYour opponent leveled up their life force!"
+		}
+		else if(data.card_type_id == 2){
+			this.descriptionText.text = "You hear ripping cloth and a relieved sigh. \nSomeone has patched themselves up!"
+		}
+		else if(data.card_type_id == 3){
+			this.descriptionText.text = "You hear the sound of metal scraping on stone... \nyour opponent is becoming mighty!"
+		}
+		else if(data.card_type_id == 4){
+			this.descriptionText.text = "A gentle snore echoes throughout the room. \nYour opponent is napping!"
+		}
+		else if(data.card_type_id == 5){
+			this.descriptionText.text = "Thuds, crashes, and shrieks echo from afar... \nYour opponent just made a monstrous new friend!"
+		}
 		this.opponentCard.cardImage.setTexture(data.card_image_path)
 		this.opponentCard.cardBorder.setTint(cardColor)
+
+		this.opponentCard.option1RewardIcon1.setTexture("HiddenIconSmall")
+		this.opponentCard.option1RewardIcon1.x = 0
+		this.opponentCard.option1RewardText1.text = ""
+		this.opponentCard.option1Container.visible = true
 	}
 
 	setupNextRoom(roomId) {

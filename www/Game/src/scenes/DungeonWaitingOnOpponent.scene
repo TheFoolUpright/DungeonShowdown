@@ -14,6 +14,7 @@
             "type": "Image",
             "id": "1e0858bb-7a9c-447d-ac96-e115da980fad",
             "label": "dungeonBackground",
+            "scope": "PUBLIC",
             "texture": {
                 "key": "DungeonBackground"
             },
