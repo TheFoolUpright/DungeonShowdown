@@ -303,18 +303,20 @@ class Showdown extends Phaser.Scene {
 
 	loadInfoData(data) {
 		//Load Info
-
+		
 		this.info.phaseName.text = "SHOWDOWN"
 		this.info.roomOrTurn.text = "Turn " + data.showdown_turn
 		this.info.playerName.text = data.player_username
 		this.info.playerName.setColor(data.player_color)
+		
 		return
 	}
 
 	loadOpponentData(data) {
+		const opponentColor = data.opponent_color.replace("#", "0x")
 		this.opponent.opponentName.text = data.opponent_username
 		this.opponent.opponentName.setColor(data.opponent_color)
-
+		this.opponent.characterColor.setTint(opponentColor)
 		return
 	}
 
