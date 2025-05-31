@@ -775,7 +775,7 @@ app.put("/joinMatch", (req, res) => {
         )
     }
 
-    function GetDungeonDataForScene(){
+    function GetDungeonDataForScene() {
         connection.query("SELECT player_username, player_color, \
         player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, showdown_turn, is_visible, \
         match_id, PS.player_id, max_health, current_health, energy, insight, damage, \
@@ -851,7 +851,7 @@ app.post("/endGame", (req, res) => {
         )
     }
 
-    function GetPlayerData(){
+    function GetPlayerData() {
     connection.query("SELECT player_id, player_username, player_color \
             FROM player WHERE player_id = ?", [req.session.playerId],
         function (err, rows, fields) {

@@ -135,6 +135,7 @@ class ShowdownResult extends Phaser.Scene {
 		// opponenetMissText
 		const opponenetMissText = this.add.text(1250, 400, "", {});
 		opponenetMissText.setOrigin(0.5, 0.5);
+		opponenetMissText.visible = false;
 		opponenetMissText.text = "MISS!";
 		opponenetMissText.setStyle({ "align": "center", "color": "#5b4e99", "fontFamily": "Rockey", "fontSize": "72px", "stroke": "#000000ff", "strokeThickness":10});
 		opponenetMissText.setWordWrapWidth(280);
@@ -294,11 +295,11 @@ class ShowdownResult extends Phaser.Scene {
 			playerShowdownAnimations.ImpressiveBlock.visible = true
 			playerDefense = true
 		}
-		// else if (data.player_cards[0].card_id == playerShowdownAnimations.Dodge.id) {
-		// 	playerShowdownAnimations.Dodge.visible = true
-		// 	playerDefense = true
-		// }
-		// else if (data.player_cards[0].card_id == playerShowdownAnimations.Parry.id) {
+		else if (data.player_cards[0].card_id == playerShowdownAnimations.Dodge.id || (data.player_cards[1] && data.player_cards[1].card_id == playerShowdownAnimations.Dodge.id)) {
+			playerShowdownAnimations.Dodge.visible = true
+			playerDefense = true
+		}
+		// else if (data.player_cards[0].card_id == playerShowdownAnimations.Parry.id || (data.player_cards[1] && data.player_cards[1].card_id == playerShowdownAnimations.Parry.id)) {
 		// 	playerShowdownAnimations.Parry.visible = true
 		// 	playerDefense = true
 		// }
@@ -592,20 +593,31 @@ class ShowdownResult extends Phaser.Scene {
 			if (this.opponentBlock.scale < 2.5) {
 				this.opponentBlock.scale += dt / 256
 			}
-			if (opponentShowdownAnimations.Dodge.visible) {
-				this.opponenetMissText.visible = true
-			}
 		}
 		else if (this.opponentAttacks.angle >= 0) {
 			if (this.opponentBlock.scale > 1) {
 				this.opponentBlock.scale -= dt / 256
 			}
-			if (this.opponenetMissText.visible) {
-				this.opponenetMissText.visible = false
-			}
 		}
 		if (this.opponentBlock.scale < 1) {
 			this.opponentBlock.scale = 1
+		}
+
+		if (opponentShowdownAnimations.Dodge.visible) {
+			if ((this.playerAttacks.angle <= 0) && this.opponent.character.scaleX > -1) {
+				this.opponenetMissText.visible = true
+				this.opponent.character.scaleX -= dt / 128
+				this.opponent.characterColor.scaleX -= dt / 128
+			}
+			else if ((this.playerAttacks.angle >= 0) && this.opponent.character.scaleX < 1) {
+				this.opponent.character.scaleX += dt / 128
+				this.opponent.characterColor.scaleX += dt / 128
+			}
+		}
+
+		if (this.opponent.character.scaleX > 1) {
+			this.opponent.character.scaleX = 1
+			this.opponent.characterColor.scaleX = 1
 		}
 	}
 
@@ -619,9 +631,9 @@ class ShowdownResult extends Phaser.Scene {
 		else if (playerShowdownAnimations.ImpressiveBlock.visible) {
 			this.playerBlock.impressiveBlock.visible = true
 		}
-		// else if (playerShowdownAnimations.Dodge.visible) {
-		// 	this.visible = true
-		// }
+		else if (playerShowdownAnimations.Dodge.visible) {
+			this.playerMissText.visible = true
+		}
 		// else if (playerShowdownAnimations.Parry.visible) {
 		// 	this.visible = true
 		// }
@@ -635,6 +647,22 @@ class ShowdownResult extends Phaser.Scene {
 		}
 		if (this.playerBlock.y > 1080) {
 			this.playerBlock.y == 1080
+		}
+
+		if (((this.opponentAttacks.angle <= 180 && this.opponentAttacks.angle >= 20) || 
+			(this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -140))) {
+			if (this.playerMissText.y > 750) {
+				this.playerMissText.y -= dt * 2
+			}
+			else if (this.playerMissText.y <= 750) {
+				this.playerMissText.y == 750
+			}
+		}
+		else if (this.opponentAttacks.angle >= -140 && this.opponentBlock.y < 1080) {
+			this.playerMissText.y += dt * 1.5
+		}
+		if (this.playerMissText.y > 1080) {
+			this.playerMissText.y == 1080
 		}
 	}
 
@@ -697,6 +725,7 @@ class ShowdownResult extends Phaser.Scene {
 		this.playerBlock.clumsyBlock.visible = false
 		this.playerBlock.solidBlock.visible = false
 		this.playerBlock.impressiveBlock.visible = false
+		this.playerMissText.visible = false
 		playerDefenseAnimationFinished = true
 	}
 
