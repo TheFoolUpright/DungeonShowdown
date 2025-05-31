@@ -2,7 +2,7 @@
 // You can write more code here
 
 	var nextSceneDataLoaded = false
-
+	var showdownWaitingOnOpponentInterval = null;
 /* START OF COMPILED CODE */
 
 class ShowdownWaitingOnOpponent extends Phaser.Scene {
@@ -44,13 +44,15 @@ class ShowdownWaitingOnOpponent extends Phaser.Scene {
 		this.editorCreate();
 		
 		nextSceneDataLoaded = false
+		showdownWaitingOnOpponentInterval = setInterval(this.CheckShowdownOpponentSelectionState, 2000, this);
+
 	}
 
-	update() {
-		this.CheckShowdownOpponentSelectionState()
-	}
+	// update() {
+	// 	this.CheckShowdownOpponentSelectionState()
+	// }
 
-	CheckShowdownOpponentSelectionState() {
+	CheckShowdownOpponentSelectionState(stateScene) {
 		var xhttp = new XMLHttpRequest()
 
 		xhttp.onreadystatechange = () => {
@@ -62,8 +64,9 @@ class ShowdownWaitingOnOpponent extends Phaser.Scene {
 				if (xhttp.status == 200) {
 
 					if (data.state == "SHOW_RESULT"  && !nextSceneDataLoaded) {
-						this.scene.start("ShowdownResult", data)
+						clearInterval(showdownWaitingOnOpponentInterval);
 						nextSceneDataLoaded = true
+						stateScene.scene.start("ShowdownResult", data)
 					}
 					else if (data.state == "WAITING_FOR_OPP") {
 						return

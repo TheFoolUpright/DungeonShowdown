@@ -83,18 +83,56 @@ class Ending extends Phaser.Scene {
 
 		this.editorCreate();
 
+		this.confirmButton.confirmButtonText.text = "Play Again!"
+
 		if(data.state == 8){
 			this.endingText.text = "Victory!"
-			this.girlWins.visible = true
+			if(data.IsPlayer1){
+				this.girlWins.visible = true
+			}
+			else{
+				this.boyWins.visible = true
+			}
 		}
 		else if (data.state == 9){
 			this.endingText.text = "Defeat..."
-			this.boyWins.visible = true
+			if(data.IsPlayer1){
+				this.girlWins.visible = true
+			}
+			else{
+				this.boyWins.visible = true
+			}
 		}
 		else if (data.state == 10){
 			this.endingText.text = "It's a Tie..."
 			this.draw.visible = true
 		}
+
+		this.confirmButton.on("pointerdown", () =>{
+			this.EndMatch()
+		})
+
+	}
+
+	EndMatch(){
+		var xhttp = new XMLHttpRequest();
+		
+		xhttp.onreadystatechange = () => {
+			if (xhttp.readyState == 4) {
+				var data = JSON.parse(xhttp.responseText)
+				console.log(data)
+
+				if (xhttp.status == 200){
+					this.scene.start("JoinMatch", data);
+				}
+			}
+		}
+
+		xhttp.open("POST", "/endGame", true);
+
+		xhttp.setRequestHeader("Content-Type", "application/json");
+
+		xhttp.send();
 	}
 
 	/* END-USER-CODE */

@@ -175,7 +175,7 @@ class Preload extends Phaser.Scene {
 						 this.scene.start("ShowdownResult")
 					}
 					else if(data.state_id == states.EndingCheck) {
-						 this.GetShowdownData()
+						 //this.GetShowdownData()
 					}
 				}
 			}

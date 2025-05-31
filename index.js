@@ -192,6 +192,88 @@ app.post("/register", (req, res) => {
 //#endregion
 
 //#region Match
+app.get("/getWaitingForMatch", (req, res) => {
+
+    MatchCheck()
+
+    function MatchCheck() {
+        connection.query("SELECT match_id, player_id, is_waiting_for_match \
+            FROM game_match INNER JOIN player ON player_id = player_1_id OR player_id = player_2_id \
+            WHERE player_id = ? AND is_match_finished = 0"
+            , [req.session.playerId],
+        function (err, rows, fields) {
+            if (err) {
+                console.log("Database Error: " + err)
+                res.status(500).json({
+                    "message": err
+                })
+                return
+            }
+            if (rows.length == 0) {
+                res.status(200).json({
+                    "message": "Waiting for another player",
+                    "state": "WAITING_FOR_MATCH"
+                    })
+            }
+            else {
+                req.session.matchId = rows[0].match_id
+                GetDungeonData()
+            }
+        })
+    }
+
+    //mary look here
+    function GetDungeonData(){
+        connection.query("SELECT player_username, player_color, \
+        player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, showdown_turn, is_visible, \
+        match_id, PS.player_id, max_health, current_health, energy, insight, damage, \
+        card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path, card_description, card_display_option \
+        FROM player_card_slot PCS \
+        INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id \
+        INNER JOIN player P ON P.player_id = PS.player_id \
+        INNER JOIN card C ON PCS.card_id = C.card_id \
+        WHERE PS.player_id = ? AND match_id = ? AND room_id = ?"
+        , [req.session.playerId, req.session.matchId,  1],
+            function (err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+                if (rows.length != 0) {
+                    req.session.roomId = rows[0].room_id
+                    req.session.playerStatusId = rows[0].player_status_id
+
+                    var card1 = rows[0]
+                    var card2 = rows[1]
+                    var card3 = rows[2]
+            
+                    res.status(200).json({
+                        "message": "Player stats and cards updated",
+                        "state": "MATCH_FOUND",
+                        "player_username": rows[0].player_username,
+                        "player_color": rows[0].player_color,
+                        "room_id":  req.session.roomId,
+                        "max_health": rows[0].max_health,
+                        "current_health": rows[0].current_health,
+                        "energy": rows[0].energy,
+                        "insight": rows[0].insight,
+                        "damage": rows[0].damage,
+                        "card" : [
+                            card1, card2, card3
+                        ]
+                    })
+                
+                }
+            }
+        )
+    }
+
+    
+})
+
 
 app.get("/getMatchState", (req, res) => {
     if (req.session.matchId) {
@@ -679,7 +761,6 @@ app.put("/joinMatch", (req, res) => {
         })
     }
 
-    //mary look here 
     function UpdateWaitingForMatchFound() {
         connection.query("UPDATE player p INNER JOIN game_match m ON m.player_1_id = p.player_id or m.player_2_id = p.player_id SET p.is_waiting_for_match = 0 WHERE m.match_id = ?", [req.session.matchId], 
             function (err, rows, fields) {
@@ -748,6 +829,58 @@ app.put("/joinMatch", (req, res) => {
 
 //#region Game
 
+app.post("/endGame", (req, res) => {
+    UpdateMatchFinished()
+    function UpdateMatchFinished() {
+        connection.query("UPDATE game_match SET is_match_finished = 1 WHERE match_id = ?", [req.session.matchId],
+            function(err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+                req.session.matchId = null
+                req.session.playerStatusId = null
+                req.session.state = null
+                req.session.roomId = null
+                req.session.showdownTurn = null
+
+                GetPlayerData()
+            }
+        )
+    }
+
+    function GetPlayerData(){
+    connection.query("SELECT player_id, player_username, player_color \
+            FROM player WHERE player_id = ?", [req.session.playerId],
+        function (err, rows, fields) {
+            if (err) {
+                console.log("Database Error: " + err)
+                res.status(500).json({
+                    "message": err
+                })
+                return
+            }
+            if (rows.length != 0) {
+                res.status(200).json({
+                "message": "Ending state changed and session varibles cleared!",
+                "player_username": rows[0].player_username,
+                "player_color": rows[0].player_color
+                })
+                return 
+            }
+            else {
+                res.status(200).json({
+                    "message": "Player Not Found"
+                })
+                return   
+            }
+        })
+        }
+})
+
 /**
  * Gets the  req.session.roomId,  req.session.showdownTurn, and  req.session.state from the database
  * Called by client side function getGameState.
@@ -790,7 +923,6 @@ app.get("/getGameState", (req, res) => {
 })
 
 app.get("/getWaitingOnOpponentDungeon", (req, res) => {
-
     GetOpponentStatus()
 
     function GetOpponentStatus() {
@@ -869,7 +1001,7 @@ app.get("/getWaitingOnOpponentDungeon", (req, res) => {
         connection.query("SELECT player_username , player_color, max_health, current_health, energy, insight, damage \
             FROM player_status ps \
             INNER JOIN player p ON p.player_id = ps.player_id \
-            WHERE p.player_id = ? AND match_id = ?", [req.session.playerStatusId, req.session.matchId],
+            WHERE p.player_id = ? AND match_id = ?", [req.session.playerId, req.session.matchId],
             function(err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -3224,13 +3356,36 @@ app.post("/setupShowdown", (req, res) => {
                     return
                 }
 
-                res.status(200).json({
-                            "message": "Player stats and cards updated",
-                            "state": state
-                        })
+                WhoIsPlayerOne(state)
                 
             }
         )
+    }
+
+    function WhoIsPlayerOne(state){
+        connection.query("SELECT player_1_id \
+                    FROM game_match \
+                    WHERE match_id = ?;", [req.session.matchId],
+            function (err, rows, fields) {
+                if (err) {
+                    console.log("Database Error: " + err)
+                    res.status(500).json({
+                        "message": err
+                    })
+                    return
+                }
+                if (rows.length != 0) {
+                    var IsPlayer1 = false
+                    if(rows[0].player_1_id == req.session.playerId){
+                        IsPlayer1 = true
+                    }
+                    res.status(200).json({
+                            "message": "Player stats and cards updated",
+                            "state": state,
+                            "IsPlayer1": IsPlayer1
+                        })
+                }
+            })
     }
 
 

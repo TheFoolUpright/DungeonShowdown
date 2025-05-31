@@ -2,7 +2,7 @@
 // You can write more code here
 
 	var nextSceneDataLoaded = false
-
+	var dungeonWaitingOnOpponentInterval = null;
 /* START OF COMPILED CODE */
 
 class DungeonWaitingOnOpponent extends Phaser.Scene {
@@ -45,14 +45,14 @@ class DungeonWaitingOnOpponent extends Phaser.Scene {
 
 		this.editorCreate();
 		nextSceneDataLoaded = false
-
+		dungeonWaitingOnOpponentInterval = setInterval(this.CheckDungeonOpponentSelectionState, 2000, this);
 	}
 
-	update() {
-		this.CheckDungeonOpponentSelectionState()
-	}
+	// update() {
+	// 	this.CheckDungeonOpponentSelectionState()
+	// }
 
-	CheckDungeonOpponentSelectionState() {
+	CheckDungeonOpponentSelectionState(stateScene) {
 		var xhttp = new XMLHttpRequest();
 
 		xhttp.onreadystatechange = () => {
@@ -65,7 +65,8 @@ class DungeonWaitingOnOpponent extends Phaser.Scene {
 
 					if (data.state == "NEXT_ROOM" && !nextSceneDataLoaded) {
 						nextSceneDataLoaded = true
-						this.scene.start("DungeonResult", data)
+						clearInterval(dungeonWaitingOnOpponentInterval);
+						stateScene.scene.start("DungeonResult", data)
 					}
 					else if (data.state == "WAITING_FOR_OPP") {
 						return;
