@@ -126,7 +126,7 @@ class ShowdownResult extends Phaser.Scene {
 		this.add.existing(playerBlock);
 
 		// opponentBlock
-		const opponentBlock = new PrefabOpponentBlock(this, 1165, 540);
+		const opponentBlock = new PrefabOpponentBlock(this, 1171, 535);
 		this.add.existing(opponentBlock);
 		opponentBlock.scaleX = 1;
 		opponentBlock.scaleY = 1;
@@ -659,7 +659,7 @@ class ShowdownResult extends Phaser.Scene {
 			}
 		}
 		else if (this.opponentAttacks.angle >= -140 && this.opponentBlock.y < 1080) {
-			this.playerMissText.y += dt * 1.5
+			this.playerMissText.y += dt * 2
 		}
 		if (this.playerMissText.y > 1080) {
 			this.playerMissText.y == 1080
