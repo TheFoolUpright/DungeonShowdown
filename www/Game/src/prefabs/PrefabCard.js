@@ -13,7 +13,8 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		// cardDescription
 		const cardDescription = scene.add.text(0, -260, "", {});
 		cardDescription.setOrigin(0.5, 1);
-		cardDescription.text = "Take no damage from one of the opponent's attacks and hit them back for half of their _";
+		cardDescription.visible = false;
+		cardDescription.text = "Take no damage from one of the opponent's attacks and hit them back for half of their might";
 		cardDescription.setStyle({ "align": "justify", "color": "#ffffffff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff", "strokeThickness":8});
 		cardDescription.setPadding({"left":5,"top":5,"right":5,"bottom":5});
 		cardDescription.setWordWrapWidth(280);
