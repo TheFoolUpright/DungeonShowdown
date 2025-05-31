@@ -381,10 +381,10 @@ class ShowdownResult extends Phaser.Scene {
 		var insight = data.insight
 		var damage = data.damage
 
-		this.statsContainer.healthText.text = currentHealth + "/" +  maxHealth
-		this.statsContainer.insightText.text = insight + "/10"
-		this.statsContainer.energyText.text = energy
-		this.statsContainer.mightText.text = damage
+		this.statsContainer.healthText.text = previousCurrentHealth + "/" +  previousMaxHealth
+		this.statsContainer.insightText.text = previousInsight + "/10"
+		this.statsContainer.energyText.text = previousEnergy
+		this.statsContainer.mightText.text = previousDamage
 
 		if(previousMaxHealth != maxHealth && previousCurrentHealth != currentHealth){
 			var maxHealthDiff = maxHealth - previousMaxHealth
@@ -458,9 +458,10 @@ class ShowdownResult extends Phaser.Scene {
 	}
 
 	loadOpponentData(data) {
+		const opponentColor = data.opponent_cards[0].player_color.replace("#", "0x")
 		this.opponent.opponentName.text = data.opponent_cards[0].player_username
 		this.opponent.opponentName.setColor(data.opponent_cards[0].player_color)	
-
+		this.opponent.characterColor.setTint(opponentColor)
 		return
 	}
 
