@@ -13,9 +13,8 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		// cardDescription
 		const cardDescription = scene.add.text(0, -260, "", {});
 		cardDescription.setOrigin(0.5, 1);
-		cardDescription.visible = false;
 		cardDescription.text = "Take no damage from one of the opponent's attacks and hit them back for half of their _";
-		cardDescription.setStyle({ "align": "justify", "color": "#ffffffff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff", "strokeThickness":8});
+		cardDescription.setStyle({ "align": "justify", "color": "#ffffffff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff", "strokeThickness":8});
 		cardDescription.setPadding({"left":5,"top":5,"right":5,"bottom":5});
 		cardDescription.setWordWrapWidth(280);
 		this.add(cardDescription);
@@ -55,14 +54,14 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		this.add(option1Container);
 
 		// option1RewardIcon1
-		const option1RewardIcon1 = scene.add.image(-15, 130, "HiddenIconSmall");
+		const option1RewardIcon1 = scene.add.image(-20, 130, "HiddenIconSmall");
 		option1Container.add(option1RewardIcon1);
 
 		// option1RewardText1
 		const option1RewardText1 = scene.add.text(15, 130, "", {});
 		option1RewardText1.setOrigin(0.5, 0.5);
 		option1RewardText1.text = "+ 5";
-		option1RewardText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option1RewardText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option1Container.add(option1RewardText1);
 
 		// option2Container
@@ -71,25 +70,25 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		this.add(option2Container);
 
 		// option2RewardIcon1
-		const option2RewardIcon1 = scene.add.image(-50, 130, "HiddenIconSmall");
+		const option2RewardIcon1 = scene.add.image(-55, 130, "HiddenIconSmall");
 		option2Container.add(option2RewardIcon1);
 
 		// option2RewardText2
 		const option2RewardText2 = scene.add.text(60, 130, "", {});
 		option2RewardText2.setOrigin(0.5, 0.5);
 		option2RewardText2.text = "+ 5";
-		option2RewardText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option2RewardText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option2Container.add(option2RewardText2);
 
 		// option2RewardIcon2
-		const option2RewardIcon2 = scene.add.image(30, 130, "HiddenIconSmall");
+		const option2RewardIcon2 = scene.add.image(25, 130, "HiddenIconSmall");
 		option2Container.add(option2RewardIcon2);
 
 		// option2RewardText1
 		const option2RewardText1 = scene.add.text(-20, 130, "", {});
 		option2RewardText1.setOrigin(0.5, 0.5);
 		option2RewardText1.text = "+ 5";
-		option2RewardText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option2RewardText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option2Container.add(option2RewardText1);
 
 		// option1_1Container
@@ -101,22 +100,22 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		const option1_1CostText1 = scene.add.text(15, 100, "", {});
 		option1_1CostText1.setOrigin(0.5, 0.5);
 		option1_1CostText1.text = "- 5";
-		option1_1CostText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option1_1CostText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option1_1Container.add(option1_1CostText1);
 
 		// option1_1CostIcon1
-		const option1_1CostIcon1 = scene.add.image(-15, 100, "HiddenIconSmall");
+		const option1_1CostIcon1 = scene.add.image(-20, 100, "HiddenIconSmall");
 		option1_1Container.add(option1_1CostIcon1);
 
 		// option1_1RewardIcon1
-		const option1_1RewardIcon1 = scene.add.image(-15, 160, "HiddenIconSmall");
+		const option1_1RewardIcon1 = scene.add.image(-20, 160, "HiddenIconSmall");
 		option1_1Container.add(option1_1RewardIcon1);
 
 		// option1_1RewardText1
 		const option1_1RewardText1 = scene.add.text(15, 160, "", {});
 		option1_1RewardText1.setOrigin(0.5, 0.5);
 		option1_1RewardText1.text = "+ 5";
-		option1_1RewardText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option1_1RewardText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option1_1Container.add(option1_1RewardText1);
 
 		// option1_2Container
@@ -128,33 +127,33 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		const option1_2CostText1 = scene.add.text(15, 100, "", {});
 		option1_2CostText1.setOrigin(0.5, 0.5);
 		option1_2CostText1.text = "- 5";
-		option1_2CostText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option1_2CostText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option1_2Container.add(option1_2CostText1);
 
 		// option1_2CostIcon1
-		const option1_2CostIcon1 = scene.add.image(-15, 100, "HiddenIconSmall");
+		const option1_2CostIcon1 = scene.add.image(-20, 100, "HiddenIconSmall");
 		option1_2Container.add(option1_2CostIcon1);
 
 		// option1_2RewardIcon1
-		const option1_2RewardIcon1 = scene.add.image(-50, 160, "HiddenIconSmall");
+		const option1_2RewardIcon1 = scene.add.image(-55, 160, "HiddenIconSmall");
 		option1_2Container.add(option1_2RewardIcon1);
 
 		// option1_2RewardText1
 		const option1_2RewardText1 = scene.add.text(-20, 160, "", {});
 		option1_2RewardText1.setOrigin(0.5, 0.5);
 		option1_2RewardText1.text = "+ 5";
-		option1_2RewardText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option1_2RewardText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option1_2Container.add(option1_2RewardText1);
 
 		// option1_2RewardIcon2
-		const option1_2RewardIcon2 = scene.add.image(30, 160, "HiddenIconSmall");
+		const option1_2RewardIcon2 = scene.add.image(25, 160, "HiddenIconSmall");
 		option1_2Container.add(option1_2RewardIcon2);
 
 		// option1_2RewardText2
 		const option1_2RewardText2 = scene.add.text(60, 160, "", {});
 		option1_2RewardText2.setOrigin(0.5, 0.5);
 		option1_2RewardText2.text = "+ 5";
-		option1_2RewardText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option1_2RewardText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option1_2Container.add(option1_2RewardText2);
 
 		// option2_1Container
@@ -166,33 +165,33 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		const option2_1RewardText1 = scene.add.text(15, 160, "", {});
 		option2_1RewardText1.setOrigin(0.5, 0.5);
 		option2_1RewardText1.text = "+ 5";
-		option2_1RewardText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option2_1RewardText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option2_1Container.add(option2_1RewardText1);
 
 		// option2_1RewardIcon1
-		const option2_1RewardIcon1 = scene.add.image(-15, 160, "HiddenIconSmall");
+		const option2_1RewardIcon1 = scene.add.image(-20, 160, "HiddenIconSmall");
 		option2_1Container.add(option2_1RewardIcon1);
 
 		// option2_1CostIcon1
-		const option2_1CostIcon1 = scene.add.image(-50, 100, "HiddenIconSmall");
+		const option2_1CostIcon1 = scene.add.image(-55, 100, "HiddenIconSmall");
 		option2_1Container.add(option2_1CostIcon1);
 
 		// option2_1CostText1
 		const option2_1CostText1 = scene.add.text(-20, 100, "", {});
 		option2_1CostText1.setOrigin(0.5, 0.5);
 		option2_1CostText1.text = "- 5";
-		option2_1CostText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option2_1CostText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option2_1Container.add(option2_1CostText1);
 
 		// option2_1CostIcon2
-		const option2_1CostIcon2 = scene.add.image(30, 100, "HiddenIconSmall");
+		const option2_1CostIcon2 = scene.add.image(25, 100, "HiddenIconSmall");
 		option2_1Container.add(option2_1CostIcon2);
 
 		// option2_1CostText2
 		const option2_1CostText2 = scene.add.text(60, 100, "", {});
 		option2_1CostText2.setOrigin(0.5, 0.5);
 		option2_1CostText2.text = "- 5";
-		option2_1CostText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option2_1CostText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option2_1Container.add(option2_1CostText2);
 
 		// option1_3Container
@@ -201,47 +200,47 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		this.add(option1_3Container);
 
 		// option1_3RewardIcon1
-		const option1_3RewardIcon1 = scene.add.image(-95, 160, "HiddenIconSmall");
+		const option1_3RewardIcon1 = scene.add.image(-100, 160, "HiddenIconSmall");
 		option1_3Container.add(option1_3RewardIcon1);
 
 		// option1_3RewardText1
 		const option1_3RewardText1 = scene.add.text(-65, 160, "", {});
 		option1_3RewardText1.setOrigin(0.5, 0.5);
 		option1_3RewardText1.text = "+ 5";
-		option1_3RewardText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option1_3RewardText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option1_3Container.add(option1_3RewardText1);
 
 		// option1_3RewardText2
 		const option1_3RewardText2 = scene.add.text(15, 160, "", {});
 		option1_3RewardText2.setOrigin(0.5, 0.5);
 		option1_3RewardText2.text = "+ 5";
-		option1_3RewardText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option1_3RewardText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option1_3Container.add(option1_3RewardText2);
 
 		// option1_3RewardIcon2
-		const option1_3RewardIcon2 = scene.add.image(-15, 160, "HiddenIconSmall");
+		const option1_3RewardIcon2 = scene.add.image(-20, 160, "HiddenIconSmall");
 		option1_3Container.add(option1_3RewardIcon2);
 
 		// option1_3RewardIcon3
-		const option1_3RewardIcon3 = scene.add.image(65, 160, "HiddenIconSmall");
+		const option1_3RewardIcon3 = scene.add.image(60, 160, "HiddenIconSmall");
 		option1_3Container.add(option1_3RewardIcon3);
 
 		// option1_3RewardText3
 		const option1_3RewardText3 = scene.add.text(95, 160, "", {});
 		option1_3RewardText3.setOrigin(0.5, 0.5);
 		option1_3RewardText3.text = "+ 5";
-		option1_3RewardText3.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option1_3RewardText3.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option1_3Container.add(option1_3RewardText3);
 
 		// option1_3CostIcon1
-		const option1_3CostIcon1 = scene.add.image(-15, 100, "HiddenIconSmall");
+		const option1_3CostIcon1 = scene.add.image(-20, 100, "HiddenIconSmall");
 		option1_3Container.add(option1_3CostIcon1);
 
 		// option1_3CostText1
 		const option1_3CostText1 = scene.add.text(15, 100, "", {});
 		option1_3CostText1.setOrigin(0.5, 0.5);
 		option1_3CostText1.text = "- 5";
-		option1_3CostText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option1_3CostText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option1_3Container.add(option1_3CostText1);
 
 		// option2_2Container
@@ -250,47 +249,47 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		this.add(option2_2Container);
 
 		// option2_2CostIcon1
-		const option2_2CostIcon1 = scene.add.image(-50, 100, "HiddenIconSmall");
+		const option2_2CostIcon1 = scene.add.image(-55, 100, "HiddenIconSmall");
 		option2_2Container.add(option2_2CostIcon1);
 
 		// option2_2CostText1
 		const option2_2CostText1 = scene.add.text(-20, 100, "", {});
 		option2_2CostText1.setOrigin(0.5, 0.5);
 		option2_2CostText1.text = "- 5";
-		option2_2CostText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option2_2CostText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option2_2Container.add(option2_2CostText1);
 
 		// option2_2CostIcon2
-		const option2_2CostIcon2 = scene.add.image(30, 100, "HiddenIconSmall");
+		const option2_2CostIcon2 = scene.add.image(25, 100, "HiddenIconSmall");
 		option2_2Container.add(option2_2CostIcon2);
 
 		// option2_2CostText2
 		const option2_2CostText2 = scene.add.text(62, 100, "", {});
 		option2_2CostText2.setOrigin(0.5, 0.5);
 		option2_2CostText2.text = "- 5";
-		option2_2CostText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option2_2CostText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option2_2Container.add(option2_2CostText2);
 
 		// option2_2RewardIcon1
-		const option2_2RewardIcon1 = scene.add.image(-50, 160, "HiddenIconSmall");
+		const option2_2RewardIcon1 = scene.add.image(-55, 160, "HiddenIconSmall");
 		option2_2Container.add(option2_2RewardIcon1);
 
 		// option2_2RewardText2
 		const option2_2RewardText2 = scene.add.text(60, 160, "", {});
 		option2_2RewardText2.setOrigin(0.5, 0.5);
 		option2_2RewardText2.text = "+ 5";
-		option2_2RewardText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option2_2RewardText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option2_2Container.add(option2_2RewardText2);
 
 		// option2_2RewardIcon2
-		const option2_2RewardIcon2 = scene.add.image(30, 160, "HiddenIconSmall");
+		const option2_2RewardIcon2 = scene.add.image(25, 160, "HiddenIconSmall");
 		option2_2Container.add(option2_2RewardIcon2);
 
 		// option2_2RewardText1
 		const option2_2RewardText1 = scene.add.text(-20, 160, "", {});
 		option2_2RewardText1.setOrigin(0.5, 0.5);
 		option2_2RewardText1.text = "+ 5";
-		option2_2RewardText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option2_2RewardText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option2_2Container.add(option2_2RewardText1);
 
 		// option2_3Container
@@ -299,14 +298,14 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		this.add(option2_3Container);
 
 		// option2_3RewardIcon1
-		const option2_3RewardIcon1 = scene.add.image(-95, 160, "HiddenIconSmall");
+		const option2_3RewardIcon1 = scene.add.image(-100, 160, "HiddenIconSmall");
 		option2_3Container.add(option2_3RewardIcon1);
 
 		// option2_3RewardText1
 		const option2_3RewardText1 = scene.add.text(-65, 160, "", {});
 		option2_3RewardText1.setOrigin(0.5, 0.5);
 		option2_3RewardText1.text = "+ 5";
-		option2_3RewardText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option2_3RewardText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option2_3RewardText1.setWordWrapWidth(292);
 		option2_3Container.add(option2_3RewardText1);
 
@@ -314,47 +313,47 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		const option2_3RewardText2 = scene.add.text(15, 160, "", {});
 		option2_3RewardText2.setOrigin(0.5, 0.5);
 		option2_3RewardText2.text = "+ 5";
-		option2_3RewardText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option2_3RewardText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option2_3RewardText2.setWordWrapWidth(292);
 		option2_3Container.add(option2_3RewardText2);
 
 		// option2_3RewardIcon2
-		const option2_3RewardIcon2 = scene.add.image(-15, 160, "HiddenIconSmall");
+		const option2_3RewardIcon2 = scene.add.image(-20, 160, "HiddenIconSmall");
 		option2_3Container.add(option2_3RewardIcon2);
 
 		// option2_3RewardIcon3
-		const option2_3RewardIcon3 = scene.add.image(65, 160, "HiddenIconSmall");
+		const option2_3RewardIcon3 = scene.add.image(60, 160, "HiddenIconSmall");
 		option2_3Container.add(option2_3RewardIcon3);
 
 		// option2_3RewardText3
 		const option2_3RewardText3 = scene.add.text(95, 160, "", {});
 		option2_3RewardText3.setOrigin(0.5, 0.5);
 		option2_3RewardText3.text = "+ 5";
-		option2_3RewardText3.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option2_3RewardText3.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option2_3RewardText3.setWordWrapWidth(292);
 		option2_3Container.add(option2_3RewardText3);
 
 		// option2_3CostIcon1
-		const option2_3CostIcon1 = scene.add.image(-50, 100, "HiddenIconSmall");
+		const option2_3CostIcon1 = scene.add.image(-55, 100, "HiddenIconSmall");
 		option2_3Container.add(option2_3CostIcon1);
 
 		// option2_3CostText1
 		const option2_3CostText1 = scene.add.text(-20, 100, "", {});
 		option2_3CostText1.setOrigin(0.5, 0.5);
 		option2_3CostText1.text = "- 5";
-		option2_3CostText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option2_3CostText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option2_3CostText1.setWordWrapWidth(292);
 		option2_3Container.add(option2_3CostText1);
 
 		// option2_3CostIcon2
-		const option2_3CostIcon2 = scene.add.image(30, 100, "HiddenIconSmall");
+		const option2_3CostIcon2 = scene.add.image(25, 100, "HiddenIconSmall");
 		option2_3Container.add(option2_3CostIcon2);
 
 		// option2_3CostText2
 		const option2_3CostText2 = scene.add.text(60, 100, "", {});
 		option2_3CostText2.setOrigin(0.5, 0.5);
 		option2_3CostText2.text = "- 5";
-		option2_3CostText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "24px", "stroke": "#000000ff" });
+		option2_3CostText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option2_3CostText2.setWordWrapWidth(292);
 		option2_3Container.add(option2_3CostText2);
 

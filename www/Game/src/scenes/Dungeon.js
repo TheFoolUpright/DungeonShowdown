@@ -194,10 +194,7 @@ class Dungeon extends Phaser.Scene {
 
 	)
 }
-		console.log(backgroundMusic)
-		console.log("Is it playing: " + Boolean(backgroundMusic.isPlaying))
 		if(!backgroundMusic.isPlaying){
-			console.log("StartedPlaying")
 			backgroundMusic.play()
 		}
 		const cardSound = this.sound.add("card-sounds-35956")
@@ -259,7 +256,6 @@ class Dungeon extends Phaser.Scene {
 		})
 
 		this.slot1Card.on("pointerover", () => {
-			console.log(this.slot1Card)
 			this.slot1Card.cardGlow.active = true
 			this.slot1Card.cardDescription.visible = true
 
@@ -292,7 +288,6 @@ class Dungeon extends Phaser.Scene {
 		this.onwardButton.glowFx.active = false
 
 		this.onwardButton.on("pointerover", () => {
-			console.log(this.onwardButton)
 			this.onwardButton.glowFx.active = true
 
 		})
@@ -428,7 +423,8 @@ class Dungeon extends Phaser.Scene {
 			this.slot1Card.cardImage.setTexture("HiddenDraft")
 			this.slot1Card.cardDescription.text = "Not enough insight to see the card"
 
-			this.slot1Card.option1RewardIcon1.setTexture("HiddenDraft")
+			this.slot1Card.option1RewardIcon1.setTexture("HiddenIconSmall")
+			this.slot1Card.option1RewardIcon1.x = 0
 			this.slot1Card.option1RewardText1.text = ""
 			this.slot1Card.option1Container.visible = true
 		}
@@ -448,10 +444,11 @@ class Dungeon extends Phaser.Scene {
 		}
 		else {
 			this.slot2Card.cardName.text = "? ? ?"
-			this.slot2Card.cardImage.setTexture("HiddenDraft");
+			this.slot2Card.cardImage.setTexture("HiddenDraft")
 			this.slot2Card.cardDescription.text = "Not enough insight to see the card"
 
-			this.slot2Card.option1RewardIcon1.setTexture("HiddenDraft")
+			this.slot2Card.option1RewardIcon1.setTexture("HiddenIconSmall")
+			this.slot2Card.option1RewardIcon1.x = 0
 			this.slot2Card.option1RewardText1.text = ""
 			this.slot2Card.option1Container.visible = true
 		}
@@ -474,7 +471,8 @@ class Dungeon extends Phaser.Scene {
 			this.slot3Card.cardImage.setTexture("HiddenDraft")
 			this.slot3Card.cardDescription.text = "Not enough insight to see the card"
 
-			this.slot3Card.option1RewardIcon1.setTexture("HiddenDraft")
+			this.slot3Card.option1RewardIcon1.setTexture("HiddenIconSmall")
+			this.slot3Card.option1RewardIcon1.x = 0
 			this.slot3Card.option1RewardText1.text = ""
 			this.slot3Card.option1Container.visible = true
 		}

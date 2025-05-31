@@ -335,7 +335,7 @@ class JoinMatch extends Phaser.Scene {
 						this.scene.start("WaitingForMatch")
 					}
 					else if (data.state == "MATCH_FOUND") {
-						this.scene.start("Dungeon", data);
+						this.scene.start("Dungeon", data)
 					}
 				}
 			}

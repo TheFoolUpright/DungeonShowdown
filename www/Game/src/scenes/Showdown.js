@@ -118,7 +118,7 @@ class Showdown extends Phaser.Scene {
 
 		//Check if Ending
 		if(data.state == 8 || data.state == 9 || data.state == 10){
-			this.scene.start("Ending", data);
+			this.scene.start("Ending", data)
 		}
 		else{
 			//load Data
@@ -308,7 +308,7 @@ class Showdown extends Phaser.Scene {
 		this.info.roomOrTurn.text = "Turn " + data.showdown_turn
 		this.info.playerName.text = data.player_username
 		this.info.playerName.setColor(data.player_color)
-		return;
+		return
 	}
 
 	loadOpponentData(data) {
@@ -375,7 +375,8 @@ class Showdown extends Phaser.Scene {
 			this.specialAttackSlot.cardImage.setTexture("HiddenDraft")
 			this.specialAttackSlot.cardDescription.text = "Not enough insight to see the card"
 
-			this.specialAttackSlot.option1RewardIcon1.setTexture("HiddenDraft")
+			this.specialAttackSlot.option1RewardIcon1.setTexture("HiddenIconSmall")
+			this.specialAttackSlot.option1RewardIcon1.x = 0
 			this.specialAttackSlot.option1RewardText1.text = ""
 			this.specialAttackSlot.option1Container.visible = true
 		}
@@ -396,6 +397,11 @@ class Showdown extends Phaser.Scene {
 			this.defenseSlot.cardName.text = "? ? ?"
 			this.defenseSlot.cardImage.setTexture("HiddenDraft")
 			this.defenseSlot.cardDescription.text = "Not enough insight to see the card"
+
+			this.defenseSlot.option1RewardIcon1.setTexture("HiddenIconSmall")
+			this.defenseSlot.option1RewardIcon1.x = 0
+			this.defenseSlot.option1RewardText1.text = ""
+			this.defenseSlot.option1Container.visible = true
 		}
 
 		//Skill Attack
@@ -407,13 +413,18 @@ class Showdown extends Phaser.Scene {
 
 		if(this.skillSlot.isVisible) {
 			this.skillSlot.cardName.text = data.card[3].card_name
-			this.skillSlot.cardImage.setTexture(data.card[3].card_image_path);
+			this.skillSlot.cardImage.setTexture(data.card[3].card_image_path)
 			this.skillSlot.cardDescription.text
 		}
 		else {
 			this.skillSlot.cardName.text = "? ? ?"
 			this.skillSlot.cardImage.setTexture("HiddenDraft")
 			this.skillSlot.cardDescription.text = "Not enough insight to see the card"
+
+			this.skillSlot.option1RewardIcon1.setTexture("HiddenIconSmall")
+			this.skillSlot.option1RewardIcon1.x = 0
+			this.skillSlot.option1RewardText1.text = ""
+			this.skillSlot.option1Container.visible = true
 		}
 	}
 

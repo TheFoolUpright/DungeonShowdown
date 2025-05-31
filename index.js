@@ -396,7 +396,7 @@ app.put("/joinMatch", (req, res) => {
             , [req.session.matchId],
             function (err, rows, fields) {
                 if (err) {
-                    console.log("Database Error : " + err)
+                    console.log("Database Error: " + err)
                     res.status(500).json({
                         "message": err
                     })
@@ -441,7 +441,6 @@ app.put("/joinMatch", (req, res) => {
 
     function InsertDungeonCards(playerStats, opponentStatus, deck) {
 
-        //Create Cards 
         var indexOfElement
         var MaxHealthDeck = []
         var MaxHealthIterator = 0
@@ -2020,7 +2019,7 @@ app.get("/getShowdownCardSelection", (req, res) => {
         connection.query("SELECT P.player_username, P.player_color \
                     FROM player P \
                     INNER JOIN game_match GM ON GM.player_1_id = P.player_id OR GM.player_2_id = P.player_id \
-                    WHERE P.player_id != ? AND match_id = ?;", [req.session.playerId, req.session.matchId],
+                    WHERE P.player_id != ? AND match_id = ?", [req.session.playerId, req.session.matchId],
             function (err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -2133,7 +2132,7 @@ app.get("/getEndingCheck", (req, res) => {
             , [req.session.playerId, req.session.matchId],
             function (err, rows, fields) {
                 if (err) {
-                    console.log("Database Error : " + err)
+                    console.log("Database Error: " + err)
                     res.status(500).json({
                         "message": err
                     })
@@ -2770,7 +2769,7 @@ function CalculateShowdownCards(req, res) {
                     return
                 }
                 //CheckIfInitiativeIsSet()
-                ifTrue = true;
+                ifTrue = true
             }
         )
     }
@@ -3102,7 +3101,7 @@ app.post("/setupShowdown", (req, res) => {
                 FROM player P \
                 INNER JOIN game_match GM ON GM.player_1_id = P.player_id OR GM.player_2_id = P.player_id \
                 INNER JOIN player_status PS ON PS.player_id = P.player_id \
-                WHERE P.player_id != ? AND GM.match_id = ?;", [req.session.playerId, req.session.matchId],
+                WHERE P.player_id != ? AND GM.match_id = ?", [req.session.playerId, req.session.matchId],
             function (err, rows, fields) {
                 if (err) {
                     console.log("Database Error: " + err)
@@ -3335,8 +3334,6 @@ app.post("/resolveShowdownTurn", (req, res) => {
     } 
 
     function GetOpponentShowdownCardStats() {
-        console.log("Player: "+ [req.session.playerStatusId]);
-
         connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path, \
             player_username, player_color \
             FROM card C \
@@ -3354,7 +3351,6 @@ app.post("/resolveShowdownTurn", (req, res) => {
                     return
                 }
                 if (rows.length != 0) {
-                    console.log("Got here")
                     GetPlayerShowdownCardStatsShowdownResult(rows) 
                 }
                 else {

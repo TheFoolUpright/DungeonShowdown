@@ -458,16 +458,16 @@ class ShowdownResult extends Phaser.Scene {
 				console.log(data)
 
 				if (xhttp.status == 200) {
-					this.scene.start("Showdown", data);
+					this.scene.start("Showdown", data)
 				}
 			}
 		}
 
-		xhttp.open("POST", "/setupShowdown", true);
+		xhttp.open("POST", "/setupShowdown", true)
 
-		xhttp.setRequestHeader("Content-Type", "application/json");
+		xhttp.setRequestHeader("Content-Type", "application/json")
 
-		xhttp.send();
+		xhttp.send()
 	}
 
 	update(time, dt) {
@@ -522,7 +522,6 @@ class ShowdownResult extends Phaser.Scene {
 		else {
 			this.confirmButton.visible = false
 		}
-		console.log(this.opponentAttacks.angle)
 	}
 
 	//	END OF UPDATE FUNCTION	//	END OF UPDATE FUNCTION	//	END OF UPDATE FUNCTION (yes I'm blind and will probably forget to take this out)

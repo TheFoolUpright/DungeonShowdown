@@ -13,8 +13,6 @@ var states = {
     "Draw": 10
 }
 
-
-
 /* START OF COMPILED CODE */
 
 class Preload extends Phaser.Scene {
@@ -75,15 +73,13 @@ class Preload extends Phaser.Scene {
 		this.editorPreload();
 
         this.load.on(Phaser.Loader.Events.COMPLETE, () => {
-            this.LoginCheck();
-        });
+            this.LoginCheck()
+        })
 
-		
-		
 	}
 
 	LoginCheck() {
-		var xhttp = new XMLHttpRequest();
+		var xhttp = new XMLHttpRequest()
 		
 		xhttp.onreadystatechange = () => {
 			console.log(xhttp.readyState)
@@ -94,26 +90,26 @@ class Preload extends Phaser.Scene {
 
 				if (xhttp.status == 200) {
 					if(data.state == "NOT_LOGGED_IN") {
-						window.location.href = "/login.html";
+						window.location.href = "/login.html"
 						return
 					}
 					else if(data.state == "LOGGED_IN") {
-						this.MatchCheck();
+						this.MatchCheck()
 					}
 				}
 			}
 		}
 
-		xhttp.open("GET", "/idLoggedIn", true);
+		xhttp.open("GET", "/idLoggedIn", true)
 
-		xhttp.setRequestHeader("Content-Type", "application/json");
+		xhttp.setRequestHeader("Content-Type", "application/json")
 
-		xhttp.send();
+		xhttp.send()
 	}
 
 	MatchCheck() {
 
-		var xhttp = new XMLHttpRequest();
+		var xhttp = new XMLHttpRequest()
 		
 		xhttp.onreadystatechange = () => {
 			if (xhttp.readyState == 4) {
@@ -127,27 +123,27 @@ class Preload extends Phaser.Scene {
 					}
 					else if (data.state == "NOT_IN_MATCH") {
 						//Go to Main Menu 
-						 this.scene.start("JoinMatch", data);
+						 this.scene.start("JoinMatch", data)
 
 					}
 					else if (data.state == "WAITING_FOR_MATCH") {
 						//Go to waiting for a Match
-						 this.scene.start("WaitingForMatch");
+						 this.scene.start("WaitingForMatch")
 
 					}
 				}
 			}
 		}
 
-		xhttp.open("GET", "/getMatchState", true);
+		xhttp.open("GET", "/getMatchState", true)
 
-		xhttp.setRequestHeader("Content-Type", "application/json");
+		xhttp.setRequestHeader("Content-Type", "application/json")
 
-		xhttp.send();
+		xhttp.send()
 	}
 
 	GetGameState() {
-		var xhttp = new XMLHttpRequest();
+		var xhttp = new XMLHttpRequest()
 		
 		xhttp.onreadystatechange = () => {
 			if (xhttp.readyState == 4) {
@@ -157,7 +153,7 @@ class Preload extends Phaser.Scene {
 
 				if (xhttp.status == 200){
 					if(data.state_id == states.DungeonCardSelection) {
-						this.GetDungeonData();
+						this.GetDungeonData()
 					}
 					else if(data.state_id == states.DungeonWaitingOnOpponent) {
 						 this.scene.start("DungeonWaitingOnOpponent")
@@ -181,15 +177,15 @@ class Preload extends Phaser.Scene {
 			}
 		}
 
-		xhttp.open("GET", "/getGameState", true);
+		xhttp.open("GET", "/getGameState", true)
 
-		xhttp.setRequestHeader("Content-Type", "application/json");
+		xhttp.setRequestHeader("Content-Type", "application/json")
 
-		xhttp.send();
+		xhttp.send()
 	}
 
 	GetDungeonData() {
-		var xhttp = new XMLHttpRequest();
+		var xhttp = new XMLHttpRequest()
 		
 		xhttp.onreadystatechange = () => {
 			if (xhttp.readyState == 4) {
@@ -197,20 +193,20 @@ class Preload extends Phaser.Scene {
 				console.log(data)
 
 				if (xhttp.status == 200){
-				    this.scene.start("Dungeon", data);
+				    this.scene.start("Dungeon", data)
 				}
 			}
 		}
 
-		xhttp.open("GET", "/getDungeonCardSelection", true);
+		xhttp.open("GET", "/getDungeonCardSelection", true)
 
-		xhttp.setRequestHeader("Content-Type", "application/json");
+		xhttp.setRequestHeader("Content-Type", "application/json")
 
-		xhttp.send();
+		xhttp.send()
 	}
 
     GetDungeonResultData() {
-        var xhttp = new XMLHttpRequest();
+        var xhttp = new XMLHttpRequest()
 		
 		xhttp.onreadystatechange = () => {
 			if (xhttp.readyState == 4) {
@@ -218,20 +214,20 @@ class Preload extends Phaser.Scene {
 				console.log(data)
 
 				if (xhttp.status == 200){
-				    this.scene.start("DungeonResult", data);
+				    this.scene.start("DungeonResult", data)
 				}
 			}
 		}
 
-		xhttp.open("GET", "/getOpponentCard", true);
+		xhttp.open("GET", "/getOpponentCard", true)
 
-		xhttp.setRequestHeader("Content-Type", "application/json");
+		xhttp.setRequestHeader("Content-Type", "application/json")
 
-		xhttp.send();
+		xhttp.send()
     }
 
 	GetShowdownData() {
-		var xhttp = new XMLHttpRequest();
+		var xhttp = new XMLHttpRequest()
 		
 		xhttp.onreadystatechange = () => {
 			if (xhttp.readyState == 4) {
@@ -239,20 +235,20 @@ class Preload extends Phaser.Scene {
 				console.log(data)
 
 				if (xhttp.status == 200){
-				    this.scene.start("Showdown", data);
+				    this.scene.start("Showdown", data)
 				}
 			}
 		}
 
-		xhttp.open("GET", "/getShowdownCardSelection", true);
+		xhttp.open("GET", "/getShowdownCardSelection", true)
 
-		xhttp.setRequestHeader("Content-Type", "application/json");
+		xhttp.setRequestHeader("Content-Type", "application/json")
 
-		xhttp.send();
+		xhttp.send()
 	}
 	
 	GetShowdownResultData(){
-		var xhttp = new XMLHttpRequest();
+		var xhttp = new XMLHttpRequest()
 		
 		xhttp.onreadystatechange = () => {
 			if (xhttp.readyState == 4) {
@@ -260,16 +256,16 @@ class Preload extends Phaser.Scene {
 				console.log(data)
 
 				if (xhttp.status == 200){
-				    this.scene.start("ShowdownResult", data);
+				    this.scene.start("ShowdownResult", data)
 				}
 			}
 		}
 
-		xhttp.open("GET", "/getWaitingOnOpponentShowdown", true);
+		xhttp.open("GET", "/getWaitingOnOpponentShowdown", true)
 
-		xhttp.setRequestHeader("Content-Type", "application/json");
+		xhttp.setRequestHeader("Content-Type", "application/json")
 
-		xhttp.send();
+		xhttp.send()
 	}
 
 
