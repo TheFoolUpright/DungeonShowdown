@@ -612,7 +612,7 @@ class Showdown extends Phaser.Scene {
 		//Defense
 		//not enough stats limitation
 		if (!this.specialAttackSlot.isSelected && !this.skillSlot.isSelected) {
-			if ((defenseCard.energy + defenseCard.card_energy) < 0) {
+			if (((defenseCard.energy + defenseCard.card_energy) < 0) || ((defenseCard.insight + defenseCard.card_insight) < 0)) {
 				this.defenseSlot.isDisabled = true
 				if (!this.defenseSlot.isTinted) {
 					this.defenseSlot.empty_Card.setTint("0xaaaaaa")
@@ -631,7 +631,7 @@ class Showdown extends Phaser.Scene {
 		}
 		else {
 			if (this.specialAttackSlot.isSelected) {
-				if ((defenseCard.energy + defenseCard.card_energy + specialAttackCard.card_energy) < 0) {
+				if (((defenseCard.energy + defenseCard.card_energy + specialAttackCard.card_energy) < 0) || ((defenseCard.insight + defenseCard.card_insight) < 0)) {
 					this.defenseSlot.isDisabled = true
 					if (!this.defenseSlot.isTinted) {
 						this.defenseSlot.empty_Card.setTint("0xaaaaaa")
@@ -649,7 +649,7 @@ class Showdown extends Phaser.Scene {
 				}
 			}
 			if (this.skillSlot.isSelected) {
-				if ((defenseCard.energy + defenseCard.card_energy + skillCard.card_energy) < 0) {
+				if (((defenseCard.energy + defenseCard.card_energy + skillCard.card_energy) < 0) || ((defenseCard.insight + defenseCard.card_insight + skillCard.card_insight) < 0)) {
 					this.defenseSlot.isDisabled = true
 					if (!this.defenseSlot.isTinted) {
 						this.defenseSlot.empty_Card.setTint("0xaaaaaa")

@@ -588,8 +588,8 @@ class ShowdownResult extends Phaser.Scene {
 
 		if ((!playerAttack || (playerAttack && playerAttackAnimationFinished)) && 
 		(!opponentAttack || (opponentAttack && opponentAttackAnimationFinished)) && 
-		(!opponentDefense || (opponentDefense && opponentDefenseAnimationFinished)) && 
-		(!playerDefense || (playerDefense && playerDefenseAnimationFinished))) {
+		(!opponentDefense || (opponentDefense && (opponentDefenseAnimationFinished || !playerAttack))) && 
+		(!playerDefense || (playerDefense && (playerDefenseAnimationFinished || !opponentAttack)))) {
 			this.confirmButton.visible = true
 		}
 		else {

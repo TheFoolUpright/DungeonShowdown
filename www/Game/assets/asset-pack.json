@@ -348,11 +348,6 @@
                 "key": "OpponentSolidBlock"
             },
             {
-                "url": "assets/opponent/PlayerParry.png",
-                "type": "image",
-                "key": "PlayerParry"
-            },
-            {
                 "url": "assets/opponent/OpponentSolidBlock.png",
                 "type": "image",
                 "key": "OpponentSolidBlock"
@@ -438,9 +433,9 @@
                 "key": "Recovery Hit"
             },
             {
-                "url": "assets/card/RecoveryAttac.png",
+                "url": "assets/card/RecoveryAttack.png",
                 "type": "image",
-                "key": "RecoveryAttac"
+                "key": "RecoveryAttack"
             },
             {
                 "url": "assets/card/RejuvenatingCloth.png",
