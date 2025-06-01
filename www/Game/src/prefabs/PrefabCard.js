@@ -10,14 +10,20 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		this.setInteractive(new Phaser.Geom.Rectangle(-150, -218, 300, 436.4214080647836), Phaser.Geom.Rectangle.Contains);
 
+		// cardDescriptionTextBox
+		const cardDescriptionTextBox = scene.add.image(0, -250, "TextBox");
+		cardDescriptionTextBox.setOrigin(0.5, 1);
+		cardDescriptionTextBox.visible = false;
+		this.add(cardDescriptionTextBox);
+
 		// cardDescription
 		const cardDescription = scene.add.text(0, -260, "", {});
 		cardDescription.setOrigin(0.5, 1);
 		cardDescription.visible = false;
 		cardDescription.text = "Take no damage from one of the opponent's attacks and hit them back for half of their might";
-		cardDescription.setStyle({ "align": "justify", "color": "#ffffffff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff", "strokeThickness":8});
+		cardDescription.setStyle({ "backgroundColor": "", "color": "#ffffffff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff", "strokeThickness":8});
 		cardDescription.setPadding({"left":5,"top":5,"right":5,"bottom":5});
-		cardDescription.setWordWrapWidth(280);
+		cardDescription.setWordWrapWidth(284);
 		this.add(cardDescription);
 
 		// empty_Card
@@ -365,6 +371,7 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		// onAwakeScript
 		const onAwakeScript = new OnAwakeScript(this);
 
+		this.cardDescriptionTextBox = cardDescriptionTextBox;
 		this.cardDescription = cardDescription;
 		this.cardGlow = cardGlow;
 		this.empty_Card = empty_Card;
@@ -437,6 +444,8 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		/* END-USER-CTR-CODE */
 	}
 
+	/** @type {Phaser.GameObjects.Image} */
+	cardDescriptionTextBox;
 	/** @type {Phaser.GameObjects.Text} */
 	cardDescription;
 	/** @type {Phaser.FX.Glow} */

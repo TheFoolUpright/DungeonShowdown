@@ -258,31 +258,38 @@ class Dungeon extends Phaser.Scene {
 		this.slot1Card.on("pointerover", () => {
 			this.slot1Card.cardGlow.active = true
 			this.slot1Card.cardDescription.visible = true
+			this.slot1Card.cardDescriptionTextBox.visible = true
+
 
 		})
 		this.slot1Card.on("pointerout", () => {
 			this.slot1Card.cardGlow.active = false
 			this.slot1Card.cardDescription.visible = false
+			this.slot1Card.cardDescriptionTextBox.visible = false
 		})
 
 		this.slot2Card.on("pointerover", () => {
 			this.slot2Card.cardGlow.active = true
 			this.slot2Card.cardDescription.visible = true
+			this.slot2Card.cardDescriptionTextBox.visible = true
 
 		})
 		this.slot2Card.on("pointerout", () => {
 			this.slot2Card.cardGlow.active = false
 			this.slot2Card.cardDescription.visible = false
+			this.slot2Card.cardDescriptionTextBox.visible = false
 		})
 
 		this.slot3Card.on("pointerover", () => {
 			this.slot3Card.cardGlow.active = true
 			this.slot3Card.cardDescription.visible = true
+			this.slot3Card.cardDescriptionTextBox.visible = true
 
 		})
 		this.slot3Card.on("pointerout", () => {
 			this.slot3Card.cardGlow.active = false
 			this.slot3Card.cardDescription.visible = false
+			this.slot3Card.cardDescriptionTextBox.visible = false
 		})
 
 		this.onwardButton.glowFx.active = false

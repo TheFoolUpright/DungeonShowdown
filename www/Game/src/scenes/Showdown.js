@@ -35,20 +35,32 @@ class Showdown extends Phaser.Scene {
 		this.add.existing(skillSlot);
 		skillSlot.visible = true;
 
+		// moveInSceneActionScript_4
+		const moveInSceneActionScript_4 = new MoveInSceneActionScript(skillSlot.onAwakeScript);
+
 		// defenseSlot
 		const defenseSlot = new PrefabCard(this, 1120, 800);
 		this.add.existing(defenseSlot);
 		defenseSlot.visible = true;
+
+		// moveInSceneActionScript_2
+		const moveInSceneActionScript_2 = new MoveInSceneActionScript(defenseSlot.onAwakeScript);
 
 		// specialAttackSlot
 		const specialAttackSlot = new PrefabCard(this, 800, 800);
 		this.add.existing(specialAttackSlot);
 		specialAttackSlot.visible = true;
 
+		// moveInSceneActionScript_1
+		const moveInSceneActionScript_1 = new MoveInSceneActionScript(specialAttackSlot.onAwakeScript);
+
 		// normalAttackSlot
 		const normalAttackSlot = new PrefabCard(this, 480, 800);
 		this.add.existing(normalAttackSlot);
 		normalAttackSlot.visible = true;
+
+		// moveInSceneActionScript_3
+		const moveInSceneActionScript_3 = new MoveInSceneActionScript(normalAttackSlot.onAwakeScript);
 
 		// statsContainer
 		const statsContainer = new PrefabStats(this, 120, 50);
@@ -66,22 +78,38 @@ class Showdown extends Phaser.Scene {
 		skillSlot.cardId = 0;
 		skillSlot.isVisible = true;
 
+		// moveInSceneActionScript_4 (prefab fields)
+		moveInSceneActionScript_4.from = "BOTTOM";
+
 		// defenseSlot (prefab fields)
 		defenseSlot.cardId = 0;
 		defenseSlot.isVisible = true;
+
+		// moveInSceneActionScript_2 (prefab fields)
+		moveInSceneActionScript_2.from = "BOTTOM";
 
 		// specialAttackSlot (prefab fields)
 		specialAttackSlot.cardId = 0;
 		specialAttackSlot.isVisible = true;
 
+		// moveInSceneActionScript_1 (prefab fields)
+		moveInSceneActionScript_1.from = "BOTTOM";
+
 		// normalAttackSlot (prefab fields)
 		normalAttackSlot.cardId = 0;
 		normalAttackSlot.isVisible = true;
 
+		// moveInSceneActionScript_3 (prefab fields)
+		moveInSceneActionScript_3.from = "BOTTOM";
+
 		this.opponent = opponent;
+		this.moveInSceneActionScript_4 = moveInSceneActionScript_4;
 		this.skillSlot = skillSlot;
+		this.moveInSceneActionScript_2 = moveInSceneActionScript_2;
 		this.defenseSlot = defenseSlot;
+		this.moveInSceneActionScript_1 = moveInSceneActionScript_1;
 		this.specialAttackSlot = specialAttackSlot;
+		this.moveInSceneActionScript_3 = moveInSceneActionScript_3;
 		this.normalAttackSlot = normalAttackSlot;
 		this.statsContainer = statsContainer;
 		this.info = info;
@@ -92,12 +120,20 @@ class Showdown extends Phaser.Scene {
 
 	/** @type {PrefabOpponent} */
 	opponent;
+	/** @type {MoveInSceneActionScript} */
+	moveInSceneActionScript_4;
 	/** @type {PrefabCard} */
 	skillSlot;
+	/** @type {MoveInSceneActionScript} */
+	moveInSceneActionScript_2;
 	/** @type {PrefabCard} */
 	defenseSlot;
+	/** @type {MoveInSceneActionScript} */
+	moveInSceneActionScript_1;
 	/** @type {PrefabCard} */
 	specialAttackSlot;
+	/** @type {MoveInSceneActionScript} */
+	moveInSceneActionScript_3;
 	/** @type {PrefabCard} */
 	normalAttackSlot;
 	/** @type {PrefabStats} */
@@ -241,46 +277,54 @@ class Showdown extends Phaser.Scene {
 			if (!this.normalAttackSlot.isDisabled) {
 				this.normalAttackSlot.cardGlow.active = true
 				this.normalAttackSlot.cardDescription.visible = true
+				this.normalAttackSlot.cardDescriptionTextBox.visible = true
 			}
 
 		})
 		this.normalAttackSlot.on("pointerout", () => {
 			this.normalAttackSlot.cardGlow.active = false
 			this.normalAttackSlot.cardDescription.visible = false
+			this.normalAttackSlot.cardDescriptionTextBox.visible = false
 		})
 
 		this.specialAttackSlot.on("pointerover", () => {
 			if (!this.specialAttackSlot.isDisabled) {
 				this.specialAttackSlot.cardGlow.active = true
 				this.specialAttackSlot.cardDescription.visible = true
+				this.specialAttackSlot.cardDescriptionTextBox.visible = true
 			}
 
 		})
 		this.specialAttackSlot.on("pointerout", () => {
 			this.specialAttackSlot.cardGlow.active = false
 			this.specialAttackSlot.cardDescription.visible = false
+			this.specialAttackSlot.cardDescriptionTextBox.visible = false
 		})
 
 		this.defenseSlot.on("pointerover", () => {
 			if (!this.defenseSlot.isDisabled) {
 				this.defenseSlot.cardGlow.active = true
 				this.defenseSlot.cardDescription.visible = true
+				this.defenseSlot.cardDescriptionTextBox.visible = true
 			}
 		})
 		this.defenseSlot.on("pointerout", () => {
 			this.defenseSlot.cardGlow.active = false
 			this.defenseSlot.cardDescription.visible = false
+			this.defenseSlot.cardDescriptionTextBox.visible = false
 		})
 
 		this.skillSlot.on("pointerover", () => {
 			if (!this.skillSlot.isDisabled) {
 				this.skillSlot.cardGlow.active = true
 				this.skillSlot.cardDescription.visible = true
+				this.skillSlot.cardDescriptionTextBox.visible = true
 			}
 		})
 		this.skillSlot.on("pointerout", () => {
 			this.skillSlot.cardGlow.active = false
 			this.skillSlot.cardDescription.visible = false
+			this.skillSlot.cardDescriptionTextBox.visible = false
 		})
 	}
 
@@ -298,17 +342,17 @@ class Showdown extends Phaser.Scene {
 	}
 
 	sortShowdownCards(cardA, cardB) {
-			return cardA.slot_id - cardB.slot_id
+		return cardA.slot_id - cardB.slot_id
 	}
 
 	loadInfoData(data) {
 		//Load Info
-		
+
 		this.info.phaseName.text = "SHOWDOWN"
 		this.info.roomOrTurn.text = "Turn " + data.showdown_turn
 		this.info.playerName.text = data.player_username
 		this.info.playerName.setColor(data.player_color)
-		
+
 		return
 	}
 
@@ -422,16 +466,16 @@ class Showdown extends Phaser.Scene {
 
 			}
 			else if(data.card[3].card_id == playerShowdownAnimations.Rage){
-				
+
 			}
 			else if(data.card[3].card_id == playerShowdownAnimations.Focus){
-				
+
 			}
 			else if(data.card[3].card_id == playerShowdownAnimations.Adrenaline){
-				
+
 			}
 			else if(data.card[3].card_id == playerShowdownAnimations.Healing){
-				
+
 			}
 
 		}

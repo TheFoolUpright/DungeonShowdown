@@ -492,6 +492,11 @@
                 "key": "success-fanfare-trumpets-6185"
             },
             {
+                "url": "assets/ui/TextBox.png",
+                "type": "image",
+                "key": "TextBox"
+            },
+            {
                 "url": [
                     "assets/audio/thump_thud_slam_fist_heavy-39349.mp3"
                 ],
