@@ -7,19 +7,9 @@
                 "key": "Adrenaline"
             },
             {
-                "url": "assets/card/AdrenalineDraft.png",
-                "type": "image",
-                "key": "AdrenalineDraft"
-            },
-            {
                 "url": "assets/card/Anger.png",
                 "type": "image",
                 "key": "Anger"
-            },
-            {
-                "url": "assets/card/AngerDraft.png",
-                "type": "image",
-                "key": "AngerDraft"
             },
             {
                 "url": "assets/ui/Attack.png",
@@ -32,31 +22,11 @@
                 "key": "Bat"
             },
             {
-                "url": "assets/card/BatDraft.png",
-                "type": "image",
-                "key": "BatDraft"
-            },
-            {
                 "url": [
                     "assets/audio/birds-chirping-75156.mp3"
                 ],
                 "type": "audio",
                 "key": "birds-chirping-75156"
-            },
-            {
-                "url": "assets/card/Block2Draft.png",
-                "type": "image",
-                "key": "Block2Draft"
-            },
-            {
-                "url": "assets/card/Block3Draft.png",
-                "type": "image",
-                "key": "Block3Draft"
-            },
-            {
-                "url": "assets/card/Block4Draft.png",
-                "type": "image",
-                "key": "Block4Draft"
             },
             {
                 "url": "assets/background/BoyWins.png",
@@ -107,14 +77,9 @@
                 "key": "CharacterColor"
             },
             {
-                "url": "assets/opponent/ClumsyBlock.png",
-                "type": "image",
-                "key": "ClumsyBlock"
-            },
-            {
                 "url": "assets/card/ClumsyBlock.png",
                 "type": "image",
-                "key": "ClumsyBlock_1"
+                "key": "ClumsyBlock"
             },
             {
                 "url": "assets/ui/ColorFill.png",
@@ -147,11 +112,6 @@
                 "key": "CounterAttack"
             },
             {
-                "url": "assets/card/CounterAttackDraft.png",
-                "type": "image",
-                "key": "CounterAttackDraft"
-            },
-            {
                 "url": "assets/ui/CurrentHealth.png",
                 "type": "image",
                 "key": "CurrentHealth"
@@ -170,11 +130,6 @@
                 "url": "assets/ui/DamageBig.png",
                 "type": "image",
                 "key": "DamageBig"
-            },
-            {
-                "url": "assets/card/DamageDraft.png",
-                "type": "image",
-                "key": "DamageDraft"
             },
             {
                 "url": [
@@ -201,19 +156,9 @@
                 "key": "Dodge"
             },
             {
-                "url": "assets/card/DodgeDraft.png",
-                "type": "image",
-                "key": "DodgeDraft"
-            },
-            {
                 "url": "assets/card/DoubleAttack.png",
                 "type": "image",
                 "key": "DoubleAttack"
-            },
-            {
-                "url": "assets/card/DoubleAttackDraft.png",
-                "type": "image",
-                "key": "DoubleAttackDraft"
             },
             {
                 "url": "assets/background/Draw.png",
@@ -282,19 +227,9 @@
                 "key": "Focus"
             },
             {
-                "url": "assets/card/FocusDraft.png",
-                "type": "image",
-                "key": "FocusDraft"
-            },
-            {
                 "url": "assets/card/Ghost.png",
                 "type": "image",
                 "key": "Ghost"
-            },
-            {
-                "url": "assets/card/GhostDraft.png",
-                "type": "image",
-                "key": "GhostDraft"
             },
             {
                 "url": "assets/background/GirlWins.png",
@@ -314,16 +249,6 @@
                 "key": "Heal"
             },
             {
-                "url": "assets/card/HealDraft.png",
-                "type": "image",
-                "key": "HealDraft"
-            },
-            {
-                "url": "assets/card/HealingDraft.png",
-                "type": "image",
-                "key": "HealingDraft"
-            },
-            {
                 "url": "assets/ui/HealthBar.png",
                 "type": "image",
                 "key": "HealthBar"
@@ -339,19 +264,9 @@
                 "key": "HeavyAttack"
             },
             {
-                "url": "assets/card/HeavyAttackDraft.png",
-                "type": "image",
-                "key": "HeavyAttackDraft"
-            },
-            {
                 "url": "assets/card/Hidden.png",
                 "type": "image",
                 "key": "Hidden"
-            },
-            {
-                "url": "assets/card/HiddenDraft.png",
-                "type": "image",
-                "key": "HiddenDraft"
             },
             {
                 "url": "assets/card/HiddenIconSmall.png",
@@ -359,14 +274,9 @@
                 "key": "HiddenIconSmall"
             },
             {
-                "url": "assets/opponent/ImpressiveBlock.png",
-                "type": "image",
-                "key": "ImpressiveBlock"
-            },
-            {
                 "url": "assets/card/ImpressiveBlock.png",
                 "type": "image",
-                "key": "ImpressiveBlock_1"
+                "key": "ImpressiveBlock"
             },
             {
                 "url": "assets/ui/Insight.png",
@@ -387,11 +297,6 @@
                 "url": "assets/ui/Max Health.png",
                 "type": "image",
                 "key": "Max Health"
-            },
-            {
-                "url": "assets/card/MaxHealthDraft.png",
-                "type": "image",
-                "key": "MaxHealthDraft"
             },
             {
                 "url": "assets/ui/MightBar.png",
@@ -423,11 +328,6 @@
                 "key": "NormalAttack"
             },
             {
-                "url": "assets/card/NormalAttackDraft.png",
-                "type": "image",
-                "key": "NormalAttackDraft"
-            },
-            {
                 "url": "assets/opponent/OpponentClumsyBlock.png",
                 "type": "image",
                 "key": "OpponentClumsyBlock"
@@ -453,9 +353,24 @@
                 "key": "Parry"
             },
             {
-                "url": "assets/card/ParryDraft.png",
+                "url": "assets/opponent/PlayerClumsyBlock.png",
                 "type": "image",
-                "key": "ParryDraft"
+                "key": "PlayerClumsyBlock"
+            },
+            {
+                "url": "assets/opponent/PlayerImpressiveBlock.png",
+                "type": "image",
+                "key": "PlayerImpressiveBlock"
+            },
+            {
+                "url": "assets/opponent/PlayerParry.png",
+                "type": "image",
+                "key": "PlayerParry"
+            },
+            {
+                "url": "assets/opponent/PlayerSolidBlock.png",
+                "type": "image",
+                "key": "PlayerSolidBlock"
             },
             {
                 "url": "src/prefabs/PrefabAttacks.js",
@@ -508,11 +423,6 @@
                 "key": "Rage"
             },
             {
-                "url": "assets/card/RageDraft.png",
-                "type": "image",
-                "key": "RageDraft"
-            },
-            {
                 "url": "assets/opponent/Recovery Hit.png",
                 "type": "image",
                 "key": "Recovery Hit"
@@ -523,19 +433,9 @@
                 "key": "RecoveryAttac"
             },
             {
-                "url": "assets/card/RecoveryAttackDraft.png",
-                "type": "image",
-                "key": "RecoveryAttackDraft"
-            },
-            {
                 "url": "assets/card/RejuvenatingCloth.png",
                 "type": "image",
                 "key": "RejuvenatingCloth"
-            },
-            {
-                "url": "assets/card/RestDraft.png",
-                "type": "image",
-                "key": "RestDraft"
             },
             {
                 "url": "assets/card/RestfulDwelling.png",
@@ -565,19 +465,9 @@
                 "key": "Slime"
             },
             {
-                "url": "assets/card/SlimeDraft.png",
-                "type": "image",
-                "key": "SlimeDraft"
-            },
-            {
-                "url": "assets/opponent/SolidBlock.png",
-                "type": "image",
-                "key": "SolidBlock"
-            },
-            {
                 "url": "assets/card/SolidBlock.png",
                 "type": "image",
-                "key": "SolidBlock_1"
+                "key": "SolidBlock"
             },
             {
                 "url": "assets/card/StoneOfPower.png",
