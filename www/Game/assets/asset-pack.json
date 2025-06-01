@@ -373,6 +373,11 @@
                 "key": "PlayerParry"
             },
             {
+                "url": "assets/opponent/PlayerParry.png",
+                "type": "image",
+                "key": "PlayerParry"
+            },
+            {
                 "url": "assets/opponent/PlayerSolidBlock.png",
                 "type": "image",
                 "key": "PlayerSolidBlock"
