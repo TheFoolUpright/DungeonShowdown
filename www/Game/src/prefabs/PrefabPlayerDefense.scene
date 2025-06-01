@@ -46,6 +46,17 @@
                     },
                     "originY": 0,
                     "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "179c23b4-b65b-4848-a238-b13ba3364e31",
+                    "label": "parry",
+                    "scope": "PUBLIC",
+                    "texture": {
+                        "key": "Parry"
+                    },
+                    "originY": 0,
+                    "visible": false
                 }
             ]
         }

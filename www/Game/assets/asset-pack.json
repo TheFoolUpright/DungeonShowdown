@@ -348,6 +348,16 @@
                 "key": "OpponentSolidBlock"
             },
             {
+                "url": "assets/opponent/PlayerParry.png",
+                "type": "image",
+                "key": "PlayerParry"
+            },
+            {
+                "url": "assets/opponent/OpponentSolidBlock.png",
+                "type": "image",
+                "key": "OpponentSolidBlock"
+            },
+            {
                 "url": "assets/card/Parry.png",
                 "type": "image",
                 "key": "Parry"

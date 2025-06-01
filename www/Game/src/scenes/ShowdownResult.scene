@@ -102,16 +102,12 @@
             "unlock": [
                 "x",
                 "y",
-                "visible",
-                "scaleX",
-                "scaleY"
+                "visible"
             ],
             "label": "opponentBlock",
             "scope": "PUBLIC",
             "x": 1171,
             "y": 535,
-            "scaleX": 1,
-            "scaleY": 1,
             "visible": true
         },
         {
