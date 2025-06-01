@@ -203,7 +203,7 @@ class DungeonResult extends Phaser.Scene {
 			this.opponentCard.cardName.text = data.card_type_name
 		}
 		if(data.card_type_id == 1){
-			this.descriptionText.text = "A strange bubbling echoes from afar. \nYour opponent leveled up their life force!"
+			this.descriptionText.text = "A bottle clinks, a cap pops, and someone says, “That hit the spot.” \nYour rival leveled up their life force!"
 		}
 		else if(data.card_type_id == 2){
 			this.descriptionText.text = "You hear ripping cloth and a relieved sigh. \nSomeone has patched themselves up!"
@@ -215,7 +215,18 @@ class DungeonResult extends Phaser.Scene {
 			this.descriptionText.text = "A gentle snore echoes throughout the room. \nYour opponent is napping!"
 		}
 		else if(data.card_type_id == 5){
-			this.descriptionText.text = "Thuds, crashes, and shrieks echo from afar... \nYour opponent just made a monstrous new friend!"
+			if(data.card_name == "Slime"){
+				this.descriptionText.text = "Squish. Squish. SPLAT. \nYour rival has found a blob with a bad attitude."
+			}
+			else if(data.card_name == "Bat"){
+				this.descriptionText.text = "You hear frantic swatting and tiny screeches... \nSomeone woke up the dungeon bats."
+			}
+			else if(data.card_name == "Ghost"){
+				this.descriptionText.text = "The temperature drops and a chill creeps over you. \nSomeone’s dealing with a very floaty problem."
+			}
+			else{
+				this.descriptionText.text = "Thuds, crashes, and shrieks echo from afar... \nYour opponent just made a monstrous new friend!"
+			}
 		}
 		this.opponentCard.cardImage.setTexture(data.card_image_path)
 		this.opponentCard.cardBorder.setTint(cardColor)

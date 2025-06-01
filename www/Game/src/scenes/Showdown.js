@@ -374,7 +374,7 @@ class Showdown extends Phaser.Scene {
 		}
 		else {
 			this.specialAttackSlot.cardName.text = "? ? ?"
-			this.specialAttackSlot.cardImage.setTexture("HiddenDraft")
+			this.specialAttackSlot.cardImage.setTexture("Hidden")
 			this.specialAttackSlot.cardDescription.text = "Not enough insight to see the card"
 
 			this.specialAttackSlot.option1RewardIcon1.setTexture("HiddenIconSmall")
@@ -397,7 +397,7 @@ class Showdown extends Phaser.Scene {
 		}
 		else {
 			this.defenseSlot.cardName.text = "? ? ?"
-			this.defenseSlot.cardImage.setTexture("HiddenDraft")
+			this.defenseSlot.cardImage.setTexture("Hidden")
 			this.defenseSlot.cardDescription.text = "Not enough insight to see the card"
 
 			this.defenseSlot.option1RewardIcon1.setTexture("HiddenIconSmall")
@@ -417,10 +417,27 @@ class Showdown extends Phaser.Scene {
 			this.skillSlot.cardName.text = data.card[3].card_name
 			this.skillSlot.cardImage.setTexture(data.card[3].card_image_path)
 			this.skillSlot.cardDescription.text
+
+			if(data.card[3].card_id == playerShowdownAnimations.Anger){
+
+			}
+			else if(data.card[3].card_id == playerShowdownAnimations.Rage){
+				
+			}
+			else if(data.card[3].card_id == playerShowdownAnimations.Focus){
+				
+			}
+			else if(data.card[3].card_id == playerShowdownAnimations.Adrenaline){
+				
+			}
+			else if(data.card[3].card_id == playerShowdownAnimations.Healing){
+				
+			}
+
 		}
 		else {
 			this.skillSlot.cardName.text = "? ? ?"
-			this.skillSlot.cardImage.setTexture("HiddenDraft")
+			this.skillSlot.cardImage.setTexture("Hidden")
 			this.skillSlot.cardDescription.text = "Not enough insight to see the card"
 
 			this.skillSlot.option1RewardIcon1.setTexture("HiddenIconSmall")
@@ -485,6 +502,12 @@ class Showdown extends Phaser.Scene {
 	update() {
 		//If any card is selected make the button visible
 		if (this.normalAttackSlot.isSelected || this.specialAttackSlot.isSelected || this.defenseSlot.isSelected || this.skillSlot.isSelected) {
+			if(this.normalAttackSlot.isSelected || this.specialAttackSlot.isSelected){
+				this.confirmButton.confirmButtonText.text = "Rip & Tear!"
+			}
+			else{
+				this.confirmButton.confirmButtonText.text = "Perservere!"
+			}
 			this.confirmButton.visible = true
 		}
 		else {

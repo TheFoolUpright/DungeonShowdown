@@ -420,7 +420,7 @@ class Dungeon extends Phaser.Scene {
 		}
 		else {
 			this.slot1Card.cardName.text = "? ? ?"
-			this.slot1Card.cardImage.setTexture("HiddenDraft")
+			this.slot1Card.cardImage.setTexture("Hidden")
 			this.slot1Card.cardDescription.text = "Not enough insight to see the card"
 
 			this.slot1Card.option1RewardIcon1.setTexture("HiddenIconSmall")
@@ -444,7 +444,7 @@ class Dungeon extends Phaser.Scene {
 		}
 		else {
 			this.slot2Card.cardName.text = "? ? ?"
-			this.slot2Card.cardImage.setTexture("HiddenDraft")
+			this.slot2Card.cardImage.setTexture("Hidden")
 			this.slot2Card.cardDescription.text = "Not enough insight to see the card"
 
 			this.slot2Card.option1RewardIcon1.setTexture("HiddenIconSmall")
@@ -468,7 +468,7 @@ class Dungeon extends Phaser.Scene {
 		}
 		else {
 			this.slot3Card.cardName.text = "? ? ?"
-			this.slot3Card.cardImage.setTexture("HiddenDraft")
+			this.slot3Card.cardImage.setTexture("Hidden")
 			this.slot3Card.cardDescription.text = "Not enough insight to see the card"
 
 			this.slot3Card.option1RewardIcon1.setTexture("HiddenIconSmall")

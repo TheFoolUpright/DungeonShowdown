@@ -2,14 +2,29 @@
     "section1": {
         "files": [
             {
+                "url": "assets/card/Adrenaline.png",
+                "type": "image",
+                "key": "Adrenaline"
+            },
+            {
                 "url": "assets/card/AdrenalineDraft.png",
                 "type": "image",
                 "key": "AdrenalineDraft"
             },
             {
+                "url": "assets/card/Anger.png",
+                "type": "image",
+                "key": "Anger"
+            },
+            {
                 "url": "assets/card/AngerDraft.png",
                 "type": "image",
                 "key": "AngerDraft"
+            },
+            {
+                "url": "assets/ui/Attack.png",
+                "type": "image",
+                "key": "Attack"
             },
             {
                 "url": "assets/card/Bat.png",
@@ -97,6 +112,11 @@
                 "key": "ClumsyBlock"
             },
             {
+                "url": "assets/card/ClumsyBlock.png",
+                "type": "image",
+                "key": "ClumsyBlock_1"
+            },
+            {
                 "url": "assets/ui/ColorFill.png",
                 "type": "image",
                 "key": "ColorFill"
@@ -120,6 +140,11 @@
                 "url": "assets/opponent/Counter Slash.png",
                 "type": "image",
                 "key": "Counter Slash"
+            },
+            {
+                "url": "assets/card/CounterAttack.png",
+                "type": "image",
+                "key": "CounterAttack"
             },
             {
                 "url": "assets/card/CounterAttackDraft.png",
@@ -171,9 +196,19 @@
                 "type": "image"
             },
             {
+                "url": "assets/card/Dodge.png",
+                "type": "image",
+                "key": "Dodge"
+            },
+            {
                 "url": "assets/card/DodgeDraft.png",
                 "type": "image",
                 "key": "DodgeDraft"
+            },
+            {
+                "url": "assets/card/DoubleAttack.png",
+                "type": "image",
+                "key": "DoubleAttack"
             },
             {
                 "url": "assets/card/DoubleAttackDraft.png",
@@ -242,6 +277,11 @@
                 "key": "flipcard-91468"
             },
             {
+                "url": "assets/card/Focus.png",
+                "type": "image",
+                "key": "Focus"
+            },
+            {
                 "url": "assets/card/FocusDraft.png",
                 "type": "image",
                 "key": "FocusDraft"
@@ -269,6 +309,11 @@
                 "key": "gong-79191"
             },
             {
+                "url": "assets/card/Heal.png",
+                "type": "image",
+                "key": "Heal"
+            },
+            {
                 "url": "assets/card/HealDraft.png",
                 "type": "image",
                 "key": "HealDraft"
@@ -289,9 +334,19 @@
                 "key": "Heavy Slash"
             },
             {
+                "url": "assets/card/HeavyAttack.png",
+                "type": "image",
+                "key": "HeavyAttack"
+            },
+            {
                 "url": "assets/card/HeavyAttackDraft.png",
                 "type": "image",
                 "key": "HeavyAttackDraft"
+            },
+            {
+                "url": "assets/card/Hidden.png",
+                "type": "image",
+                "key": "Hidden"
             },
             {
                 "url": "assets/card/HiddenDraft.png",
@@ -307,6 +362,11 @@
                 "url": "assets/opponent/ImpressiveBlock.png",
                 "type": "image",
                 "key": "ImpressiveBlock"
+            },
+            {
+                "url": "assets/card/ImpressiveBlock.png",
+                "type": "image",
+                "key": "ImpressiveBlock_1"
             },
             {
                 "url": "assets/ui/Insight.png",
@@ -358,6 +418,11 @@
                 "key": "Normal Slash"
             },
             {
+                "url": "assets/card/NormalAttack.png",
+                "type": "image",
+                "key": "NormalAttack"
+            },
+            {
                 "url": "assets/card/NormalAttackDraft.png",
                 "type": "image",
                 "key": "NormalAttackDraft"
@@ -373,14 +438,19 @@
                 "key": "OpponentImpressiveBlock"
             },
             {
+                "url": "assets/opponent/OpponentParry.png",
+                "type": "image",
+                "key": "OpponentParry"
+            },
+            {
                 "url": "assets/opponent/OpponentSolidBlock.png",
                 "type": "image",
                 "key": "OpponentSolidBlock"
             },
             {
-                "url": "assets/opponent/OpponentParry.png",
+                "url": "assets/card/Parry.png",
                 "type": "image",
-                "key": "OpponentParry"
+                "key": "Parry"
             },
             {
                 "url": "assets/card/ParryDraft.png",
@@ -433,6 +503,11 @@
                 "key": "PrefabStats"
             },
             {
+                "url": "assets/card/Rage.png",
+                "type": "image",
+                "key": "Rage"
+            },
+            {
                 "url": "assets/card/RageDraft.png",
                 "type": "image",
                 "key": "RageDraft"
@@ -441,6 +516,11 @@
                 "url": "assets/opponent/Recovery Hit.png",
                 "type": "image",
                 "key": "Recovery Hit"
+            },
+            {
+                "url": "assets/card/RecoveryAttac.png",
+                "type": "image",
+                "key": "RecoveryAttac"
             },
             {
                 "url": "assets/card/RecoveryAttackDraft.png",
@@ -493,6 +573,11 @@
                 "url": "assets/opponent/SolidBlock.png",
                 "type": "image",
                 "key": "SolidBlock"
+            },
+            {
+                "url": "assets/card/SolidBlock.png",
+                "type": "image",
+                "key": "SolidBlock_1"
             },
             {
                 "url": "assets/card/StoneOfPower.png",
