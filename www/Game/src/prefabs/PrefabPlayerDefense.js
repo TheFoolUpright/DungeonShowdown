@@ -26,9 +26,16 @@ class PrefabPlayerDefense extends Phaser.GameObjects.Container {
 		clumsyBlock.visible = false;
 		this.add(clumsyBlock);
 
+		// parry
+		const parry = scene.add.image(0, 0, "Parry");
+		parry.setOrigin(0.5, 0);
+		parry.visible = false;
+		this.add(parry);
+
 		this.impressiveBlock = impressiveBlock;
 		this.solidBlock = solidBlock;
 		this.clumsyBlock = clumsyBlock;
+		this.parry = parry;
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.
@@ -41,6 +48,8 @@ class PrefabPlayerDefense extends Phaser.GameObjects.Container {
 	solidBlock;
 	/** @type {Phaser.GameObjects.Image} */
 	clumsyBlock;
+	/** @type {Phaser.GameObjects.Image} */
+	parry;
 
 	/* START-USER-CODE */
 

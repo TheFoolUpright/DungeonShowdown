@@ -373,14 +373,19 @@
                 "key": "OpponentImpressiveBlock"
             },
             {
+                "url": "assets/opponent/OpponentParry.png",
+                "type": "image",
+                "key": "OpponentParry"
+            },
+            {
                 "url": "assets/opponent/OpponentSolidBlock.png",
                 "type": "image",
                 "key": "OpponentSolidBlock"
             },
             {
-                "url": "assets/opponent/OpponentParry.png",
+                "url": "assets/opponent/Parry.png",
                 "type": "image",
-                "key": "OpponentParry"
+                "key": "Parry"
             },
             {
                 "url": "assets/card/ParryDraft.png",
