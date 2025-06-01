@@ -389,6 +389,7 @@ class Showdown extends Phaser.Scene {
 	}
 
 	loadCardData(data) {
+		console.log(data)
 
 		data.card.sort(this.sortShowdownCards)
 
@@ -402,7 +403,7 @@ class Showdown extends Phaser.Scene {
 
 		this.normalAttackSlot.cardName.text = data.card[0].card_name
 		this.normalAttackSlot.cardImage.setTexture(data.card[0].card_image_path)
-		this.normalAttackSlot.cardDescription.text
+		this.normalAttackSlot.cardDescription.text = data.card[0].card_description
 
 		//Special Attack
 		specialAttackCard = data.card[1]
@@ -414,12 +415,12 @@ class Showdown extends Phaser.Scene {
 		if(this.specialAttackSlot.isVisible) {
 			this.specialAttackSlot.cardName.text = data.card[1].card_name
 			this.specialAttackSlot.cardImage.setTexture(data.card[1].card_image_path)
-			this.specialAttackSlot.cardDescription.text
+			this.specialAttackSlot.cardDescription.text = data.card[1].card_description
 		}
 		else {
 			this.specialAttackSlot.cardName.text = "? ? ?"
 			this.specialAttackSlot.cardImage.setTexture("Hidden")
-			this.specialAttackSlot.cardDescription.text = "Not enough insight to see the card"
+			this.specialAttackSlot.cardDescription.text = "Not enough insight to see the card."
 
 			this.specialAttackSlot.option1RewardIcon1.setTexture("HiddenIconSmall")
 			this.specialAttackSlot.option1RewardIcon1.x = 0
@@ -437,12 +438,12 @@ class Showdown extends Phaser.Scene {
 		if(this.defenseSlot.isVisible) {
 			this.defenseSlot.cardName.text = data.card[2].card_name
 			this.defenseSlot.cardImage.setTexture(data.card[2].card_image_path)
-			this.defenseSlot.cardDescription.text
+			this.defenseSlot.cardDescription.text = data.card[2].card_description
 		}
 		else {
 			this.defenseSlot.cardName.text = "? ? ?"
 			this.defenseSlot.cardImage.setTexture("Hidden")
-			this.defenseSlot.cardDescription.text = "Not enough insight to see the card"
+			this.defenseSlot.cardDescription.text = "Not enough insight to see the card."
 
 			this.defenseSlot.option1RewardIcon1.setTexture("HiddenIconSmall")
 			this.defenseSlot.option1RewardIcon1.x = 0
@@ -460,7 +461,7 @@ class Showdown extends Phaser.Scene {
 		if(this.skillSlot.isVisible) {
 			this.skillSlot.cardName.text = data.card[3].card_name
 			this.skillSlot.cardImage.setTexture(data.card[3].card_image_path)
-			this.skillSlot.cardDescription.text
+			this.skillSlot.cardDescription.text = data.card[3].card_description
 
 			if(data.card[3].card_id == playerShowdownAnimations.Anger){
 
@@ -482,7 +483,7 @@ class Showdown extends Phaser.Scene {
 		else {
 			this.skillSlot.cardName.text = "? ? ?"
 			this.skillSlot.cardImage.setTexture("Hidden")
-			this.skillSlot.cardDescription.text = "Not enough insight to see the card"
+			this.skillSlot.cardDescription.text = "Not enough insight to see the card."
 
 			this.skillSlot.option1RewardIcon1.setTexture("HiddenIconSmall")
 			this.skillSlot.option1RewardIcon1.x = 0

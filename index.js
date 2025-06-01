@@ -2170,7 +2170,7 @@ app.get("/getShowdownCardSelection", (req, res) => {
         connection.query("SELECT player_card_slot_id, PCS.player_status_id, slot_id, PCS.card_id, room_id, showdown_turn, is_visible, \
             match_id, P.player_id, max_health, current_health, energy, insight, damage, \
             P.player_username, P.player_color, \
-            card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path, state_id \
+            card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path, card_description, state_id \
             FROM player_card_slot PCS \
             INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id \
             INNER JOIN player P ON PS.player_id = P.player_id \
@@ -3255,7 +3255,7 @@ app.post("/setupShowdown", (req, res) => {
          connection.query("SELECT player_username, player_color, player_card_slot_id, PCS.player_status_id, \
             slot_id, PCS.card_id, room_id, showdown_turn, is_visible, match_id, \
             P.player_id, max_health, current_health, energy, insight, damage, \
-            card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path, state_id \
+            card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path, card_description, state_id \
             FROM player_card_slot PCS \
             INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id \
             INNER JOIN player P ON P.player_id = PS.player_id \

@@ -27,8 +27,8 @@
                     "texture": {
                         "key": "TextBox"
                     },
-                    "y": -250,
-                    "originY": 1,
+                    "y": -500,
+                    "originY": 0,
                     "visible": false
                 },
                 {
@@ -36,9 +36,8 @@
                     "id": "eda211a7-946d-40d1-87c6-29ac4d5014f2",
                     "label": "cardDescription",
                     "scope": "PUBLIC",
-                    "y": -260,
+                    "y": -500,
                     "originX": 0.5,
-                    "originY": 1,
                     "visible": false,
                     "text": "Take no damage from one of the opponent's attacks and hit them back for half of their might",
                     "paddingLeft": 5,

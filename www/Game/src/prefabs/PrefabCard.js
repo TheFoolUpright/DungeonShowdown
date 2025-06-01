@@ -11,14 +11,14 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		this.setInteractive(new Phaser.Geom.Rectangle(-150, -218, 300, 436.4214080647836), Phaser.Geom.Rectangle.Contains);
 
 		// cardDescriptionTextBox
-		const cardDescriptionTextBox = scene.add.image(0, -250, "TextBox");
-		cardDescriptionTextBox.setOrigin(0.5, 1);
+		const cardDescriptionTextBox = scene.add.image(0, -500, "TextBox");
+		cardDescriptionTextBox.setOrigin(0.5, 0);
 		cardDescriptionTextBox.visible = false;
 		this.add(cardDescriptionTextBox);
 
 		// cardDescription
-		const cardDescription = scene.add.text(0, -260, "", {});
-		cardDescription.setOrigin(0.5, 1);
+		const cardDescription = scene.add.text(0, -500, "", {});
+		cardDescription.setOrigin(0.5, 0);
 		cardDescription.visible = false;
 		cardDescription.text = "Take no damage from one of the opponent's attacks and hit them back for half of their might";
 		cardDescription.setStyle({ "backgroundColor": "", "color": "#ffffffff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff", "strokeThickness":8});
