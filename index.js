@@ -1944,7 +1944,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
                 //Player Defense
                 for (let i = 0; i < playerCards.length; i++) {
                     if (playerCards[i].card_type_id == 7) {
-                        playerDefense = playerDefense + playerCards[i].card_defense
+                        playerDefense = playerDefense + Math.round(playerCards[i].card_defense * (playerMaxHealth - 20))
                         playerInsight = playerInsight + playerCards[i].card_insight
                         playerEnergy = playerEnergy + playerCards[i].card_energy
 
@@ -3622,7 +3622,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
                 //Player Defense
                 for (let i = 0; i < playerCards.length; i++) {
                     if (playerCards[i].card_type_id == 7) {
-                        playerDefense = playerDefense + playerCards[i].card_defense
+                        playerDefense = playerDefense + Math.round(playerCards[i].card_defense * (playerMaxHealth - 20))
                         playerInsight = playerInsight + playerCards[i].card_insight
                         playerEnergy = playerEnergy + playerCards[i].card_energy
 
