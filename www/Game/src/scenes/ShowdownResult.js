@@ -806,16 +806,22 @@ class ShowdownResult extends Phaser.Scene {
 			if ((this.playerAttacks.angle <= 0) && this.opponent.character.scaleX > -1) {
 				this.opponenetMissText.visible = true
 				this.opponent.character.scaleX -= dt / 128
+				this.opponent.characterRipped1.scaleX -= dt / 128
+				this.opponent.characterRipped2.scaleX -= dt / 128
 				this.opponent.characterColor.scaleX -= dt / 128
 			}
 			else if ((this.playerAttacks.angle >= 0) && this.opponent.character.scaleX < 1) {
 				this.opponent.character.scaleX += dt / 128
+				this.opponent.characterRipped1.scaleX += dt / 128
+				this.opponent.characterRipped2.scaleX += dt / 128
 				this.opponent.characterColor.scaleX += dt / 128
 			}
 		}
 
 		if (this.opponent.character.scaleX > 1) {
 			this.opponent.character.scaleX = 1
+			this.opponent.characterRipped1.scaleX = 1
+			this.opponent.characterRipped2.scaleX = 1
 			this.opponent.characterColor.scaleX = 1
 		}
 	}
