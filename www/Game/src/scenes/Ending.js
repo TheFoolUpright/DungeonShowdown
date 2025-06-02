@@ -40,6 +40,7 @@ class Ending extends Phaser.Scene {
 
 		// boyWins
 		const boyWins = this.add.image(960, 540, "BoyWins");
+		boyWins.visible = false;
 
 		// boyWinsBoyColors
 		const boyWinsBoyColors = this.add.image(1450.6907, 804.1161, "Boy Wins Boy Colors");

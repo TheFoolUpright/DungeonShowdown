@@ -82,7 +82,8 @@
                 "key": "BoyWins"
             },
             "x": 960,
-            "y": 540
+            "y": 540,
+            "visible": false
         },
         {
             "type": "Image",
