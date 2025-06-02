@@ -18,6 +18,9 @@ class JoinMatch extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
+		// joinMatchBackground
+		this.add.image(960, 540, "JoinMatchBackground");
+
 		// joinMatch
 		const joinMatch = new PrefabNextRoom(this, 1680, 800);
 		this.add.existing(joinMatch);
@@ -122,12 +125,16 @@ class JoinMatch extends Phaser.Scene {
 	create(data) {
 
 		this.editorCreate();
-		
+
 		this.loadPresets(data)
 		this.ButtonGlowEvents()
 		this.ButtonEvents()
 
-		
+		if(!MenuBackgroundMusic.isPlaying){
+			MenuBackgroundMusic.play()
+		}
+
+
 	}
 
 	update(){
@@ -282,37 +289,48 @@ class JoinMatch extends Phaser.Scene {
 
 	ButtonEvents(){
 		this.joinMatch.on("pointerdown", () =>{
+			ButtonSFX.play()
 			this.confirmJoinMatch()
 		})
 
 		this.pinkButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			playerColor = this.pinkButton.colorFill.tint
 		})
 		this.redButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			playerColor = this.redButton.colorFill.tint
 		})
 		this.orangeRedButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			playerColor = this.orangeRedButton.colorFill.tint
 		})
 		this.orangeButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			playerColor = this.orangeButton.colorFill.tint
 		})
 		this.yellowButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			playerColor = this.yellowButton.colorFill.tint
 		})
 		this.yellowGreenButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			playerColor = this.yellowGreenButton.colorFill.tint
 		})
 		this.greenButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			playerColor = this.greenButton.colorFill.tint
 		})
 		this.greenBlueButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			playerColor = this.greenBlueButton.colorFill.tint
 		})
 		this.blueButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			playerColor = this.blueButton.colorFill.tint
 		})
 		this.purpleButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			playerColor = this.purpleButton.colorFill.tint
 		})
 	}
@@ -335,6 +353,14 @@ class JoinMatch extends Phaser.Scene {
 						this.scene.start("WaitingForMatch")
 					}
 					else if (data.state == "MATCH_FOUND") {
+						if(MenuBackgroundMusic.isPlaying){
+							this.tweens.add({
+								targets:  MenuBackgroundMusic,
+								volume:   0,
+								duration: 500
+							});
+							MenuBackgroundMusic.stop()
+						}
 						this.scene.start("Dungeon", data)
 					}
 				}

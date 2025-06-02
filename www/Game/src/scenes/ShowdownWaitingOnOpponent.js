@@ -46,9 +46,16 @@ class ShowdownWaitingOnOpponent extends Phaser.Scene {
 
 		this.editorCreate();
 		this.showdownBackground.setTexture("ShowdownBackgroundBlur")
+		this.loadAudioForShowdownWaitingOnOpponent()
 		nextSceneDataLoaded = false
 		showdownWaitingOnOpponentInterval = setInterval(this.CheckShowdownOpponentSelectionState, 2000, this);
 
+	}
+
+	loadAudioForShowdownWaitingOnOpponent(){
+		if(!ShowdownBackgroundMusic.isPlaying){
+			ShowdownBackgroundMusic.play()
+		}
 	}
 
 	// update() {

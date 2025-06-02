@@ -96,6 +96,7 @@
             "originX": 0.5,
             "originY": 0.5,
             "text": "Thuds, crashes, and shrieks echo from afar... \nYour opponent just made a monstrous new friend!",
+            "align": "center",
             "fontFamily": "Rockey",
             "fontSize": "40px",
             "stroke": "#000000ff",
