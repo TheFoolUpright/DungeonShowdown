@@ -419,13 +419,10 @@ class Showdown extends Phaser.Scene {
 		this.normalAttackSlot.cardImage.setTexture(data.card[0].card_image_path)
 		this.normalAttackSlot.cardDescription.text = data.card[0].card_description
 		
-		this.normalAttackSlot.option1_1CostIcon1.setTexture("Damage")
-		this.normalAttackSlot.option1_1CostText1.text = "x" + data.card[0].card_attack.replace(".0", "")
-
-		this.normalAttackSlot.option1_1RewardIcon1.setTexture("Attack")
-		this.normalAttackSlot.option1_1RewardText1.text = ": " + (data.card[0].card_attack * previousDamage)
+		this.normalAttackSlot.option1RewardIcon1.setTexture("Attack")
+		this.normalAttackSlot.option1RewardText1.text = ": " + (data.card[0].card_attack * previousDamage)
 		
-		this.normalAttackSlot.option1_1Container.visible = true
+		this.normalAttackSlot.option1Container.visible = true
 
 
 		//Special Attack
