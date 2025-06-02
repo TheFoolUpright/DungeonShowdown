@@ -64,17 +64,13 @@ var playerDefenseAnimationFinished = false
 var opponentDefenseAnimationFinished = false
 
 // Skill animation variables	
-// var	playerAttack = false
+var	playerSkill = false
 
-// var	opponentAttack = false
+var	opponentSkill = false
 
-// var playerSecondSwing = false
+var playerSkillAnimationFinished = false
 
-// var opponentSecondSwing = false
-
-// var playerAttackAnimationFinished = false
-
-// var opponentAttackAnimationFinished = false
+var opponentSkillAnimationFinished = false
 
 var timer = 0
 
@@ -133,6 +129,10 @@ class ShowdownResult extends Phaser.Scene {
 		this.add.existing(playerAttacks);
 		playerAttacks.angle = 0;
 		playerAttacks.visible = true;
+
+		// playerSkills
+		const playerSkills = new PrefabPlayerSkills(this, 960, 1080);
+		this.add.existing(playerSkills);
 
 		// opponenetMissText
 		const opponenetMissText = this.add.text(1250, 400, "", {});
@@ -218,6 +218,7 @@ class ShowdownResult extends Phaser.Scene {
 		this.playerBlock = playerBlock;
 		this.opponentBlock = opponentBlock;
 		this.playerAttacks = playerAttacks;
+		this.playerSkills = playerSkills;
 		this.opponenetMissText = opponenetMissText;
 		this.playerMissText = playerMissText;
 		this.moveInSceneActionScript_4 = moveInSceneActionScript_4;
@@ -250,6 +251,8 @@ class ShowdownResult extends Phaser.Scene {
 	opponentBlock;
 	/** @type {PrefabPlayerAttacks} */
 	playerAttacks;
+	/** @type {PrefabPlayerSkills} */
+	playerSkills;
 	/** @type {Phaser.GameObjects.Text} */
 	opponenetMissText;
 	/** @type {Phaser.GameObjects.Text} */
@@ -339,11 +342,21 @@ class ShowdownResult extends Phaser.Scene {
 
 		opponentDefenseAnimationFinished = false
 
+		playerSkill = false
+
+		opponentSkill = false
+
+		playerSkillAnimationFinished = false
+
+		opponentSkillAnimationFinished = false
+
 		timer = 0
 
 		this.playerAttacks.angle = -110
 
 		this.opponentAttacks.angle = 40
+
+		this.playerSkills.y = 1080
 
 		this.confirmButton.visible = false
 
@@ -353,6 +366,7 @@ class ShowdownResult extends Phaser.Scene {
 		this.confirmButtonGlow()
 		this.loadPlayerAttack(data)
 		this.loadPlayerDefense(data)
+		this.loadPlayerSkill(data)
 		this.loadOpponentAttack(data)
 		this.loadOpponentDefence(data)
 		this.loadCards(data)
@@ -448,6 +462,29 @@ class ShowdownResult extends Phaser.Scene {
 		else if (data.player_cards[0].card_id == playerShowdownAnimations.Parry.id || (data.player_cards[1] && data.player_cards[1].card_id == playerShowdownAnimations.Parry.id)) {
 			playerShowdownAnimations.Parry.visible = true
 			playerDefense = true
+		}
+	}
+
+	loadPlayerSkill(data) {
+		if (data.player_cards[0].card_id == playerShowdownAnimations.Anger.id || (data.player_cards[1] && data.player_cards[1].card_id == playerShowdownAnimations.Anger.id)) {
+			playerShowdownAnimations.Anger.visible = true
+			playerSkill = true
+		}
+		else if (data.player_cards[0].card_id == playerShowdownAnimations.Rage.id || (data.player_cards[1] && data.player_cards[1].card_id == playerShowdownAnimations.Rage.id)) {
+			playerShowdownAnimations.Rage.visible = true
+			playerSkill = true
+		}
+		else if (data.player_cards[0].card_id == playerShowdownAnimations.Focus.id || (data.player_cards[1] && data.player_cards[1].card_id == playerShowdownAnimations.Focus.id)) {
+			playerShowdownAnimations.Focus.visible = true
+			playerSkill = true
+		}
+		else if (data.player_cards[0].card_id == playerShowdownAnimations.Adrenaline.id || (data.player_cards[1] && data.player_cards[1].card_id == playerShowdownAnimations.Adrenaline.id)) {
+			playerShowdownAnimations.Adrenaline.visible = true
+			playerSkill = true
+		}
+		else if (data.player_cards[0].card_id == playerShowdownAnimations.Healing.id || (data.player_cards[1] && data.player_cards[1].card_id == playerShowdownAnimations.Healing.id)) {
+			playerShowdownAnimations.Healing.visible = true
+			playerSkill = true
 		}
 	}
 
@@ -624,7 +661,7 @@ class ShowdownResult extends Phaser.Scene {
 				console.log(data)
 
 				if (xhttp.status == 200) {
-					
+
 					this.scene.start("Showdown", data)
 				}
 			}
@@ -660,7 +697,30 @@ class ShowdownResult extends Phaser.Scene {
 	update(time, dt) {
 		timer += dt
 		if (timer > 1200) {
-			if (playerAttack && !playerAttackAnimationFinished && (!opponentShowdownAnimations.Parry.visible || (opponentShowdownAnimations.Parry.visible && !opponentAttack || (opponentAttack && opponentAttackAnimationFinished)))) {
+			if (playerSkill && !playerSkillAnimationFinished) {
+				if (this.playerSkills.y > -2400) {
+					if (playerShowdownAnimations.Anger.visible) {
+						this.playerSkills.angerSkill.visible = true
+					}
+					else if (playerShowdownAnimations.Rage.visible) {
+						this.playerSkills.rageSkill.visible = true
+					}
+					else if (playerShowdownAnimations.Focus.visible) {
+						this.playerSkills.focusSkill.visible = true
+					}
+					else if (playerShowdownAnimations.Adrenaline.visible) {
+						this.playerSkills.adrenalineSkill.visible = true
+					}
+					else if (playerShowdownAnimations.Healing.visible) {
+						this.playerSkills.healingSkill.visible = true
+					}
+					this.playerSkills.y -= dt * 2
+				}
+				else {
+					playerSkillAnimationFinished = true
+				}
+			}
+			else if (playerAttack && !playerAttackAnimationFinished && (!opponentShowdownAnimations.Parry.visible || (opponentShowdownAnimations.Parry.visible && !opponentAttack || (opponentAttack && opponentAttackAnimationFinished)))) {
 				this.loadPlayerAttackAnimations()
 				if (opponentShowdownAnimations.Parry.visible) {
 					this.opponentBlock.parry.visible = true

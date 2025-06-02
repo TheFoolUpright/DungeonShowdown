@@ -1,0 +1,82 @@
+{
+    "id": "df9e9341-ccc7-4018-8c5f-f5313a2dbf85",
+    "sceneType": "PREFAB",
+    "settings": {
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1920,
+        "borderHeight": 1080
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "b830bf10-e941-494a-8a41-d387b4e87bdb",
+            "label": "container_1",
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "0cc175fd-bb2d-43ca-bcb9-3878242bcd55",
+                    "label": "healingSkill",
+                    "scope": "PUBLIC",
+                    "texture": {
+                        "key": "HealSkill"
+                    },
+                    "originY": 0,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "6ec97224-7175-4d13-b905-412856e6a31b",
+                    "label": "adrenalineSkill",
+                    "scope": "PUBLIC",
+                    "texture": {
+                        "key": "AdrenalineSkill"
+                    },
+                    "originY": 0,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "fa2558ab-af3d-49b5-b62c-260e328b1c83",
+                    "label": "focusSkill",
+                    "scope": "PUBLIC",
+                    "texture": {
+                        "key": "FocusSkill"
+                    },
+                    "originY": 0,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "53fb6b91-51ff-4b29-ae80-038853907d87",
+                    "label": "rageSkill",
+                    "scope": "PUBLIC",
+                    "texture": {
+                        "key": "RageSkill"
+                    },
+                    "originY": 0,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "eade0fe2-5057-4eac-ad5d-01782cba4677",
+                    "label": "angerSkill",
+                    "scope": "PUBLIC",
+                    "texture": {
+                        "key": "AngerSkill"
+                    },
+                    "originY": 0,
+                    "visible": false
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

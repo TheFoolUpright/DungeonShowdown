@@ -149,14 +149,14 @@ class Ending extends Phaser.Scene {
 			this.draw.visible = true
 		}
 
-		this.confirmButton.on("pointerdown", () =>{
+		this.confirmButton.on("pointerdown", () => {
 			ButtonSFX.play()
 			this.EndMatch()
 		})
 
 	}
 
-	EndMatch(){
+	EndMatch() {
 		var xhttp = new XMLHttpRequest();
 
 		xhttp.onreadystatechange = () => {
@@ -164,7 +164,7 @@ class Ending extends Phaser.Scene {
 				var data = JSON.parse(xhttp.responseText)
 				console.log(data)
 
-				if (xhttp.status == 200){
+				if (xhttp.status == 200) {
 					this.scene.start("JoinMatch", data);
 				}
 			}

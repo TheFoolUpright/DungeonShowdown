@@ -7,9 +7,19 @@
                 "key": "Adrenaline"
             },
             {
+                "url": "assets/opponent/AdrenalineSkill.png",
+                "type": "image",
+                "key": "AdrenalineSkill"
+            },
+            {
                 "url": "assets/card/Anger.png",
                 "type": "image",
                 "key": "Anger"
+            },
+            {
+                "url": "assets/opponent/AngerSkill.png",
+                "type": "image",
+                "key": "AngerSkill"
             },
             {
                 "url": "assets/ui/Attack.png",
@@ -234,6 +244,11 @@
                 "key": "Focus"
             },
             {
+                "url": "assets/opponent/FocusSkill.png",
+                "type": "image",
+                "key": "FocusSkill"
+            },
+            {
                 "url": "assets/card/Ghost.png",
                 "type": "image",
                 "key": "Ghost"
@@ -257,6 +272,11 @@
                 "url": "assets/card/Heal.png",
                 "type": "image",
                 "key": "Heal"
+            },
+            {
+                "url": "assets/opponent/HealSkill.png",
+                "type": "image",
+                "key": "HealSkill"
             },
             {
                 "url": "assets/ui/HealthBar.png",
@@ -450,6 +470,11 @@
                 "key": "PrefabPlayerDefense"
             },
             {
+                "url": "src/prefabs/PrefabPlayerSkills.js",
+                "type": "script",
+                "key": "PrefabPlayerSkills"
+            },
+            {
                 "url": "src/prefabs/PrefabStats.js",
                 "type": "script",
                 "key": "PrefabStats"
@@ -458,6 +483,11 @@
                 "url": "assets/card/Rage.png",
                 "type": "image",
                 "key": "Rage"
+            },
+            {
+                "url": "assets/opponent/RageSkill.png",
+                "type": "image",
+                "key": "RageSkill"
             },
             {
                 "url": "assets/opponent/Recovery Hit.png",

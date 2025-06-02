@@ -840,6 +840,7 @@ app.put("/joinMatch", (req, res) => {
 
 app.post("/endGame", (req, res) => {
     UpdateMatchFinished()
+    
     function UpdateMatchFinished() {
         connection.query("UPDATE game_match SET is_match_finished = 1 WHERE match_id = ?", [req.session.matchId],
             function(err, rows, fields) {
@@ -3385,7 +3386,7 @@ app.post("/setupShowdown", (req, res) => {
         )
     }
 
-    function WhoIsPlayerOne(state){
+    function WhoIsPlayerOne(state) {
         connection.query("SELECT player_1_id \
                     FROM game_match \
                     WHERE match_id = ?;", [req.session.matchId],
