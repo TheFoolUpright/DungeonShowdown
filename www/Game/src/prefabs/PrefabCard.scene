@@ -20,13 +20,24 @@
             "hitArea.height": 436.4214080647836,
             "list": [
                 {
+                    "type": "Image",
+                    "id": "ff45461d-3081-4316-9dc3-41a68e0b2929",
+                    "label": "cardDescriptionTextBox",
+                    "scope": "PUBLIC",
+                    "texture": {
+                        "key": "TextBox"
+                    },
+                    "y": -500,
+                    "originY": 0,
+                    "visible": false
+                },
+                {
                     "type": "Text",
                     "id": "eda211a7-946d-40d1-87c6-29ac4d5014f2",
                     "label": "cardDescription",
                     "scope": "PUBLIC",
-                    "y": -260,
+                    "y": -500,
                     "originX": 0.5,
-                    "originY": 1,
                     "visible": false,
                     "text": "Take no damage from one of the opponent's attacks and hit them back for half of their might",
                     "paddingLeft": 5,
@@ -823,12 +834,6 @@
                     "y": -37
                 },
                 {
-                    "prefabId": "7028a0e2-cd14-44b7-b2a4-68dac16ece00",
-                    "id": "0dc21418-28d1-4973-b2a8-45b31b3aad4b",
-                    "label": "onAwakeScript",
-                    "scope": "NESTED_PREFAB"
-                },
-                {
                     "type": "Container",
                     "id": "3633ac4f-6b1a-4c2e-a667-7cb20d11567b",
                     "label": "option1_1_1Container",
@@ -1115,6 +1120,12 @@
                             "y": 100
                         }
                     ]
+                },
+                {
+                    "prefabId": "7028a0e2-cd14-44b7-b2a4-68dac16ece00",
+                    "id": "0dc21418-28d1-4973-b2a8-45b31b3aad4b",
+                    "label": "onAwakeScript",
+                    "scope": "NESTED_PREFAB"
                 }
             ]
         }
