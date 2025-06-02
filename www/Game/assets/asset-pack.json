@@ -253,6 +253,16 @@
                 "key": "InsightBig"
             },
             {
+                "url": "assets/background/JoinMatchBackground.png",
+                "type": "image",
+                "key": "JoinMatchBackground"
+            },
+            {
+                "url": "assets/background/JoinMatchBackgroundBlur.png",
+                "type": "image",
+                "key": "JoinMatchBackgroundBlur"
+            },
+            {
                 "url": "assets/ui/Max Health.png",
                 "type": "image",
                 "key": "Max Health"

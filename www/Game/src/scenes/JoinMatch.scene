@@ -10,6 +10,16 @@
     },
     "displayList": [
         {
+            "type": "Image",
+            "id": "1ba4c3a9-ac9e-427b-97f2-9abaa2bfeadf",
+            "label": "joinMatchBackground",
+            "texture": {
+                "key": "JoinMatchBackground"
+            },
+            "x": 960,
+            "y": 540
+        },
+        {
             "prefabId": "2f15ddb5-a4d8-4a13-9237-ebf5b4a7f47e",
             "id": "e364854c-3bc0-4dc1-809f-0c61ef63ba43",
             "unlock": [

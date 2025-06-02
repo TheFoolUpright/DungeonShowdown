@@ -18,6 +18,9 @@ class JoinMatch extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
+		// joinMatchBackground
+		this.add.image(960, 540, "JoinMatchBackground");
+
 		// joinMatch
 		const joinMatch = new PrefabNextRoom(this, 1680, 800);
 		this.add.existing(joinMatch);
@@ -122,7 +125,7 @@ class JoinMatch extends Phaser.Scene {
 	create(data) {
 
 		this.editorCreate();
-		
+
 		this.loadPresets(data)
 		this.ButtonGlowEvents()
 		this.ButtonEvents()
@@ -131,7 +134,7 @@ class JoinMatch extends Phaser.Scene {
 			MenuBackgroundMusic.play()
 		}
 
-		
+
 	}
 
 	update(){
@@ -351,6 +354,11 @@ class JoinMatch extends Phaser.Scene {
 					}
 					else if (data.state == "MATCH_FOUND") {
 						if(MenuBackgroundMusic.isPlaying){
+							this.tweens.add({
+								targets:  MenuBackgroundMusic,
+								volume:   0,
+								duration: 500
+							});
 							MenuBackgroundMusic.stop()
 						}
 						this.scene.start("Dungeon", data)

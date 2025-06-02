@@ -16,10 +16,14 @@ class WaitingForMatch extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
-		// rectangle_1
-		const rectangle_1 = this.add.rectangle(868, 367, 128, 128);
-		rectangle_1.isFilled = true;
-		rectangle_1.fillColor = 14246462;
+		// joinMatchBackgroundBlur
+		this.add.image(960, 540, "JoinMatchBackgroundBlur");
+
+		// text_1
+		const text_1 = this.add.text(960, 540, "", {});
+		text_1.setOrigin(0.5, 0.5);
+		text_1.text = "Please Wait..\nWe're selecting the best opponent for you...";
+		text_1.setStyle({ "align": "center", "fontFamily": "Rockey", "fontSize": "64px", "stroke": "#000000ff", "strokeThickness":25});
 
 		this.events.emit("scene-awake");
 	}
@@ -27,7 +31,7 @@ class WaitingForMatch extends Phaser.Scene {
 	/* START-USER-CODE */
 
 	// Write your code here
-	
+
 
 	create() {
 
@@ -36,7 +40,7 @@ class WaitingForMatch extends Phaser.Scene {
 			MenuBackgroundMusic.play()
 		}
 		this.startInterval()
-		
+
 	}
 
 	startInterval(){
@@ -48,7 +52,7 @@ class WaitingForMatch extends Phaser.Scene {
 
 	GetMatchState(stateScene) {
 		var xhttp = new XMLHttpRequest();
-		
+
 		xhttp.onreadystatechange = () => {
 			if (xhttp.readyState == 4) {
 				var data = JSON.parse(xhttp.responseText)
@@ -61,7 +65,11 @@ class WaitingForMatch extends Phaser.Scene {
 					else if (data.state == "MATCH_FOUND"){
 						clearInterval(waitingForMatchInterval);
 						if(MenuBackgroundMusic.isPlaying){
-							MenuBackgroundMusic.stop()
+							stateScene.tweens.add({
+								targets:  MenuBackgroundMusic,
+								volume:   0,
+								duration: 500
+							});
 						}
 						stateScene.scene.start("Dungeon", data);
 					} 

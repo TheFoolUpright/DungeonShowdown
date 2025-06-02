@@ -42,7 +42,7 @@ class DungeonResult extends Phaser.Scene {
 		const descriptionText = this.add.text(968, 287, "", {});
 		descriptionText.setOrigin(0.5, 0.5);
 		descriptionText.text = "Thuds, crashes, and shrieks echo from afar... \nYour opponent just made a monstrous new friend!";
-		descriptionText.setStyle({ "fontFamily": "Rockey", "fontSize": "40px", "stroke": "#000000ff", "strokeThickness":11});
+		descriptionText.setStyle({ "align": "center", "fontFamily": "Rockey", "fontSize": "40px", "stroke": "#000000ff", "strokeThickness":11});
 
 		// moveInSceneActionScript (prefab fields)
 		moveInSceneActionScript.from = "RIGHT";

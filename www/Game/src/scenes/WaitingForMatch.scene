@@ -5,20 +5,34 @@
         "preloadPackFiles": [],
         "createMethodName": "editorCreate",
         "sceneKey": "WaitingForMatch",
-        "borderWidth": 1280,
-        "borderHeight": 720
+        "borderWidth": 1920,
+        "borderHeight": 1080
     },
     "displayList": [
         {
-            "type": "Rectangle",
-            "id": "1f346792-efdb-4b53-9b19-ecc5e2937a4b",
-            "label": "rectangle_1",
-            "x": 868,
-            "y": 367,
-            "isFilled": true,
-            "fillColor": "#d9623e",
-            "width": 128,
-            "height": 128
+            "type": "Image",
+            "id": "aa899abe-8c7f-4310-beee-0ad73830cbf8",
+            "label": "joinMatchBackgroundBlur",
+            "texture": {
+                "key": "JoinMatchBackgroundBlur"
+            },
+            "x": 960,
+            "y": 540
+        },
+        {
+            "type": "Text",
+            "id": "1581d614-43b5-4ee2-8c79-b814fe296652",
+            "label": "text_1",
+            "x": 960,
+            "y": 540,
+            "originX": 0.5,
+            "originY": 0.5,
+            "text": "Please Wait..\nWe're selecting the best opponent for you...",
+            "align": "center",
+            "fontFamily": "Rockey",
+            "fontSize": "64px",
+            "stroke": "#000000ff",
+            "strokeThickness": 25
         }
     ],
     "plainObjects": [],
