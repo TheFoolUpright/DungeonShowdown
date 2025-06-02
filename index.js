@@ -2032,7 +2032,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
                 
                 //Apply Normal, Heavy or Recovery Attack Damage
                 if (!isCounterOpponent && !isDoubleAttackOpponent && !isDodge && !isParry) {
-                    playerCurrentHealth = playerCurrentHealth + playerDefense - Math.ceil(opponentAttack * opponentDamage)
+                    playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - Math.ceil(opponentAttack * opponentDamage))
                     playerDefense = Math.max(0, playerDefense - Math.ceil(opponentAttack * opponentDamage))
                 }
                 
@@ -3463,7 +3463,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
                 
                 //Apply Normal, Heavy or Recovery Attack Damage
                 if (!isCounterOpponent && !isDoubleAttackOpponent && !isDodge && !isParry) {
-                    playerCurrentHealth = playerCurrentHealth + playerDefense - Math.ceil(opponentAttack * opponentDamage)
+                    playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - Math.ceil(opponentAttack * opponentDamage))
                     playerDefense = Math.max(0, playerDefense - Math.ceil(opponentAttack * opponentDamage))
                 }
                 
