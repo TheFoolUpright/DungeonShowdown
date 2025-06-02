@@ -354,6 +354,7 @@ class ShowdownResult extends Phaser.Scene {
 		this.loadOpponentAttack(data)
 		this.loadOpponentDefence(data)
 		this.loadCards(data)
+		this.loadOpponentDamage(data)
 
 		this.confirmButton.on("pointerdown", () => {
 			this.setupNextTurn()
@@ -622,6 +623,26 @@ class ShowdownResult extends Phaser.Scene {
 		xhttp.setRequestHeader("Content-Type", "application/json")
 
 		xhttp.send()
+	}
+
+	loadOpponentDamage(data) {
+		console.log(data.opponent_cards[0].current_health)
+		if (data.opponent_cards[0].current_health > 20) {
+			this.opponent.character.visible = true
+			this.opponent.characterRipped1.visible = false
+			this.opponent.characterRipped2.visible = false
+		}
+		if ((data.opponent_cards[0].current_health <= 20) && (data.opponent_cards[0].current_health > 10)) {
+			this.opponent.character.visible = false
+			this.opponent.characterRipped1.visible = true
+			this.opponent.characterRipped2.visible = false
+		}
+		if (data.opponent_cards[0].current_health <= 10 || !data.opponent_cards[0].current_health) {
+			this.opponent.character.visible = false
+			this.opponent.characterRipped1.visible = false
+			this.opponent.characterRipped2.visible = true
+		}
+		return
 	}
 
 	update(time, dt) {

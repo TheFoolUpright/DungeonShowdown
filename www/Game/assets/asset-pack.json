@@ -72,6 +72,16 @@
                 "key": "Character"
             },
             {
+                "url": "assets/opponent/Character Ripped 1.png",
+                "type": "image",
+                "key": "Character Ripped 1"
+            },
+            {
+                "url": "assets/opponent/Character Ripped 2.png",
+                "type": "image",
+                "key": "Character Ripped 2"
+            },
+            {
                 "url": "assets/opponent/CharacterColor.png",
                 "type": "image",
                 "key": "CharacterColor"

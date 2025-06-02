@@ -13,6 +13,18 @@ class PrefabOpponent extends Phaser.GameObjects.Container {
 		character.setOrigin(0.56, 0.5);
 		this.add(character);
 
+		// characterRipped1
+		const characterRipped1 = scene.add.image(0, 30, "Character Ripped 1");
+		characterRipped1.setOrigin(0.56, 0.5);
+		characterRipped1.visible = false;
+		this.add(characterRipped1);
+
+		// characterRipped2
+		const characterRipped2 = scene.add.image(0, 30, "Character Ripped 2");
+		characterRipped2.setOrigin(0.56, 0.5);
+		characterRipped2.visible = false;
+		this.add(characterRipped2);
+
 		// characterColor
 		const characterColor = scene.add.image(0, 30, "CharacterColor");
 		characterColor.setOrigin(0.56, 0.5);
@@ -26,6 +38,8 @@ class PrefabOpponent extends Phaser.GameObjects.Container {
 		this.add(opponentName);
 
 		this.character = character;
+		this.characterRipped1 = characterRipped1;
+		this.characterRipped2 = characterRipped2;
 		this.characterColor = characterColor;
 		this.opponentName = opponentName;
 
@@ -36,6 +50,10 @@ class PrefabOpponent extends Phaser.GameObjects.Container {
 
 	/** @type {Phaser.GameObjects.Image} */
 	character;
+	/** @type {Phaser.GameObjects.Image} */
+	characterRipped1;
+	/** @type {Phaser.GameObjects.Image} */
+	characterRipped2;
 	/** @type {Phaser.GameObjects.Image} */
 	characterColor;
 	/** @type {Phaser.GameObjects.Text} */
