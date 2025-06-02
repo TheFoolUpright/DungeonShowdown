@@ -373,6 +373,17 @@
                     ]
                 }
             ]
+        },
+        {
+            "prefabId": "9f05886b-ac70-4db9-b8ab-e2d528a5d6c4",
+            "id": "39828c9b-d46a-4f0d-a05b-468cdb645dc5",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "opponentAdrenaline",
+            "x": 968,
+            "y": 413
         }
     ],
     "plainObjects": [],

@@ -197,6 +197,10 @@ class ShowdownResult extends Phaser.Scene {
 		// moveInSceneActionScript_3
 		const moveInSceneActionScript_3 = new MoveInSceneActionScript(opponenetCard1.onAwakeScript);
 
+		// opponentAdrenaline
+		const opponentAdrenaline = new PrefabOpponentSkills(this, 968, 413);
+		this.add.existing(opponentAdrenaline);
+
 		// moveInSceneActionScript_4 (prefab fields)
 		moveInSceneActionScript_4.from = "LEFT";
 
