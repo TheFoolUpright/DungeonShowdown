@@ -146,6 +146,11 @@
                 "key": "dark-dungeon-game-hiphop-20241015-252251"
             },
             {
+                "url": "assets/ui/Defense.png",
+                "type": "image",
+                "key": "Defense"
+            },
+            {
                 "url": "assets/dino.png",
                 "key": "dino",
                 "type": "image"

@@ -416,7 +416,7 @@ class Dungeon extends Phaser.Scene {
 			this.slot1Card.cardName.text = data.card[0].card_name
 			this.slot1Card.cardImage.setTexture(data.card[0].card_image_path)
 			this.slot1Card.cardDescription.text = data.card[0].card_description
-			this.MakeCardIconsVisible(this.slot1Card, data.card[0])
+			this.MakeDungeonCardIconsVisible(this.slot1Card, data.card[0])
 		}
 		else {
 			this.slot1Card.cardName.text = "? ? ?"
@@ -440,7 +440,7 @@ class Dungeon extends Phaser.Scene {
 			this.slot2Card.cardName.text = data.card[1].card_name
 			this.slot2Card.cardImage.setTexture(data.card[1].card_image_path)
 			this.slot2Card.cardDescription.text = data.card[1].card_description
-			this.MakeCardIconsVisible(this.slot2Card, data.card[1])
+			this.MakeDungeonCardIconsVisible(this.slot2Card, data.card[1])
 		}
 		else {
 			this.slot2Card.cardName.text = "? ? ?"
@@ -464,7 +464,7 @@ class Dungeon extends Phaser.Scene {
 			this.slot3Card.cardName.text = data.card[2].card_name
 			this.slot3Card.cardImage.setTexture(data.card[2].card_image_path)
 			this.slot3Card.cardDescription.text = data.card[2].card_description
-			this.MakeCardIconsVisible(this.slot3Card, data.card[2])
+			this.MakeDungeonCardIconsVisible(this.slot3Card, data.card[2])
 		}
 		else {
 			this.slot3Card.cardName.text = "? ? ?"
@@ -479,7 +479,7 @@ class Dungeon extends Phaser.Scene {
 		return
 	}
 
-	MakeCardIconsVisible(card, cardData){
+	MakeDungeonCardIconsVisible(card, cardData){
 		var iterator = 0
 		var displayInfo = {}
 

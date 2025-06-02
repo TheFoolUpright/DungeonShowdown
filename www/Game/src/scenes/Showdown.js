@@ -336,8 +336,8 @@ class Showdown extends Phaser.Scene {
 		previousInsight = insight
 		previousDamage = damage
 
-		this.statsContainer.healthText.text = currentHealth + "/" +  maxHealth
-		this.statsContainer.insightText.text = insight + "/10"
+		this.statsContainer.healthText.text = currentHealth +"/" +  maxHealth
+		this.statsContainer.insightText.text = insight +"/10"
 		this.statsContainer.energyText.text = energy
 		this.statsContainer.mightText.text = damage
 
@@ -358,7 +358,16 @@ class Showdown extends Phaser.Scene {
 
 		this.normalAttackSlot.cardName.text = data.card[0].card_name
 		this.normalAttackSlot.cardImage.setTexture(data.card[0].card_image_path)
-		this.normalAttackSlot.cardDescription.text
+		this.normalAttackSlot.cardDescription.text = data.card[0].card_description
+		
+		this.normalAttackSlot.option1_1CostIcon1.setTexture("Damage")
+		this.normalAttackSlot.option1_1CostText1.text = "x" + data.card[0].card_attack.replace(".0", "")
+
+		this.normalAttackSlot.option1_1RewardIcon1.setTexture("Attack")
+		this.normalAttackSlot.option1_1RewardText1.text = ": " + (data.card[0].card_attack * previousDamage)
+		
+		this.normalAttackSlot.option1_1Container.visible = true
+
 
 		//Special Attack
 		specialAttackCard = data.card[1]
@@ -370,7 +379,8 @@ class Showdown extends Phaser.Scene {
 		if(this.specialAttackSlot.isVisible) {
 			this.specialAttackSlot.cardName.text = data.card[1].card_name
 			this.specialAttackSlot.cardImage.setTexture(data.card[1].card_image_path)
-			this.specialAttackSlot.cardDescription.text
+			this.specialAttackSlot.cardDescription.text = data.card[1].card_description
+			this.MakeShowdownCardIconsVisible(this.specialAttackSlot, data.card[1])
 		}
 		else {
 			this.specialAttackSlot.cardName.text = "? ? ?"
@@ -393,7 +403,8 @@ class Showdown extends Phaser.Scene {
 		if(this.defenseSlot.isVisible) {
 			this.defenseSlot.cardName.text = data.card[2].card_name
 			this.defenseSlot.cardImage.setTexture(data.card[2].card_image_path)
-			this.defenseSlot.cardDescription.text
+			this.defenseSlot.cardDescription.text = data.card[2].card_description
+			this.MakeShowdownCardIconsVisible(this.defenseSlot, data.card[2])
 		}
 		else {
 			this.defenseSlot.cardName.text = "? ? ?"
@@ -416,24 +427,8 @@ class Showdown extends Phaser.Scene {
 		if(this.skillSlot.isVisible) {
 			this.skillSlot.cardName.text = data.card[3].card_name
 			this.skillSlot.cardImage.setTexture(data.card[3].card_image_path)
-			this.skillSlot.cardDescription.text
-
-			if(data.card[3].card_id == playerShowdownAnimations.Anger){
-
-			}
-			else if(data.card[3].card_id == playerShowdownAnimations.Rage){
-				
-			}
-			else if(data.card[3].card_id == playerShowdownAnimations.Focus){
-				
-			}
-			else if(data.card[3].card_id == playerShowdownAnimations.Adrenaline){
-				
-			}
-			else if(data.card[3].card_id == playerShowdownAnimations.Healing){
-				
-			}
-
+			this.skillSlot.cardDescription.text = data.card[3].card_description
+			this.MakeShowdownCardIconsVisible(this.skillSlot, data.card[3])
 		}
 		else {
 			this.skillSlot.cardName.text = "? ? ?"
@@ -499,6 +494,164 @@ class Showdown extends Phaser.Scene {
 		xhttp.send(JSON.stringify(dataToSend))
 	}
 
+	MakeShowdownCardIconsVisible(card, cardData){
+		if(cardData.card_id == playerShowdownAnimations.HeavyAttack.id){
+			card.option1_1_1CostIcon1.setTexture("Energy")
+			card.option1_1_1CostText1.text = cardData.card_energy
+
+			card.option1_1_1CalcIcon1.setTexture("Damage")
+			card.option1_1_1CalcText1.text = "x" + cardData.card_attack
+
+			card.option1_1_1TotalIcon1.setTexture("Attack")
+			card.option1_1_1TotalText1.text = ": " + Math.round(cardData.card_attack * previousDamage)
+			
+			card.option1_1_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.DoubleAttack.id){
+			card.option1_1_1CostIcon1.setTexture("Energy")
+			card.option1_1_1CostText1.text = cardData.card_energy
+
+			card.option1_1_1CalcIcon1.setTexture("Damage")
+			card.option1_1_1CalcText1.text = "x" + cardData.card_attack
+			card.option1_1_1TotalIcon1.setTexture("Attack")
+			card.option1_1_1TotalText1.text = ": " + Math.round(cardData.card_attack * previousDamage) +" x 2"
+			
+			card.option1_1_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.RecoveryAttack.id){
+			card.attackOption2_1RewardIcon.setTexture("Energy")
+			card.attackOption2_1RewardText.text = "+" + cardData.card_energy
+
+			card.attackOption2_1CalcIcon.setTexture("Damage")
+			card.attackOption2_1CalcText.text = " x" + cardData.card_attack//.replace(".0", "")
+
+			card.attackOption2_1TotalIcon.setTexture("Attack")
+			card.attackOption2_1TotalText.text = ": " + Math.round(cardData.card_attack * previousDamage)
+			
+			card.attackOption2_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.CounterAttack.id){
+			card.option1_1_1CostIcon1.setTexture("Energy")
+			card.option1_1_1CostText1.text = cardData.card_energy
+
+			card.option1_1_1CalcIcon1.setTexture("Damage")
+			card.option1_1_1CalcText1.text = "x" + Math.round(cardData.card_attack)
+
+			card.option1_1_1TotalIcon1.setTexture("Attack")
+			card.option1_1_1TotalText1.text = ": " + Math.round(cardData.card_attack * previousDamage)
+			
+			card.option1_1_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.ClumsyBlock.id){
+			card.option1_1_1CostIcon1.setTexture("Insight")
+			card.option1_1_1CostText1.text = cardData.card_insight
+
+			card.option1_1_1CalcIcon1.setTexture("Max Health")
+			card.option1_1_1CalcText1.text = "-20 x 1/3"
+
+			card.option1_1_1TotalIcon1.setTexture("Defense")
+			card.option1_1_1TotalText1.text = ": " + Math.round(cardData.card_defense * previousMaxHealth)
+			
+			card.option1_1_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.SolidBlock.id){
+			card.option1_1_1CostIcon1.setTexture("Insight")
+			card.option1_1_1CostText1.text = cardData.card_insight
+
+			card.option1_1_1CalcIcon1.setTexture("Max Health")
+			card.option1_1_1CalcText1.text = "-20 x 1/2"
+
+			card.option1_1_1TotalIcon1.setTexture("Defense")
+			card.option1_1_1TotalText1.text = ": " + Math.round(cardData.card_defense * previousMaxHealth)
+			
+			card.option1_1_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.ImpressiveBlock.id){
+			card.option1_1_1CostIcon1.setTexture("Insight")
+			card.option1_1_1CostText1.text = cardData.card_insight
+
+			card.option1_1_1CalcIcon1.setTexture("Max Health")
+			card.option1_1_1CalcText1.text = "-20 x 2/3"
+
+			card.option1_1_1TotalIcon1.setTexture("Defense")
+			card.option1_1_1TotalText1.text = ": " + Math.round(cardData.card_defense * previousMaxHealth)
+			
+			card.option1_1_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.Dodge.id){
+			card.option2RewardIcon1.setTexture("Energy")
+			card.option2RewardText1.text = cardData.card_energy
+
+			card.option2RewardIcon2.setTexture("Insight")
+			card.option2RewardText2.text = cardData.card_insight
+
+			card.option2Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.Parry.id){
+			card.option2_1_1CostIcon1.setTexture("Energy")
+			card.option2_1_1CostText1.text = cardData.card_energy
+
+			card.option2_1_1CostIcon2.setTexture("Insight")
+			card.option2_1_1CostText2.text = cardData.card_insight
+
+			card.option2_1_1CalcIcon.setTexture("Damage")
+			card.option2_1_1CalcText.text = "x" + Math.round(cardData.card_attack)
+
+			card.option2_1_1TotalIcon.setTexture("Attack")
+			card.option2_1_1TotalText.text = ": " + Math.round(cardData.card_attack * previousDamage)
+			
+			card.option2_1_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.Anger.id){
+			card.option1_1CostIcon1.setTexture("Energy")
+			card.option1_1CostText1.text = cardData.card_energy
+
+			card.option1_1RewardIcon1.setTexture("Damage")
+			card.option1_1RewardText1.text = "+" + cardData.card_damage
+
+			card.option1_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.Rage.id){
+			card.option1_1CostIcon1.setTexture("Energy")
+			card.option1_1CostText1.text = cardData.card_energy
+
+			card.option1_1RewardIcon1.setTexture("Damage")
+			card.option1_1RewardText1.text = "+" + cardData.card_damage
+
+			card.option1_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.Focus.id){
+			card.option1_1CostIcon1.setTexture("Energy")
+			card.option1_1CostText1.text = cardData.card_energy
+
+			card.option1_1RewardIcon1.setTexture("Insight")
+			card.option1_1RewardText1.text = "+" + cardData.card_insight
+
+			card.option1_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.Adrenaline.id){
+			card.option1_2CostIcon1.setTexture("CurrentHealth")
+			card.option1_2CostText1.text = cardData.card_current_health
+
+			card.option1_2RewardIcon1.setTexture("Energy")
+			card.option1_2RewardText1.text = "+" + cardData.card_energy
+
+			card.option1_2RewardIcon2.setTexture("Insight")
+			card.option1_2RewardText2.text = "+" + cardData.card_insight
+
+			card.option1_2Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.Healing.id){
+			card.option1_1CostIcon1.setTexture("Energy")
+			card.option1_1CostText1.text = cardData.card_energy
+
+			card.option1_1RewardIcon1.setTexture("CurrentHealth")
+			card.option1_1RewardText1.text = "+" + cardData.card_current_health
+
+			card.option1_1Container.visible = true
+		}
+
+	}
 	update() {
 		//If any card is selected make the button visible
 		if (this.normalAttackSlot.isSelected || this.specialAttackSlot.isSelected || this.defenseSlot.isSelected || this.skillSlot.isSelected) {

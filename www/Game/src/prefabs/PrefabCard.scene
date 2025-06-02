@@ -215,6 +215,32 @@
                     "list": [
                         {
                             "type": "Text",
+                            "id": "09544179-533b-427d-9b55-d99a2a67f116",
+                            "label": "option1_1RewardText1",
+                            "scope": "PUBLIC",
+                            "x": 15,
+                            "y": 160,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "32px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "18d5fac2-9fc8-4a90-a6aa-e4cb6a3c7606",
+                            "label": "option1_1RewardIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenIconSmall"
+                            },
+                            "x": -20,
+                            "y": 160
+                        },
+                        {
+                            "type": "Text",
                             "id": "22981238-7713-4596-b7b9-70ac6cef5d4e",
                             "label": "option1_1CostText1",
                             "scope": "PUBLIC",
@@ -238,32 +264,6 @@
                             },
                             "x": -20,
                             "y": 100
-                        },
-                        {
-                            "type": "Image",
-                            "id": "18d5fac2-9fc8-4a90-a6aa-e4cb6a3c7606",
-                            "label": "option1_1RewardIcon1",
-                            "scope": "PUBLIC",
-                            "texture": {
-                                "key": "HiddenIconSmall"
-                            },
-                            "x": -20,
-                            "y": 160
-                        },
-                        {
-                            "type": "Text",
-                            "id": "09544179-533b-427d-9b55-d99a2a67f116",
-                            "label": "option1_1RewardText1",
-                            "scope": "PUBLIC",
-                            "x": 15,
-                            "y": 160,
-                            "originX": 0.5,
-                            "originY": 0.5,
-                            "text": "+ 5",
-                            "fontFamily": "Rockey",
-                            "fontSize": "32px",
-                            "color": "#000000ff",
-                            "stroke": "#000000ff"
                         }
                     ]
                 },
@@ -275,6 +275,58 @@
                     "y": -1,
                     "visible": false,
                     "list": [
+                        {
+                            "type": "Text",
+                            "id": "efed48a7-10ff-4ee8-a46d-8159b30a6361",
+                            "label": "option1_2RewardText2",
+                            "scope": "PUBLIC",
+                            "x": 60,
+                            "y": 160,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "32px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "52d94fda-fe40-4050-a009-a7252ed0c625",
+                            "label": "option1_2RewardIcon2",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenIconSmall"
+                            },
+                            "x": 25,
+                            "y": 160
+                        },
+                        {
+                            "type": "Text",
+                            "id": "bc08e451-6a1b-402a-ac74-caa44fcd2af5",
+                            "label": "option1_2RewardText1",
+                            "scope": "PUBLIC",
+                            "x": -20,
+                            "y": 160,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "32px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "22e058e6-0ff1-4755-94a3-e9e37c1e0c4e",
+                            "label": "option1_2RewardIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenIconSmall"
+                            },
+                            "x": -55,
+                            "y": 160
+                        },
                         {
                             "type": "Text",
                             "id": "db78b62d-775b-4919-b8ff-7fc659f2fd4b",
@@ -300,58 +352,6 @@
                             },
                             "x": -20,
                             "y": 100
-                        },
-                        {
-                            "type": "Image",
-                            "id": "22e058e6-0ff1-4755-94a3-e9e37c1e0c4e",
-                            "label": "option1_2RewardIcon1",
-                            "scope": "PUBLIC",
-                            "texture": {
-                                "key": "HiddenIconSmall"
-                            },
-                            "x": -55,
-                            "y": 160
-                        },
-                        {
-                            "type": "Text",
-                            "id": "bc08e451-6a1b-402a-ac74-caa44fcd2af5",
-                            "label": "option1_2RewardText1",
-                            "scope": "PUBLIC",
-                            "x": -20,
-                            "y": 160,
-                            "originX": 0.5,
-                            "originY": 0.5,
-                            "text": "+ 5",
-                            "fontFamily": "Rockey",
-                            "fontSize": "32px",
-                            "color": "#000000ff",
-                            "stroke": "#000000ff"
-                        },
-                        {
-                            "type": "Image",
-                            "id": "52d94fda-fe40-4050-a009-a7252ed0c625",
-                            "label": "option1_2RewardIcon2",
-                            "scope": "PUBLIC",
-                            "texture": {
-                                "key": "HiddenIconSmall"
-                            },
-                            "x": 25,
-                            "y": 160
-                        },
-                        {
-                            "type": "Text",
-                            "id": "efed48a7-10ff-4ee8-a46d-8159b30a6361",
-                            "label": "option1_2RewardText2",
-                            "scope": "PUBLIC",
-                            "x": 60,
-                            "y": 160,
-                            "originX": 0.5,
-                            "originY": 0.5,
-                            "text": "+ 5",
-                            "fontFamily": "Rockey",
-                            "fontSize": "32px",
-                            "color": "#000000ff",
-                            "stroke": "#000000ff"
                         }
                     ]
                 },
@@ -829,6 +829,294 @@
                     "id": "0dc21418-28d1-4973-b2a8-45b31b3aad4b",
                     "label": "onAwakeScript",
                     "scope": "NESTED_PREFAB"
+                },
+                {
+                    "type": "Container",
+                    "id": "3633ac4f-6b1a-4c2e-a667-7cb20d11567b",
+                    "label": "option1_1_1Container",
+                    "scope": "PUBLIC",
+                    "x": -3,
+                    "y": -7,
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Text",
+                            "id": "ae21bd34-cc55-4581-a077-0c524ed24404",
+                            "label": "option1_1_1TotalText1",
+                            "scope": "PUBLIC",
+                            "y": 184,
+                            "originY": 0.5,
+                            "text": "- 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "32px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "29805dde-3cd2-4eab-9d8a-2ce0f345a413",
+                            "label": "option1_1_1TotalIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenIconSmall"
+                            },
+                            "x": -19,
+                            "y": 184
+                        },
+                        {
+                            "type": "Text",
+                            "id": "3c69f731-14cd-4e6a-ae29-09da67d23508",
+                            "label": "option1_1_1CalcText1",
+                            "scope": "PUBLIC",
+                            "y": 141,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "32px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "dfe41cfe-8219-4d50-b34e-5d2562bfa007",
+                            "label": "option1_1_1CalcIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenIconSmall"
+                            },
+                            "x": -20,
+                            "y": 141
+                        },
+                        {
+                            "type": "Text",
+                            "id": "af0b9c71-56a5-4dab-9410-3b757b5dd1be",
+                            "label": "option1_1_1CostText1",
+                            "scope": "PUBLIC",
+                            "x": 15,
+                            "y": 100,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "- 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "32px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "6c9028f1-e10f-4186-90f3-e7de147757f7",
+                            "label": "option1_1_1CostIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenIconSmall"
+                            },
+                            "x": -20,
+                            "y": 100
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "ce9b965d-c983-44f0-9b2b-1b5ca299dfe6",
+                    "label": "attackOption2_1Container",
+                    "scope": "PUBLIC",
+                    "x": -1,
+                    "y": 3,
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Text",
+                            "id": "0f818cb5-80df-4d22-af99-1b56010632a8",
+                            "label": "attackOption2_1TotalText",
+                            "scope": "PUBLIC",
+                            "x": 15,
+                            "y": 160,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "32px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "abdd4fe7-4bed-4760-ab4d-7c8d7296d0dc",
+                            "label": "attackOption2_1TotalIcon",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenIconSmall"
+                            },
+                            "x": -20,
+                            "y": 160
+                        },
+                        {
+                            "type": "Text",
+                            "id": "596598a8-93ce-489d-bc1b-c27294fd5e2b",
+                            "label": "attackOption2_1CalcText",
+                            "scope": "PUBLIC",
+                            "x": 45,
+                            "y": 100,
+                            "originY": 0.5,
+                            "text": "- 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "32px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "34793f31-83da-4fa7-ba4f-c29325d76fad",
+                            "label": "attackOption2_1CalcIcon",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenIconSmall"
+                            },
+                            "x": 25,
+                            "y": 100
+                        },
+                        {
+                            "type": "Text",
+                            "id": "d28cb7f5-12c9-4fb7-a1a7-14254e7fe9a4",
+                            "label": "attackOption2_1RewardText",
+                            "scope": "PUBLIC",
+                            "x": -20,
+                            "y": 100,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "- 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "32px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "d8ccff15-a7e7-46a6-97ee-602ce21ec126",
+                            "label": "attackOption2_1RewardIcon",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenIconSmall"
+                            },
+                            "x": -55,
+                            "y": 100
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "e4976c64-2b3f-487a-ad1b-d5450a38c193",
+                    "label": "option2_1_1Container",
+                    "scope": "PUBLIC",
+                    "x": -3,
+                    "y": -5,
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Text",
+                            "id": "3234c20a-ef91-4148-83d0-3fcd6546c806",
+                            "label": "option2_1_1TotalText",
+                            "scope": "PUBLIC",
+                            "x": 18,
+                            "y": 177,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "32px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "2938a50e-2525-47ee-9bd9-1d3708f85200",
+                            "label": "option2_1_1TotalIcon",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenIconSmall"
+                            },
+                            "x": -17,
+                            "y": 177
+                        },
+                        {
+                            "type": "Text",
+                            "id": "946989be-5c32-4a37-b5b8-d38ca09a211d",
+                            "label": "option2_1_1CalcText",
+                            "scope": "PUBLIC",
+                            "x": 15,
+                            "y": 140,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "+ 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "32px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "62469088-a755-41d4-8feb-55065d63be39",
+                            "label": "option2_1_1CalcIcon",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenIconSmall"
+                            },
+                            "x": -20,
+                            "y": 140
+                        },
+                        {
+                            "type": "Text",
+                            "id": "6c0bf73d-8ed7-4905-988e-8116d4c75985",
+                            "label": "option2_1_1CostText2",
+                            "scope": "PUBLIC",
+                            "x": 60,
+                            "y": 100,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "- 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "32px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "31031374-9645-4a6d-a6f8-1c1b676edc36",
+                            "label": "option2_1_1CostIcon2",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenIconSmall"
+                            },
+                            "x": 25,
+                            "y": 100
+                        },
+                        {
+                            "type": "Text",
+                            "id": "31abf557-a6ee-4863-810f-58c666b61dc6",
+                            "label": "option2_1_1CostText1",
+                            "scope": "PUBLIC",
+                            "x": -20,
+                            "y": 100,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "- 5",
+                            "fontFamily": "Rockey",
+                            "fontSize": "32px",
+                            "color": "#000000ff",
+                            "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "74da0de5-1257-4db4-b380-ce36353f1f1e",
+                            "label": "option2_1_1CostIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenIconSmall"
+                            },
+                            "x": -55,
+                            "y": 100
+                        }
+                    ]
                 }
             ]
         }
