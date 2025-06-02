@@ -46,7 +46,31 @@
                 "key": "GirlWins"
             },
             "x": 960,
-            "y": 541,
+            "y": 540,
+            "visible": false
+        },
+        {
+            "type": "Image",
+            "id": "f398ef17-e6e6-40ad-8c5a-522ac101d2d0",
+            "label": "girlWinsBoyColors",
+            "scope": "PUBLIC",
+            "texture": {
+                "key": "Girl Wins Boy Colors"
+            },
+            "x": 1301.7168,
+            "y": 945.6795,
+            "visible": false
+        },
+        {
+            "type": "Image",
+            "id": "805f6425-3313-4e9c-bd3b-985b6844d4c9",
+            "label": "girlWins_GirlColors",
+            "scope": "PUBLIC",
+            "texture": {
+                "key": "Girl Wins Girl Colors"
+            },
+            "x": 779.8259,
+            "y": 649.6259,
             "visible": false
         },
         {
@@ -58,8 +82,29 @@
                 "key": "BoyWins"
             },
             "x": 960,
-            "y": 540,
-            "visible": false
+            "y": 540
+        },
+        {
+            "type": "Image",
+            "id": "b95a2242-d4bf-4a55-801f-d8264d6216d1",
+            "label": "boyWinsBoyColors",
+            "scope": "PUBLIC",
+            "texture": {
+                "key": "Boy Wins Boy Colors"
+            },
+            "x": 1450.6907,
+            "y": 804.1161
+        },
+        {
+            "type": "Image",
+            "id": "21a6ece0-4339-4ad4-ac43-f5b9d96b1584",
+            "label": "boyWinsGirlColors",
+            "scope": "PUBLIC",
+            "texture": {
+                "key": "Boy Wins Girl Colors"
+            },
+            "x": 892.6917,
+            "y": 760.4895
         },
         {
             "type": "Image",
@@ -70,7 +115,31 @@
                 "key": "Draw"
             },
             "x": 960,
-            "y": 539,
+            "y": 540,
+            "visible": false
+        },
+        {
+            "type": "Image",
+            "id": "8617cc5a-058e-4180-ad8f-a9d6440b359d",
+            "label": "drawBoyColors",
+            "scope": "PUBLIC",
+            "texture": {
+                "key": "Draw Boy Colors"
+            },
+            "x": 1301.7168,
+            "y": 945.6795,
+            "visible": false
+        },
+        {
+            "type": "Image",
+            "id": "50812751-7aa3-422a-8ac0-36d69db2b92c",
+            "label": "drawGirlColors",
+            "scope": "PUBLIC",
+            "texture": {
+                "key": "Draw Girl Colors"
+            },
+            "x": 892.1152,
+            "y": 758.3424,
             "visible": false
         },
         {

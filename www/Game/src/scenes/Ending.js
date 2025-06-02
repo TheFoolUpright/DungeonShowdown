@@ -27,16 +27,37 @@ class Ending extends Phaser.Scene {
 		endingText.setWordWrapWidth(290);
 
 		// girlWins
-		const girlWins = this.add.image(960, 541, "GirlWins");
+		const girlWins = this.add.image(960, 540, "GirlWins");
 		girlWins.visible = false;
+
+		// girlWinsBoyColors
+		const girlWinsBoyColors = this.add.image(1301.7168, 945.6795, "Girl Wins Boy Colors");
+		girlWinsBoyColors.visible = false;
+
+		// girlWins_GirlColors
+		const girlWins_GirlColors = this.add.image(779.8259, 649.6259, "Girl Wins Girl Colors");
+		girlWins_GirlColors.visible = false;
 
 		// boyWins
 		const boyWins = this.add.image(960, 540, "BoyWins");
-		boyWins.visible = false;
+
+		// boyWinsBoyColors
+		const boyWinsBoyColors = this.add.image(1450.6907, 804.1161, "Boy Wins Boy Colors");
+
+		// boyWinsGirlColors
+		const boyWinsGirlColors = this.add.image(892.6917, 760.4895, "Boy Wins Girl Colors");
 
 		// draw
-		const draw = this.add.image(960, 539, "Draw");
+		const draw = this.add.image(960, 540, "Draw");
 		draw.visible = false;
+
+		// drawBoyColors
+		const drawBoyColors = this.add.image(1301.7168, 945.6795, "Draw Boy Colors");
+		drawBoyColors.visible = false;
+
+		// drawGirlColors
+		const drawGirlColors = this.add.image(892.1152, 758.3424, "Draw Girl Colors");
+		drawGirlColors.visible = false;
 
 		// dungeonShowdown
 		const dungeonShowdown = this.add.text(1132, 820, "", {});
@@ -52,8 +73,14 @@ class Ending extends Phaser.Scene {
 		this.endingBackground = endingBackground;
 		this.endingText = endingText;
 		this.girlWins = girlWins;
+		this.girlWinsBoyColors = girlWinsBoyColors;
+		this.girlWins_GirlColors = girlWins_GirlColors;
 		this.boyWins = boyWins;
+		this.boyWinsBoyColors = boyWinsBoyColors;
+		this.boyWinsGirlColors = boyWinsGirlColors;
 		this.draw = draw;
+		this.drawBoyColors = drawBoyColors;
+		this.drawGirlColors = drawGirlColors;
 		this.dungeonShowdown = dungeonShowdown;
 		this.confirmButton = confirmButton;
 
@@ -67,9 +94,21 @@ class Ending extends Phaser.Scene {
 	/** @type {Phaser.GameObjects.Image} */
 	girlWins;
 	/** @type {Phaser.GameObjects.Image} */
+	girlWinsBoyColors;
+	/** @type {Phaser.GameObjects.Image} */
+	girlWins_GirlColors;
+	/** @type {Phaser.GameObjects.Image} */
 	boyWins;
 	/** @type {Phaser.GameObjects.Image} */
+	boyWinsBoyColors;
+	/** @type {Phaser.GameObjects.Image} */
+	boyWinsGirlColors;
+	/** @type {Phaser.GameObjects.Image} */
 	draw;
+	/** @type {Phaser.GameObjects.Image} */
+	drawBoyColors;
+	/** @type {Phaser.GameObjects.Image} */
+	drawGirlColors;
 	/** @type {Phaser.GameObjects.Text} */
 	dungeonShowdown;
 	/** @type {PrefabNextRoom} */
@@ -116,7 +155,7 @@ class Ending extends Phaser.Scene {
 
 	EndMatch(){
 		var xhttp = new XMLHttpRequest();
-		
+
 		xhttp.onreadystatechange = () => {
 			if (xhttp.readyState == 4) {
 				var data = JSON.parse(xhttp.responseText)

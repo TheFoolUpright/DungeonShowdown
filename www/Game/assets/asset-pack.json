@@ -29,6 +29,16 @@
                 "key": "birds-chirping-75156"
             },
             {
+                "url": "assets/background/Boy Wins Boy Colors.png",
+                "type": "image",
+                "key": "Boy Wins Boy Colors"
+            },
+            {
+                "url": "assets/background/Boy Wins Girl Colors.png",
+                "type": "image",
+                "key": "Boy Wins Girl Colors"
+            },
+            {
                 "url": "assets/background/BoyWins.png",
                 "type": "image",
                 "key": "BoyWins"
@@ -181,6 +191,16 @@
                 "key": "Draw"
             },
             {
+                "url": "assets/background/Draw Boy Colors.png",
+                "type": "image",
+                "key": "Draw Boy Colors"
+            },
+            {
+                "url": "assets/background/Draw Girl Colors.png",
+                "type": "image",
+                "key": "Draw Girl Colors"
+            },
+            {
                 "url": [
                     "assets/audio/droplets-in-a-cave-6785.mp3"
                 ],
@@ -245,6 +265,16 @@
                 "url": "assets/card/Ghost.png",
                 "type": "image",
                 "key": "Ghost"
+            },
+            {
+                "url": "assets/background/Girl Wins Boy Colors.png",
+                "type": "image",
+                "key": "Girl Wins Boy Colors"
+            },
+            {
+                "url": "assets/background/Girl Wins Girl Colors.png",
+                "type": "image",
+                "key": "Girl Wins Girl Colors"
             },
             {
                 "url": "assets/background/GirlWins.png",
