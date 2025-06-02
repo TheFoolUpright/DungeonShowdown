@@ -3106,10 +3106,18 @@ app.post("/setupShowdown", (req, res) => {
             var card2 = defenseDeck[Math.floor(Math.random() * defenseDeck.length)]
             var card3 = skillDeck[Math.floor(Math.random() * skillDeck.length)]
 
+            
+            console.log("Player"+req.session.playerStatusId+" card 1: "+card1)
+            console.log("Player"+req.session.playerStatusId+" card 2: "+card2)
+            console.log("Player"+req.session.playerStatusId+" card 3: "+card3)
+            console.log("showdownTurn: "+req.session.showdownTurn)
 
             InsertCards(playerStats, card1, card2, card3)
         }
         else {
+            console.log("playerStatusId: "+req.session.playerStatusId)
+            console.log("showdownTurn: "+req.session.showdownTurn)
+            console.log("matchId: "+req.session.matchId)
             connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_image_path \
                                 FROM card C \
                                 WHERE card_type_id IN (6, 7, 8) AND card_id NOT IN \
@@ -3136,7 +3144,7 @@ app.post("/setupShowdown", (req, res) => {
                         //         }                              
                         //     }
                         // }
-                        
+                        console.log(rows)
                         var attackDeck = []
                         var attackIterator = 0
                         var defenseDeck = []

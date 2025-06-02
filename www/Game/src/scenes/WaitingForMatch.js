@@ -65,11 +65,7 @@ class WaitingForMatch extends Phaser.Scene {
 					else if (data.state == "MATCH_FOUND"){
 						clearInterval(waitingForMatchInterval);
 						if(MenuBackgroundMusic.isPlaying){
-							stateScene.tweens.add({
-								targets:  MenuBackgroundMusic,
-								volume:   0,
-								duration: 500
-							});
+							MenuBackgroundMusic.stop()
 						}
 						stateScene.scene.start("Dungeon", data);
 					} 
