@@ -82,7 +82,8 @@
                 "key": "BoyWins"
             },
             "x": 960,
-            "y": 540
+            "y": 540,
+            "visible": false
         },
         {
             "type": "Image",
@@ -93,7 +94,8 @@
                 "key": "Boy Wins Boy Colors"
             },
             "x": 1450.6907,
-            "y": 804.1161
+            "y": 804.1161,
+            "visible": false
         },
         {
             "type": "Image",
@@ -104,7 +106,8 @@
                 "key": "Boy Wins Girl Colors"
             },
             "x": 892.6917,
-            "y": 760.4895
+            "y": 760.4895,
+            "visible": false
         },
         {
             "type": "Image",

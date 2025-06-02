@@ -1,0 +1,74 @@
+{
+    "id": "9f05886b-ac70-4db9-b8ab-e2d528a5d6c4",
+    "sceneType": "PREFAB",
+    "settings": {
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1920,
+        "borderHeight": 1080
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "3f0735fc-ee18-46d3-927a-4adaea767d03",
+            "label": "container_1",
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "49a572d3-444d-4dde-be75-091eda0c2d9b",
+                    "label": "focus",
+                    "scope": "PUBLIC",
+                    "texture": {
+                        "key": "opponentFocus"
+                    }
+                },
+                {
+                    "type": "Image",
+                    "id": "89a491d3-7289-4cc7-8584-c2ac2ccd5723",
+                    "label": "adrenaline",
+                    "scope": "PUBLIC",
+                    "texture": {
+                        "key": "opponentAdrenaline"
+                    }
+                },
+                {
+                    "type": "Image",
+                    "id": "83b53bbc-1567-45c6-872a-611618bdef6b",
+                    "label": "opponentHealing",
+                    "texture": {
+                        "key": "opponentHealing"
+                    },
+                    "y": -100
+                },
+                {
+                    "type": "Image",
+                    "id": "9a580ffd-67a4-4aa3-a56c-f5e889105743",
+                    "label": "opponentAnger",
+                    "texture": {
+                        "key": "opponentAnger"
+                    },
+                    "x": -67,
+                    "y": -87
+                },
+                {
+                    "type": "Image",
+                    "id": "bca6387b-77c3-45fa-94d9-6949cbd19123",
+                    "label": "opponentRage",
+                    "texture": {
+                        "key": "opponentRage"
+                    },
+                    "x": 59,
+                    "y": -92
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

@@ -361,6 +361,16 @@
                 "key": "NormalAttack"
             },
             {
+                "url": "assets/opponent/opponentAdrenaline.png",
+                "type": "image",
+                "key": "opponentAdrenaline"
+            },
+            {
+                "url": "assets/opponent/opponentAnger.png",
+                "type": "image",
+                "key": "opponentAnger"
+            },
+            {
                 "url": [
                     "assets/audio/OpponentCardSFX.mp3"
                 ],
@@ -373,6 +383,16 @@
                 "key": "OpponentClumsyBlock"
             },
             {
+                "url": "assets/opponent/opponentFocus.png",
+                "type": "image",
+                "key": "opponentFocus"
+            },
+            {
+                "url": "assets/opponent/opponentHealing.png",
+                "type": "image",
+                "key": "opponentHealing"
+            },
+            {
                 "url": "assets/opponent/OpponentImpressiveBlock.png",
                 "type": "image",
                 "key": "OpponentImpressiveBlock"
@@ -381,6 +401,11 @@
                 "url": "assets/opponent/OpponentParry.png",
                 "type": "image",
                 "key": "OpponentParry"
+            },
+            {
+                "url": "assets/opponent/opponentRage.png",
+                "type": "image",
+                "key": "opponentRage"
             },
             {
                 "url": "assets/opponent/OpponentSolidBlock.png",
