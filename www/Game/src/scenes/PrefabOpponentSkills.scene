@@ -35,7 +35,8 @@
                 {
                     "type": "Image",
                     "id": "83b53bbc-1567-45c6-872a-611618bdef6b",
-                    "label": "opponentHealing",
+                    "label": "healing",
+                    "scope": "PUBLIC",
                     "texture": {
                         "key": "opponentHealing"
                     },
@@ -44,22 +45,24 @@
                 {
                     "type": "Image",
                     "id": "9a580ffd-67a4-4aa3-a56c-f5e889105743",
-                    "label": "opponentAnger",
+                    "label": "anger",
+                    "scope": "PUBLIC",
                     "texture": {
                         "key": "opponentAnger"
                     },
-                    "x": -67,
-                    "y": -87
+                    "x": -70,
+                    "y": -80
                 },
                 {
                     "type": "Image",
                     "id": "bca6387b-77c3-45fa-94d9-6949cbd19123",
-                    "label": "opponentRage",
+                    "label": "rage",
+                    "scope": "PUBLIC",
                     "texture": {
                         "key": "opponentRage"
                     },
-                    "x": 59,
-                    "y": -92
+                    "x": 60,
+                    "y": -90
                 }
             ]
         }

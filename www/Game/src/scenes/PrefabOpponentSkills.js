@@ -16,20 +16,23 @@ class PrefabOpponentSkills extends Phaser.GameObjects.Container {
 		const adrenaline = scene.add.image(0, 0, "opponentAdrenaline");
 		this.add(adrenaline);
 
-		// opponentHealing
-		const opponentHealing = scene.add.image(0, -100, "opponentHealing");
-		this.add(opponentHealing);
+		// healing
+		const healing = scene.add.image(0, -100, "opponentHealing");
+		this.add(healing);
 
-		// opponentAnger
-		const opponentAnger = scene.add.image(-67, -87, "opponentAnger");
-		this.add(opponentAnger);
+		// anger
+		const anger = scene.add.image(-70, -80, "opponentAnger");
+		this.add(anger);
 
-		// opponentRage
-		const opponentRage = scene.add.image(59, -92, "opponentRage");
-		this.add(opponentRage);
+		// rage
+		const rage = scene.add.image(60, -90, "opponentRage");
+		this.add(rage);
 
 		this.focus = focus;
 		this.adrenaline = adrenaline;
+		this.healing = healing;
+		this.anger = anger;
+		this.rage = rage;
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.
@@ -40,6 +43,12 @@ class PrefabOpponentSkills extends Phaser.GameObjects.Container {
 	focus;
 	/** @type {Phaser.GameObjects.Image} */
 	adrenaline;
+	/** @type {Phaser.GameObjects.Image} */
+	healing;
+	/** @type {Phaser.GameObjects.Image} */
+	anger;
+	/** @type {Phaser.GameObjects.Image} */
+	rage;
 
 	/* START-USER-CODE */
 
