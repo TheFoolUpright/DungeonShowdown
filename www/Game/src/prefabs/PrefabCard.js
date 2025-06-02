@@ -10,20 +10,14 @@ class PrefabCard extends Phaser.GameObjects.Container {
 
 		this.setInteractive(new Phaser.Geom.Rectangle(-150, -218, 300, 436.4214080647836), Phaser.Geom.Rectangle.Contains);
 
-		// cardDescriptionTextBox
-		const cardDescriptionTextBox = scene.add.image(0, -500, "TextBox");
-		cardDescriptionTextBox.setOrigin(0.5, 0);
-		cardDescriptionTextBox.visible = false;
-		this.add(cardDescriptionTextBox);
-
 		// cardDescription
-		const cardDescription = scene.add.text(0, -500, "", {});
-		cardDescription.setOrigin(0.5, 0);
+		const cardDescription = scene.add.text(0, -260, "", {});
+		cardDescription.setOrigin(0.5, 1);
 		cardDescription.visible = false;
 		cardDescription.text = "Take no damage from one of the opponent's attacks and hit them back for half of their might";
-		cardDescription.setStyle({ "backgroundColor": "", "color": "#ffffffff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff", "strokeThickness":8});
+		cardDescription.setStyle({ "align": "justify", "color": "#ffffffff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff", "strokeThickness":8});
 		cardDescription.setPadding({"left":5,"top":5,"right":5,"bottom":5});
-		cardDescription.setWordWrapWidth(284);
+		cardDescription.setWordWrapWidth(280);
 		this.add(cardDescription);
 
 		// empty_Card
@@ -104,8 +98,8 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		this.add(option1_1Container);
 
 		// option1_1RewardText1
-		const option1_1RewardText1 = scene.add.text(15, 160, "", {});
-		option1_1RewardText1.setOrigin(0.5, 0.5);
+		const option1_1RewardText1 = scene.add.text(0, 160, "", {});
+		option1_1RewardText1.setOrigin(0, 0.5);
 		option1_1RewardText1.text = "+ 5";
 		option1_1RewardText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option1_1Container.add(option1_1RewardText1);
@@ -179,9 +173,16 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		const option2_1RewardIcon1 = scene.add.image(-20, 160, "HiddenIconSmall");
 		option2_1Container.add(option2_1RewardIcon1);
 
-		// option2_1CostIcon1
-		const option2_1CostIcon1 = scene.add.image(-55, 100, "HiddenIconSmall");
-		option2_1Container.add(option2_1CostIcon1);
+		// option2_1CostText2
+		const option2_1CostText2 = scene.add.text(60, 100, "", {});
+		option2_1CostText2.setOrigin(0.5, 0.5);
+		option2_1CostText2.text = "- 5";
+		option2_1CostText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
+		option2_1Container.add(option2_1CostText2);
+
+		// option2_1CostIcon2
+		const option2_1CostIcon2 = scene.add.image(25, 100, "HiddenIconSmall");
+		option2_1Container.add(option2_1CostIcon2);
 
 		// option2_1CostText1
 		const option2_1CostText1 = scene.add.text(-20, 100, "", {});
@@ -190,16 +191,9 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		option2_1CostText1.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
 		option2_1Container.add(option2_1CostText1);
 
-		// option2_1CostIcon2
-		const option2_1CostIcon2 = scene.add.image(25, 100, "HiddenIconSmall");
-		option2_1Container.add(option2_1CostIcon2);
-
-		// option2_1CostText2
-		const option2_1CostText2 = scene.add.text(60, 100, "", {});
-		option2_1CostText2.setOrigin(0.5, 0.5);
-		option2_1CostText2.text = "- 5";
-		option2_1CostText2.setStyle({ "color": "#000000ff", "fontFamily": "Rockey", "fontSize": "32px", "stroke": "#000000ff" });
-		option2_1Container.add(option2_1CostText2);
+		// option2_1CostIcon1
+		const option2_1CostIcon1 = scene.add.image(-55, 100, "HiddenIconSmall");
+		option2_1Container.add(option2_1CostIcon1);
 
 		// option1_3Container
 		const option1_3Container = scene.add.container(0, -1);
@@ -496,7 +490,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		const option2_1_1CostIcon1 = scene.add.image(-55, 100, "HiddenIconSmall");
 		option2_1_1Container.add(option2_1_1CostIcon1);
 
-		this.cardDescriptionTextBox = cardDescriptionTextBox;
 		this.cardDescription = cardDescription;
 		this.cardGlow = cardGlow;
 		this.empty_Card = empty_Card;
@@ -526,10 +519,10 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		this.option1_2Container = option1_2Container;
 		this.option2_1RewardText1 = option2_1RewardText1;
 		this.option2_1RewardIcon1 = option2_1RewardIcon1;
-		this.option2_1CostIcon1 = option2_1CostIcon1;
-		this.option2_1CostText1 = option2_1CostText1;
-		this.option2_1CostIcon2 = option2_1CostIcon2;
 		this.option2_1CostText2 = option2_1CostText2;
+		this.option2_1CostIcon2 = option2_1CostIcon2;
+		this.option2_1CostText1 = option2_1CostText1;
+		this.option2_1CostIcon1 = option2_1CostIcon1;
 		this.option2_1Container = option2_1Container;
 		this.option1_3RewardIcon1 = option1_3RewardIcon1;
 		this.option1_3RewardText1 = option1_3RewardText1;
@@ -592,8 +585,6 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		/* END-USER-CTR-CODE */
 	}
 
-	/** @type {Phaser.GameObjects.Image} */
-	cardDescriptionTextBox;
 	/** @type {Phaser.GameObjects.Text} */
 	cardDescription;
 	/** @type {Phaser.FX.Glow} */
@@ -652,14 +643,14 @@ class PrefabCard extends Phaser.GameObjects.Container {
 	option2_1RewardText1;
 	/** @type {Phaser.GameObjects.Image} */
 	option2_1RewardIcon1;
-	/** @type {Phaser.GameObjects.Image} */
-	option2_1CostIcon1;
 	/** @type {Phaser.GameObjects.Text} */
-	option2_1CostText1;
+	option2_1CostText2;
 	/** @type {Phaser.GameObjects.Image} */
 	option2_1CostIcon2;
 	/** @type {Phaser.GameObjects.Text} */
-	option2_1CostText2;
+	option2_1CostText1;
+	/** @type {Phaser.GameObjects.Image} */
+	option2_1CostIcon1;
 	/** @type {Phaser.GameObjects.Container} */
 	option2_1Container;
 	/** @type {Phaser.GameObjects.Image} */

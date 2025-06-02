@@ -20,37 +20,26 @@
             "hitArea.height": 436.4214080647836,
             "list": [
                 {
-                    "type": "Image",
-                    "id": "be74b355-2cfa-4685-a380-2caf8d574393",
-                    "label": "cardDescriptionTextBox",
-                    "scope": "PUBLIC",
-                    "texture": {
-                        "key": "TextBox"
-                    },
-                    "y": -500,
-                    "originY": 0,
-                    "visible": false
-                },
-                {
                     "type": "Text",
                     "id": "eda211a7-946d-40d1-87c6-29ac4d5014f2",
                     "label": "cardDescription",
                     "scope": "PUBLIC",
-                    "y": -500,
+                    "y": -260,
                     "originX": 0.5,
+                    "originY": 1,
                     "visible": false,
                     "text": "Take no damage from one of the opponent's attacks and hit them back for half of their might",
                     "paddingLeft": 5,
                     "paddingTop": 5,
                     "paddingRight": 5,
                     "paddingBottom": 5,
+                    "align": "justify",
                     "fontFamily": "Rockey",
                     "fontSize": "32px",
                     "color": "#ffffffff",
                     "stroke": "#000000ff",
                     "strokeThickness": 8,
-                    "backgroundColor": "",
-                    "wordWrapWidth": 284
+                    "wordWrapWidth": 280
                 },
                 {
                     "type": "Image",
@@ -229,9 +218,7 @@
                             "id": "09544179-533b-427d-9b55-d99a2a67f116",
                             "label": "option1_1RewardText1",
                             "scope": "PUBLIC",
-                            "x": 15,
                             "y": 160,
-                            "originX": 0.5,
                             "originY": 0.5,
                             "text": "+ 5",
                             "fontFamily": "Rockey",
@@ -401,22 +388,11 @@
                             "y": 160
                         },
                         {
-                            "type": "Image",
-                            "id": "b3d01344-43f7-43b3-8df2-d951f5ba4d4e",
-                            "label": "option2_1CostIcon1",
-                            "scope": "PUBLIC",
-                            "texture": {
-                                "key": "HiddenIconSmall"
-                            },
-                            "x": -55,
-                            "y": 100
-                        },
-                        {
                             "type": "Text",
-                            "id": "2cb428e4-9e14-4c16-bb09-79eca879abc9",
-                            "label": "option2_1CostText1",
+                            "id": "96434c87-eaa2-4763-95d9-7f6f638db61a",
+                            "label": "option2_1CostText2",
                             "scope": "PUBLIC",
-                            "x": -20,
+                            "x": 60,
                             "y": 100,
                             "originX": 0.5,
                             "originY": 0.5,
@@ -439,10 +415,10 @@
                         },
                         {
                             "type": "Text",
-                            "id": "96434c87-eaa2-4763-95d9-7f6f638db61a",
-                            "label": "option2_1CostText2",
+                            "id": "2cb428e4-9e14-4c16-bb09-79eca879abc9",
+                            "label": "option2_1CostText1",
                             "scope": "PUBLIC",
-                            "x": 60,
+                            "x": -20,
                             "y": 100,
                             "originX": 0.5,
                             "originY": 0.5,
@@ -451,6 +427,17 @@
                             "fontSize": "32px",
                             "color": "#000000ff",
                             "stroke": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "b3d01344-43f7-43b3-8df2-d951f5ba4d4e",
+                            "label": "option2_1CostIcon1",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "HiddenIconSmall"
+                            },
+                            "x": -55,
+                            "y": 100
                         }
                     ]
                 },

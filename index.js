@@ -2153,7 +2153,7 @@ app.get("/getShowdownCardSelection", (req, res) => {
     GetOpponentNameAndColor()
 
     function GetOpponentNameAndColor() {
-        connection.query("SELECT P.player_username, P.player_color, current_health \
+        connection.query("SELECT P.player_username, P.player_color, current_health, damage \
                     FROM player P \
                     INNER JOIN game_match GM ON GM.player_1_id = P.player_id OR GM.player_2_id = P.player_id \
                     INNER JOIN player_status PS ON PS.player_id = P.player_id \
@@ -2223,6 +2223,7 @@ app.get("/getShowdownCardSelection", (req, res) => {
                         "opponent_username": opponentInfo[0].player_username,
                         "opponent_color": opponentInfo[0].player_color,
                         "opponent_current_health": opponentInfo[0].current_health,
+                        "opponent_damage": opponentInfo[0].damage,
                         "player_username": rows[0].player_username,
                         "player_color": rows[0].player_color,
                         "max_health": rows[0].max_health,
@@ -3240,7 +3241,7 @@ app.post("/setupShowdown", (req, res) => {
     }
 
     function GetOpponentNameAndColor() {
-        connection.query("SELECT P.player_username, P.player_color , PS.current_health \
+        connection.query("SELECT P.player_username, P.player_color , PS.current_health, PS.damage \
                 FROM player P \
                 INNER JOIN game_match GM ON GM.player_1_id = P.player_id OR GM.player_2_id = P.player_id \
                 INNER JOIN player_status PS ON PS.player_id = P.player_id \
@@ -3324,6 +3325,7 @@ app.post("/setupShowdown", (req, res) => {
                             "opponent_username": opponentNameAndColor[0].player_username,
                             "opponent_color": opponentNameAndColor[0].player_color,
                             "opponent_current_health": opponentNameAndColor[0].current_health, // If anything breaks come here
+                            "opponent_damage": opponentNameAndColor[0].damage,
                             "room_id":  req.session.roomId,
                             "showdown_turn":  req.session.showdownTurn,
                             "max_health": rows[0].max_health,
