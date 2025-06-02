@@ -127,6 +127,18 @@
             "visible": true
         },
         {
+            "prefabId": "df9e9341-ccc7-4018-8c5f-f5313a2dbf85",
+            "id": "422a2909-e7ce-41a3-983d-7bc2f193a131",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "playerSkills",
+            "scope": "PUBLIC",
+            "x": 960,
+            "y": 1080
+        },
+        {
             "type": "Text",
             "id": "baef9b7d-d270-4250-9b67-cf7d01634989",
             "label": "opponenetMissText",
