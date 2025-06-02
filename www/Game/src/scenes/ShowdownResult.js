@@ -149,6 +149,66 @@ class ShowdownResult extends Phaser.Scene {
 		playerMissText.text = "MISS!";
 		playerMissText.setStyle({ "align": "center", "color": "#5b4e99", "fontFamily": "Rockey", "fontSize": "72px", "stroke": "#000000ff", "strokeThickness":10});
 
+		// playerCard1
+		const playerCard1 = new PrefabCard(this, 150, 850);
+		this.add.existing(playerCard1);
+		playerCard1.removeInteractive();
+		playerCard1.setInteractive(new Phaser.Geom.Rectangle(-150, -218, 300, 436.4214080647836), Phaser.Geom.Rectangle.Contains);
+		playerCard1.scaleX = 0.7;
+		playerCard1.scaleY = 0.7;
+		playerCard1.visible = true;
+
+		// moveInSceneActionScript_4
+		const moveInSceneActionScript_4 = new MoveInSceneActionScript(playerCard1.onAwakeScript);
+
+		// playerCard2
+		const playerCard2 = new PrefabCard(this, 400, 850);
+		this.add.existing(playerCard2);
+		playerCard2.removeInteractive();
+		playerCard2.setInteractive(new Phaser.Geom.Rectangle(-150, -218, 300, 436.4214080647836), Phaser.Geom.Rectangle.Contains);
+		playerCard2.scaleX = 0.7;
+		playerCard2.scaleY = 0.7;
+		playerCard2.visible = false;
+
+		// moveInSceneActionScript_2
+		const moveInSceneActionScript_2 = new MoveInSceneActionScript(playerCard2.onAwakeScript);
+
+		// opponenetCard2
+		const opponenetCard2 = new PrefabCard(this, 400, 475);
+		this.add.existing(opponenetCard2);
+		opponenetCard2.removeInteractive();
+		opponenetCard2.setInteractive(new Phaser.Geom.Rectangle(-150, -218, 300, 436.4214080647836), Phaser.Geom.Rectangle.Contains);
+		opponenetCard2.scaleX = 0.7;
+		opponenetCard2.scaleY = 0.7;
+		opponenetCard2.visible = false;
+
+		// moveInSceneActionScript_1
+		const moveInSceneActionScript_1 = new MoveInSceneActionScript(opponenetCard2.onAwakeScript);
+
+		// opponenetCard1
+		const opponenetCard1 = new PrefabCard(this, 150, 475);
+		this.add.existing(opponenetCard1);
+		opponenetCard1.removeInteractive();
+		opponenetCard1.setInteractive(new Phaser.Geom.Rectangle(-150, -218, 300, 436.4214080647836), Phaser.Geom.Rectangle.Contains);
+		opponenetCard1.scaleX = 0.7;
+		opponenetCard1.scaleY = 0.7;
+		opponenetCard1.visible = true;
+
+		// moveInSceneActionScript_3
+		const moveInSceneActionScript_3 = new MoveInSceneActionScript(opponenetCard1.onAwakeScript);
+
+		// moveInSceneActionScript_4 (prefab fields)
+		moveInSceneActionScript_4.from = "LEFT";
+
+		// moveInSceneActionScript_2 (prefab fields)
+		moveInSceneActionScript_2.from = "LEFT";
+
+		// moveInSceneActionScript_1 (prefab fields)
+		moveInSceneActionScript_1.from = "LEFT";
+
+		// moveInSceneActionScript_3 (prefab fields)
+		moveInSceneActionScript_3.from = "LEFT";
+
 		this.showdownBackground = showdownBackground;
 		this.statsContainer = statsContainer;
 		this.info = info;
@@ -160,6 +220,14 @@ class ShowdownResult extends Phaser.Scene {
 		this.playerAttacks = playerAttacks;
 		this.opponenetMissText = opponenetMissText;
 		this.playerMissText = playerMissText;
+		this.moveInSceneActionScript_4 = moveInSceneActionScript_4;
+		this.playerCard1 = playerCard1;
+		this.moveInSceneActionScript_2 = moveInSceneActionScript_2;
+		this.playerCard2 = playerCard2;
+		this.moveInSceneActionScript_1 = moveInSceneActionScript_1;
+		this.opponenetCard2 = opponenetCard2;
+		this.moveInSceneActionScript_3 = moveInSceneActionScript_3;
+		this.opponenetCard1 = opponenetCard1;
 
 		this.events.emit("scene-awake");
 	}
@@ -186,6 +254,22 @@ class ShowdownResult extends Phaser.Scene {
 	opponenetMissText;
 	/** @type {Phaser.GameObjects.Text} */
 	playerMissText;
+	/** @type {MoveInSceneActionScript} */
+	moveInSceneActionScript_4;
+	/** @type {PrefabCard} */
+	playerCard1;
+	/** @type {MoveInSceneActionScript} */
+	moveInSceneActionScript_2;
+	/** @type {PrefabCard} */
+	playerCard2;
+	/** @type {MoveInSceneActionScript} */
+	moveInSceneActionScript_1;
+	/** @type {PrefabCard} */
+	opponenetCard2;
+	/** @type {MoveInSceneActionScript} */
+	moveInSceneActionScript_3;
+	/** @type {PrefabCard} */
+	opponenetCard1;
 
 	/* START-USER-CODE */
 
@@ -265,8 +349,52 @@ class ShowdownResult extends Phaser.Scene {
 		this.loadInfoData(data)
 		this.loadOpponentData(data)
 		this.confirmButtonGlow()
+		this.loadPlayerAttack(data)
+		this.loadPlayerDefense(data)
+		this.loadOpponentAttack(data)
+		this.loadOpponentDefence(data)
+		this.loadCards(data)
+		this.loadOpponentDamage(data)
 
-		// Loading Player Attacks
+		this.confirmButton.on("pointerdown", () => {
+			this.setupNextTurn()
+		})
+	}
+
+	loadCards(data) {
+		this.playerCard1.cardGlow.active = false
+		this.playerCard2.cardGlow.active = false
+		this.opponenetCard1.cardGlow.active = false
+		this.opponenetCard2.cardGlow.active = false
+
+		const playerCardColor = data.player_color.replace("#", "0x")
+
+		const opponentCardColor = data.opponent_cards[0].player_color.replace("#", "0x")
+
+		this.playerCard1.cardBorder.setTint(playerCardColor)
+		this.playerCard1.cardName.text = data.player_cards[0].card_name
+		this.playerCard1.cardImage.setTexture(data.player_cards[0].card_image_path)
+
+		if (data.player_cards[1]) {
+			this.playerCard2.visible = true
+			this.playerCard2.cardBorder.setTint(playerCardColor)
+			this.playerCard2.cardName.text = data.player_cards[1].card_name
+			this.playerCard2.cardImage.setTexture(data.player_cards[1].card_image_path)
+		}
+
+		this.opponenetCard1.cardBorder.setTint(opponentCardColor)
+		this.opponenetCard1.cardName.text = data.opponent_cards[0].card_name
+		this.opponenetCard1.cardImage.setTexture(data.opponent_cards[0].card_image_path)
+
+		if (data.opponent_cards[1]) {
+			this.opponenetCard2.visible = true
+			this.opponenetCard2.cardBorder.setTint(opponentCardColor)
+			this.opponenetCard2.cardName.text = data.opponent_cards[1].card_name
+			this.opponenetCard2.cardImage.setTexture(data.opponent_cards[1].card_image_path)
+		}
+	}
+
+	loadPlayerAttack(data) {
 		if (data.player_cards[0].card_id == playerShowdownAnimations.NormalAttack.id || (data.player_cards[1] && data.player_cards[1].card_id == playerShowdownAnimations.NormalAttack.id)) {
 			playerShowdownAnimations.NormalAttack.visible = true
 			playerAttack = true
@@ -287,8 +415,9 @@ class ShowdownResult extends Phaser.Scene {
 			playerShowdownAnimations.CounterAttack.visible = true
 			playerAttack = true
 		}
+	}
 
-		// Loading Player Defense
+	loadPlayerDefense(data) {
 		if (data.player_cards[0].card_id == playerShowdownAnimations.ClumsyBlock.id || (data.player_cards[1] && data.player_cards[1].card_id == playerShowdownAnimations.ClumsyBlock.id)) {
 			playerShowdownAnimations.ClumsyBlock.visible = true
 			playerDefense = true
@@ -309,8 +438,9 @@ class ShowdownResult extends Phaser.Scene {
 			playerShowdownAnimations.Parry.visible = true
 			playerDefense = true
 		}
+	}
 
-		// Loading Opponent Attacks
+	loadOpponentAttack(data) {
 		if (data.opponent_cards[0].card_id == opponentShowdownAnimations.NormalAttack.id || (data.opponent_cards[1] && data.opponent_cards[1].card_id == opponentShowdownAnimations.NormalAttack.id)) {
 			opponentShowdownAnimations.NormalAttack.visible = true
 			opponentAttack = true
@@ -331,8 +461,9 @@ class ShowdownResult extends Phaser.Scene {
 			opponentShowdownAnimations.CounterAttack.visible = true
 			opponentAttack = true
 		}
+	}
 
-		// Loading Opponent Defense
+	loadOpponentDefence(data) {
 		if (data.opponent_cards[0].card_id == opponentShowdownAnimations.ClumsyBlock.id || (data.opponent_cards[1] && data.opponent_cards[1].card_id == opponentShowdownAnimations.ClumsyBlock.id)) {
 			opponentShowdownAnimations.ClumsyBlock.visible = true
 			opponentDefense = true
@@ -353,10 +484,6 @@ class ShowdownResult extends Phaser.Scene {
 			opponentShowdownAnimations.Parry.visible = true
 			opponentDefense = true
 		}
-
-		this.confirmButton.on("pointerdown", () => {
-			this.setupNextTurn()
-		})
 	}
 
 	loadInfoData(data) {
@@ -498,6 +625,26 @@ class ShowdownResult extends Phaser.Scene {
 		xhttp.send()
 	}
 
+	loadOpponentDamage(data) {
+		console.log(data.opponent_cards[0].current_health)
+		if (data.opponent_cards[0].current_health > 20) {
+			this.opponent.character.visible = true
+			this.opponent.characterRipped1.visible = false
+			this.opponent.characterRipped2.visible = false
+		}
+		if ((data.opponent_cards[0].current_health <= 20) && (data.opponent_cards[0].current_health > 10)) {
+			this.opponent.character.visible = false
+			this.opponent.characterRipped1.visible = true
+			this.opponent.characterRipped2.visible = false
+		}
+		if (data.opponent_cards[0].current_health <= 10 || !data.opponent_cards[0].current_health) {
+			this.opponent.character.visible = false
+			this.opponent.characterRipped1.visible = false
+			this.opponent.characterRipped2.visible = true
+		}
+		return
+	}
+
 	update(time, dt) {
 		timer += dt
 		if (timer > 1200) {
@@ -588,8 +735,8 @@ class ShowdownResult extends Phaser.Scene {
 
 		if ((!playerAttack || (playerAttack && playerAttackAnimationFinished)) && 
 		(!opponentAttack || (opponentAttack && opponentAttackAnimationFinished)) && 
-		(!opponentDefense || (opponentDefense && opponentDefenseAnimationFinished)) && 
-		(!playerDefense || (playerDefense && playerDefenseAnimationFinished))) {
+		(!opponentDefense || (opponentDefense && (opponentDefenseAnimationFinished || !playerAttack))) && 
+		(!playerDefense || (playerDefense && (playerDefenseAnimationFinished || !opponentAttack)))) {
 			this.confirmButton.visible = true
 		}
 		else {
@@ -659,16 +806,22 @@ class ShowdownResult extends Phaser.Scene {
 			if ((this.playerAttacks.angle <= 0) && this.opponent.character.scaleX > -1) {
 				this.opponenetMissText.visible = true
 				this.opponent.character.scaleX -= dt / 128
+				this.opponent.characterRipped1.scaleX -= dt / 128
+				this.opponent.characterRipped2.scaleX -= dt / 128
 				this.opponent.characterColor.scaleX -= dt / 128
 			}
 			else if ((this.playerAttacks.angle >= 0) && this.opponent.character.scaleX < 1) {
 				this.opponent.character.scaleX += dt / 128
+				this.opponent.characterRipped1.scaleX += dt / 128
+				this.opponent.characterRipped2.scaleX += dt / 128
 				this.opponent.characterColor.scaleX += dt / 128
 			}
 		}
 
 		if (this.opponent.character.scaleX > 1) {
 			this.opponent.character.scaleX = 1
+			this.opponent.characterRipped1.scaleX = 1
+			this.opponent.characterRipped2.scaleX = 1
 			this.opponent.characterColor.scaleX = 1
 		}
 	}

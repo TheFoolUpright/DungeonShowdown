@@ -20,26 +20,37 @@
             "hitArea.height": 436.4214080647836,
             "list": [
                 {
+                    "type": "Image",
+                    "id": "be74b355-2cfa-4685-a380-2caf8d574393",
+                    "label": "cardDescriptionTextBox",
+                    "scope": "PUBLIC",
+                    "texture": {
+                        "key": "TextBox"
+                    },
+                    "y": -500,
+                    "originY": 0,
+                    "visible": false
+                },
+                {
                     "type": "Text",
                     "id": "eda211a7-946d-40d1-87c6-29ac4d5014f2",
                     "label": "cardDescription",
                     "scope": "PUBLIC",
-                    "y": -260,
+                    "y": -500,
                     "originX": 0.5,
-                    "originY": 1,
                     "visible": false,
                     "text": "Take no damage from one of the opponent's attacks and hit them back for half of their might",
                     "paddingLeft": 5,
                     "paddingTop": 5,
                     "paddingRight": 5,
                     "paddingBottom": 5,
-                    "align": "justify",
                     "fontFamily": "Rockey",
                     "fontSize": "32px",
                     "color": "#ffffffff",
                     "stroke": "#000000ff",
                     "strokeThickness": 8,
-                    "wordWrapWidth": 280
+                    "backgroundColor": "",
+                    "wordWrapWidth": 284
                 },
                 {
                     "type": "Image",

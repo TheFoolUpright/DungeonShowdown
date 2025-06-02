@@ -161,6 +161,206 @@
             "color": "#5b4e99",
             "stroke": "#000000ff",
             "strokeThickness": 10
+        },
+        {
+            "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
+            "id": "6d2277bc-c411-4e53-9083-23cf21dc2c23",
+            "unlock": [
+                "x",
+                "y",
+                "scaleX",
+                "scaleY",
+                "hitArea.shape",
+                "hitArea.x",
+                "hitArea.y",
+                "hitArea.width",
+                "hitArea.height",
+                "hitArea.radius",
+                "hitArea.points",
+                "hitArea.alphaTolerance",
+                "visible"
+            ],
+            "label": "playerCard1",
+            "scope": "PUBLIC",
+            "hitArea.shape": "RECTANGLE",
+            "hitArea.x": -150,
+            "hitArea.y": -218,
+            "hitArea.width": 300,
+            "hitArea.height": 436.4214080647836,
+            "x": 150,
+            "y": 850,
+            "scaleX": 0.7,
+            "scaleY": 0.7,
+            "visible": true,
+            "nestedPrefabs": [
+                {
+                    "prefabId": "0dc21418-28d1-4973-b2a8-45b31b3aad4b",
+                    "id": "11e6db81-9c6c-4307-a1d6-0891860d49fb",
+                    "label": "onAwakeScript",
+                    "list": [
+                        {
+                            "prefabId": "3d337935-cdca-4937-9126-9f75bc2486de",
+                            "id": "259456f2-ca71-41f3-960a-d68fb3e7693f",
+                            "unlock": [
+                                "from"
+                            ],
+                            "label": "moveInSceneActionScript_4",
+                            "scope": "PUBLIC",
+                            "from": "LEFT"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
+            "id": "f427e6f1-5f7f-40ad-b86f-7340affddbd5",
+            "unlock": [
+                "x",
+                "y",
+                "scaleX",
+                "scaleY",
+                "hitArea.shape",
+                "hitArea.x",
+                "hitArea.y",
+                "hitArea.width",
+                "hitArea.height",
+                "hitArea.radius",
+                "hitArea.points",
+                "hitArea.alphaTolerance",
+                "visible"
+            ],
+            "label": "playerCard2",
+            "scope": "PUBLIC",
+            "hitArea.shape": "RECTANGLE",
+            "hitArea.x": -150,
+            "hitArea.y": -218,
+            "hitArea.width": 300,
+            "hitArea.height": 436.4214080647836,
+            "x": 400,
+            "y": 850,
+            "scaleX": 0.7,
+            "scaleY": 0.7,
+            "visible": false,
+            "nestedPrefabs": [
+                {
+                    "prefabId": "0dc21418-28d1-4973-b2a8-45b31b3aad4b",
+                    "id": "47165523-adc0-4261-abd8-ee8e2ed0ede5",
+                    "label": "onAwakeScript",
+                    "list": [
+                        {
+                            "prefabId": "3d337935-cdca-4937-9126-9f75bc2486de",
+                            "id": "ebe8bf64-a32f-4c5b-8eb2-9a3be22e3342",
+                            "unlock": [
+                                "from"
+                            ],
+                            "label": "moveInSceneActionScript_2",
+                            "scope": "PUBLIC",
+                            "from": "LEFT"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
+            "id": "b0d696af-dcb7-4501-94cf-fcc24a0ff7ba",
+            "unlock": [
+                "x",
+                "y",
+                "scaleX",
+                "scaleY",
+                "hitArea.shape",
+                "hitArea.x",
+                "hitArea.y",
+                "hitArea.width",
+                "hitArea.height",
+                "hitArea.radius",
+                "hitArea.points",
+                "hitArea.alphaTolerance",
+                "visible"
+            ],
+            "label": "opponenetCard2",
+            "scope": "PUBLIC",
+            "hitArea.shape": "RECTANGLE",
+            "hitArea.x": -150,
+            "hitArea.y": -218,
+            "hitArea.width": 300,
+            "hitArea.height": 436.4214080647836,
+            "x": 400,
+            "y": 475,
+            "scaleX": 0.7,
+            "scaleY": 0.7,
+            "visible": false,
+            "nestedPrefabs": [
+                {
+                    "prefabId": "0dc21418-28d1-4973-b2a8-45b31b3aad4b",
+                    "id": "2435d730-ba48-4fd7-bb99-92e6a700cc63",
+                    "label": "onAwakeScript",
+                    "list": [
+                        {
+                            "prefabId": "3d337935-cdca-4937-9126-9f75bc2486de",
+                            "id": "0654cffa-6794-4ac1-b284-f1bc766428d6",
+                            "unlock": [
+                                "from"
+                            ],
+                            "label": "moveInSceneActionScript_1",
+                            "scope": "PUBLIC",
+                            "from": "LEFT"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "prefabId": "7be0273a-b7f7-47f0-bf8e-78598a037b99",
+            "id": "b0371a7d-1976-4c2a-aca3-c8332cff6435",
+            "unlock": [
+                "x",
+                "y",
+                "scaleX",
+                "scaleY",
+                "hitArea.shape",
+                "hitArea.x",
+                "hitArea.y",
+                "hitArea.width",
+                "hitArea.height",
+                "hitArea.radius",
+                "hitArea.points",
+                "hitArea.alphaTolerance",
+                "visible"
+            ],
+            "label": "opponenetCard1",
+            "scope": "PUBLIC",
+            "hitArea.shape": "RECTANGLE",
+            "hitArea.x": -150,
+            "hitArea.y": -218,
+            "hitArea.width": 300,
+            "hitArea.height": 436.4214080647836,
+            "x": 150,
+            "y": 475,
+            "scaleX": 0.7,
+            "scaleY": 0.7,
+            "visible": true,
+            "nestedPrefabs": [
+                {
+                    "prefabId": "0dc21418-28d1-4973-b2a8-45b31b3aad4b",
+                    "id": "b70752e4-fab6-49e0-96c0-4287a2c35b81",
+                    "label": "onAwakeScript",
+                    "list": [
+                        {
+                            "prefabId": "3d337935-cdca-4937-9126-9f75bc2486de",
+                            "id": "91cbacdc-1551-494c-a366-b6b7d311f562",
+                            "unlock": [
+                                "from"
+                            ],
+                            "label": "moveInSceneActionScript_3",
+                            "scope": "PUBLIC",
+                            "from": "LEFT"
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "plainObjects": [],

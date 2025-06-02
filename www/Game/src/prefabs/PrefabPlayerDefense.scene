@@ -16,44 +16,44 @@
             "list": [
                 {
                     "type": "Image",
-                    "id": "e3bc3e59-ace5-44e8-a39b-423981322692",
-                    "label": "impressiveBlock",
-                    "scope": "PUBLIC",
-                    "texture": {
-                        "key": "ImpressiveBlock"
-                    },
-                    "originY": 0,
-                    "visible": false
-                },
-                {
-                    "type": "Image",
-                    "id": "5874becf-65d6-414a-a9e8-a3062fde1658",
-                    "label": "solidBlock",
-                    "scope": "PUBLIC",
-                    "texture": {
-                        "key": "SolidBlock"
-                    },
-                    "originY": 0,
-                    "visible": false
-                },
-                {
-                    "type": "Image",
-                    "id": "d3530d02-4e8a-491a-ae38-55681c444884",
+                    "id": "8f258f72-7186-44c2-84d5-eb1ddda54620",
                     "label": "clumsyBlock",
                     "scope": "PUBLIC",
                     "texture": {
-                        "key": "ClumsyBlock"
+                        "key": "PlayerClumsyBlock"
                     },
                     "originY": 0,
                     "visible": false
                 },
                 {
                     "type": "Image",
-                    "id": "179c23b4-b65b-4848-a238-b13ba3364e31",
+                    "id": "90ca4ac5-ce2f-4184-a76f-93a70f546514",
+                    "label": "impressiveBlock",
+                    "scope": "PUBLIC",
+                    "texture": {
+                        "key": "PlayerImpressiveBlock"
+                    },
+                    "originY": 0,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "c86b29af-ad7a-4756-a84d-cf8054c5be7b",
+                    "label": "solidBlock",
+                    "scope": "PUBLIC",
+                    "texture": {
+                        "key": "PlayerSolidBlock"
+                    },
+                    "originY": 0,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "ce7ec5ee-c1ca-455a-977d-ccbe8aebeb11",
                     "label": "parry",
                     "scope": "PUBLIC",
                     "texture": {
-                        "key": "Parry"
+                        "key": "PlayerParry"
                     },
                     "originY": 0,
                     "visible": false

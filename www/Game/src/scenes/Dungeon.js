@@ -258,31 +258,38 @@ class Dungeon extends Phaser.Scene {
 		this.slot1Card.on("pointerover", () => {
 			this.slot1Card.cardGlow.active = true
 			this.slot1Card.cardDescription.visible = true
+			this.slot1Card.cardDescriptionTextBox.visible = true
+
 
 		})
 		this.slot1Card.on("pointerout", () => {
 			this.slot1Card.cardGlow.active = false
 			this.slot1Card.cardDescription.visible = false
+			this.slot1Card.cardDescriptionTextBox.visible = false
 		})
 
 		this.slot2Card.on("pointerover", () => {
 			this.slot2Card.cardGlow.active = true
 			this.slot2Card.cardDescription.visible = true
+			this.slot2Card.cardDescriptionTextBox.visible = true
 
 		})
 		this.slot2Card.on("pointerout", () => {
 			this.slot2Card.cardGlow.active = false
 			this.slot2Card.cardDescription.visible = false
+			this.slot2Card.cardDescriptionTextBox.visible = false
 		})
 
 		this.slot3Card.on("pointerover", () => {
 			this.slot3Card.cardGlow.active = true
 			this.slot3Card.cardDescription.visible = true
+			this.slot3Card.cardDescriptionTextBox.visible = true
 
 		})
 		this.slot3Card.on("pointerout", () => {
 			this.slot3Card.cardGlow.active = false
 			this.slot3Card.cardDescription.visible = false
+			this.slot3Card.cardDescriptionTextBox.visible = false
 		})
 
 		this.onwardButton.glowFx.active = false
@@ -421,7 +428,7 @@ class Dungeon extends Phaser.Scene {
 		else {
 			this.slot1Card.cardName.text = "? ? ?"
 			this.slot1Card.cardImage.setTexture("Hidden")
-			this.slot1Card.cardDescription.text = "Not enough insight to see the card"
+			this.slot1Card.cardDescription.text = "Not enough insight to see the card."
 
 			this.slot1Card.option1RewardIcon1.setTexture("HiddenIconSmall")
 			this.slot1Card.option1RewardIcon1.x = 0
@@ -445,7 +452,7 @@ class Dungeon extends Phaser.Scene {
 		else {
 			this.slot2Card.cardName.text = "? ? ?"
 			this.slot2Card.cardImage.setTexture("Hidden")
-			this.slot2Card.cardDescription.text = "Not enough insight to see the card"
+			this.slot2Card.cardDescription.text = "Not enough insight to see the card."
 
 			this.slot2Card.option1RewardIcon1.setTexture("HiddenIconSmall")
 			this.slot2Card.option1RewardIcon1.x = 0
@@ -469,7 +476,7 @@ class Dungeon extends Phaser.Scene {
 		else {
 			this.slot3Card.cardName.text = "? ? ?"
 			this.slot3Card.cardImage.setTexture("Hidden")
-			this.slot3Card.cardDescription.text = "Not enough insight to see the card"
+			this.slot3Card.cardDescription.text = "Not enough insight to see the card."
 
 			this.slot3Card.option1RewardIcon1.setTexture("HiddenIconSmall")
 			this.slot3Card.option1RewardIcon1.x = 0

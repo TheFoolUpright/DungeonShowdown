@@ -27,6 +27,30 @@
                 },
                 {
                     "type": "Image",
+                    "id": "31ffa150-524d-44c7-b7dd-eb6f9f812fd3",
+                    "label": "characterRipped1",
+                    "scope": "PUBLIC",
+                    "texture": {
+                        "key": "Character Ripped 1"
+                    },
+                    "y": 30,
+                    "originX": 0.56,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "819f5e86-8246-4a77-991c-22baa9eabd30",
+                    "label": "characterRipped2",
+                    "scope": "PUBLIC",
+                    "texture": {
+                        "key": "Character Ripped 2"
+                    },
+                    "y": 30,
+                    "originX": 0.56,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
                     "id": "22957763-7cac-4170-a5ad-11f88732a7ec",
                     "label": "characterColor",
                     "scope": "PUBLIC",
