@@ -32,6 +32,9 @@ class WaitingForMatch extends Phaser.Scene {
 	create() {
 
 		this.editorCreate();
+		if(!MenuBackgroundMusic.isPlaying){
+			MenuBackgroundMusic.play()
+		}
 		this.startInterval()
 		
 	}
@@ -57,6 +60,9 @@ class WaitingForMatch extends Phaser.Scene {
 					}
 					else if (data.state == "MATCH_FOUND"){
 						clearInterval(waitingForMatchInterval);
+						if(MenuBackgroundMusic.isPlaying){
+							MenuBackgroundMusic.stop()
+						}
 						stateScene.scene.start("Dungeon", data);
 					} 
 				}

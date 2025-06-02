@@ -127,6 +127,10 @@ class JoinMatch extends Phaser.Scene {
 		this.ButtonGlowEvents()
 		this.ButtonEvents()
 
+		if(!MenuBackgroundMusic.isPlaying){
+			MenuBackgroundMusic.play()
+		}
+
 		
 	}
 
@@ -282,37 +286,48 @@ class JoinMatch extends Phaser.Scene {
 
 	ButtonEvents(){
 		this.joinMatch.on("pointerdown", () =>{
+			ButtonSFX.play()
 			this.confirmJoinMatch()
 		})
 
 		this.pinkButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			playerColor = this.pinkButton.colorFill.tint
 		})
 		this.redButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			playerColor = this.redButton.colorFill.tint
 		})
 		this.orangeRedButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			playerColor = this.orangeRedButton.colorFill.tint
 		})
 		this.orangeButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			playerColor = this.orangeButton.colorFill.tint
 		})
 		this.yellowButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			playerColor = this.yellowButton.colorFill.tint
 		})
 		this.yellowGreenButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			playerColor = this.yellowGreenButton.colorFill.tint
 		})
 		this.greenButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			playerColor = this.greenButton.colorFill.tint
 		})
 		this.greenBlueButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			playerColor = this.greenBlueButton.colorFill.tint
 		})
 		this.blueButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			playerColor = this.blueButton.colorFill.tint
 		})
 		this.purpleButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			playerColor = this.purpleButton.colorFill.tint
 		})
 	}
@@ -335,6 +350,9 @@ class JoinMatch extends Phaser.Scene {
 						this.scene.start("WaitingForMatch")
 					}
 					else if (data.state == "MATCH_FOUND") {
+						if(MenuBackgroundMusic.isPlaying){
+							MenuBackgroundMusic.stop()
+						}
 						this.scene.start("Dungeon", data)
 					}
 				}

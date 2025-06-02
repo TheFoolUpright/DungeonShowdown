@@ -152,8 +152,13 @@ class Showdown extends Phaser.Scene {
 
 		this.editorCreate();
 
+		this.loadAudioForShowdown()
+
 		//Check if Ending
 		if(data.state == 8 || data.state == 9 || data.state == 10){
+			if(ShowdownBackgroundMusic.isPlaying){
+			ShowdownBackgroundMusic.stop()
+			}
 			this.scene.start("Ending", data)
 		}
 		else{
@@ -170,9 +175,17 @@ class Showdown extends Phaser.Scene {
 			this.loadButtonHoverEvents()
 
 			this.confirmButton.on("pointerdown", () => {
+				ButtonSFX.play()
 				this.ConfirmShowdownChoice()
 			})
 		}
+	}
+
+	loadAudioForShowdown(){
+		if(!ShowdownBackgroundMusic.isPlaying){
+			ShowdownBackgroundMusic.play()
+		}
+		PlayerCardSFX.play()
 	}
 
 	loadCardClickEvents(){

@@ -13,6 +13,21 @@ var states = {
     "Draw": 10
 }
 
+var backgroundMusicVolume = .5
+var SFXVolume = 1
+
+var MenuBackgroundMusic
+var DungeonBackgroundMusic
+var ShowdownBackgroundMusic
+
+var PlayerCardSFX
+var OpponentCardSFX
+var DodgeSFX
+var ButtonSFX
+
+var VictoryEnding
+var DefeatEnding
+
 /* START OF COMPILED CODE */
 
 class Preload extends Phaser.Scene {
@@ -73,8 +88,129 @@ class Preload extends Phaser.Scene {
 		this.editorPreload();
 
         this.load.on(Phaser.Loader.Events.COMPLETE, () => {
+			this.InitializeAudio()
             this.LoginCheck()
         })
+
+	}
+
+	InitializeAudio(){
+		if (!MenuBackgroundMusic){
+			MenuBackgroundMusic = this.sound.add("MenuBackgroundMusic",
+			{
+			mute: false,
+			volume: backgroundMusicVolume,
+			rate: 1,
+			detune: 0,
+			seek: 0,
+			loop: true,
+			delay: 0,
+
+			// source of the spatial sound
+			source: {
+				x: 0,
+				y: 0,
+				z: 0,
+				panningModel: 'equalpower',
+				distanceModel: 'inverse',
+				orientationX: 0,
+				orientationY: 0,
+				orientationZ: -1,
+				refDistance: 1,
+				maxDistance: 10000,
+				rolloffFactor: 1,
+				coneInnerAngle: 360,
+				coneOuterAngle: 0,
+				coneOuterGain: 0,
+				follow: undefined
+				}
+			})
+		}
+	
+		if (!DungeonBackgroundMusic){
+			DungeonBackgroundMusic = this.sound.add("DungeonBackgroundMusic",
+			{
+			mute: false,
+			volume: backgroundMusicVolume,
+			rate: 1,
+			detune: 0,
+			seek: 0,
+			loop: true,
+			delay: 0,
+
+			// source of the spatial sound
+			source: {
+				x: 0,
+				y: 0,
+				z: 0,
+				panningModel: 'equalpower',
+				distanceModel: 'inverse',
+				orientationX: 0,
+				orientationY: 0,
+				orientationZ: -1,
+				refDistance: 1,
+				maxDistance: 10000,
+				rolloffFactor: 1,
+				coneInnerAngle: 360,
+				coneOuterAngle: 0,
+				coneOuterGain: 0,
+				follow: undefined
+				}
+			})
+		}
+
+		if (!ShowdownBackgroundMusic){
+			ShowdownBackgroundMusic = this.sound.add("ShowdownBackgroundMusic",
+			{
+			mute: false,
+			volume: backgroundMusicVolume,
+			rate: 1,
+			detune: 0,
+			seek: 0,
+			loop: true,
+			delay: 0,
+
+			// source of the spatial sound
+			source: {
+				x: 0,
+				y: 0,
+				z: 0,
+				panningModel: 'equalpower',
+				distanceModel: 'inverse',
+				orientationX: 0,
+				orientationY: 0,
+				orientationZ: -1,
+				refDistance: 1,
+				maxDistance: 10000,
+				rolloffFactor: 1,
+				coneInnerAngle: 360,
+				coneOuterAngle: 0,
+				coneOuterGain: 0,
+				follow: undefined
+				}
+			})
+		}
+
+		if(!PlayerCardSFX){
+			PlayerCardSFX = this.sound.add("PlayerCardSFX")
+		}
+		if(!OpponentCardSFX){
+			OpponentCardSFX = this.sound.add("OpponentCardSFX")
+		}
+		if(!DodgeSFX){
+			DodgeSFX = this.sound.add("DodgeSFX")
+		}
+		if(!ButtonSFX){
+			ButtonSFX = this.sound.add("StickerButtonSFX")
+		}
+
+		if(!VictoryEnding){
+			VictoryEnding = this.sound.add("VictoryEnding")
+		}
+		if(!DefeatEnding){
+			DefeatEnding = this.sound.add("DefeatEnding")
+		}
+
 
 	}
 

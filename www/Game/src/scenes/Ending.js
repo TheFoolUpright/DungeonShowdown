@@ -87,6 +87,7 @@ class Ending extends Phaser.Scene {
 
 		if(data.state == 8){
 			this.endingText.text = "Victory!"
+			VictoryEnding.play()
 			if(data.IsPlayer1){
 				this.girlWins.visible = true
 			}
@@ -96,6 +97,7 @@ class Ending extends Phaser.Scene {
 		}
 		else if (data.state == 9){
 			this.endingText.text = "Defeat..."
+			DefeatEnding.play()
 			if(data.IsPlayer1){
 				this.girlWins.visible = true
 			}
@@ -109,6 +111,7 @@ class Ending extends Phaser.Scene {
 		}
 
 		this.confirmButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			this.EndMatch()
 		})
 

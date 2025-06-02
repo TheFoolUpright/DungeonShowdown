@@ -22,44 +22,9 @@
                 "key": "Bat"
             },
             {
-                "url": [
-                    "assets/audio/birds-chirping-75156.mp3"
-                ],
-                "type": "audio",
-                "key": "birds-chirping-75156"
-            },
-            {
                 "url": "assets/background/BoyWins.png",
                 "type": "image",
                 "key": "BoyWins"
-            },
-            {
-                "url": [
-                    "assets/audio/breathing-6811.mp3"
-                ],
-                "type": "audio",
-                "key": "breathing-6811"
-            },
-            {
-                "url": [
-                    "assets/audio/card-mixing-48088.mp3"
-                ],
-                "type": "audio",
-                "key": "card-mixing-48088"
-            },
-            {
-                "url": [
-                    "assets/audio/card-sounds-35956.mp3"
-                ],
-                "type": "audio",
-                "key": "card-sounds-35956"
-            },
-            {
-                "url": [
-                    "assets/audio/cardboard-box-73023.mp3"
-                ],
-                "type": "audio",
-                "key": "cardboard-box-73023"
             },
             {
                 "url": "assets/card/CardBorder.png",
@@ -143,17 +108,10 @@
             },
             {
                 "url": [
-                    "assets/audio/dark-ambient-horror-cinematic-halloween-atmosphere-scary-118585.mp3"
+                    "assets/audio/DefeatEnding.mp3"
                 ],
                 "type": "audio",
-                "key": "dark-ambient-horror-cinematic-halloween-atmosphere-scary-118585"
-            },
-            {
-                "url": [
-                    "assets/audio/dark-dungeon-game-hiphop-20241015-252251.mp3"
-                ],
-                "type": "audio",
-                "key": "dark-dungeon-game-hiphop-20241015-252251"
+                "key": "DefeatEnding"
             },
             {
                 "url": "assets/ui/Defense.png",
@@ -171,6 +129,13 @@
                 "key": "Dodge"
             },
             {
+                "url": [
+                    "assets/audio/DodgeSFX.mp3"
+                ],
+                "type": "audio",
+                "key": "DodgeSFX"
+            },
+            {
                 "url": "assets/card/DoubleAttack.png",
                 "type": "image",
                 "key": "DoubleAttack"
@@ -181,20 +146,6 @@
                 "key": "Draw"
             },
             {
-                "url": [
-                    "assets/audio/droplets-in-a-cave-6785.mp3"
-                ],
-                "type": "audio",
-                "key": "droplets-in-a-cave-6785"
-            },
-            {
-                "url": [
-                    "assets/audio/dungeon-air-6983.mp3"
-                ],
-                "type": "audio",
-                "key": "dungeon-air-6983"
-            },
-            {
                 "url": "assets/background/DungeonBackground.png",
                 "type": "image",
                 "key": "DungeonBackground"
@@ -203,6 +154,13 @@
                 "url": "assets/background/DungeonBackgroundBlur.png",
                 "type": "image",
                 "key": "DungeonBackgroundBlur"
+            },
+            {
+                "url": [
+                    "assets/audio/DungeonBackgroundMusic.mp3"
+                ],
+                "type": "audio",
+                "key": "DungeonBackgroundMusic"
             },
             {
                 "url": "assets/card/Empty Card.png",
@@ -230,13 +188,6 @@
                 "key": "EnergyBig"
             },
             {
-                "url": [
-                    "assets/audio/flipcard-91468.mp3"
-                ],
-                "type": "audio",
-                "key": "flipcard-91468"
-            },
-            {
                 "url": "assets/card/Focus.png",
                 "type": "image",
                 "key": "Focus"
@@ -250,13 +201,6 @@
                 "url": "assets/background/GirlWins.png",
                 "type": "image",
                 "key": "GirlWins"
-            },
-            {
-                "url": [
-                    "assets/audio/gong-79191.mp3"
-                ],
-                "type": "audio",
-                "key": "gong-79191"
             },
             {
                 "url": "assets/card/Heal.png",
@@ -314,23 +258,16 @@
                 "key": "Max Health"
             },
             {
+                "url": [
+                    "assets/audio/MenuBackgroundMusic.mp3"
+                ],
+                "type": "audio",
+                "key": "MenuBackgroundMusic"
+            },
+            {
                 "url": "assets/ui/MightBar.png",
                 "type": "image",
                 "key": "MightBar"
-            },
-            {
-                "url": [
-                    "assets/audio/multiple-swish-101325.mp3"
-                ],
-                "type": "audio",
-                "key": "multiple-swish-101325"
-            },
-            {
-                "url": [
-                    "assets/audio/mysterious-forest-creepy-lofi-halloween-lofi-halloween-music-168238.mp3"
-                ],
-                "type": "audio",
-                "key": "mysterious-forest-creepy-lofi-halloween-lofi-halloween-music-168238"
             },
             {
                 "url": "assets/opponent/Normal Slash.png",
@@ -341,6 +278,13 @@
                 "url": "assets/card/NormalAttack.png",
                 "type": "image",
                 "key": "NormalAttack"
+            },
+            {
+                "url": [
+                    "assets/audio/OpponentCardSFX.mp3"
+                ],
+                "type": "audio",
+                "key": "OpponentCardSFX"
             },
             {
                 "url": "assets/opponent/OpponentClumsyBlock.png",
@@ -371,6 +315,13 @@
                 "url": "assets/card/Parry.png",
                 "type": "image",
                 "key": "Parry"
+            },
+            {
+                "url": [
+                    "assets/audio/PlayerCardSFX.mp3"
+                ],
+                "type": "audio",
+                "key": "PlayerCardSFX"
             },
             {
                 "url": "assets/opponent/PlayerClumsyBlock.png",
@@ -468,13 +419,6 @@
                 "key": "RestfulDwelling"
             },
             {
-                "url": [
-                    "assets/audio/scary-pumpkin-spooky-halloween-trap-beat-242102.mp3"
-                ],
-                "type": "audio",
-                "key": "scary-pumpkin-spooky-halloween-trap-beat-242102"
-            },
-            {
                 "url": "assets/background/ShowdownBackground.png",
                 "type": "image",
                 "key": "ShowdownBackground"
@@ -483,6 +427,13 @@
                 "url": "assets/background/ShowdownBackgroundBlur.png",
                 "type": "image",
                 "key": "ShowdownBackgroundBlur"
+            },
+            {
+                "url": [
+                    "assets/audio/ShowdownBackgroundMusic.mp3"
+                ],
+                "type": "audio",
+                "key": "ShowdownBackgroundMusic"
             },
             {
                 "url": "assets/card/Slime.png",
@@ -495,16 +446,16 @@
                 "key": "SolidBlock"
             },
             {
+                "url": [
+                    "assets/audio/StickerButtonSFX.wav"
+                ],
+                "type": "audio",
+                "key": "StickerButtonSFX"
+            },
+            {
                 "url": "assets/card/StoneOfPower.png",
                 "type": "image",
                 "key": "StoneOfPower"
-            },
-            {
-                "url": [
-                    "assets/audio/success-fanfare-trumpets-6185.mp3"
-                ],
-                "type": "audio",
-                "key": "success-fanfare-trumpets-6185"
             },
             {
                 "url": "assets/ui/TextBox.png",
@@ -513,22 +464,15 @@
             },
             {
                 "url": [
-                    "assets/audio/thump_thud_slam_fist_heavy-39349.mp3"
+                    "assets/audio/VictoryEnding.mp3"
                 ],
                 "type": "audio",
-                "key": "thump_thud_slam_fist_heavy-39349"
+                "key": "VictoryEnding"
             },
             {
                 "url": "assets/card/VitalityBrew.png",
                 "type": "image",
                 "key": "VitalityBrew"
-            },
-            {
-                "url": [
-                    "assets/audio/wrong-answer-21-199825.mp3"
-                ],
-                "type": "audio",
-                "key": "wrong-answer-21-199825"
             }
         ]
     },

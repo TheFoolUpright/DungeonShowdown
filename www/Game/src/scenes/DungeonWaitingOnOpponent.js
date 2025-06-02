@@ -47,10 +47,16 @@ class DungeonWaitingOnOpponent extends Phaser.Scene {
 	create() {
 
 		this.editorCreate();
-
+		this.loadAudioForDungeonWaitingOnOpponent()
 		this.dungeonBackground.setTexture("DungeonBackgroundBlur")
 		nextSceneDataLoaded = false
 		dungeonWaitingOnOpponentInterval = setInterval(this.CheckDungeonOpponentSelectionState, 2000, this);
+	}
+
+	loadAudioForDungeonWaitingOnOpponent(){
+		if(!DungeonBackgroundMusic.isPlaying){
+			DungeonBackgroundMusic.play()
+		}
 	}
 
 	// update() {

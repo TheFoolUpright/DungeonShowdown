@@ -161,54 +161,41 @@ class Dungeon extends Phaser.Scene {
 	create(data) {
 
 		this.editorCreate();
-		if (!backgroundMusic){
-		backgroundMusic = this.sound.add("dark-ambient-horror-cinematic-halloween-atmosphere-scary-118585",
-		{
-		mute: false,
-		volume: 1,
-		rate: 1,
-		detune: 0,
-		seek: 0,
-		loop: true,
-		delay: 0,
-
-		// source of the spatial sound
-		source: {
-			x: 0,
-			y: 0,
-			z: 0,
-			panningModel: 'equalpower',
-			distanceModel: 'inverse',
-			orientationX: 0,
-			orientationY: 0,
-			orientationZ: -1,
-			refDistance: 1,
-			maxDistance: 10000,
-			rolloffFactor: 1,
-			coneInnerAngle: 360,
-			coneOuterAngle: 0,
-			coneOuterGain: 0,
-			follow: undefined
-		}
-	}
-
-	)
-}
-		if(!backgroundMusic.isPlaying){
-			backgroundMusic.play()
-		}
-		const cardSound = this.sound.add("card-sounds-35956")
-		cardSound.play()
+		
+		//Load Audio
+		this.loadAudioForDungeon()
 
 		//Load Data
 		this.loadInfoData(data)
 		this.loadStatsData(data)
 		this.loadCardData(data)
 
+		//Load Events
+		this.loadButtonClickEvents()
+		this.loadButtonHoverEvents()
 
+		this.loadCardClickEvents()
+		this.loadCardHoverEvents()
+	}
+
+	loadAudioForDungeon(){
+		if(!DungeonBackgroundMusic.isPlaying){
+			DungeonBackgroundMusic.play()
+		}
+		PlayerCardSFX.play()
+	}
+
+	loadButtonClickEvents(){
+		this.onwardButton.on("pointerdown", () =>{
+			ButtonSFX.play()
+			this.ConfirmDungeonChoice()
+		})
+	}
+
+	loadCardClickEvents(){
 		//Create events
 		this.slot1Card.on("pointerdown", () => {
-			cardSound.play()
+			PlayerCardSFX.play()
 			if (!this.slot1Card.isSelected) {
 				this.slot1Card.isSelected = true
 				this.slot2Card.isSelected = false
@@ -224,7 +211,7 @@ class Dungeon extends Phaser.Scene {
 		})
 
 		this.slot2Card.on("pointerdown", () => {
-			cardSound.play()
+			PlayerCardSFX.play()
 			if (!this.slot2Card.isSelected) {
 				this.slot1Card.isSelected = false
 				this.slot2Card.isSelected = true
@@ -240,7 +227,7 @@ class Dungeon extends Phaser.Scene {
 		})
 
 		this.slot3Card.on("pointerdown", () => {
-			cardSound.play()
+			PlayerCardSFX.play()
 			if (!this.slot3Card.isSelected) {
 				this.slot1Card.isSelected = false
 				this.slot2Card.isSelected = false
@@ -255,6 +242,9 @@ class Dungeon extends Phaser.Scene {
 			}
 		})
 
+	}
+
+	loadCardHoverEvents(){
 		this.slot1Card.on("pointerover", () => {
 			this.slot1Card.cardGlow.active = true
 			this.slot1Card.cardDescription.visible = true
@@ -291,7 +281,9 @@ class Dungeon extends Phaser.Scene {
 			this.slot3Card.cardDescription.visible = false
 			this.slot3Card.cardDescriptionTextBox.visible = false
 		})
+	}
 
+	loadButtonHoverEvents(){
 		this.onwardButton.glowFx.active = false
 
 		this.onwardButton.on("pointerover", () => {
@@ -299,15 +291,9 @@ class Dungeon extends Phaser.Scene {
 
 		})
 
-
 		this.onwardButton.on("pointerout", () => {
 			this.onwardButton.glowFx.active = false
 		})
-
-		this.onwardButton.on("pointerdown", () =>{
-			this.ConfirmDungeonChoice()
-		})
-
 	}
 
 	update() {

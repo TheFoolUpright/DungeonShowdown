@@ -77,11 +77,14 @@ class DungeonResult extends Phaser.Scene {
 	create(data) {
 
 		this.editorCreate()
+
+		this.loadAudioForDungeonResult()
 		this.loadStatsData(data)
 		this.displayCardInformation(data)
 		this.confirmButtonGlow()
 
 		this.confirmButton.on("pointerdown", () =>{
+			ButtonSFX.play()
 			this.setupNextRoom(data.room_id)
 		})
 
@@ -91,6 +94,13 @@ class DungeonResult extends Phaser.Scene {
 		this.info.roomOrTurn.text = "Room " + data.room_id
 		this.info.playerName.text = data.player_username
 		this.info.playerName.setColor(data.player_color)
+	}
+
+	loadAudioForDungeonResult(){
+		if(!DungeonBackgroundMusic.isPlaying){
+			DungeonBackgroundMusic.play()
+		}
+		OpponentCardSFX.play()
 	}
 
 	loadStatsData(data) {
@@ -271,6 +281,9 @@ class DungeonResult extends Phaser.Scene {
 					console.log(data)
 
 					if (xhttp.status == 200) {
+						if(DungeonBackgroundMusic.isPlaying){
+							DungeonBackgroundMusic.stop()
+						}
 						this.scene.start("Showdown", data);
 					}
 				}

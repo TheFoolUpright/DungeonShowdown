@@ -279,6 +279,8 @@ class ShowdownResult extends Phaser.Scene {
 
 		this.editorCreate();
 
+		this.loadAudioForShowdownResult()
+
 		playerShowdownAnimations.NormalAttack.visible = false
 		playerShowdownAnimations.HeavyAttack.visible = false
 		playerShowdownAnimations.DoubleAttack.visible = false
@@ -357,8 +359,17 @@ class ShowdownResult extends Phaser.Scene {
 		this.loadOpponentDamage(data)
 
 		this.confirmButton.on("pointerdown", () => {
+			ButtonSFX.play()
 			this.setupNextTurn()
 		})
+	}
+
+	loadAudioForShowdownResult(){
+		if(!ShowdownBackgroundMusic.isPlaying){
+			ShowdownBackgroundMusic.play()
+		}
+		OpponentCardSFX.play()
+		PlayerCardSFX.play()
 	}
 
 	loadCards(data) {
@@ -613,6 +624,7 @@ class ShowdownResult extends Phaser.Scene {
 				console.log(data)
 
 				if (xhttp.status == 200) {
+					
 					this.scene.start("Showdown", data)
 				}
 			}
