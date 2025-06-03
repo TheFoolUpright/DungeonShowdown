@@ -162,11 +162,11 @@ class Ending extends Phaser.Scene {
 
 		if (data.IsPlayer1) {
 			girlColor = data.player_color.replace("#", "0x")
-			boyColor = data.opponentNameAndColor[0].player_color.replace("#", "0x")
+			boyColor = data.opponent_color.replace("#", "0x")
 		}
 		else {
-			girlColor = data.opponentNameAndColor[0].player_color.replace("#", "0x")
-			boyColor = data.player_color.replace("#", "0x")
+			girlColor = data.player_color.replace("#", "0x")
+			boyColor = data.opponent_color.replace("#", "0x")
 
 		}
 
