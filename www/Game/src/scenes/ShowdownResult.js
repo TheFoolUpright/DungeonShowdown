@@ -1605,15 +1605,15 @@ class ShowdownResult extends Phaser.Scene {
 				this.opponent.character.scaleX -= dt / 128
 				this.opponent.characterRipped1.scaleX -= dt / 128
 				this.opponent.characterRipped2.scaleX -= dt / 128
-				this.opponentSkills.scaleX -= dt / 128
 				this.opponent.characterColor.scaleX -= dt / 128
+				this.opponentSkills.scaleX = this.opponent.character.scaleX
 			}
 			else if ((this.playerAttacks.angle >= 0) && this.opponent.character.scaleX < 1) {
 				this.opponent.character.scaleX += dt / 128
 				this.opponent.characterRipped1.scaleX += dt / 128
 				this.opponent.characterRipped2.scaleX += dt / 128
-				this.opponentSkills.scaleX -= dt / 128
 				this.opponent.characterColor.scaleX += dt / 128
+				this.opponentSkills.scaleX = this.opponent.character.scaleX
 			}
 		}
 
