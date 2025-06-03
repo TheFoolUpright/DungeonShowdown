@@ -1605,7 +1605,7 @@ function setupNextDungeonRoom(req, res) {
         card2.IsVisible = true
         card3.IsVisible = true
         
-        if (playerStats[0].insight < 9 && playerStats[0].insight > 5) {
+        if (playerStats[0].insight < 7 && playerStats[0].insight > 3) {
             var randomChoice =  Math.floor((Math.random() * 3) + 1)
             if (randomChoice == 1) {
                 card1.IsVisible = false
@@ -1618,7 +1618,7 @@ function setupNextDungeonRoom(req, res) {
             }
             
         }
-        if (playerStats[0].insight < 6 && playerStats[0].insight > 2) {
+        if (playerStats[0].insight < 4 && playerStats[0].insight > 1) {
             var randomChoice =  Math.floor((Math.random() * 3) + 1)
             if (randomChoice == 1) {
                 card1.IsVisible = false
@@ -1633,7 +1633,7 @@ function setupNextDungeonRoom(req, res) {
                 card3.IsVisible = false
             }
         }
-        if (playerStats[0].insight < 3) {
+        if (playerStats[0].insight < 2) {
             card1.IsVisible = false
             card2.IsVisible = false
             card3.IsVisible = false
@@ -1832,7 +1832,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
      function GetOpponentShowdownCardStats() {
         connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path, \
             player_username, player_color, \
-            current_health \
+            max_health, current_health, energy, insight, damage \
             FROM card C \
             INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id \
             INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id \
@@ -2933,7 +2933,7 @@ app.post("/setupShowdown", (req, res) => {
         card2.IsVisible = true
         card3.IsVisible = true
         
-        if (playerStats[0].insight < 9 && playerStats[0].insight >= 6) {
+        if (playerStats[0].insight < 7 && playerStats[0].insight > 3) {
             var randomChoice =  Math.floor((Math.random() * 3) + 1)
             if (randomChoice == 1) {
                 card1.IsVisible = false
@@ -2946,7 +2946,7 @@ app.post("/setupShowdown", (req, res) => {
             }
             
         }
-        if (playerStats[0].insight < 6 && playerStats[0].insight >= 3) {
+        if (playerStats[0].insight < 4 && playerStats[0].insight > 1) {
             var randomChoice =  Math.floor((Math.random() * 3) + 1)
             if (randomChoice == 1) {
                 card1.IsVisible = false
@@ -2961,7 +2961,7 @@ app.post("/setupShowdown", (req, res) => {
                 card3.IsVisible = false
             }
         }
-        if (playerStats[0].insight < 3) {
+        if (playerStats[0].insight < 2) {
             card1.IsVisible = false
             card2.IsVisible = false
             card3.IsVisible = false
@@ -3264,7 +3264,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
     function GetOpponentShowdownCardStats() {
         connection.query("SELECT C.card_id, card_type_id, card_name, card_max_health, card_current_health, card_energy, card_insight, card_damage, card_attack, card_defense, card_image_path, \
             player_username, player_color, \
-            current_health \
+            max_health, current_health, energy, insight, damage \
             FROM card C \
             INNER JOIN player_card_slot PCS ON C.card_id = PCS.card_id \
             INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id \

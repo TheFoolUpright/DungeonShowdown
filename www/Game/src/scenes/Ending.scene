@@ -64,7 +64,7 @@
         {
             "type": "Image",
             "id": "805f6425-3313-4e9c-bd3b-985b6844d4c9",
-            "label": "girlWins_GirlColors",
+            "label": "girlWinsGirlColors",
             "scope": "PUBLIC",
             "texture": {
                 "key": "Girl Wins Girl Colors"

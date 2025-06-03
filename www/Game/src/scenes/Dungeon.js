@@ -178,7 +178,7 @@ class Dungeon extends Phaser.Scene {
 		this.loadCardHoverEvents()
 	}
 
-	loadAudioForDungeon(){
+	loadAudioForDungeon() {
 		if(!DungeonBackgroundMusic.isPlaying){
 			DungeonBackgroundMusic.play()
 		}
@@ -192,7 +192,7 @@ class Dungeon extends Phaser.Scene {
 		})
 	}
 
-	loadCardClickEvents(){
+	loadCardClickEvents() {
 		//Create events
 		this.slot1Card.on("pointerdown", () => {
 			PlayerCardSFX.play()
@@ -244,7 +244,7 @@ class Dungeon extends Phaser.Scene {
 
 	}
 
-	loadCardHoverEvents(){
+	loadCardHoverEvents() {
 		this.slot1Card.on("pointerover", () => {
 			this.slot1Card.cardGlow.active = true
 			this.slot1Card.cardDescription.visible = true
@@ -283,7 +283,7 @@ class Dungeon extends Phaser.Scene {
 		})
 	}
 
-	loadButtonHoverEvents(){
+	loadButtonHoverEvents() {
 		this.onwardButton.glowFx.active = false
 
 		this.onwardButton.on("pointerover", () => {

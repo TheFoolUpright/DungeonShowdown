@@ -1,6 +1,7 @@
 
 // You can write more code here
-
+	var girlColor
+	var boyColor
 /* START OF COMPILED CODE */
 
 class Ending extends Phaser.Scene {
@@ -34,9 +35,9 @@ class Ending extends Phaser.Scene {
 		const girlWinsBoyColors = this.add.image(1301.7168, 945.6795, "Girl Wins Boy Colors");
 		girlWinsBoyColors.visible = false;
 
-		// girlWins_GirlColors
-		const girlWins_GirlColors = this.add.image(779.8259, 649.6259, "Girl Wins Girl Colors");
-		girlWins_GirlColors.visible = false;
+		// girlWinsGirlColors
+		const girlWinsGirlColors = this.add.image(779.8259, 649.6259, "Girl Wins Girl Colors");
+		girlWinsGirlColors.visible = false;
 
 		// boyWins
 		const boyWins = this.add.image(960, 540, "BoyWins");
@@ -77,7 +78,7 @@ class Ending extends Phaser.Scene {
 		this.endingText = endingText;
 		this.girlWins = girlWins;
 		this.girlWinsBoyColors = girlWinsBoyColors;
-		this.girlWins_GirlColors = girlWins_GirlColors;
+		this.girlWinsGirlColors = girlWinsGirlColors;
 		this.boyWins = boyWins;
 		this.boyWinsBoyColors = boyWinsBoyColors;
 		this.boyWinsGirlColors = boyWinsGirlColors;
@@ -99,7 +100,7 @@ class Ending extends Phaser.Scene {
 	/** @type {Phaser.GameObjects.Image} */
 	girlWinsBoyColors;
 	/** @type {Phaser.GameObjects.Image} */
-	girlWins_GirlColors;
+	girlWinsGirlColors;
 	/** @type {Phaser.GameObjects.Image} */
 	boyWins;
 	/** @type {Phaser.GameObjects.Image} */
@@ -127,27 +128,27 @@ class Ending extends Phaser.Scene {
 
 		this.confirmButton.confirmButtonText.text = "Play Again!"
 
-		if(data.state == 8){
+		if (data.state == 8) {
 			this.endingText.text = "Victory!"
 			VictoryEnding.play()
-			if(data.IsPlayer1){
+			if (data.IsPlayer1) {
 				this.girlWins.visible = true
 			}
 			else{
 				this.boyWins.visible = true
 			}
 		}
-		else if (data.state == 9){
+		else if (data.state == 9) {
 			this.endingText.text = "Defeat..."
 			DefeatEnding.play()
-			if(data.IsPlayer1){
-				this.girlWins.visible = true
-			}
-			else{
+			if(data.IsPlayer1) {
 				this.boyWins.visible = true
 			}
+			else{
+				this.girlWins.visible = true
+			}
 		}
-		else if (data.state == 10){
+		else if (data.state == 10) {
 			this.endingText.text = "It's a Tie..."
 			this.draw.visible = true
 		}
@@ -156,6 +157,30 @@ class Ending extends Phaser.Scene {
 			ButtonSFX.play()
 			this.EndMatch()
 		})
+		
+		console.log("PLAYER: " + data)
+
+		if (data.IsPlayer1) {
+			girlColor = data.player_color.replace("#", "0x")
+			boyColor = data.opponentNameAndColor[0].player_color.replace("#", "0x")
+		}
+		else {
+			girlColor = data.opponentNameAndColor[0].player_color.replace("#", "0x")
+			boyColor = data.player_color.replace("#", "0x")
+
+		}
+
+		if (this.girlWins.visible) {
+			this.girlWinsGirlColors.cardBorder.setTint(girlColor)
+			this.girlWinsBoyColors.cardBorder.setTint(boyColor)
+		}
+		else if (this.boyWins.visible) {
+			this.boyWinsGirlColors.cardBorder.setTint(girlColor)
+			this.boyWinsBoyColors.cardBorder.setTint(boyColor)
+		} else {
+			this.drawGirlColors.cardBorder.setTint(girlColor)
+			this.drawBoyColors.cardBorder.setTint(boyColor)
+		}
 
 	}
 
