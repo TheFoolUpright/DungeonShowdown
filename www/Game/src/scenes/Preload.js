@@ -20,13 +20,70 @@ var MenuBackgroundMusic
 var DungeonBackgroundMusic
 var ShowdownBackgroundMusic
 
-var PlayerCardSFX
-var OpponentCardSFX
-var DodgeSFX
-var ButtonSFX
-
 var VictoryEnding
 var DefeatEnding
+
+var PlayerCardSFX
+var OpponentCardSFX
+var ButtonSFX
+
+var DodgeSFX
+var ClumsyBlockSFX
+var SolidBlockSFX
+var ImpressiveBlockSFX
+var ParrySFX
+
+var FemaleAdrenalineSFX
+var FemaleAngerSFX
+var FemaleFocusSFX
+var FemaleHealingSFX
+var FemaleRageSFX
+
+var MaleAdrenalineSFX
+var MaleAngerSFX
+var MaleFocusSFX
+var MaleHealingSFX
+var MaleRageSFX
+
+var FemaleCounterAttackSFX1
+var FemaleCounterAttackSFX2
+var FemaleCounterAttackSFX3
+var FemaleCounterAttackSFX4
+
+var MaleCounterAttackSFX1
+var MaleCounterAttackSFX2
+var MaleCounterAttackSFX3
+var MaleCounterAttackSFX4
+
+var FemaleHeavyAttackSFX1
+var FemaleHeavyAttackSFX2
+var FemaleHeavyAttackSFX3
+var FemaleHeavyAttackSFX4
+
+var MaleHeavyAttackSFX1
+var MaleHeavyAttackSFX2
+var MaleHeavyAttackSFX3
+var MaleHeavyAttackSFX4
+
+var FemaleNormalAttackSFX1
+var FemaleNormalAttackSFX2
+var FemaleNormalAttackSFX3
+var FemaleNormalAttackSFX4
+
+var MaleNormalAttackSFX1
+var MaleNormalAttackSFX2
+var MaleNormalAttackSFX3
+var MaleNormalAttackSFX4
+
+var FemaleRecoveryAttackSFX1
+var FemaleRecoveryAttackSFX2
+var FemaleRecoveryAttackSFX3
+var FemaleRecoveryAttackSFX4
+
+var MaleRecoveryAttackSFX1
+var MaleRecoveryAttackSFX2
+var MaleRecoveryAttackSFX3
+var MaleRecoveryAttackSFX4
 
 /* START OF COMPILED CODE */
 
@@ -191,19 +248,6 @@ class Preload extends Phaser.Scene {
 			})
 		}
 
-		if(!PlayerCardSFX){
-			PlayerCardSFX = this.sound.add("PlayerCardSFX")
-		}
-		if(!OpponentCardSFX){
-			OpponentCardSFX = this.sound.add("OpponentCardSFX")
-		}
-		if(!DodgeSFX){
-			DodgeSFX = this.sound.add("DodgeSFX")
-		}
-		if(!ButtonSFX){
-			ButtonSFX = this.sound.add("StickerButtonSFX")
-		}
-
 		if(!VictoryEnding){
 			VictoryEnding = this.sound.add("VictoryEnding")
 		}
@@ -211,6 +255,167 @@ class Preload extends Phaser.Scene {
 			DefeatEnding = this.sound.add("DefeatEnding")
 		}
 
+		if(!PlayerCardSFX){
+			PlayerCardSFX = this.sound.add("PlayerCardSFX")
+		}
+		if(!OpponentCardSFX){
+			OpponentCardSFX = this.sound.add("OpponentCardSFX")
+		}
+		if(!ButtonSFX){
+			ButtonSFX = this.sound.add("StickerButtonSFX")
+		}
+
+		if(!DodgeSFX){
+			DodgeSFX = this.sound.add("DodgeSFX")
+		}
+		if(!ClumsyBlockSFX){
+			ClumsyBlockSFX = this.sound.add("CardboardSound1")
+		}
+		if(!SolidBlockSFX){
+			SolidBlockSFX = this.sound.add("CardboardSound8")
+		}
+		if(!ImpressiveBlockSFX){
+			ImpressiveBlockSFX = this.sound.add("CardboardSound2")
+		}
+		if(!ParrySFX){
+			ParrySFX = this.sound.add("CardboardSound3")
+		}
+
+		if(!FemaleAdrenalineSFX){
+			FemaleAdrenalineSFX = this.sound.add("FemaleAdrenalineSFX")
+		}
+		if(!FemaleAngerSFX){
+			FemaleAngerSFX = this.sound.add("FemaleAngerSFX")
+		}
+		if(!FemaleFocusSFX){
+			FemaleFocusSFX = this.sound.add("FemaleFocusSFX")
+		}
+		if(!FemaleHealingSFX){
+			FemaleHealingSFX = this.sound.add("FemaleHealingSFX")
+		}
+		if(!FemaleRageSFX){
+			FemaleRageSFX = this.sound.add("FemaleRageSFX")
+		}
+
+		if(!MaleAdrenalineSFX){
+			MaleAdrenalineSFX = this.sound.add("MaleAdrenalineSFX")
+		}
+		if(!MaleAngerSFX){
+			MaleAngerSFX = this.sound.add("MaleAngerSFX")
+		}
+		if(!MaleFocusSFX){
+			MaleFocusSFX = this.sound.add("MaleFocusSFX")
+		}
+		if(!MaleHealingSFX){
+			MaleHealingSFX = this.sound.add("MaleHealingSFX")
+		}
+		if(!MaleRageSFX){
+			MaleRageSFX = this.sound.add("MaleRageSFX")
+		}
+
+		if(!FemaleCounterAttackSFX1){
+			FemaleCounterAttackSFX1 = this.sound.add("FemaleCounterAttackSFX1")
+		}
+		if(!FemaleCounterAttackSFX2){
+			FemaleCounterAttackSFX2 = this.sound.add("FemaleCounterAttackSFX2")
+		}
+		if(!FemaleCounterAttackSFX3){
+			FemaleCounterAttackSFX3 = this.sound.add("FemaleCounterAttackSFX3")
+		}
+		if(!FemaleCounterAttackSFX4){
+			FemaleCounterAttackSFX4 = this.sound.add("FemaleCounterAttackSFX4")
+		}
+
+		if(!MaleCounterAttackSFX1){
+			MaleCounterAttackSFX1 = this.sound.add("MaleCounterAttackSFX1")
+		}
+		if(!MaleCounterAttackSFX2){
+			MaleCounterAttackSFX2 = this.sound.add("MaleCounterAttackSFX2")
+		}
+		if(!MaleCounterAttackSFX3){
+			MaleCounterAttackSFX3 = this.sound.add("MaleCounterAttackSFX3")
+		}
+		if(!MaleCounterAttackSFX4){
+			MaleCounterAttackSFX4 = this.sound.add("MaleCounterAttackSFX4")
+		}
+
+		if(!FemaleHeavyAttackSFX1){
+			FemaleHeavyAttackSFX1 = this.sound.add("FemaleHeavyAttackSFX1")
+		}
+		if(!FemaleHeavyAttackSFX2){
+			FemaleHeavyAttackSFX2 = this.sound.add("FemaleHeavyAttackSFX2")
+		}
+		if(!FemaleHeavyAttackSFX3){
+			FemaleHeavyAttackSFX3 = this.sound.add("FemaleHeavyAttackSFX3")
+		}
+		if(!FemaleHeavyAttackSFX4){
+			FemaleHeavyAttackSFX4 = this.sound.add("FemaleHeavyAttackSFX4")
+		}
+
+		if(!MaleHeavyAttackSFX1){
+			MaleHeavyAttackSFX1 = this.sound.add("MaleHeavyAttackSFX1")
+		}
+		if(!MaleHeavyAttackSFX2){
+			MaleHeavyAttackSFX2 = this.sound.add("MaleHeavyAttackSFX2")
+		}
+		if(!MaleHeavyAttackSFX3){
+			MaleHeavyAttackSFX3 = this.sound.add("MaleHeavyAttackSFX3")
+		}
+		if(!MaleHeavyAttackSFX4){
+			MaleHeavyAttackSFX4 = this.sound.add("MaleHeavyAttackSFX4")
+		}
+
+		if(!FemaleNormalAttackSFX1){
+			FemaleNormalAttackSFX1 = this.sound.add("FemaleNormalAttackSFX1")
+		}
+		if(!FemaleNormalAttackSFX2){
+			FemaleNormalAttackSFX2 = this.sound.add("FemaleNormalAttackSFX2")
+		}
+		if(!FemaleNormalAttackSFX3){
+			FemaleNormalAttackSFX3 = this.sound.add("FemaleNormalAttackSFX3")
+		}
+		if(!FemaleNormalAttackSFX4){
+			FemaleNormalAttackSFX4 = this.sound.add("FemaleNormalAttackSFX4")
+		}
+
+		if(!MaleNormalAttackSFX1){
+			MaleNormalAttackSFX1 = this.sound.add("MaleNormalAttackSFX1")
+		}
+		if(!MaleNormalAttackSFX2){
+			MaleNormalAttackSFX2 = this.sound.add("MaleNormalAttackSFX2")
+		}
+		if(!MaleNormalAttackSFX3){
+			MaleNormalAttackSFX3 = this.sound.add("MaleNormalAttackSFX3")
+		}
+		if(!MaleNormalAttackSFX4){
+			MaleNormalAttackSFX4 = this.sound.add("MaleNormalAttackSFX4")
+		}
+
+		if(!FemaleRecoveryAttackSFX1){
+			FemaleRecoveryAttackSFX1 = this.sound.add("FemaleRecoveryAttackSFX1")
+		}
+		if(!FemaleRecoveryAttackSFX2){
+			FemaleRecoveryAttackSFX2 = this.sound.add("FemaleRecoveryAttackSFX2")
+		}
+		if(!FemaleRecoveryAttackSFX3){
+			FemaleRecoveryAttackSFX3 = this.sound.add("FemaleRecoveryAttackSFX3")
+		}
+		if(!FemaleRecoveryAttackSFX4){
+			FemaleRecoveryAttackSFX4 = this.sound.add("FemaleRecoveryAttackSFX4")
+		}
+
+		if(!MaleRecoveryAttackSFX1){
+			MaleRecoveryAttackSFX1 = this.sound.add("MaleRecoveryAttackSFX1")
+		}
+		if(!MaleRecoveryAttackSFX2){
+			MaleRecoveryAttackSFX2 = this.sound.add("MaleRecoveryAttackSFX2")
+		}
+		if(!MaleRecoveryAttackSFX3){
+			MaleRecoveryAttackSFX3 = this.sound.add("MaleRecoveryAttackSFX3")
+		}
+		if(!MaleRecoveryAttackSFX4){
+			MaleRecoveryAttackSFX4 = this.sound.add("MaleRecoveryAttackSFX4")
+		}
 
 	}
 
