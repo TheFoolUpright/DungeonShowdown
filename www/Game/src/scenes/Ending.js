@@ -158,28 +158,34 @@ class Ending extends Phaser.Scene {
 			this.EndMatch()
 		})
 		
-		console.log("PLAYER: " + data)
+		console.log("PLAYER: " + data.player_color)
 
 		if (data.IsPlayer1) {
 			girlColor = data.player_color.replace("#", "0x")
 			boyColor = data.opponent_color.replace("#", "0x")
 		}
 		else {
-			girlColor = data.player_color.replace("#", "0x")
-			boyColor = data.opponent_color.replace("#", "0x")
+			girlColor = data.opponent_color.replace("#", "0x")
+			boyColor = data.player_color.replace("#", "0x")
 
 		}
 
 		if (this.girlWins.visible) {
-			this.girlWinsGirlColors.cardBorder.setTint(girlColor)
-			this.girlWinsBoyColors.cardBorder.setTint(boyColor)
+			this.girlWinsGirlColors.visible = true
+			this.girlWinsBoyColors.visible = true
+			this.girlWinsGirlColors.setTint(girlColor)
+			this.girlWinsBoyColors.setTint(boyColor)
 		}
 		else if (this.boyWins.visible) {
-			this.boyWinsGirlColors.cardBorder.setTint(girlColor)
-			this.boyWinsBoyColors.cardBorder.setTint(boyColor)
+			this.boyWinsGirlColors.visible = true
+			this.boyWinsBoyColors.visible = true
+			this.boyWinsGirlColors.setTint(girlColor)
+			this.boyWinsBoyColors.setTint(boyColor)
 		} else {
-			this.drawGirlColors.cardBorder.setTint(girlColor)
-			this.drawBoyColors.cardBorder.setTint(boyColor)
+			this.drawGirlColors.visible = true
+			this.drawBoyColors.visible = true
+			this.drawGirlColors.setTint(girlColor)
+			this.drawBoyColors.setTint(boyColor)
 		}
 
 	}

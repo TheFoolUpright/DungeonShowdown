@@ -715,7 +715,7 @@ class Showdown extends Phaser.Scene {
 	update() {
 		//If any card is selected make the button visible
 		if (this.normalAttackSlot.isSelected || this.specialAttackSlot.isSelected || this.defenseSlot.isSelected || this.skillSlot.isSelected) {
-			if(this.normalAttackSlot.isSelected || this.specialAttackSlot.isSelected){
+			if(this.normalAttackSlot.isSelected || this.specialAttackSlot.isSelected) {
 				this.confirmButton.confirmButtonText.text = "Rip & Tear!"
 			}
 			else{
