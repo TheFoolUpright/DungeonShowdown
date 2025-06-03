@@ -715,7 +715,7 @@ class Showdown extends Phaser.Scene {
 				this.confirmButton.confirmButtonText.text = "Rip & Tear!"
 			}
 			else{
-				this.confirmButton.confirmButtonText.text = "Perservere!"
+				this.confirmButton.confirmButtonText.text = "Persevere!"
 			}
 			this.confirmButton.visible = true
 		}
