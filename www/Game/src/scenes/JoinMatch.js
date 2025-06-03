@@ -2,6 +2,16 @@
 // You can write more code here
 var playerColor
 var playerColorText
+var pinkGlow
+var redGlow
+var orangeRedGlow
+var orangeGlow
+var yellowGlow
+var yellowGreenGlow
+var greenGlow
+var greenBlueGlow
+var blueGlow
+var purpleGlow
 
 /* START OF COMPILED CODE */
 
@@ -137,7 +147,7 @@ class JoinMatch extends Phaser.Scene {
 
 	}
 
-	update(){
+	update() {
 		this.playerCharater.characterColor.setTint(playerColor)
 		playerColorText = playerColor.replace("0x", "#")
 		this.playerCharater.opponentName.setColor(playerColorText)
@@ -176,7 +186,7 @@ class JoinMatch extends Phaser.Scene {
 		// }
 	}
 
-	loadPresets(data){
+	loadPresets(data) {
 		playerColor = data.player_color.replace("#", "0x")
 		playerColorText = data.player_color
 		this.joinMatch.confirmButtonText.text = "Join"
@@ -207,7 +217,7 @@ class JoinMatch extends Phaser.Scene {
 
 	}
 
-	ButtonGlowEvents(){
+	ButtonGlowEvents() {
 		this.joinMatch.on("pointerover", () => {
 			this.joinMatch.glowFx.active = true
 		})
@@ -217,77 +227,97 @@ class JoinMatch extends Phaser.Scene {
 
 		this.pinkButton.on("pointerover", () => {
 			this.pinkButton.glowFx.active = true
+			pinkGlow = true
 		})
 		this.pinkButton.on("pointerout", () => {
 			this.pinkButton.glowFx.active = false
+			pinkGlow = false
 		})
 
 		this.redButton.on("pointerover", () => {
 			this.redButton.glowFx.active = true
+			redGlow = true
 		})
 		this.redButton.on("pointerout", () => {
 			this.redButton.glowFx.active = false
+			redGlow = false
 		})
 
 		this.orangeRedButton.on("pointerover", () => {
 			this.orangeRedButton.glowFx.active = true
+			orangeRedGlow = true
 		})
 		this.orangeRedButton.on("pointerout", () => {
 			this.orangeRedButton.glowFx.active = false
+			orangeRedGlow = false
 		})
 
 		this.orangeButton.on("pointerover", () => {
 			this.orangeButton.glowFx.active = true
+			orangeGlow = true
 		})
 		this.orangeButton.on("pointerout", () => {
 			this.orangeButton.glowFx.active = false
+			orangeGlow = false
 		})
 
 		this.yellowButton.on("pointerover", () => {
 			this.yellowButton.glowFx.active = true
+			yellowGlow = true
 		})
 		this.yellowButton.on("pointerout", () => {
 			this.yellowButton.glowFx.active = false
+			yellowGlow = false
 		})
 
 		this.yellowGreenButton.on("pointerover", () => {
 			this.yellowGreenButton.glowFx.active = true
+			yellowGreenGlow = true
 		})
 		this.yellowGreenButton.on("pointerout", () => {
 			this.yellowGreenButton.glowFx.active = false
+			yellowGreenGlow = false
 		})
 
 		this.greenButton.on("pointerover", () => {
 			this.greenButton.glowFx.active = true
+			greenGlow = true
 		})
 		this.greenButton.on("pointerout", () => {
 			this.greenButton.glowFx.active = false
+			greenGlow = false
 		})
 
 		this.greenBlueButton.on("pointerover", () => {
 			this.greenBlueButton.glowFx.active = true
+			greenBlueGlow = true
 		})
 		this.greenBlueButton.on("pointerout", () => {
 			this.greenBlueButton.glowFx.active = false
+			greenBlueGlow = false
 		})
 
 		this.blueButton.on("pointerover", () => {
 			this.blueButton.glowFx.active = true
+			blueGlow = true
 		})
 		this.blueButton.on("pointerout", () => {
 			this.blueButton.glowFx.active = false
+			blueGlow = false
 		})
 
 		this.purpleButton.on("pointerover", () => {
 			this.purpleButton.glowFx.active = true
+			purpleGlow = true
 		})
 		this.purpleButton.on("pointerout", () => {
 			this.purpleButton.glowFx.active = false
+			purpleGlow = false
 		})
 
 	}
 
-	ButtonEvents(){
+	ButtonEvents() {
 		this.joinMatch.on("pointerdown", () =>{
 			ButtonSFX.play()
 			this.confirmJoinMatch()
@@ -335,7 +365,7 @@ class JoinMatch extends Phaser.Scene {
 		})
 	}
 
-	confirmJoinMatch(){
+	confirmJoinMatch() {
 		var dataToSend = {  
 			"player_color": playerColorText
 			}
@@ -367,6 +397,27 @@ class JoinMatch extends Phaser.Scene {
 		xhttp.setRequestHeader("Content-Type", "application/json")
 
 		xhttp.send(JSON.stringify(dataToSend))
+	}
+
+	checkColorSelection() {
+		// pinkGlow
+		// redGlow
+		// orangeRedGlow
+		// orangeGlow
+		// yellowGlow
+		// yellowGreenGlow
+		// greenGlow
+		// greenBlueGlow
+		// blueGlow
+		// purpleGlow
+		// Normal Attack
+		if (this.normalAttackSlot.isSelected == true && this.normalAttackSlot.cardGlow.active == false) {
+			this.normalAttackSlot.cardGlow.active = true
+		}
+
+		if (this.normalAttackSlot.isSelected == false && (this.specialAttackSlot.isSelected == true || this.defenseSlot.isSelected == true || this.skillSlot.isSelected == true) && this.normalAttackSlot.cardDescriptionTextBox.visible == false && this.normalAttackSlot.cardGlow.active == true) {
+			this.normalAttackSlot.cardGlow.active = false
+		}
 	}
 	/* END-USER-CODE */
 }

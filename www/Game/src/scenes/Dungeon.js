@@ -297,7 +297,7 @@ class Dungeon extends Phaser.Scene {
 	}
 
 	update() {
-
+		console.log(this.slot1Card.isSelected == false && this.slot1Card.cardGlow.active == true)
 		//If any card is selected make the button visible
 		if (this.slot1Card.isSelected || this.slot2Card.isSelected || this.slot3Card.isSelected) {
 			this.onwardButton.visible = true
@@ -305,6 +305,7 @@ class Dungeon extends Phaser.Scene {
 		else {
 			this.onwardButton.visible = false
 		}
+		this.checkCardSelection()
 	}
 
 	sortDungeonCards(cardA, cardB) {
@@ -472,7 +473,7 @@ class Dungeon extends Phaser.Scene {
 		return
 	}
 
-	MakeDungeonCardIconsVisible(card, cardData){
+	MakeDungeonCardIconsVisible(card, cardData) {
 		var iterator = 0
 		var displayInfo = {}
 
@@ -701,6 +702,32 @@ class Dungeon extends Phaser.Scene {
 				card.option2_3Container.visible = true
 				break;
 			}
+	}
+
+	checkCardSelection() {
+		if (this.slot1Card.isSelected == true && this.slot1Card.cardGlow.active == false) {
+			this.slot1Card.cardGlow.active = true
+		}
+
+		if (this.slot2Card.isSelected == true && this.slot2Card.cardGlow.active == false) {
+			this.slot2Card.cardGlow.active = true
+		}
+
+		if (this.slot3Card.isSelected == true && this.slot3Card.cardGlow.active == false) {
+			this.slot3Card.cardGlow.active = true
+		}
+
+		if (this.slot1Card.isSelected == false && (this.slot2Card.isSelected == true || this.slot3Card.isSelected == true) && this.slot1Card.cardDescriptionTextBox.visible == false && this.slot1Card.cardGlow.active == true) {
+			this.slot1Card.cardGlow.active = false
+		}
+		
+		if (this.slot2Card.isSelected == false && (this.slot1Card.isSelected == true || this.slot3Card.isSelected == true) && this.slot2Card.cardDescriptionTextBox.visible == false && this.slot2Card.cardGlow.active == true) {
+			this.slot2Card.cardGlow.active = false
+		}
+		
+		if (this.slot3Card.isSelected == false && (this.slot1Card.isSelected == true || this.slot2Card.isSelected == true) && this.slot3Card.cardDescriptionTextBox.visible == false && this.slot3Card.cardGlow.active == true) {
+			this.slot3Card.cardGlow.active = false
+		}
 	}
 	/* END-USER-CODE */
 }
