@@ -3046,15 +3046,15 @@ app.post("/setupShowdown", (req, res) => {
                     var state
                     if (rows[0].current_health > 0 && opponentNameAndColor[0].current_health <= 0) {
                         state = 8
-                        UpdatePlayerStateToEnding(state)
+                        UpdatePlayerStateToEnding(state, rows[0].player_color, opponentNameAndColor[0].player_color)
                     }
                     else if (rows[0].current_health <= 0 && opponentNameAndColor[0].current_health > 0) {
                         state = 9
-                        UpdatePlayerStateToEnding(state)
+                        UpdatePlayerStateToEnding(state, rows[0].player_color, opponentNameAndColor[0].player_color)
                     }
                     else if (rows[0].current_health <= 0 && opponentNameAndColor[0].current_health <= 0) {
                         state = 10
-                        UpdatePlayerStateToEnding(state)
+                        UpdatePlayerStateToEnding(state, rows[0].player_color, opponentNameAndColor[0].player_color)
                     }
                     else {
                         
@@ -3105,7 +3105,7 @@ app.post("/setupShowdown", (req, res) => {
         )   
     }
 
-    function UpdatePlayerStateToEnding(state) {
+    function UpdatePlayerStateToEnding(state, player_color, opponent_color) {
         var queryString1
 
         if (state == 8) {
@@ -3131,13 +3131,13 @@ app.post("/setupShowdown", (req, res) => {
                     return
                 }
 
-                WhoIsPlayerOne(state)
+                WhoIsPlayerOne(state, player_color, opponent_color)
                 
             }
         )
     }
 
-    function WhoIsPlayerOne(state) {
+    function WhoIsPlayerOne(state, player_color, opponent_color) {
         connection.query("SELECT player_1_id \
                     FROM game_match \
                     WHERE match_id = ?;", [req.session.matchId],
@@ -3157,7 +3157,9 @@ app.post("/setupShowdown", (req, res) => {
                     res.status(200).json({
                             "message": "Player stats and cards updated",
                             "state": state,
-                            "IsPlayer1": IsPlayer1
+                            "IsPlayer1": IsPlayer1,
+                            "player_color": player_color,
+                            "opponent_color": opponent_color
                         })
                 }
             })
