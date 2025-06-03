@@ -74,6 +74,19 @@ var opponentSkillAnimationFinished = false
 
 var timer = 0
 
+//Sound Variables
+var isPlayer1 = false
+
+var playerAttackSoundPlayed = false
+var playerAttack2SoundPlayed = false
+var playerDefenseSoundPlayed = false
+var playerSkillSoundPlayed = false
+
+var opponenetAttackSoundPlayed = false
+var opponenetAttack2SoundPlayed = false
+var opponenetDefenseSoundPlayed = false
+var opponenetSkillSoundPlayed = false
+
 
 /* START OF COMPILED CODE */
 
@@ -371,6 +384,16 @@ class ShowdownResult extends Phaser.Scene {
 
 		this.confirmButton.visible = false
 
+		isPlayer1 = data.IsPlayer1
+
+		playerAttackSoundPlayed = false
+		playerDefenseSoundPlayed = false
+		playerSkillSoundPlayed = false
+
+		opponenetAttackSoundPlayed = false
+		opponenetDefenseSoundPlayed = false
+		opponenetSkillSoundPlayed = false
+
 		this.loadStatsData(data)
 		this.loadInfoData(data)
 		this.loadOpponentData(data)
@@ -410,7 +433,6 @@ class ShowdownResult extends Phaser.Scene {
 		this.playerCard1.cardBorder.setTint(playerCardColor)
 		this.playerCard1.cardName.text = data.player_cards[0].card_name
 		this.playerCard1.cardImage.setTexture(data.player_cards[0].card_image_path)
-		console.log("Here1")
 		this.MakeShowdownCardIconsVisible(this.playerCard1, data.player_cards[0], data.opponent_cards[0].damage, data)
 
 		if (data.player_cards[1]) {
@@ -418,14 +440,12 @@ class ShowdownResult extends Phaser.Scene {
 			this.playerCard2.cardBorder.setTint(playerCardColor)
 			this.playerCard2.cardName.text = data.player_cards[1].card_name
 			this.playerCard2.cardImage.setTexture(data.player_cards[1].card_image_path)
-			console.log("Here2")
 			this.MakeShowdownCardIconsVisible(this.playerCard2, data.player_cards[1], data.opponent_cards[0].damage, data)
 		}
 
 		this.opponenetCard1.cardBorder.setTint(opponentCardColor)
 		this.opponenetCard1.cardName.text = data.opponent_cards[0].card_name
 		this.opponenetCard1.cardImage.setTexture(data.opponent_cards[0].card_image_path)
-		console.log("Here3")
 		this.MakeShowdownCardIconsVisible(this.opponenetCard1, data.opponent_cards[0], previousDamage, data.opponent_cards[0])
 
 		if (data.opponent_cards[1]) {
@@ -433,7 +453,6 @@ class ShowdownResult extends Phaser.Scene {
 			this.opponenetCard2.cardBorder.setTint(opponentCardColor)
 			this.opponenetCard2.cardName.text = data.opponent_cards[1].card_name
 			this.opponenetCard2.cardImage.setTexture(data.opponent_cards[1].card_image_path)
-			console.log("Here4")
 			this.MakeShowdownCardIconsVisible(this.opponenetCard2, data.opponent_cards[1], previousDamage, data.opponent_cards[1])
 		}
 	}
@@ -745,7 +764,7 @@ class ShowdownResult extends Phaser.Scene {
 		this.statsContainer.energyText.text = previousEnergy
 		this.statsContainer.mightText.text = previousDamage
 
-		if(previousMaxHealth != maxHealth && previousCurrentHealth != currentHealth){
+		if(previousMaxHealth != maxHealth && previousCurrentHealth != currentHealth) {
 			var maxHealthDiff = maxHealth - previousMaxHealth
 			var currentHealthDiff = currentHealth - previousCurrentHealth
 
@@ -767,7 +786,7 @@ class ShowdownResult extends Phaser.Scene {
 			this.statsContainer.healthDifferenceText.visible = true
 		}
 		else if(previousMaxHealth != maxHealth) {
-			if(maxHealth - previousMaxHealth > 0){
+			if(maxHealth - previousMaxHealth > 0) {
 				this.statsContainer.healthDifferenceText.text =  "+" + (maxHealth - previousMaxHealth) + "/+" + (maxHealth - previousMaxHealth) 
 			}
 			else{
@@ -880,23 +899,86 @@ class ShowdownResult extends Phaser.Scene {
 		return
 	}
 
+	playerAttackSounds(){
+
+	}
+
+	playerDefenseSounds(){
+		
+	}
+
 	update(time, dt) {
 		timer += dt
 		if (opponentSkill && !opponentSkillAnimationFinished) {
 			if (opponentShowdownAnimations.Anger.visible) {
 				this.opponentSkills.anger.visible = true
+				if (!opponenetSkillSoundPlayed){
+					if(isPlayer1){
+						MaleAngerSFX.play()
+						opponenetSkillSoundPlayed = true
+			
+					}
+					else{
+						FemaleAngerSFX.play()
+						opponenetSkillSoundPlayed = true					
+					}
+				}
 			}
 			else if (opponentShowdownAnimations.Rage.visible) {
 				this.opponentSkills.rage.visible = true
+				if (!opponenetSkillSoundPlayed){
+					if(isPlayer1){
+						MaleRageSFX.play()
+						opponenetSkillSoundPlayed = true	
+					}
+					else{
+						FemaleRageSFX.play()
+						opponenetSkillSoundPlayed = true
+											
+					}
+				}
 			}
 			else if (opponentShowdownAnimations.Focus.visible) {
 				this.opponentSkills.focus.visible = true
+				if (!opponenetSkillSoundPlayed){
+					if(isPlayer1){
+						MaleFocusSFX.play()
+						opponenetSkillSoundPlayed = true	
+						
+					}
+					else{
+						FemaleFocusSFX.play()
+						opponenetSkillSoundPlayed = true				
+					}
+				}
 			}
 			else if (opponentShowdownAnimations.Adrenaline.visible) {
 				this.opponentSkills.adrenaline.visible = true
+				if (!opponenetSkillSoundPlayed){
+					if(isPlayer1){
+						MaleAdrenalineSFX.play()
+						opponenetSkillSoundPlayed = true
+						
+					}
+					else{
+							FemaleAdrenalineSFX.play()
+						opponenetSkillSoundPlayed = true					
+					}
+				}
 			}
 			else if (opponentShowdownAnimations.Healing.visible) {
 				this.opponentSkills.healing.visible = true
+				if (!opponenetSkillSoundPlayed){
+					if(isPlayer1){
+						MaleHealingSFX.play()
+						opponenetSkillSoundPlayed = true
+						
+					}
+					else{
+						FemaleHealingSFX.play()
+						opponenetSkillSoundPlayed = true					
+					}
+				}
 			}
 			opponentSkillAnimationFinished = true
 		}
@@ -913,6 +995,180 @@ class ShowdownResult extends Phaser.Scene {
 				(this.playerAttacks.angle >= -120 && this.playerAttacks.angle <= 0)) && 
 				!playerSecondSwing &&
 				!this.opponentBlock.parry.visible) {
+					//here first swings of normal, recovery, heavy and counter
+					var attackSoundNumber = Math.floor(Math.random() * 4)
+
+					if(!playerAttackSoundPlayed){
+						if(playerShowdownAnimations.NormalAttack.visible) {
+							if(attackSoundNumber == 0){
+								if(isPlayer1){
+									FemaleNormalAttackSFX1.play()
+									playerAttackSoundPlayed = true
+								}
+								else{
+									MaleNormalAttackSFX1.play()
+									playerAttackSoundPlayed = true						
+								}
+							}
+							else if(attackSoundNumber == 1){
+								if(isPlayer1){
+									FemaleNormalAttackSFX2.play()
+									playerAttackSoundPlayed = true
+								}
+								else{
+									MaleNormalAttackSFX2.play()
+									playerAttackSoundPlayed = true						
+								}
+							}
+							else if(attackSoundNumber == 2){
+								if(isPlayer1){
+									FemaleNormalAttackSFX3.play()
+									playerAttackSoundPlayed = true
+								}
+								else{
+									MaleNormalAttackSFX3.play()
+									playerAttackSoundPlayed = true						
+								}
+							}
+							else if(attackSoundNumber == 3){
+								if(isPlayer1){
+									FemaleNormalAttackSFX4.play()
+									playerAttackSoundPlayed = true
+								}
+								else{
+									MaleNormalAttackSFX4.play()
+									playerAttackSoundPlayed = true						
+								}
+							}
+						}
+						else if(playerShowdownAnimations.HeavyAttack.visible) {
+							if(attackSoundNumber == 0){
+								if(isPlayer1){
+									FemaleHeavyAttackSFX1.play()
+									playerAttackSoundPlayed = true
+								}
+								else{
+									MaleHeavyAttackSFX1.play()
+									playerAttackSoundPlayed = true						
+								}
+							}
+							else if(attackSoundNumber == 1){
+								if(isPlayer1){
+									FemaleHeavyAttackSFX2.play()
+									playerAttackSoundPlayed = true
+								}
+								else{
+									MaleHeavyAttackSFX2.play()
+									playerAttackSoundPlayed = true						
+								}
+							}
+							else if(attackSoundNumber == 2){
+								if(isPlayer1){
+									FemaleHeavyAttackSFX3.play()
+									playerAttackSoundPlayed = true
+								}
+								else{
+									MaleHeavyAttackSFX3.play()
+									playerAttackSoundPlayed = true						
+								}
+							}
+							else if(attackSoundNumber == 3){
+								if(isPlayer1){
+									FemaleHeavyAttackSFX4.play()
+									playerAttackSoundPlayed = true
+								}
+								else{
+									MaleHeavyAttackSFX4.play()
+									playerAttackSoundPlayed = true						
+								}
+							}
+						}
+						else if(playerShowdownAnimations.RecoveryAttack.visible) {
+							if(attackSoundNumber == 0){
+								if(isPlayer1){
+									FemaleRecoveryAttackSFX1.play()
+									playerAttackSoundPlayed = true
+								}
+								else{
+									MaleRecoveryAttackSFX1.play()
+									playerAttackSoundPlayed = true						
+								}
+							}
+							else if(attackSoundNumber == 1){
+								if(isPlayer1){
+									FemaleRecoveryAttackSFX2.play()
+									playerAttackSoundPlayed = true
+								}
+								else{
+									MaleRecoveryAttackSFX2.play()
+									playerAttackSoundPlayed = true						
+								}
+							}
+							else if(attackSoundNumber == 2){
+								if(isPlayer1){
+									FemaleRecoveryAttackSFX3.play()
+									playerAttackSoundPlayed = true
+								}
+								else{
+									MaleRecoveryAttackSFX3.play()
+									playerAttackSoundPlayed = true						
+								}
+							}
+							else if(attackSoundNumber == 3){
+								if(isPlayer1){
+									FemaleRecoveryAttackSFX4.play()
+									playerAttackSoundPlayed = true
+								}
+								else{
+									MaleRecoveryAttackSFX4.play()
+									playerAttackSoundPlayed = true						
+								}
+							}
+						}
+						else if(playerShowdownAnimations.CounterAttack.visible) {
+							if(attackSoundNumber == 0){
+								if(isPlayer1){
+									FemaleCounterAttackSFX1.play()
+									playerAttackSoundPlayed = true
+								}
+								else{
+									MaleCounterAttackSFX1.play()
+									playerAttackSoundPlayed = true						
+								}
+							}
+							else if(attackSoundNumber == 1){
+								if(isPlayer1){
+									FemaleCounterAttackSFX2.play()
+									playerAttackSoundPlayed = true
+								}
+								else{
+									MaleCounterAttackSFX2.play()
+									playerAttackSoundPlayed = true						
+								}
+							}
+							else if(attackSoundNumber == 2){
+								if(isPlayer1){
+									FemaleCounterAttackSFX3.play()
+									playerAttackSoundPlayed = true
+								}
+								else{
+									MaleCounterAttackSFX3.play()
+									playerAttackSoundPlayed = true						
+								}
+							}
+							else if(attackSoundNumber == 3){
+								if(isPlayer1){
+									FemaleCounterAttackSFX4.play()
+									playerAttackSoundPlayed = true
+								}
+								else{
+									MaleCounterAttackSFX4.play()
+									playerAttackSoundPlayed = true						
+								}
+							}
+						}
+					}
+					
 					this.playerAttacks.angle += dt / 3
 					if (opponentDefense && !opponentDefenseAnimationFinished) {
 						this.playOpponentDefenseAnimations(dt)
@@ -951,6 +1207,194 @@ class ShowdownResult extends Phaser.Scene {
 				(this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -40)) && 
 				!opponentSecondSwing &&
 				!this.playerBlock.parry.visible) {
+					//here opponent slashes
+					var attackSoundNumber = Math.floor(Math.random() * 4)
+
+					if(!opponenetAttackSoundPlayed){
+						if(opponentShowdownAnimations.NormalAttack.visible) {
+							if(attackSoundNumber == 0){
+								if(isPlayer1){
+									MaleNormalAttackSFX1.play()
+									opponenetAttackSoundPlayed = true						
+								}
+								else{
+									FemaleNormalAttackSFX1.play()
+									opponenetAttackSoundPlayed = true					
+								}
+							}
+							else if(attackSoundNumber == 1){
+								if(isPlayer1){
+									MaleNormalAttackSFX2.play()
+									opponenetAttackSoundPlayed = true	
+								}
+								else{
+									FemaleNormalAttackSFX2.play()
+									opponenetAttackSoundPlayed = true
+														
+								}
+							}
+							else if(attackSoundNumber == 2){
+								if(isPlayer1){
+									MaleNormalAttackSFX3.play()
+									opponenetAttackSoundPlayed = true
+								}
+								else{
+									FemaleNormalAttackSFX3.play()
+									opponenetAttackSoundPlayed = true
+															
+								}
+							}
+							else if(attackSoundNumber == 3){
+								if(isPlayer1){
+									MaleNormalAttackSFX4.play()
+									opponenetAttackSoundPlayed = true	
+								}
+								else{
+									FemaleNormalAttackSFX4.play()
+									opponenetAttackSoundPlayed = true
+														
+								}
+							}
+						}
+						else if(opponentShowdownAnimations.HeavyAttack.visible) {
+							if(attackSoundNumber == 0){
+								if(isPlayer1){
+									MaleHeavyAttackSFX1.play()
+									opponenetAttackSoundPlayed = true
+								}
+								else{
+									FemaleHeavyAttackSFX1.play()
+									opponenetAttackSoundPlayed = true
+															
+								}
+							}
+							else if(attackSoundNumber == 1){
+								if(isPlayer1){
+									MaleHeavyAttackSFX2.play()
+									opponenetAttackSoundPlayed = true
+								}
+								else{
+									FemaleHeavyAttackSFX2.play()
+									opponenetAttackSoundPlayed = true
+															
+								}
+							}
+							else if(attackSoundNumber == 2){
+								if(isPlayer1){
+									MaleHeavyAttackSFX3.play()
+									opponenetAttackSoundPlayed = true
+								}
+								else{
+									FemaleHeavyAttackSFX3.play()
+									opponenetAttackSoundPlayed = true
+															
+								}
+							}
+							else if(attackSoundNumber == 3){
+								if(isPlayer1){
+									MaleHeavyAttackSFX4.play()
+									opponenetAttackSoundPlayed = true	
+								}
+								else{
+									FemaleHeavyAttackSFX4.play()
+									opponenetAttackSoundPlayed = true
+														
+								}
+							}
+						}
+						else if(opponentShowdownAnimations.RecoveryAttack.visible) {
+							if(attackSoundNumber == 0){
+								if(isPlayer1){
+									MaleRecoveryAttackSFX1.play()
+									opponenetAttackSoundPlayed = true
+								}
+								else{
+									FemaleRecoveryAttackSFX1.play()
+									opponenetAttackSoundPlayed = true
+															
+								}
+							}
+							else if(attackSoundNumber == 1){
+								if(isPlayer1){
+									MaleRecoveryAttackSFX2.play()
+									opponenetAttackSoundPlayed = true
+								}
+								else{
+									FemaleRecoveryAttackSFX2.play()
+									opponenetAttackSoundPlayed = true
+															
+								}
+							}
+							else if(attackSoundNumber == 2){
+								if(isPlayer1){
+									MaleRecoveryAttackSFX3.play()
+									opponenetAttackSoundPlayed = true
+								}
+								else{
+									FemaleRecoveryAttackSFX3.play()
+									opponenetAttackSoundPlayed = true
+															
+								}
+							}
+							else if(attackSoundNumber == 3){
+								if(isPlayer1){
+									MaleRecoveryAttackSFX4.play()
+									opponenetAttackSoundPlayed = true
+								}
+								else{
+									FemaleRecoveryAttackSFX4.play()
+									opponenetAttackSoundPlayed = true
+															
+								}
+							}
+						}
+						else if(opponentShowdownAnimations.CounterAttack.visible) {
+							if(attackSoundNumber == 0){
+								if(isPlayer1){
+									MaleCounterAttackSFX1.play()
+									opponenetAttackSoundPlayed = true
+								}
+								else{
+									FemaleCounterAttackSFX1.play()
+									opponenetAttackSoundPlayed = true
+															
+								}
+							}
+							else if(attackSoundNumber == 1){
+								if(isPlayer1){
+									MaleCounterAttackSFX2.play()
+									opponenetAttackSoundPlayed = true
+								}
+								else{
+									FemaleCounterAttackSFX2.play()
+									opponenetAttackSoundPlayed = true
+															
+								}
+							}
+							else if(attackSoundNumber == 2){
+								if(isPlayer1){
+									MaleCounterAttackSFX3.play()
+									opponenetAttackSoundPlayed = true
+								}
+								else{
+									FemaleCounterAttackSFX3.play()
+									opponenetAttackSoundPlayed = true
+															
+								}
+							}
+							else if(attackSoundNumber == 3){
+								if(isPlayer1){
+									MaleCounterAttackSFX4.play()
+									opponenetAttackSoundPlayed = true
+								}
+								else{
+									FemaleCounterAttackSFX4.play()
+									opponenetAttackSoundPlayed = true
+															
+								}
+							}
+						}
+					}
 					this.opponentAttacks.angle += dt / 3
 					if (playerDefense && !playerDefenseAnimationFinished) {
 						this.playPlayerDefenseAnimations(dt)
@@ -1000,23 +1444,74 @@ class ShowdownResult extends Phaser.Scene {
 		}
 	}
 
+
 	//	END OF UPDATE FUNCTION	//	END OF UPDATE FUNCTION	//	END OF UPDATE FUNCTION (yes I'm blind and will probably forget to take this out)
 	playPlayerSkillAnimations(dt) {
 		if (this.playerSkills.y > -2400) {
 			if (playerShowdownAnimations.Anger.visible) {
 				this.playerSkills.angerSkill.visible = true
+				if (!playerSkillSoundPlayed){
+					if(isPlayer1){
+						FemaleAngerSFX.play()
+						playerSkillSoundPlayed = true
+					}
+					else{
+						MaleAngerSFX.play()
+						playerSkillSoundPlayed = true						
+					}
+				}
 			}
 			else if (playerShowdownAnimations.Rage.visible) {
 				this.playerSkills.rageSkill.visible = true
+				if (!playerSkillSoundPlayed){
+					if(isPlayer1){
+						FemaleRageSFX.play()
+						playerSkillSoundPlayed = true
+					}
+					else{
+						MaleRageSFX.play()
+						playerSkillSoundPlayed = true						
+					}
+				}
 			}
 			else if (playerShowdownAnimations.Focus.visible) {
 				this.playerSkills.focusSkill.visible = true
+				if (!playerSkillSoundPlayed){
+					if(isPlayer1){
+						FemaleFocusSFX.play()
+						playerSkillSoundPlayed = true
+					}
+					else{
+						MaleFocusSFX.play()
+						playerSkillSoundPlayed = true						
+					}
+				}
 			}
 			else if (playerShowdownAnimations.Adrenaline.visible) {
 				this.playerSkills.adrenalineSkill.visible = true
+				if (!playerSkillSoundPlayed){
+					if(isPlayer1){
+						FemaleAdrenalineSFX.play()
+						playerSkillSoundPlayed = true
+					}
+					else{
+						MaleAdrenalineSFX.play()
+						playerSkillSoundPlayed = true						
+					}
+				}
 			}
 			else if (playerShowdownAnimations.Healing.visible) {
 				this.playerSkills.healingSkill.visible = true
+				if (!playerSkillSoundPlayed){
+					if(isPlayer1){
+						FemaleHealingSFX.play()
+						playerSkillSoundPlayed = true
+					}
+					else{
+						MaleHealingSFX.play()
+						playerSkillSoundPlayed = true						
+					}
+				}
 			}
 			this.playerSkills.y -= dt * 2
 		}
@@ -1071,8 +1566,23 @@ class ShowdownResult extends Phaser.Scene {
 			}
 		}
 		else if (this.opponentAttacks.angle >= 0) {
+			//here all blocks
 			if (this.opponentBlock.scale > 1) {
 				this.opponentBlock.scale -= dt / 256
+				if(!opponenetDefenseSoundPlayed){
+					if(opponentShowdownAnimations.ClumsyBlock.visible){
+						ClumsyBlockSFX.play()
+						opponenetDefenseSoundPlayed = true
+					}
+					else if(opponentShowdownAnimations.SolidBlock.visible){
+						SolidBlockSFX.play()
+						opponenetDefenseSoundPlayed = true
+					}
+					else if(opponentShowdownAnimations.ImpressiveBlock.visible){
+						ImpressiveBlockSFX.play()
+						opponenetDefenseSoundPlayed = true
+					}
+				}
 			}
 		}
 		if (this.opponentBlock.scale < 1) {
@@ -1083,6 +1593,11 @@ class ShowdownResult extends Phaser.Scene {
 
 	playOpponentDodgeAnimation(dt) {
 		if (opponentShowdownAnimations.Dodge.visible) {
+
+			if(!opponenetDefenseSoundPlayed){
+					DodgeSFX.play()
+					opponenetDefenseSoundPlayed = true
+			}
 			if ((this.playerAttacks.angle <= 0) && this.opponent.character.scaleX > -1) {
 				this.opponenetMissText.visible = true
 				this.opponent.character.scaleX -= dt / 128
@@ -1117,6 +1632,11 @@ class ShowdownResult extends Phaser.Scene {
 			}
 		}
 		else if (!playerParrySwing) {
+			//here is parry
+			if(!opponenetDefenseSoundPlayed){
+					ParrySFX.play()
+					opponenetDefenseSoundPlayed = true
+				}
 			playerParrySwing = true
 		}
 		else {
@@ -1145,7 +1665,22 @@ class ShowdownResult extends Phaser.Scene {
 			this.playerBlock.y -= dt
 		}
 		else if (this.opponentAttacks.angle >= -140 && this.opponentBlock.y < 1080) {
+			//here all player blocks
 			this.playerBlock.y += dt
+			if(!playerDefenseSoundPlayed){
+				if(playerShowdownAnimations.ClumsyBlock.visible){
+					ClumsyBlockSFX.play()
+					playerDefenseSoundPlayed = true
+				}
+				else if(playerShowdownAnimations.SolidBlock.visible){
+					SolidBlockSFX.play()
+					playerDefenseSoundPlayed = true
+				}
+				else if(playerShowdownAnimations.ImpressiveBlock.visible){
+					ImpressiveBlockSFX.play()
+					playerDefenseSoundPlayed = true
+				}
+			}
 		}
 		if (this.playerBlock.y > 1080) {
 			this.playerBlock.y == 1080
@@ -1160,6 +1695,11 @@ class ShowdownResult extends Phaser.Scene {
 		if (((this.opponentAttacks.angle <= 180 && this.opponentAttacks.angle >= 20) || 
 			(this.opponentAttacks.angle >= -180 && this.opponentAttacks.angle <= -140))) {
 			if (this.playerMissText.y > 750) {
+				//here is player dodge
+				if(!playerDefenseSoundPlayed){
+					DodgeSFX.play()
+					playerDefenseSoundPlayed = true
+				}
 				this.playerMissText.y -= dt * 2
 			}
 			else if (this.playerMissText.y <= 750) {
@@ -1185,6 +1725,11 @@ class ShowdownResult extends Phaser.Scene {
 			this.playerBlock.y -= dt * 1.2
 		}
 		else if (!opponentParrySwing) {
+			//here player parry
+			if(!playerDefenseSoundPlayed) {
+					ParrySFX.play()
+					playerDefenseSoundPlayed = true
+				}
 			opponentParrySwing = true
 		}
 		else if (this.playerBlock.y < 1080) {
@@ -1204,6 +1749,51 @@ class ShowdownResult extends Phaser.Scene {
 		this.opponenetMissText.visible = false
 		if (playerSecondSwing && this.playerAttacks.normal_Slash.scaleX > 0) {
 			this.playerAttacks.normal_Slash.flipX = true
+			//here double attack second slash
+			var attackSoundNumber = Math.floor(Math.random() * 4)
+
+			if(!playerAttack2SoundPlayed) {
+				if(attackSoundNumber == 0){
+					if(isPlayer1){
+						FemaleNormalAttackSFX1.play()
+						playerAttack2SoundPlayed = true
+					}
+					else{
+						MaleNormalAttackSFX1.play()
+						playerAttack2SoundPlayed = true						
+					}
+				}
+				else if(attackSoundNumber == 1){
+					if(isPlayer1){
+						FemaleNormalAttackSFX2.play()
+						playerAttack2SoundPlayed = true
+					}
+					else{
+						MaleNormalAttackSFX2.play()
+						playerAttack2SoundPlayed = true						
+					}
+				}
+				else if(attackSoundNumber == 2){
+					if(isPlayer1){
+						FemaleNormalAttackSFX3.play()
+						playerAttack2SoundPlayed = true
+					}
+					else{
+						MaleNormalAttackSFX3.play()
+						playerAttack2SoundPlayed = true						
+					}
+				}
+				else if(attackSoundNumber == 3){
+					if(isPlayer1){
+						FemaleNormalAttackSFX4.play()
+						playerAttack2SoundPlayed = true
+					}
+					else{
+						MaleNormalAttackSFX4.play()
+						playerAttack2SoundPlayed = true						
+					}
+				}
+			}
 		}
 		if (playerSecondSwing &&
 			((this.playerAttacks.angle <= 140 && this.playerAttacks.angle >= 0) || 
@@ -1222,6 +1812,55 @@ class ShowdownResult extends Phaser.Scene {
 		}
 		opponentSecondSwing = true
 		if (opponentSecondSwing && this.opponentAttacks.normal_Slash.scaleX > 0) {
+			//here second swing
+			var attackSoundNumber = Math.floor(Math.random() * 4)
+			
+			if(!opponenetAttack2SoundPlayed) {
+				if(attackSoundNumber == 0){
+					if(isPlayer1){
+						MaleNormalAttackSFX1.play()
+						opponenetAttack2SoundPlayed = true
+						
+					}
+					else{
+							FemaleNormalAttackSFX1.play()
+						opponenetAttack2SoundPlayed = true					
+					}
+				}
+				else if(attackSoundNumber == 1){
+					if(isPlayer1){
+						MaleNormalAttackSFX2.play()
+						opponenetAttack2SoundPlayed = true
+						
+					}
+					else{
+							FemaleNormalAttackSFX2.play()
+						opponenetAttack2SoundPlayed = true					
+					}
+				}
+				else if(attackSoundNumber == 2){
+					if(isPlayer1){
+						MaleNormalAttackSFX3.play()
+						opponenetAttack2SoundPlayed = true
+						
+					}
+					else{
+						FemaleNormalAttackSFX3.play()
+						opponenetAttack2SoundPlayed = true					
+					}
+				}
+				else if(attackSoundNumber == 3){
+					if(isPlayer1){
+						MaleNormalAttackSFX4.play()
+						opponenetAttack2SoundPlayed = true	
+						
+					}
+					else{
+						FemaleNormalAttackSFX4.play()
+						opponenetAttack2SoundPlayed = true				
+					}
+				}
+			}
 			this.opponentAttacks.normal_Slash.flipX = true
 		}
 		if (opponentSecondSwing &&

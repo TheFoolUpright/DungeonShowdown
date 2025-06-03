@@ -2111,12 +2111,35 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
                         return
                     }
                     if (rows.length != 0) {
-                        GetPlayerShowdownPlayerState(opponentCards, rows)
+                        WhoIsPlayerOne(opponentCards, rows)
                     }
                 }
             )
         }
-        function GetPlayerShowdownPlayerState(opponentCards, playerCards) {
+
+        function WhoIsPlayerOne(opponentCards, playerCards) {
+            connection.query("SELECT player_1_id \
+                        FROM game_match \
+                        WHERE match_id = ?;", [req.session.matchId],
+                function (err, rows, fields) {
+                    if (err) {
+                        console.log("Database Error: " + err)
+                        res.status(500).json({
+                            "message": err
+                        })
+                        return
+                    }
+                    if (rows.length != 0) {
+                        var IsPlayer1 = false
+                        if(rows[0].player_1_id == req.session.playerId){
+                            IsPlayer1 = true
+                        }
+                        GetPlayerShowdownPlayerState(opponentCards, playerCards, IsPlayer1)
+                    }
+                })
+        }
+
+        function GetPlayerShowdownPlayerState(opponentCards, playerCards, IsPlayer1) {
             connection.query("SELECT showdown_turn, max_health, current_health, energy, insight, damage, player_username, player_color \
                 FROM player_card_slot PCS \
                 INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id \
@@ -2137,6 +2160,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
                             "state": "SHOW_RESULT",
                             "opponent_cards": opponentCards,
                             "opponent_current_health": opponentCards[0].current_health,
+                            "IsPlayer1": IsPlayer1,
                             "player_cards": playerCards,
                             "player_color": rows[0].player_color,
                             "player_username": rows[0].player_username,
@@ -3545,12 +3569,35 @@ app.post("/resolveShowdownTurn", (req, res) => {
                         return
                     }
                     if (rows.length != 0) {
-                        GetPlayerShowdownPlayerState(opponentCards, rows)
+                        WhoIsPlayerOne(opponentCards, rows)
                     }
                 }
             )
         }
-        function GetPlayerShowdownPlayerState(opponentCards, playerCards) {
+
+        function WhoIsPlayerOne(opponentCards, playerCards) {
+            connection.query("SELECT player_1_id \
+                        FROM game_match \
+                        WHERE match_id = ?;", [req.session.matchId],
+                function (err, rows, fields) {
+                    if (err) {
+                        console.log("Database Error: " + err)
+                        res.status(500).json({
+                            "message": err
+                        })
+                        return
+                    }
+                    if (rows.length != 0) {
+                        var IsPlayer1 = false
+                        if(rows[0].player_1_id == req.session.playerId){
+                            IsPlayer1 = true
+                        }
+                        GetPlayerShowdownPlayerState(opponentCards, playerCards, IsPlayer1)
+                    }
+                })
+        }
+
+        function GetPlayerShowdownPlayerState(opponentCards, playerCards, IsPlayer1) {
             connection.query("SELECT showdown_turn, max_health, current_health, energy, insight, damage, player_username, player_color \
                 FROM player_card_slot PCS \
                 INNER JOIN player_status PS ON PS.player_status_id = PCS.player_status_id \
@@ -3571,6 +3618,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
                             "state": "SHOW_RESULT",
                             "opponent_cards": opponentCards,
                             "opponent_current_health": opponentCards[0].current_health,
+                            "IsPlayer1": IsPlayer1,
                             "player_cards": playerCards,
                             "player_color": rows[0].player_color,
                             "player_username": rows[0].player_username,

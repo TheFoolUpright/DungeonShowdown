@@ -13,7 +13,7 @@ var states = {
     "Draw": 10
 }
 
-var backgroundMusicVolume = .4
+var backgroundMusicVolume = 0
 var SFXVolume = 1
 
 var MenuBackgroundMusic
