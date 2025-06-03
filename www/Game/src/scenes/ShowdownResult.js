@@ -724,7 +724,7 @@ class ShowdownResult extends Phaser.Scene {
 		//Load Info
 
 		this.info.phaseName.text = "SHOWDOWN"
-		this.confirmButton.confirmButtonText.text = "Perservere!"
+		this.confirmButton.confirmButtonText.text = "Persevere!"
 		this.info.roomOrTurn.text = "Turn " + data.showdown_turn
 		this.info.playerName.text = data.player_username
 		this.info.playerName.setColor(data.player_color)

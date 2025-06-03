@@ -998,6 +998,43 @@ class Showdown extends Phaser.Scene {
 			this.skillSlot.isSelected = false
 			this.skillSlot.setY(800)
 		}
+
+		this.checkCardSelection()
+	}
+
+	checkCardSelection() {
+		// Normal Attack
+		if (this.normalAttackSlot.isSelected == true && this.normalAttackSlot.cardGlow.active == false) {
+			this.normalAttackSlot.cardGlow.active = true
+		}
+
+		if (this.normalAttackSlot.isSelected == false && (this.specialAttackSlot.isSelected == true || this.defenseSlot.isSelected == true || this.skillSlot.isSelected == true) && this.normalAttackSlot.cardDescriptionTextBox.visible == false && this.normalAttackSlot.cardGlow.active == true) {
+			this.normalAttackSlot.cardGlow.active = false
+		}
+		// Special Attack
+		if (this.specialAttackSlot.isSelected == true && this.specialAttackSlot.cardGlow.active == false) {
+			this.specialAttackSlot.cardGlow.active = true
+		}
+
+		if (this.specialAttackSlot.isSelected == false && (this.normalAttackSlot.isSelected == true || this.defenseSlot.isSelected == true || this.skillSlot.isSelected == true) && this.specialAttackSlot.cardDescriptionTextBox.visible == false && this.specialAttackSlot.cardGlow.active == true) {
+			this.specialAttackSlot.cardGlow.active = false
+		}
+		// Defense
+		if (this.defenseSlot.isSelected == true && this.defenseSlot.cardGlow.active == false) {
+			this.defenseSlot.cardGlow.active = true
+		}
+
+		if (this.defenseSlot.isSelected == false && (this.normalAttackSlot.isSelected == true || this.specialAttackSlot.isSelected == true || this.skillSlot.isSelected == true) && this.defenseSlot.cardDescriptionTextBox.visible == false && this.defenseSlot.cardGlow.active == true) {
+			this.defenseSlot.cardGlow.active = false
+		}
+		// Skill
+		if (this.skillSlot.isSelected == true && this.skillSlot.cardGlow.active == false) {
+			this.skillSlot.cardGlow.active = true
+		}
+
+		if (this.skillSlot.isSelected == false && (this.normalAttackSlot.isSelected == true || this.specialAttackSlot.isSelected == true || this.defenseSlot.isSelected == true) && this.skillSlot.cardDescriptionTextBox.visible == false && this.skillSlot.cardGlow.active == true) {
+			this.skillSlot.cardGlow.active = false
+		}
 	}
 	/* END-USER-CODE */
 }
@@ -1005,3 +1042,4 @@ class Showdown extends Phaser.Scene {
 /* END OF COMPILED CODE */
 
 // You can write more code here
+
