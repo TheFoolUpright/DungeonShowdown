@@ -109,6 +109,10 @@ class ShowdownResult extends Phaser.Scene {
 		const confirmButton = new PrefabNextRoom(this, 1680, 800);
 		this.add.existing(confirmButton);
 
+		// opponentSkills
+		const opponentSkills = new PrefabOpponentSkills(this, 968, 413);
+		this.add.existing(opponentSkills);
+
 		// opponentAttacks
 		const opponentAttacks = new PrefabAttacks(this, 986, 769);
 		this.add.existing(opponentAttacks);
@@ -197,10 +201,6 @@ class ShowdownResult extends Phaser.Scene {
 		// moveInSceneActionScript_3
 		const moveInSceneActionScript_3 = new MoveInSceneActionScript(opponenetCard1.onAwakeScript);
 
-		// opponentAdrenaline
-		const opponentAdrenaline = new PrefabOpponentSkills(this, 968, 413);
-		this.add.existing(opponentAdrenaline);
-
 		// moveInSceneActionScript_4 (prefab fields)
 		moveInSceneActionScript_4.from = "LEFT";
 
@@ -218,6 +218,7 @@ class ShowdownResult extends Phaser.Scene {
 		this.info = info;
 		this.opponent = opponent;
 		this.confirmButton = confirmButton;
+		this.opponentSkills = opponentSkills;
 		this.opponentAttacks = opponentAttacks;
 		this.playerBlock = playerBlock;
 		this.opponentBlock = opponentBlock;
@@ -247,6 +248,8 @@ class ShowdownResult extends Phaser.Scene {
 	opponent;
 	/** @type {PrefabNextRoom} */
 	confirmButton;
+	/** @type {PrefabOpponentSkills} */
+	opponentSkills;
 	/** @type {PrefabAttacks} */
 	opponentAttacks;
 	/** @type {PrefabPlayerDefense} */
@@ -303,7 +306,6 @@ class ShowdownResult extends Phaser.Scene {
 		playerShowdownAnimations.Focus.visible = false
 		playerShowdownAnimations.Adrenaline.visible = false
 		playerShowdownAnimations.Healing.visible = false
-		playerShowdownAnimations.NormalAttack.visible = false
 
 		opponentShowdownAnimations.NormalAttack.visible = false
 		opponentShowdownAnimations.HeavyAttack.visible = false
@@ -320,7 +322,6 @@ class ShowdownResult extends Phaser.Scene {
 		opponentShowdownAnimations.Focus.visible = false
 		opponentShowdownAnimations.Adrenaline.visible = false
 		opponentShowdownAnimations.Healing.visible = false
-		opponentShowdownAnimations.NormalAttack.visible = false
 
 		playerAttack = false
 
@@ -362,6 +363,12 @@ class ShowdownResult extends Phaser.Scene {
 
 		this.playerSkills.y = 1080
 
+		this.opponentSkills.anger.visible = false
+		this.opponentSkills.rage.visible = false
+		this.opponentSkills.focus.visible = false
+		this.opponentSkills.adrenaline.visible = false
+		this.opponentSkills.healing.visible = false
+
 		this.confirmButton.visible = false
 
 		this.loadStatsData(data)
@@ -373,6 +380,7 @@ class ShowdownResult extends Phaser.Scene {
 		this.loadPlayerSkill(data)
 		this.loadOpponentAttack(data)
 		this.loadOpponentDefence(data)
+		this.loadOpponentSkill(data)
 		this.loadCards(data)
 		this.loadOpponentDamage(data)
 
@@ -538,6 +546,29 @@ class ShowdownResult extends Phaser.Scene {
 		}
 	}
 
+	loadOpponentSkill(data) {
+		if (data.opponent_cards[0].card_id == opponentShowdownAnimations.Anger.id || (data.opponent_cards[1] && data.opponent_cards[1].card_id == opponentShowdownAnimations.Anger.id)) {
+			opponentShowdownAnimations.Anger.visible = true
+			opponentSkill = true
+		}
+		else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.Rage.id || (data.opponent_cards[1] && data.opponent_cards[1].card_id == opponentShowdownAnimations.Rage.id)) {
+			opponentShowdownAnimations.Rage.visible = true
+			opponentSkill = true
+		}
+		else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.Focus.id || (data.opponent_cards[1] && data.opponent_cards[1].card_id == opponentShowdownAnimations.Focus.id)) {
+			opponentShowdownAnimations.Focus.visible = true
+			opponentSkill = true
+		}
+		else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.Adrenaline.id || (data.opponent_cards[1] && data.opponent_cards[1].card_id == opponentShowdownAnimations.Adrenaline.id)) {
+			opponentShowdownAnimations.Adrenaline.visible = true
+			opponentSkill = true
+		}
+		else if (data.opponent_cards[0].card_id == opponentShowdownAnimations.Healing.id || (data.opponent_cards[1] && data.opponent_cards[1].card_id == opponentShowdownAnimations.Healing.id)) {
+			opponentShowdownAnimations.Healing.visible = true
+			opponentSkill = true
+		}
+	}
+
 	loadInfoData(data) {
 		//Load Info
 
@@ -700,29 +731,27 @@ class ShowdownResult extends Phaser.Scene {
 
 	update(time, dt) {
 		timer += dt
+		if (opponentSkill && !opponentSkillAnimationFinished) {
+			if (opponentShowdownAnimations.Anger.visible) {
+				this.opponentSkills.anger.visible = true
+			}
+			else if (opponentShowdownAnimations.Rage.visible) {
+				this.opponentSkills.rage.visible = true
+			}
+			else if (opponentShowdownAnimations.Focus.visible) {
+				this.opponentSkills.focus.visible = true
+			}
+			else if (opponentShowdownAnimations.Adrenaline.visible) {
+				this.opponentSkills.adrenaline.visible = true
+			}
+			else if (opponentShowdownAnimations.Healing.visible) {
+				this.opponentSkills.healing.visible = true
+			}
+			opponentSkillAnimationFinished = true
+		}
 		if (timer > 1200) {
 			if (playerSkill && !playerSkillAnimationFinished) {
-				if (this.playerSkills.y > -2400) {
-					if (playerShowdownAnimations.Anger.visible) {
-						this.playerSkills.angerSkill.visible = true
-					}
-					else if (playerShowdownAnimations.Rage.visible) {
-						this.playerSkills.rageSkill.visible = true
-					}
-					else if (playerShowdownAnimations.Focus.visible) {
-						this.playerSkills.focusSkill.visible = true
-					}
-					else if (playerShowdownAnimations.Adrenaline.visible) {
-						this.playerSkills.adrenalineSkill.visible = true
-					}
-					else if (playerShowdownAnimations.Healing.visible) {
-						this.playerSkills.healingSkill.visible = true
-					}
-					this.playerSkills.y -= dt * 2
-				}
-				else {
-					playerSkillAnimationFinished = true
-				}
+				this.playPlayerSkillAnimations(dt)
 			}
 			else if (playerAttack && !playerAttackAnimationFinished && (!opponentShowdownAnimations.Parry.visible || (opponentShowdownAnimations.Parry.visible && !opponentAttack || (opponentAttack && opponentAttackAnimationFinished)))) {
 				this.loadPlayerAttackAnimations()
@@ -821,6 +850,30 @@ class ShowdownResult extends Phaser.Scene {
 	}
 
 	//	END OF UPDATE FUNCTION	//	END OF UPDATE FUNCTION	//	END OF UPDATE FUNCTION (yes I'm blind and will probably forget to take this out)
+	playPlayerSkillAnimations(dt) {
+		if (this.playerSkills.y > -2400) {
+			if (playerShowdownAnimations.Anger.visible) {
+				this.playerSkills.angerSkill.visible = true
+			}
+			else if (playerShowdownAnimations.Rage.visible) {
+				this.playerSkills.rageSkill.visible = true
+			}
+			else if (playerShowdownAnimations.Focus.visible) {
+				this.playerSkills.focusSkill.visible = true
+			}
+			else if (playerShowdownAnimations.Adrenaline.visible) {
+				this.playerSkills.adrenalineSkill.visible = true
+			}
+			else if (playerShowdownAnimations.Healing.visible) {
+				this.playerSkills.healingSkill.visible = true
+			}
+			this.playerSkills.y -= dt * 2
+		}
+		else {
+			playerSkillAnimationFinished = true
+		}
+	}
+
 	loadPlayerAttackAnimations() {
 		if (playerShowdownAnimations.NormalAttack.visible || playerShowdownAnimations.DoubleAttack.visible) {
 			this.playerAttacks.normal_Slash.visible = true

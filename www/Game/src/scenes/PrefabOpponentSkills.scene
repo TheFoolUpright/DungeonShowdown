@@ -21,7 +21,8 @@
                     "scope": "PUBLIC",
                     "texture": {
                         "key": "opponentFocus"
-                    }
+                    },
+                    "visible": false
                 },
                 {
                     "type": "Image",
@@ -30,7 +31,8 @@
                     "scope": "PUBLIC",
                     "texture": {
                         "key": "opponentAdrenaline"
-                    }
+                    },
+                    "visible": false
                 },
                 {
                     "type": "Image",
@@ -40,7 +42,8 @@
                     "texture": {
                         "key": "opponentHealing"
                     },
-                    "y": -100
+                    "y": -100,
+                    "visible": false
                 },
                 {
                     "type": "Image",
@@ -51,7 +54,8 @@
                         "key": "opponentAnger"
                     },
                     "x": -70,
-                    "y": -80
+                    "y": -80,
+                    "visible": false
                 },
                 {
                     "type": "Image",
@@ -62,7 +66,8 @@
                         "key": "opponentRage"
                     },
                     "x": 60,
-                    "y": -90
+                    "y": -90,
+                    "visible": false
                 }
             ]
         }

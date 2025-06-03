@@ -10,22 +10,27 @@ class PrefabOpponentSkills extends Phaser.GameObjects.Container {
 
 		// focus
 		const focus = scene.add.image(0, 0, "opponentFocus");
+		focus.visible = false;
 		this.add(focus);
 
 		// adrenaline
 		const adrenaline = scene.add.image(0, 0, "opponentAdrenaline");
+		adrenaline.visible = false;
 		this.add(adrenaline);
 
 		// healing
 		const healing = scene.add.image(0, -100, "opponentHealing");
+		healing.visible = false;
 		this.add(healing);
 
 		// anger
 		const anger = scene.add.image(-70, -80, "opponentAnger");
+		anger.visible = false;
 		this.add(anger);
 
 		// rage
 		const rage = scene.add.image(60, -90, "opponentRage");
+		rage.visible = false;
 		this.add(rage);
 
 		this.focus = focus;
