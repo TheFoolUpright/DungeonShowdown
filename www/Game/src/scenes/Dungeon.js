@@ -578,7 +578,6 @@ class Dungeon extends Phaser.Scene {
 			}
 
 		}
-		console.log(displayInfo)
 		console.log(card)
 		switch(cardData.card_display_option) {
 			case "1":
@@ -597,6 +596,10 @@ class Dungeon extends Phaser.Scene {
 				card.option2Container.visible = true
 				break;
 			case "1_1":
+				if (cardData.card_type_id == 5){
+					//card.EnemyHiddenRewardText.text = "?"
+					//card.EnemyHiddenReward.visible = true
+				}
 				card.option1_1CostIcon1.setTexture(displayInfo[0].image)
 				card.option1_1CostText1.text = displayInfo[0].value	
 
@@ -606,6 +609,10 @@ class Dungeon extends Phaser.Scene {
 				card.option1_1Container.visible = true
 				break;
 			case "1_2":
+				if (cardData.card_type_id == 5){
+					//card.EnemyHiddenRewardText.text = "?  ?"
+					//card.EnemyHiddenReward.visible = true
+				}
 				card.option1_2CostIcon1.setTexture(displayInfo[0].image)
 				card.option1_2CostText1.text = displayInfo[0].value
 
@@ -618,6 +625,10 @@ class Dungeon extends Phaser.Scene {
 				card.option1_2Container.visible = true
 				break;
 			case "1_3":
+				if (cardData.card_type_id == 5){
+					//card.EnemyHiddenRewardText.text = "?  ?  ?"
+					//card.EnemyHiddenReward.visible = true
+				}
 				card.option1_3CostIcon1.setTexture(displayInfo[0].image)
 				card.option1_3CostText1.text = displayInfo[0].value
 
@@ -633,6 +644,10 @@ class Dungeon extends Phaser.Scene {
 				card.option1_3Container.visible = true
 				break;
 			case "2_1":
+				if (cardData.card_type_id == 5){
+					//card.EnemyHiddenRewardText.text = "?"
+					//card.EnemyHiddenReward.visible = true
+				}
 				card.option2_1CostIcon1.setTexture(displayInfo[0].image)
 				card.option2_1CostText1.text = displayInfo[0].value	
 
@@ -645,6 +660,10 @@ class Dungeon extends Phaser.Scene {
 				card.option2_1Container.visible = true
 				break;
 			case "2_2":
+				if (cardData.card_type_id == 5){
+					//card.EnemyHiddenRewardText.text = "?  ?"
+					//card.EnemyHiddenReward.visible = true
+				}
 				card.option2_2CostIcon1.setTexture(displayInfo[0].image)
 				card.option2_2CostText1.text = displayInfo[0].value	
 
@@ -660,6 +679,10 @@ class Dungeon extends Phaser.Scene {
 				card.option2_2Container.visible = true
 				break;
 			case "2_3":
+				if (cardData.card_type_id == 5){
+					//card.EnemyHiddenRewardText.text = "?  ?  ?"
+					//card.EnemyHiddenReward.visible = true
+				}
 				card.option2_3CostIcon1.setTexture(displayInfo[0].image)
 				card.option2_3CostText1.text = displayInfo[0].value	
 
