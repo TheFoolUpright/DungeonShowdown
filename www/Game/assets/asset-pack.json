@@ -485,7 +485,7 @@
                 "key": "PrefabOpponentBlock"
             },
             {
-                "url": "src/scenes/PrefabOpponentSkills.js",
+                "url": "src/prefabs/PrefabOpponentSkills.js",
                 "type": "script",
                 "key": "PrefabOpponentSkills"
             },

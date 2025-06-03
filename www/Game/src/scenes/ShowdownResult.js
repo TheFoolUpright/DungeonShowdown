@@ -390,8 +390,8 @@ class ShowdownResult extends Phaser.Scene {
 		})
 	}
 
-	loadAudioForShowdownResult(){
-		if(!ShowdownBackgroundMusic.isPlaying){
+	loadAudioForShowdownResult() {
+		if(!ShowdownBackgroundMusic.isPlaying) {
 			ShowdownBackgroundMusic.play()
 		}
 		OpponentCardSFX.play()
@@ -407,30 +407,181 @@ class ShowdownResult extends Phaser.Scene {
 		const playerCardColor = data.player_color.replace("#", "0x")
 
 		const opponentCardColor = data.opponent_cards[0].player_color.replace("#", "0x")
-
 		this.playerCard1.cardBorder.setTint(playerCardColor)
 		this.playerCard1.cardName.text = data.player_cards[0].card_name
 		this.playerCard1.cardImage.setTexture(data.player_cards[0].card_image_path)
+		console.log("Here1")
+		this.MakeShowdownCardIconsVisible(this.playerCard1, data.player_cards[0], data.opponent_cards[0].damage, data)
 
 		if (data.player_cards[1]) {
 			this.playerCard2.visible = true
 			this.playerCard2.cardBorder.setTint(playerCardColor)
 			this.playerCard2.cardName.text = data.player_cards[1].card_name
 			this.playerCard2.cardImage.setTexture(data.player_cards[1].card_image_path)
+			console.log("Here2")
+			this.MakeShowdownCardIconsVisible(this.playerCard2, data.player_cards[1], data.opponent_cards[0].damage, data)
 		}
 
 		this.opponenetCard1.cardBorder.setTint(opponentCardColor)
 		this.opponenetCard1.cardName.text = data.opponent_cards[0].card_name
 		this.opponenetCard1.cardImage.setTexture(data.opponent_cards[0].card_image_path)
+		console.log("Here3")
+		this.MakeShowdownCardIconsVisible(this.opponenetCard1, data.opponent_cards[0], previousDamage, data.opponent_cards[0])
 
 		if (data.opponent_cards[1]) {
 			this.opponenetCard2.visible = true
 			this.opponenetCard2.cardBorder.setTint(opponentCardColor)
 			this.opponenetCard2.cardName.text = data.opponent_cards[1].card_name
 			this.opponenetCard2.cardImage.setTexture(data.opponent_cards[1].card_image_path)
+			console.log("Here4")
+			this.MakeShowdownCardIconsVisible(this.opponenetCard2, data.opponent_cards[1], previousDamage, data.opponent_cards[1])
 		}
 	}
 
+	MakeShowdownCardIconsVisible(card, cardData, opponentsDamage, playerStats) {
+		console.log(cardData)
+		if(cardData.card_id == playerShowdownAnimations.NormalAttack.id) {
+			card.option1RewardIcon1.setTexture("Attack")
+			card.option1RewardText1.text = ": " + (cardData.card_attack * playerStats.damage)
+			
+			card.option1Container.visible = true
+		}
+
+		if(cardData.card_id == playerShowdownAnimations.HeavyAttack.id) {
+			card.option1_1CostIcon1.setTexture("Energy")
+			card.option1_1CostText1.text = cardData.card_energy
+
+			card.option1_1RewardIcon1.setTexture("Attack")
+			card.option1_1RewardText1.text = ": " + Math.round(cardData.card_attack * playerStats.damage)
+			
+			card.option1_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.DoubleAttack.id) {
+			card.option1_1CostIcon1.setTexture("Energy")
+			card.option1_1CostText1.text = cardData.card_energy
+
+			card.option1_1RewardIcon1.setTexture("Attack")
+			card.option1_1RewardText1.text = ": " + Math.round(cardData.card_attack * playerStats.damage) + " x2"
+			
+			card.option1_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.RecoveryAttack.id) {
+			card.option1_1CostIcon1.setTexture("Energy")
+			card.option1_1CostText1.text = "+" + cardData.card_energy
+
+			card.option1_1RewardIcon1.setTexture("Attack")
+			card.option1_1RewardText1.text = ": " + Math.round(cardData.card_attack * playerStats.damage)
+			
+			card.option1_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.CounterAttack.id) {
+			card.option1_1CostIcon1.setTexture("Energy")
+			card.option1_1CostText1.text = cardData.card_energy
+
+			card.option1_1RewardIcon1.setTexture("Attack")
+			card.option1_1RewardText1.text = ": " + Math.round(cardData.card_attack * playerStats.damage)
+			
+			card.option1_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.ClumsyBlock.id) {
+			card.option1_1CostIcon1.setTexture("Insight")
+			card.option1_1CostText1.text = cardData.card_insight
+
+			card.option1_1RewardIcon1.setTexture("Defense")
+			card.option1_1RewardText1.text = ": " + Math.round(cardData.card_defense * (playerStats.max_health - 20))
+			
+			card.option1_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.SolidBlock.id) {
+			card.option1_1CostIcon1.setTexture("Insight")
+			card.option1_1CostText1.text = cardData.card_insight
+
+			card.option1_1RewardIcon1.setTexture("Defense")
+			card.option1_1RewardText1.text = ": " + Math.round(cardData.card_defense * (playerStats.max_health - 20))
+			
+			card.option1_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.ImpressiveBlock.id) {
+			card.option1_1CostIcon1.setTexture("Insight")
+			card.option1_1CostText1.text = cardData.card_insight
+
+			card.option1_1RewardIcon1.setTexture("Defense")
+			card.option1_1RewardText1.text = ": " + Math.round(cardData.card_defense * (playerStats.max_health - 20))
+			
+			card.option1_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.Dodge.id) {
+			card.option2RewardIcon1.setTexture("Energy")
+			card.option2RewardText1.text = cardData.card_energy
+
+			card.option2RewardIcon2.setTexture("Insight")
+			card.option2RewardText2.text = cardData.card_insight
+
+			card.option2Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.Parry.id) {
+			card.option2_1CostIcon1.setTexture("Energy")
+			card.option2_1CostText1.text = cardData.card_energy
+
+			card.option2_1CostIcon2.setTexture("Insight")
+			card.option2_1CostText2.text = cardData.card_insight
+
+			card.option2_1RewardIcon1.setTexture("Attack")
+			card.option2_1RewardText1.text = ": " + Math.round(cardData.card_attack * opponentsDamage)
+			
+			card.option2_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.Anger.id) {
+			card.option1_1CostIcon1.setTexture("Energy")
+			card.option1_1CostText1.text = cardData.card_energy
+
+			card.option1_1RewardIcon1.setTexture("Damage")
+			card.option1_1RewardText1.text = "+" + cardData.card_damage
+
+			card.option1_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.Rage.id) {
+			card.option1_1CostIcon1.setTexture("Energy")
+			card.option1_1CostText1.text = cardData.card_energy
+
+			card.option1_1RewardIcon1.setTexture("Damage")
+			card.option1_1RewardText1.text = "+" + cardData.card_damage
+
+			card.option1_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.Focus.id) {
+			card.option1_1CostIcon1.setTexture("Energy")
+			card.option1_1CostText1.text = cardData.card_energy
+
+			card.option1_1RewardIcon1.setTexture("Insight")
+			card.option1_1RewardText1.text = "+" + cardData.card_insight
+
+			card.option1_1Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.Adrenaline.id) {
+			card.option1_2CostIcon1.setTexture("CurrentHealth")
+			card.option1_2CostText1.text = cardData.card_current_health
+
+			card.option1_2RewardIcon1.setTexture("Energy")
+			card.option1_2RewardText1.text = "+" + cardData.card_energy
+
+			card.option1_2RewardIcon2.setTexture("Insight")
+			card.option1_2RewardText2.text = "+" + cardData.card_insight
+
+			card.option1_2Container.visible = true
+		}
+		else if(cardData.card_id == playerShowdownAnimations.Healing.id) {
+			card.option1_1CostIcon1.setTexture("Energy")
+			card.option1_1CostText1.text = cardData.card_energy
+
+			card.option1_1RewardIcon1.setTexture("CurrentHealth")
+			card.option1_1RewardText1.text = "+" + cardData.card_current_health
+
+			card.option1_1Container.visible = true
+		}
+
+	}
+	
 	loadPlayerAttack(data) {
 		if (data.player_cards[0].card_id == playerShowdownAnimations.NormalAttack.id || (data.player_cards[1] && data.player_cards[1].card_id == playerShowdownAnimations.NormalAttack.id)) {
 			playerShowdownAnimations.NormalAttack.visible = true
