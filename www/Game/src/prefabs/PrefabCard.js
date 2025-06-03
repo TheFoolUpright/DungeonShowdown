@@ -493,6 +493,22 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		const option2_1_1CostIcon1 = scene.add.image(-55, 100, "HiddenIconSmall");
 		option2_1_1Container.add(option2_1_1CostIcon1);
 
+		// EnemyHiddenReward
+		const enemyHiddenReward = scene.add.container(0, 0);
+		enemyHiddenReward.visible = false;
+		this.add(enemyHiddenReward);
+
+		// cardEnemySticker
+		const cardEnemySticker = scene.add.image(0, 0, "CardEnemySticker");
+		enemyHiddenReward.add(cardEnemySticker);
+
+		// EnemyHiddenRewardText
+		const enemyHiddenRewardText = scene.add.text(-4, 157, "", {});
+		enemyHiddenRewardText.setOrigin(0.5, 0.5);
+		enemyHiddenRewardText.text = "?  ?  ?";
+		enemyHiddenRewardText.setStyle({ "fontFamily": "Rockey", "fontSize": "34px", "stroke": "#000000ff", "strokeThickness":10});
+		enemyHiddenReward.add(enemyHiddenRewardText);
+
 		// onAwakeScript
 		const onAwakeScript = new OnAwakeScript(this);
 
@@ -584,6 +600,9 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		this.option2_1_1CostText1 = option2_1_1CostText1;
 		this.option2_1_1CostIcon1 = option2_1_1CostIcon1;
 		this.option2_1_1Container = option2_1_1Container;
+		this.cardEnemySticker = cardEnemySticker;
+		this.enemyHiddenRewardText = enemyHiddenRewardText;
+		this.enemyHiddenReward = enemyHiddenReward;
 		this.onAwakeScript = onAwakeScript;
 
 		/* START-USER-CTR-CODE */
@@ -768,6 +787,12 @@ class PrefabCard extends Phaser.GameObjects.Container {
 	option2_1_1CostIcon1;
 	/** @type {Phaser.GameObjects.Container} */
 	option2_1_1Container;
+	/** @type {Phaser.GameObjects.Image} */
+	cardEnemySticker;
+	/** @type {Phaser.GameObjects.Text} */
+	enemyHiddenRewardText;
+	/** @type {Phaser.GameObjects.Container} */
+	enemyHiddenReward;
 	/** @type {OnAwakeScript} */
 	onAwakeScript;
 	/** @type {number} */

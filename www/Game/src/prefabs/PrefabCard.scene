@@ -1122,6 +1122,39 @@
                     ]
                 },
                 {
+                    "type": "Container",
+                    "id": "64c1372c-83c1-4119-bed0-2f01043c3518",
+                    "label": "EnemyHiddenReward",
+                    "scope": "PUBLIC",
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "a4fdc12d-49cf-4684-80b7-6f383d210732",
+                            "label": "cardEnemySticker",
+                            "scope": "PUBLIC",
+                            "texture": {
+                                "key": "CardEnemySticker"
+                            }
+                        },
+                        {
+                            "type": "Text",
+                            "id": "3b3a3cd9-36fb-4ad5-9d1a-5ee495b8f76f",
+                            "label": "EnemyHiddenRewardText",
+                            "scope": "PUBLIC",
+                            "x": -4,
+                            "y": 157,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "?  ?  ?",
+                            "fontFamily": "Rockey",
+                            "fontSize": "34px",
+                            "stroke": "#000000ff",
+                            "strokeThickness": 10
+                        }
+                    ]
+                },
+                {
                     "prefabId": "7028a0e2-cd14-44b7-b2a4-68dac16ece00",
                     "id": "0dc21418-28d1-4973-b2a8-45b31b3aad4b",
                     "label": "onAwakeScript",
