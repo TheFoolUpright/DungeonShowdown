@@ -190,6 +190,7 @@ class Showdown extends Phaser.Scene {
 
 	loadCardClickEvents(){
 		this.normalAttackSlot.on("pointerdown", () => {
+			PlayerCardSFX.play()
 			if (!this.normalAttackSlot.isDisabled) {
 				if (!this.normalAttackSlot.isSelected) {
 					if (this.defenseSlot.isSelected && this.skillSlot.isSelected) {
@@ -211,6 +212,7 @@ class Showdown extends Phaser.Scene {
 		})
 
 		this.specialAttackSlot.on("pointerdown", () => {
+			PlayerCardSFX.play()
 			if (!this.specialAttackSlot.isDisabled) {
 				if (!this.specialAttackSlot.isSelected) {
 					if (this.defenseSlot.isSelected && this.skillSlot.isSelected) {
@@ -232,6 +234,7 @@ class Showdown extends Phaser.Scene {
 		})
 
 		this.defenseSlot.on("pointerdown", () => {
+			PlayerCardSFX.play()
 			if (!this.defenseSlot.isDisabled) {
 				if (!this.defenseSlot.isSelected) {
 					if (this.normalAttackSlot.isSelected && this.skillSlot.isSelected) {
@@ -259,6 +262,7 @@ class Showdown extends Phaser.Scene {
 		})
 
 		this.skillSlot.on("pointerdown", () => {
+			PlayerCardSFX.play()
 			if (!this.skillSlot.isDisabled) {
 				if (!this.skillSlot.isSelected) {
 					if (this.normalAttackSlot.isSelected && this.defenseSlot.isSelected) {

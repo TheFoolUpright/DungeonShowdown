@@ -269,6 +269,7 @@ class Preload extends Phaser.Scene {
 			DodgeSFX = this.sound.add("DodgeSFX")
 		}
 		if(!ClumsyBlockSFX){
+			this.load.audio('CardboardSound1','/assets/sfx/CardboardSound1.mp3')
 			ClumsyBlockSFX = this.sound.add("CardboardSound1")
 		}
 		if(!SolidBlockSFX){
