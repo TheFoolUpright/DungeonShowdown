@@ -13,7 +13,7 @@ var states = {
     "Draw": 10
 }
 
-var backgroundMusicVolume = 0
+var backgroundMusicVolume = .2
 var SFXVolume = 1
 
 var MenuBackgroundMusic
@@ -22,6 +22,7 @@ var ShowdownBackgroundMusic
 
 var VictoryEnding
 var DefeatEnding
+var TieEnding
 
 var PlayerCardSFX
 var OpponentCardSFX
@@ -220,7 +221,7 @@ class Preload extends Phaser.Scene {
 			ShowdownBackgroundMusic = this.sound.add("ShowdownBackgroundMusic",
 			{
 			mute: false,
-			volume: backgroundMusicVolume,
+			volume: backgroundMusicVolume - .1,
 			rate: 1,
 			detune: 0,
 			seek: 0,
@@ -253,6 +254,9 @@ class Preload extends Phaser.Scene {
 		}
 		if(!DefeatEnding){
 			DefeatEnding = this.sound.add("DefeatEnding")
+		}
+		if(!TieEnding){
+			TieEnding = this.sound.add("TieEnding")
 		}
 
 		if(!PlayerCardSFX){

@@ -891,6 +891,13 @@
             },
             {
                 "url": [
+                    "../../audio_files/Ending/TieEnding.mp3"
+                ],
+                "type": "audio",
+                "key": "TieEnding"
+            },
+            {
+                "url": [
                     "../../audio_files/Ending/VictoryEnding.mp3"
                 ],
                 "type": "audio",

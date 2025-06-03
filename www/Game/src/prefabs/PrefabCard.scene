@@ -1124,7 +1124,7 @@
                 {
                     "type": "Container",
                     "id": "64c1372c-83c1-4119-bed0-2f01043c3518",
-                    "label": "EnemyHiddenReward",
+                    "label": "enemyHiddenReward",
                     "scope": "PUBLIC",
                     "visible": false,
                     "list": [
@@ -1140,7 +1140,7 @@
                         {
                             "type": "Text",
                             "id": "3b3a3cd9-36fb-4ad5-9d1a-5ee495b8f76f",
-                            "label": "EnemyHiddenRewardText",
+                            "label": "enemyHiddenRewardText",
                             "scope": "PUBLIC",
                             "x": -4,
                             "y": 157,
@@ -1216,6 +1216,16 @@
             "label": "IsTinted",
             "tooltip": "",
             "defValue": false,
+            "customDefinition": false,
+            "type": {
+                "id": "boolean"
+            }
+        },
+        {
+            "name": "isAnimated",
+            "label": "IsAnimated",
+            "tooltip": "",
+            "defValue": true,
             "customDefinition": false,
             "type": {
                 "id": "boolean"

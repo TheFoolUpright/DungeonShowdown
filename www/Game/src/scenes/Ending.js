@@ -150,6 +150,7 @@ class Ending extends Phaser.Scene {
 		}
 		else if (data.state == 10) {
 			this.endingText.text = "It's a Tie..."
+			TieEnding.play()
 			this.draw.visible = true
 		}
 

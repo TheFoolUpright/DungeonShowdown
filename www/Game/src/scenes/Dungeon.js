@@ -7,6 +7,10 @@ var previousEnergy
 var previousInsight
 var previousDamage
 var backgroundMusic 
+var enemyTimeout
+var stopTurning
+var stickerSoundPlayed
+var isConfirmed
 
 
 
@@ -171,11 +175,14 @@ class Dungeon extends Phaser.Scene {
 		this.loadCardData(data)
 
 		//Load Events
-		this.loadButtonClickEvents()
+		this.loadButtonClickEvents(data)
 		this.loadButtonHoverEvents()
 
 		this.loadCardClickEvents()
 		this.loadCardHoverEvents()
+
+		stopTurning = false
+		isConfirmed = false
 	}
 
 	loadAudioForDungeon() {
@@ -185,10 +192,11 @@ class Dungeon extends Phaser.Scene {
 		PlayerCardSFX.play()
 	}
 
-	loadButtonClickEvents(){
+	loadButtonClickEvents(data){
 		this.onwardButton.on("pointerdown", () =>{
 			ButtonSFX.play()
-			this.ConfirmDungeonChoice()
+			this.ConfirmDungeonChoice(data)
+			isConfirmed = true
 		})
 	}
 
@@ -297,37 +305,83 @@ class Dungeon extends Phaser.Scene {
 	}
 
 	update() {
-		console.log(this.slot1Card.isSelected == false && this.slot1Card.cardGlow.active == true)
+		//console.log(this.slot1Card.isSelected == false && this.slot1Card.cardGlow.active == true)
 		//If any card is selected make the button visible
-		if (this.slot1Card.isSelected || this.slot2Card.isSelected || this.slot3Card.isSelected) {
+		if ((this.slot1Card.isSelected || this.slot2Card.isSelected || this.slot3Card.isSelected) && !isConfirmed) {
 			this.onwardButton.visible = true
 		}
 		else {
 			this.onwardButton.visible = false
 		}
 		this.checkCardSelection()
+		console.log(this.slot2Card.enemyHiddenReward.y)
+		if(this.slot1Card.isAnimated){
+			if(this.slot1Card.enemyHiddenReward.y > -30 && !stopTurning){
+				this.slot1Card.enemyHiddenReward.scale += .01
+				this.slot1Card.enemyHiddenReward.angle  -= 2
+				this.slot1Card.enemyHiddenReward.y  -= 5
+			}
+			else{
+				stopTurning = true
+			}
+			if(stopTurning) {
+				this.slot1Card.enemyHiddenReward.y  += 5 * 3
+			}
+		}
+		else if(this.slot2Card.isAnimated){
+			if(this.slot2Card.enemyHiddenReward.y > -30 && !stopTurning){
+				this.slot2Card.enemyHiddenReward.scale += .01
+				this.slot2Card.enemyHiddenReward.angle  -= 2
+				this.slot2Card.enemyHiddenReward.y  -= 5
+			}
+			else{
+				stopTurning = true
+			}
+			if(stopTurning) {
+				this.slot2Card.enemyHiddenReward.y  += 5 * 3
+			}
+		}
+		else if(this.slot3Card.isAnimated){
+			if(this.slot3Card.enemyHiddenReward.y > -30 && !stopTurning){
+				this.slot3Card.enemyHiddenReward.scale += .01
+				this.slot3Card.enemyHiddenReward.angle  -= 2
+				this.slot3Card.enemyHiddenReward.y  -= 5
+			}
+			else{
+				stopTurning = true
+			}
+			if(stopTurning) {
+				this.slot3Card.enemyHiddenReward.y  += 5 * 3
+			}
+		}
 	}
 
 	sortDungeonCards(cardA, cardB) {
 			return cardA.slot_id - cardB.slot_id
 	}
 
-	ConfirmDungeonChoice() {
-
+	ConfirmDungeonChoice(data) {
+		console.log(data)
 		//determine which card is selected
 		if (this.slot1Card.isSelected) {
 			var dataToSend = {  
-			"cardId": this.slot1Card.cardId
+			"cardId": this.slot1Card.cardId,
+			"slotId": 1,
+			"cardTypeId": data.card[0].card_type_id
 			}
 		}
 		else if (this.slot2Card.isSelected) {
 			var dataToSend = {  
-			"cardId": this.slot2Card.cardId
+			"cardId": this.slot2Card.cardId,
+			"slotId": 2,
+			"cardTypeId": data.card[1].card_type_id
 			}
 		}
 		else if (this.slot3Card.isSelected) {
 			var dataToSend = {  
-			"cardId": this.slot3Card.cardId
+			"cardId": this.slot3Card.cardId,
+			"slotId": 3,
+			"cardTypeId": data.card[2].card_type_id
 			}
 		}
 
@@ -342,12 +396,22 @@ class Dungeon extends Phaser.Scene {
 				console.log(data)
 
 				if (xhttp.status == 200) {
-					if (data.state == "NEXT_ROOM") {
-						this.scene.start("DungeonResult", data)
+
+					if(dataToSend.slotId == 1 && dataToSend.cardTypeId == 5 && this.slot1Card.isVisible){
+						this.slot1Card.isAnimated = true
+						enemyTimeout = setTimeout(this.nextRoom, 2000, data, this);
 					}
-					else if (data.state == "WAITING_FOR_OPP") {
-						this.scene.start("DungeonWaitingOnOpponent")
+					else if(dataToSend.slotId == 2 && dataToSend.cardTypeId == 5 && this.slot2Card.isVisible){
+						this.slot2Card.isAnimated = true
+						enemyTimeout = setTimeout(this.nextRoom, 2000, data, this);
 					}
+					else if(dataToSend.slotId == 3 && dataToSend.cardTypeId == 5 && this.slot3Card.isVisible){
+						this.slot3Card.isAnimated = true
+						enemyTimeout = setTimeout(this.nextRoom, 2000, data, this);
+					}
+					else{
+						this.nextRoom(data, this)
+					}			
 				}
 			}
 		}
@@ -357,6 +421,18 @@ class Dungeon extends Phaser.Scene {
 		xhttp.setRequestHeader("Content-Type", "application/json")
 
 		xhttp.send(JSON.stringify(dataToSend))
+	}
+
+	nextRoom(data, sceneState){
+		if (data.state == "NEXT_ROOM") {
+			sceneState.scene.start("DungeonResult", data)
+		}
+		else if (data.state == "WAITING_FOR_OPP") {
+			sceneState.scene.start("DungeonWaitingOnOpponent")
+		}
+		if(enemyTimeout){
+			clearTimeout(enemyTimeout);
+		}
 	}
 
 	loadInfoData(data) {
@@ -399,6 +475,7 @@ class Dungeon extends Phaser.Scene {
 
 		this.slot1Card.cardId = data.card[0].card_id
 		this.slot1Card.isVisible = data.card[0].is_visible
+		this.slot1Card.isAnimated = false
 
 		const cardColor = data.player_color.replace("#", "0x")
 
@@ -425,6 +502,7 @@ class Dungeon extends Phaser.Scene {
 
 		this.slot2Card.cardId = data.card[1].card_id
 		this.slot2Card.isVisible = data.card[1].is_visible
+		this.slot2Card.isAnimated = false
 
 		this.slot2Card.cardBorder.setTint(cardColor)
 
@@ -449,6 +527,7 @@ class Dungeon extends Phaser.Scene {
 
 		this.slot3Card.cardId = data.card[2].card_id
 		this.slot3Card.isVisible = data.card[2].is_visible
+		this.slot3Card.isAnimated = false
 
 		this.slot3Card.cardBorder.setTint(cardColor)
 
@@ -598,8 +677,8 @@ class Dungeon extends Phaser.Scene {
 				break;
 			case "1_1":
 				if (cardData.card_type_id == 5){
-					//card.EnemyHiddenRewardText.text = "?"
-					//card.EnemyHiddenReward.visible = true
+					card.enemyHiddenRewardText.text = "?"
+					card.enemyHiddenReward.visible = true
 				}
 				card.option1_1CostIcon1.setTexture(displayInfo[0].image)
 				card.option1_1CostText1.text = displayInfo[0].value	
@@ -611,8 +690,8 @@ class Dungeon extends Phaser.Scene {
 				break;
 			case "1_2":
 				if (cardData.card_type_id == 5){
-					//card.EnemyHiddenRewardText.text = "?  ?"
-					//card.EnemyHiddenReward.visible = true
+					card.enemyHiddenRewardText.text = "?  ?"
+					card.enemyHiddenReward.visible = true
 				}
 				card.option1_2CostIcon1.setTexture(displayInfo[0].image)
 				card.option1_2CostText1.text = displayInfo[0].value
@@ -627,8 +706,8 @@ class Dungeon extends Phaser.Scene {
 				break;
 			case "1_3":
 				if (cardData.card_type_id == 5){
-					//card.EnemyHiddenRewardText.text = "?  ?  ?"
-					//card.EnemyHiddenReward.visible = true
+					card.enemyHiddenRewardText.text = "?  ?  ?"
+					card.enemyHiddenReward.visible = true
 				}
 				card.option1_3CostIcon1.setTexture(displayInfo[0].image)
 				card.option1_3CostText1.text = displayInfo[0].value
@@ -646,8 +725,8 @@ class Dungeon extends Phaser.Scene {
 				break;
 			case "2_1":
 				if (cardData.card_type_id == 5){
-					//card.EnemyHiddenRewardText.text = "?"
-					//card.EnemyHiddenReward.visible = true
+					card.enemyHiddenRewardText.text = "?"
+					card.enemyHiddenReward.visible = true
 				}
 				card.option2_1CostIcon1.setTexture(displayInfo[0].image)
 				card.option2_1CostText1.text = displayInfo[0].value	
@@ -662,8 +741,8 @@ class Dungeon extends Phaser.Scene {
 				break;
 			case "2_2":
 				if (cardData.card_type_id == 5){
-					//card.EnemyHiddenRewardText.text = "?  ?"
-					//card.EnemyHiddenReward.visible = true
+					card.enemyHiddenRewardText.text = "?  ?"
+					card.enemyHiddenReward.visible = true
 				}
 				card.option2_2CostIcon1.setTexture(displayInfo[0].image)
 				card.option2_2CostText1.text = displayInfo[0].value	
@@ -681,8 +760,8 @@ class Dungeon extends Phaser.Scene {
 				break;
 			case "2_3":
 				if (cardData.card_type_id == 5){
-					//card.EnemyHiddenRewardText.text = "?  ?  ?"
-					//card.EnemyHiddenReward.visible = true
+					card.enemyHiddenRewardText.text = "?  ?  ?"
+					card.enemyHiddenReward.visible = true
 				}
 				card.option2_3CostIcon1.setTexture(displayInfo[0].image)
 				card.option2_3CostText1.text = displayInfo[0].value	

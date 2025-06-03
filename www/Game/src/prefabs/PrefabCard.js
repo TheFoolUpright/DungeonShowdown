@@ -493,7 +493,7 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		const option2_1_1CostIcon1 = scene.add.image(-55, 100, "HiddenIconSmall");
 		option2_1_1Container.add(option2_1_1CostIcon1);
 
-		// EnemyHiddenReward
+		// enemyHiddenReward
 		const enemyHiddenReward = scene.add.container(0, 0);
 		enemyHiddenReward.visible = false;
 		this.add(enemyHiddenReward);
@@ -502,7 +502,7 @@ class PrefabCard extends Phaser.GameObjects.Container {
 		const cardEnemySticker = scene.add.image(0, 0, "CardEnemySticker");
 		enemyHiddenReward.add(cardEnemySticker);
 
-		// EnemyHiddenRewardText
+		// enemyHiddenRewardText
 		const enemyHiddenRewardText = scene.add.text(-4, 157, "", {});
 		enemyHiddenRewardText.setOrigin(0.5, 0.5);
 		enemyHiddenRewardText.text = "?  ?  ?";
@@ -805,6 +805,8 @@ class PrefabCard extends Phaser.GameObjects.Container {
 	isDisabled = false;
 	/** @type {boolean} */
 	isTinted = false;
+	/** @type {boolean} */
+	isAnimated = true;
 
 	/* START-USER-CODE */
 
