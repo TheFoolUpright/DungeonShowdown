@@ -133,7 +133,7 @@
             },
             {
                 "url": [
-                    "assets/audio/DefeatEnding.mp3"
+                    "../../audio_files/Ending/DefeatEnding.mp3"
                 ],
                 "type": "audio",
                 "key": "DefeatEnding"
@@ -155,7 +155,7 @@
             },
             {
                 "url": [
-                    "assets/audio/DodgeSFX.mp3"
+                    "../../audio_files/Defense/DodgeSFX.mp3"
                 ],
                 "type": "audio",
                 "key": "DodgeSFX"
@@ -192,7 +192,7 @@
             },
             {
                 "url": [
-                    "assets/audio/DungeonBackgroundMusic.mp3"
+                    "../../audio_files/BackgroundMusic/DungeonBackgroundMusic.mp3"
                 ],
                 "type": "audio",
                 "key": "DungeonBackgroundMusic"
@@ -324,7 +324,7 @@
             },
             {
                 "url": [
-                    "assets/audio/MenuBackgroundMusic.mp3"
+                    "../../audio_files/BackgroundMusic/MenuBackgroundMusic.mp3"
                 ],
                 "type": "audio",
                 "key": "MenuBackgroundMusic"
@@ -356,7 +356,7 @@
             },
             {
                 "url": [
-                    "assets/audio/OpponentCardSFX.mp3"
+                    "../../audio_files/OpponentCardSFX.mp3"
                 ],
                 "type": "audio",
                 "key": "OpponentCardSFX"
@@ -408,7 +408,7 @@
             },
             {
                 "url": [
-                    "assets/audio/PlayerCardSFX.mp3"
+                    "../../audio_files/PlayerCardSFX.mp3"
                 ],
                 "type": "audio",
                 "key": "PlayerCardSFX"
@@ -535,7 +535,7 @@
             },
             {
                 "url": [
-                    "assets/audio/ShowdownBackgroundMusic.mp3"
+                    "../../audio_files/BackgroundMusic/ShowdownBackgroundMusic.mp3"
                 ],
                 "type": "audio",
                 "key": "ShowdownBackgroundMusic"
@@ -552,7 +552,7 @@
             },
             {
                 "url": [
-                    "assets/audio/StickerButtonSFX.wav"
+                    "../../audio_files/StickerButtonSFX.wav"
                 ],
                 "type": "audio",
                 "key": "StickerButtonSFX"
@@ -569,10 +569,332 @@
             },
             {
                 "url": [
-                    "assets/audio/VictoryEnding.mp3"
+                    "../../audio_files/Ending/VictoryEnding.mp3"
                 ],
                 "type": "audio",
                 "key": "VictoryEnding"
+            },
+            {
+                "url": [
+                    "../../audio_files/CounterAttack/FemaleCounterAttackSFX1.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleCounterAttackSFX1"
+            },
+            {
+                "url": [
+                    "../../audio_files/CounterAttack/FemaleCounterAttackSFX2.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleCounterAttackSFX2"
+            },
+            {
+                "url": [
+                    "../../audio_files/CounterAttack/FemaleCounterAttackSFX3.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleCounterAttackSFX3"
+            },
+            {
+                "url": [
+                    "../../audio_files/CounterAttack/FemaleCounterAttackSFX4.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleCounterAttackSFX4"
+            },
+            {
+                "url": [
+                    "../../audio_files/CounterAttack/MaleCounterAttackSFX1.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleCounterAttackSFX1"
+            },
+            {
+                "url": [
+                    "../../audio_files/CounterAttack/MaleCounterAttackSFX2.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleCounterAttackSFX2"
+            },
+            {
+                "url": [
+                    "../../audio_files/CounterAttack/MaleCounterAttackSFX3.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleCounterAttackSFX3"
+            },
+            {
+                "url": [
+                    "../../audio_files/CounterAttack/MaleCounterAttackSFX4.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleCounterAttackSFX4"
+            },
+            {
+                "url": [
+                    "../../audio_files/Defense/CardboardSound1.mp3"
+                ],
+                "type": "audio",
+                "key": "CardboardSound1"
+            },
+            {
+                "url": [
+                    "../../audio_files/Defense/CardboardSound2.mp3"
+                ],
+                "type": "audio",
+                "key": "CardboardSound2"
+            },
+            {
+                "url": [
+                    "../../audio_files/Defense/CardboardSound3.mp3"
+                ],
+                "type": "audio",
+                "key": "CardboardSound3"
+            },
+            {
+                "url": [
+                    "../../audio_files/Defense/CardboardSound8.mp3"
+                ],
+                "type": "audio",
+                "key": "CardboardSound8"
+            },  
+            {
+                "url": [
+                    "../../audio_files/HeavyAttack/FemaleHeavyAttackSFX1.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleHeavyAttackSFX1"
+            },  
+            {
+                "url": [
+                    "../../audio_files/HeavyAttack/FemaleHeavyAttackSFX2.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleHeavyAttackSFX2"
+            },
+            {
+                "url": [
+                    "../../audio_files/HeavyAttack/FemaleHeavyAttackSFX3.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleHeavyAttackSFX3"
+            },
+            {
+                "url": [
+                    "../../audio_files/HeavyAttack/FemaleHeavyAttackSFX4.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleHeavyAttackSFX4"
+            },
+            {
+                "url": [
+                    "../../audio_files/HeavyAttack/MaleHeavyAttackSFX1.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleHeavyAttackSFX1"
+            },
+            {
+                "url": [
+                    "../../audio_files/HeavyAttack/MaleHeavyAttackSFX2.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleHeavyAttackSFX2"
+            },
+            {
+                "url": [
+                    "../../audio_files/HeavyAttack/MaleHeavyAttackSFX3.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleHeavyAttackSFX3"
+            },
+            {
+                "url": [
+                    "../../audio_files/HeavyAttack/MaleHeavyAttackSFX4.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleHeavyAttackSFX4"
+            },
+            {
+                "url": [
+                    "../../audio_files/NormalAttack/FemaleNormalAttackSFX1.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleNormalAttackSFX1"
+            },
+            {
+                "url": [
+                    "../../audio_files/NormalAttack/FemaleNormalAttackSFX2.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleNormalAttackSFX2"
+            },
+            {
+                "url": [
+                    "../../audio_files/NormalAttack/FemaleNormalAttackSFX3.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleNormalAttackSFX3"
+            },
+            {
+                "url": [
+                    "../../audio_files/NormalAttack/FemaleNormalAttackSFX4.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleNormalAttackSFX4"
+            },
+            {
+                "url": [
+                    "../../audio_files/NormalAttack/MaleNormalAttackSFX1.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleNormalAttackSFX1"
+            },
+            {
+                "url": [
+                    "../../audio_files/NormalAttack/MaleNormalAttackSFX2.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleNormalAttackSFX2"
+            },
+            {
+                "url": [
+                    "../../audio_files/NormalAttack/MaleNormalAttackSFX3.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleNormalAttackSFX3"
+            },
+            {
+                "url": [
+                    "../../audio_files/NormalAttack/MaleNormalAttackSFX4.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleNormalAttackSFX4"
+            },
+            {
+                "url": [
+                    "../../audio_files/RecoveryAttack/FemaleRecoveryAttackSFX1.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleRecoveryAttackSFX1"
+            },
+            {
+                "url": [
+                    "../../audio_files/RecoveryAttack/FemaleRecoveryAttackSFX2.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleRecoveryAttackSFX2"
+            },
+            {
+                "url": [
+                    "../../audio_files/RecoveryAttack/FemaleRecoveryAttackSFX3.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleRecoveryAttackSFX3"
+            },
+            {
+                "url": [
+                    "../../audio_files/RecoveryAttack/FemaleRecoveryAttackSFX4.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleRecoveryAttackSFX4"
+            },
+            {
+                "url": [
+                    "../../audio_files/RecoveryAttack/MaleRecoveryAttackSFX1.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleRecoveryAttackSFX1"
+            },
+            {
+                "url": [
+                    "../../audio_files/RecoveryAttack/MaleRecoveryAttackSFX2.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleRecoveryAttackSFX2"
+            },
+            {
+                "url": [
+                    "../../audio_files/RecoveryAttack/MaleRecoveryAttackSFX3.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleRecoveryAttackSFX3"
+            },
+            {
+                "url": [
+                    "../../audio_files/RecoveryAttack/MaleRecoveryAttackSFX4.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleRecoveryAttackSFX4"
+            },
+            {
+                "url": [
+                    "../../audio_files/Skills/FemaleAdrenalineSFX.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleAdrenalineSFX"
+            },
+            {
+                "url": [
+                    "../../audio_files/Skills/FemaleAngerSFX.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleAngerSFX"
+            },
+            {
+                "url": [
+                    "../../audio_files/Skills/FemaleFocusSFX.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleFocusSFX"
+            },
+            {
+                "url": [
+                    "../../audio_files/Skills/FemaleHealingSFX.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleHealingSFX"
+            },
+            {
+                "url": [
+                    "../../audio_files/Skills/FemaleRageSFX.mp3"
+                ],
+                "type": "audio",
+                "key": "FemaleRageSFX"
+            },
+            {
+                "url": [
+                    "../../audio_files/Skills/MaleAdrenalineSFX.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleAdrenalineSFX"
+            },
+            {
+                "url": [
+                    "../../audio_files/Skills/MaleAngerSFX.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleAngerSFX"
+            },
+            {
+                "url": [
+                    "../../audio_files/Skills/MaleFocusSFX.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleFocusSFX"
+            },
+            {
+                "url": [
+                    "../../audio_files/Skills/MaleHealingSFX.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleHealingSFX"
+            },
+            {
+                "url": [
+                    "../../audio_files/Skills/MaleRageSFX.mp3"
+                ],
+                "type": "audio",
+                "key": "MaleRageSFX"
             },
             {
                 "url": "assets/card/VitalityBrew.png",
