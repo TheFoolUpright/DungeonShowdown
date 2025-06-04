@@ -172,11 +172,6 @@
                 "key": "Defense"
             },
             {
-                "url": "assets/dino.png",
-                "key": "dino",
-                "type": "image"
-            },
-            {
                 "url": "assets/card/Dodge.png",
                 "type": "image",
                 "key": "Dodge"

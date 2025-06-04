@@ -107,13 +107,8 @@ class Preload extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
-		// guapen
-		const guapen = this.add.image(505.0120544433594, 360, "guapen");
-		guapen.scaleX = 0.32715486817515643;
-		guapen.scaleY = 0.32715486817515643;
-
 		// progressBar
-		const progressBar = this.add.rectangle(553.0120849609375, 361, 256, 20);
+		const progressBar = this.add.rectangle(960, 540, 256, 20);
 		progressBar.setOrigin(0, 0);
 		progressBar.isFilled = true;
 		progressBar.fillColor = 14737632;
@@ -122,18 +117,26 @@ class Preload extends Phaser.Scene {
 		new PreloadBarUpdaterScript(progressBar);
 
 		// progressBarBg
-		const progressBarBg = this.add.rectangle(553.0120849609375, 361, 256, 20);
+		const progressBarBg = this.add.rectangle(960, 540, 256, 20);
 		progressBarBg.setOrigin(0, 0);
 		progressBarBg.fillColor = 14737632;
 		progressBarBg.isStroked = true;
 
 		// loadingText
-		const loadingText = this.add.text(552.0120849609375, 329, "", {});
+		const loadingText = this.add.text(960, 505, "", {});
 		loadingText.text = "Loading...";
 		loadingText.setStyle({ "color": "#e0e0e0", "fontFamily": "arial", "fontSize": "20px" });
 
+		// mushroom
+		const mushroom = this.add.image(866, 530, "Mushroom");
+
+		this.mushroom = mushroom;
+
 		this.events.emit("scene-awake");
 	}
+
+	/** @type {Phaser.GameObjects.Image} */
+	mushroom;
 
 	/* START-USER-CODE */
 
@@ -184,7 +187,7 @@ class Preload extends Phaser.Scene {
 				}
 			})
 		}
-	
+
 		if (!DungeonBackgroundMusic){
 			DungeonBackgroundMusic = this.sound.add("DungeonBackgroundMusic",
 			{
@@ -426,11 +429,11 @@ class Preload extends Phaser.Scene {
 
 	LoginCheck() {
 		var xhttp = new XMLHttpRequest()
-		
+
 		xhttp.onreadystatechange = () => {
 			console.log(xhttp.readyState)
 			if (xhttp.readyState == 4) {
-				
+
 				var data = JSON.parse(xhttp.responseText)
 				console.log(data)
 
@@ -456,7 +459,7 @@ class Preload extends Phaser.Scene {
 	MatchCheck() {
 
 		var xhttp = new XMLHttpRequest()
-		
+
 		xhttp.onreadystatechange = () => {
 			if (xhttp.readyState == 4) {
 				var data = JSON.parse(xhttp.responseText)
@@ -490,7 +493,7 @@ class Preload extends Phaser.Scene {
 
 	GetGameState() {
 		var xhttp = new XMLHttpRequest()
-		
+
 		xhttp.onreadystatechange = () => {
 			if (xhttp.readyState == 4) {
 				var data = JSON.parse(xhttp.responseText)
@@ -514,7 +517,8 @@ class Preload extends Phaser.Scene {
 						 this.scene.start("ShowdownWaitingOnOpponent")
 					}
 					else if(data.state_id == states.ShowdownResult) {
-						 this.scene.start("ShowdownResult")
+						console.log("ShowdownResult")
+						 this.GetShowdownResultData()
 					}
 					else if(data.state_id == states.EndingCheck) {
 						 //this.GetShowdownData()
@@ -532,7 +536,7 @@ class Preload extends Phaser.Scene {
 
 	GetDungeonData() {
 		var xhttp = new XMLHttpRequest()
-		
+
 		xhttp.onreadystatechange = () => {
 			if (xhttp.readyState == 4) {
 				var data = JSON.parse(xhttp.responseText)
@@ -553,7 +557,7 @@ class Preload extends Phaser.Scene {
 
     GetDungeonResultData() {
         var xhttp = new XMLHttpRequest()
-		
+
 		xhttp.onreadystatechange = () => {
 			if (xhttp.readyState == 4) {
 				var data = JSON.parse(xhttp.responseText)
@@ -574,7 +578,7 @@ class Preload extends Phaser.Scene {
 
 	GetShowdownData() {
 		var xhttp = new XMLHttpRequest()
-		
+
 		xhttp.onreadystatechange = () => {
 			if (xhttp.readyState == 4) {
 				var data = JSON.parse(xhttp.responseText)
@@ -592,11 +596,13 @@ class Preload extends Phaser.Scene {
 
 		xhttp.send()
 	}
-	
+
 	GetShowdownResultData(){
+		console.log("ShowdownResult: sending data")
 		var xhttp = new XMLHttpRequest()
-		
+
 		xhttp.onreadystatechange = () => {
+			console.log("ShowdownResult xhttp: " + xhttp.readyState)
 			if (xhttp.readyState == 4) {
 				var data = JSON.parse(xhttp.responseText)
 				console.log(data)
@@ -607,7 +613,7 @@ class Preload extends Phaser.Scene {
 			}
 		}
 
-		xhttp.open("GET", "/getWaitingOnOpponentShowdown", true)
+		xhttp.open("GET", "/getShowdownResult", true)
 
 		xhttp.setRequestHeader("Content-Type", "application/json")
 

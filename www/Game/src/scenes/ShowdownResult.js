@@ -759,6 +759,22 @@ class ShowdownResult extends Phaser.Scene {
 		var insight = data.insight
 		var damage = data.damage
 
+		if(isNaN(previousMaxHealth)){
+			previousMaxHealth = maxHealth
+		}
+		if(isNaN(previousCurrentHealth)){
+			previousCurrentHealth = currentHealth
+		}
+		if(isNaN(previousEnergy)){
+			previousEnergy = energy
+		}
+		if(isNaN(previousInsight)){
+			previousInsight = insight
+		}
+		if(isNaN(previousDamage)){
+			previousDamage = damage
+		}
+
 		this.statsContainer.healthText.text = previousCurrentHealth + "/" +  previousMaxHealth
 		this.statsContainer.insightText.text = previousInsight + "/10"
 		this.statsContainer.energyText.text = previousEnergy
