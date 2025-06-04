@@ -52,15 +52,11 @@ class ShowdownWaitingOnOpponent extends Phaser.Scene {
 
 	}
 
-	loadAudioForShowdownWaitingOnOpponent(){
-		if(!ShowdownBackgroundMusic.isPlaying){
+	loadAudioForShowdownWaitingOnOpponent() {
+		if (!ShowdownBackgroundMusic.isPlaying) {
 			ShowdownBackgroundMusic.play()
 		}
 	}
-
-	// update() {
-	// 	this.CheckShowdownOpponentSelectionState()
-	// }
 
 	CheckShowdownOpponentSelectionState(stateScene) {
 		var xhttp = new XMLHttpRequest()

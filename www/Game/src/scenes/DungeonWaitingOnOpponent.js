@@ -53,15 +53,11 @@ class DungeonWaitingOnOpponent extends Phaser.Scene {
 		dungeonWaitingOnOpponentInterval = setInterval(this.CheckDungeonOpponentSelectionState, 2000, this);
 	}
 
-	loadAudioForDungeonWaitingOnOpponent(){
-		if(!DungeonBackgroundMusic.isPlaying){
+	loadAudioForDungeonWaitingOnOpponent() {
+		if (!DungeonBackgroundMusic.isPlaying) {
 			DungeonBackgroundMusic.play()
 		}
 	}
-
-	// update() {
-	// 	this.CheckDungeonOpponentSelectionState()
-	// }
 
 	CheckDungeonOpponentSelectionState(stateScene) {
 		var xhttp = new XMLHttpRequest();

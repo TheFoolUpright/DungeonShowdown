@@ -1180,6 +1180,180 @@ class ShowdownResult extends Phaser.Scene {
 					if (opponentDefense && !opponentDefenseAnimationFinished) {
 						this.playOpponentParryAnimation(dt)
 						if (!playerParrySwing) {
+					var attackSoundNumber = Math.floor(Math.random() * 4)
+
+							if (!playerAttackSoundPlayed) {
+								console.log("playerAttackSoundPlayed: " + attackSoundNumber)
+								if (playerShowdownAnimations.NormalAttack.visible || playerShowdownAnimations.DoubleAttack.visible) {
+									if (attackSoundNumber == 0) {
+										if (isPlayer1) {
+											FemaleNormalAttackSFX1.play()
+											playerAttackSoundPlayed = true
+										}
+										else {
+											MaleNormalAttackSFX1.play()
+											playerAttackSoundPlayed = true						
+										}
+									}
+									else if (attackSoundNumber == 1) {
+										if (isPlayer1) {
+											FemaleNormalAttackSFX2.play()
+											playerAttackSoundPlayed = true
+										}
+										else {
+											MaleNormalAttackSFX2.play()
+											playerAttackSoundPlayed = true						
+										}
+									}
+									else if (attackSoundNumber == 2) {
+										if (isPlayer1) {
+											FemaleNormalAttackSFX3.play()
+											playerAttackSoundPlayed = true
+										}
+										else {
+											MaleNormalAttackSFX3.play()
+											playerAttackSoundPlayed = true						
+										}
+									}
+									else if (attackSoundNumber == 3) {
+										if (isPlayer1) {
+											FemaleNormalAttackSFX4.play()
+											playerAttackSoundPlayed = true
+										}
+										else {
+											MaleNormalAttackSFX4.play()
+											playerAttackSoundPlayed = true						
+										}
+									}
+								}
+								else if (playerShowdownAnimations.HeavyAttack.visible) {
+									if (attackSoundNumber == 0) {
+										if (isPlayer1) {
+											FemaleHeavyAttackSFX1.play()
+											playerAttackSoundPlayed = true
+										}
+										else {
+											MaleHeavyAttackSFX1.play()
+											playerAttackSoundPlayed = true						
+										}
+									}
+									else if (attackSoundNumber == 1) {
+										if (isPlayer1) {
+											FemaleHeavyAttackSFX2.play()
+											playerAttackSoundPlayed = true
+										}
+										else {
+											MaleHeavyAttackSFX2.play()
+											playerAttackSoundPlayed = true						
+										}
+									}
+									else if (attackSoundNumber == 2) {
+										if (isPlayer1) {
+											FemaleHeavyAttackSFX3.play()
+											playerAttackSoundPlayed = true
+										}
+										else {
+											MaleHeavyAttackSFX3.play()
+											playerAttackSoundPlayed = true						
+										}
+									}
+									else if (attackSoundNumber == 3) {
+										if (isPlayer1) {
+											FemaleHeavyAttackSFX4.play()
+											playerAttackSoundPlayed = true
+										}
+										else {
+											MaleHeavyAttackSFX4.play()
+											playerAttackSoundPlayed = true						
+										}
+									}
+								}
+								else if (playerShowdownAnimations.RecoveryAttack.visible) {
+									if (attackSoundNumber == 0) {
+										if (isPlayer1) {
+											FemaleRecoveryAttackSFX1.play()
+											playerAttackSoundPlayed = true
+										}
+										else {
+											MaleRecoveryAttackSFX1.play()
+											playerAttackSoundPlayed = true						
+										}
+									}
+									else if (attackSoundNumber == 1) {
+										if (isPlayer1) {
+											FemaleRecoveryAttackSFX2.play()
+											playerAttackSoundPlayed = true
+										}
+										else {
+											MaleRecoveryAttackSFX2.play()
+											playerAttackSoundPlayed = true						
+										}
+									}
+									else if (attackSoundNumber == 2) {
+										if (isPlayer1) {
+											FemaleRecoveryAttackSFX3.play()
+											playerAttackSoundPlayed = true
+										}
+										else {
+											MaleRecoveryAttackSFX3.play()
+											playerAttackSoundPlayed = true						
+										}
+									}
+									else if (attackSoundNumber == 3) {
+										if (isPlayer1) {
+											FemaleRecoveryAttackSFX4.play()
+											playerAttackSoundPlayed = true
+										}
+										else {
+											MaleRecoveryAttackSFX4.play()
+											playerAttackSoundPlayed = true						
+										}
+									}
+								}
+								else if (playerShowdownAnimations.CounterAttack.visible) {
+									if (attackSoundNumber == 0) {
+										if (isPlayer1) {
+											FemaleCounterAttackSFX1.play()
+											playerAttackSoundPlayed = true
+										}
+										else {
+											MaleCounterAttackSFX1.play()
+											playerAttackSoundPlayed = true						
+										}
+									}
+									else if (attackSoundNumber == 1) {
+										if (isPlayer1) {
+											FemaleCounterAttackSFX2.play()
+											playerAttackSoundPlayed = true
+										}
+										else {
+											MaleCounterAttackSFX2.play()
+											playerAttackSoundPlayed = true						
+										}
+									}
+									else if (attackSoundNumber == 2) {
+										if (isPlayer1) {
+											FemaleCounterAttackSFX3.play()
+											playerAttackSoundPlayed = true
+										}
+										else {
+											MaleCounterAttackSFX3.play()
+											playerAttackSoundPlayed = true						
+										}
+									}
+									else if (attackSoundNumber == 3) {
+										if (isPlayer1) {
+											FemaleCounterAttackSFX4.play()
+											playerAttackSoundPlayed = true
+										}
+										else {
+											MaleCounterAttackSFX4.play()
+											playerAttackSoundPlayed = true						
+										}
+									}
+								}
+							}
+
 							this.playerAttacks.angle += dt / 3
 						}
 						else {
@@ -1408,6 +1582,194 @@ class ShowdownResult extends Phaser.Scene {
 					if (playerDefense && !playerDefenseAnimationFinished) {
 						this.playPlayerParryAnimation(dt)
 						if (!opponentParrySwing) {
+							var attackSoundNumber = Math.floor(Math.random() * 4)
+
+							if (!opponenetAttackSoundPlayed) {
+								console.log("opponenetAttackSoundPlayed: " + attackSoundNumber)
+								if (opponentShowdownAnimations.NormalAttack.visible || opponentShowdownAnimations.DoubleAttack.visible) {
+									if (attackSoundNumber == 0) {
+										if (isPlayer1) {
+											MaleNormalAttackSFX1.play()
+											opponenetAttackSoundPlayed = true						
+										}
+										else {
+											FemaleNormalAttackSFX1.play()
+											opponenetAttackSoundPlayed = true					
+										}
+									}
+									else if (attackSoundNumber == 1) {
+										if (isPlayer1) {
+											MaleNormalAttackSFX2.play()
+											opponenetAttackSoundPlayed = true	
+										}
+										else {
+											FemaleNormalAttackSFX2.play()
+											opponenetAttackSoundPlayed = true
+																
+										}
+									}
+									else if (attackSoundNumber == 2) {
+										if (isPlayer1) {
+											MaleNormalAttackSFX3.play()
+											opponenetAttackSoundPlayed = true
+										}
+										else {
+											FemaleNormalAttackSFX3.play()
+											opponenetAttackSoundPlayed = true
+																	
+										}
+									}
+									else if (attackSoundNumber == 3) {
+										if (isPlayer1) {
+											MaleNormalAttackSFX4.play()
+											opponenetAttackSoundPlayed = true	
+										}
+										else {
+											FemaleNormalAttackSFX4.play()
+											opponenetAttackSoundPlayed = true
+																
+										}
+									}
+								}
+								else if (opponentShowdownAnimations.HeavyAttack.visible) {
+									if (attackSoundNumber == 0) {
+										if (isPlayer1) {
+											MaleHeavyAttackSFX1.play()
+											opponenetAttackSoundPlayed = true
+										}
+										else {
+											FemaleHeavyAttackSFX1.play()
+											opponenetAttackSoundPlayed = true
+																	
+										}
+									}
+									else if (attackSoundNumber == 1) {
+										if (isPlayer1) {
+											MaleHeavyAttackSFX2.play()
+											opponenetAttackSoundPlayed = true
+										}
+										else {
+											FemaleHeavyAttackSFX2.play()
+											opponenetAttackSoundPlayed = true
+																	
+										}
+									}
+									else if (attackSoundNumber == 2) {
+										if (isPlayer1) {
+											MaleHeavyAttackSFX3.play()
+											opponenetAttackSoundPlayed = true
+										}
+										else {
+											FemaleHeavyAttackSFX3.play()
+											opponenetAttackSoundPlayed = true
+																	
+										}
+									}
+									else if (attackSoundNumber == 3) {
+										if (isPlayer1) {
+											MaleHeavyAttackSFX4.play()
+											opponenetAttackSoundPlayed = true	
+										}
+										else {
+											FemaleHeavyAttackSFX4.play()
+											opponenetAttackSoundPlayed = true
+																
+										}
+									}
+								}
+								else if (opponentShowdownAnimations.RecoveryAttack.visible) {
+									if (attackSoundNumber == 0) {
+										if (isPlayer1) {
+											MaleRecoveryAttackSFX1.play()
+											opponenetAttackSoundPlayed = true
+										}
+										else {
+											FemaleRecoveryAttackSFX1.play()
+											opponenetAttackSoundPlayed = true
+																	
+										}
+									}
+									else if (attackSoundNumber == 1) {
+										if (isPlayer1) {
+											MaleRecoveryAttackSFX2.play()
+											opponenetAttackSoundPlayed = true
+										}
+										else {
+											FemaleRecoveryAttackSFX2.play()
+											opponenetAttackSoundPlayed = true
+																	
+										}
+									}
+									else if (attackSoundNumber == 2) {
+										if (isPlayer1) {
+											MaleRecoveryAttackSFX3.play()
+											opponenetAttackSoundPlayed = true
+										}
+										else {
+											FemaleRecoveryAttackSFX3.play()
+											opponenetAttackSoundPlayed = true
+																	
+										}
+									}
+									else if (attackSoundNumber == 3) {
+										if (isPlayer1) {
+											MaleRecoveryAttackSFX4.play()
+											opponenetAttackSoundPlayed = true
+										}
+										else {
+											FemaleRecoveryAttackSFX4.play()
+											opponenetAttackSoundPlayed = true
+																	
+										}
+									}
+								}
+								else if (opponentShowdownAnimations.CounterAttack.visible) {
+									if (attackSoundNumber == 0) {
+										if (isPlayer1) {
+											MaleCounterAttackSFX1.play()
+											opponenetAttackSoundPlayed = true
+										}
+										else {
+											FemaleCounterAttackSFX1.play()
+											opponenetAttackSoundPlayed = true
+																	
+										}
+									}
+									else if (attackSoundNumber == 1) {
+										if (isPlayer1) {
+											MaleCounterAttackSFX2.play()
+											opponenetAttackSoundPlayed = true
+										}
+										else {
+											FemaleCounterAttackSFX2.play()
+											opponenetAttackSoundPlayed = true
+																	
+										}
+									}
+									else if (attackSoundNumber == 2) {
+										if (isPlayer1) {
+											MaleCounterAttackSFX3.play()
+											opponenetAttackSoundPlayed = true
+										}
+										else {
+											FemaleCounterAttackSFX3.play()
+											opponenetAttackSoundPlayed = true
+																	
+										}
+									}
+									else if (attackSoundNumber == 3) {
+										if (isPlayer1) {
+											MaleCounterAttackSFX4.play()
+											opponenetAttackSoundPlayed = true
+										}
+										else {
+											FemaleCounterAttackSFX4.play()
+											opponenetAttackSoundPlayed = true
+																	
+										}
+									}
+								}
+							}
 							this.opponentAttacks.angle += dt / 3
 						}
 						else {
@@ -1886,7 +2248,7 @@ class ShowdownResult extends Phaser.Scene {
 		this.playerAttacks.recovery_Hit.visible = false
 		this.playerAttacks.counter_Slash.visible = false
 		playerAttackAnimationFinished = true
-		timer = 40
+		timer = 200
 	}
 	finishOpponentAttackAnimations() {
 		this.opponentAttacks.normal_Slash.visible = false
@@ -1894,7 +2256,7 @@ class ShowdownResult extends Phaser.Scene {
 		this.opponentAttacks.recovery_Hit.visible = false
 		this.opponentAttacks.counter_Slash.visible = false
 		opponentAttackAnimationFinished = true
-		timer = 40
+		timer = 200
 	}
 
 	finishOpponentDefenseAnimations() {

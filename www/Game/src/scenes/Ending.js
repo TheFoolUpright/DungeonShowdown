@@ -134,17 +134,17 @@ class Ending extends Phaser.Scene {
 			if (data.IsPlayer1) {
 				this.girlWins.visible = true
 			}
-			else{
+			else {
 				this.boyWins.visible = true
 			}
 		}
 		else if (data.state == 9) {
 			this.endingText.text = "Defeat..."
 			DefeatEnding.play()
-			if(data.IsPlayer1) {
+			if (data.IsPlayer1) {
 				this.boyWins.visible = true
 			}
-			else{
+			else {
 				this.girlWins.visible = true
 			}
 		}

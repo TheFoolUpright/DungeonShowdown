@@ -96,8 +96,8 @@ class DungeonResult extends Phaser.Scene {
 		this.info.playerName.setColor(data.player_color)
 	}
 
-	loadAudioForDungeonResult(){
-		if(!DungeonBackgroundMusic.isPlaying){
+	loadAudioForDungeonResult() {
+		if (!DungeonBackgroundMusic.isPlaying) {
 			DungeonBackgroundMusic.play()
 		}
 		OpponentCardSFX.play()
@@ -117,69 +117,69 @@ class DungeonResult extends Phaser.Scene {
 		this.statsContainer.energyText.text = previousEnergy
 		this.statsContainer.mightText.text = previousDamage
 
-		if(previousMaxHealth != maxHealth && previousCurrentHealth != currentHealth){
+		if (previousMaxHealth != maxHealth && previousCurrentHealth != currentHealth) {
 			var maxHealthDiff = maxHealth - previousMaxHealth
 			var currentHealthDiff = currentHealth - previousCurrentHealth
 
-			if(maxHealthDiff > 0 && currentHealthDiff > 0){
+			if (maxHealthDiff > 0 && currentHealthDiff > 0) {
 				this.statsContainer.healthDifferenceText.text =  "+" + currentHealthDiff + "/+" + maxHealthDiff
 			}
-			else if (maxHealthDiff < 0 && currentHealthDiff < 0){
+			else if (maxHealthDiff < 0 && currentHealthDiff < 0) {
 				this.statsContainer.healthDifferenceText.text =   currentHealthDiff + "/" + maxHealthDiff
 			}
-			else if (maxHealthDiff > 0 && currentHealthDiff < 0){
+			else if (maxHealthDiff > 0 && currentHealthDiff < 0) {
 				this.statsContainer.healthDifferenceText.text =   currentHealthDiff + "/+" + maxHealthDiff
 			}
-			else if (maxHealthDiff < 0 && currentHealthDiff > 0){
+			else if (maxHealthDiff < 0 && currentHealthDiff > 0) {
 				this.statsContainer.healthDifferenceText.text =   "+" + currentHealthDiff + "/" + maxHealthDiff
 			}
-			else{
+			else {
 				this.statsContainer.healthDifferenceText.text =  currentHealthDiff + "/" + maxHealthDiff
 			}
 			this.statsContainer.healthDifferenceText.visible = true
 		}
-		else if(previousMaxHealth != maxHealth){
-			if(maxHealth - previousMaxHealth > 0){
+		else if (previousMaxHealth != maxHealth) {
+			if (maxHealth - previousMaxHealth > 0) {
 				this.statsContainer.healthDifferenceText.text =  "+" + (maxHealth - previousMaxHealth) + "/+" + (maxHealth - previousMaxHealth) 
 			}
-			else{
+			else {
 				this.statsContainer.healthDifferenceText.text =  (maxHealth - previousMaxHealth) + "/" + (maxHealth - previousMaxHealth)
 			}
 			this.statsContainer.healthDifferenceText.visible = true
 		}
-		else if(previousCurrentHealth != currentHealth){
-			if(currentHealth - previousCurrentHealth > 0){
+		else if (previousCurrentHealth != currentHealth) {
+			if (currentHealth - previousCurrentHealth > 0) {
 				this.statsContainer.healthDifferenceText.text =  "+" + (currentHealth - previousCurrentHealth) + "/0"
 			}
-			else{
+			else {
 				this.statsContainer.healthDifferenceText.text = (currentHealth - previousCurrentHealth) + "/0"
 			}
 			this.statsContainer.healthDifferenceText.visible = true
 		}
 
-		if(previousEnergy != energy){
-			if(energy - previousEnergy > 0){
+		if (previousEnergy != energy) {
+			if (energy - previousEnergy > 0) {
 				this.statsContainer.energyDifferenceText.text =  "+" + (energy - previousEnergy)
 			}
-			else{
+			else {
 				this.statsContainer.energyDifferenceText.text = (energy - previousEnergy)
 			}
 			this.statsContainer.energyDifferenceText.visible = true
 		}
-		if(previousInsight != insight){
-			if(insight - previousInsight > 0){
+		if (previousInsight != insight) {
+			if (insight - previousInsight > 0) {
 				this.statsContainer.insightDifferenceText.text =  "+" + (insight - previousInsight)
 			}
-			else{
+			else {
 				this.statsContainer.insightDifferenceText.text =  (insight - previousInsight)
 			}
 			this.statsContainer.insightDifferenceText.visible = true
 		}
-		if(previousDamage != damage){
-			if(damage - previousDamage > 0){
+		if (previousDamage != damage) {
+			if (damage - previousDamage > 0) {
 				this.statsContainer.mightDifferenceText.text =  "+" + (damage - previousDamage)
 			}
-			else{
+			else {
 				this.statsContainer.mightDifferenceText.text = (damage - previousDamage)
 			}
 			this.statsContainer.mightDifferenceText.visible = true
@@ -212,29 +212,29 @@ class DungeonResult extends Phaser.Scene {
 		else {
 			this.opponentCard.cardName.text = data.card_type_name
 		}
-		if(data.card_type_id == 1){
+		if (data.card_type_id == 1) {
 			this.descriptionText.text = "A bottle clinks, a cap pops, and someone says, “That hit the spot.” \nYour rival leveled up their life force!"
 		}
-		else if(data.card_type_id == 2){
+		else if (data.card_type_id == 2) {
 			this.descriptionText.text = "You hear ripping cloth and a relieved sigh. \nSomeone has patched themselves up!"
 		}
-		else if(data.card_type_id == 3){
+		else if (data.card_type_id == 3) {
 			this.descriptionText.text = "You hear the sound of metal scraping on stone... \nyour opponent is becoming mighty!"
 		}
-		else if(data.card_type_id == 4){
+		else if (data.card_type_id == 4) {
 			this.descriptionText.text = "A gentle snore echoes throughout the room. \nYour opponent is napping!"
 		}
-		else if(data.card_type_id == 5){
-			if(data.card_name == "Slime"){
+		else if (data.card_type_id == 5) {
+			if (data.card_name == "Slime") {
 				this.descriptionText.text = "Squish. Squish. SPLAT. \nYour rival has found a blob with a bad attitude."
 			}
-			else if(data.card_name == "Bat"){
+			else if (data.card_name == "Bat") {
 				this.descriptionText.text = "You hear frantic swatting and tiny screeches... \nSomeone woke up the dungeon bats."
 			}
-			else if(data.card_name == "Ghost"){
+			else if (data.card_name == "Ghost") {
 				this.descriptionText.text = "The temperature drops and a chill creeps over you. \nSomeone’s dealing with a very floaty problem."
 			}
-			else{
+			else {
 				this.descriptionText.text = "Thuds, crashes, and shrieks echo from afar... \nYour opponent just made a monstrous new friend!"
 			}
 		}
@@ -249,7 +249,7 @@ class DungeonResult extends Phaser.Scene {
 
 	setupNextRoom(roomId) {
 
-		if(roomId <= 4) {
+		if (roomId <= 4) {
 
 			var xhttp = new XMLHttpRequest()
 
@@ -281,7 +281,7 @@ class DungeonResult extends Phaser.Scene {
 					console.log(data)
 
 					if (xhttp.status == 200) {
-						if(DungeonBackgroundMusic.isPlaying){
+						if (DungeonBackgroundMusic.isPlaying) {
 							DungeonBackgroundMusic.stop()
 						}
 						this.scene.start("Showdown", data);

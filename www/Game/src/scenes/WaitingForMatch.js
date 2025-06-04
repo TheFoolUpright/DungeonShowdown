@@ -36,15 +36,15 @@ class WaitingForMatch extends Phaser.Scene {
 	create() {
 
 		this.editorCreate();
-		if(!MenuBackgroundMusic.isPlaying){
+		if (!MenuBackgroundMusic.isPlaying) {
 			MenuBackgroundMusic.play()
 		}
 		this.startInterval()
 
 	}
 
-	startInterval(){
-		if(waitingForMatchInterval){
+	startInterval() {
+		if (waitingForMatchInterval) {
 			clearInterval(waitingForMatchInterval);
 		}
 		waitingForMatchInterval = setInterval(this.GetMatchState, 2000, this);
@@ -58,13 +58,13 @@ class WaitingForMatch extends Phaser.Scene {
 				var data = JSON.parse(xhttp.responseText)
 				console.log(data)
 
-				if (xhttp.status == 200){
-					if(data.state == "WAITING_FOR_MATCH"){
+				if (xhttp.status == 200) {
+					if (data.state == "WAITING_FOR_MATCH") {
 						return
 					}
-					else if (data.state == "MATCH_FOUND"){
+					else if (data.state == "MATCH_FOUND") {
 						clearInterval(waitingForMatchInterval);
-						if(MenuBackgroundMusic.isPlaying){
+						if (MenuBackgroundMusic.isPlaying) {
 							MenuBackgroundMusic.stop()
 						}
 						stateScene.scene.start("Dungeon", data);
