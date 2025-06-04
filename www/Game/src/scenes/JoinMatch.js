@@ -2,16 +2,16 @@
 // You can write more code here
 var playerColor
 var playerColorText
-var pinkGlow
-var redGlow
-var orangeRedGlow
-var orangeGlow
-var yellowGlow
-var yellowGreenGlow
-var greenGlow
-var greenBlueGlow
-var blueGlow
-var purpleGlow
+var pinkGlow = false
+var redGlow = false
+var orangeRedGlow = false
+var orangeGlow = false
+var yellowGlow = false
+var yellowGreenGlow = false
+var greenGlow = false
+var greenBlueGlow = false
+var blueGlow = false
+var purpleGlow = false
 
 /* START OF COMPILED CODE */
 
@@ -184,6 +184,7 @@ class JoinMatch extends Phaser.Scene {
 		// 		this.purpleButton.glowFx.active = true
 		// 		break;
 		// }
+		this.checkColorSelection()
 	}
 
 	loadPresets(data) {
@@ -318,50 +319,210 @@ class JoinMatch extends Phaser.Scene {
 	}
 
 	ButtonEvents() {
-		this.joinMatch.on("pointerdown", () =>{
+		this.joinMatch.on("pointerdown", () => {
 			ButtonSFX.play()
 			this.confirmJoinMatch()
 		})
 
-		this.pinkButton.on("pointerdown", () =>{
+		this.pinkButton.on("pointerdown", () => {
 			ButtonSFX.play()
 			playerColor = this.pinkButton.colorFill.tint
+
+			if (!this.pinkButton.isSelected) {
+				this.pinkButton.isSelected = true
+				this.redButton.isSelected = false
+				this.orangeRedButton.isSelected = false
+				this.orangeButton.isSelected = false
+				this.yellowButton.isSelected = false
+				this.yellowGreenButton.isSelected = false
+				this.greenButton.isSelected = false
+				this.greenBlueButton.isSelected = false
+				this.blueButton.isSelected = false
+				this.purpleButton.isSelected = false
+			}
+			else {
+				this.pinkButton.isSelected = false
+			}
 		})
-		this.redButton.on("pointerdown", () =>{
+		this.redButton.on("pointerdown", () => {
 			ButtonSFX.play()
 			playerColor = this.redButton.colorFill.tint
+
+			if (!this.redButton.isSelected) {
+				this.pinkButton.isSelected = false
+				this.redButton.isSelected = true
+				this.orangeRedButton.isSelected = false
+				this.orangeButton.isSelected = false
+				this.yellowButton.isSelected = false
+				this.yellowGreenButton.isSelected = false
+				this.greenButton.isSelected = false
+				this.greenBlueButton.isSelected = false
+				this.blueButton.isSelected = false
+				this.purpleButton.isSelected = false
+			}
+			else {
+				this.redButton.isSelected = false
+			}
 		})
-		this.orangeRedButton.on("pointerdown", () =>{
+		this.orangeRedButton.on("pointerdown", () => {
 			ButtonSFX.play()
 			playerColor = this.orangeRedButton.colorFill.tint
+
+			if (!this.orangeRedButton.isSelected) {
+				this.pinkButton.isSelected = false
+				this.redButton.isSelected = false
+				this.orangeRedButton.isSelected = true
+				this.orangeButton.isSelected = false
+				this.yellowButton.isSelected = false
+				this.yellowGreenButton.isSelected = false
+				this.greenButton.isSelected = false
+				this.greenBlueButton.isSelected = false
+				this.blueButton.isSelected = false
+				this.purpleButton.isSelected = false
+			}
+			else {
+				this.orangeRedButton.isSelected = false
+			}
 		})
-		this.orangeButton.on("pointerdown", () =>{
+		this.orangeButton.on("pointerdown", () => {
 			ButtonSFX.play()
 			playerColor = this.orangeButton.colorFill.tint
+
+			if (!this.orangeButton.isSelected) {
+				this.pinkButton.isSelected = false
+				this.redButton.isSelected = false
+				this.orangeRedButton.isSelected = false
+				this.orangeButton.isSelected = true
+				this.yellowButton.isSelected = false
+				this.yellowGreenButton.isSelected = false
+				this.greenButton.isSelected = false
+				this.greenBlueButton.isSelected = false
+				this.blueButton.isSelected = false
+				this.purpleButton.isSelected = false
+			}
+			else {
+				this.orangeButton.isSelected = false
+			}
 		})
-		this.yellowButton.on("pointerdown", () =>{
+		this.yellowButton.on("pointerdown", () => {
 			ButtonSFX.play()
 			playerColor = this.yellowButton.colorFill.tint
+
+			if (!this.yellowButton.isSelected) {
+				this.pinkButton.isSelected = false
+				this.redButton.isSelected = false
+				this.orangeRedButton.isSelected = false
+				this.orangeButton.isSelected = false
+				this.yellowButton.isSelected = true
+				this.yellowGreenButton.isSelected = false
+				this.greenButton.isSelected = false
+				this.greenBlueButton.isSelected = false
+				this.blueButton.isSelected = false
+				this.purpleButton.isSelected = false
+			}
+			else {
+				this.yellowButton.isSelected = false
+			}
 		})
-		this.yellowGreenButton.on("pointerdown", () =>{
+		this.yellowGreenButton.on("pointerdown", () => {
 			ButtonSFX.play()
 			playerColor = this.yellowGreenButton.colorFill.tint
+
+			if (!this.yellowGreenButton.isSelected) {
+				this.pinkButton.isSelected = false
+				this.redButton.isSelected = false
+				this.orangeRedButton.isSelected = false
+				this.orangeButton.isSelected = false
+				this.yellowButton.isSelected = false
+				this.yellowGreenButton.isSelected = true
+				this.greenButton.isSelected = false
+				this.greenBlueButton.isSelected = false
+				this.blueButton.isSelected = false
+				this.purpleButton.isSelected = false
+			}
+			else {
+				this.yellowGreenButton.isSelected = false
+			}
 		})
-		this.greenButton.on("pointerdown", () =>{
+		this.greenButton.on("pointerdown", () => {
 			ButtonSFX.play()
 			playerColor = this.greenButton.colorFill.tint
+
+			if (!this.greenButton.isSelected) {
+				this.pinkButton.isSelected = false
+				this.redButton.isSelected = false
+				this.orangeRedButton.isSelected = false
+				this.orangeButton.isSelected = false
+				this.yellowButton.isSelected = false
+				this.yellowGreenButton.isSelected = false
+				this.greenButton.isSelected = true
+				this.greenBlueButton.isSelected = false
+				this.blueButton.isSelected = false
+				this.purpleButton.isSelected = false
+			}
+			else {
+				this.greenButton.isSelected = false
+			}
 		})
-		this.greenBlueButton.on("pointerdown", () =>{
+		this.greenBlueButton.on("pointerdown", () => {
 			ButtonSFX.play()
 			playerColor = this.greenBlueButton.colorFill.tint
+
+			if (!this.greenBlueButton.isSelected) {
+				this.pinkButton.isSelected = false
+				this.redButton.isSelected = false
+				this.orangeRedButton.isSelected = false
+				this.orangeButton.isSelected = false
+				this.yellowButton.isSelected = false
+				this.yellowGreenButton.isSelected = false
+				this.greenButton.isSelected = false
+				this.greenBlueButton.isSelected = true
+				this.blueButton.isSelected = false
+				this.purpleButton.isSelected = false
+			}
+			else {
+				this.greenBlueButton.isSelected = false
+			}
 		})
-		this.blueButton.on("pointerdown", () =>{
+		this.blueButton.on("pointerdown", () => {
 			ButtonSFX.play()
 			playerColor = this.blueButton.colorFill.tint
+
+			if (!this.blueButton.isSelected) {
+				this.pinkButton.isSelected = false
+				this.redButton.isSelected = false
+				this.orangeRedButton.isSelected = false
+				this.orangeButton.isSelected = false
+				this.yellowButton.isSelected = false
+				this.yellowGreenButton.isSelected = false
+				this.greenButton.isSelected = false
+				this.greenBlueButton.isSelected = false
+				this.blueButton.isSelected = true
+				this.purpleButton.isSelected = false
+			}
+			else {
+				this.blueButton.isSelected = false
+			}
 		})
-		this.purpleButton.on("pointerdown", () =>{
+		this.purpleButton.on("pointerdown", () => {
 			ButtonSFX.play()
 			playerColor = this.purpleButton.colorFill.tint
+
+			if (!this.purpleButton.isSelected) {
+				this.pinkButton.isSelected = false
+				this.redButton.isSelected = false
+				this.orangeRedButton.isSelected = false
+				this.orangeButton.isSelected = false
+				this.yellowButton.isSelected = false
+				this.yellowGreenButton.isSelected = false
+				this.greenButton.isSelected = false
+				this.greenBlueButton.isSelected = false
+				this.blueButton.isSelected = false
+				this.purpleButton.isSelected = true
+			}
+			else {
+				this.purpleButton.isSelected = false
+			}
 		})
 	}
 
@@ -400,23 +561,104 @@ class JoinMatch extends Phaser.Scene {
 	}
 
 	checkColorSelection() {
-		// pinkGlow
-		// redGlow
-		// orangeRedGlow
-		// orangeGlow
-		// yellowGlow
-		// yellowGreenGlow
-		// greenGlow
-		// greenBlueGlow
-		// blueGlow
-		// purpleGlow
-		// Normal Attack
-		if (this.normalAttackSlot.isSelected == true && this.normalAttackSlot.cardGlow.active == false) {
-			this.normalAttackSlot.cardGlow.active = true
+
+		// orangeRed
+		// orange
+		// yellow
+		// yellowGreen
+		// green
+		// greenBlue
+		// blue
+		// purple
+
+		// pink
+		if (this.pinkButton.isSelected == true && this.pinkButton.glowFx.active == false) {
+			this.pinkButton.glowFx.active = true
 		}
 
-		if (this.normalAttackSlot.isSelected == false && (this.specialAttackSlot.isSelected == true || this.defenseSlot.isSelected == true || this.skillSlot.isSelected == true) && this.normalAttackSlot.cardDescriptionTextBox.visible == false && this.normalAttackSlot.cardGlow.active == true) {
-			this.normalAttackSlot.cardGlow.active = false
+		if (this.pinkButton.isSelected == false && (this.redButton.isSelected == true || this.orangeRedButton.isSelected == true || this.orangeButton.isSelected == true || this.yellowButton.isSelected == true || this.yellowGreenButton.isSelected == true || this.greenButton.isSelected == true || this.greenBlueButton.isSelected == true || this.blueButton.isSelected == true || this.purpleButton.isSelected == true) && !pinkGlow && this.pinkButton.glowFx.active == true) {
+			this.pinkButton.glowFx.active = false
+		}
+
+		// red
+		if (this.redButton.isSelected == true && this.redButton.glowFx.active == false) {
+			this.redButton.glowFx.active = true
+		}
+
+		if (this.redButton.isSelected == false && (this.pinkButton.isSelected == true || this.orangeRedButton.isSelected == true || this.orangeButton.isSelected == true || this.yellowButton.isSelected == true || this.yellowGreenButton.isSelected == true || this.greenButton.isSelected == true || this.greenBlueButton.isSelected == true || this.blueButton.isSelected == true || this.purpleButton.isSelected == true) && !redGlow && this.redButton.glowFx.active == true) {
+			this.redButton.glowFx.active = false
+		}
+		
+		// orangeRed
+		if (this.orangeRedButton.isSelected == true && this.orangeRedButton.glowFx.active == false) {
+			this.orangeRedButton.glowFx.active = true
+		}
+
+		if (this.orangeRedButton.isSelected == false && (this.pinkButton.isSelected == true || this.redButton.isSelected == true || this.orangeButton.isSelected == true || this.yellowButton.isSelected == true || this.yellowGreenButton.isSelected == true || this.greenButton.isSelected == true || this.greenBlueButton.isSelected == true || this.blueButton.isSelected == true || this.purpleButton.isSelected == true) && !orangeRedGlow && this.orangeRedButton.glowFx.active == true) {
+			this.orangeRedButton.glowFx.active = false
+		}
+		
+		// orange
+		if (this.orangeButton.isSelected == true && this.orangeButton.glowFx.active == false) {
+			this.orangeButton.glowFx.active = true
+		}
+
+		if (this.orangeButton.isSelected == false && (this.pinkButton.isSelected == true || this.redButton.isSelected == true || this.orangeRedButton.isSelected == true || this.yellowButton.isSelected == true || this.yellowGreenButton.isSelected == true || this.greenButton.isSelected == true || this.greenBlueButton.isSelected == true || this.blueButton.isSelected == true || this.purpleButton.isSelected == true) && !orangeGlow && this.orangeButton.glowFx.active == true) {
+			this.orangeButton.glowFx.active = false
+		}
+		
+		// yellow
+		if (this.yellowButton.isSelected == true && this.yellowButton.glowFx.active == false) {
+			this.yellowButton.glowFx.active = true
+		}
+
+		if (this.yellowButton.isSelected == false && (this.pinkButton.isSelected == true || this.redButton.isSelected == true || this.orangeRedButton.isSelected == true || this.orangeButton.isSelected == true || this.yellowGreenButton.isSelected == true || this.greenButton.isSelected == true || this.greenBlueButton.isSelected == true || this.blueButton.isSelected == true || this.purpleButton.isSelected == true) && !yellowGlow && this.yellowButton.glowFx.active == true) {
+			this.yellowButton.glowFx.active = false
+		}
+		
+		// yellowGreen
+		if (this.yellowGreenButton.isSelected == true && this.yellowGreenButton.glowFx.active == false) {
+			this.yellowGreenButton.glowFx.active = true
+		}
+
+		if (this.yellowGreenButton.isSelected == false && (this.pinkButton.isSelected == true || this.redButton.isSelected == true || this.orangeRedButton.isSelected == true || this.orangeButton.isSelected == true || this.yellowButton.isSelected == true || this.greenButton.isSelected == true || this.greenBlueButton.isSelected == true || this.blueButton.isSelected == true || this.purpleButton.isSelected == true) && !yellowGreenGlow && this.yellowGreenButton.glowFx.active == true) {
+			this.yellowGreenButton.glowFx.active = false
+		}
+		
+		// green
+		if (this.greenButton.isSelected == true && this.greenButton.glowFx.active == false) {
+			this.greenButton.glowFx.active = true
+		}
+
+		if (this.greenButton.isSelected == false && (this.pinkButton.isSelected == true || this.redButton.isSelected == true || this.orangeRedButton.isSelected == true || this.orangeButton.isSelected == true || this.yellowButton.isSelected == true || this.yellowGreenButton.isSelected == true || this.greenBlueButton.isSelected == true || this.blueButton.isSelected == true || this.purpleButton.isSelected == true) && !greenGlow && this.greenButton.glowFx.active == true) {
+			this.greenButton.glowFx.active = false
+		}
+		
+		// greenBlue
+		if (this.greenBlueButton.isSelected == true && this.greenBlueButton.glowFx.active == false) {
+			this.greenBlueButton.glowFx.active = true
+		}
+
+		if (this.greenBlueButton.isSelected == false && (this.pinkButton.isSelected == true || this.redButton.isSelected == true || this.orangeRedButton.isSelected == true || this.orangeButton.isSelected == true || this.yellowButton.isSelected == true || this.yellowGreenButton.isSelected == true || this.greenButton.isSelected == true || this.blueButton.isSelected == true || this.purpleButton.isSelected == true) && !greenBlueGlow && this.greenBlueButton.glowFx.active == true) {
+			this.greenBlueButton.glowFx.active = false
+		}
+		
+		// blue
+		if (this.blueButton.isSelected == true && this.blueButton.glowFx.active == false) {
+			this.blueButton.glowFx.active = true
+		}
+
+		if (this.blueButton.isSelected == false && (this.pinkButton.isSelected == true || this.redButton.isSelected == true || this.orangeRedButton.isSelected == true || this.orangeButton.isSelected == true || this.yellowButton.isSelected == true || this.yellowGreenButton.isSelected == true || this.greenButton.isSelected == true || this.greenBlueButton.isSelected == true || this.purpleButton.isSelected == true) && !blueGlow && this.blueButton.glowFx.active == true) {
+			this.blueButton.glowFx.active = false
+		}
+		
+		// purple
+		if (this.purpleButton.isSelected == true && this.purpleButton.glowFx.active == false) {
+			this.purpleButton.glowFx.active = true
+		}
+
+		if (this.purpleButton.isSelected == false && (this.pinkButton.isSelected == true || this.redButton.isSelected == true || this.orangeRedButton.isSelected == true || this.orangeButton.isSelected == true || this.yellowButton.isSelected == true || this.yellowGreenButton.isSelected == true || this.greenButton.isSelected == true || this.greenBlueButton.isSelected == true || this.blueButton.isSelected == true) && !purpleGlow && this.purpleButton.glowFx.active == true) {
+			this.purpleButton.glowFx.active = false
 		}
 	}
 	/* END-USER-CODE */

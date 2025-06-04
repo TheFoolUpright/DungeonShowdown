@@ -64,6 +64,8 @@ class ColorPrefab extends Phaser.GameObjects.Container {
 	moveInSceneActionScript;
 	/** @type {OnAwakeScript} */
 	onAwakeScript;
+	/** @type {boolean} */
+	isSelected = false;
 
 	/* START-USER-CODE */
 
