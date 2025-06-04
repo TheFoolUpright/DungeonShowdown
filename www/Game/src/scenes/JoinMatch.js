@@ -562,15 +562,6 @@ class JoinMatch extends Phaser.Scene {
 
 	checkColorSelection() {
 
-		// orangeRed
-		// orange
-		// yellow
-		// yellowGreen
-		// green
-		// greenBlue
-		// blue
-		// purple
-
 		// pink
 		if (this.pinkButton.isSelected == true && this.pinkButton.glowFx.active == false) {
 			this.pinkButton.glowFx.active = true

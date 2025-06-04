@@ -84,14 +84,14 @@ app.post("/login", (req, res) => {
 
 
 app.get("/idLoggedIn", (req, res) => {
-    if(!req.session.playerId){
+    if (!req.session.playerId) {
         res.status(200).json({
                 "message": "The user is not logged in",
                 "state": "NOT_LOGGED_IN"
             })
         return
     }
-    else{
+    else {
         res.status(200).json({
                 "message": "The user is logged in",
                 "state": "LOGGED_IN"
@@ -150,7 +150,7 @@ app.post("/register", (req, res) => {
         return
     }
 
-    if(!isSent){
+    if (!isSent) {
     connection.query("SELECT player_username, player_email FROM player WHERE player_username = ?", [receivedUsername],
         function (err, rows, fields) {
             if (err) {
@@ -167,7 +167,7 @@ app.post("/register", (req, res) => {
                 })
                 isSent = true
             }
-            else{
+            else {
                 InsertPlayer()
             }
 
@@ -176,7 +176,7 @@ app.post("/register", (req, res) => {
     }
     
 
-    function InsertPlayer(){
+    function InsertPlayer() {
         //Insert into the Database
         console.log("Inserting into the database")
         connection.query("INSERT INTO player (player_username, player_email, player_password) \VALUES (?,?,?)"
@@ -337,14 +337,14 @@ app.get("/getMatchState", (req, res) => {
                 return
             }
             if (rows.length != 0) {
-                if(rows[0].is_waiting_for_match == 1){
+                if (rows[0].is_waiting_for_match == 1) {
                     res.status(200).json({
                     "message": "Player already in a match",
                     "state": "WAITING_FOR_MATCH"
                     })
                     return  
                 }
-                else{
+                else {
                     res.status(200).json({
                     "message": "Player already in a match",
                     "state": "NOT_IN_MATCH",
@@ -415,7 +415,7 @@ app.put("/joinMatch", (req, res) => {
                     return
                 }
 
-                if(rows.length == 0) {
+                if (rows.length == 0) {
                     //Send waiting for matches
                     res.status(200).json({
                         "message": "Waiting for Match!",
@@ -546,23 +546,23 @@ app.put("/joinMatch", (req, res) => {
         var EnemyIterator = 0
 
         for (let i = 0; i < deck.length; i++) {
-            if(deck[i].card_type_id == 1) {
+            if (deck[i].card_type_id == 1) {
                 MaxHealthDeck[MaxHealthIterator] = deck[i]
                 MaxHealthIterator++
             }
-            if(deck[i].card_type_id == 2) {
+            if (deck[i].card_type_id == 2) {
                 HealingDeck[HealingIterator] = deck[i]
                 HealingIterator++
             }
-            if(deck[i].card_type_id == 3) {
+            if (deck[i].card_type_id == 3) {
                 DamageDeck[DamageIterator] = deck[i]
                 DamageIterator++
             }
-            if(deck[i].card_type_id == 4) {
+            if (deck[i].card_type_id == 4) {
                 RestDeck[RestIterator] = deck[i]
                 RestIterator++
             }
-            if(deck[i].card_type_id == 5) {
+            if (deck[i].card_type_id == 5) {
                 EnemyDeck[EnemyIterator] = deck[i]
                 EnemyIterator++
             }   
@@ -915,7 +915,7 @@ app.get("/getGameState", (req, res) => {
                     })
                     return
                 } 
-                if(rows.length != 0) {
+                if (rows.length != 0) {
 
                     req.session.roomId = rows[0].room_id
                     req.session.showdownTurn = rows[0].showdown_turn
@@ -993,7 +993,7 @@ app.get("/getWaitingOnOpponentDungeon", (req, res) => {
                     })
                     return
                 }
-                if(rows.length != 0) {
+                if (rows.length != 0) {
                     GetPlayerUsername(rows)
                 }
                 else
@@ -1020,7 +1020,7 @@ app.get("/getWaitingOnOpponentDungeon", (req, res) => {
                     })
                     return
                 }
-                if(rows.length != 0) {
+                if (rows.length != 0) {
                     res.status(200).json({
                         "message": "Player stats updated and opponent card received",
                         "state": "NEXT_ROOM",
@@ -1147,7 +1147,7 @@ app.post("/resolveDungeonTurn", (req, res) => {
     if (!req.session.playerStatusId) {
         GetSessionPlayerStatusId()
     }
-    else{
+    else {
         UpdateGameStateToWaitingForOpponentDungeon()
     }
 
@@ -1325,7 +1325,7 @@ app.post("/resolveDungeonTurn", (req, res) => {
                     })
                     return
                 }
-                if(rows.length != 0) {
+                if (rows.length != 0) {
                     UpdateGameStateToDungeonResult(rows)
                 }
                 else
@@ -1371,7 +1371,7 @@ app.post("/resolveDungeonTurn", (req, res) => {
                     })
                     return
                 }
-                if(rows.length != 0) {
+                if (rows.length != 0) {
                     res.status(200).json({
                         "message": "Player stats updated and opponent card received",
                         "state": "NEXT_ROOM",
@@ -1481,23 +1481,23 @@ function setupNextDungeonRoom(req, res) {
         var EnemyIterator = 0
 
         for (let i = 0; i < deck.length; i++) {
-            if(deck[i].card_type_id == 1) {
+            if (deck[i].card_type_id == 1) {
                 MaxHealthDeck[MaxHealthIterator] = deck[i]
                 MaxHealthIterator++
             }
-            if(deck[i].card_type_id == 2) {
+            if (deck[i].card_type_id == 2) {
                 HealingDeck[HealingIterator] = deck[i]
                 HealingIterator++
             }
-            if(deck[i].card_type_id == 3) {
+            if (deck[i].card_type_id == 3) {
                 DamageDeck[DamageIterator] = deck[i]
                 DamageIterator++
             }
-            if(deck[i].card_type_id == 4) {
+            if (deck[i].card_type_id == 4) {
                 RestDeck[RestIterator] = deck[i]
                 RestIterator++
             }
-            if(deck[i].card_type_id == 5) {
+            if (deck[i].card_type_id == 5) {
                 EnemyDeck[EnemyIterator] = deck[i]
                 EnemyIterator++
             }   
@@ -1759,7 +1759,7 @@ app.get("/getOpponentCard", (req, res) => {
                 })
                 return
             }
-            if(rows.length != 0) {
+            if (rows.length != 0) {
                 GetPlayerUsername(rows)
             }
             else
@@ -2014,7 +2014,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
                         playerDefense = Math.max(0, playerDefense - Math.ceil(opponentAttack * opponentDamage))
                     }
                 }
-                if(isDoubleAttackOpponent) {
+                if (isDoubleAttackOpponent) {
                     if (!isDodge && !isParry) {
                         playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - ((opponentAttack * opponentDamage) * 2))
                         playerDefense = Math.max(0, playerDefense - ((opponentAttack * opponentDamage) * 2))
@@ -2131,7 +2131,7 @@ app.get("/getWaitingOnOpponentShowdown", (req, res) => {
                     }
                     if (rows.length != 0) {
                         var IsPlayer1 = false
-                        if(rows[0].player_1_id == req.session.playerId){
+                        if (rows[0].player_1_id == req.session.playerId) {
                             IsPlayer1 = true
                         }
                         GetPlayerShowdownPlayerState(opponentCards, playerCards, IsPlayer1)
@@ -2275,168 +2275,6 @@ app.get("/getShowdownCardSelection", (req, res) => {
         )
     }
 })
-
-// app.get("/getEndingCheck", (req, res) => {
-//     connection.query("SELECT state_id FROM player_status WHERE match_id = ?", [req.session.matchId],
-//         function (err, rows, fields) {
-//             if (err) {
-//                 console.log("Database Error: " + err)
-//                 res.status(500).json({
-//                     "message": err
-//                 })
-//                 return
-//             }
-//             if (rows.length != 0) {
-//                 if (rows[0].state_id == rows[1].state_id && rows[0].state_id == 7) {
-//                     GetPlayerStats()
-//                 }
-//                 else{
-//                     res.status(200).json({
-//                         "message": "Waiting on Opponent"
-//                     })
-//                 }
-//             }
-//         }
-//     )
-
-//     function GetPlayerStats() {
-//         // Now checks whether the current player is player 1 or 2
-//         connection.query("SELECT player_status_id, player_id, max_health, current_health, energy, insight, damage, showdown_initiative \
-//             FROM player_status \
-//             WHERE player_id = ? AND match_id = ?"
-//             , [req.session.playerId, req.session.matchId],
-//             function (err, rows, fields) {
-//                 if (err) {
-//                     console.log("Database Error: " + err)
-//                     res.status(500).json({
-//                         "message": err
-//                     })
-//                     return
-//                 }
-//                 req.session.playerStatusId = rows[0].player_status_id
-
-//                 CheckOpponentHealth(rows[0].current_health)
-//             }
-//         )
-//     }
-
-//     function CheckOpponentHealth(playerCurrentHealth) {
-//         connection.query("SELECT current_health \
-//             FROM player_status \
-//             WHERE player_status_id != ? AND match_id = ?"
-//             , [req.session.playerStatusId, req.session.matchId], 
-//             function(err, rows, fields) {
-//                 if (err) {
-//                     console.log("Database Error: " + err)
-//                     res.status(500).json({
-//                         "message": err
-//                     })
-//                     return
-//                 }
-//                 var state
-//                 if (playerCurrentHealth > 0 && rows[0].current_health <= 0) {
-//                     state = 8
-//                     UpdatePlayerStateToEnding(state)
-//                 }
-//                 else if (playerCurrentHealth <= 0 && rows[0].current_health > 0) {
-//                     state = 9
-//                     UpdatePlayerStateToEnding(state)
-//                 }
-//                 else if (playerCurrentHealth <= 0 && rows[0].current_health <= 0) {
-//                     state = 10
-//                     UpdatePlayerStateToEnding(state)
-//                 }
-//                 else {
-//                     UpdatePlayerStateToShowdown()
-//                 }
-//             }
-//         )
-//     }
-
-//     function UpdatePlayerStateToEnding(state) {
-//         var queryString1
-//         var queryString2
-
-//         if (state == 8) {
-//             queryString1 = "UPDATE player_status SET state_id = " + 8 + " WHERE player_status_id = " + req.session.playerStatusId + ";"
-//             queryString2 = "UPDATE player_status SET state_id = " + 9 + " WHERE player_status_id != " + req.session.playerStatusId +" AND match_id = " + req.session.matchId + ";"
-//         }
-//         else if (state == 9) {
-//             queryString1 = "UPDATE player_status SET state_id = " + 9 + " WHERE player_status_id = " + req.session.playerStatusId + ";"
-//             queryString2 = "UPDATE player_status SET state_id = " + 8 + " WHERE player_status_id != " + req.session.playerStatusId +" AND match_id = " + req.session.matchId + ";"
-//         }
-//         else if (state == 10) {
-//             queryString1 = "UPDATE player_status SET state_id = " + 10 + " WHERE player_status_id = " + req.session.playerStatusId + ";"
-//             queryString2 = "UPDATE player_status SET state_id = " + 10 + " WHERE player_status_id != " + req.session.playerStatusId +" AND match_id = " + req.session.matchId + ";"
-//         }
-//         else{
-//             queryString1 = "UPDATE player_status SET state_id = " + 4 + " WHERE player_status_id = " + req.session.playerStatusId + ";"
-//         }
-        
-//         connection.query(queryString1, 
-//             function(err, rows, fields) {
-//                 if (err) {
-//                     console.log("Database Error: " + err)
-//                     res.status(500).json({
-//                         "message": err
-//                     })
-//                     return
-//                 }
-//                 UpdateOpponentStateToEnding(queryString2)
-//             }
-//         )
-//     }
-
-//     function UpdateOpponentStateToEnding(queryString2) {
-//         connection.query(queryString2, 
-//             function(err, rows, fields) {
-//                 if (err) {
-//                     console.log("Database Error: " + err)
-//                     res.status(500).json({
-//                         "message": err
-//                     })
-//                     return
-//                 }
-//                 //UpdateMatchFinished()
-//             }
-//         )
-//     }
-
-    
-//     // function UpdateMatchFinished() {
-//     //     connection.query("UPDATE game_match SET is_match_finished = 1 WHERE match_id = ?", [req.session.matchId],
-//     //         function(err, rows, fields) {
-//     //             if (err) {
-//     //                 console.log("Database Error: " + err)
-//     //                 res.status(500).json({
-//     //                     "message": err
-//     //                 })
-//     //                 return
-//     //             }
-//     //             res.status(200).json({
-//     //                 "message": "Ending state change!"
-//     //             })
-//     //         }
-//     //     )
-//     // }
-
-//     function UpdatePlayerStateToShowdown() {
-//         connection.query("UPDATE player_status SET state_id = 4 WHERE match_id = ?", [req.session.matchId], 
-//             function(err, rows, fields) {
-//                 if (err) {
-//                     console.log("Database Error: " + err)
-//                     res.status(500).json({
-//                         "message": err
-//                     })
-//                     return
-//                 }
-//                 res.status(200).json({
-//                     "message": "Continuing the Showdown!"
-//                 })
-//             }
-//         )
-//     }
-// })
 
 /**
  * Gets what cards the opponent chose for the showdown turn.
@@ -2617,7 +2455,7 @@ app.post("/setupShowdown", (req, res) => {
         if (!req.session.playerStatusId) {
             GetSessionPlayerStatusId()
         }
-        else{
+        else {
             CheckIfInitiativeIsSet()
         }
    }
@@ -2644,12 +2482,7 @@ app.post("/setupShowdown", (req, res) => {
                 return
             }
             req.session.playerStatusId = rows[0].player_status_id
-            // if (req.session.roomId == 5) {
-                CheckIfInitiativeIsSet()
-            // }
-            // else {
-            //     GetPlayerStats()
-            // }
+            CheckIfInitiativeIsSet()
             
         }
     )
@@ -2813,13 +2646,7 @@ app.post("/setupShowdown", (req, res) => {
                     }
                         
                     if (rows.length != 0) {
-                        // for (let i = 0; i < rows.length; i++) {
-                        //     for (let j = 0; j < deck.length; j++) {
-                        //         if(rows[i].card_id == deck[j].card_id) {
-                        //             deck.splice(j, 1)
-                        //         }                              
-                        //     }
-                        // }
+
                         console.log(rows)
                         var attackDeck = []
                         var attackIterator = 0
@@ -2974,7 +2801,6 @@ app.post("/setupShowdown", (req, res) => {
                     return
                 }
                 if (rows.length != 0) {
-                    //
                     var state
                     if (rows[0].current_health > 0 && opponentNameAndColor[0].current_health <= 0) {
                         state = 8
@@ -3049,7 +2875,7 @@ app.post("/setupShowdown", (req, res) => {
         else if (state == 10) {
             queryString1 = "UPDATE player_status SET state_id = " + 10 + " WHERE player_status_id = " + req.session.playerStatusId + ";"
         }
-        else{
+        else {
             queryString1 = "UPDATE player_status SET state_id = " + 4 + " WHERE player_status_id = " + req.session.playerStatusId + ";"
         }
         
@@ -3083,7 +2909,7 @@ app.post("/setupShowdown", (req, res) => {
                 }
                 if (rows.length != 0) {
                     var IsPlayer1 = false
-                    if(rows[0].player_1_id == req.session.playerId){
+                    if (rows[0].player_1_id == req.session.playerId) {
                         IsPlayer1 = true
                     }
                     res.status(200).json({
@@ -3109,7 +2935,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
     if (!req.session.playerStatusId) {
         GetSessionPlayerStatusId()
     }
-    else{
+    else {
         UpdateSelectedCardSlot1()
     }
 
@@ -3379,7 +3205,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
                         playerDefense = Math.max(0, playerDefense - Math.ceil(opponentAttack * opponentDamage))
                     }
                 }
-                if(isDoubleAttackOpponent) {
+                if (isDoubleAttackOpponent) {
                     if (!isDodge && !isParry) {
                         playerCurrentHealth = Math.min(playerCurrentHealth, playerCurrentHealth + playerDefense - ((opponentAttack * opponentDamage) * 2))
                         playerDefense = Math.max(0, playerDefense - ((opponentAttack * opponentDamage) * 2))
@@ -3497,7 +3323,7 @@ app.post("/resolveShowdownTurn", (req, res) => {
                     }
                     if (rows.length != 0) {
                         var IsPlayer1 = false
-                        if(rows[0].player_1_id == req.session.playerId){
+                        if (rows[0].player_1_id == req.session.playerId) {
                             IsPlayer1 = true
                         }
                         GetPlayerShowdownPlayerState(opponentCards, playerCards, IsPlayer1)

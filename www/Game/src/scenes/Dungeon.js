@@ -304,7 +304,7 @@ class Dungeon extends Phaser.Scene {
 		})
 	}
 
-	update() {
+	update(time, dt) {
 		//console.log(this.slot1Card.isSelected == false && this.slot1Card.cardGlow.active == true)
 		//If any card is selected make the button visible
 		if ((this.slot1Card.isSelected || this.slot2Card.isSelected || this.slot3Card.isSelected) && !isConfirmed) {
@@ -317,41 +317,41 @@ class Dungeon extends Phaser.Scene {
 		console.log(this.slot2Card.enemyHiddenReward.y)
 		if(this.slot1Card.isAnimated){
 			if(this.slot1Card.enemyHiddenReward.y > -30 && !stopTurning){
-				this.slot1Card.enemyHiddenReward.scale += .01
-				this.slot1Card.enemyHiddenReward.angle  -= 2
-				this.slot1Card.enemyHiddenReward.y  -= 5
+				this.slot1Card.enemyHiddenReward.scale += (dt / 12) * .01
+				this.slot1Card.enemyHiddenReward.angle  -= (dt / 12) * 2
+				this.slot1Card.enemyHiddenReward.y  -= (dt / 12) * 5
 			}
-			else{
+			else {
 				stopTurning = true
 			}
 			if(stopTurning) {
-				this.slot1Card.enemyHiddenReward.y  += 5 * 3
+				this.slot1Card.enemyHiddenReward.y  += (dt / 12) * (5 * 3)
 			}
 		}
 		else if(this.slot2Card.isAnimated){
 			if(this.slot2Card.enemyHiddenReward.y > -30 && !stopTurning){
-				this.slot2Card.enemyHiddenReward.scale += .01
-				this.slot2Card.enemyHiddenReward.angle  -= 2
-				this.slot2Card.enemyHiddenReward.y  -= 5
+				this.slot2Card.enemyHiddenReward.scale += (dt / 12) * .01
+				this.slot2Card.enemyHiddenReward.angle  -= (dt / 12) * 2
+				this.slot2Card.enemyHiddenReward.y  -= (dt / 12) * 5
 			}
-			else{
+			else {
 				stopTurning = true
 			}
 			if(stopTurning) {
-				this.slot2Card.enemyHiddenReward.y  += 5 * 3
+				this.slot2Card.enemyHiddenReward.y  += (dt / 12) * 5 * 3
 			}
 		}
 		else if(this.slot3Card.isAnimated){
 			if(this.slot3Card.enemyHiddenReward.y > -30 && !stopTurning){
-				this.slot3Card.enemyHiddenReward.scale += .01
-				this.slot3Card.enemyHiddenReward.angle  -= 2
-				this.slot3Card.enemyHiddenReward.y  -= 5
+				this.slot3Card.enemyHiddenReward.scale += (dt / 12) * .01
+				this.slot3Card.enemyHiddenReward.angle  -= (dt / 12) * 2
+				this.slot3Card.enemyHiddenReward.y  -= (dt / 12) * 5
 			}
-			else{
+			else {
 				stopTurning = true
 			}
 			if(stopTurning) {
-				this.slot3Card.enemyHiddenReward.y  += 5 * 3
+				this.slot3Card.enemyHiddenReward.y  += (dt / 12) * 5 * 3
 			}
 		}
 	}
@@ -409,7 +409,7 @@ class Dungeon extends Phaser.Scene {
 						this.slot3Card.isAnimated = true
 						enemyTimeout = setTimeout(this.nextRoom, 2000, data, this);
 					}
-					else{
+					else {
 						this.nextRoom(data, this)
 					}			
 				}

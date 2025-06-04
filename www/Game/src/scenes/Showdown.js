@@ -155,13 +155,13 @@ class Showdown extends Phaser.Scene {
 		this.loadAudioForShowdown()
 
 		//Check if Ending
-		if(data.state == 8 || data.state == 9 || data.state == 10){
-			if(ShowdownBackgroundMusic.isPlaying){
+		if (data.state == 8 || data.state == 9 || data.state == 10) {
+			if (ShowdownBackgroundMusic.isPlaying) {
 			ShowdownBackgroundMusic.stop()
 			}
 			this.scene.start("Ending", data)
 		}
-		else{
+		else {
 			//load Data
 			this.loadInfoData(data)
 			this.loadStatsData(data)
@@ -181,14 +181,14 @@ class Showdown extends Phaser.Scene {
 		}
 	}
 
-	loadAudioForShowdown(){
-		if(!ShowdownBackgroundMusic.isPlaying){
+	loadAudioForShowdown() {
+		if (!ShowdownBackgroundMusic.isPlaying) {
 			ShowdownBackgroundMusic.play()
 		}
 		PlayerCardSFX.play()
 	}
 
-	loadCardClickEvents(){
+	loadCardClickEvents() {
 		this.normalAttackSlot.on("pointerdown", () => {
 			PlayerCardSFX.play()
 			if (!this.normalAttackSlot.isDisabled) {
@@ -290,7 +290,7 @@ class Showdown extends Phaser.Scene {
 		})
 	}
 
-	loadCardHoverEvents(){
+	loadCardHoverEvents() {
 		this.normalAttackSlot.on("pointerover", () => {
 			if (!this.normalAttackSlot.isDisabled) {
 				this.normalAttackSlot.cardGlow.active = true
@@ -346,7 +346,7 @@ class Showdown extends Phaser.Scene {
 		})
 	}
 
-	loadButtonHoverEvents(){
+	loadButtonHoverEvents() {
 		this.confirmButton.glowFx.active = false
 
 		this.confirmButton.on("pointerover", () => {
@@ -431,7 +431,7 @@ class Showdown extends Phaser.Scene {
 		this.specialAttackSlot.cardBorder.setTint(cardColor)
 		this.specialAttackSlot.cardGlow.active = false
 
-		if(this.specialAttackSlot.isVisible) {
+		if (this.specialAttackSlot.isVisible) {
 			this.specialAttackSlot.cardName.text = data.card[1].card_name
 			this.specialAttackSlot.cardImage.setTexture(data.card[1].card_image_path)
 			this.specialAttackSlot.cardDescription.text = data.card[1].card_description
@@ -455,7 +455,7 @@ class Showdown extends Phaser.Scene {
 		this.defenseSlot.cardBorder.setTint(cardColor)
 		this.defenseSlot.cardGlow.active = false
 
-		if(this.defenseSlot.isVisible) {
+		if (this.defenseSlot.isVisible) {
 			this.defenseSlot.cardName.text = data.card[2].card_name
 			this.defenseSlot.cardImage.setTexture(data.card[2].card_image_path)
 			this.defenseSlot.cardDescription.text = data.card[2].card_description
@@ -479,7 +479,7 @@ class Showdown extends Phaser.Scene {
 		this.skillSlot.cardBorder.setTint(cardColor)
 		this.skillSlot.cardGlow.active = false
 
-		if(this.skillSlot.isVisible) {
+		if (this.skillSlot.isVisible) {
 			this.skillSlot.cardName.text = data.card[3].card_name
 			this.skillSlot.cardImage.setTexture(data.card[3].card_image_path)
 			this.skillSlot.cardDescription.text = data.card[3].card_description
@@ -510,11 +510,11 @@ class Showdown extends Phaser.Scene {
 			card[cardIterator] = this.specialAttackSlot.cardId
 			cardIterator++
 		}
-		if (this.defenseSlot.isSelected){
+		if (this.defenseSlot.isSelected) {
 			card[cardIterator] = this.defenseSlot.cardId
 			cardIterator++
 		}
-		if (this.skillSlot.isSelected){
+		if (this.skillSlot.isSelected) {
 			card[cardIterator] = this.skillSlot.cardId
 			cardIterator++
 		}
@@ -535,7 +535,7 @@ class Showdown extends Phaser.Scene {
 					if (data.state == "WAITING_FOR_OPP") {
 						this.scene.start("ShowdownWaitingOnOpponent")
 					}
-					else if(data.state == "SHOW_RESULT") {
+					else if (data.state == "SHOW_RESULT") {
 						this.scene.start("ShowdownResult", data)
 					}
 				}
@@ -570,14 +570,14 @@ class Showdown extends Phaser.Scene {
 	}
 
 	MakeShowdownCardIconsVisible(card, cardData, opponentsDamage) {
-		if(cardData.card_id == playerShowdownAnimations.NormalAttack.id){
+		if (cardData.card_id == playerShowdownAnimations.NormalAttack.id) {
 			card.option1RewardIcon1.setTexture("Attack")
 			card.option1RewardText1.text = ": " + (cardData.card_attack * previousDamage)
 			
 			card.option1Container.visible = true
 		}
 
-		if(cardData.card_id == playerShowdownAnimations.HeavyAttack.id) {
+		if (cardData.card_id == playerShowdownAnimations.HeavyAttack.id) {
 			card.option1_1CostIcon1.setTexture("Energy")
 			card.option1_1CostText1.text = cardData.card_energy
 
@@ -586,7 +586,7 @@ class Showdown extends Phaser.Scene {
 			
 			card.option1_1Container.visible = true
 		}
-		else if(cardData.card_id == playerShowdownAnimations.DoubleAttack.id) {
+		else if (cardData.card_id == playerShowdownAnimations.DoubleAttack.id) {
 			card.option1_1CostIcon1.setTexture("Energy")
 			card.option1_1CostText1.text = cardData.card_energy
 
@@ -595,7 +595,7 @@ class Showdown extends Phaser.Scene {
 			
 			card.option1_1Container.visible = true
 		}
-		else if(cardData.card_id == playerShowdownAnimations.RecoveryAttack.id) {
+		else if (cardData.card_id == playerShowdownAnimations.RecoveryAttack.id) {
 			card.option1_1CostIcon1.setTexture("Energy")
 			card.option1_1CostText1.text = "+" + cardData.card_energy
 
@@ -604,7 +604,7 @@ class Showdown extends Phaser.Scene {
 			
 			card.option1_1Container.visible = true
 		}
-		else if(cardData.card_id == playerShowdownAnimations.CounterAttack.id) {
+		else if (cardData.card_id == playerShowdownAnimations.CounterAttack.id) {
 			card.option1_1CostIcon1.setTexture("Energy")
 			card.option1_1CostText1.text = cardData.card_energy
 
@@ -613,7 +613,7 @@ class Showdown extends Phaser.Scene {
 			
 			card.option1_1Container.visible = true
 		}
-		else if(cardData.card_id == playerShowdownAnimations.ClumsyBlock.id) {
+		else if (cardData.card_id == playerShowdownAnimations.ClumsyBlock.id) {
 			card.option1_1CostIcon1.setTexture("Insight")
 			card.option1_1CostText1.text = cardData.card_insight
 
@@ -622,7 +622,7 @@ class Showdown extends Phaser.Scene {
 			
 			card.option1_1Container.visible = true
 		}
-		else if(cardData.card_id == playerShowdownAnimations.SolidBlock.id) {
+		else if (cardData.card_id == playerShowdownAnimations.SolidBlock.id) {
 			card.option1_1CostIcon1.setTexture("Insight")
 			card.option1_1CostText1.text = cardData.card_insight
 
@@ -631,7 +631,7 @@ class Showdown extends Phaser.Scene {
 			
 			card.option1_1Container.visible = true
 		}
-		else if(cardData.card_id == playerShowdownAnimations.ImpressiveBlock.id) {
+		else if (cardData.card_id == playerShowdownAnimations.ImpressiveBlock.id) {
 			card.option1_1CostIcon1.setTexture("Insight")
 			card.option1_1CostText1.text = cardData.card_insight
 
@@ -640,7 +640,7 @@ class Showdown extends Phaser.Scene {
 			
 			card.option1_1Container.visible = true
 		}
-		else if(cardData.card_id == playerShowdownAnimations.Dodge.id) {
+		else if (cardData.card_id == playerShowdownAnimations.Dodge.id) {
 			card.option2RewardIcon1.setTexture("Energy")
 			card.option2RewardText1.text = cardData.card_energy
 
@@ -649,7 +649,7 @@ class Showdown extends Phaser.Scene {
 
 			card.option2Container.visible = true
 		}
-		else if(cardData.card_id == playerShowdownAnimations.Parry.id) {
+		else if (cardData.card_id == playerShowdownAnimations.Parry.id) {
 			card.option2_1CostIcon1.setTexture("Energy")
 			card.option2_1CostText1.text = cardData.card_energy
 
@@ -661,7 +661,7 @@ class Showdown extends Phaser.Scene {
 			
 			card.option2_1Container.visible = true
 		}
-		else if(cardData.card_id == playerShowdownAnimations.Anger.id) {
+		else if (cardData.card_id == playerShowdownAnimations.Anger.id) {
 			card.option1_1CostIcon1.setTexture("Energy")
 			card.option1_1CostText1.text = cardData.card_energy
 
@@ -670,7 +670,7 @@ class Showdown extends Phaser.Scene {
 
 			card.option1_1Container.visible = true
 		}
-		else if(cardData.card_id == playerShowdownAnimations.Rage.id) {
+		else if (cardData.card_id == playerShowdownAnimations.Rage.id) {
 			card.option1_1CostIcon1.setTexture("Energy")
 			card.option1_1CostText1.text = cardData.card_energy
 
@@ -679,7 +679,7 @@ class Showdown extends Phaser.Scene {
 
 			card.option1_1Container.visible = true
 		}
-		else if(cardData.card_id == playerShowdownAnimations.Focus.id) {
+		else if (cardData.card_id == playerShowdownAnimations.Focus.id) {
 			card.option1_1CostIcon1.setTexture("Energy")
 			card.option1_1CostText1.text = cardData.card_energy
 
@@ -688,7 +688,7 @@ class Showdown extends Phaser.Scene {
 
 			card.option1_1Container.visible = true
 		}
-		else if(cardData.card_id == playerShowdownAnimations.Adrenaline.id) {
+		else if (cardData.card_id == playerShowdownAnimations.Adrenaline.id) {
 			card.option1_2CostIcon1.setTexture("CurrentHealth")
 			card.option1_2CostText1.text = cardData.card_current_health
 
@@ -700,7 +700,7 @@ class Showdown extends Phaser.Scene {
 
 			card.option1_2Container.visible = true
 		}
-		else if(cardData.card_id == playerShowdownAnimations.Healing.id) {
+		else if (cardData.card_id == playerShowdownAnimations.Healing.id) {
 			card.option1_1CostIcon1.setTexture("Energy")
 			card.option1_1CostText1.text = cardData.card_energy
 
@@ -715,10 +715,10 @@ class Showdown extends Phaser.Scene {
 	update() {
 		//If any card is selected make the button visible
 		if (this.normalAttackSlot.isSelected || this.specialAttackSlot.isSelected || this.defenseSlot.isSelected || this.skillSlot.isSelected) {
-			if(this.normalAttackSlot.isSelected || this.specialAttackSlot.isSelected) {
+			if (this.normalAttackSlot.isSelected || this.specialAttackSlot.isSelected) {
 				this.confirmButton.confirmButtonText.text = "Rip & Tear!"
 			}
-			else{
+			else {
 				this.confirmButton.confirmButtonText.text = "Persevere!"
 			}
 			this.confirmButton.visible = true
