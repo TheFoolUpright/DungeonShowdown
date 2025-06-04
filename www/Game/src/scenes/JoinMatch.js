@@ -553,7 +553,7 @@ class JoinMatch extends Phaser.Scene {
 			}
 		}
 
-		xhttp.open("PUT", "/joinMatch", true)
+		xhttp.open("PUT", "/joinMatch/joinMatch", true)
 
 		xhttp.setRequestHeader("Content-Type", "application/json")
 

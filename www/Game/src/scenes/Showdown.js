@@ -542,7 +542,7 @@ class Showdown extends Phaser.Scene {
 			}
 		}
 
-		xhttp.open("POST", "/resolveShowdownTurn", true)
+		xhttp.open("POST", "/showdown/resolveShowdownTurn", true)
 
 		xhttp.setRequestHeader("Content-Type", "application/json")
 

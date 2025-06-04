@@ -416,7 +416,7 @@ class Dungeon extends Phaser.Scene {
 			}
 		}
 
-		xhttp.open("POST", "/resolveDungeonTurn", true)
+		xhttp.open("POST", "/dungeon/resolveDungeonTurn", true)
 
 		xhttp.setRequestHeader("Content-Type", "application/json")
 

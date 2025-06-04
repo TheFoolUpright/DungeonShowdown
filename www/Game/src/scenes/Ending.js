@@ -205,7 +205,7 @@ class Ending extends Phaser.Scene {
 			}
 		}
 
-		xhttp.open("POST", "/endGame", true);
+		xhttp.open("POST", "/game/endGame", true);
 
 		xhttp.setRequestHeader("Content-Type", "application/json");
 

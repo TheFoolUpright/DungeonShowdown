@@ -449,7 +449,7 @@ class Preload extends Phaser.Scene {
 			}
 		}
 
-		xhttp.open("GET", "/idLoggedIn", true)
+		xhttp.open("GET", "/login/idLoggedIn", true)
 
 		xhttp.setRequestHeader("Content-Type", "application/json")
 
@@ -484,7 +484,7 @@ class Preload extends Phaser.Scene {
 			}
 		}
 
-		xhttp.open("GET", "/getMatchState", true)
+		xhttp.open("GET", "/joinMatch/getMatchState", true)
 
 		xhttp.setRequestHeader("Content-Type", "application/json")
 
@@ -527,7 +527,7 @@ class Preload extends Phaser.Scene {
 			}
 		}
 
-		xhttp.open("GET", "/getGameState", true)
+		xhttp.open("GET", "/game/getGameState", true)
 
 		xhttp.setRequestHeader("Content-Type", "application/json")
 
@@ -548,7 +548,7 @@ class Preload extends Phaser.Scene {
 			}
 		}
 
-		xhttp.open("GET", "/getDungeonCardSelection", true)
+		xhttp.open("GET", "/dungeon/getDungeonCardSelection", true)
 
 		xhttp.setRequestHeader("Content-Type", "application/json")
 
@@ -569,7 +569,7 @@ class Preload extends Phaser.Scene {
 			}
 		}
 
-		xhttp.open("GET", "/getOpponentCard", true)
+		xhttp.open("GET", "/dungeon/getOpponentCard", true)
 
 		xhttp.setRequestHeader("Content-Type", "application/json")
 
@@ -590,7 +590,7 @@ class Preload extends Phaser.Scene {
 			}
 		}
 
-		xhttp.open("GET", "/getShowdownCardSelection", true)
+		xhttp.open("GET", "/showdown/getShowdownCardSelection", true)
 
 		xhttp.setRequestHeader("Content-Type", "application/json")
 
@@ -613,7 +613,7 @@ class Preload extends Phaser.Scene {
 			}
 		}
 
-		xhttp.open("GET", "/getShowdownResult", true)
+		xhttp.open("GET", "/showdown/getShowdownResult", true)
 
 		xhttp.setRequestHeader("Content-Type", "application/json")
 

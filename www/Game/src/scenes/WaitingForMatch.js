@@ -73,7 +73,7 @@ class WaitingForMatch extends Phaser.Scene {
 			}
 		}
 
-		xhttp.open("GET", "/getWaitingForMatch", true);
+		xhttp.open("GET", "/joinMatch/getWaitingForMatch", true);
 
 		xhttp.setRequestHeader("Content-Type", "application/json");
 

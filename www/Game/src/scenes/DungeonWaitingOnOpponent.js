@@ -82,7 +82,7 @@ class DungeonWaitingOnOpponent extends Phaser.Scene {
 			}
 		}
 
-		xhttp.open("GET", "/getWaitingOnOpponentDungeon", true);
+		xhttp.open("GET", "/dungeon/getWaitingOnOpponentDungeon", true);
 
 		xhttp.setRequestHeader("Content-Type", "application/json");
 

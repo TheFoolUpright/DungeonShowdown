@@ -17,7 +17,7 @@ function JoinMatch() {
         }
     }
 
-    xhttp.open("PUT", "/joinMatch", true);
+    xhttp.open("PUT", "/joinMatch/joinMatch", true);
 
     xhttp.setRequestHeader("Content-Type", "application/json");
 
@@ -44,7 +44,7 @@ function GetMatchState() {
         }
     }
 
-    xhttp.open("GET", "/getMatchState", true);
+    xhttp.open("GET", "/joinMatch/getMatchState", true);
 
     xhttp.setRequestHeader("Content-Type", "application/json");
 

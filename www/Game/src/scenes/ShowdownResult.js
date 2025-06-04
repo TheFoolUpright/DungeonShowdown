@@ -888,7 +888,7 @@ class ShowdownResult extends Phaser.Scene {
 			}
 		}
 
-		xhttp.open("POST", "/setupShowdown", true)
+		xhttp.open("POST", "/showdown/setupShowdown", true)
 
 		xhttp.setRequestHeader("Content-Type", "application/json")
 

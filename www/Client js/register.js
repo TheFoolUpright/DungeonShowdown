@@ -36,7 +36,7 @@ function RegisterRequest() {
             }
         }
 
-        xhttp.open("POST", "/register", true);
+        xhttp.open("POST", "/register/register", true);
 
         xhttp.setRequestHeader("Content-Type", "application/json");
 

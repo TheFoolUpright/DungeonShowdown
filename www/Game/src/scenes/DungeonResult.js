@@ -281,7 +281,7 @@ class DungeonResult extends Phaser.Scene {
 				}
 			}
 
-			xhttp.open("POST", "/setupNextDungeonRoom", true)
+			xhttp.open("POST", "/dungeon/setupNextDungeonRoom", true)
 
 			xhttp.setRequestHeader("Content-Type", "application/json")
 
@@ -305,7 +305,7 @@ class DungeonResult extends Phaser.Scene {
 				}
 			}
 
-			xhttp.open("POST", "/setupShowdown", true);
+			xhttp.open("POST", "/showdown/setupShowdown", true);
 
 			xhttp.setRequestHeader("Content-Type", "application/json");
 

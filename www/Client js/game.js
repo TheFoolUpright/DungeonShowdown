@@ -132,7 +132,7 @@ function getWaitingOnOpponentDungeon() {
         }
     }
 
-    xhttp.open("GET", "/getWaitingOnOpponentDungeon", true);
+    xhttp.open("GET", "/dungeon/getWaitingOnOpponentDungeon", true);
 
     xhttp.setRequestHeader("Content-Type", "application/json");
 
@@ -247,7 +247,7 @@ function SetupNextRoom() {
             }
         }
     
-        xhttp.open("POST", "/setupNextDungeonRoom", true);
+        xhttp.open("POST", "/dungeon/setupNextDungeonRoom", true);
     
         xhttp.setRequestHeader("Content-Type", "application/json");
     
@@ -513,7 +513,7 @@ function getDungeonCardSelection() {
             }
         }
 
-        xhttp.open("GET", "/getDungeonCardSelection", true);
+        xhttp.open("GET", "/dungeon/getDungeonCardSelection", true);
 
         xhttp.setRequestHeader("Content-Type", "application/json");
 
@@ -564,7 +564,7 @@ function getDungeonResult() {
         }
     }
 
-    xhttp.open("GET", "/getOpponentCard", true);
+    xhttp.open("GET", "/dungeon/getOpponentCard", true);
 
     xhttp.setRequestHeader("Content-Type", "application/json");
 
@@ -733,7 +733,7 @@ function DungeonEndTurn() {
         }
     }
 
-    xhttp.open("POST", "/resolveDungeonTurn", true);
+    xhttp.open("POST", "/dungeon/resolveDungeonTurn", true);
 
     xhttp.setRequestHeader("Content-Type", "application/json");
 

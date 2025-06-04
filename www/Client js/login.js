@@ -21,7 +21,7 @@ function LoginRequest() {
         }
     }
 
-    xhttp.open("POST", "/login", true);
+    xhttp.open("POST", "/login/login", true);
 
     xhttp.setRequestHeader("Content-Type", "application/json");
 
